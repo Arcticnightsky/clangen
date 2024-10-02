@@ -2185,7 +2185,7 @@ class Events:
             targets = [
                 i
                 for i in relationships
-                if i.dislike > 1
+                if i.dislike > 30
                 and not Cat.fetch_cat(i.cat_to).dead
                 and not Cat.fetch_cat(i.cat_to).outside
             ]
@@ -2222,7 +2222,7 @@ class Events:
         hate_relation = [
             i
             for i in relationships
-            if i.dislike > 15
+            if i.dislike > 30
             and not Cat.fetch_cat(i.cat_to).dead
             and not Cat.fetch_cat(i.cat_to).outside
         ]
@@ -2230,7 +2230,7 @@ class Events:
         resent_relation = [
             i
             for i in relationships
-            if i.jealousy > 15
+            if i.jealousy > 25
             and not Cat.fetch_cat(i.cat_to).dead
             and not Cat.fetch_cat(i.cat_to).outside
         ]
@@ -2271,7 +2271,7 @@ class Events:
                 cat.personality.trait == "ambitious"
                 and Cat.fetch_cat(chosen_target.cat_to).status == "leader"
             ):
-                kill_chance -= 10
+                kill_chance -= 20
 
             kill_chance = max(1, int(kill_chance))
 
