@@ -372,6 +372,35 @@ def create_new_cat_block(
 
             give_mates.extend(event.new_cats[index])
 
+    # gather romance
+    give_romance = []
+    for tag in attribute_list:
+        match = re.match(r"romance:([_,0-9a-zA-Z]+)", tag)
+        if not match:
+            continue
+            
+        romance_indexes = match.group(1).split(",")
+            
+        # TODO: make this less ugly
+        for index in romance_indexes:
+            if index in in_event_cats:
+                if in_event_cats[index] in ("apprentice", "medicine cat apprentice"):
+                    print("Can't romance apprentices")
+                    continue
+                    
+                give_romance.append(in_event_cats[index])
+                        
+            try:
+                index = int(index)
+            except ValueError:
+                print(f"romance-index not correct: {index}")
+                continue
+                
+            if index >= i:
+                continue
+                
+            give_romance.extend(event.new_cats[index])
+        
     # determine gender
     if "male" in attribute_list:
         gender = "male"
@@ -432,9 +461,14 @@ def create_new_cat_block(
                 Cat.age_moons[give_mates[0].age][0], Cat.age_moons[give_mates[0].age][1]
             )
             break
+            
+        if match.group(1) == "romance" and give_romance:
+            age = randint(Cat.age_moons[give_romance[0].age][0], 
+                          Cat.age_moons[give_romance[0].age][1])
+            break
 
         if match.group(1) == "has_kits":
-            age = randint(19, 120)
+            age = randint(20, 120)
             break
 
     if status and not age:
@@ -840,6 +874,7 @@ def create_new_cat(
             "NOLEFTEAR",
             "NORIGHTEAR",
             "MANLEG",
+            "BLIND",
         ]
         for scar in new_cat.pelt.scars:
             if scar in not_allowed:
@@ -890,7 +925,9 @@ def create_new_cat(
                     new_cat.pelt.scars.append("NOPAW")
                 elif chosen_condition in ["lost their tail", "born without a tail"]:
                     new_cat.pelt.scars.append("NOTAIL")
-
+                elif chosen_condition in ["blind"]:
+                    new_cat.pelt.scars.append("BLIND")
+                    
         if outside:
             new_cat.outside = True
         if not alive:
