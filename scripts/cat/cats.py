@@ -420,36 +420,24 @@ class Cat:
         :param skill_dict: TODO what is a skill dict exactly
         :return: None
         """
-        # trans cat chances
+        # nope
         theythemdefault = game.settings["they them default"]
         self.genderalign = self.gender
-        trans_chance = randint(0, 50)
-        nb_chance = randint(0, 75)
 
-        # GENDER IDENTITY
-        if self.age in ["kitten", "newborn"]:
-            # newborns can't be trans, sorry babies
-            pass
-        elif nb_chance == 1:
-            self.genderalign = "nonbinary"
-        elif trans_chance == 1:
-            if self.gender == "female":
-                self.genderalign = "trans male"
-            else:
-                self.genderalign = "trans female"
+        if self.gender == "female":
+                self.genderalign = self.gender
+        elif self.gender == "male":
+                self.genderalign = self.gender
 
         # PRONOUNS
         if theythemdefault is True:
             self.pronouns = [self.default_pronouns[0].copy()]
         else:
             # Assigning pronouns based on gender
-            if self.genderalign in ["female", "trans female"]:
-                self.pronouns = [self.default_pronouns[1].copy()]
-            elif self.genderalign in ["male", "trans male"]:
-                self.pronouns = [self.default_pronouns[2].copy()]
-            else:
-                self.genderalign = "nonbinary"
-                self.pronouns = [self.default_pronouns[0].copy()]
+            if self.gender == "female":
+               self.pronouns = [self.default_pronouns[1].copy()]
+            elif self.gender == "male":
+                 self.pronouns = [self.default_pronouns[2].copy()]
 
         # APPEARANCE
         self.pelt = Pelt.generate_new_pelt(
@@ -556,7 +544,7 @@ class Cat:
 
         # Deal with leader death
         text = ""
-        darkforest = game.clan.instructor.df
+        darkforest = game.clan.instructor.df or self.skills == "DARK,1"
         isoutside = self.outside
         if self.status == "leader":
             if game.clan.leader_lives > 0:
@@ -602,14 +590,34 @@ class Cat:
             if game.clan.instructor.df is False:
                 self.df = False
                 game.clan.add_to_starclan(self)
-            elif game.clan.instructor.df is True:
+            elif game.clan.instructor.df is True or self.skills == "DARK,10":
                 self.df = True
                 game.clan.add_to_darkforest(self)
         else:
             game.clan.add_to_unknown(self)
-
+            
+        if self.status == "exiled" and self.driven_out == False and self.dead:
+           self.outside = False
+           self.df = True
+           game.clan.add_to_darkforest(self)
         return
-
+        
+        self_history = History.get_murders(self.main_cat)
+        if self_history:
+            if "is_murderer" in self_history:
+                murder_history = self_history["is_murderer"]
+                for murder in murder_history:
+                    self.murder_index = murder_history.index(murder)
+                    victim_cat = self.fetch_cat(murder_history[self.murder_index]["victim"])
+                    if murder_history[self.murder_index]["revealed"] is True and self.dead and self.outside == False:
+                        self.df = True
+                        game.clan.add_to_darkforest(self)
+                        event_text += " And because of the crime {PRONOUN/m_c/subject} commited against {victim_cat.name}, StarClan has exiled {PRONOUN/m_c/poss} into the Dark Forest, giving justice for {victim_cat.name} once and for all."
+                    elif murder_history[self.murder_index]["revealed"] is False and self.dead and self.outside == False:
+                        self.df = True
+                        game.clan.add_to_darkforest(self)
+                        event_text += " StarClan has eyes everywhere, everyone knows that by now. They have watched m_c take {victim_cat.name}'s life. m_c was exiled {PRONOUN/m_c/poss} into the Dark Forest, giving justice for {victim_cat.name} once and for all." 
+                        
     def exile(self):
         """This is used to send a cat into exile. This removes the cat's status and gives them a special 'exiled'
         status."""
@@ -1770,7 +1778,19 @@ class Cat:
         if not self.inheritance:
             self.inheritance = Inheritance(self)
         return self.inheritance.siblings.keys()
-
+    
+    def get_half_siblings(self):
+        """Returns list of the siblings(id)."""
+        if not self.inheritance:
+            self.inheritance = Inheritance(self)
+        return self.inheritance.half_siblings.keys()
+    
+    def get_adoptive_siblings(self):
+        """Returns list of the siblings(id)."""
+        if not self.inheritance:
+            self.inheritance = Inheritance(self)
+        return self.inheritance.adoptive_siblings.keys()
+        
     def get_children(self):
         """Returns list of the children (ids)."""
         if not self.inheritance:
@@ -1806,6 +1826,28 @@ class Cat:
         ]
         return other_cat.ID in litter_mates
 
+    def is_half_sibling(self, other_cat: Cat):
+        """Check if the cats are littermates."""
+        if other_cat.ID not in self.inheritance.siblings.keys():
+            return False
+        half_siblings = [
+            key
+            for key, value in self.inheritance.siblings.items()
+            if "half sibling" in value["additional"]
+        ]
+        return other_cat.ID in half_siblings
+
+    def is_adoptive_sibling(self, other_cat: Cat):
+        """Check if the cats are littermates."""
+        if other_cat.ID not in self.inheritance.siblings.keys():
+            return False
+        adoptive_siblings = [
+            key
+            for key, value in self.inheritance.siblings.items()
+            if "adoptive" in value["additional"]
+        ]
+        return other_cat.ID in adoptive_siblings
+    
     def is_uncle_aunt(self, other_cat: Cat):
         """Check if the cats are related as uncle/aunt and niece/nephew."""
         if not self.inheritance:
@@ -1928,6 +1970,8 @@ class Cat:
             return
         if name == "torn ear" and "NOEAR" in self.pelt.scars:
             return
+        if name == "damaged eyes" and "BLIND" in self.pelt.scars:
+            return
 
         injury = INJURIES[name]
         mortality = injury["mortality"][self.age]
@@ -2033,6 +2077,8 @@ class Cat:
             cat.pelt.scars.append("NOPAW")
         elif new_condition == "born without a tail":
             cat.pelt.scars.append("NOTAIL")
+        elif new_condition == "blind":
+            cat.pelt.scars.append("BLIND")
 
         self.get_permanent_condition(new_condition, born_with=True)
 
@@ -3785,6 +3831,7 @@ def create_cat(status, moons=None, biome=None):
         "HALFTAIL",
         "NOEAR",
         "BOTHBLIND",
+        "BLIND",
         "RIGHTBLIND",
         "LEFTBLIND",
         "BRIGHTHEART",
