@@ -253,7 +253,7 @@ class Sprites:
              "FROSTMITT", "FROSTSOCK", "QUILLCHUNK", "QUILLSCRATCH"],
             ["TAILSCAR", "SNOUT", "CHEEK", "SIDE", "THROAT", "TAILBASE", "BELLY", "TOETRAP", "SNAKE", "LEGBITE",
              "NECKBITE", "FACE"],
-            ["HINDLEG", "BACK", "QUILLSIDE", "SCRATCHSIDE", "TOE", "BEAKSIDE", "CATBITETWO", "SNAKETWO", "FOUR"]
+            ["HINDLEG", "BACK", "QUILLSIDE", "SCRATCHSIDE", "TOE", "BEAKSIDE", "CATBITETWO", "SNAKETWO", "FOUR", "BLIND"]
         ]
 
         # define missing parts
