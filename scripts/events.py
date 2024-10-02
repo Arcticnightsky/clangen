@@ -2447,39 +2447,7 @@ class Events:
         if cat.genderalign == cat.gender:
             if cat.moons < 6:
                 return
-
-            involved_cats = [cat.ID]
-            if cat.age == "adolescent":
-                transing_chance = random.getrandbits(8)  # 2/256
-            elif cat.age == "young adult":
-                transing_chance = random.getrandbits(9)  # 2/512
-            else:
-                # adult, senior adult, elder
-                transing_chance = random.getrandbits(10)  # 2/1028
-
-            if transing_chance:
-                # transing_chance != 0, no trans kitties today...    L
-                return
-
-            if random.getrandbits(1):  # 50/50
-                if cat.gender == "male":
-                    cat.genderalign = "trans female"
-                    cat.pronouns = [cat.default_pronouns[1].copy()]
-                else:
-                    cat.genderalign = "trans male"
-                    cat.pronouns = [cat.default_pronouns[2].copy()]
-            else:
-                cat.genderalign = "nonbinary"
-                cat.pronouns = [cat.default_pronouns[0].copy()]
-
-            if cat.gender == "male":
-                gender = "tom"
-            else:
-                gender = "she-cat"
-            text = f"{cat.name} has realized that {gender} doesn't describe how they feel anymore."
-            game.cur_events_list.append(Single_Event(text, "misc", involved_cats))
-            # game.misc_events_list.append(text)
-
+                
     def check_and_promote_leader(self):
         """Checks if a new leader need to be promoted, and promotes them, if needed."""
         # check for leader
@@ -2523,6 +2491,7 @@ class Events:
                         lambda x: not x.dead
                         and not x.outside
                         and x.status == "warrior"
+                        and x.experience_level not in ["untrained", "trainee", "prepared"]
                         and (x.apprentice or x.former_apprentices),
                         Cat.all_cats_list,
                     )
