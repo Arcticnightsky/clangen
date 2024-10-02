@@ -90,8 +90,8 @@ class Cat:
     experience_levels_range = {
         "untrained": (0, 0),
         "trainee": (1, 50),
-        "prepared": (51, 110),
-        "competent": (110, 170),
+        "prepared": (51, 100),
+        "competent": (101, 170),
         "proficient": (171, 240),
         "expert": (241, 320),
         "master": (321, 321),
