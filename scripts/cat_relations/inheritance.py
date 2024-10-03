@@ -455,6 +455,7 @@ class Inheritance:
         ):
             siblings = True
             rel_type = RelationType.HALF_BLOOD
+            additional_info.append("half sibling")
         elif (
             len(adoptive_overlap1) > 0
             or len(adoptive_overlap2) > 0
@@ -462,7 +463,8 @@ class Inheritance:
         ):
             siblings = True
             rel_type = RelationType.ADOPTIVE
-
+            additional_info.append("adoptive")
+            
         if siblings:
             self.siblings[inter_id] = {"type": rel_type, "additional": additional_info}
             self.all_involved.append(inter_id)
