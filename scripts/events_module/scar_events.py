@@ -119,6 +119,9 @@ class Scar_Events():
             if 'BOTHBLIND' in cat.pelt.scars:
                 scar_pool = [i for i in scar_pool if
                              i not in ["THREE", "RIGHTBLIND", "LEFTBLIND", "BOTHBLIND", "BRIGHTHEART"]]
+            if 'BLIND' in cat.pelt.scars:
+                scar_pool = [i for i in scar_pool if
+                             i not in ["THREE", "RIGHTBLIND", "LEFTBLIND", "BOTHBLIND", "BRIGHTHEART"]]
             if 'NOEAR' in cat.pelt.scars:
                 scar_pool = [i for i in scar_pool if
                              i not in ["LEFTEAR", "RIGHTEAR", 'NOLEFTEAR', 'NORIGHTEAR', "FROSTFACE"]]
@@ -138,7 +141,7 @@ class Scar_Events():
                 condition_scars = {
                     "LEGBITE", "THREE", "NOPAW", "TOETRAP", "NOTAIL", "HALFTAIL", "LEFTEAR", "RIGHTEAR",
                     "MANLEG", "BRIGHTHEART", "NOLEFTEAR", "NORIGHTEAR", "NOEAR", "LEFTBLIND",
-                    "RIGHTBLIND", "BOTHBLIND", "RATBITE"
+                    "RIGHTBLIND", "BOTHBLIND", "RATBITE", "BLIND"
                 }
 
                 scar_pool = list(set(scar_pool).difference(condition_scars))
