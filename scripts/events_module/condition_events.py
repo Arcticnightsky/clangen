@@ -416,6 +416,7 @@ class Condition_Events:
             "LEFTBLIND": ["one bad eye", "failing eyesight"],
             "RIGHTBLIND": ["one bad eye", "failing eyesight"],
             "BOTHBLIND": ["blind"],
+            "BLIND": ["blind"],
             "RATBITE": ["weak leg"],
         }
 
@@ -424,7 +425,6 @@ class Condition_Events:
             "paralyzed",
             "raspy lungs",
             "wasting disease",
-            "blind",
             "failing eyesight",
             "one bad eye",
             "partial hearing loss",
