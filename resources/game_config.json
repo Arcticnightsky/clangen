@@ -11,7 +11,7 @@
 		"passive_influence_div": 1.5,
 		"chance_for_neutral": 10,
 		"chance_of_special_group": 8,
-		"chance_romantic_not_mate": 15,
+		"chance_romantic_not_mate": 30,
 		"influence_condition_events": 20,
 		"comment":[
 			"chance_for_neutral - how high the chance is to make the interaction of the relationship to a 'neutral' instead of negative or positive",
@@ -21,14 +21,14 @@
 		]
 	},
 	"mates":{
-		"age_range": 40,
-		"override_same_age_group": false,
+		"age_range": 20,
+		"override_same_age_group": true,
 		"chance_fulfilled_condition": 5,
 		"chance_friends_to_lovers": 170,
 		"confession": {
 			"make_confession" : {
-				"romantic": 30,
-				"platonic": 15,
+				"romantic": 25,
+				"platonic": 20,
 				"dislike": -15,
 				"admiration": 0,
 				"comfortable": 10,
@@ -56,7 +56,7 @@
 		},
 		"platonic_to_romantic": {
 			"romantic": 0,
-			"platonic": 30,
+			"platonic": 35,
 			"dislike": -15,
 			"admiration": 0,
 			"comfortable": 20,
@@ -159,16 +159,16 @@
 	},
 	"pregnancy": {
 		"birth_cooldown": 6,
-		"primary_chance_mated": 80,
+		"primary_chance_mated": 20,
 		"primary_chance_unmated": 130,
 		"random_affair_chance": 50,
 		"unmated_random_affair_chance": 10,
-		"one_kit_possibility": {"young adult": 8, "adult": 9, "senior adult": 10, "senior": 4},
-        "two_kit_possibility": {"young adult": 10, "adult": 13, "senior adult": 15, "senior": 3},
-        "three_kit_possibility": {"young adult": 17, "adult": 15, "senior adult": 5, "senior": 1},
-        "four_kit_possibility": {"young adult": 12, "adult": 8, "senior adult": 2, "senior": 0},
-        "five_kit_possibility": {"young adult": 6, "adult": 2, "senior adult": 0, "senior": 0},
-		"max_kit_possibility": {"young adult": 2, "adult": 0, "senior adult": 0, "senior": 0},
+		"one_kit_possibility": {"young adult": 3, "adult": 4, "senior adult": 12, "senior": 16},
+        	"two_kit_possibility": {"young adult": 13, "adult": 14, "senior adult": 15, "senior": 17},
+        	"three_kit_possibility": {"young adult": 20, "adult": 18, "senior adult": 13, "senior": 3},
+        	"four_kit_possibility": {"young adult": 18, "adult": 14, "senior adult": 7, "senior": 2},
+        	"five_kit_possibility": {"young adult": 14, "adult": 8, "senior adult": 2, "senior": 1},
+        	"max_kit_possibility": {"young adult": 4, "adult": 2, "senior adult": 0, "senior": 0},
 		"min_kits": 1,
 		"max_kits": 6,
 		"comment": [
@@ -181,12 +181,12 @@
 	},
 	"cat_generation": {
 		"base_permanent_condition": 90,
-		"base_male_tortie": 13,
+		"base_male_tortie": 3000,
 		"base_female_tortie": 4,
-		"base_heterochromia": 120,
-		"direct_inheritance": 15,
-		"wildcard_tortie": 9,
-		"vit_chance": 8,
+		"base_heterochromia": 200,
+		"direct_inheritance": 1,
+		"wildcard_tortie": 900,
+		"vit_chance": 10,
 		"random_point_chance": 5
 	},
 	"cat_name_controls": {
@@ -200,12 +200,12 @@
 		]
 	},
 	"accessory_generation": {
-		"base_acc_chance": 150,
+		"base_acc_chance": 250,
 		"med_modifier": -80,
 		"baby_modifier": -20,
-		"elder_modifier": 20,
-		"happy_trait_modifier": -30,
-		"grumpy_trait_modifier": 30,
+		"elder_modifier": 30,
+		"happy_trait_modifier": -50,
+		"grumpy_trait_modifier": 50,
 		"ceremony_modifier": -20
 	},
 	"fading": {
@@ -215,14 +215,14 @@
 	},
 	"roles": {
 		"mediator_app_chance": 50,
-		"base_medicine_app_chance": 41,
+		"base_medicine_app_chance": 50,
 		"become_mediator_chances": {
 			"warrior": 5000,
 			"elder": 400
 		}
 	},
 	"lost_cat": {
-		"rejoin_chance": 20
+		"rejoin_chance": 5
 	},
 	"cat_ages": {
 		"newborn": [0, 0],
@@ -249,7 +249,7 @@
 		"better_stat_modifier": 5,
 		"best_stat_modifier": 10,
 		"fail_stat_cat_modifier": -15,
-		"chance_of_romance_patrol": 16,
+		"chance_of_romance_patrol": 1,
 		"debug_ensure_patrol_id": null,
 		"debug_override_patrol_stat_requirements": false,
 		"debug_ensure_patrol_outcome": null,
@@ -262,14 +262,14 @@
 		"debug_ensure_event_id": null
 	},
 	"death_related": {
-		"leader_death_chance": 50,
-		"classic_death_chance": 500,
-		"expanded_death_chance": 350,
+		"leader_death_chance": 10,
+		"classic_death_chance": 1000,
+		"expanded_death_chance": 950,
 		"cruel season_death_chance": 300,
 		"war_death_modifier_leader": 95,
 		"war_death_modifier": 250,
-		"base_random_murder_chance": 25,
-		"base_murder_kill_chance": 80,
+		"base_random_murder_chance": 1000,
+		"base_murder_kill_chance": 800,
 		"old_age_death_start": 150,
 		"old_age_death_curve": 4.5,
 		"comment": [
@@ -279,25 +279,25 @@
 		]
 	},
 	"condition_related": {
-		"expanded_illness_chance": 250,
+		"expanded_illness_chance": 450,
 		"cruel season_illness_chance": 200,
-		"classic_illness_chance": 500,
-		"classic_injury_chance": 450,
+		"classic_illness_chance": 600,
+		"classic_injury_chance": 650,
 		"expanded_injury_chance": 250,
 		"cruel season_injury_chance": 150,
 		"permanent_condition_chance": 15,
 		"war_injury_modifier": 100
 	},
 	"clan_creation": {
-		"rerolls": 3,
+		"rerolls": -1,
 		"comment": "Set this to -1 for it to be infinite"
 	},
 	"graduation": {
 		"base_app_timeskip_ex": [[3, 12],[5, 6]],
 		"base_med_app_timeskip_ex": [[2, 7],[2, 3]],
 		"max_apprentice_age": {
-			"medicine cat apprentice": 30,
-			"apprentice": 25,
+			"medicine cat apprentice": 20,
+			"apprentice": 15,
 			"mediator apprentice": 25
 		},
 		"min_graduating_age": 10
@@ -310,13 +310,13 @@
     "focus":{
         "duration": 3,
         "hunting":{
-            "warrior": 2,
-            "apprentice": 1,
+            "warrior": 5,
+            "apprentice": 2,
             "comment": "Defines how much a working warrior(leader/deputy) or apprentice gathers additionally."
         },
         "herb gathering" : {
-            "med": 3,
-            "med_apprentice" : 2,
+            "med": 20,
+            "med_apprentice" : 10,
             "comment": "Defines how much a working warrior(leader/deputy) or (apprentice) medicine cat gathers additionally."
         },
         "outsiders" : {
@@ -357,8 +357,8 @@
             ]
         },
         "hoarding" : {
-            "prey_warrior": 1,
-            "herb_medicine": 2,
+            "prey_warrior": 10,
+            "herb_medicine": 30,
             "injury_chance_warrior": 25,
             "injury_chance_medicine cat": 35,
             "injuries": {
@@ -376,7 +376,7 @@
             "illness_chance": 35,
             "illnesses": {
                 "running nose": 5,
-                "whitecough": 1
+                "whitecough": 10
             },
             "comments": [
                 "prey_warrior - how much prey each working warrior(leader/deputy) will gather",
