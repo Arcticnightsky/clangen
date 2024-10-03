@@ -69,7 +69,7 @@ class Pelt:
     scars1 = ["ONE", "TWO", "THREE", "TAILSCAR", "SNOUT", "CHEEK", "SIDE", "THROAT", "TAILBASE", "BELLY",
               "LEGBITE", "NECKBITE", "FACE", "MANLEG", "BRIGHTHEART", "MANTAIL", "BRIDGE", "RIGHTBLIND", "LEFTBLIND",
               "BOTHBLIND", "BEAKCHEEK", "BEAKLOWER", "CATBITE", "RATBITE", "QUILLCHUNK", "QUILLSCRATCH", "HINDLEG",
-              "BACK", "QUILLSIDE", "SCRATCHSIDE", "BEAKSIDE", "CATBITETWO", "FOUR"]
+              "BACK", "QUILLSIDE", "SCRATCHSIDE", "BEAKSIDE", "CATBITETWO", "FOUR", "BLIND"]
 
     # missing parts
     scars2 = ["LEFTEAR", "RIGHTEAR", "NOTAIL", "HALFTAIL", "NOPAW", "NOLEFTEAR", "NORIGHTEAR", "NOEAR"]
@@ -317,19 +317,22 @@ class Pelt:
         
     def init_eyes(self, parents):
         if not parents:
-            self.eye_colour = choice(Pelt.eye_colours)
+            if self.white_patches == 'FULLWHITE' or self.colour == 'WHITE' or self.points:
+                self.eye_colour = choice((Pelt.blue_eyes * 3) + Pelt.yellow_eyes + Pelt.green_eyes)
+            else:
+                self.eye_colour = choice((Pelt.yellow_eyes + Pelt.green_eyes) * 2 + Pelt.blue_eyes)
         else:
             self.eye_colour = choice([i.pelt.eye_colour for i in parents] + [choice(Pelt.eye_colours)])
 
         # White patches must be initalized before eye color.
         num = game.config["cat_generation"]["base_heterochromia"]
-        if self.white_patches in [Pelt.high_white, Pelt.mostly_white, 'FULLWHITE'] or self.colour == 'WHITE':
-            num = num - 90
+        if self.white_patches in [Pelt.high_white, Pelt.mostly_white]:
+            num = num - 70
         if self.white_patches == 'FULLWHITE' or self.colour == 'WHITE':
-            num -= 10
+            num -= 100
         for _par in parents:
             if _par.pelt.eye_colour2:
-                num -= 10
+                num -= 80
 
         if num < 0:
             num = 1
@@ -436,8 +439,14 @@ class Pelt:
         for p_ in par_pelts:
             if p_.name in Pelt.torties:
                 tortie_chance_f = int(tortie_chance_f / 2)
-                tortie_chance_m = tortie_chance_m - 1
-                break
+                tortie_chance_m = tortie_chance_m - 20
+            if gender == "female":
+                torbie = random.getrandbits(tortie_chance_f) == 1
+            else:
+                torbie = random.getrandbits(tortie_chance_m) == 1
+            if torbie:
+                self.tortiebase = selected.tortiebase
+            break
 
         # Determine tortie:
         if gender == "female":
@@ -461,7 +470,10 @@ class Pelt:
         weights = [0, 0, 0, 0]
         for p_ in par_peltcolours:
             if p_ in Pelt.ginger_colours:
-                add_weight = (40, 0, 0, 10)
+                if gender == "female":
+                    add_weight = (20, 5, 5, 30)
+                else:
+                    add_weight = (40, 0, 0, 10)
             elif p_ in Pelt.black_colours:
                 add_weight = (0, 40, 2, 5)
             elif p_ in Pelt.white_colours:
@@ -469,7 +481,10 @@ class Pelt:
             elif p_ in Pelt.brown_colours:
                 add_weight = (10, 5, 0, 35)
             elif p_ is None:
-                add_weight = (40, 40, 40, 40)
+                if gender == "female":
+                    add_weight = (15, 40, 40, 40)
+                else:
+                    add_weight = (40, 40, 40, 40)
             else:
                 add_weight = (0, 0, 0, 0)
 
@@ -663,6 +678,12 @@ class Pelt:
         if 'NOTAIL' in self.scars and 'HALFTAIL' in self.scars:
             self.scars.remove('HALFTAIL')
 
+        if 'BOTHBLIND' in self.scars and 'BLIND' in self.scars:
+            self.scars.remove('BLIND')
+
+        if 'BRIGHTHEART' in self.scars and 'BLIND' in self.scars:
+            self.scars.remove('BLIND')
+    
     def init_accessories(self, age):
         if age == "newborn":
             self.accessory = None
@@ -721,13 +742,13 @@ class Pelt:
 
                     # Ginger is often duplicated to increase its chances
                     if (self.colour in Pelt.black_colours) or (self.colour in Pelt.white_colours):
-                        self.tortiecolour = choice((Pelt.ginger_colours * 2) + Pelt.brown_colours)
+                        self.tortiecolour = choice((Pelt.ginger_colours * 4) + Pelt.brown_colours)
                     elif self.colour in Pelt.ginger_colours:
-                        self.tortiecolour = choice(Pelt.brown_colours + Pelt.black_colours * 2)
+                        self.tortiecolour = choice(Pelt.brown_colours + (Pelt.black_colours * 4))
                     elif self.colour in Pelt.brown_colours:
                         possible_colors = Pelt.brown_colours.copy()
                         possible_colors.remove(self.colour)
-                        possible_colors.extend(Pelt.black_colours + (Pelt.ginger_colours * 2))
+                        possible_colors.extend(Pelt.black_colours + (Pelt.ginger_colours * 4))
                         self.tortiecolour = choice(possible_colors)
                     else:
                         self.tortiecolour = "GOLDEN"
@@ -853,7 +874,7 @@ class Pelt:
 
         # Adjust weights for torties, since they can't have anything greater than mid_white:
         if self.name == "Tortie":
-            weights = (2, 1, 0, 0, 0)
+            weights = (3, 1, 0, 0, 0)
         elif self.name == "Calico":
             weights = (0, 0, 20, 15, 1)
         else:
@@ -1068,7 +1089,8 @@ class Pelt:
                 "NOPAW": "three legs",
                 "NOLEFTEAR": "a missing ear",
                 "NORIGHTEAR": "a missing ear",
-                "NOEAR": "no ears"
+                "NOEAR": "no ears",
+                "BLIND": "blind cloudy eyes"
             }
 
             additional_details = []
