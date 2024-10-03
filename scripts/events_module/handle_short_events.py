@@ -237,6 +237,9 @@ class HandleShortEvents:
         if "murder_reveal" in self.chosen_event.sub_type:
             if "clan_wide" in self.chosen_event.tags:
                 other_cat = None
+                main_cat.exiled = True
+                main_cat.outside = True
+                main_cat.status = "exiled"
             else:
                 other_cat = self.random_cat
             History.reveal_murder(
