@@ -448,9 +448,9 @@
     "singular": "black bow collar"
   },
   "SPIKESBOW": {
-    "default": "gold foil bow collar",
-    "plural": "gold foil bow collars",
-    "singular": "gold foil bow collar"
+    "default": "silver foil bow collar",
+    "plural": "silver foil bow collars",
+    "singular": "silver foil bow collar"
   },
   "WHITEBOW": {
     "default": "white bow collar",
@@ -523,9 +523,9 @@
     "singular": "black nylon collar"
   },
   "SPIKESNYLON": {
-    "default": "blue and gold nylon collar",
-    "plural": "blue and gold nylon collars",
-    "singular": "blue and gold nylon collar"
+    "default": "black and silver nylon collar",
+    "plural": "black and silver nylon collars",
+    "singular": "black and silver nylon collar"
   },
   "WHITENYLON": {
     "default": "white nylon collar",
