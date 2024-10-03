@@ -584,22 +584,63 @@ class RelationshipScreen(Screens):
                     else:
                         col2 += "related: parent's sibling"
                 elif self.inspect_cat.is_grandparent(self.the_cat):
-                    col2 += "related: grandparent"
-                elif self.the_cat.is_grandparent(self.inspect_cat):
-                    col2 += "related: grandchild"
-                elif self.inspect_cat.is_parent(self.the_cat):
-                    col2 += "related: parent"
-                elif self.the_cat.is_parent(self.inspect_cat):
-                    col2 += "related: child"
-                elif self.inspect_cat.is_sibling(
-                    self.the_cat
-                ) or self.the_cat.is_sibling(self.inspect_cat):
-                    if self.inspect_cat.is_littermate(
-                        self.the_cat
-                    ) or self.the_cat.is_littermate(self.inspect_cat):
-                        col2 += "related: sibling (littermate)"
+                    if self.inspect_cat.genderalign in ["female", "trans female"]:
+                        col2 += "related: grandmother"
+                    elif self.inspect_cat.genderalign in ["male", "trans male"]:
+                        col2 += "related: grandfather"
                     else:
-                        col2 += "related: sibling"
+                    	col2 += "related: grandparent"
+                elif self.the_cat.is_grandparent(self.inspect_cat):
+                    if self.inspect_cat.genderalign in ["female", "trans female"]:
+                        col2 += "related: granddaughter"
+                    elif self.inspect_cat.genderalign in ["male", "trans male"]:
+                        col2 += "related: grandson"
+                    else:
+                    	col2 += "related: grandchild"
+                elif self.inspect_cat.is_parent(self.the_cat):
+                    if self.inspect_cat.genderalign in ["female", "trans female"]:
+                        col2 += "related: mother"
+                    elif self.inspect_cat.genderalign in ["male", "trans male"]:
+                        col2 += "related: father"
+                    else:
+                    	col2 += "related: parent"
+                elif self.the_cat.is_parent(self.inspect_cat):
+                    if self.inspect_cat.genderalign in ["female", "trans female"]:
+                        col2 += "related: daughter"
+                    elif self.inspect_cat.genderalign in ["male", "trans male"]:
+                        col2 += "related: son"
+                    else:
+                    	col2 += "related: child"
+
+                elif self.inspect_cat.is_sibling(self.the_cat) or self.the_cat.is_sibling(self.inspect_cat):
+                    if self.inspect_cat.is_littermate(self.the_cat) or self.the_cat.is_littermate(self.inspect_cat):
+                    	if self.inspect_cat.genderalign in ["female", "trans female"]:
+                            col2 += "related: sister (littermate)"
+                    	elif self.inspect_cat.genderalign in ["male", "trans male"]:
+                            col2 += "related: brother (littermate)"
+                    	else:
+                            col2 += "related: sibling (littermate)"
+                    elif self.inspect_cat.is_half_sibling(self.the_cat) or self.the_cat.is_half_sibling(self.inspect_cat):
+                    	if self.inspect_cat.genderalign in ["female", "trans female"]:
+                            col2 += "related: half sister"
+                    	elif self.inspect_cat.genderalign in ["male", "trans male"]:
+                            col2 += "related: half brother"
+                    	else:
+                            col2 += "related: half sibling"
+                    elif self.inspect_cat.is_adoptive_sibling(self.the_cat) or self.the_cat.is_adoptive_sibling(self.inspect_cat):
+                    	if self.inspect_cat.genderalign in ["female", "trans female"]:
+                            col2 += "related: sister (adoptive)"
+                    	elif self.inspect_cat.genderalign in ["male", "trans male"]:
+                            col2 += "related: brother (adoptive)"
+                    	else:
+                            col2 += "related: sibling (adoptive)"
+                    else:
+                    	if self.inspect_cat.genderalign in ["female", "trans female"]:
+                            col2 += "related: sister"
+                    	elif self.inspect_cat.genderalign in ["male", "trans male"]:
+                            col2 += "related: brother"
+                    	else:
+                            col2 += "related: sibling"
                 elif not game.clan.clan_settings[
                     "first cousin mates"
                 ] and self.inspect_cat.is_cousin(self.the_cat):
