@@ -50,12 +50,10 @@
             "Woke up on the wrong side of the nest",
             "Is staring off into space",
             "Is picking the burrs from {PRONOUN/m_c/poss} pelt",
-            "Is batting at {PRONOUN/m_c/poss} tail",
             "Daydreams about being a warrior in LionClan",
             "Daydreams about being a warrior in TigerClan",
             "Daydreams about being a warrior in LeopardClan",
             "Spends time watching fish in the nearby river",
-            "Is batting at a beam of sunlight",
             "Didn't get enough sleep",
             "Is stretching out",
             "Is watching cats come and go from camp",
@@ -194,6 +192,7 @@
     },
     {
         "id": "working_cat",
+        "not_working": false,
         "thoughts": [
             "Is guarding camp",
             "Is sharpening {PRONOUN/m_c/poss} claws",
@@ -223,6 +222,7 @@
     },
     {
         "id": "working_cat_to_leadership",
+        "not_working": false,
         "thoughts": [
             "Is wondering if {PRONOUN/m_c/subject} could handle r_c's position",
             "Is complaining about being sent on dawn patrol",
@@ -245,6 +245,7 @@
     },
     {
         "id": "working_cat_to_deputy",
+        "not_working": false,
         "thoughts": [
             "Is hoping the deputy won't assign {PRONOUN/m_c/object} to the dawn patrol tomorrow",
             "Is hoping the deputy assigns {PRONOUN/m_c/object} to the next patrol",
@@ -1588,6 +1589,12 @@
             "Snuck away from camp with r_c for some alone time",
             "Is nuzzling into r_c's fur, taking in {PRONOUN/r_c/poss} scent",
             "Can't stop admiring r_c",
+            "Gave r_c a beautiful gift earlier",
+            "Recieved a gift from r_c earlier",
+            "Is enjoying r_c's warmth and company",
+            "Is happy to have someone like r_c by {PRONOUN/m_c/poss} side",
+            "Is lost in r_c's eyes",
+            "Hopes {PRONOUN/m_c/subject} and r_c will always be with eachother for the rest of their lives",
             "Is waiting for r_c to return from {PRONOUN/r_c/poss} patrol",
             "Can't stop admiring r_c's pelt",
             "Is certain no cat would ever compare to r_c",
@@ -1734,6 +1741,7 @@
             "Saw a kittypet sitting calmly next to a dog!",
             "Almost got lost near some Twoleg nests",
             "Saw some wandering Twolegs today",
+            "Would never in a million moons imagine {PRONOUN/m_c/self} being a kittypet",
             "Saw a Twoleg kit playing with a dog",
             "Saw a Twoleg kit playing with a kittypet",
             "Saw a kittypet rolling around a Twoleg garden",
@@ -3528,8 +3536,14 @@
         "id": "gen_newleaf",
         "thoughts": [
             "Enjoying the warmth of newleaf",
-            "Is relieved leaf-bare is finally over",
+            "Is admiring the scent of freshly bloomed flowers",
+            "Watches petals blow into the camp",
+            "Sneezed as some pollen got in {PRONOUN/m_c/poss} nose",
+            "Thinks that {PRONOUN/m_c/subject} might have gotten allergies",
+            "Is admiring all the plant colors around {PRONOUN/m_c/object}",
+            "Is feeling the days get warmer and warmer",
             "Is soaking in the newleaf warmth",
+            "Is enjoying the beauty of Newleaf",
             "Purrs as a cool breeze hits {PRONOUN/m_c/object}"
         ],
         "season": [
@@ -3542,6 +3556,9 @@
     {
         "id": "gen_newleaf_not_kit",
         "thoughts": [
+            "Is relieved that {PRONOUN/m_c/subject} made it through another Leaf-bare",
+            "Stills feels what's left of the chill from Leaf-bare",
+            "Starts to feel a little bit of the Greenleaf heat underway",
             "Is looking forward to finding more prey as the snow melts"
         ],
         "season": [
@@ -3562,7 +3579,13 @@
             "Can't sleep because of the bugs and the heat",
             "Purrs as a cool breeze hits {PRONOUN/m_c/object}",
             "Can't get anything done with this heat",
+            "Tries to spend as much time as {PRONOUN/m_c/subject} can inside {PRONOUN/m_c/poss} den to escape the sweltering heat",
             "Is sitting in the shade trying to hide from the heat",
+            "Is hissing as insects pester {PRONOUN/m_c/object}",
+            "Spent the day in a nearby river to cool off",
+            "Spent the day in a nearby lake to cool off",
+            "Is enjoying the beauty of Greenleaf",
+            "Is getting tired of the heat",
             "Is debating swimming to cool down"
         ],
         "season": [
@@ -3588,8 +3611,13 @@
     {
         "id": "gen_leaffall",
         "thoughts": [
-            "Leapt into a pile of fallen leaves",
+            "Stomps a pile of fallen leaves",
             "Is crushing leaves under {PRONOUN/m_c/poss} paws",
+            "Is admiring the colorful landscape",
+            "Watches leaves blow into the camp",
+	    "Is enjoying the beauty of Leaf-fall",
+            "Is admiring all the plant colors around {PRONOUN/m_c/object}",
+            "Is enjoying the crisp Leaf-fall breeze",
             "Is glad it's not so hot out anymore"
         ],
         "season": [
@@ -3605,6 +3633,9 @@
             "Is worried about the lack of prey leaf-bare will bring",
             "Is cleaning the clearing of fallen leaves",
             "Caught extra prey for leaf-bare",
+            "Dreads the potential illness that may arrive in Leaf-bare",
+            "Stills feels what's left of the heat from Greenleaf",
+            "Starts to feel a little bit of the Leaf-bare chill underway",
             "Is not looking forward to the sparse hunting in leaf-bare"
         ],
         "season": [
@@ -3621,12 +3652,19 @@
         "id": "gen_leafbare",
         "thoughts": [
             "Sneezed when a snowflake landed on {PRONOUN/m_c/poss} nose",
+            "Dreads the potential illness that may arrive soon...",
             "Took a nap in the clearing and woke up under a blanket of snow",
+            "Is watching snow fall onto the ground",
             "Can't wait for newleaf",
+            "Is shivering from the cold wind",
             "Can't stand this cold",
+            "Tries to spend as much time as {PRONOUN/m_c/subject} can inside {PRONOUN/m_c/poss} den to escape the bitter cold",
+            "Fluffs out {PRONOUN/m_c/poss} fur for warmth",
             "Is cleaning the clearing of snow",
             "Pounced on some movement under the snow like a fox",
             "Slipped on some ice hidden under the snow",
+            "Is enjoying the beauty of Leaf-bare",
+            "Is getting tired of the cold",
             "Is careful not to stand under branches with snow on them"
         ],
         "season": [
@@ -4277,6 +4315,146 @@
                 "lasting grief"
             ]
         },
+        "random_living_status": [
+            "living"
+        ]
+    },
+    {
+        "id": "pregnant_gen",
+        "thoughts": [
+            "Is wondering how many names {PRONOUN/m_c/subject} should think about, for {PRONOUN/m_c/poss} kits",
+            "Has no idea how big {PRONOUN/m_c/subject} should craft the nest in the nursery {PRONOUN/m_c/subject}{VERB/m_c/'re/'s} creating",
+            "Feels her kits move around inside her",
+            "Hopes she'll be a good mother to the kits",
+            "Hopes she's been eating healthy enough for the kits",
+            "Threw up in the dirtplace this morning",
+            "Hopes her litter will be born healthy",
+            "Hopes the pregnancy will go just fine...",
+            "Hopes the birth will turn out just fine...",
+	    "Is pissed over a small thing",
+            "Can't help but wonder if one of the kits she's carrying will become the future leader of the Clan someday...",
+            "Feels like {PRONOUN/m_c/poss} entire existence is one long trip between water and the dirtplace, again and again",
+            "Has mood swings and weird cravings now, thanks to her pregnancy hormones",
+            "Is trying to figure out how many kits she'll have based on the weight of her belly",
+            "Invites {PRONOUN/m_c/poss} friends to feel {PRONOUN/m_c/poss} litter kick",
+            "Is starting to feel heavy and bloated",
+            "Is trying to not stress herself out too much, for the kit's sake",
+            "Is curled up, purring at {PRONOUN/m_c/poss} belly"
+        ],
+        "has_injuries": {
+            "m_c": [
+                "pregnant"
+            ]
+        },
+        "main_age_constraint": [
+            "young adult",
+            "adult",
+            "senior adult",
+            "senior"
+        ]
+    },
+    {
+        "id": "pregnant_gen_to_alive_mate",
+        "thoughts": [
+            "Is coming up with name ideas with r_c for their kits",
+            "Wonders if the kits will look more like her or r_c",
+            "Has invited r_c to feel their litter kick around inside her",
+            "Is purring while r_c gently grooms her and her kits move around inside her",
+            "Feels grateful for r_c's love and support",
+            "Has been given some delicious, plump prey from r_c",
+            "Is purring happily as she sees r_c come back from patrol with nesting material in his jaws"
+        ],
+        "has_injuries": {
+            "m_c": [
+                "pregnant"
+            ]
+        },
+        "relationship_constraint": [
+            "mates"
+        ],
+        "random_living_status": [
+            "living"
+        ]
+    },
+    {
+        "id": "gen_to_alive_pregnant_mate",
+        "thoughts": [
+            "Is coming up with name ideas with r_c for their kits",
+            "Wonders if the kits will look more like him or r_c",
+            "Felt r_c's belly earlier",
+            "Is feeling more protective of r_c now more than ever",
+            "Is helping r_c build her nest in the nursery",
+            "Hopes r_c's pregnancy will turn out just fine...",
+            "Wants to be the best father he can be once the kits are born",
+            "Is looking for soft nesting material for r_c outside of camp",
+            "Is hunting fat, juicy prey for r_c",
+            "Is excited to be a father to some kits!",
+            "Is making sure r_c doesn't stress herself out too much"
+        ],
+        "has_injuries": {
+            "r_c": [
+                "pregnant"
+            ]
+        },
+        "relationship_constraint": [
+            "mates"
+        ],
+        "random_living_status": [
+            "living"
+        ]
+    },
+    {
+        "id": "recovering_from_birth_gen",
+        "thoughts": [
+            "Is purring while watching her litter nurse",
+            "Is relieved that the pregnancy had no complications",
+            "Is relieved that everything went well while kitting",
+            "Hopes she'll recover well after giving birth",
+            "Is enjoying {PRONOUN/m_c/poss} break from {PRONOUN/m_c/poss} duties",
+            "Is basking in the sun outside the nursery",
+            "Asks the medicine cat for herbs that will help her lactate more",
+            "Is murmuring loving words to her litter",
+            "Feels a new sense of purpose from just looking down at her litter",
+            "Carried her litter outside the nursery to get some fresh air",
+            "Wishes {PRONOUN/m_c/subject} wasn't so confined to the nursery",
+            "Still feels heavy and bloated, despite already have given birth"
+        ],
+        "has_injuries": {
+            "m_c": [
+                "recovering from birth"
+            ]
+        },
+        "main_age_constraint": [
+            "young adult",
+            "adult",
+            "senior adult",
+            "senior"
+        ]
+    },
+    {
+        "id": "recovering_from_birth_parent_to_alive_newborn",
+        "thoughts": [
+            "Is grooming r_c clean",
+            "Feels r_c suckling on her teat",
+            "Already came up with a suffix for r_c for when {PRONOUN/r_c/poss}'s older, just gotta tell the leader first...",
+            "Wonders if r_c was just like her when she was a newborn",
+            "Wonders which path r_c will take, medicine cat or a warrior?",
+            "Can't help but wonder if r_c will become the future leader of the Clan someday...",
+            "Is cleaning up r_c's rump after {PRONOUN/r_c/subject} made dirt",
+            "Is purring with joy after r_c mewled out {PRONOUN/r_c/poss} first word!",
+            "Is purring while watching r_c crawl around the nest"
+        ],
+        "has_injuries": {
+            "m_c": [
+                "recovering from birth"
+            ]
+        },
+        "relationship_constraint": [
+            "parent/child"
+        ],
+        "random_status_constraint": [
+            "newborn"
+        ],
         "random_living_status": [
             "living"
         ]
