@@ -216,10 +216,6 @@
         ],
         "risks": [
             {
-                "name": "an infected wound",
-                "chance": 60
-            },
-            {
                 "name": "torn pelt",
                 "chance": 30
             },
