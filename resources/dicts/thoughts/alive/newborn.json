@@ -10,8 +10,9 @@
             "Almost rolled out of the nest",
             "Tried suckling on a piece of bedding",
             "Is squealing loudly",
-            "Mewls at someone nudging {PRONOUN/m_c/object}",
-            "Hisses at all the strange new smells"
+            "Is suckling on {PRONOUN/m_c/poss} mother's teat",
+            "Is crawling around the nest",
+            "Mewls at someone nudging {PRONOUN/m_c/object}"
         ],
         "main_age_constraint": [
             "newborn"
@@ -40,6 +41,7 @@
     {
         "id": "gen_newborn_to_sibling",
         "thoughts":[
+            "Is currently battling r_c over their mother's teat",
             "Tried suckling on r_c's tail",
             "Is being buried under r_c",
             "Was almost shoved out of the nest by r_c"
@@ -47,11 +49,8 @@
         "main_age_constraint": [
             "newborn"
         ],
-        "random_age_constraint": [
-            "newborn"
-        ],
         "relationship_constraint": [
-            "sibling"
+            "littermates"
         ],
         "random_living_status": [
             "living"
