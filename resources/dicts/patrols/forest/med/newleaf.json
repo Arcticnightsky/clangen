@@ -7,7 +7,7 @@
         "tags": ["romantic"],
         "patrol_art": "med_general_intro",
         "min_cats": 2,
-        "max_cats": 6,
+        "max_cats": 2,
         "min_max_status": {
             "medicine cat": [1, 6],
             "healer cats": [1, 6],
@@ -92,7 +92,7 @@
         "tags": ["romantic"],
         "patrol_art": "gen_flower_date_med_med",
         "min_cats": 2,
-        "max_cats": 6,
+        "max_cats": 2,
         "min_max_status": {
             "apprentice": [-1, -1],
             "medicine cat": [1, 6],
