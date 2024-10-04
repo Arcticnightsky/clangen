@@ -1,6 +1,16 @@
 {
     "announcement": [
-        "m_c announced that {PRONOUN/m_c/subject} {VERB/m_c/are/is} expecting kits."
+        "m_c announced that {PRONOUN/m_c/subject} {VERB/m_c/are/is} expecting kits.",
+	"m_c woke up with a few aches in {PRONOUN/m_c/poss} belly, but it was no surprise, {PRONOUN/m_c/subject} knew exactly what {PRONOUN/m_c/subject} did with r_c the other night, hehe... {PRONOUN/m_c/subject/CAP} wakes up r_c and excitedly tells {PRONOUN/r_c/object} the news and then later announces to the Clan that {PRONOUN/m_c/subject} {VERB/m_c/are/is} expecting kits!",
+    	"m_c wasn't really sure if {PRONOUN/m_c/subject} were pregnant, so {PRONOUN/m_c/subject} waited a few days to make sure that {PRONOUN/m_c/subject} were. Once {PRONOUN/m_c/subject} were showing signs, {PRONOUN/m_c/subject} happily announce that {PRONOUN/m_c/subject} {VERB/m_c/are/is} expecting kits!",
+    	"m_c and r_c left the camp one evening and came back the next morning, looking quite satisfied. Then m_c bashfully tells the Clan that {PRONOUN/m_c/subject} might be expecting kits soon...",
+    	"Okay, m_c was a little surprised to find this out, but hey, what do you expect when you and your mate go on a romantic date while in heat, one thing leading to another over the course of the date? Seeing this as a pleasant surprise, m_c excitedly stands in front of the clan announcing {PRONOUN/m_c/poss} pregnancy!",
+    	"After moons of mental preparation and talks with r_c, m_c is happy to announce that {PRONOUN/m_c/subject} {VERB/m_c/are/is} expecting kits.",
+    	"With {PRONOUN/m_c/poss} mate r_c excitedly smiling behind {PRONOUN/m_c/object}, m_c announces that {PRONOUN/m_c/subject} {VERB/m_c/are/is} expecting kits!",
+	"m_c announced that {PRONOUN/m_c/subject} {VERB/m_c/are/is} expecting kits.",
+	"m_c had been secretive for a while now and nobody could even begin to guess what about... until today, that is, when m_c announced {PRONOUN/m_c/poss} pregnancy!",
+        "The entire Clan could see the signs way before m_c did. Everyone urged {PRONOUN/m_c/object} to visit the medicine cat den to no avail. They just about gave up until, finally, m_c announced {PRONOUN/m_c/poss} pregnancy.",
+	"m_c's been worried sick over a recent illness {PRONOUN/m_c/subject} couldn't quite explain, until a recent visit to the medicine cat den made everything clear. m_c's pregnant!"
     ],
     "litter_guess": [
         "m_c hopes the litter will be small - {PRONOUN/m_c/subject} {VERB/m_c/feel/feels} overwhelmed at the idea of a big litter.",
