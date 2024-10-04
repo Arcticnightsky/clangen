@@ -955,26 +955,6 @@
                     }
                 ],
                 "other_clan_rep": -1
-            },
-            {
-                "text": "As p_l crosses the border with r_c to grab the kits by their scruff, a o_c_n patrol suddenly appears, looking furious, with their claws unsheathed and fangs bared! r_c gently drops the kit and attempts to explain the situation but is immediately and viciously killed. p_l races back over to their side of the border, just barely escaping the wrath of o_c_n warriors.",
-                "exp": 0,
-                "weight": 10,
-                "dead_cats": ["r_c"],
-                "history_text": {
-                    "reg_death": "m_c was slain by o_c_n warriors",
-                    "lead_death": "lost a life by o_c_n warriors"
-                },
-                "relationships": [
-                    {
-                        "cats_to": ["patrol"],
-                        "cats_from": ["patrol"],
-                        "mutual": false,
-                        "values": ["respect", "trust"],
-                        "amount": -10
-                    }
-                ],
-                "other_clan_rep": -1
             }
         ],
         "antag_fail_outcomes": [
