@@ -346,6 +346,1484 @@
         ]
     },
     {
+        "patrol_id": "fst_pln_bord_my_hero1",
+        "biome": ["forest", "plains"],
+        "season": ["any"],
+        "types": ["border"],
+        "tags": ["new_cat"],
+        "patrol_art": "fst_pln_bord_my_hero_INTRO",
+        "min_cats": 3,
+        "max_cats": 6,
+        "min_max_status": {
+            "normal adult": [1, 6]
+        },
+        "weight": 20,
+        "intro_text": "The patrol heads out towards the outskirts of the territory to scentmark it, alls fine and well until r_c hears a loud yowl not far from where they are and alerts p_l. When they arrive to where the yowl came from, they see a cat hanging for dear life on the edge of a ridge!",
+        "decline_text": "The cat manages to get themself back up and runs away terrified.",
+        "chance_of_success": 40,
+        "success_outcomes": [
+            {
+                "text": "p_l quickly grabs the cat by the scruff and reassures {PRONOUN/n_c:0/object} that everything's gonna be alright. {PRONOUN/p_l/subject/CAP} looked down at {PRONOUN/n_c:0/object} and realized how beautiful {PRONOUN/n_c:0/subject} is, despite {PRONOUN/n_c:0/object} being terrifed, and that terror was fading away the more they kept staring into eachother's eyes. With the help from the rest of the patrol, p_l manages to get the cat back to safety. The cat thanks them, flirtatiously calls p_l {PRONOUN/n_c:0/poss} hero, and introduces {PRONOUN/n_c:0/self} as n_c:0. {PRONOUN/n_c:0/object} heard that they're clan cats and would like to join the Clan. p_l instantly says yes and the patrol heads back to camp, rolling their eyes while having to watch p_l and n_c:0 get flirty with eachother.",
+                "exp": 10,
+                "weight": 20,
+                "new_cat": [
+                    ["age:romance", "romance:p_l", "backstory:loner4"]
+                ],
+                "relationships": [
+                    {
+                        "cats_from": ["n_c:0"],
+                        "cats_to": ["patrol"],
+                        "mutual": false,
+                        "values": ["trust", "comfort"],
+                        "amount": 20
+                    },
+                    {
+                        "cats_from": ["n_c:0"],
+                        "cats_to": ["p_l"],
+                        "mutual": true,
+                        "values": ["platonic", "romantic", "respect"],
+                        "amount": 15
+                    }
+                ],
+                "art": "fst_pln_bord_my_hero_OUTCOME",
+                "outsider_rep": 1
+            },
+            {
+                "text": "s_c quickly grabs the cat by the scruff and reassures {PRONOUN/n_c:0/object} that everything's gonna be alright. The rest of the patrol grabs s_c and helps pull {PRONOUN/s_c/object} and the cat back up. They step back as s_c flops onto {PRONOUN/s_c/poss} back, with the cat, n_c:0, on top of {PRONOUN/s_c/object} in a... sus way. A few moments after they stare at eachother, n_c:0 thanks s_c earnestly and s_c, who's clearly smitten by {PRONOUN/n_c:0/object}, takes the credit for {PRONOUN/n_c:0/poss} rescue and n_c:0 brushes up against s_c calling {PRONOUN/s_c/object} {PRONOUN/n_c:0/poss} hero. The rest of the patrol is furious by the time they get back to camp, watching s_c tell the leader about {PRONOUN/s_c/poss} heroic deed. They're happy n_c:0 is safe and in the clan now, but THEY HELPED TOO! WHERE'S THEIR CREDIT!?",
+                "exp": 10,
+                "weight": 20,
+                "stat_trait": [
+                    "ambitious",
+                    "arrogant",
+                    "cold",
+                    "cunning",
+                    "competitive",
+                    "childish",
+                    "shameless",
+                    "troublesome",
+                    "vengeful"
+                ],
+                "can_have_stat": ["adult"],
+                "new_cat": [
+                    ["age:romance", "romance:s_c", "backstory:loner4"]
+                ],
+                "relationships": [
+                    {
+                        "cats_from": ["n_c:0"],
+                        "cats_to": ["s_c"],
+                        "mutual": false,
+                        "values": ["trust", "comfort"],
+                        "amount": 20
+                    },
+                    {
+                        "cats_from": ["patrol"],
+                        "cats_to": ["s_c"],
+                        "mutual": false,
+                        "values": ["dislike", "jealous"],
+                        "amount": 10
+                    },
+                    {
+                        "cats_from": ["patrol"],
+                        "cats_to": ["s_c"],
+                        "mutual": false,
+                        "values": ["trust", "respect", "platonic"],
+                        "amount": -15
+                    },
+                    {
+                        "cats_from": ["n_c:0"],
+                        "cats_to": ["s_c"],
+                        "mutual": true,
+                        "values": ["platonic", "romantic", "respect"],
+                        "amount": 15
+                    }
+                ],
+                "art": "fst_pln_bord_my_hero_OUTCOME",
+                "outsider_rep": 1
+            },
+            {
+                "text": "p_l quickly grabs the cat by the scruff and reassures {PRONOUN/n_c:0/object} that everything's gonna be alright. The rest of the patrol grabs p_l and helps pull {PRONOUN/p_l/object} and the cat back up. They step back as p_l flops onto {PRONOUN/p_l/poss} back, with the cat, n_c:0, on top of {PRONOUN/p_l/object} in a... sus way. A few moments after they stare at eachother, n_c:0 thanks p_l earnestly and p_l, who's clearly smitten by {PRONOUN/n_c:0/object}, takes the credit for {PRONOUN/n_c:0/poss} rescue and n_c:0 brushes up against p_l calling {PRONOUN/p_l/object} {PRONOUN/n_c:0/poss} hero. s_c thinks instead of being angry, they should all joke about this and sink in the drama. The rest of the patrol agrees and they all try to hide their laughs and snickers while watching the romance unfold between p_l and n_c:0. Finally! Some interesting drama in this Clan for once! They let p_l take the credit for the rescue as long as it means they get entertained by this unexpected romance.",
+                "exp": 10,
+                "weight": 20,
+                "stat_trait": [
+	            "compassionate",
+                    "troublesome",
+                    "adventurous",
+                    "charismatic",
+        	    "strange",
+        	    "sneaky",
+                    "childish",
+		    "loving",
+                    "playful"
+                ],
+                "can_have_stat": ["adult"],
+                "new_cat": [
+                    ["age:romance", "romance:p_l", "backstory:loner4"]
+                ],
+                "relationships": [
+                    {
+                        "cats_from": ["n_c:0"],
+                        "cats_to": ["patrol"],
+                        "mutual": true,
+                        "values": ["trust", "comfort"],
+                        "amount": 20
+                    },
+                    {
+                        "cats_from": ["n_c:0"],
+                        "cats_to": ["p_l"],
+                        "mutual": true,
+                        "values": ["platonic", "romantic", "respect"],
+                        "amount": 15
+                    }
+                ],
+                "art": "fst_pln_bord_my_hero_OUTCOME",
+                "outsider_rep": 1            
+            },
+            {
+                "text": "p_l quickly grabs the cat by the scruff and reassures {PRONOUN/n_c:0/object} that everything's gonna be alright. {PRONOUN/p_l/subject/CAP} looked down at {PRONOUN/n_c:0/object} and realized how beautiful {PRONOUN/n_c:0/subject} is, despite {PRONOUN/n_c:0/object} being terrifed. The patrol pulls p_l back up with the cat in tow. {PRONOUN/n_c:0/subject/CAP} introduces {PRONOUN/n_c:0/self} as n_c:0 and thanks everyone for helping {PRONOUN/n_c:0/object}, even though {PRONOUN/n_c:0/subject} seems to be paying most of {PRONOUN/n_c:0/poss} attention to p_l. {PRONOUN/p_l/subject/CAP} offers {PRONOUN/n_c:0/poss} a place to stay in the Clan, and n_c:0 accepts, whispering that {PRONOUN/n_c:0/subject}'d always would want to stay around {PRONOUN/n_c:0/poss} heros, hehe... ",
+                "exp": 10,
+                "weight": 20,
+                "new_cat": [
+                    ["age:romance", "romance:p_l", "backstory:loner4"]
+                ],
+                "relationships": [
+                    {
+                        "cats_from": ["n_c:0"],
+                        "cats_to": ["patrol"],
+                        "mutual": false,
+                        "values": ["trust", "comfort"],
+                        "amount": 20
+                    },
+                    {
+                        "cats_from": ["n_c:0"],
+                        "cats_to": ["p_l"],
+                        "mutual": true,
+                        "values": ["platonic", "romantic", "respect"],
+                        "amount": 15
+                    }
+                ],
+                "art": "fst_pln_bord_my_hero_OUTCOME",
+                "outsider_rep": 1
+            }
+        ],
+        "fail_outcomes": [
+            {
+                "text": "p_l quickly grabs the cat by the scruff and reassures {PRONOUN/n_c:0/object} that everything's gonna be alright. {PRONOUN/p_l/subject/CAP} looked down at {PRONOUN/n_c:0/object} and realized how beautiful {PRONOUN/n_c:0/subject} is, despite {PRONOUN/n_c:0/object} being terrifed, and that terror was fading away the more they kept staring into eachother's eyes. p_l was so mesmorized by {PRONOUN/n_c:0/poss} beauty that {PRONOUN/p_l/subject} looses {PRONOUN/p_l/poss} grip and the cat falls! Everyone watches in horror as they see {PRONOUN/n_c:0/object} plummet to {PRONOUN/n_c:0/poss} death. The patrol comforts p_l promising {PRONOUN/p_l/object} it wasn't {PRONOUN/p_l/poss} fault, but p_l is in shock and a sudden sense of grief overcomes {PRONOUN/p_l/object}, how could've {PRONOUN/p_l/subject} lost someone so precious, yet alone grieve them even though they have never met???",
+                "exp": 0,
+                "weight": 20,
+                "outsider_rep": -1,
+                "relationships": [
+                    {
+                        "cats_from": ["p_l"],
+                        "cats_to": ["n_c:0"],
+                        "mutual": false,
+                        "values": ["romantic"],
+                        "amount": 20
+                    }
+                ],
+                "injury": [
+                    {
+                    	"cats": ["patrol"],
+                    	"injuries": ["shock", "non_lethal"],
+                        "scars": []
+                    },
+                    {
+                    	"cats": ["p_l"],
+                    	"injuries": ["grief stricken"],
+                        "scars": []
+                    }
+                ],
+                "new_cat": [
+                    ["age:romance", "romance:p_l", "loner", "dead", "meeting"]
+                ]
+            },
+            {
+                "text": "p_l quickly grabs the cat by the scruff and reassures {PRONOUN/n_c:0/object} that everything's gonna be alright. {PRONOUN/p_l/subject} looked down at {PRONOUN/n_c:0/object} and realized how beautiful {PRONOUN/n_c:0/subject} is, but instead of being calm or scared, the cat hisses and claims that {PRONOUN/n_c:0/subject} didn't need any help and was almost there! The patrol pulls p_l back up with the cat in tow and p_l, who's trying not to blush, asks {PRONOUN/n_c:0/object} if {PRONOUN/n_c:0/subject}'s alright. The cat snaps back of course {PRONOUN/n_c:0/subject}'s alright and hisses at everyone to back off! p_l tries to calm {PRONOUN/n_c:0/object} down but gets a claw to the face instead! The cat flees while p_l watches {PRONOUN/n_c:0/object} in the distance, awestruck of {PRONOUN/n_c:0/poss} ferocity. Damn, {PRONOUN/n_c:0/subject}'s something else...",
+                "exp": 0,
+                "weight": 10,
+                "injury": [
+                    {
+                    	"cats": ["p_l"],
+                        "injuries": ["claw-wound"],
+                        "scars": ["SNOUT"]
+                    }
+                ],
+                "history_text": {
+                    "scar": "m_c was scarred when the most beautiful loner {PRONOUN/m_c/subject}'s ever seen, attacked {PRONOUN/m_c/object}. It was worth it.",
+                    "reg_death": "m_c died from {PRONOUN/m_c/poss} wound after the most beautiful loner {PRONOUN/m_c/subject}'s ever seen, attacked {PRONOUN/m_c/object}. Was it worth it?",
+                    "lead_death": "{VERB/m_c/were/was} attacked by the most beautiful loner {PRONOUN/m_c/subject}'s ever seen, it was worth it,"
+                },
+                "outsider_rep": -1,
+                "new_cat": [
+                    ["age:romance", "romance:p_l", "loner", "meeting"]
+                ],
+                "relationships": [
+                    {
+                        "cats_from": ["p_l"],
+                        "cats_to": ["n_c:0"],
+                        "mutual": false,
+                        "values": ["romantic", "dislike"],
+                        "amount": 10
+                    },
+                    {
+                        "cats_from": ["n_c:0"],
+                        "cats_to": ["patrol"],
+                        "mutual": false,
+                        "values": ["dislike"],
+                        "amount": 10
+                    }
+                ],
+                "outsider_rep": -1  
+            }
+        ],
+        "antag_fail_outcomes": [
+            {
+                "text": "The loner escapes the dog by climbing a tree and scowls at the patrol, who stood by watching.",
+                "exp": 0,
+                "weight": 20,
+                "outsider_rep": -1,
+                "new_cat": [
+                    "meeting", "loner"
+                ],
+                "relationships": [
+                    {
+                        "cats_from": ["n_c:0"],
+                        "cats_to": ["patrol"],
+                        "mutual": false,
+                        "values": ["dislike"],
+                        "amount": 40
+                    }
+                ]
+            }
+        ],
+        "antag_success_outcomes": [
+            {
+                "text": "The patrol watches as the loner climbs up a spindly tree to escape the dog, and then promptly proceed to chase the dog out of the territory and warn the loner not to cross the border.",
+                "exp": 10,
+                "weight": 20,
+                "outsider_rep": -2,
+                "new_cat": [
+                    "meeting", "loner"
+                ]
+            }
+        ]
+    },
+    {
+        "patrol_id": "fst_pln_bord_my_hero2",
+        "biome": ["forest", "plains"],
+        "season": ["any"],
+        "types": ["border"],
+        "tags": ["new_cat"],
+        "patrol_art": "fst_pln_bord_my_hero_INTRO",
+        "min_cats": 1,
+        "max_cats": 1,
+        "min_max_status": {
+            "normal adult": [1, 6]
+        },
+        "weight": 20,
+        "intro_text": "p_l heads out towards the outskirts of the territory to scentmark it, alls fine and well until p_l hears a loud yowl not far from where {PRONOUN/p_l/subject} is. When {PRONOUN/p_l/subject} arrives to where the yowl came from, {PRONOUN/p_l/subject} sees a cat hanging for dear life on the edge of a ridge!",
+        "decline_text": "The cat manages to get themself back up and runs away terrified.",
+        "chance_of_success": 40,
+        "success_outcomes": [
+            {
+                "text": "p_l quickly grabs the cat by the scruff and reassures {PRONOUN/n_c:0/object} that everything's gonna be alright. {PRONOUN/p_l/subject} looked down at {PRONOUN/n_c:0/object} and realized how beautiful {PRONOUN/n_c:0/subject} is, despite {PRONOUN/n_c:0/object} being terrifed, and that terror was fading away the more they kept staring into eachother's eyes. p_l manages to get the cat back to safety. The cat thanks {PRONOUN/p_l/object}, flirtatiously calls {PRONOUN/p_l/object} {PRONOUN/n_c:0/poss} hero, and introduces {PRONOUN/n_c:0/self} as n_c:0. {PRONOUN/n_c:0/object/CAP} heard that {PRONOUN/p_l/subject}'s a clan cat and would like to join the Clan. p_l instantly says yes and they head back to camp while being flirty with eachother.",
+                "exp": 10,
+                "weight": 20,
+                "new_cat": [
+                    ["age:romance", "romance:p_l", "backstory:loner4"]
+                ],
+                "relationships": [
+                    {
+                        "cats_from": ["n_c:0"],
+                        "cats_to": ["p_l"],
+                        "mutual": false,
+                        "values": ["trust", "comfort"],
+                        "amount": 20
+                    },
+                    {
+                        "cats_from": ["n_c:0"],
+                        "cats_to": ["p_l"],
+                        "mutual": true,
+                        "values": ["platonic", "romantic", "respect"],
+                        "amount": 15
+                    }                ],
+                "art": "fst_pln_bord_my_hero_OUTCOME",
+                "outsider_rep": 1
+            },
+            {
+                "text": "s_c quickly grabs the cat by the scruff and reassures {PRONOUN/n_c:0/object} that everything's gonna be alright. s_c pulls {PRONOUN/p_l/self} back up with the cat in tow and flops onto {PRONOUN/s_c/poss} back, with the cat, n_c:0, on top of {PRONOUN/s_c/object} in a... sus way. A few moments after they stare at eachother, n_c:0 thanks s_c earnestly and s_c, who's clearly smitten by {PRONOUN/n_c:0/object}, takes the credit for {PRONOUN/n_c:0/poss} rescue and n_c:0 brushes up against s_c calling {PRONOUN/s_c/object} {PRONOUN/n_c:0/poss} hero. s_c proudly strides into camp with n_c:0 and proudly tells the leader what happened and gets praised by the clan for it.",
+                "exp": 10,
+                "weight": 20,
+                "stat_trait": [
+                    "ambitious",
+                    "arrogant",
+                    "cold",
+                    "cunning",
+                    "competitive",
+                    "childish",
+                    "shameless",
+                    "troublesome",
+                    "vengeful"
+                ],
+                "new_cat": [
+                    ["age:romance", "romance:s_c", "backstory:loner4"]
+                ],
+                "relationships": [
+                    {
+                        "cats_from": ["n_c:0"],
+                        "cats_to": ["p_l"],
+                        "mutual": false,
+                        "values": ["trust", "comfort"],
+                        "amount": 20
+                    },
+                    {
+                        "cats_from": ["clan"],
+                        "cats_to": ["p_l"],
+                        "mutual": false,
+                        "values": ["respect", "trust"],
+                        "amount": 10
+                    },
+                    {
+                        "cats_from": ["n_c:0"],
+                        "cats_to": ["p_l"],
+                        "mutual": true,
+                        "values": ["platonic", "romantic", "respect"],
+                        "amount": 15
+                    }
+                ],
+                "art": "fst_pln_bord_my_hero_OUTCOME",
+                "outsider_rep": 1
+            },
+            {
+                "text": "p_l quickly grabs the cat by the scruff and reassures {PRONOUN/n_c:0/object} that everything's gonna be alright. {PRONOUN/p_l/subject/CAP} looked down at {PRONOUN/n_c:0/object} and realized how beautiful {PRONOUN/n_c:0/subject} is, despite {PRONOUN/n_c:0/object} being terrifed. p_l pulls {PRONOUN/p_l/self} back up with the cat in tow. {PRONOUN/n_c:0/subject/CAP} introduces {PRONOUN/n_c:0/self} as n_c:0 and thanks {PRONOUN/p_l/object} for helping {PRONOUN/n_c:0/object}. {PRONOUN/p_l/subject/CAP} offers {PRONOUN/n_c:0/poss} a place to stay in the Clan, and n_c:0 accepts, whispering that {PRONOUN/n_c:0/subject}'d always would want to stay around {PRONOUN/n_c:0/poss} heros, hehe...",
+                "exp": 10,
+                "weight": 20,
+                "new_cat": [
+                    ["age:romance", "romance:p_l", "backstory:loner4"]
+                ],
+                "relationships": [
+                    {
+                        "cats_from": ["n_c:0"],
+                        "cats_to": ["p_l"],
+                        "mutual": false,
+                        "values": ["trust", "comfort"],
+                        "amount": 20
+                    },
+                    {
+                        "cats_from": ["n_c:0"],
+                        "cats_to": ["p_l"],
+                        "mutual": true,
+                        "values": ["platonic", "romantic", "respect"],
+                        "amount": 15
+                    }
+                ],
+                "art": "fst_pln_bord_my_hero_OUTCOME",
+                "outsider_rep": 1
+            }
+        ],
+        "fail_outcomes": [
+            {
+                "text": "p_l quickly grabs the cat by the scruff and reassures {PRONOUN/n_c:0/object} that everything's gonna be alright. {PRONOUN/p_l/subject} looked down at {PRONOUN/n_c:0/object} and realized how beautiful {PRONOUN/n_c:0/subject} is, despite {PRONOUN/n_c:0/object} being terrifed, and that terror was fading away the more they kept staring into eachother's eyes. p_l was so mesmorized by {PRONOUN/n_c:0/poss} beauty that {PRONOUN/p_l/subject} looses {PRONOUN/p_l/poss} grip and the cat falls! {PRONOUN/p_l/subject/CAP} watches in horror as {PRONOUN/p_l/subject} sees {PRONOUN/n_c:0/object} plummet to {PRONOUN/n_c:0/poss} death. p_l is in shock and a sudden sense of grief overcomes {PRONOUN/p_l/object}, how could've {PRONOUN/p_l/subject} lost someone so precious, yet alone grieve them even though they have never met???",
+                "exp": 0,
+                "weight": 20,
+                "outsider_rep": -1,
+                "relationships": [
+                    {
+                        "cats_from": ["p_l"],
+                        "cats_to": ["n_c:0"],
+                        "mutual": false,
+                        "values": ["romantic"],
+                        "amount": 20
+                    }
+                ],
+                "injury": [
+                    {
+                    	"cats": ["patrol"],
+                    	"injuries": ["shock", "non_lethal"],
+                        "scars": []
+                    },
+                    {
+                    	"cats": ["p_l"],
+                    	"injuries": ["grief stricken"],
+                        "scars": []
+                    }
+                ],
+                "new_cat": [
+                    ["age:romance", "romance:p_l", "loner", "dead", "meeting"]
+                ]
+            },
+            {
+                "text": "p_l quickly grabs the cat by the scruff and reassures {PRONOUN/n_c:0/object} that everything's gonna be alright. {PRONOUN/p_l/subject} looked down at {PRONOUN/n_c:0/object} and realized how beautiful {PRONOUN/n_c:0/subject} is, but instead of being calm or scared, the cat hisses and claims that {PRONOUN/n_c:0/subject} didn't need any help and was almost there! p_l pulls {PRONOUN/p_l/self} back up with the cat in tow and tries not to blush while asking if {PRONOUN/n_c:0/subject}'s alright. The cat snaps back of course {PRONOUN/n_c:0/subject}'s alright and hisses at {PRONOUN/p_l/object} to back off! p_l tries to calm {PRONOUN/n_c:0/object} down but gets a claw to the face instead! The cat flees while p_l watches {PRONOUN/n_c:0/object} in the distance, awestruck of {PRONOUN/n_c:0/poss} ferocity. Damn, {PRONOUN/n_c:0/subject}'s something else...",
+                "exp": 0,
+                "weight": 10,
+                "injury": [
+                    {
+                    	"cats": ["p_l"],
+                        "injuries": ["claw-wound"],
+                        "scars": ["SNOUT"]
+                    }
+                ],
+                "history_text": {
+                    "scar": "m_c was scarred when the most beautiful loner {PRONOUN/m_c/subject}'s ever seen, attacked {PRONOUN/m_c/object}. It was worth it.",
+                    "reg_death": "m_c died after the most beautiful loner {PRONOUN/m_c/subject}'s ever seen, attacked {PRONOUN/m_c/object}. Was it worth it?",
+                    "lead_death": "{VERB/m_c/were/was} attacked by the most beautiful loner {PRONOUN/m_c/subject}'s ever seen, it was worth it,"
+                },
+                "outsider_rep": -1,
+                "new_cat": [
+                    ["age:romance", "romance:p_l", "loner", "meeting"]
+                ],
+                "relationships": [
+                    {
+                        "cats_from": ["p_l"],
+                        "cats_to": ["n_c:0"],
+                        "mutual": false,
+                        "values": ["romantic", "dislike"],
+                        "amount": 10
+                    }, 
+                    {
+                        "cats_from": ["n_c:0"],
+                        "cats_to": ["patrol"],
+                        "mutual": false,
+                        "values": ["dislike"],
+                        "amount": 10
+                    }
+                ],
+                "outsider_rep": -1  
+            }
+        ],
+        "antag_fail_outcomes": [
+            {
+                "text": "The loner escapes the dog by climbing a tree and scowls at the patrol, who stood by watching.",
+                "exp": 0,
+                "weight": 20,
+                "outsider_rep": -1,
+                "new_cat": [
+                    "meeting", "loner"
+                ],
+                "relationships": [
+                    {
+                        "cats_from": ["n_c:0"],
+                        "cats_to": ["patrol"],
+                        "mutual": false,
+                        "values": ["dislike"],
+                        "amount": 40
+                    }
+                ]
+            }
+        ],
+        "antag_success_outcomes": [
+            {
+                "text": "The patrol watches as the loner climbs up a spindly tree to escape the dog, and then promptly proceed to chase the dog out of the territory and warn the loner not to cross the border.",
+                "exp": 10,
+                "weight": 20,
+                "outsider_rep": -2,
+                "new_cat": [
+                    "meeting", "loner"
+                ]
+            }
+        ]
+    },
+    {
+        "patrol_id": "fst_pln_bord_my_hero3",
+        "biome": ["forest", "plains"],
+        "season": ["any"],
+        "types": ["border"],
+        "tags": ["new_cat"],
+        "patrol_art": "fst_pln_bord_my_hero_INTRO",
+        "min_cats": 2,
+        "max_cats": 2,
+        "min_max_status": {
+            "normal adult": [1, 6]
+        },
+        "weight": 20,
+        "intro_text": "The patrol heads out towards the outskirts of the territory to scentmark it, alls fine and well until r_c hears a loud yowl not far from where they are and alerts p_l. When they arrive to where the yowl came from, they see a cat hanging for dear life on the edge of a ridge!",
+        "decline_text": "The cat manages to get themself back up and runs away terrified.",
+        "chance_of_success": 20,
+        "success_outcomes": [
+            {
+                "text": "p_l quickly grabs the cat by the scruff and reassures {PRONOUN/n_c:0/object} that everything's gonna be alright. {PRONOUN/p_l/subject/CAP} looked down at {PRONOUN/n_c:0/object} and realized how beautiful {PRONOUN/n_c:0/subject} is, despite {PRONOUN/n_c:0/object} being terrifed, and that terror was fading away the more they kept staring into eachother's eyes. With the help from r_c, p_l manages to get the cat back to safety. The cat thanks them, flirtatiously calls p_l {PRONOUN/n_c:0/poss} hero, and introduces {PRONOUN/n_c:0/self} as n_c:0. {PRONOUN/n_c:0/object} heard that they're clan cats and would like to join the Clan. p_l instantly says yes and the patrol heads back to camp, with r_c rolling {PRONOUN/r_c/poss} eyes while having to watch p_l and n_c:0 get flirty with eachother.",
+                "exp": 10,
+                "weight": 20,
+                "new_cat": [
+                    ["age:romance", "romance:p_l", "backstory:loner4"]
+                ],
+                "relationships": [
+                    {
+                        "cats_from": ["n_c:0"],
+                        "cats_to": ["patrol"],
+                        "mutual": false,
+                        "values": ["trust", "comfort"],
+                        "amount": 20
+                    },
+                    {
+                        "cats_from": ["n_c:0"],
+                        "cats_to": ["p_l"],
+                        "mutual": true,
+                        "values": ["platonic", "romantic", "respect"],
+                        "amount": 15
+                    }
+                ],
+                "art": "fst_pln_bord_my_hero_OUTCOME",
+                "outsider_rep": 1
+            },
+            {
+                "text": "s_c quickly grabs the cat by the scruff and reassures {PRONOUN/n_c:0/object} that everything's gonna be alright. r_c grabs s_c and helps pull {PRONOUN/s_c/object} and the cat back up. r_c steps back as s_c flops onto {PRONOUN/s_c/poss} back, with the cat, n_c:0, on top of {PRONOUN/s_c/object} in a... sus way. A few moments after they stare at eachother, n_c:0 thanks s_c earnestly and s_c, who's clearly smitten by {PRONOUN/n_c:0/object}, takes the credit for {PRONOUN/n_c:0/poss} rescue and n_c:0 brushes up against s_c calling {PRONOUN/s_c/object} {PRONOUN/n_c:0/poss} hero. r_c is furious by the time they get back to camp, watching s_c tell the leader about {PRONOUN/s_c/poss} heroic deed. {PRONOUN/s_c/subject/CAP}'s happy n_c:0 is safe and in the clan now, but {PRONOUN/r_c/subject/CAP} HELPED TOO! WHERE'S {PRONOUN/r_c/poss/CAP} CREDIT!?",
+                "exp": 10,
+                "weight": 20,
+                "stat_trait": [
+                    "ambitious",
+                    "arrogant",
+                    "cold",
+                    "cunning",
+                    "competitive",
+                    "childish",
+                    "shameless",
+                    "troublesome",
+                    "vengeful"
+                ],
+                "can_have_stat": ["adult"],
+                "new_cat": [
+                    ["age:romance", "romance:s_c", "backstory:loner4"]
+                ],
+                "relationships": [
+                    {
+                        "cats_from": ["n_c:0"],
+                        "cats_to": ["s_c"],
+                        "mutual": false,
+                        "values": ["trust", "comfort"],
+                        "amount": 20
+                    },
+                    {
+                        "cats_from": ["r_c"],
+                        "cats_to": ["s_c"],
+                        "mutual": false,
+                        "values": ["dislike", "jealous"],
+                        "amount": 15
+                    },
+                    {
+                        "cats_from": ["r_c"],
+                        "cats_to": ["s_c"],
+                        "mutual": false,
+                        "values": ["trust", "respect", "platonic"],
+                        "amount": -15
+                    },
+                    {
+                        "cats_from": ["n_c:0"],
+                        "cats_to": ["s_c"],
+                        "mutual": true,
+                        "values": ["platonic", "romantic", "respect"],
+                        "amount": 15
+                    }
+                ],
+                "art": "fst_pln_bord_my_hero_OUTCOME",
+                "outsider_rep": 1
+            },
+            {
+                "text": "p_l quickly grabs the cat by the scruff and reassures {PRONOUN/n_c:0/object} that everything's gonna be alright. The rest of the patrol grabs p_l and helps pull {PRONOUN/p_l/object} and the cat back up. They step back as p_l flops onto {PRONOUN/p_l/poss} back, with the cat, n_c:0, on top of {PRONOUN/p_l/object} in a... sus way. A few moments after they stare at eachother, n_c:0 thanks p_l earnestly and p_l, who's clearly smitten by {PRONOUN/n_c:0/object}, takes the credit for {PRONOUN/n_c:0/poss} rescue and n_c:0 brushes up against p_l calling {PRONOUN/p_l/object} {PRONOUN/n_c:0/poss} hero. s_c thinks instead of being angry, {PRONOUN/s_c/subject} should all joke about this and sink in the drama. {PRONOUN/s_c/subject/CAP} tries to hide {PRONOUN/s_c/poss} laughs and snickers while watching the romance unfold between p_l and n_c:0. Finally! Some interesting drama in this Clan for once! {PRONOUN/s_c/subject/CAP} lets p_l take the credit for the rescue as long as it means {PRONOUN/s_c/subject} get entertained by this unexpected romance.",
+                "exp": 10,
+                "weight": 20,
+                "stat_trait": [
+	            "compassionate",
+                    "troublesome",
+                    "adventurous",
+                    "charismatic",
+        	    "strange",
+        	    "sneaky",
+                    "childish",
+		    "loving",
+                    "playful"
+                ],
+                "can_have_stat": ["adult"],
+                "new_cat": [
+                    ["age:romance", "romance:p_l", "backstory:loner4"]
+                ],
+                "relationships": [
+                    {
+                        "cats_from": ["n_c:0"],
+                        "cats_to": ["patrol"],
+                        "mutual": true,
+                        "values": ["trust", "comfort"],
+                        "amount": 20
+                    },
+                    {
+                        "cats_from": ["n_c:0"],
+                        "cats_to": ["p_l"],
+                        "mutual": true,
+                        "values": ["platonic", "romantic", "respect"],
+                        "amount": 15
+                    }
+                ],
+                "art": "fst_pln_bord_my_hero_OUTCOME",
+                "outsider_rep": 1            
+            },
+            {
+                "text": "p_l quickly grabs the cat by the scruff and reassures {PRONOUN/n_c:0/object} that everything's gonna be alright. {PRONOUN/p_l/subject/CAP} looked down at {PRONOUN/n_c:0/object} and realized how beautiful {PRONOUN/n_c:0/subject} is, despite {PRONOUN/n_c:0/object} being terrifed. r_c pulls p_l back up with the cat in tow. {PRONOUN/n_c:0/subject/CAP} introduces {PRONOUN/n_c:0/self} as n_c:0 and thanks them for helping {PRONOUN/n_c:0/object}, even though {PRONOUN/n_c:0/subject} seems to be paying most of {PRONOUN/n_c:0/poss} attention to p_l. {PRONOUN/p_l/subject/CAP} offers {PRONOUN/n_c:0/poss} a place to stay in the Clan, and n_c:0 accepts, whispering that {PRONOUN/n_c:0/subject}'d always would want to stay around {PRONOUN/n_c:0/poss} heros, hehe... ",
+                "exp": 10,
+                "weight": 20,
+                "new_cat": [
+                    ["age:romance", "romance:p_l", "backstory:loner4"]
+                ],
+                "relationships": [
+                    {
+                        "cats_from": ["n_c:0"],
+                        "cats_to": ["patrol"],
+                        "mutual": false,
+                        "values": ["trust", "comfort"],
+                        "amount": 20
+                    },
+                    {
+                        "cats_from": ["n_c:0"],
+                        "cats_to": ["p_l"],
+                        "mutual": true,
+                        "values": ["platonic", "romantic", "respect"],
+                        "amount": 15
+                    }
+                ],
+                "art": "fst_pln_bord_my_hero_OUTCOME",
+                "outsider_rep": 1
+            }
+        ],
+        "fail_outcomes": [
+            {
+                "text": "p_l quickly grabs the cat by the scruff and reassures {PRONOUN/n_c:0/object} that everything's gonna be alright. {PRONOUN/p_l/subject/CAP} looked down at {PRONOUN/n_c:0/object} and realized how beautiful {PRONOUN/n_c:0/subject} is, despite {PRONOUN/n_c:0/object} being terrifed, and that terror was fading away the more they kept staring into eachother's eyes. p_l was so mesmorized by {PRONOUN/n_c:0/poss} beauty that {PRONOUN/p_l/subject} looses {PRONOUN/p_l/poss} grip and the cat falls! The two cats watch in horror as they see {PRONOUN/n_c:0/object} plummet to {PRONOUN/n_c:0/poss} death. r_c comforts p_l promising {PRONOUN/p_l/object} it wasn't {PRONOUN/p_l/poss} fault, but p_l is in shock and a sudden sense of grief overcomes {PRONOUN/p_l/object}, how could've {PRONOUN/p_l/subject} lost someone so precious, yet alone grieve them even though they have never met???",
+                "exp": 0,
+                "weight": 20,
+                "outsider_rep": -1,
+                "relationships": [
+                    {
+                        "cats_from": ["p_l"],
+                        "cats_to": ["n_c:0"],
+                        "mutual": false,
+                        "values": ["romantic"],
+                        "amount": 20
+                    }
+                ],
+                "injury": [
+                    {
+                    	"cats": ["patrol"],
+                    	"injuries": ["shock", "non_lethal"],
+                        "scars": []
+                    },
+                    {
+                    	"cats": ["p_l"],
+                    	"injuries": ["grief stricken"],
+                        "scars": []
+                    }
+                ],
+                "new_cat": [
+                    ["age:romance", "romance:p_l", "loner", "dead", "meeting"]
+                ]
+            },
+            {
+                "text": "p_l quickly grabs the cat by the scruff and reassures {PRONOUN/n_c:0/object} that everything's gonna be alright. {PRONOUN/p_l/subject} looked down at {PRONOUN/n_c:0/object} and realized how beautiful {PRONOUN/n_c:0/subject} is, but instead of being calm or scared, the cat hisses and claims that {PRONOUN/n_c:0/subject} didn't need any help and was almost there! r_c pulls p_l back up with the cat in tow and p_l, who's trying not to blush, asks {PRONOUN/n_c:0/object} if {PRONOUN/n_c:0/subject}'s alright. The cat snaps back of course {PRONOUN/n_c:0/subject}'s alright and hisses at them to back off! p_l tries to calm {PRONOUN/n_c:0/object} down but gets a claw to the face instead! The cat flees while p_l watches {PRONOUN/n_c:0/object} in the distance, awestruck of {PRONOUN/n_c:0/poss} ferocity. Damn, {PRONOUN/n_c:0/subject}'s something else...",
+                "exp": 0,
+                "weight": 10,
+                "injury": [
+                    {
+                    	"cats": ["p_l"],
+                        "injuries": ["claw-wound"],
+                        "scars": ["SNOUT"]
+                    }
+                ],
+                "history_text": {
+                    "scar": "m_c was scarred when the most beautiful loner {PRONOUN/m_c/subject}'s ever seen, attacked {PRONOUN/m_c/object}. It was worth it.",
+                    "reg_death": "m_c died after the most beautiful loner {PRONOUN/m_c/subject}'s ever seen, attacked {PRONOUN/m_c/object}. Was it worth it?",
+                    "lead_death": "{VERB/m_c/were/was} attacked by the most beautiful loner {PRONOUN/m_c/subject}'s ever seen, it was worth it,"
+                },
+                "outsider_rep": -1,
+                "new_cat": [
+                    ["age:romance", "romance:p_l", "loner", "meeting"]
+                ],
+                "relationships": [
+                    {
+                        "cats_from": ["p_l"],
+                        "cats_to": ["n_c:0"],
+                        "mutual": false,
+                        "values": ["romantic", "dislike"],
+                        "amount": 10
+                    },
+                    {
+                        "cats_from": ["n_c:0"],
+                        "cats_to": ["patrol"],
+                        "mutual": false,
+                        "values": ["dislike"],
+                        "amount": 10
+                    }
+                ],
+                "outsider_rep": -1  
+            }
+        ],
+        "antag_fail_outcomes": [
+            {
+                "text": "The loner escapes the dog by climbing a tree and scowls at the patrol, who stood by watching.",
+                "exp": 0,
+                "weight": 20,
+                "outsider_rep": -1,
+                "new_cat": [
+                    "meeting", "loner"
+                ],
+                "relationships": [
+                    {
+                        "cats_from": ["n_c:0"],
+                        "cats_to": ["patrol"],
+                        "mutual": false,
+                        "values": ["dislike"],
+                        "amount": 40
+                    }
+                ]
+            }
+        ],
+        "antag_success_outcomes": [
+            {
+                "text": "The patrol watches as the loner climbs up a spindly tree to escape the dog, and then promptly proceed to chase the dog out of the territory and warn the loner not to cross the border.",
+                "exp": 10,
+                "weight": 20,
+                "outsider_rep": -2,
+                "new_cat": [
+                    "meeting", "loner"
+                ]
+            }
+        ]
+    },
+    {
+        "patrol_id": "mtn_bch_bord_my_hero1",
+        "biome": ["mountainous", "beach"],
+        "season": ["any"],
+        "types": ["border"],
+        "tags": ["new_cat"],
+        "patrol_art": "mtn_bch_bord_my_hero_INTRO",
+        "min_cats": 3,
+        "max_cats": 6,
+        "min_max_status": {
+            "normal adult": [1, 6]
+        },
+        "weight": 20,
+        "intro_text": "The patrol heads out towards the outskirts of the territory to scentmark it, alls fine and well until r_c hears a loud yowl not far from where they are and alerts p_l. When they arrive to where the yowl came from, they see a cat hanging for dear life on the edge of a cliff!",
+        "decline_text": "The cat manages to get themself back up and runs away terrified.",
+        "chance_of_success": 30,
+        "success_outcomes": [
+            {
+                "text": "p_l quickly grabs the cat by the scruff and reassures {PRONOUN/n_c:0/object} that everything's gonna be alright. {PRONOUN/p_l/subject/CAP} looked down at {PRONOUN/n_c:0/object} and realized how beautiful {PRONOUN/n_c:0/subject} is, despite {PRONOUN/n_c:0/object} being terrifed, and that terror was fading away the more they kept staring into eachother's eyes. With the help from the rest of the patrol, p_l manages to get the cat back to safety. The cat thanks them, flirtatiously calls p_l {PRONOUN/n_c:0/poss} hero, and introduces {PRONOUN/n_c:0/self} as n_c:0. {PRONOUN/n_c:0/object} heard that they're clan cats and would like to join the Clan. p_l instantly says yes and the patrol heads back to camp, rolling their eyes while having to watch p_l and n_c:0 get flirty with eachother.",
+                "exp": 10,
+                "weight": 20,
+                "new_cat": [
+                    ["age:romance", "romance:p_l", "backstory:loner4"]
+                ],
+                "relationships": [
+                    {
+                        "cats_from": ["n_c:0"],
+                        "cats_to": ["patrol"],
+                        "mutual": false,
+                        "values": ["trust", "comfort"],
+                        "amount": 20
+                    },
+                    {
+                        "cats_from": ["n_c:0"],
+                        "cats_to": ["p_l"],
+                        "mutual": true,
+                        "values": ["platonic", "romantic", "respect"],
+                        "amount": 15
+                    }
+                ],
+                "art": "fst_pln_bord_my_hero_OUTCOME",
+                "outsider_rep": 1
+            },
+            {
+                "text": "s_c quickly grabs the cat by the scruff and reassures {PRONOUN/n_c:0/object} that everything's gonna be alright. The rest of the patrol grabs s_c and helps pull {PRONOUN/s_c/object} and the cat back up. They step back as s_c flops onto {PRONOUN/s_c/poss} back, with the cat, n_c:0, on top of {PRONOUN/s_c/object} in a... sus way. A few moments after they stare at eachother, n_c:0 thanks s_c earnestly and s_c, who's clearly smitten by {PRONOUN/n_c:0/object}, takes the credit for {PRONOUN/n_c:0/poss} rescue and n_c:0 brushes up against s_c calling {PRONOUN/s_c/object} {PRONOUN/n_c:0/poss} hero. The rest of the patrol is furious by the time they get back to camp, watching s_c tell the leader about {PRONOUN/s_c/poss} heroic deed. They're happy n_c:0 is safe and in the clan now, but THEY HELPED TOO! WHERE'S THEIR CREDIT!?",
+                "exp": 10,
+                "weight": 20,
+                "stat_trait": [
+                    "ambitious",
+                    "arrogant",
+                    "cold",
+                    "cunning",
+                    "competitive",
+                    "childish",
+                    "shameless",
+                    "troublesome",
+                    "vengeful"
+                ],
+                "can_have_stat": ["adult"],
+                "new_cat": [
+                    ["age:romance", "romance:s_c", "backstory:loner4"]
+                ],
+                "relationships": [
+                    {
+                        "cats_from": ["n_c:0"],
+                        "cats_to": ["s_c"],
+                        "mutual": false,
+                        "values": ["trust", "comfort"],
+                        "amount": 20
+                    },
+                    {
+                        "cats_from": ["patrol"],
+                        "cats_to": ["s_c"],
+                        "mutual": false,
+                        "values": ["dislike", "jealous"],
+                        "amount": 10
+                    },
+                    {
+                        "cats_from": ["patrol"],
+                        "cats_to": ["s_c"],
+                        "mutual": false,
+                        "values": ["trust", "respect", "platonic"],
+                        "amount": -15
+                    },
+                    {
+                        "cats_from": ["n_c:0"],
+                        "cats_to": ["s_c"],
+                        "mutual": true,
+                        "values": ["platonic", "romantic", "respect"],
+                        "amount": 15
+                    }
+                ],
+                "art": "fst_pln_bord_my_hero_OUTCOME",
+                "outsider_rep": 1
+            },
+            {
+                "text": "p_l quickly grabs the cat by the scruff and reassures {PRONOUN/n_c:0/object} that everything's gonna be alright. The rest of the patrol grabs p_l and helps pull {PRONOUN/p_l/object} and the cat back up. They step back as p_l flops onto {PRONOUN/p_l/poss} back, with the cat, n_c:0, on top of {PRONOUN/p_l/object} in a... sus way. A few moments after they stare at eachother, n_c:0 thanks p_l earnestly and p_l, who's clearly smitten by {PRONOUN/n_c:0/object}, takes the credit for {PRONOUN/n_c:0/poss} rescue and n_c:0 brushes up against p_l calling {PRONOUN/p_l/object} {PRONOUN/n_c:0/poss} hero. s_c thinks instead of being angry, they should all joke about this and sink in the drama. The rest of the patrol agrees and they all try to hide their laughs and snickers while watching the romance unfold between p_l and n_c:0. Finally! Some interesting drama in this Clan for once! They let p_l take the credit for the rescue as long as it means they get entertained by this unexpected romance.",
+                "exp": 10,
+                "weight": 20,
+                "stat_trait": [
+	            "compassionate",
+                    "troublesome",
+                    "adventurous",
+                    "charismatic",
+        	    "strange",
+        	    "sneaky",
+                    "childish",
+		    "loving",
+                    "playful"
+                ],
+                "can_have_stat": ["adult"],
+                "new_cat": [
+                    ["age:romance", "romance:p_l", "backstory:loner4"]
+                ],
+                "relationships": [
+                    {
+                        "cats_from": ["n_c:0"],
+                        "cats_to": ["patrol"],
+                        "mutual": true,
+                        "values": ["trust", "comfort"],
+                        "amount": 20
+                    },
+                    {
+                        "cats_from": ["n_c:0"],
+                        "cats_to": ["p_l"],
+                        "mutual": true,
+                        "values": ["platonic", "romantic", "respect"],
+                        "amount": 15
+                    }
+                ],
+                "art": "fst_pln_bord_my_hero_OUTCOME",
+                "outsider_rep": 1            
+            },
+            {
+                "text": "p_l quickly grabs the cat by the scruff and reassures {PRONOUN/n_c:0/object} that everything's gonna be alright. {PRONOUN/p_l/subject/CAP} looked down at {PRONOUN/n_c:0/object} and realized how beautiful {PRONOUN/n_c:0/subject} is, despite {PRONOUN/n_c:0/object} being terrifed. The patrol pulls p_l back up with the cat in tow. {PRONOUN/n_c:0/subject/CAP} introduces {PRONOUN/n_c:0/self} as n_c:0 and thanks everyone for helping {PRONOUN/n_c:0/object}, even though {PRONOUN/n_c:0/subject} seems to be paying most of {PRONOUN/n_c:0/poss} attention to p_l. {PRONOUN/p_l/subject/CAP} offers {PRONOUN/n_c:0/poss} a place to stay in the Clan, and n_c:0 accepts, whispering that {PRONOUN/n_c:0/subject}'d always would want to stay around {PRONOUN/n_c:0/poss} heros, hehe...",
+                "exp": 10,
+                "weight": 20,
+                "new_cat": [
+                    ["age:romance", "romance:p_l", "backstory:loner4"]
+                ],
+                "relationships": [
+                    {
+                        "cats_from": ["n_c:0"],
+                        "cats_to": ["patrol"],
+                        "mutual": false,
+                        "values": ["trust", "comfort"],
+                        "amount": 20
+                    },
+                    {
+                        "cats_from": ["n_c:0"],
+                        "cats_to": ["p_l"],
+                        "mutual": true,
+                        "values": ["platonic", "romantic", "respect"],
+                        "amount": 15
+                    }
+                ],
+                "art": "fst_pln_bord_my_hero_OUTCOME",
+                "outsider_rep": 1
+            }
+        ],
+        "fail_outcomes": [
+            {
+                "text": "p_l quickly grabs the cat by the scruff and reassures {PRONOUN/n_c:0/object} that everything's gonna be alright. {PRONOUN/p_l/subject/CAP} looked down at {PRONOUN/n_c:0/object} and realized how beautiful {PRONOUN/n_c:0/subject} is, despite {PRONOUN/n_c:0/object} being terrifed, and that terror was fading away the more they kept staring into eachother's eyes. p_l was so mesmorized by {PRONOUN/n_c:0/poss} beauty that {PRONOUN/p_l/subject} looses {PRONOUN/p_l/poss} grip and the cat falls! Everyone watches in horror as they see {PRONOUN/n_c:0/object} plunge into the waters to {PRONOUN/n_c:0/poss} death. The patrol comforts p_l promising {PRONOUN/p_l/object} it wasn't {PRONOUN/p_l/poss} fault, but p_l is in shock and a sudden sense of grief overcomes {PRONOUN/p_l/object}, how could've {PRONOUN/p_l/subject} lost someone so precious, yet alone grieve them even though they have never met???",
+                "exp": 0,
+                "weight": 20,
+                "outsider_rep": -1,
+                "relationships": [
+                    {
+                        "cats_from": ["p_l"],
+                        "cats_to": ["n_c:0"],
+                        "mutual": false,
+                        "values": ["romantic"],
+                        "amount": 20
+                    }
+                ],
+                "injury": [
+                    {
+                    	"cats": ["patrol"],
+                    	"injuries": ["shock", "non_lethal"],
+                        "scars": []
+                    },
+                    {
+                    	"cats": ["p_l"],
+                    	"injuries": ["grief stricken"],
+                        "scars": []
+                    }
+                ],
+                "new_cat": [
+                    ["age:romance", "romance:p_l", "loner", "dead", "meeting"]
+                ]
+            },
+            {
+                "text": "p_l quickly grabs the cat by the scruff and reassures {PRONOUN/n_c:0/object} that everything's gonna be alright. {PRONOUN/p_l/subject} looked down at {PRONOUN/n_c:0/object} and realized how beautiful {PRONOUN/n_c:0/subject} is, but instead of being calm or scared, the cat hisses and claims that {PRONOUN/n_c:0/subject} didn't need any help and was almost there! The patrol pulls p_l back up with the cat in tow and p_l, who's trying not to blush, asks {PRONOUN/n_c:0/object} if {PRONOUN/n_c:0/subject}'s alright. The cat snaps back of course {PRONOUN/n_c:0/subject}'s alright and hisses at everyone to back off! p_l tries to calm {PRONOUN/n_c:0/object} down but gets a claw to the face instead! The cat flees while p_l watches {PRONOUN/n_c:0/object} in the distance, awestruck of {PRONOUN/n_c:0/poss} ferocity. Damn, {PRONOUN/n_c:0/subject}'s something else...",
+                "exp": 0,
+                "weight": 10,
+                "injury": [
+                    {
+                    	"cats": ["p_l"],
+                        "injuries": ["claw-wound"],
+                        "scars": ["SNOUT"]
+                    }
+                ],
+                "history_text": {
+                    "scar": "m_c was scarred when the most beautiful loner {PRONOUN/m_c/subject}'s ever seen, attacked {PRONOUN/m_c/object}. It was worth it.",
+                    "reg_death": "m_c died after the most beautiful loner {PRONOUN/m_c/subject}'s ever seen, attacked {PRONOUN/m_c/object}. Was it worth it?",
+                    "lead_death": "{VERB/m_c/were/was} attacked by the most beautiful loner {PRONOUN/m_c/subject}'s ever seen, it was worth it,"
+                },
+                "outsider_rep": -1,
+                "new_cat": [
+                    ["age:romance", "romance:p_l", "loner", "meeting"]
+                ],
+                "relationships": [
+                    {
+                        "cats_from": ["p_l"],
+                        "cats_to": ["n_c:0"],
+                        "mutual": false,
+                        "values": ["romantic", "dislike"],
+                        "amount": 10
+                    },
+                    {
+                        "cats_from": ["n_c:0"],
+                        "cats_to": ["patrol"],
+                        "mutual": false,
+                        "values": ["dislike"],
+                        "amount": 10
+                    }
+                ],
+                "outsider_rep": -1  
+            }
+        ],
+        "antag_fail_outcomes": [
+            {
+                "text": "The loner escapes the dog by climbing a tree and scowls at the patrol, who stood by watching.",
+                "exp": 0,
+                "weight": 20,
+                "outsider_rep": -1,
+                "new_cat": [
+                    "meeting", "loner"
+                ],
+                "relationships": [
+                    {
+                        "cats_from": ["n_c:0"],
+                        "cats_to": ["patrol"],
+                        "mutual": false,
+                        "values": ["dislike"],
+                        "amount": 40
+                    }
+                ]
+            }
+        ],
+        "antag_success_outcomes": [
+            {
+                "text": "The patrol watches as the loner climbs up a spindly tree to escape the dog, and then promptly proceed to chase the dog out of the territory and warn the loner not to cross the border.",
+                "exp": 10,
+                "weight": 20,
+                "outsider_rep": -2,
+                "new_cat": [
+                    "meeting", "loner"
+                ]
+            }
+        ]
+    },
+    {
+        "patrol_id": "mtn_bch_bord_my_hero2",
+        "biome": ["mountainous", "beach"],
+        "season": ["any"],
+        "types": ["border"],
+        "tags": ["new_cat"],
+        "patrol_art": "mtn_bch_bord_my_hero_INTRO",
+        "min_cats": 1,
+        "max_cats": 1,
+        "min_max_status": {
+            "normal adult": [1, 6]
+        },
+        "weight": 20,
+        "intro_text": "p_l heads out towards the outskirts of the territory to scentmark it, alls fine and well until p_l hears a loud yowl not far from where {PRONOUN/p_l/subject} is. When {PRONOUN/p_l/subject} arrives to where the yowl came from, {PRONOUN/p_l/subject} sees a cat hanging for dear life on the edge of a cliff!",
+        "decline_text": "The cat manages to get themself back up and runs away terrified.",
+        "chance_of_success": 20,
+        "success_outcomes": [
+            {
+                "text": "p_l quickly grabs the cat by the scruff and reassures {PRONOUN/n_c:0/object} that everything's gonna be alright. {PRONOUN/p_l/subject} looked down at {PRONOUN/n_c:0/object} and realized how beautiful {PRONOUN/n_c:0/subject} is, despite {PRONOUN/n_c:0/object} being terrifed, and that terror was fading away the more they kept staring into eachother's eyes. p_l manages to get the cat back to safety. The cat thanks {PRONOUN/p_l/object}, flirtatiously calls {PRONOUN/p_l/object} {PRONOUN/n_c:0/poss} hero, and introduces {PRONOUN/n_c:0/self} as n_c:0. {PRONOUN/n_c:0/object/CAP} heard that {PRONOUN/p_l/subject}'s a clan cat and would like to join the Clan. p_l instantly says yes and they head back to camp while being flirty with eachother.",
+                "exp": 10,
+                "weight": 20,
+                "new_cat": [
+                    ["age:romance", "romance:p_l", "backstory:loner4"]
+                ],
+                "relationships": [
+                    {
+                        "cats_from": ["n_c:0"],
+                        "cats_to": ["p_l"],
+                        "mutual": false,
+                        "values": ["trust", "comfort"],
+                        "amount": 20
+                    },
+                    {
+                        "cats_from": ["n_c:0"],
+                        "cats_to": ["p_l"],
+                        "mutual": true,
+                        "values": ["platonic", "romantic", "respect"],
+                        "amount": 15
+                    }                ],
+                "art": "fst_pln_bord_my_hero_OUTCOME",
+                "outsider_rep": 1
+            },
+            {
+                "text": "s_c quickly grabs the cat by the scruff and reassures {PRONOUN/n_c:0/object} that everything's gonna be alright. s_c pulls {PRONOUN/p_l/self} back up with the cat in tow and flops onto {PRONOUN/s_c/poss} back, with the cat, n_c:0, on top of {PRONOUN/s_c/object} in a... sus way. A few moments after they stare at eachother, n_c:0 thanks s_c earnestly and s_c, who's clearly smitten by {PRONOUN/n_c:0/object}, takes the credit for {PRONOUN/n_c:0/poss} rescue and n_c:0 brushes up against s_c calling {PRONOUN/s_c/object} {PRONOUN/n_c:0/poss} hero. s_c proudly strides into camp with n_c:0 and proudly tells the leader what happened and gets praised by the clan for it.",
+                "exp": 10,
+                "weight": 20,
+                "stat_trait": [
+                    "ambitious",
+                    "arrogant",
+                    "cold",
+                    "cunning",
+                    "competitive",
+                    "childish",
+                    "shameless",
+                    "troublesome",
+                    "vengeful"
+                ],
+                "new_cat": [
+                    ["age:romance", "romance:s_c", "backstory:loner4"]
+                ],
+                "relationships": [
+                    {
+                        "cats_from": ["n_c:0"],
+                        "cats_to": ["p_l"],
+                        "mutual": false,
+                        "values": ["trust", "comfort"],
+                        "amount": 20
+                    },
+                    {
+                        "cats_from": ["clan"],
+                        "cats_to": ["p_l"],
+                        "mutual": false,
+                        "values": ["respect", "trust"],
+                        "amount": 10
+                    },
+                    {
+                        "cats_from": ["n_c:0"],
+                        "cats_to": ["p_l"],
+                        "mutual": true,
+                        "values": ["platonic", "romantic", "respect"],
+                        "amount": 15
+                    }
+                ],
+                "art": "fst_pln_bord_my_hero_OUTCOME",
+                "outsider_rep": 1
+            },
+            {
+                "text": "p_l quickly grabs the cat by the scruff and reassures {PRONOUN/n_c:0/object} that everything's gonna be alright. {PRONOUN/p_l/subject/CAP} looked down at {PRONOUN/n_c:0/object} and realized how beautiful {PRONOUN/n_c:0/subject} is, despite {PRONOUN/n_c:0/object} being terrifed. p_l pulls {PRONOUN/p_l/self} back up with the cat in tow. {PRONOUN/n_c:0/subject/CAP} introduces {PRONOUN/n_c:0/self} as n_c:0 and thanks {PRONOUN/p_l/object} for helping {PRONOUN/n_c:0/object}. {PRONOUN/p_l/subject/CAP} offers {PRONOUN/n_c:0/poss} a place to stay in the Clan, and n_c:0 accepts, whispering that {PRONOUN/n_c:0/subject}'d always would want to stay around {PRONOUN/n_c:0/poss} heros, hehe...",
+                "exp": 10,
+                "weight": 20,
+                "new_cat": [
+                    ["age:romance", "romance:p_l", "backstory:loner4"]
+                ],
+                "relationships": [
+                    {
+                        "cats_from": ["n_c:0"],
+                        "cats_to": ["p_l"],
+                        "mutual": false,
+                        "values": ["trust", "comfort"],
+                        "amount": 20
+                    },
+                    {
+                        "cats_from": ["n_c:0"],
+                        "cats_to": ["p_l"],
+                        "mutual": true,
+                        "values": ["platonic", "romantic", "respect"],
+                        "amount": 15
+                    }
+                ],
+                "art": "fst_pln_bord_my_hero_OUTCOME",
+                "outsider_rep": 1
+            }
+        ],
+        "fail_outcomes": [
+            {
+                "text": "p_l quickly grabs the cat by the scruff and reassures {PRONOUN/n_c:0/object} that everything's gonna be alright. {PRONOUN/p_l/subject} looked down at {PRONOUN/n_c:0/object} and realized how beautiful {PRONOUN/n_c:0/subject} is, despite {PRONOUN/n_c:0/object} being terrifed, and that terror was fading away the more they kept staring into eachother's eyes. p_l was so mesmorized by {PRONOUN/n_c:0/poss} beauty that {PRONOUN/p_l/subject} looses {PRONOUN/p_l/poss} grip and the cat falls! {PRONOUN/p_l/subject/CAP} watches in horror as {PRONOUN/p_l/subject} sees {PRONOUN/n_c:0/object} plunge into the waters to {PRONOUN/n_c:0/poss} death. p_l is in shock and a sudden sense of grief overcomes {PRONOUN/p_l/object}, how could've {PRONOUN/p_l/subject} lost someone so precious, yet alone grieve them even though they have never met???",
+                "exp": 0,
+                "weight": 20,
+                "outsider_rep": -1,
+                "relationships": [
+                    {
+                        "cats_from": ["p_l"],
+                        "cats_to": ["n_c:0"],
+                        "mutual": false,
+                        "values": ["romantic"],
+                        "amount": 20
+                    }
+                ],
+                "injury": [
+                    {
+                    	"cats": ["patrol"],
+                    	"injuries": ["shock", "non_lethal"],
+                        "scars": []
+                    },
+                    {
+                    	"cats": ["p_l"],
+                    	"injuries": ["grief stricken"],
+                        "scars": []
+                    }
+                ],
+                "new_cat": [
+                    ["age:romance", "romance:p_l", "loner", "dead", "meeting"]
+                ]
+            },
+            {
+                "text": "p_l quickly grabs the cat by the scruff and reassures {PRONOUN/n_c:0/object} that everything's gonna be alright. {PRONOUN/p_l/subject} looked down at {PRONOUN/n_c:0/object} and realized how beautiful {PRONOUN/n_c:0/subject} is, but instead of being calm or scared, the cat hisses and claims that {PRONOUN/n_c:0/subject} didn't need any help and was almost there! p_l pulls {PRONOUN/p_l/self} back up with the cat in tow and tries not to blush while asking if {PRONOUN/n_c:0/subject}'s alright. The cat snaps back of course {PRONOUN/n_c:0/subject}'s alright and hisses at {PRONOUN/p_l/object} to back off! p_l tries to calm {PRONOUN/n_c:0/object} down but gets a claw to the face instead! The cat flees while p_l watches {PRONOUN/n_c:0/object} in the distance, awestruck of {PRONOUN/n_c:0/poss} ferocity. Damn, {PRONOUN/n_c:0/subject}'s something else...",
+                "exp": 0,
+                "weight": 10,
+                "injury": [
+                    {
+                    	"cats": ["p_l"],
+                        "injuries": ["claw-wound"],
+                        "scars": ["SNOUT"]
+                    }
+                ],
+                "history_text": {
+                    "scar": "m_c was scarred when the most beautiful loner {PRONOUN/m_c/subject}'s ever seen, attacked {PRONOUN/m_c/object}. It was worth it.",
+                    "reg_death": "m_c died after the most beautiful loner {PRONOUN/m_c/subject}'s ever seen, attacked {PRONOUN/m_c/object}. Was it worth it?",
+                    "lead_death": "{VERB/m_c/were/was} attacked by the most beautiful loner {PRONOUN/m_c/subject}'s ever seen, it was worth it,"
+                },
+                "outsider_rep": -1,
+                "new_cat": [
+                    ["age:romance", "romance:p_l", "loner", "meeting"]
+                ],
+                "relationships": [
+                    {
+                        "cats_from": ["p_l"],
+                        "cats_to": ["n_c:0"],
+                        "mutual": false,
+                        "values": ["romantic", "dislike"],
+                        "amount": 10
+                    }, 
+                    {
+                        "cats_from": ["n_c:0"],
+                        "cats_to": ["patrol"],
+                        "mutual": false,
+                        "values": ["dislike"],
+                        "amount": 10
+                    }
+                ],
+                "outsider_rep": -1  
+            }
+        ],
+        "antag_fail_outcomes": [
+            {
+                "text": "The loner escapes the dog by climbing a tree and scowls at the patrol, who stood by watching.",
+                "exp": 0,
+                "weight": 20,
+                "outsider_rep": -1,
+                "new_cat": [
+                    "meeting", "loner"
+                ],
+                "relationships": [
+                    {
+                        "cats_from": ["n_c:0"],
+                        "cats_to": ["patrol"],
+                        "mutual": false,
+                        "values": ["dislike"],
+                        "amount": 40
+                    }
+                ]
+            }
+        ],
+        "antag_success_outcomes": [
+            {
+                "text": "The patrol watches as the loner climbs up a spindly tree to escape the dog, and then promptly proceed to chase the dog out of the territory and warn the loner not to cross the border.",
+                "exp": 10,
+                "weight": 20,
+                "outsider_rep": -2,
+                "new_cat": [
+                    "meeting", "loner"
+                ]
+            }
+        ]
+    },
+    {
+        "patrol_id": "mtn_bch_bord_my_hero3",
+        "biome": ["mountainous", "beach"],
+        "season": ["any"],
+        "types": ["border"],
+        "tags": ["new_cat"],
+        "patrol_art": "mtn_bch_bord_my_hero_INTRO",
+        "min_cats": 2,
+        "max_cats": 2,
+        "min_max_status": {
+            "normal adult": [1, 6]
+        },
+        "weight": 20,
+        "intro_text": "The patrol heads out towards the outskirts of the territory to scentmark it, alls fine and well until r_c hears a loud yowl not far from where they are and alerts p_l. When they arrive to where the yowl came from, they see a cat hanging for dear life on the edge of a ridge!",
+        "decline_text": "The cat manages to get themself back up and runs away terrified.",
+        "chance_of_success": 20,
+        "success_outcomes": [
+            {
+                "text": "p_l quickly grabs the cat by the scruff and reassures {PRONOUN/n_c:0/object} that everything's gonna be alright. {PRONOUN/p_l/subject/CAP} looked down at {PRONOUN/n_c:0/object} and realized how beautiful {PRONOUN/n_c:0/subject} is, despite {PRONOUN/n_c:0/object} being terrifed, and that terror was fading away the more they kept staring into eachother's eyes. With the help from r_c, p_l manages to get the cat back to safety. The cat thanks them, flirtatiously calls p_l {PRONOUN/n_c:0/poss} hero, and introduces {PRONOUN/n_c:0/self} as n_c:0. {PRONOUN/n_c:0/object} heard that they're clan cats and would like to join the Clan. p_l instantly says yes and the patrol heads back to camp, with r_c rolling {PRONOUN/r_c/poss} eyes while having to watch p_l and n_c:0 get flirty with eachother.",
+                "exp": 10,
+                "weight": 20,
+                "new_cat": [
+                    ["age:romance", "romance:p_l", "backstory:loner4"]
+                ],
+                "relationships": [
+                    {
+                        "cats_from": ["n_c:0"],
+                        "cats_to": ["patrol"],
+                        "mutual": false,
+                        "values": ["trust", "comfort"],
+                        "amount": 20
+                    },
+                    {
+                        "cats_from": ["n_c:0"],
+                        "cats_to": ["p_l"],
+                        "mutual": true,
+                        "values": ["platonic", "romantic", "respect"],
+                        "amount": 15
+                    }
+                ],
+                "art": "fst_pln_bord_my_hero_OUTCOME",
+                "outsider_rep": 1
+            },
+            {
+                "text": "s_c quickly grabs the cat by the scruff and reassures {PRONOUN/n_c:0/object} that everything's gonna be alright. r_c grabs s_c and helps pull {PRONOUN/s_c/object} and the cat back up. r_c steps back as s_c flops onto {PRONOUN/s_c/poss} back, with the cat, n_c:0, on top of {PRONOUN/s_c/object} in a... sus way. A few moments after they stare at eachother, n_c:0 thanks s_c earnestly and s_c, who's clearly smitten by {PRONOUN/n_c:0/object}, takes the credit for {PRONOUN/n_c:0/poss} rescue and n_c:0 brushes up against s_c calling {PRONOUN/s_c/object} {PRONOUN/n_c:0/poss} hero. r_c is furious by the time they get back to camp, watching s_c tell the leader about {PRONOUN/s_c/poss} heroic deed. {PRONOUN/s_c/subject/CAP}'s happy n_c:0 is safe and in the clan now, but {PRONOUN/r_c/subject/CAP} HELPED TOO! WHERE'S {PRONOUN/r_c/poss/CAP} CREDIT!?",
+                "exp": 10,
+                "weight": 20,
+                "stat_trait": [
+                    "ambitious",
+                    "arrogant",
+                    "cold",
+                    "cunning",
+                    "competitive",
+                    "childish",
+                    "shameless",
+                    "troublesome",
+                    "vengeful"
+                ],
+                "can_have_stat": ["adult"],
+                "new_cat": [
+                    ["age:romance", "romance:s_c", "backstory:loner4"]
+                ],
+                "relationships": [
+                    {
+                        "cats_from": ["n_c:0"],
+                        "cats_to": ["s_c"],
+                        "mutual": false,
+                        "values": ["trust", "comfort"],
+                        "amount": 20
+                    },
+                    {
+                        "cats_from": ["r_c"],
+                        "cats_to": ["s_c"],
+                        "mutual": false,
+                        "values": ["dislike", "jealous"],
+                        "amount": 15
+                    },
+                    {
+                        "cats_from": ["r_c"],
+                        "cats_to": ["s_c"],
+                        "mutual": false,
+                        "values": ["trust", "respect", "platonic"],
+                        "amount": -15
+                    },
+                    {
+                        "cats_from": ["n_c:0"],
+                        "cats_to": ["s_c"],
+                        "mutual": true,
+                        "values": ["platonic", "romantic", "respect"],
+                        "amount": 15
+                    }
+                ],
+                "art": "fst_pln_bord_my_hero_OUTCOME",
+                "outsider_rep": 1
+            },
+            {
+                "text": "p_l quickly grabs the cat by the scruff and reassures {PRONOUN/n_c:0/object} that everything's gonna be alright. The rest of the patrol grabs p_l and helps pull {PRONOUN/p_l/object} and the cat back up. They step back as p_l flops onto {PRONOUN/p_l/poss} back, with the cat, n_c:0, on top of {PRONOUN/p_l/object} in a... sus way. A few moments after they stare at eachother, n_c:0 thanks p_l earnestly and p_l, who's clearly smitten by {PRONOUN/n_c:0/object}, takes the credit for {PRONOUN/n_c:0/poss} rescue and n_c:0 brushes up against p_l calling {PRONOUN/p_l/object} {PRONOUN/n_c:0/poss} hero. s_c thinks instead of being angry, {PRONOUN/s_c/subject} should all joke about this and sink in the drama. {PRONOUN/s_c/subject/CAP} tries to hide {PRONOUN/s_c/poss} laughs and snickers while watching the romance unfold between p_l and n_c:0. Finally! Some interesting drama in this Clan for once! {PRONOUN/s_c/subject/CAP} lets p_l take the credit for the rescue as long as it means {PRONOUN/s_c/subject} get entertained by this unexpected romance.",
+                "exp": 10,
+                "weight": 20,
+                "stat_trait": [
+	            "compassionate",
+                    "troublesome",
+                    "adventurous",
+                    "charismatic",
+        	    "strange",
+        	    "sneaky",
+                    "childish",
+		    "loving",
+                    "playful"
+                ],
+                "can_have_stat": ["adult"],
+                "new_cat": [
+                    ["age:romance", "romance:p_l", "backstory:loner4"]
+                ],
+                "relationships": [
+                    {
+                        "cats_from": ["n_c:0"],
+                        "cats_to": ["patrol"],
+                        "mutual": true,
+                        "values": ["trust", "comfort"],
+                        "amount": 20
+                    },
+                    {
+                        "cats_from": ["n_c:0"],
+                        "cats_to": ["p_l"],
+                        "mutual": true,
+                        "values": ["platonic", "romantic", "respect"],
+                        "amount": 15
+                    }
+                ],
+                "art": "fst_pln_bord_my_hero_OUTCOME",
+                "outsider_rep": 1            
+            },
+            {
+                "text": "p_l quickly grabs the cat by the scruff and reassures {PRONOUN/n_c:0/object} that everything's gonna be alright. {PRONOUN/p_l/subject/CAP} looked down at {PRONOUN/n_c:0/object} and realized how beautiful {PRONOUN/n_c:0/subject} is, despite {PRONOUN/n_c:0/object} being terrifed. r_c pulls p_l back up with the cat in tow. {PRONOUN/n_c:0/subject/CAP} introduces {PRONOUN/n_c:0/self} as n_c:0 and thanks them for helping {PRONOUN/n_c:0/object}, even though {PRONOUN/n_c:0/subject} seems to be paying most of {PRONOUN/n_c:0/poss} attention to p_l. {PRONOUN/p_l/subject/CAP} offers {PRONOUN/n_c:0/poss} a place to stay in the Clan, and n_c:0 accepts, whispering that {PRONOUN/n_c:0/subject}'d always would want to stay around {PRONOUN/n_c:0/poss} heros, hehe... ",
+                "exp": 10,
+                "weight": 20,
+                "new_cat": [
+                    ["age:romance", "romance:p_l", "backstory:loner4"]
+                ],
+                "relationships": [
+                    {
+                        "cats_from": ["n_c:0"],
+                        "cats_to": ["patrol"],
+                        "mutual": false,
+                        "values": ["trust", "comfort"],
+                        "amount": 20
+                    },
+                    {
+                        "cats_from": ["n_c:0"],
+                        "cats_to": ["p_l"],
+                        "mutual": true,
+                        "values": ["platonic", "romantic", "respect"],
+                        "amount": 15
+                    }
+                ],
+                "art": "fst_pln_bord_my_hero_OUTCOME",
+                "outsider_rep": 1
+            }
+        ],
+        "fail_outcomes": [
+            {
+                "text": "p_l quickly grabs the cat by the scruff and reassures {PRONOUN/n_c:0/object} that everything's gonna be alright. {PRONOUN/p_l/subject/CAP} looked down at {PRONOUN/n_c:0/object} and realized how beautiful {PRONOUN/n_c:0/subject} is, despite {PRONOUN/n_c:0/object} being terrifed, and that terror was fading away the more they kept staring into eachother's eyes. p_l was so mesmorized by {PRONOUN/n_c:0/poss} beauty that {PRONOUN/p_l/subject} looses {PRONOUN/p_l/poss} grip and the cat falls! The two cats watch in horror as they see {PRONOUN/n_c:0/object} plunge into the waters to {PRONOUN/n_c:0/poss} death. r_c comforts p_l promising {PRONOUN/p_l/object} it wasn't {PRONOUN/p_l/poss} fault, but p_l is in shock and a sudden sense of grief overcomes {PRONOUN/p_l/object}, how could've {PRONOUN/p_l/subject} lost someone so precious, yet alone grieve them even though they have never met???",
+                "exp": 0,
+                "weight": 20,
+                "outsider_rep": -1,
+                "relationships": [
+                    {
+                        "cats_from": ["p_l"],
+                        "cats_to": ["n_c:0"],
+                        "mutual": false,
+                        "values": ["romantic"],
+                        "amount": 20
+                    }
+                ],
+                "injury": [
+                    {
+                    	"cats": ["patrol"],
+                    	"injuries": ["shock", "non_lethal"],
+                        "scars": []
+                    },
+                    {
+                    	"cats": ["p_l"],
+                    	"injuries": ["grief stricken"],
+                        "scars": []
+                    }
+                ],
+                "new_cat": [
+                    ["age:romance", "romance:p_l", "loner", "dead", "meeting"]
+                ]
+            },
+            {
+                "text": "p_l quickly grabs the cat by the scruff and reassures {PRONOUN/n_c:0/object} that everything's gonna be alright. {PRONOUN/p_l/subject} looked down at {PRONOUN/n_c:0/object} and realized how beautiful {PRONOUN/n_c:0/subject} is, but instead of being calm or scared, the cat hisses and claims that {PRONOUN/n_c:0/subject} didn't need any help and was almost there! r_c pulls p_l back up with the cat in tow and p_l, who's trying not to blush, asks {PRONOUN/n_c:0/object} if {PRONOUN/n_c:0/subject}'s alright. The cat snaps back of course {PRONOUN/n_c:0/subject}'s alright and hisses at them to back off! p_l tries to calm {PRONOUN/n_c:0/object} down but gets a claw to the face instead! The cat flees while p_l watches {PRONOUN/n_c:0/object} in the distance, awestruck of {PRONOUN/n_c:0/poss} ferocity. Damn, {PRONOUN/n_c:0/subject}'s something else...",
+                "exp": 0,
+                "weight": 10,
+                "injury": [
+                    {
+                    	"cats": ["p_l"],
+                        "injuries": ["claw-wound"],
+                        "scars": ["SNOUT"]
+                    }
+                ],
+                "history_text": {
+                    "scar": "m_c was scarred when the most beautiful loner {PRONOUN/m_c/subject}'s ever seen, attacked {PRONOUN/m_c/object}. It was worth it.",
+                    "reg_death": "m_c died after the most beautiful loner {PRONOUN/m_c/subject}'s ever seen, attacked {PRONOUN/m_c/object}. Was it worth it?",
+                    "lead_death": "{VERB/m_c/were/was} attacked by the most beautiful loner {PRONOUN/m_c/subject}'s ever seen, it was worth it,"
+                },
+                "outsider_rep": -1,
+                "new_cat": [
+                    ["age:romance", "romance:p_l", "loner", "meeting"]
+                ],
+                "relationships": [
+                    {
+                        "cats_from": ["p_l"],
+                        "cats_to": ["n_c:0"],
+                        "mutual": false,
+                        "values": ["romantic", "dislike"],
+                        "amount": 10
+                    },
+                    {
+                        "cats_from": ["n_c:0"],
+                        "cats_to": ["patrol"],
+                        "mutual": false,
+                        "values": ["dislike"],
+                        "amount": 10
+                    }
+                ],
+                "outsider_rep": -1  
+            }
+        ],
+        "antag_fail_outcomes": [
+            {
+                "text": "The loner escapes the dog by climbing a tree and scowls at the patrol, who stood by watching.",
+                "exp": 0,
+                "weight": 20,
+                "outsider_rep": -1,
+                "new_cat": [
+                    "meeting", "loner"
+                ],
+                "relationships": [
+                    {
+                        "cats_from": ["n_c:0"],
+                        "cats_to": ["patrol"],
+                        "mutual": false,
+                        "values": ["dislike"],
+                        "amount": 40
+                    }
+                ]
+            }
+        ],
+        "antag_success_outcomes": [
+            {
+                "text": "The patrol watches as the loner climbs up a spindly tree to escape the dog, and then promptly proceed to chase the dog out of the territory and warn the loner not to cross the border.",
+                "exp": 10,
+                "weight": 20,
+                "outsider_rep": -2,
+                "new_cat": [
+                    "meeting", "loner"
+                ]
+            }
+        ]
+    },
+    {
         "patrol_id": "gen_bord_newcatthunderpath3",
         "biome": ["any"],
         "season": ["any"],
