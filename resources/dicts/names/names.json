@@ -39,7 +39,7 @@
     "zoom"
   ],
   "pelt_suffixes": {
-    "TwoColour": ["patch", "spot", "splash", "patch", "spots", "swan"],
+    "TwoColour": ["patch", "frost", "spot", "throat", "belly", "splash", "frost", "patch", "blotch", "swan", "frost"],
     "Tabby": ["stripe", "feather", "leaf", "stripe", "shade", "swirl"],
     "Marbled": ["stripe", "feather", "leaf", "stripe", "shade", "swirl"],
     "Speckled": ["dapple", "speckle", "spot", "speck", "freckle", "fleck"],
@@ -53,8 +53,8 @@
     "Agouti": ["back", "pelt", "fur"],
     "Singlestripe": ["stripe", "streak", "back", "shade", "stem", "shadow"],
     "Masked": ["stripe", "mask", "mask", "shade"],
-    "Tortie": ["dapple", "speckle", "spot", "dapple"],
-    "Calico": ["stripe", "dapple", "patch", "patch"]
+    "Tortie": ["dapple", "splash", "speckle", "spot", "dapple"],
+    "Calico": ["splash", "dapple", "patch", "patch", "frost"]
   },
   "tortie_pelt_suffixes": {
     "single": ["dapple", "speckle", "spots", "splash"],
@@ -128,30 +128,30 @@
     "WHITE": [
     "White", "White", "Pale", "Snow", "Snowy", "Cloud", "Cloudy", "Milk", "Hail", "Frost", "Frozen", "Freeze", "Ice", "Icy", "Icicle",
     "Blizzard", "Flurry", "Moon", "Light", "Bone", "Bright", "Swan", "Dove", "Cotton", "Hawthorn", "Laurel", "Wisp",
-    "Fringe", "Ibis", "Air", "Bright", "Rime", "Ghost", "Privet", "Egg"
+    "Fringe", "Ibis", "Air", "Bright", "Rime", "Ghost", "Privet", "Egg", "Clear"
     ],
     "PALEGREY": [
     "Gray", "Gray", "Silver", "Pale", "Light", "Cloud", "Cloudy", "Hail", "Frost", "Ice", "Icy", "Mouse", "Bright", "Fog", "Freeze",
     "Frozen", "Stone", "Pebble", "Dove", "Sky", "Cotton", "Heather", "Ashen", "Tufted", "Pipit", "Azalea",
-    "Fringe", "Mistle", "Icicle", "Rime"
+    "Fringe", "Mistle", "Icicle", "Rime", "Wolf"
     ],
     "SILVER": [
     "Gray", "Silver", "Silver", "Silver", "Cinder", "Ice", "Icy", "Frost", "Frozen", "Freeze", "Rain", "Blue",
     "River", "Blizzard", "Flurry", "Bone", "Bleak", "Stone", "Pebble", "Heather", "Scale", "Crocus",
-    "Rue", "Fringe", "Glint", "Mistle", "Shatter", "Gossamer", "Air", "Pale", "Ermine", "Stoat", "Gull", "Vine", "Lilac", "Rime"
+    "Rue", "Fringe", "Glint", "Mistle", "Shatter", "Gossamer", "Air", "Pale", "Ermine", "Stoat", "Gull", "Vine", "Lilac", "Rime", "Wolf"
     ],
     "GREY": [
     "Gray", "Gray", "Ash", "Ashen", "Cinder", "Rock", "Stone", "Shade", "Mouse", "Smoke", "Smoky", "Shadow", "Fog", "Bone",
     "Bleak", "Rain", "Storm", "Soot", "Pebble", "Mist", "Misty", "Heather", "Trout", "Shrike", "Plume", "Teasel",
-    "Lyre", "Rat", "Gull", "Pigeon", "Rime"
+    "Lyre", "Rat", "Gull", "Pigeon", "Rime", "Wolf", "Stormy"
     ],
     "DARKGREY": [
     "Gray", "Gray", "Shade", "Raven", "Crow", "Stone", "Dark", "Dark", "Night", "Cinder", "Ash", "Ashen", "Twilight",
-    "Smoke", "Smokey", "Shadow", "Bleak", "Rain", "Storm", "Pebble", "Mist", "Misty", "Warbler", "Wisp"
+    "Smoke", "Smokey", "Shadow", "Bleak", "Rain", "Storm", "Pebble", "Mist", "Misty", "Warbler", "Wisp", "Stormy"
     ],
     "GHOST": [
     "Black", "Black", "Shade", "Shaded", "Crow", "Raven", "Ebony", "Dark", "Char", "Charred", "Magpie",
-    "Night", "Shadow", "Scorch", "Midnight", "Bleak", "Storm", "Violet", "Pepper", "Bat", "Faded", "Silver", "Ghost"
+    "Night", "Shadow", "Scorch", "Midnight", "Bleak", "Storm", "Violet", "Pepper", "Bat", "Faded", "Silver", "Ghost", "Stormy"
     ],
     "PALEGINGER": [
     "Pale", "Ginger", "Sand", "Sandy", "Yellow", "Sun", "Sunny", "Light", "Lion", "Bright", "Phlox", "Vervain",
@@ -189,7 +189,7 @@
     ],
     "LILAC": [
     "Pale", "Light", "Mouse", "Dust", "Dusty", "Sand", "Sandy", "Bright", "Mud", "Scrub", "Velvet",
-    "Hazel", "Vole", "Branch", "Warm", "Robin", "Lilac", "Lavender", "Heather"
+    "Hazel", "Vole", "Branch", "Warm", "Robin", "Lilac", "Lavender", "Heather", "Rose", "Rosy"
     ],
     "BROWN": [
     "Brown", "Brown", "Oak", "Mouse", "Dark", "Shade", "Russet", "Dust", "Dusty", "Mud", "Deer", "Fawn", "Doe", "Stag",
@@ -211,7 +211,7 @@
     "BLACK": [
     "Black", "Black", "Black", "Shade", "Shaded", "Crow", "Raven", "Ebony", "Dark", "Grackle",
     "Night", "Shadow", "Scorch", "Midnight", "Pepper", "Pitch", "Bat", "Burnt", "Coal", "Ink", "Inky",
-    "Char", "Charred", "Mulberry", "Night", "Evening", "Dark", "Murk", "Ghost"
+    "Char", "Charred", "Mulberry", "Night", "Evening", "Dark", "Murk", "Ghost", "Abyss"
     ]
   },
 
@@ -309,6 +309,7 @@
     "COBALT": ["Blue", "Blue", "Ice", "Icy", "Sky", "Lake", "Frost", "Water", "Frosty", "Rime"],
     "SUNLITICE": ["Sun", "Ice", "Icy", "Frost", "Dawn", "Dusk", "Odd", "Glow", "Mouse"],
     "GREENYELLOW": ["Green", "Yellow", "Tawny", "Hazel", "Gold", "Daisy", "Sand", "Sandy", "Weed"],
+    "BRONZE": ["Brown", "Mud", "Muddy", "Cinnamon", "Dark", "Shadow", "Bog", "Shade", "Wood"],
     "SILVER": ["Gray", "Stone", "Silver", "Silver", "Moon", "Rain", "Storm", "Pale", "Light"]
   },
 
@@ -402,7 +403,7 @@
     "Ramen", "Ramon", "Randy", "Rani", "Raptor", "Rapunzel", "Rarity", "Rat", "Ratau", "Ratoo", "Rattle", "Raven", "Ravioli", "Ray", "Raymond", "Razzle", "Reaper", "Rebel", "Reese", "Reeses Puff", 
     "Regina", "Ren", "Renata", "Rhea", "Rhianna", "Rhubarb", "Ribosome", "Ricardo", "Rice", "Rick Astley", "Rico", "Ricotta", "Rigatoni", "Rigel", "Righteous Bread Pudding", "Riley", "Ringo Starr", 
     "Ringo", "Rio", "Riolu", "Riot", "Risa", "River", "Rivulet", "Riya", "Rizz", "Roald", "Robbie", "Robert", "Rocket", "Rodeo", "Rolo", "Roman", "Romeo", "Roomba", "Rooster", "Rori", "Rorschach", 
-    "Rory", "Rosanna", "Rose", "Roselie", "Rosewood", "Rowan", "Rubber Duck", "Ruby", "Rudolph", "Rudy", "Rue", "Ruffnut", "Rufus", "Rukiya", "Rum Tum Tugger", "Rum", "Rumpleteazer", "Runt", "Russel", 
+    "Rory", "Rosanna", "Rosanne",  "Rose", "Roselie", "Rosewood", "Rowan", "Roxana", "Roxane", "Rubber Duck", "Ruby", "Rudolph", "Rudy", "Rue", "Ruffnut", "Rufus", "Rukiya", "Rum Tum Tugger", "Rum", "Rumpleteazer", "Runt", "Russel", 
     "Rusty", "Ruthie", "Ryos", "Sable", "Sachiko", "Sadie", "Sadiki", "Saeko", "Safari", "Saffron", "Safi", "Sage Marro", "Sagittarius", "Sagwa", "Sahara", "Sahel", "Saidah", "Sailor", "Saint", "Sakari", 
     "Saki", "Sakura", "Salem", "Salmon", "Salsa", "Salt", "Salvage", "Sam", "Samantha", "Sambusa", "Samus", "Sanai", "Sandwich", "Sandy", "Sangria", "Sans", "Santana", "Sanyu", "Sapphire", "Sarabi", 
     "Sarafina", "Sarah", "Sarek", "Sarge", "Sarki", "Sasha", "Sashimi", "Sassy", "Saturn", "Sausage", "Savannah", "Savvy", "Scampi", "Scarecrow", "Scavenger", "Schmidt", "Scholar", "Scorpio", "Scotch", 
@@ -453,6 +454,6 @@
     "Wren"
 	],
 	"inappropriate_names": [
-		"wetback", "yellowface", "redface", "blackface", "brownface", "pancakeface", "yellowbone", "molesting"
+		"wetback", "yellowface", "redface", "blackface", "brownface", "pancakeface", "yellowbone", "molesting", "silverpelt"
 	]
 }
