@@ -1020,7 +1020,8 @@
     "weight": 15,
     "event_text": "m_c and r_c take a late night patrol out of camp to watch the sun rise.",
     "m_c": {
-      "age": ["young adult", "adult", "senior adult"]
+      "age": ["young adult", "adult", "senior adult"],
+      "relationship_status": ["romance_5"]
     },
     "r_c": {
       "age": ["young adult", "adult", "senior adult"]
@@ -1043,7 +1044,8 @@
     "weight": 15,
     "event_text": "m_c and r_c take an early evening patrol out of camp to watch the moon rise.",
     "m_c": {
-      "age": ["young adult", "adult", "senior adult"]
+      "age": ["young adult", "adult", "senior adult"],
+      "relationship_status": ["romance_5"]
     },
     "r_c": {
       "age": ["young adult", "adult", "senior adult"]
@@ -3990,7 +3992,8 @@
     "event_text": "Flowers can be so pretty, even before they bloom, just like m_c. r_c blushes as {PRONOUN/r_c/subject} {VERB/r_c/see/sees} m_c wear the acc_singular {PRONOUN/r_c/subject} got {PRONOUN/m_c/object}.",
     "new_accessory": ["BULB WHITE", "BULB YELLOW", "BULB ORANGE", "BULB PINK", "BULB BLUE"],
     "m_c": {
-      "age": ["young adult", "adult", "senior adult"]
+      "age": ["young adult", "adult", "senior adult"],
+      "relationship_status": ["mates"]
     },
     "r_c": {
       "age": ["young adult", "adult", "senior adult"]
