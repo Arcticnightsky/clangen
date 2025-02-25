@@ -1700,7 +1700,41 @@
         "main_trait_constraint": [
             "nervous"
         ]
-        },
+    },
+    {
+        "id": "oblivious_gen",
+        "thoughts": [
+            "Made a weird comment during a Clan meeting and is unaware of {PRONOUN/m_c/poss} Clanmates giving {PRONOUN/m_c/object} weird looks",
+            "Is finishing up telling a long story to a Clanmate, who hasn't even been paying attention to {PRONOUN/m_c/object} the whole time!",
+            "Feels guilty about eating a big piece of prey a Clanmate was saving for later...",
+            "Was naive enough to fall for one of {PRONOUN/m_c/poss} Clanmate's stupid pranks... again",
+            "Thinks {PRONOUN/m_c/poss} Clanmates are laughing with {PRONOUN/m_c/object}, but they're laughing at {PRONOUN/m_c/object}",
+            "Didn't know {PRONOUN/m_c/poss} fur was unkept until a Clanmate told {PRONOUN/m_c/object} and is now desperatley trying to groom it",
+            "Is being told an obvious lie by a Clanmate, drinking in every word believing it's real",
+            "Is wishing that {PRONOUN/m_c/poss} Clanmates would stop pranking {PRONOUN/m_c/object}",
+            "Is wishing {PRONOUN/m_c/subject} {VERB/m_c/weren't/wasn't} so gullible"
+        ],
+        "main_trait_constraint": [
+            "oblivious"
+        ]
+    },
+    {
+        "id": "oblivious_working_cat",
+        "thoughts": [
+            "Almost stepped on a snake while out on patrol, not knowing it was there",
+            "Was <i>very</i> close to stepping into another Clan's territory without realizing",
+            "Walked passed an unknown scent without realizing it"
+        ],
+        "main_status_constraint": [
+            "apprentice",
+            "warrior",
+            "deputy",
+            "leader"
+        ],
+        "main_trait_constraint": [
+            "oblivious"
+        ]
+    },
     {
         "id": "playful_gen",
         "thoughts": [
