@@ -610,22 +610,62 @@ class RelationshipScreen(Screens):
                     else:
                         relation = "general.parents_sibling"
                 elif self.inspect_cat.is_grandparent(self.the_cat):
-                    relation = "general.grandparent"
-                elif self.the_cat.is_grandparent(self.inspect_cat):
-                    relation = "general.grandchild"
-                elif self.inspect_cat.is_parent(self.the_cat):
-                    relation = "general.parent"
-                elif self.the_cat.is_parent(self.inspect_cat):
-                    relation = "general.child"
-                elif self.inspect_cat.is_sibling(
-                    self.the_cat
-                ) or self.the_cat.is_sibling(self.inspect_cat):
-                    if self.inspect_cat.is_littermate(
-                        self.the_cat
-                    ) or self.the_cat.is_littermate(self.inspect_cat):
-                        relation = "general.sibling_littermate"
+                    if self.inspect_cat.genderalign in ("female", "trans female"):
+                        relation = "general.grandmother"
+                    elif self.inspect_cat.genderalign in ("male", "trans male"):
+                        relation = "general.grandfather"
                     else:
-                        relation = "general.sibling"
+                        relation = "general.grandparent"
+                elif self.the_cat.is_grandparent(self.inspect_cat):
+                    if self.inspect_cat.genderalign in ("female", "trans female"):
+                        relation = "general.granddaughter"
+                    elif self.inspect_cat.genderalign in ("male", "trans male"):
+                        relation = "general.grandson"
+                    else:
+                        relation = "general.grandchild"
+                elif self.inspect_cat.is_parent(self.the_cat):
+                    if self.inspect_cat.genderalign in ("female", "trans female"):
+                        relation = "general.mother"
+                    elif self.inspect_cat.genderalign in ("male", "trans male"):
+                        relation = "general.father"
+                    else:
+                        relation = "general.parent"
+                elif self.the_cat.is_parent(self.inspect_cat):
+                    if self.inspect_cat.genderalign in ("female", "trans female"):
+                        relation = "general.daughter"
+                    elif self.inspect_cat.genderalign in ("male", "trans male"):
+                        relation = "general.son"
+                    else:
+                        relation = "general.child"
+                elif self.inspect_cat.is_sibling(self.the_cat) or self.the_cat.is_sibling(self.inspect_cat):
+                    if self.inspect_cat.is_littermate(self.the_cat) or self.the_cat.is_littermate(self.inspect_cat):
+                        if self.inspect_cat.genderalign in ["female", "trans female"]:
+                            relation = "general.sister_littermate"
+                        elif self.inspect_cat.genderalign in ["male", "trans male"]:
+                            relation = "general.brother_littermate"
+                        else:
+                            relation = "general.sibling_littermate"
+                    elif self.inspect_cat.is_half_sibling(self.the_cat) or self.the_cat.is_half_sibling(self.inspect_cat):
+                        if self.inspect_cat.genderalign in ["female", "trans female"]:
+                            relation = "general.half_sister"
+                        elif self.inspect_cat.genderalign in ["male", "trans male"]:
+                            relation = "general.half_brother"
+                        else:
+                            relation = "general.relation_HALF_BLOOD"
+                    elif self.inspect_cat.is_adoptive_sibling(self.the_cat) or self.the_cat.is_adoptive_sibling(self.inspect_cat):
+                        if self.inspect_cat.genderalign in ["female", "trans female"]:
+                            relation = "general.adoptive_sister"
+                        elif self.inspect_cat.genderalign in ["male", "trans male"]:
+                            relation = "general.adoptive_brother"
+                        else:
+                            relation = "general.adoptive_sibling"
+                    else:
+                        if self.inspect_cat.genderalign in ["female", "trans female"]:
+                            relation = "general.sister"
+                        elif self.inspect_cat.genderalign in ["male", "trans male"]:
+                            relation = "general.brother"
+                        else:
+                            relation = "general.sibling"
                 elif not game.clan.clan_settings[
                     "first cousin mates"
                 ] and self.inspect_cat.is_cousin(self.the_cat):
