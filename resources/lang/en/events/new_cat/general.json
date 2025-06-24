@@ -814,5 +814,55 @@
             "current_rep": ["any"],
             "changed": -5
         }
+    },
+    {
+        "event_id": "gen_new_cat_mate_with_kits",
+        "location": ["any"],
+        "season": ["any"],
+        "tags": ["romantic"],
+        "weight": 5,
+        "event_text": "m_c introuduces a strange new cat into the clan, named n_c:0, claiming that {PRONOUN/n_c:0/subject} {PRONOUN/m_c/poss} mate. and most surpisingly, n_c:0 brings a litter of kits that are not just {PRONOUN/n_c:0/inposs}, but also m_c's... This makes the Clan a bit upset that m_c broke the warrior code and had kits with an outsider.",
+        "m_c": {
+            "age": ["young adult", "adult", "senior adult", "senior"],
+            "status": ["any"]
+	    "gender": ["male"]
+        },
+        "new_cat": [
+            ["old_name", "can_birth", "backstory:loner4", "mate:m_c"],
+            ["new_name", "litter", "age:newborn", "backstory:outsider_roots2", "parent:m_c,0"]
+        ],
+        "outsider": {
+            "current_rep": ["welcoming"],
+            "changed": 1
+        },
+        "relationships": [
+          {
+            "cats_from": ["m_c"],
+            "cats_to": ["n_c:0"],
+            "mutual": true,
+              "values": ["romantic", "trust"],
+            "amount": 55
+          },
+          {
+            "cats_from": ["clan"],
+            "cats_to": ["m_c"],
+            "mutual": false,
+              "values": ["dislike"],
+            "amount": 5
+          },
+          {
+            "cats_from": ["m_c"],
+            "cats_to": ["n_c:0"],
+            "mutual": true,
+            "values": ["platonic", "comfort"],
+            "amount": 25
+          },
+          {
+            "cats_from": ["m_c", "n_c:0"],
+            "cats_to": ["n_c:1"],
+            "mutual": true,
+            "values": ["platonic", "comfort", "trust"],
+            "amount": 25
+          }
     }
 ]
