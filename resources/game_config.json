@@ -21,7 +21,7 @@
 		]
 	},
 	"mates":{
-		"age_range": 40,
+		"age_range": 20,
 		"override_same_age_group": false,
 		"chance_fulfilled_condition": 5,
 		"chance_friends_to_lovers": 170,
@@ -163,12 +163,12 @@
 		"primary_chance_unmated": 130,
 		"random_affair_chance": 50,
 		"unmated_random_affair_chance": 10,
-		"one_kit_possibility": {"young adult": 8, "adult": 9, "senior adult": 10, "senior": 4},
-        "two_kit_possibility": {"young adult": 10, "adult": 13, "senior adult": 15, "senior": 3},
-        "three_kit_possibility": {"young adult": 17, "adult": 15, "senior adult": 5, "senior": 1},
-        "four_kit_possibility": {"young adult": 12, "adult": 8, "senior adult": 2, "senior": 0},
-        "five_kit_possibility": {"young adult": 6, "adult": 2, "senior adult": 0, "senior": 0},
-        "max_kit_possibility": {"young adult": 2, "adult": 0, "senior adult": 0, "senior": 0},
+		"one_kit_possibility": {"young adult": 3, "adult": 4, "senior adult": 12, "senior": 16},
+        	"two_kit_possibility": {"young adult": 13, "adult": 14, "senior adult": 15, "senior": 17},
+        	"three_kit_possibility": {"young adult": 20, "adult": 18, "senior adult": 13, "senior": 3},
+        	"four_kit_possibility": {"young adult": 18, "adult": 14, "senior adult": 7, "senior": 2},
+        	"five_kit_possibility": {"young adult": 14, "adult": 8, "senior adult": 2, "senior": 1},
+        	"max_kit_possibility": {"young adult": 7, "adult": 4, "senior adult": 0, "senior": 0},
 		"min_kits": 1,
 		"max_kits": 6,
 		"comment": [
@@ -181,11 +181,11 @@
 	},
 	"cat_generation": {
 		"base_permanent_condition": 90,
-		"base_male_tortie": 13,
+		"base_male_tortie": 3000,
 		"base_female_tortie": 4,
-		"base_heterochromia": 120,
-		"direct_inheritance": 15,
-		"wildcard_tortie": 9,
+		"base_heterochromia": 150,
+		"direct_inheritance": 1,
+		"wildcard_tortie": 90000,
 		"vit_chance": 8,
 		"random_point_chance": 5
 	},
@@ -210,9 +210,9 @@
 		"multiple_acc_modifier": 50
 	},
     "transition_related": {
-        "base_trans_chance": 256,
-        "adolescent_modifier": -128,
-        "older_modifier": 256
+        "base_trans_chance": 100000000000000000000000000000000000000000000000000000000,
+        "adolescent_modifier": 0,
+        "older_modifier": 0
     },
 	"fading": {
 		"age_to_fade": 202,
@@ -268,14 +268,14 @@
 		"debug_ensure_event_id": null
 	},
 	"death_related": {
-		"leader_death_chance": 50,
+		"leader_death_chance": 20,
 		"classic_death_chance": 500,
 		"expanded_death_chance": 350,
 		"cruel season_death_chance": 300,
 		"war_death_modifier_leader": 35,
 		"war_death_modifier": 330,
-		"base_random_murder_chance": 25,
-		"base_murder_kill_chance": 80,
+		"base_random_murder_chance": 450,
+		"base_murder_kill_chance": 580,
 		"old_age_death_start": 150,
 		"old_age_death_curve": 4.5,
 		"comment": [
@@ -295,7 +295,7 @@
 		"war_injury_modifier": 240
 	},
 	"clan_creation": {
-		"rerolls": 3,
+		"rerolls": -1,
 		"comment": "Set this to -1 for it to be infinite"
 	},
 	"graduation": {
@@ -499,5 +499,5 @@
 			}
 		}
 	},
-	"dev_tools": false
+	"dev_tools": true
 }
