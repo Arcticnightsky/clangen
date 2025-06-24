@@ -434,6 +434,7 @@ class HerbSupply:
         # meds with relevant skills will get a boost to the herbs they find
         # SENSE finds larger amount of herbs
         # CLEVER finds greater quantity of herbs
+        # and HUNTER find a significant amount of herbs because, well, they hunt for herbs pretty well, no?
         primary = med_cat.skills.primary.path
         secondary = None
         if med_cat.skills.secondary:
@@ -445,13 +446,15 @@ class HerbSupply:
             amount_modifier = game.config["clan_resources"]["herbs"]["primary_sense"]
         elif primary == SkillPath.CLEVER:
             quantity_modifier = game.config["clan_resources"]["herbs"]["primary_clever"]
+        elif primary == SkillPath.HUNTER:
+            quantity_modifier = game.config["clan_resources"]["herbs"]["primary_hunter"]
 
         if secondary == SkillPath.SENSE:
             amount_modifier = game.config["clan_resources"]["herbs"]["secondary_sense"]
         elif secondary == SkillPath.CLEVER:
-            quantity_modifier = game.config["clan_resources"]["herbs"][
-                "secondary_clever"
-            ]
+            quantity_modifier = game.config["clan_resources"]["herbs"]["secondary_clever"]
+        elif secondary == SkillPath.HUNTER:
+            quantity_modifier = game.config["clan_resources"]["herbs"]["secondary_hunter"]
 
         # list of the herbs, sorted by most need
         herb_list = self.sorted_by_need
