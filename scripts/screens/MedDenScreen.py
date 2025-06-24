@@ -590,15 +590,23 @@ class MedDenScreen(Screens):
             i += 1
 
     def draw_med_den(self):
-        sorted_dict = dict(sorted(game.clan.herbs.items()))
-        herbs_stored = sorted_dict.items()
         herb_list = []
-        for herb in herbs_stored:
-            amount = str(herb[1])
-            type = str(herb[0].replace("_", " "))
-            herb_list.append(f"{amount} {type}")
-        if not herbs_stored:
-            herb_list.append("Empty")
+        herb_supply = game.clan.herb_supply
+
+        if not herb_supply.total:
+            herb_list = ["Empty"]
+
+        elif game.clan.game_mode != "classic":
+            for herb, count in herb_supply.entire_supply.items():
+                if count <= 0:
+                    continue
+                display = (
+                    herb_supply.herb[herb].plural_display
+                    if count > 1
+                    else herb_supply.herb[herb].singular_display
+                )
+                herb_list.append(f"{count} {display}")
+
         if len(herb_list) <= 10:
             # classic doesn't display herbs
             if game.clan.game_mode == "classic":
@@ -646,23 +654,12 @@ class MedDenScreen(Screens):
                 manager=MANAGER,
             )
 
-        if game.clan.game_mode == "classic":
-            num_drawn = 0
-            herb_amount = sum(game.clan.herbs.values())
+        # otherwise draw the herbs you have
+        herbs = game.clan.herb_supply.entire_supply
 
-            # draw x different herbs where x is how many herbs you have
-            herbs = {}
-            for herb in HERBS:
-                # 2 so we have both cobwebs
-                herbs[herb] = 2
-                num_drawn += 1
-
-                if num_drawn >= herb_amount:
-                    break
-        else:
-            # otherwise draw the herbs you have
-            herbs = game.clan.herbs
-        for herb in herbs:
+        for herb, count in herbs.items():
+            if count <= 0:
+                continue
             if herb == "cobwebs":
                 self.herbs["cobweb1"] = pygame_gui.elements.UIImage(
                     ui_scale(pygame.Rect((108, 95), (396, 224))),
@@ -674,7 +671,7 @@ class MedDenScreen(Screens):
                     ),
                     manager=MANAGER,
                 )
-                if herbs["cobwebs"] > 1:
+                if count > 1:
                     self.herbs["cobweb2"] = pygame_gui.elements.UIImage(
                         ui_scale(pygame.Rect((108, 95), (396, 224))),
                         pygame.transform.scale(
