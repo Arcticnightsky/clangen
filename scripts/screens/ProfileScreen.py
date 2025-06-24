@@ -710,6 +710,8 @@ class ProfileScreen(Screens):
             "screens.profile.pelt_label",
             pelt=i18n.t(f"cat.pelts.{the_cat.pelt.name}").lower(),
         )
+        if the_cat.pelt.white_patches == "FULLWHITE":Add commentMore actions
+            output += " with full-white spotting " 
         # NEWLINE ----------
         output += "\n"
 
