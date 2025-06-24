@@ -388,6 +388,7 @@ class Events:
             # ADJUST REP
             game.clan.reputation += chosen_event["rep_change"]
 
+            additional_mates = None
             additional_kits = None
             # SUCCESS/FAIL
             if info_dict["success"]:
@@ -411,16 +412,42 @@ class Events:
                     # ADD TO CLAN AND CHECK FOR KITS
                     additional_kits = outsider_cat.add_to_clan()
 
-                    if additional_kits:
-                        event_text += i18n.t("hardcoded.event_lost_kits")
-
+                    additional_mates = []
+                    for mate_id in outsider_cat.mate:
+                        mate = Cat.all_cats.get(mate_id)
+                        if (
+                            mate
+                            and mate.outside
+                            and mate.ID in Cat.outside_cats
+                            and mate.status in ("kittypet", "loner", "rogue", "former Clancat")
+                            and not mate.dead
+                            and not mate.exiled
+                            and mate.status != "driven off"
+                        ):
+                            mate.add_to_clan()
+                            mate.backstory = "loner4"
+                            additional_mates.append(mate.ID)
+                            involved_cats.append(mate.ID)
+                            additional_mates = outsider_cat.add_to_clan()
+                        
                         for kit_ID in additional_kits:
                             # add to involved cat list
                             involved_cats.append(kit_ID)
                             kit = Cat.fetch_cat(kit_ID)
 
+                        for mate_ID in additional_mates:
+                            # add to involved cat list
+                            involved_cats.append(mate_ID)
+                            mate = Cat.fetch_cat(mate_ID)
+                    
+                    if additional_kits:
+                        event_text += i18n.t("hardcoded.event_lost_kits")
+                    if additional_mates:
+                        event_text += i18n.t("hardcoded.event_lost_mate")
+
                     invited_cats = [outsider_cat.ID]
                     invited_cats.extend(additional_kits)
+                    invited_cats.extend(additional_mates)
 
                     for cat_ID in invited_cats:
                         invited_cat = Cat.fetch_cat(cat_ID)
@@ -798,17 +825,37 @@ class Events:
 
             lost_cat = random.choice(eligible_cats)
             cat_IDs.append(lost_cat.ID)
-
+            
+            additional_mates = []
+            for mate_id in lost_cat.mate:
+                mate = Cat.all_cats.get(mate_id)
+                if (
+                    mate
+                    and mate.outside
+                    and mate.ID in Cat.outside_cats
+                    and mate.status in ("kittypet", "loner", "rogue", "former Clancat")
+                    and not mate.dead
+                    and not mate.exiled
+                    and mate.status != "driven off"
+                ):
+                    additional_mates.append(mate)
+    
             lost_cat.outside = False
             additional_cats = lost_cat.add_to_clan()
             cat_IDs.extend(additional_cats)
             text = i18n.t(f"hardcoded.event_lost{random.choice(range(1,5))}")
-
+            
             if additional_cats:
                 text += i18n.t("hardcoded.event_lost_kits", count=len(additional_cats))
 
-            text = event_text_adjust(Cat, text, main_cat=lost_cat, clan=game.clan)
+            if additional_mates:
+                additional_mate = random.choice(additional_mates)
+                additional_mate.add_to_clan()
+                additional_mate.backstory = "loner4"
+                cat_IDs.append(additional_mate.ID)
+                text += i18n.t("hardcoded.event_lost_mate")
 
+            text = event_text_adjust(Cat, text, main_cat=lost_cat, clan=game.clan)
             game.cur_events_list.append(Single_Event(text, "misc", cat_IDs))
 
         # Perform a ceremony if needed
