@@ -1255,6 +1255,9 @@ class Events:
                         amount_per_med=get_amount_cat_for_one_medic(game.clan),
                     )
 
+                    # check if the Clan has more med cats than the med cat den can already hold!
+                    has_too_many_med = len([cat for cat in med_cat_list if cat.status == "medicine cat"]) >= 3
+                    
                     # check if a med cat app already exists
                     has_med_app = any(
                         cat.status == "medicine cat apprentice" for cat in med_cat_list
@@ -1280,7 +1283,10 @@ class Events:
                         chance = int(chance / 7.125)
                     elif has_med:
                         chance = int(chance * 2.22)
-
+                        
+                    if cat.skills in ["HEALER,1", "PROPHET,1", "OMEN,1"]:
+                        chance = int(chance / 2.5)
+                    
                     if cat.personality.trait in [
                         "careful",
                         "compassionate",
@@ -1295,7 +1301,7 @@ class Events:
                     if chance == 0:
                         chance = 1
 
-                    if not has_med_app and not int(random.random() * chance):
+                    if not has_med_app and not has_too_many_med and not int(random.random() * chance):
                         self.ceremony(cat, "medicine cat apprentice")
                         self.ceremony_accessory = True
                         self.gain_accessories(cat)
@@ -2337,6 +2343,7 @@ class Events:
                     lambda x: not x.dead
                     and not x.outside
                     and x.status == "warrior"
+                    and x.experience_level not in ["untrained", "trainee", "prepared"]
                     and (x.apprentice or x.former_apprentices),
                     Cat.all_cats_list,
                 )
