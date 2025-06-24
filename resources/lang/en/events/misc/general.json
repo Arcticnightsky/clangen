@@ -5043,5 +5043,52 @@
         "other_clan": {
             "changed": 2
         }
+    },
+    {
+        "event_id": "gen_doubtful_med_mate",
+        "location": ["any"],
+        "season": ["any"],
+        "tags": ["romance"],
+        "weight": 20,
+        "event_text": "Though m_c is happy to have r_c as {PRONOUN/m_c/poss} mate, m_c can't help but feel as if StarClan is judging {PRONOUN/m_c/object} for loving r_c as {PRONOUN/m_c/poss} mate... After all, medicine cats technically aren't supposed to have mates, but m_c loves r_c too much to give {PRONOUN/r_c/object} up. m_c stays awake at night pondering about {PRONOUN/m_c/poss} love choices and the warrior code.",
+        "m_c": {
+            "age": [
+                "young adult",
+                "adult",
+                "senior adult",
+                "senior"
+            ],
+            "status": [
+                "medicine cat",
+                "medicine cat apprentice"
+            ],
+            "relationship_status": [
+                "mates",
+                "romantic_20"
+            ]
+        },
+        "r_c": {
+            "age": [
+                "senior",
+                "senior adult",
+                "adult",
+                "young adult"
+            ]
+        },
+        "relationships": [
+            {
+                "cats_from": [
+                    "m_c"
+                ],
+                "cats_to": [
+                    "r_c"
+                ],
+                "mutual": false,
+                "values": [
+                    "romantic"
+                ],
+                "amount": "-15"
+            }
+        ]
     }
 ]
