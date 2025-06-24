@@ -240,6 +240,7 @@ class Pelt:
         "BEAKSIDE",
         "CATBITETWO",
         "FOUR",
+        "BLIND",
     ]
 
     # missing parts
@@ -897,7 +898,10 @@ class Pelt:
         :return: None
         """
         if not parents:
-            self.eye_colour = choice(Pelt.eye_colours)
+            if self.white_patches == "FULLWHITE" or self.colour == "WHITE" or self.points:
+                self.eye_colour = choice((Pelt.blue_eyes * 3) + Pelt.yellow_eyes + Pelt.green_eyes)
+            else:
+                self.eye_colour = choice((Pelt.yellow_eyes + Pelt.green_eyes) * 2 + Pelt.blue_eyes)
         else:
             self.eye_colour = choice(
                 [i.pelt.eye_colour for i in parents] + [choice(Pelt.eye_colours)]
@@ -986,6 +990,14 @@ class Pelt:
             self.colour = selected.colour
             self.tortiebase = selected.tortiebase
             return selected.white
+    # If selected is a tortie and the kit is male, apply extra rarity
+    # Safe to inherit (either not a tortie, or passed rare check)
+            if gender == "male" and selected.name in Pelt.torties:
+               # Very rare chance to *stay* male, otherwise switch to female
+                boosted_inheritance = max(200, direct_inheritance * 20)
+                if random.randint(1, boosted_inheritance) != 1:
+                    print(f"Converting rare male tortie kit to female for realism.")
+                    gender = "female"
 
         # ------------------------------------------------------------------------------------------------------------#
         #   PELT
@@ -1034,7 +1046,7 @@ class Pelt:
         for p_ in par_pelts:
             if p_.name in Pelt.torties:
                 tortie_chance_f = int(tortie_chance_f / 2)
-                tortie_chance_m = tortie_chance_m - 1
+                tortie_chance_m = tortie_chance_m - 1000
                 break
 
         # Determine tortie:
@@ -1059,7 +1071,10 @@ class Pelt:
         weights = [0, 0, 0, 0]
         for p_ in par_peltcolours:
             if p_ in Pelt.ginger_colours:
-                add_weight = (40, 0, 0, 10)
+                if gender == "female":
+                    add_weight = (30, 5, 5, 25)
+                else:
+                    add_weight = (40, 0, 0, 10)
             elif p_ in Pelt.black_colours:
                 add_weight = (0, 40, 2, 5)
             elif p_ in Pelt.white_colours:
@@ -1067,7 +1082,10 @@ class Pelt:
             elif p_ in Pelt.brown_colours:
                 add_weight = (10, 5, 0, 35)
             elif p_ is None:
-                add_weight = (40, 40, 40, 40)
+                if gender == "female":
+                    add_weight = (15, 40, 40, 40)
+                else:
+                    add_weight = (40, 40, 40, 40)
             else:
                 add_weight = (0, 0, 0, 0)
 
@@ -1335,7 +1353,7 @@ class Pelt:
                         )
                     elif self.colour in Pelt.ginger_colours:
                         self.tortiecolour = choice(
-                            Pelt.brown_colours + Pelt.black_colours * 2
+                            Pelt.brown_colours + (Pelt.black_colours * 2)
                         )
                     elif self.colour in Pelt.brown_colours:
                         possible_colors = Pelt.brown_colours.copy()
@@ -1482,7 +1500,7 @@ class Pelt:
 
         # Adjust weights for torties, since they can't have anything greater than mid_white:
         if self.name == "Tortie":
-            weights = (2, 1, 0, 0, 0)
+            weights = (3, 1, 0, 0, 0)
         elif self.name == "Calico":
             weights = (0, 0, 20, 15, 1)
         else:
@@ -1725,6 +1743,7 @@ _scar_details = [
     "NOLEFTEAR",
     "NORIGHTEAR",
     "NOEAR",
+    "BLIND",
 ]
 
 
