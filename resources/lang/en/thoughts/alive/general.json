@@ -1714,6 +1714,41 @@
         ]
     },
     {
+        "id": "oblivious_gen",
+        "thoughts": [
+            "Made a weird comment during a Clan meeting and is unaware of {PRONOUN/m_c/poss} Clanmates giving {PRONOUN/m_c/object} weird looks",
+            "Is finishing up telling a long story to a Clanmate, who hasn't even been paying attention to {PRONOUN/m_c/object} the whole time!",
+            "Feels guilty about eating a big piece of prey a Clanmate was saving for later...",
+            "Was naive enough to fall for one of {PRONOUN/m_c/poss} Clanmate's stupid pranks... again",
+            "Thinks {PRONOUN/m_c/poss} Clanmates are laughing with {PRONOUN/m_c/object}, but they're laughing at {PRONOUN/m_c/object}",
+            "Didn't know {PRONOUN/m_c/poss} fur was unkept until a Clanmate told {PRONOUN/m_c/object} and is now desperatley trying to groom it",
+            "Is being told an obvious lie by a Clanmate, drinking in every word believing it's real",
+            "Is wishing that {PRONOUN/m_c/poss} Clanmates would stop pranking {PRONOUN/m_c/object}",
+            "Wishes {PRONOUN/m_c/subject} {VERB/m_c/weren't/wasn't} so gullible"
+        ],
+        "main_trait_constraint": [
+            "oblivious"
+        ]
+    },
+    {
+        "id": "oblivious_working_cat",
+        "not_working": false,
+        "thoughts": [
+            "Almost stepped on a snake while out on patrol, not knowing it was there",
+            "Was <i>very</i> close to stepping into another Clan's territory without realizing",
+            "Walked passed an unknown scent without realizing it"
+        ],
+        "main_status_constraint": [
+            "apprentice",
+            "warrior",
+            "deputy",
+            "leader"
+        ],
+        "main_trait_constraint": [
+            "oblivious"
+        ]
+    },
+    {
         "id": "playful_gen",
         "thoughts": [
             "Is playing tag with cats around camp",
@@ -5337,6 +5372,18 @@
             "Is feeling a bit sore today",
             "Wants to take a light walk around camp",
             "Feels exhausted by simple tasks",
+            "Is purring while watching her litter nurse",
+            "Is relieved that the pregnancy had no complications",
+            "Is relieved that everything went well while kitting",
+            "Hopes she'll recover well after giving birth",
+            "Is enjoying {PRONOUN/m_c/poss} break from {PRONOUN/m_c/poss} duties",
+            "Is basking in the sun outside the nursery",
+            "Asks the medicine cat for herbs that will help her lactate more",
+            "Is murmuring loving words to her litter",
+            "Feels a new sense of purpose from just looking down at her litter",
+            "Carried her litter outside the nursery to get some fresh air",
+            "Wishes {PRONOUN/m_c/subject} wasn't so confined to the nursery",
+            "Still feels heavy and bloated, despite already have given birth",
             "Readjusts to {PRONOUN/m_c/poss} body after the pregnancy"
         ],
         "has_injuries": {
@@ -5517,6 +5564,24 @@
             "Considers naming a kit after kin",
             "Craves lizards",
             "Craves water voles",
+            "Is wondering how many names {PRONOUN/m_c/subject} should think about, for {PRONOUN/m_c/poss} kits",
+            "Has no idea how big {PRONOUN/m_c/subject} should craft the nest in the nursery {PRONOUN/m_c/subject}{VERB/m_c/'re/'s} creating",
+            "Feels her kits move around inside her",
+            "Hopes she'll be a good mother to the kits",
+            "Hopes she's been eating healthy enough for the kits",
+            "Threw up in the dirtplace this morning",
+            "Hopes her litter will be born healthy",
+            "Hopes the pregnancy will go just fine...",
+            "Hopes the birth will turn out just fine...",
+	    "Is pissed over a small thing",
+            "Can't help but wonder if one of the kits she's carrying will become the future leader of the Clan someday...",
+            "Feels like {PRONOUN/m_c/poss} entire existence is one long trip between water and the dirtplace, again and again",
+            "Has mood swings and weird cravings now, thanks to her pregnancy hormones",
+            "Is trying to figure out how many kits she'll have based on the weight of her belly",
+            "Invites {PRONOUN/m_c/poss} friends to feel {PRONOUN/m_c/poss} litter kick",
+            "Is starting to feel heavy and bloated",
+            "Is trying to not stress herself out too much, for the kit's sake",
+            "Is curled up, purring at {PRONOUN/m_c/poss} belly",
             "Struggles to slow down and take it easy"
         ],
         "has_injuries": {
@@ -5524,6 +5589,89 @@
                 "pregnant"
             ]
         }
+    },
+    {
+        "id": "pregnant_gen_to_alive_mate",
+        "thoughts": [
+            "Is coming up with name ideas with r_c for their kits",
+            "Wonders if the kits will look more like her or r_c",
+            "Has invited r_c to feel their litter kick around inside her",
+            "Is purring while r_c gently grooms her belly",
+            "Feels grateful for r_c's love and support",
+            "Has been given some delicious, plump prey from r_c",
+            "Is purring happily as she sees r_c come back from patrol with nesting material in his jaws"
+        ],
+        "has_injuries": {
+            "m_c": [
+                "pregnant"
+            ]
+        },
+        "relationship_constraint": [
+            "mates"
+        ],
+        "random_living_status": [
+            "living"
+        ]
+    },
+    {
+        "id": "gen_to_alive_pregnant_mate",
+        "thoughts": [
+            "Is coming up with name ideas with r_c for their kits",
+            "Wonders if the kits will look more like him or r_c",
+            "Felt r_c's belly earlier",
+            "Is feeling more protective of r_c now more than ever",
+            "Is helping r_c build her nest in the nursery",
+            "Hopes r_c's pregnancy will turn out just fine...",
+            "Wants to be the best father he can be once the kits are born",
+            "Is looking for soft nesting material for r_c outside of camp",
+            "Is hunting fat, juicy prey for r_c",
+            "Is excited to become a {ADJ/m_c/parent/father/mother}!",
+            "Is feeling proud to be the father of r_c's kits",
+            "Is making sure r_c doesn't stress herself out too much"
+        ],
+        "has_injuries": {
+            "r_c": [
+                "pregnant"
+            ]
+        },
+        "relationship_constraint": [
+            "mates"
+        ],
+        "random_living_status": [
+            "living"
+        ]
+    },
+    {
+        "id": "recovering_from_birth_parent_to_alive_newborn",
+        "thoughts": [
+            "Is grooming r_c clean",
+            "Feels r_c suckling on her teat",
+            "Already came up with a suffix for r_c for when {PRONOUN/r_c/poss}'s older, just gotta tell the leader first...",
+            "Wonders if r_c was just like her when she was a newborn",
+            "Wonders which path r_c will take, medicine cat or a warrior?",
+            "Can't help but wonder if r_c will become the future leader of the Clan someday...",
+            "Is cleaning up r_c's rump after {PRONOUN/r_c/subject} made dirt",
+            "Hopes she was right in naming r_c",
+            "Can't believe she was as small as r_c when she was a newborn!",
+            "Can't wait for r_c's permanent eye color to come in, would {PRONOUN/r_c/subject} have her or {PRONOUN/r_c/poss} father's eyes?",
+            "Is purring with joy after r_c mewled out {PRONOUN/r_c/poss} first word!",
+            "Is purring with joy after r_c opened {PRONOUN/r_c/poss} eyes for the first time!",
+            "Is purring while watching r_c crawl around the nest"
+        ],
+        "has_injuries": {
+            "m_c": [
+                "recovering from birth"
+            ]
+        },
+        "relationship_constraint": [
+            "parent/child"
+        ],
+        "random_status_constraint": [
+            "newborn"
+        ],
+        "random_living_status": [
+            "living"
+        ]
     },
     {
         "id": "shock_gen",
