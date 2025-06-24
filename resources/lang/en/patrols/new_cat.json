@@ -514,7 +514,7 @@
         "min_max_status": {
             "normal adult": [1, 6]
         },
-        "weight": 20,
+        "weight": 15,
         "intro_text": "In the middle of remarking the border, p_l finds a distinct scent trail has crossed it.",
         "decline_text": "p_l makes a note of it, but it'll have to wait till {PRONOUN/p_l/subject}{VERB/p_l/'re/'s} done with this and back at camp.",
         "chance_of_success": 40,
@@ -4039,7 +4039,7 @@
         "min_cats": 3,
         "max_cats": 6,
         "min_max_status": {},
-        "weight": 20,
+        "weight": 13,
         "intro_text": "The patrol hears desperate screams coming from a nearby lake.",
         "decline_text": "It's not the scream of any cat p_l recognizes, so {PRONOUN/p_l/subject} {VERB/p_l/decide/decides} to continue the patrol without checking it out. Surely whoever it is will be fine. Surely.",
         "chance_of_success": 85,
