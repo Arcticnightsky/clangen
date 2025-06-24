@@ -450,6 +450,7 @@ class Condition_Events:
             "LEFTBLIND": ["one bad eye", "failing eyesight"],
             "RIGHTBLIND": ["one bad eye", "failing eyesight"],
             "BOTHBLIND": ["failing eyesight", "blind"],
+            "BLIND": ["blind"],
             "MANLEG": ["weak leg", "twisted leg"],
             "RATBITE": ["weak leg"],
             "LEGBITE": ["weak leg"],
@@ -462,7 +463,6 @@ class Condition_Events:
             "paralyzed",
             "raspy lungs",
             "wasting disease",
-            "blind",
             "failing eyesight",
             "one bad eye",
             "partial hearing loss",
@@ -845,7 +845,7 @@ class Condition_Events:
 
         condition_progression = {
             "one bad eye": "failing eyesight",
-            "failing eyesight": "blind",
+            "failing eyesight": "",
             "partial hearing loss": "deaf",
         }
 
