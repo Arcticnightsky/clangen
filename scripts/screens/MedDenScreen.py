@@ -661,7 +661,7 @@ class MedDenScreen(Screens):
             self.den_image = UIModifiedImage(
                 ui_scale(pygame.Rect((108, 95), (396, 224))),
                 pygame.transform.scale(
-                    pygame.image.load("resources/images/med_cat_den/med_den_base.png").convert_alpha(),
+                    pygame.image.load("resources/images/med_cat_den/base.png").convert_alpha(),
                     (792, 448),
                 ),
                 manager=MANAGER,
