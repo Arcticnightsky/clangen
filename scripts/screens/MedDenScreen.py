@@ -614,16 +614,6 @@ class MedDenScreen(Screens):
             else:
                 herb_display = "<br>".join(sorted(herb_list))
 
-            self.den_image = UIModifiedImage(
-                ui_scale(pygame.Rect((108, 95), (396, 224))),
-                pygame.transform.scale(
-                    pygame.image.load("resources/images/med_cat_den/base.png").convert_alpha(),
-                    (792, 448),
-                ),
-                manager=MANAGER,
-                starting_height=1
-            )
-
             self.den_base = UIImageButton(
                 ui_scale(pygame.Rect((108, 95), (396, 224))),
                 "",
@@ -658,15 +648,6 @@ class MedDenScreen(Screens):
             else:
                 herb_display = "<br>".join(holding_pairs)
 
-            self.den_image = UIModifiedImage(
-                ui_scale(pygame.Rect((108, 95), (396, 224))),
-                pygame.transform.scale(
-                    pygame.image.load("resources/images/med_cat_den/base.png").convert_alpha(),
-                    (792, 448),
-                ),
-                manager=MANAGER,
-                starting_height=1
-            )
             self.den_base = UIImageButton(
                 ui_scale(pygame.Rect((108, 95), (396, 224))),
                 "",
