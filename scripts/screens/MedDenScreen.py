@@ -672,6 +672,7 @@ class MedDenScreen(Screens):
                         (792, 448),
                     ),
                     manager=MANAGER,
+                    starting_height=6
                 )
                 if count > 1:
                     self.herbs["cobweb2"] = UIModifiedImage(
@@ -683,6 +684,7 @@ class MedDenScreen(Screens):
                             (792, 448),
                         ),
                         manager=MANAGER,
+                        starting_height=6
                     )
                 continue
             self.herbs[herb] = UIModifiedImage(
@@ -694,6 +696,7 @@ class MedDenScreen(Screens):
                     (792, 448),
                 ),
                 manager=MANAGER,
+                starting_height=6
             )
 
     def exit_screen(self):
