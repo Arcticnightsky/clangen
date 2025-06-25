@@ -618,8 +618,8 @@ class MedDenScreen(Screens):
                     tool_tip_text=herb_display,
                     manager=MANAGER,
                 )
-                else:
-                    count = 1
+            else:
+                count = 1
                 holding_pairs = []
                 pair = []
                 added = False
