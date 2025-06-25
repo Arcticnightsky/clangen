@@ -596,11 +596,11 @@ class MedDenScreen(Screens):
         if not herb_supply.total:
             herb_list = ["Empty"]
 
-        for herb in herbs_supply:
+        for herb in herb_supply:
             amount = str(herb[1])
             type = str(herb[0].replace("_", " "))
             herb_list.append(f"{amount} {type}")
-        if not herbs_stored:
+        if not herb_supply:
             herb_list.append("Empty")
 
         if len(herb_list) <= 10:
