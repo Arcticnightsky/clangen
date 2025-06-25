@@ -593,41 +593,33 @@ class MedDenScreen(Screens):
             herb_list = []
             herb_supply = game.clan.herb_supply
 
-            # Debug: print current game mode
-            # print(f"Game mode: {game.clan.game_mode}")
+            # Safely pull and sort the herb dict
+            herbs_stored = herb_supply.entire_supply.items()
+            sorted_herbs = sorted(herbs_stored)  # alphabetical
 
-            if not herb_supply.total:
-                herb_list = ["Empty"]
+            # Recreate the old tooltip format: "3 marigold"
+            for herb, count in sorted_herbs:
+                if count <= 0:
+                    continue
+                readable_name = herb.replace("_", " ")
+                herb_list.append(f"{count} {readable_name}")
 
-            elif game.clan.game_mode.lower() != "classic":
-                for herb, count in herb_supply.entire_supply.items():
-                    if count <= 0:
-                        continue
-                    display = (
-                        herb_supply.herb[herb].plural_display
-                        if count > 1
-                        else herb_supply.herb[herb].singular_display
-                    )
-                    herb_list.append(f"{count} {display}")
-
-    # Debug: print herb list contents
-    # print("Herb list:", herb_list)
+            if not herb_list:
+                herb_list.append("Empty")
 
             if len(herb_list) <= 10:
-                if game.clan.game_mode.lower() == "classic":
-                    herb_display = None
-                else:
-                    herb_display = "<br>".join(sorted(herb_list)) if herb_list else "Empty"
-
-                    self.den_base = UIImageButton(
-                        ui_scale(pygame.Rect((108, 95), (396, 224))),
-                        "",
-                        object_id="#med_cat_den_hover",
-                        tool_tip_text=herb_display,
-                        manager=MANAGER,
+                herb_display = (
+                    None if game.clan.game_mode.lower() == "classic" else "<br>".join(herb_list)
                 )
-            else:
-                count = 1
+                self.den_base = UIImageButton(
+                    ui_scale(pygame.Rect((108, 95), (396, 224))),
+                    "",
+                    object_id="#med_cat_den_hover",
+                    tool_tip_text=herb_display,
+                    manager=MANAGER,
+                )
+                else:
+                    count = 1
                 holding_pairs = []
                 pair = []
                 added = False
@@ -646,24 +638,22 @@ class MedDenScreen(Screens):
                 if not added:
                     holding_pairs.extend(pair)
 
-                if game.clan.game_mode.lower() == "classic":
-                    herb_display = None
-                else:
-                    herb_display = "<br>".join(holding_pairs) if holding_pairs else "Empty"
+                herb_display = (
+                    None if game.clan.game_mode.lower() == "classic" else "<br>".join(holding_pairs)
+                )
+                self.den_base = UIImageButton(
+                    ui_scale(pygame.Rect((108, 95), (396, 224))),
+                    "",
+                    object_id="#med_cat_den_hover_big",
+                    tool_tip_text=herb_display,
+                    manager=MANAGER,
+                )
 
-                    self.den_base = UIImageButton(
-                        ui_scale(pygame.Rect((108, 95), (396, 224))),
-                        "",
-                        object_id="#med_cat_den_hover_big",
-                        tool_tip_text=herb_display,
-                        manager=MANAGER,
-                    )
-
-            # Draw herb images
-            herbs = herb_supply.entire_supply
-            for herb, count in herbs.items():
+    # Draw herb images using the new system
+            for herb, count in herb_supply.entire_supply.items():
                 if count <= 0:
                     continue
+
                 if herb == "cobwebs":
                     self.herbs["cobweb1"] = pygame_gui.elements.UIImage(
                         ui_scale(pygame.Rect((108, 95), (396, 224))),
