@@ -630,7 +630,7 @@ class MedDenScreen(Screens):
                 object_id="#med_cat_den_hover",
                 tool_tip_text=herb_display,
                 manager=MANAGER,
-                starting_height=6,  # <-- important for tooltip to appear
+                starting_height=5,  # <-- important for tooltip to appear
             )
         else:
             count = 1
@@ -657,13 +657,23 @@ class MedDenScreen(Screens):
                 herb_display = None
             else:
                 herb_display = "<br>".join(holding_pairs)
+
+            self.den_image = UIModifiedImage(
+                ui_scale(pygame.Rect((108, 95), (396, 224))),
+                pygame.transform.scale(
+                    pygame.image.load("resources/images/med_cat_den/med_den_base.png").convert_alpha(),
+                    (792, 448),
+                ),
+                manager=MANAGER,
+                starting_height=1
+            )
             self.den_base = UIImageButton(
                 ui_scale(pygame.Rect((108, 95), (396, 224))),
                 "",
                 object_id="#med_cat_den_hover_big",
                 tool_tip_text=herb_display,
                 manager=MANAGER,
-                starting_height=4,  # <-- important for tooltip to appear
+                starting_height=5,  # <-- important for tooltip to appear
             )
 
         # otherwise draw the herbs you have
@@ -706,7 +716,7 @@ class MedDenScreen(Screens):
                     (792, 448),
                 ),
                 manager=MANAGER,
-                starting_height=5
+                starting_height=3
             )
 
     def exit_screen(self):
