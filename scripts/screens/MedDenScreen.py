@@ -23,7 +23,7 @@ from scripts.utility import (
     ui_scale_offset,
 )
 from .Screens import Screens
-from ..conditions import get_amount_cat_for_one_medic, medical_cats_condition_fulfilled
+from ..conditions import get_amount_cat_for_one_medic, amount_clanmembers_covered
 from ..game_structure.screen_settings import MANAGER
 from ..ui.generate_box import BoxStyles, get_box
 from ..ui.generate_button import get_button_dict, ButtonStyles
