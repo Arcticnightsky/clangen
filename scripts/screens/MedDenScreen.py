@@ -29,7 +29,7 @@ from ..game_structure.screen_settings import MANAGER
 from ..ui.generate_box import BoxStyles, get_box
 from ..ui.generate_button import get_button_dict, ButtonStyles
 from ..ui.icon import Icon
-from scripts.ui.ui_elements import UIModifiedImage
+from scripts.game_structure.ui_elements import UIModifiedImage
 
 class MedDenScreen(Screens):
     cat_buttons = {}
