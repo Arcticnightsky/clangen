@@ -590,95 +590,114 @@ class MedDenScreen(Screens):
             i += 1
 
     def draw_med_den(self):
-        herb_list = []
-        herb_supply = game.clan.herb_supply
+            herb_list = []
+            herb_supply = game.clan.herb_supply
 
-        if not herb_supply.total:
-            herb_list = ["Empty"]
+            # Debug: print current game mode
+            # print(f"Game mode: {game.clan.game_mode}")
 
-        if len(herb_list) <= 10:
-            # classic doesn't display herbs
-            herb_display = "<br>".join(sorted(herb_list))
+            if not herb_supply.total:
+                herb_list = ["Empty"]
 
-            self.den_base = UIImageButton(
-                ui_scale(pygame.Rect((108, 95), (396, 224))),
-                "",
-                object_id="#med_cat_den_hover",
-                tool_tip_text=herb_display,
-                manager=MANAGER,
-            )
-        else:
-            count = 1
-            holding_pairs = []
-            pair = []
-            added = False
-            for y in range(len(herb_list)):
-                if (count % 2) == 0:  # checking if count is an even number
-                    count += 1
-                    pair.append(herb_list[y])
-                    holding_pairs.append("   -   ".join(pair))
-                    pair.clear()
-                    added = True
-                    continue
+            elif game.clan.game_mode.lower() != "classic":
+                for herb, count in herb_supply.entire_supply.items():
+                    if count <= 0:
+                        continue
+                    display = (
+                        herb_supply.herb[herb].plural_display
+                        if count > 1
+                        else herb_supply.herb[herb].singular_display
+                    )
+                    herb_list.append(f"{count} {display}")
+
+    # Debug: print herb list contents
+    # print("Herb list:", herb_list)
+
+            if len(herb_list) <= 10:
+                if game.clan.game_mode.lower() == "classic":
+                    herb_display = None
                 else:
-                    pair.append(herb_list[y])
-                    count += 1
-                    added = False
-            if added is False:
-                holding_pairs.extend(pair)
+                    herb_display = "<br>".join(sorted(herb_list)) if herb_list else "Empty"
 
-            # classic doesn't display herbs
-            if game.clan.game_mode == "classic":
-                herb_display = None
-            else:
-                herb_display = "<br>".join(holding_pairs)
-            self.den_base = UIImageButton(
-                ui_scale(pygame.Rect((108, 95), (396, 224))),
-                "",
-                object_id="#med_cat_den_hover_big",
-                tool_tip_text=herb_display,
-                manager=MANAGER,
-            )
-
-        # otherwise draw the herbs you have
-        herbs = game.clan.herb_supply.entire_supply
-
-        for herb, count in herbs.items():
-            if count <= 0:
-                continue
-            if herb == "cobwebs":
-                self.herbs["cobweb1"] = pygame_gui.elements.UIImage(
+                self.den_base = UIImageButton(
                     ui_scale(pygame.Rect((108, 95), (396, 224))),
-                    pygame.transform.scale(
-                        pygame.image.load(
-                            "resources/images/med_cat_den/cobweb1.png"
-                        ).convert_alpha(),
-                        (792, 448),
-                    ),
+                    "",
+                    object_id="#med_cat_den_hover",
+                    tool_tip_text=herb_display,
                     manager=MANAGER,
                 )
-                if count > 1:
-                    self.herbs["cobweb2"] = pygame_gui.elements.UIImage(
+            else:
+                count = 1
+                holding_pairs = []
+                pair = []
+                added = False
+                for y in range(len(herb_list)):
+                    if (count % 2) == 0:
+                        count += 1
+                        pair.append(herb_list[y])
+                        holding_pairs.append("   -   ".join(pair))
+                        pair.clear()
+                        added = True
+                        continue
+                    else:
+                        pair.append(herb_list[y])
+                        count += 1
+                        added = False
+                if not added:
+                    holding_pairs.extend(pair)
+
+                if game.clan.game_mode.lower() == "classic":
+                    herb_display = None
+                else:
+                    herb_display = "<br>".join(holding_pairs) if holding_pairs else "Empty"
+
+                self.den_base = UIImageButton(
+                    ui_scale(pygame.Rect((108, 95), (396, 224))),
+                    "",
+                    object_id="#med_cat_den_hover_big",
+                    tool_tip_text=herb_display,
+                    manager=MANAGER,
+                )
+
+            # Draw herb images
+            herbs = herb_supply.entire_supply
+            for herb, count in herbs.items():
+                if count <= 0:
+                    continue
+                if herb == "cobwebs":
+                    self.herbs["cobweb1"] = pygame_gui.elements.UIImage(
                         ui_scale(pygame.Rect((108, 95), (396, 224))),
                         pygame.transform.scale(
                             pygame.image.load(
-                                "resources/images/med_cat_den/cobweb2.png"
+                                "resources/images/med_cat_den/cobweb1.png"
                             ).convert_alpha(),
                             (792, 448),
                         ),
                         manager=MANAGER,
                     )
-                continue
-            self.herbs[herb] = pygame_gui.elements.UIImage(
-                ui_scale(pygame.Rect((108, 95), (396, 224))),
-                pygame.transform.scale(
-                    pygame.image.load(
-                        f"resources/images/med_cat_den/{herb}.png"
-                    ).convert_alpha(),
-                    (792, 448),
-                ),
-                manager=MANAGER,
-            )
+                    if count > 1:
+                        self.herbs["cobweb2"] = pygame_gui.elements.UIImage(
+                            ui_scale(pygame.Rect((108, 95), (396, 224))),
+                            pygame.transform.scale(
+                                pygame.image.load(
+                                    "resources/images/med_cat_den/cobweb2.png"
+                                ).convert_alpha(),
+                                (792, 448),
+                            ),
+                            manager=MANAGER,
+                        )
+                    continue
+
+                self.herbs[herb] = pygame_gui.elements.UIImage(
+                    ui_scale(pygame.Rect((108, 95), (396, 224))),
+                    pygame.transform.scale(
+                        pygame.image.load(
+                            f"resources/images/med_cat_den/{herb}.png"
+                        ).convert_alpha(),
+                        (792, 448),
+                    ),
+                    manager=MANAGER,
+                )
 
     def exit_screen(self):
         self.meds_messages.kill()
