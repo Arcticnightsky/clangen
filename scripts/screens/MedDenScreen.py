@@ -619,12 +619,12 @@ class MedDenScreen(Screens):
                 else:
                     herb_display = "<br>".join(sorted(herb_list)) if herb_list else "Empty"
 
-                self.den_base = UIImageButton(
-                    ui_scale(pygame.Rect((108, 95), (396, 224))),
-                    "",
-                    object_id="#med_cat_den_hover",
-                    tool_tip_text=herb_display,
-                    manager=MANAGER,
+                    self.den_base = UIImageButton(
+                        ui_scale(pygame.Rect((108, 95), (396, 224))),
+                        "",
+                        object_id="#med_cat_den_hover",
+                        tool_tip_text=herb_display,
+                        manager=MANAGER,
                 )
             else:
                 count = 1
@@ -651,13 +651,13 @@ class MedDenScreen(Screens):
                 else:
                     herb_display = "<br>".join(holding_pairs) if holding_pairs else "Empty"
 
-                self.den_base = UIImageButton(
-                    ui_scale(pygame.Rect((108, 95), (396, 224))),
-                    "",
-                    object_id="#med_cat_den_hover_big",
-                    tool_tip_text=herb_display,
-                    manager=MANAGER,
-                )
+                    self.den_base = UIImageButton(
+                        ui_scale(pygame.Rect((108, 95), (396, 224))),
+                        "",
+                        object_id="#med_cat_den_hover_big",
+                        tool_tip_text=herb_display,
+                        manager=MANAGER,
+                    )
 
             # Draw herb images
             herbs = herb_supply.entire_supply
