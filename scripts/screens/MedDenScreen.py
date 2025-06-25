@@ -590,7 +590,7 @@ class MedDenScreen(Screens):
             i += 1
 
     def draw_med_den(self):
-        sorted_dict = dict(sorted(game.clan.herbs_supply()))
+        sorted_dict = dict(sorted(game.clan.herb_supply()))
         herbs_stored = sorted_dict.items()
         herb_list = []
         herb_supply = game.clan.herb_supply
