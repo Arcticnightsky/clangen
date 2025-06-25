@@ -12,6 +12,7 @@ from scripts.game_structure.ui_elements import (
     UIImageButton,
     UITextBoxTweaked,
     UISurfaceImageButton,
+    UIModifiedImage,
 )
 from scripts.utility import (
     get_text_box_theme,
@@ -28,7 +29,7 @@ from ..game_structure.screen_settings import MANAGER
 from ..ui.generate_box import BoxStyles, get_box
 from ..ui.generate_button import get_button_dict, ButtonStyles
 from ..ui.icon import Icon
-
+from ui_elements import UIModifiedImage 
 
 class MedDenScreen(Screens):
     cat_buttons = {}
@@ -189,7 +190,7 @@ class MedDenScreen(Screens):
                 manager=MANAGER,
             )
             self.log_title.hide()
-            self.cat_bg = pygame_gui.elements.UIImage(
+            self.cat_bg = UIModifiedImage(
                 ui_scale(pygame.Rect((140, 440), (560, 200))),
                 get_box(BoxStyles.ROUNDED_BOX, (560, 200)),
                 manager=MANAGER,
@@ -350,9 +351,7 @@ class MedDenScreen(Screens):
             number = amount_clanmembers_covered(Cat.all_cats.values(), amount_per_med)
 
             meds_cover = i18n.t(
-                "screens.med_den.meds_cover",
-                clansize=number,
-                count=len(self.meds)
+                "screens.med_den.meds_cover", clansize=number, count=len(self.meds)
             )
 
             if game.clan.game_mode == "classic":
@@ -365,29 +364,26 @@ class MedDenScreen(Screens):
                     Cat=Cat,
                     text=choice(MESSAGES["single_not_working"]),
                     main_cat=self.meds[0],
-                    clan=game.clan
+                    clan=game.clan,
                 )
             elif len(self.meds) >= 2 and number == 0:
                 meds_cover = event_text_adjust(
-                    Cat=Cat,
-                    text=choice(MESSAGES["many_not_working"]),
-                    clan=game.clan
+                    Cat=Cat, text=choice(MESSAGES["many_not_working"]), clan=game.clan
                 )
 
             if meds_cover:
-                med_messages.append(event_text_adjust(
-                    Cat,
-                    meds_cover,
-                    main_cat=self.meds[0]
-                ))
+                med_messages.append(
+                    event_text_adjust(Cat, meds_cover, main_cat=self.meds[0])
+                )
 
             if self.meds:
-                med_messages.append(game.clan.herb_supply.get_status_message(choice(self.meds)))
+                med_messages.append(
+                    game.clan.herb_supply.get_status_message(choice(self.meds))
+                )
             self.meds_messages.set_text("<br>".join(med_messages))
 
         else:
             self.meds_messages.set_text(choice(MESSAGES["no_meds_warning"]))
-
 
     def handle_tab_toggles(self):
         if self.open_tab == "cats":
@@ -594,7 +590,6 @@ class MedDenScreen(Screens):
             i += 1
 
     def draw_med_den(self):
-
         herb_list = []
         herb_supply = game.clan.herb_supply
 
@@ -605,7 +600,11 @@ class MedDenScreen(Screens):
             for herb, count in herb_supply.entire_supply.items():
                 if count <= 0:
                     continue
-                display = herb_supply.herb[herb].plural_display if count > 1 else herb_supply.herb[herb].singular_display
+                display = (
+                    herb_supply.herb[herb].plural_display
+                    if count > 1
+                    else herb_supply.herb[herb].singular_display
+                )
                 herb_list.append(f"{count} {display}")
 
         if len(herb_list) <= 10:
@@ -662,7 +661,7 @@ class MedDenScreen(Screens):
             if count <= 0:
                 continue
             if herb == "cobwebs":
-                self.herbs["cobweb1"] = pygame_gui.elements.UIImage(
+                self.herbs["cobweb1"] = UIModifiedImage(
                     ui_scale(pygame.Rect((108, 95), (396, 224))),
                     pygame.transform.scale(
                         pygame.image.load(
@@ -673,7 +672,7 @@ class MedDenScreen(Screens):
                     manager=MANAGER,
                 )
                 if count > 1:
-                    self.herbs["cobweb2"] = pygame_gui.elements.UIImage(
+                    self.herbs["cobweb2"] = UIModifiedImage(
                         ui_scale(pygame.Rect((108, 95), (396, 224))),
                         pygame.transform.scale(
                             pygame.image.load(
@@ -684,7 +683,7 @@ class MedDenScreen(Screens):
                         manager=MANAGER,
                     )
                 continue
-            self.herbs[herb] = pygame_gui.elements.UIImage(
+            self.herbs[herb] = UIModifiedImage(
                 ui_scale(pygame.Rect((108, 95), (396, 224))),
                 pygame.transform.scale(
                     pygame.image.load(
