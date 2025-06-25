@@ -672,7 +672,7 @@ class MedDenScreen(Screens):
                         (792, 448),
                     ),
                     manager=MANAGER,
-                    starting_height=4
+                    starting_height=5
                 )
                 if count > 1:
                     self.herbs["cobweb2"] = UIModifiedImage(
@@ -684,7 +684,7 @@ class MedDenScreen(Screens):
                             (792, 448),
                         ),
                         manager=MANAGER,
-                        starting_height=4
+                        starting_height=5
                     )
                 continue
             self.herbs[herb] = UIModifiedImage(
