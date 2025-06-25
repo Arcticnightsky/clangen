@@ -620,7 +620,7 @@ class MedDenScreen(Screens):
                 object_id="#med_cat_den_hover",
                 tool_tip_text=herb_display,
                 manager=MANAGER,
-                starting_height=1,  # <-- important for tooltip to appear
+                starting_height=4,  # <-- important for tooltip to appear
             )
         else:
             count = 1
@@ -672,6 +672,7 @@ class MedDenScreen(Screens):
                         (792, 448),
                     ),
                     manager=MANAGER,
+                    starting_height=3
                 )
                 if count > 1:
                     self.herbs["cobweb2"] = UIModifiedImage(
@@ -683,6 +684,7 @@ class MedDenScreen(Screens):
                             (792, 448),
                         ),
                         manager=MANAGER,
+                        starting_height=3
                     )
                 continue
             self.herbs[herb] = UIModifiedImage(
@@ -694,7 +696,7 @@ class MedDenScreen(Screens):
                     (792, 448),
                 ),
                 manager=MANAGER,
-                starting_height=4
+                starting_height=3
             )
 
     def exit_screen(self):
