@@ -590,18 +590,24 @@ class MedDenScreen(Screens):
             i += 1
 
     def draw_med_den(self):
+        sorted_dict = dict(sorted(game.clan.herbs.items()))
+        herbs_stored = sorted_dict.items()
         herb_list = []
         herb_supply = game.clan.herb_supply
 
         if not herb_supply.total:
             herb_list = ["Empty"]
 
-        for herb in herb_supply:
-            amount = str(herb[1])
-            type = str(herb[0].replace("_", " "))
-            herb_list.append(f"{amount} {type}")
-        if not herb_supply:
-            herb_list.append("Empty")
+        elif game.clan.game_mode != "classic":
+            for herb, count in herb_supply.entire_supply.items():
+                if count <= 0:
+                    continue
+                display = (
+                    herb_supply.herb[herb].plural_display
+                    if count > 1
+                    else herb_supply.herb[herb].singular_display
+                )
+                herb_list.append(f"{count} {display}")
 
         if len(herb_list) <= 10:
             # classic doesn't display herbs
