@@ -706,7 +706,6 @@ class MedDenScreen(Screens):
                     (792, 448),
                 ),
                 manager=MANAGER,
-                starting_height=3
             )
 
     def exit_screen(self):
