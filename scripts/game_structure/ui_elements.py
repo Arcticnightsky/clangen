@@ -96,12 +96,16 @@ class UISurfaceImageButton(pygame_gui.elements.UIButton):
                     "Button is tab, but unable to find matching data! Ensure object_id is correct & that buttonstyles has tab_movement key"
                 )
             self.tab_movement = {
-                "hovered": self.tab_data["hovered"]
-                if not hasattr(tab_movement, "hovered")
-                else tab_movement["hovered"],
-                "disabled": self.tab_data["disabled"]
-                if not hasattr(tab_movement, "disabled")
-                else tab_movement["disabled"],
+                "hovered": (
+                    self.tab_data["hovered"]
+                    if not hasattr(tab_movement, "hovered")
+                    else tab_movement["hovered"]
+                ),
+                "disabled": (
+                    self.tab_data["disabled"]
+                    if not hasattr(tab_movement, "disabled")
+                    else tab_movement["disabled"]
+                ),
             }
 
         self._normal_image = image_dict["normal"]
