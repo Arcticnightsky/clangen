@@ -29,7 +29,7 @@ from ..game_structure.screen_settings import MANAGER
 from ..ui.generate_box import BoxStyles, get_box
 from ..ui.generate_button import get_button_dict, ButtonStyles
 from ..ui.icon import Icon
-from scripts.game_structure.ui_elements import UIModifiedImage
+
 
 class MedDenScreen(Screens):
     cat_buttons = {}
@@ -620,7 +620,6 @@ class MedDenScreen(Screens):
                 object_id="#med_cat_den_hover",
                 tool_tip_text=herb_display,
                 manager=MANAGER,
-                starting_height=3,# <-- important for tooltip to appear
             )
         else:
             count = 1
@@ -647,14 +646,12 @@ class MedDenScreen(Screens):
                 herb_display = None
             else:
                 herb_display = "<br>".join(holding_pairs)
-
             self.den_base = UIImageButton(
                 ui_scale(pygame.Rect((108, 95), (396, 224))),
                 "",
                 object_id="#med_cat_den_hover_big",
                 tool_tip_text=herb_display,
                 manager=MANAGER,
-                starting_height=3,# <-- important for tooltip to appear
             )
 
         # otherwise draw the herbs you have
@@ -664,7 +661,7 @@ class MedDenScreen(Screens):
             if count <= 0:
                 continue
             if herb == "cobwebs":
-                self.herbs["cobweb1"] = UIModifiedImage(
+                self.herbs["cobweb1"] = pygame_gui.elements.UIImage(
                     ui_scale(pygame.Rect((108, 95), (396, 224))),
                     pygame.transform.scale(
                         pygame.image.load(
@@ -675,7 +672,7 @@ class MedDenScreen(Screens):
                     manager=MANAGER,
                 )
                 if count > 1:
-                    self.herbs["cobweb2"] = UIModifiedImage(
+                    self.herbs["cobweb2"] = pygame_gui.elements.UIImage(
                         ui_scale(pygame.Rect((108, 95), (396, 224))),
                         pygame.transform.scale(
                             pygame.image.load(
@@ -686,7 +683,7 @@ class MedDenScreen(Screens):
                         manager=MANAGER,
                     )
                 continue
-            self.herbs[herb] = UIModifiedImage(
+            self.herbs[herb] = pygame_gui.elements.UIImage(
                 ui_scale(pygame.Rect((108, 95), (396, 224))),
                 pygame.transform.scale(
                     pygame.image.load(
