@@ -590,6 +590,7 @@ class MedDenScreen(Screens):
             i += 1
 
     def draw_med_den(self):
+
         herb_list = []
         herb_supply = game.clan.herb_supply
 
@@ -600,11 +601,7 @@ class MedDenScreen(Screens):
             for herb, count in herb_supply.entire_supply.items():
                 if count <= 0:
                     continue
-                display = (
-                    herb_supply.herb[herb].plural_display
-                    if count > 1
-                    else herb_supply.herb[herb].singular_display
-                )
+                display = herb_supply.herb[herb].plural_display if count > 1 else herb_supply.herb[herb].singular_display
                 herb_list.append(f"{count} {display}")
 
         if len(herb_list) <= 10:
