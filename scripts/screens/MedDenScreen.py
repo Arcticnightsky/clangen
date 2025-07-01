@@ -652,44 +652,44 @@ class MedDenScreen(Screens):
             )
 
         # otherwise draw the herbs you have
-        herbs = game.clan.herb_supply.entire_supply
+            herbs = game.clan.herb_supply.entire_supply
 
-        for herb, count in herbs.items():
-            if count <= 0:
-                continue
-            if herb == "cobwebs":
-                self.herbs["cobweb1"] = pygame_gui.elements.UIImage(
-                    ui_scale(pygame.Rect((108, 95), (396, 224))),
-                    pygame.transform.scale(
-                        pygame.image.load(
-                            "resources/images/med_cat_den/cobweb1.png"
-                        ).convert_alpha(),
-                        (792, 448),
-                    ),
-                    manager=MANAGER,
-                )
-                if count > 1:
-                    self.herbs["cobweb2"] = pygame_gui.elements.UIImage(
+            for herb, count in herbs.items():
+                if count <= 0:
+                    continue
+                if herb == "cobwebs":
+                    self.herbs["cobweb1"] = pygame_gui.elements.UIImage(
                         ui_scale(pygame.Rect((108, 95), (396, 224))),
                         pygame.transform.scale(
                             pygame.image.load(
-                                "resources/images/med_cat_den/cobweb2.png"
+                                "resources/images/med_cat_den/cobweb1.png"
                             ).convert_alpha(),
                             (792, 448),
                         ),
                         manager=MANAGER,
                     )
-                continue
-            self.herbs[herb] = pygame_gui.elements.UIImage(
-                ui_scale(pygame.Rect((108, 95), (396, 224))),
-                pygame.transform.scale(
-                    pygame.image.load(
-                        f"resources/images/med_cat_den/{herb}.png"
-                    ).convert_alpha(),
-                    (792, 448),
-                ),
-                manager=MANAGER,
-            )
+                    if count > 1:
+                        self.herbs["cobweb2"] = pygame_gui.elements.UIImage(
+                            ui_scale(pygame.Rect((108, 95), (396, 224))),
+                            pygame.transform.scale(
+                                pygame.image.load(
+                                    "resources/images/med_cat_den/cobweb2.png"
+                                ).convert_alpha(),
+                                (792, 448),
+                            ),
+                            manager=MANAGER,
+                        )
+                    continue
+                self.herbs[herb] = pygame_gui.elements.UIImage(
+                    ui_scale(pygame.Rect((108, 95), (396, 224))),
+                    pygame.transform.scale(
+                        pygame.image.load(
+                            f"resources/images/med_cat_den/{herb}.png"
+                        ).convert_alpha(),
+                        (792, 448),
+                    ),
+                    manager=MANAGER,
+                )
 
     def exit_screen(self):
         self.meds_messages.kill()
