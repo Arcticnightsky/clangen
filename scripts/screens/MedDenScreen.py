@@ -615,9 +615,7 @@ class MedDenScreen(Screens):
                 ui_scale(pygame.Rect((108, 95), (396, 224))),
                 "",
                 object_id="#med_cat_den_hover",
-                tool_tip_text=herb_display,
                 manager=MANAGER,
-                starting_height=1,
             )
         else:
             count = 1
@@ -648,9 +646,7 @@ class MedDenScreen(Screens):
                 ui_scale(pygame.Rect((108, 95), (396, 224))),
                 "",
                 object_id="#med_cat_den_hover_big",
-                tool_tip_text=herb_display,
                 manager=MANAGER,
-                starting_height=1,
             )
 
         # otherwise draw the herbs you have
@@ -690,6 +686,7 @@ class MedDenScreen(Screens):
                     ).convert_alpha(),
                     (792, 448),
                 ),
+                tool_tip_text=herb_display,
                 manager=MANAGER,
             )
 
