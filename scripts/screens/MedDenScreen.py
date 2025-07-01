@@ -568,8 +568,8 @@ class MedDenScreen(Screens):
                 cat.sprite,
                 cat_object=cat,
                 manager=MANAGER,
+                starting_height=1,
                 tool_tip_text=conditions,
-                starting_height=2,
             )
 
             name = str(cat.name)
@@ -616,7 +616,7 @@ class MedDenScreen(Screens):
                 "",
                 object_id="#med_cat_den_hover",
                 tool_tip_text=herb_display,
-                starting_height=2,
+                starting_height=1,
                 manager=MANAGER,
             )
         else:
