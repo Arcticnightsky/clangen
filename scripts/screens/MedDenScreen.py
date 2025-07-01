@@ -614,72 +614,9 @@ class MedDenScreen(Screens):
                 herb_display = None
             else:
                 herb_display = "<br>".join(sorted(herb_list))
-        for herb, count in herbs.items():
-            if count <= 0:
-                continue
-            if herb == "cobwebs":
-                self.herbs["cobweb1"] = pygame_gui.elements.UIImage(
-                    ui_scale(pygame.Rect((108, 95), (396, 224))),
-                    pygame.transform.scale(
-                        pygame.image.load(
-                            "resources/images/med_cat_den/cobweb1.png"
-                        ).convert_alpha(),
-                        (792, 448),
-                    ),
-                    manager=MANAGER,
-                )
-                if count > 1:
-                    self.herbs["cobweb2"] = pygame_gui.elements.UIImage(
-                        ui_scale(pygame.Rect((108, 95), (396, 224))),
-                        pygame.transform.scale(
-                            pygame.image.load(
-                                "resources/images/med_cat_den/cobweb2.png"
-                            ).convert_alpha(),
-                            (792, 448),
-                        ),
-                        manager=MANAGER,
-                    )
-                continue
-            self.herbs[herb] = pygame_gui.elements.UIImage(
-                ui_scale(pygame.Rect((108, 95), (396, 224))),
-                pygame.transform.scale(
-                    pygame.image.load(
-                        f"resources/images/med_cat_den/{herb}.png"
-                    ).convert_alpha(),
-                    (792, 448),
-                ),
-                manager=MANAGER,
-                tool_tip_text=herb_display,
-            )
-
-        else:
-            count = 1
-            holding_pairs = []
-            pair = []
-            added = False
-            for y in range(len(herb_list)):
-                if (count % 2) == 0:  # checking if count is an even number
-                    count += 1
-                    pair.append(herb_list[y])
-                    holding_pairs.append("   -   ".join(pair))
-                    pair.clear()
-                    added = True
-                    continue
-                else:
-                    pair.append(herb_list[y])
-                    count += 1
-                    added = False
-            if added is False:
-                holding_pairs.extend(pair)
-
-            # classic doesn't display herbs
-            if game.clan.game_mode == "classic":
-                herb_display = None
-            else:
-                herb_display = "<br>".join(holding_pairs)
-            for herb, count in herbs.items():
-                if count <= 0:
-                    continue
+                for herb, count in herbs.items():
+                    if count <= 0:
+                        continue
                 if herb == "cobwebs":
                     self.herbs["cobweb1"] = pygame_gui.elements.UIImage(
                         ui_scale(pygame.Rect((108, 95), (396, 224))),
@@ -712,7 +649,70 @@ class MedDenScreen(Screens):
                         (792, 448),
                     ),
                     manager=MANAGER,
+                    tool_tip_text=herb_display,
                 )
+
+        else:
+            count = 1
+            holding_pairs = []
+            pair = []
+            added = False
+            for y in range(len(herb_list)):
+                if (count % 2) == 0:  # checking if count is an even number
+                    count += 1
+                    pair.append(herb_list[y])
+                    holding_pairs.append("   -   ".join(pair))
+                    pair.clear()
+                    added = True
+                    continue
+                else:
+                    pair.append(herb_list[y])
+                    count += 1
+                    added = False
+            if added is False:
+                holding_pairs.extend(pair)
+
+            # classic doesn't display herbs
+            if game.clan.game_mode == "classic":
+                herb_display = None
+            else:
+                herb_display = "<br>".join(holding_pairs)
+                for herb, count in herbs.items():
+                    if count <= 0:
+                        continue
+                    if herb == "cobwebs":
+                        self.herbs["cobweb1"] = pygame_gui.elements.UIImage(
+                            ui_scale(pygame.Rect((108, 95), (396, 224))),
+                            pygame.transform.scale(
+                                pygame.image.load(
+                                    "resources/images/med_cat_den/cobweb1.png"
+                                ).convert_alpha(),
+                                (792, 448),
+                            ),
+                            manager=MANAGER,
+                        )
+                        if count > 1:
+                            self.herbs["cobweb2"] = pygame_gui.elements.UIImage(
+                                ui_scale(pygame.Rect((108, 95), (396, 224))),
+                                pygame.transform.scale(
+                                    pygame.image.load(
+                                        "resources/images/med_cat_den/cobweb2.png"
+                                    ).convert_alpha(),
+                                    (792, 448),
+                                ),
+                                manager=MANAGER,
+                            )
+                        continue
+                    self.herbs[herb] = pygame_gui.elements.UIImage(
+                        ui_scale(pygame.Rect((108, 95), (396, 224))),
+                        pygame.transform.scale(
+                            pygame.image.load(
+                                f"resources/images/med_cat_den/{herb}.png"
+                            ).convert_alpha(),
+                            (792, 448),
+                        ),
+                        manager=MANAGER,
+                    )
             self.den_base = UIImageButton(
                 ui_scale(pygame.Rect((108, 95), (396, 224))),
                 "",
