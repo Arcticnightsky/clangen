@@ -689,7 +689,7 @@ class MedDenScreen(Screens):
                     pygame.image.load(
                         f"resources/images/med_cat_den/{herb}.png"
                     ).convert_alpha(),
-                    (592, 348),
+                    (192, 48),
                 ),
                 manager=MANAGER,
             )
