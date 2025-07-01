@@ -620,7 +620,7 @@ class MedDenScreen(Screens):
                 object_id="#med_cat_den_hover",
                 manager=MANAGER,
             )
-                tool_tip_text=herb_display,
+            tool_tip_text=herb_display,
         else:
             count = 1
             holding_pairs = []
@@ -652,7 +652,7 @@ class MedDenScreen(Screens):
                 object_id="#med_cat_den_hover_big",
                 manager=MANAGER,
             )
-                tool_tip_text=herb_display,
+            tool_tip_text=herb_display,
             
         # otherwise draw the herbs you have
         herbs = game.clan.herb_supply.entire_supply
