@@ -639,6 +639,7 @@ class MedDenScreen(Screens):
                             ),
                             manager=MANAGER,
                         )
+                continue
                 self.herbs[herb] = pygame_gui.elements.UIImage(
                     ui_scale(pygame.Rect((108, 95), (396, 224))),
                     pygame.transform.scale(
@@ -701,6 +702,7 @@ class MedDenScreen(Screens):
                                 ),
                                 manager=MANAGER,
                             )
+                    continue
                     self.herbs[herb] = pygame_gui.elements.UIImage(
                         ui_scale(pygame.Rect((108, 95), (396, 224))),
                         pygame.transform.scale(
