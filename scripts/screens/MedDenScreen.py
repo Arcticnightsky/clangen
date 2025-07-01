@@ -615,6 +615,7 @@ class MedDenScreen(Screens):
                 ui_scale(pygame.Rect((108, 95), (396, 224))),
                 "",
                 object_id="#med_cat_den_hover",
+                tool_tip_text=herb_display,
                 manager=MANAGER,
             )
         else:
@@ -646,6 +647,7 @@ class MedDenScreen(Screens):
                 ui_scale(pygame.Rect((108, 95), (396, 224))),
                 "",
                 object_id="#med_cat_den_hover_big",
+                tool_tip_text=herb_display,
                 manager=MANAGER,
             )
 
@@ -686,7 +688,6 @@ class MedDenScreen(Screens):
                     ).convert_alpha(),
                     (792, 448),
                 ),
-                tool_tip_text=herb_display,
                 manager=MANAGER,
             )
 
