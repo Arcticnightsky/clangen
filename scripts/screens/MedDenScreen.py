@@ -618,9 +618,9 @@ class MedDenScreen(Screens):
                 ui_scale(pygame.Rect((108, 95), (396, 224))),
                 "",
                 object_id="#med_cat_den_hover",
+                tool_tip_text=herb_display,
                 manager=MANAGER,
             )
-            tool_tip_text=herb_display,
         else:
             count = 1
             holding_pairs = []
@@ -650,9 +650,9 @@ class MedDenScreen(Screens):
                 ui_scale(pygame.Rect((108, 95), (396, 224))),
                 "",
                 object_id="#med_cat_den_hover_big",
+                tool_tip_text=herb_display,
                 manager=MANAGER,
             )
-            tool_tip_text=herb_display,
             
         # otherwise draw the herbs you have
         herbs = game.clan.herb_supply.entire_supply
@@ -684,7 +684,7 @@ class MedDenScreen(Screens):
                     )
                 continue
             self.herbs[herb] = pygame_gui.elements.UIImage(
-                ui_scale(pygame.Rect((108, 95), (396, 224))),
+                ui_scale(pygame.Rect((88, 85), (296, 124))),
                 pygame.transform.scale(
                     pygame.image.load(
                         f"resources/images/med_cat_den/{herb}.png"
