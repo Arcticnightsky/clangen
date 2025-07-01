@@ -684,12 +684,12 @@ class MedDenScreen(Screens):
                     )
                 continue
             self.herbs[herb] = pygame_gui.elements.UIImage(
-                ui_scale(pygame.Rect((88, 85), (296, 124))),
+                ui_scale(pygame.Rect((108, 95), (396, 224))),
                 pygame.transform.scale(
                     pygame.image.load(
                         f"resources/images/med_cat_den/{herb}.png"
                     ).convert_alpha(),
-                    (792, 448),
+                    (592, 348),
                 ),
                 manager=MANAGER,
             )
