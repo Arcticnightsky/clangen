@@ -619,7 +619,6 @@ class MedDenScreen(Screens):
                 "",
                 object_id="#med_cat_den_hover",
                 tool_tip_text=herb_display,
-                starting_height=2,
                 manager=MANAGER,
             )
         else:
@@ -652,7 +651,6 @@ class MedDenScreen(Screens):
                 "",
                 object_id="#med_cat_den_hover_big",
                 tool_tip_text=herb_display,
-                starting_height=2,
                 manager=MANAGER,
             )
 
