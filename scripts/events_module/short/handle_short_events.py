@@ -812,10 +812,10 @@ class HandleShortEvents:
                         )
                     if possible_scar or possible_death:
                         cat.history.add_possible_history(
+                            injury,
                             death_text=possible_death,
                             other_cat=self.random_cat,
                             scar_text=possible_scar,
-                            injury,
                         )
 
     def handle_freshkill_supply(self, block, freshkill_pile: FreshkillPile):
