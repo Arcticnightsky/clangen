@@ -815,7 +815,7 @@ class HandleShortEvents:
                             death_text=possible_death,
                             other_cat=self.random_cat,
                             scar_text=possible_scar,
-                            injury=injury,
+                            injury,
                         )
 
     def handle_freshkill_supply(self, block, freshkill_pile: FreshkillPile):
