@@ -148,7 +148,7 @@ class Cat:
         :param kwargs: TODO what are the possible args here? ["biome", ]
         """
 
-        self.history = None
+        self._history = None
 
         if (
             faded
@@ -221,8 +221,6 @@ class Cat:
 
         self.specsuffix_hidden = specsuffix_hidden
         self.inheritance = None
-
-        self.history = None
 
         # setting ID
         if ID is None:
@@ -519,6 +517,17 @@ class Cat:
             self._pronouns[i18n.config.get("locale")] = val
             return
 
+    @property
+    def history(self) -> History:
+        """load history if it is None"""
+        if self._history is None:
+            self.load_history()
+        return self._history
+
+    @history.setter
+    def history(self, val: History):
+        self._history = val
+
     def get_genderalign_string(self):
         # translate it if it's default
         if self.genderalign in (
@@ -608,6 +617,8 @@ class Cat:
         if game.clan and not self.outside and not self.exiled:
             self.grief(body)
 
+        # mark the sprite as outdated
+        self.pelt.rebuild_sprite = True
         if not self.outside:
             Cat.dead_cats.append(self)
             if game.clan.instructor.df is False:
@@ -869,7 +880,7 @@ class Cat:
         are coming with them."""
         self.outside = False
         if not self.exiled:
-            History.add_beginning(self)
+            self.history.add_beginning()
         self.exiled = False
         game.clan.add_to_clan(self)
 
@@ -885,7 +896,7 @@ class Cat:
                 and child.moons < 12
             ):
                 child.add_to_clan()
-                History.add_beginning(child)
+                child.history.add_beginning()
                 ids.append(child_id)
 
         return ids
@@ -972,19 +983,18 @@ class Cat:
                     )
                     affect_skills = self.skills.mentor_influence(Cat.fetch_cat(mentor))
                     if affect_personality:
-                        History.add_facet_mentor_influence(
-                            self,
+                        self.history.add_facet_mentor_influence(
                             mentor.ID,
                             affect_personality[0],
                             affect_personality[1],
                         )
                     if affect_skills:
-                        History.add_skill_mentor_influence(
-                            self, affect_skills[0], affect_skills[1], affect_skills[2]
+                        self.history.add_skill_mentor_influence(
+                            affect_skills[0], affect_skills[1], affect_skills[2]
                         )
 
-            History.add_mentor_skill_influence_strings(self)
-            History.add_mentor_facet_influence_strings(self)
+            self.history.add_mentor_skill_influence_strings()
+            self.history.add_mentor_facet_influence_strings()
         return
 
     def manage_outside_trait(self):
@@ -1024,13 +1034,13 @@ class Cat:
             scars.extend(
                 {"involved": None, "text": scar, "moon": "?"} for scar in scar_events
             )
-        self.history = History(
-            died_by=deaths,
-            scar_events=scars,
-        )
+        self.history = History(died_by=deaths, scar_events=scars, cat=self)
 
     def load_history(self):
         """Load this cat's history"""
+        if self._history:
+            return
+
         try:
             if game.switches["clan_name"] != "":
                 clanname = game.switches["clan_name"]
@@ -1044,7 +1054,7 @@ class Cat:
         cat_history_directory = history_directory + self.ID + "_history.json"
 
         if not os.path.exists(cat_history_directory):
-            self.history = History(
+            self._history = History(
                 beginning={},
                 mentor_influence={},
                 app_ceremony={},
@@ -1053,12 +1063,13 @@ class Cat:
                 died_by=[],
                 scar_events=[],
                 murder={},
+                cat=self,
             )
             return
         try:
             with open(cat_history_directory, "r", encoding="utf-8") as read_file:
                 history_data = ujson.loads(read_file.read())
-                self.history = History(
+                self._history = History(
                     beginning=(
                         history_data["beginning"] if "beginning" in history_data else {}
                     ),
@@ -1091,9 +1102,10 @@ class Cat:
                         else []
                     ),
                     murder=history_data["murder"] if "murder" in history_data else {},
+                    cat=self,
                 )
         except Exception:
-            self.history = None
+            self._history = None
             print(
                 f"WARNING: There was an error reading the history file of cat #{self} or their history file was "
                 f"empty. Default history info was given. Close game without saving if you have save information "
@@ -1109,7 +1121,7 @@ class Cat:
         if not os.path.exists(history_dir):
             os.makedirs(history_dir)
 
-        history_dict = History.make_dict(self)
+        history_dict = self.history.make_dict()
         try:
             game.safe_save(f"{history_dir}/{self.ID}_history.json", history_dict)
         except:
@@ -1122,6 +1134,7 @@ class Cat:
                 died_by=[],
                 scar_events=[],
                 murder={},
+                cat=self,
             )
 
             print(f"WARNING: saving history of cat #{self.ID} didn't work")
