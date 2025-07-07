@@ -2373,7 +2373,7 @@ class Events:
                     lambda x: x.status.alive_in_player_clan
                     and x.status.rank == CatRank.WARRIOR
                     and (x.apprentice or x.former_apprentices),
-                    and x.experience_level not in ["untrained", "trainee", "prepared"]
+                    and x.experience_level not in ["untrained", "trainee", "prepared"],
                     Cat.all_cats_list,
                 )
             )
