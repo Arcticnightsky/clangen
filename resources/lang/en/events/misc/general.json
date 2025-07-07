@@ -33,7 +33,8 @@
         "relationships": [
             {
                 "cats_from": [
-                    "clan"
+                    "clan",
+                    "high_lawful"
                 ],
                 "cats_to": [
                     "m_c"
@@ -182,7 +183,8 @@
         "relationships": [
             {
                 "cats_from": [
-                    "clan"
+                    "clan",
+                    "high_lawful"
                 ],
                 "cats_to": [
                     "m_c"
@@ -675,7 +677,8 @@
         "relationships": [
             {
                 "cats_from": [
-                    "clan"
+                    "clan",
+                    "high_lawful"
                 ],
                 "cats_to": [
                     "m_c"
@@ -683,6 +686,21 @@
                 "mutual": false,
                 "values": [
                     "dislike"
+                ],
+                "amount": 20
+            },
+            {
+                "cats_from": [
+                    "clan",
+                    "high_aggress",
+                    "low_lawful"
+                ],
+                "cats_to": [
+                    "m_c"
+                ],
+                "mutual": false,
+                "values": [
+                    "respect"
                 ],
                 "amount": 20
             },
@@ -953,6 +971,34 @@
         }
     },
     {
+        "event_id": "multi_misc_any_collar_accessory1",
+        "location": [
+            "forest",
+            "beach",
+            "plains"
+        ],
+        "season": [
+            "any"
+        ],
+        "sub_type": [
+            "accessory"
+        ],
+        "weight": 5,
+        "event_text": "m_c disappears for a few days, then returns to camp with a acc_singular around {PRONOUN/m_c/poss} neck.",
+        "new_accessory": [
+            "COLLAR"
+        ],
+        "m_c": {
+            "age": [
+                "adolescent",
+                "young adult",
+                "adult",
+                "senior adult",
+                "senior"
+            ]
+        }
+    },
+    {
         "event_id": "multi_misc_any_misc1",
         "location": [
             "forest",
@@ -1219,7 +1265,27 @@
             "status": [
                 "any"
             ]
-        }
+        },
+        "relationships": [
+            {
+                "cats_from": [
+                    "clan",
+                    "high_lawful",
+                    "high_stable"
+                ],
+                "cats_to": [
+                    "m_c"
+                ],
+                "mutual": false,
+                "values": [
+                    "respect",
+                    "platonic",
+                    "trust",
+                    "comfort"
+                ],
+                "amount": -10
+            }
+        ]
     },
     {
         "event_id": "gen_misc_any_misc14",
@@ -3804,14 +3870,29 @@
                     "platonic"
                 ],
                 "amount": 10
+            },
+            {
+                "cats_from": [
+                    "clan",
+                    "high_lawful",
+                    "high_stable"
+                ],
+                "cats_to": [
+                    "m_c"
+                ],
+                "mutual": false,
+                "values": [
+                    "respect",
+                    "trust"
+                ],
+                "amount": -5
             }
         ],
-        "outsider": {
-            "current_rep": [
-                "any"
-            ],
-            "changed": -5
-        }
+        "outsider": {},
+        "current_rep": [
+            "any"
+        ],
+        "changed": -5
     },
     {
         "event_id": "multi_misc_any_scandalous_kittypet2",
@@ -3854,14 +3935,29 @@
                     "platonic"
                 ],
                 "amount": 15
+            },
+            {
+                "cats_from": [
+                    "clan",
+                    "high_lawful",
+                    "high_stable"
+                ],
+                "cats_to": [
+                    "m_c"
+                ],
+                "mutual": false,
+                "values": [
+                    "respect",
+                    "trust"
+                ],
+                "amount": -5
             }
         ],
-        "outsider": {
-            "current_rep": [
-                "any"
-            ],
-            "changed": 5
-        }
+        "outsider": {},
+        "current_rep": [
+            "any"
+        ],
+        "changed": 5
     },
     {
         "event_id": "multi_misc_any_scandalous_kittypet3",
@@ -3905,14 +4001,29 @@
                     "platonic"
                 ],
                 "amount": 10
+            },
+            {
+                "cats_from": [
+                    "clan",
+                    "high_lawful",
+                    "high_stable"
+                ],
+                "cats_to": [
+                    "m_c"
+                ],
+                "mutual": false,
+                "values": [
+                    "respect",
+                    "trust"
+                ],
+                "amount": -5
             }
         ],
-        "outsider": {
-            "current_rep": [
-                "any"
-            ],
-            "changed": 7
-        }
+        "outsider": {},
+        "current_rep": [
+            "any"
+        ],
+        "changed": 7
     },
     {
         "event_id": "multi_misc_any_scandalous_kittypet4",
@@ -4314,12 +4425,29 @@
                 "senior"
             ]
         },
-        "other_clan": {
-            "current_rep": [
-                "any"
-            ],
-            "changed": 1
-        }
+        "relationships": [
+            {
+                "cats_from": [
+                    "clan",
+                    "high_lawful",
+                    "high_stable"
+                ],
+                "cats_to": [
+                    "m_c"
+                ],
+                "mutual": false,
+                "values": [
+                    "respect",
+                    "trust"
+                ],
+                "amount": -5
+            }
+        ],
+        "other_clan": {},
+        "current_rep": [
+            "any"
+        ],
+        "changed": 1
     },
     {
         "event_id": "multi_misc_any_scandalous_other_clan2",
@@ -4673,14 +4801,29 @@
                     "platonic"
                 ],
                 "amount": 15
+            },
+            {
+                "cats_from": [
+                    "clan",
+                    "high_lawful",
+                    "high_stable"
+                ],
+                "cats_to": [
+                    "m_c"
+                ],
+                "mutual": false,
+                "values": [
+                    "respect",
+                    "trust"
+                ],
+                "amount": -5
             }
         ],
-        "outsider": {
-            "current_rep": [
-                "any"
-            ],
-            "changed": 5
-        }
+        "outsider": {},
+        "current_rep": [
+            "any"
+        ],
+        "changed": 5
     },
     {
         "event_id": "multi_misc_any_scandalous_loner3",
@@ -4749,7 +4892,26 @@
                 "senior adult",
                 "senior"
             ]
-        }
+        },
+        "relationships": [
+            {
+                "cats_from": [
+                    "clan",
+                    "high_lawful",
+                    "high_stable"
+                ],
+                "cats_to": [
+                    "m_c"
+                ],
+                "mutual": false,
+                "values": [
+                    "respect",
+                    "trust",
+                    "comfort"
+                ],
+                "amount": -10
+            }
+        ]
     },
     {
         "event_id": "multi_misc_any_scandalous_rogue1",
@@ -4793,14 +4955,29 @@
                     "platonic"
                 ],
                 "amount": 10
+            },
+            {
+                "cats_from": [
+                    "clan",
+                    "high_lawful",
+                    "high_stable"
+                ],
+                "cats_to": [
+                    "m_c"
+                ],
+                "mutual": false,
+                "values": [
+                    "respect",
+                    "trust"
+                ],
+                "amount": -5
             }
         ],
-        "outsider": {
-            "current_rep": [
-                "any"
-            ],
-            "changed": 5
-        }
+        "outsider": {},
+        "current_rep": [
+            "any"
+        ],
+        "changed": 5
     },
     {
         "event_id": "gen_misc_any_scandalous_rogue2",
@@ -4840,14 +5017,29 @@
                     "platonic"
                 ],
                 "amount": 15
+            },
+            {
+                "cats_from": [
+                    "clan",
+                    "high_lawful",
+                    "high_stable"
+                ],
+                "cats_to": [
+                    "m_c"
+                ],
+                "mutual": false,
+                "values": [
+                    "respect",
+                    "trust"
+                ],
+                "amount": -5
             }
         ],
-        "outsider": {
-            "current_rep": [
-                "any"
-            ],
-            "changed": 5
-        }
+        "outsider": {},
+        "current_rep": [
+            "any"
+        ],
+        "changed": 5
     },
     {
         "event_id": "multi_misc_any_scandalous_rogue3",
@@ -8083,7 +8275,11 @@
                 "young adult",
                 "adult",
                 "senior adult"
-            ]
+            ],
+            "relationship_status": [
+                "mates",
+                "romantic_15"
+            ]         
         },
         "r_c": {
             "age": [
