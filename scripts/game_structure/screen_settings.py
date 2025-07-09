@@ -230,8 +230,8 @@ def determine_screen_scale(x, y):
         scalex = x // 200
         scaley = y // 175
         screen_scale = min(scalex, scaley) / 3.5
-        screen_x = 1000 * screen_scale
-        screen_y = 900 * screen_scale
+        screen_x = 800 * screen_scale
+        screen_y = 700 * screen_scale
 
 def toggle_fullscreen(
     fullscreen: Optional[bool] = None,
