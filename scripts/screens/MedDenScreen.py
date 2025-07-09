@@ -696,7 +696,8 @@ class MedDenScreen(Screens):
                          tool_tip_text=herb_display,
                          manager=MANAGER,
                          starting_height=2,
-
+                        )
+                         
         # Draw the med den rock *after* herbs so it appears behind
             if len(herb_list) <= 10:
                 self.den_base = UIImageButton(
