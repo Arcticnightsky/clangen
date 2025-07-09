@@ -656,7 +656,6 @@ class MedDenScreen(Screens):
                         ).convert_alpha(),
                         (792, 448),
                     ),
-                    tool_tip_text=herb_display,
                     manager=MANAGER,
                 )
                 if count > 1:
@@ -668,7 +667,6 @@ class MedDenScreen(Screens):
                             ).convert_alpha(),
                             (792, 448),
                         ),
-                        tool_tip_text=herb_display,
                         manager=MANAGER,
                     )
                 continue
