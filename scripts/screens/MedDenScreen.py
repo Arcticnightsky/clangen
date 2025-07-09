@@ -671,18 +671,31 @@ class MedDenScreen(Screens):
                         )
                     continue
 
-                self.herbs[herb] = UIModifiedImage(
-                    ui_scale(pygame.Rect((108, 95), (396, 224))),
-                    pygame.transform.scale(
-                        pygame.image.load(
-                            f"resources/images/med_cat_den/{herb}.png"
-                        ).convert_alpha(),
-                        (792, 448),
-                    ),
-                    tool_tip_text=herb_display,
-                    manager=MANAGER,
-                    starting_height=2,
-                )
+                if len(herb_list) <= 10:
+                    self.herbs[herb] = UIModifiedImage(
+                        ui_scale(pygame.Rect((108, 95), (396, 224))),
+                        pygame.transform.scale(
+                            pygame.image.load(
+                                f"resources/images/med_cat_den/{herb}.png"
+                            ).convert_alpha(),
+                            (792, 448),
+                        ),
+                        tool_tip_text=herb_display,
+                        manager=MANAGER,
+                        starting_height=2,
+                    )
+                else: 
+                     self.herbs[herb] = UIModifiedImage(
+                         ui_scale(pygame.Rect((108, 95), (396, 224))),
+                         pygame.transform.scale(
+                             pygame.image.load(
+                                 f"resources/images/med_cat_den/{herb}.png"
+                             ).convert_alpha(),
+                             (792, 448),
+                         ),
+                         tool_tip_text=herb_display,
+                         manager=MANAGER,
+                         starting_height=2,
 
         # Draw the med den rock *after* herbs so it appears behind
             if len(herb_list) <= 10:
