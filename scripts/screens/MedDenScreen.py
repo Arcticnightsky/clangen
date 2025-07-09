@@ -607,7 +607,7 @@ class MedDenScreen(Screens):
                     if count > 1
                     else herb_supply.herb[herb].singular_display
                 )
-                herb_list.append(f"{count} {display}       ")
+                herb_list.append(f"{count} {display}             ")
 
         # Format the herb list into the tooltip text
         if len(herb_list) <= 10:
@@ -624,7 +624,7 @@ class MedDenScreen(Screens):
                 if (count % 2) == 0:
                     count += 1
                     pair.append(herb_list[y])
-                    holding_pairs.append("   -   ".join(pair))
+                    holding_pairs.append("   - ".join(pair))
                     pair.clear()
                     added = True
                     continue
