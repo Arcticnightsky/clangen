@@ -619,6 +619,7 @@ class MedDenScreen(Screens):
                 object_id="#med_cat_den_hover",
                 tool_tip_text=herb_display,
                 manager=MANAGER,
+                starting_height=2,
             )
         else:
             count = 1
@@ -651,6 +652,7 @@ class MedDenScreen(Screens):
                 object_id="#med_cat_den_hover_big",
                 tool_tip_text=herb_display,
                 manager=MANAGER,
+                starting_height=2,
             )
 
         # otherwise draw the herbs you have
