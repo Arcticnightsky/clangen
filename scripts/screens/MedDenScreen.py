@@ -646,13 +646,13 @@ class MedDenScreen(Screens):
                 herb_display = None
             else:
                 herb_display = "<br>".join(holding_pairs)
+
+            tool_tip_text=herb_display
             self.den_base = UIImageButton(
                 ui_scale(pygame.Rect((108, 95), (396, 224))),
                 "",
                 object_id="#med_cat_den_hover_big",
-                tool_tip_text=herb_display,
                 manager=MANAGER,
-                starting_height=2,
             )
 
         # otherwise draw the herbs you have
