@@ -641,64 +641,64 @@ class MedDenScreen(Screens):
                 herb_display = "<br>".join(holding_pairs)
 
         # Draw herb images first, including the tooltip text on them
-        herbs = game.clan.herb_supply.entire_supply
+            herbs = game.clan.herb_supply.entire_supply
 
-        for herb, count in herbs.items():
-            if count <= 0:
-                continue
+            for herb, count in herbs.items():
+                if count <= 0:
+                    continue
 
-            if herb == "cobwebs":
-                self.herbs["cobweb1"] = UIModifiedImage(
-                    ui_scale(pygame.Rect((108, 95), (396, 224))),
-                    pygame.transform.scale(
-                        pygame.image.load(
-                            "resources/images/med_cat_den/cobweb1.png"
-                        ).convert_alpha(),
-                        (792, 448),
-                    ),
-                    manager=MANAGER,
-                )
-                if count > 1:
-                    self.herbs["cobweb2"] = UIModifiedImage(
+                if herb == "cobwebs":
+                    self.herbs["cobweb1"] = UIModifiedImage(
                         ui_scale(pygame.Rect((108, 95), (396, 224))),
                         pygame.transform.scale(
                             pygame.image.load(
-                                "resources/images/med_cat_den/cobweb2.png"
+                                "resources/images/med_cat_den/cobweb1.png"
                             ).convert_alpha(),
                             (792, 448),
                         ),
                         manager=MANAGER,
                     )
-                continue
+                    if count > 1:
+                        self.herbs["cobweb2"] = UIModifiedImage(
+                            ui_scale(pygame.Rect((108, 95), (396, 224))),
+                            pygame.transform.scale(
+                                pygame.image.load(
+                                    "resources/images/med_cat_den/cobweb2.png"
+                                ).convert_alpha(),
+                                (792, 448),
+                            ),
+                            manager=MANAGER,
+                        )
+                    continue
 
-            self.herbs[herb] = UIModifiedImage(
-                ui_scale(pygame.Rect((108, 95), (396, 224))),
-                pygame.transform.scale(
-                    pygame.image.load(
-                        f"resources/images/med_cat_den/{herb}.png"
-                    ).convert_alpha(),
-                    (792, 448),
-                ),
-                tool_tip_text=herb_display,
-                manager=MANAGER,
-                starting_height=2,
-            )
+                self.herbs[herb] = UIModifiedImage(
+                    ui_scale(pygame.Rect((108, 95), (396, 224))),
+                    pygame.transform.scale(
+                        pygame.image.load(
+                            f"resources/images/med_cat_den/{herb}.png"
+                        ).convert_alpha(),
+                        (792, 448),
+                    ),
+                    tool_tip_text=herb_display,
+                    manager=MANAGER,
+                    starting_height=2,
+                )
 
         # Draw the med den rock *after* herbs so it appears behind
-        if len(herb_list) <= 10:
-            self.den_base = UIImageButton(
-                ui_scale(pygame.Rect((108, 95), (396, 224))),
-                "",
-                object_id="#med_cat_den_hover",
-                manager=MANAGER,
-            )
-        else:
-            self.den_base = UIImageButton(
-                ui_scale(pygame.Rect((108, 95), (396, 224))),
-                "",
-                object_id="#med_cat_den_hover_big",
-                manager=MANAGER,
-            )
+            if len(herb_list) <= 10:
+                self.den_base = UIImageButton(
+                    ui_scale(pygame.Rect((108, 95), (396, 224))),
+                    "",
+                    object_id="#med_cat_den_hover",
+                    manager=MANAGER,
+                )
+            else:
+                self.den_base = UIImageButton(
+                    ui_scale(pygame.Rect((108, 95), (396, 224))),
+                    "",
+                    object_id="#med_cat_den_hover_big",
+                    manager=MANAGER,
+                )
 
 
     def exit_screen(self):
