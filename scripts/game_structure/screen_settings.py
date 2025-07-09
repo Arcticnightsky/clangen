@@ -227,12 +227,11 @@ def determine_screen_scale(x, y):
         screen_y = 700 * screen_scale
     else:
         # this means screen scales in multiples of 200 x 175 which has a reasonable tradeoff for crunch
-        screen_scale = 1
-        screen_x = x
-        screen_y = y
-        offset = (0, 0)
-
-    game_screen_size = (screen_x, screen_y)
+        scalex = x // 200
+        scaley = y // 175
+        screen_scale = min(scalex, scaley) / 4
+        screen_x = 1000 * screen_scale
+        screen_y = 900 * screen_scale
 
 def toggle_fullscreen(
     fullscreen: Optional[bool] = None,
