@@ -1722,36 +1722,15 @@ class UIImageHorizontalSlider(pygame_gui.elements.UIHorizontalSlider):
 
 
 class UIModifiedImage(pygame_gui.elements.UIImage):
-    """
-    UIImage class modified to prevent it from blocking hover actions in other elements
-    """
+    def __init__(self, relative_rect, image_surface, manager=None, container=None,
+                 anchors=None, starting_height=1, tool_tip_text=None):
+        super().__init__(relative_rect, image_surface, manager=manager,
+                         container=container, anchors=anchors,
+                         starting_height=starting_height)
 
-    def __init__(
-        self,
-        relative_rect: RectLike,
-        image_surface: pygame.surface.Surface,
-        manager: Optional[IUIManagerInterface] = None,
-        image_is_alpha_premultiplied: bool = False,
-        container: Optional[IContainerLikeInterface] = None,
-        parent_element: Optional[UIElement] = None,
-        object_id: Optional[Union[ObjectID, str]] = None,
-        anchors: Optional[Dict[str, Union[str, UIElement]]] = None,
-        visible: int = 1,
-        *,
-        starting_height: int = 1,
-    ):
-        super().__init__(
-            relative_rect=relative_rect,
-            image_surface=image_surface,
-            manager=manager,
-            image_is_alpha_premultiplied=image_is_alpha_premultiplied,
-            container=container,
-            parent_element=parent_element,
-            object_id=object_id,
-            anchors=anchors,
-            visible=visible,
-            starting_height=starting_height,
-        )
+        # Enable tooltip if text is provided
+        if tool_tip_text is not None:
+            self.set_tool_tip(tool_tip_text)
 
     def check_hover(self, time_delta: float, hovered_higher_element: bool) -> bool:
         """
