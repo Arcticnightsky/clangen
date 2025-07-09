@@ -5,8 +5,9 @@ from copy import copy
 import pygame
 import ujson
 
+from scripts.game_structure import constants
+from scripts.game_structure.game.settings import game_setting_get
 from scripts.special_dates import SpecialDate, is_today
-from scripts.game_structure.game_essentials import game
 
 logger = logging.getLogger(__name__)
 
@@ -163,7 +164,8 @@ class Sprites:
             "symbols",
         ):
             if "lineart" in x and (
-                game.config["fun"]["april_fools"] or is_today(SpecialDate.APRIL_FOOLS)
+                constants.CONFIG["fun"]["april_fools"]
+                or is_today(SpecialDate.APRIL_FOOLS)
             ):
                 self.spritesheet(f"sprites/aprilfools{x}.png", x)
             else:
@@ -607,9 +609,9 @@ class Sprites:
                 "GOLDEN CREEPING JENNY",
                 "DESERT WILLOW",
                 "CACTUS FLOWER",
-                "PRARIE FIRE",
+                "PRAIRIE FIRE",
                 "VERBENA EAR",
-                "VERBENA PELT"
+                "VERBENA PELT",
             ],
         ]
         dryherbs_data = [["DRY HERBS", "DRY CATMINT", "DRY NETTLES", "DRY LAURELS"]]
@@ -628,7 +630,7 @@ class Sprites:
                 "BLACK CICADA",
             ],
             [
-                "ROAD RUNNER FEATHER"
+                "ROAD RUNNER FEATHER",
             ],
         ]
 
@@ -790,9 +792,9 @@ class Sprites:
         var.replace(
             (87, 76, 45),
             (
-                pygame.Color(game.config["theme"]["dark_mode_clan_symbols"])
-                if not force_light and game.settings["dark mode"]
-                else pygame.Color(game.config["theme"]["light_mode_clan_symbols"])
+                pygame.Color(constants.CONFIG["theme"]["dark_mode_clan_symbols"])
+                if not force_light and game_setting_get("dark mode")
+                else pygame.Color(constants.CONFIG["theme"]["light_mode_clan_symbols"])
             ),
             distance=0,
         )
