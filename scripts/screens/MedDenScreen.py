@@ -624,7 +624,7 @@ class MedDenScreen(Screens):
                 if (count % 2) == 0:
                     count += 1
                     pair.append(herb_list[y])
-                    holding_pairs.append("   -   ".join(pair))
+                    holding_pairs.append(" - ".join(pair))
                     pair.clear()
                     added = True
                     continue
@@ -699,7 +699,6 @@ class MedDenScreen(Screens):
                     object_id="#med_cat_den_hover_big",
                     manager=MANAGER,
                 )
-
 
     def exit_screen(self):
         self.meds_messages.kill()
