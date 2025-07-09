@@ -1721,16 +1721,11 @@ class UIImageHorizontalSlider(pygame_gui.elements.UIHorizontalSlider):
         )
 
 
-class UIModifiedImage(pygame_gui.elements.UIImage):
-    def __init__(self, relative_rect, image_surface, manager=None, container=None,
-                 anchors=None, starting_height=1, tool_tip_text=None):
-        super().__init__(relative_rect, image_surface, manager=manager,
-                         container=container, anchors=anchors,
-                         starting_height=starting_height)
-
-        # Enable tooltip if text is provided
-        if tool_tip_text is not None:
-            self.set_tool_tip(tool_tip_text)
+class UIModifiedImage(UIImage):
+    def __init__(self, relative_rect, image_surface, manager, tool_tip_text=None, **kwargs):
+        super().__init__(relative_rect, image_surface, manager, **kwargs)
+        if tool_tip_text:
+            self.set_tooltip(tool_tip_text)
 
     def check_hover(self, time_delta: float, hovered_higher_element: bool) -> bool:
         """
