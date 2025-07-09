@@ -624,7 +624,7 @@ class MedDenScreen(Screens):
                 if (count % 2) == 0:
                     count += 1
                     pair.append(herb_list[y])
-                    holding_pairs.append("      - ".join(pair))
+                    holding_pairs.append(" -       ".join(pair))
                     pair.clear()
                     added = True
                     continue
