@@ -229,7 +229,7 @@ def determine_screen_scale(x, y):
         # this means screen scales in multiples of 200 x 175 which has a reasonable tradeoff for crunch
         scalex = x // 200
         scaley = y // 175
-        screen_scale = min(scalex, scaley) / 3.25
+        screen_scale = min(scalex, scaley) / 3.3
         screen_x = 800 * screen_scale
         screen_y = 700 * screen_scale
 
