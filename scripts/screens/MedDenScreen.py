@@ -699,20 +699,20 @@ class MedDenScreen(Screens):
                         )
                          
         # Draw the med den rock *after* herbs so it appears behind
-            if len(herb_list) <= 10:
-                self.den_base = UIImageButton(
-                    ui_scale(pygame.Rect((108, 95), (396, 224))),
-                    "",
-                    object_id="#med_cat_den_hover",
-                    manager=MANAGER,
-                )
-            else:
-                self.den_base = UIImageButton(
-                    ui_scale(pygame.Rect((108, 95), (396, 224))),
-                    "",
-                    object_id="#med_cat_den_hover_big",
-                    manager=MANAGER,
-                )
+                if len(herb_list) <= 10:
+                    self.den_base = UIImageButton(
+                        ui_scale(pygame.Rect((108, 95), (396, 224))),
+                        "",
+                        object_id="#med_cat_den_hover",
+                        manager=MANAGER,
+                    )
+                else:
+                    self.den_base = UIImageButton(
+                        ui_scale(pygame.Rect((108, 95), (396, 224))),
+                        "",
+                        object_id="#med_cat_den_hover_big",
+                        manager=MANAGER,
+                    )
 
     def exit_screen(self):
         self.meds_messages.kill()
