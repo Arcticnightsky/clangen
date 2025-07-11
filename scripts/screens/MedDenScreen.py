@@ -690,25 +690,25 @@ class MedDenScreen(Screens):
                         object_id="#med_cat_den_hover",
                         manager=MANAGER,
                     )
-                else: 
-                     self.herbs[herb] = UIModifiedImage(
-                         ui_scale(pygame.Rect((108, 95), (396, 224))),
-                         pygame.transform.scale(
-                             pygame.image.load(
-                                 f"resources/images/med_cat_den/{herb}.png"
-                             ).convert_alpha(),
-                             (792, 448),
-                         ),
-                         tool_tip_text=herb_display,
-                         manager=MANAGER,
-                         starting_height=2,
-                        )
-                        self.den_base = UIImageButton(
-                            ui_scale(pygame.Rect((108, 95), (396, 224))),
-                            "",
-                            object_id="#med_cat_den_hover_big",
-                            manager=MANAGER,
-                        )
+                else:
+                    self.herbs[herb] = UIModifiedImage(
+                        ui_scale(pygame.Rect((108, 95), (396, 224))),
+                        pygame.transform.scale(
+                            pygame.image.load(
+                                f"resources/images/med_cat_den/{herb}.png"
+                            ).convert_alpha(),
+                            (792, 448),
+                        ),
+                        tool_tip_text=herb_display,
+                        manager=MANAGER,
+                        starting_height=2,
+                    )
+                    self.den_base = UIImageButton(
+                        ui_scale(pygame.Rect((108, 95), (396, 224))),
+                        "",
+                        object_id="#med_cat_den_hover_big",
+                        manager=MANAGER,
+                    )
 
     def exit_screen(self):
         self.meds_messages.kill()
