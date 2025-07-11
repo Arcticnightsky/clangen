@@ -703,12 +703,7 @@ class MedDenScreen(Screens):
                          manager=MANAGER,
                          starting_height=2,
                         )
-                    self.den_base = UIImageButton(
-                        ui_scale(pygame.Rect((108, 95), (396, 224))),
-                        "",
-                        object_id="#med_cat_den_hover_big",
-                        manager=MANAGER,
-                    )
+                    self.den_base = UIImageButton(ui_scale(pygame.Rect((108, 95), (396, 224))), "", object_id="#med_cat_den_hover_big", manager=MANAGER,)
 
     def exit_screen(self):
         self.meds_messages.kill()
