@@ -640,6 +640,22 @@ class MedDenScreen(Screens):
             else:
                 herb_display = "<br>".join(holding_pairs)
 
+
+                # Draw the den base background first (only once)
+            if len(herb_list) <= 10:
+                self.den_base = UIImageButton(
+                    ui_scale(pygame.Rect((108, 95), (396, 224))),
+                    "",
+                    object_id="#med_cat_den_hover",
+                    manager=MANAGER,
+                )
+            else:
+                self.den_base = UIImageButton(
+                    ui_scale(pygame.Rect((108, 95), (396, 224))),
+                    "",
+                    object_id="#med_cat_den_hover_big",
+                    manager=MANAGER,
+                )
         # Draw herb images first, including the tooltip text on them
             herbs = game.clan.herb_supply.entire_supply
 
@@ -684,12 +700,6 @@ class MedDenScreen(Screens):
                         manager=MANAGER,
                         starting_height=2,
                     )
-                    self.den_base = UIImageButton(
-                        ui_scale(pygame.Rect((108, 95), (396, 224))),
-                        "",
-                        object_id="#med_cat_den_hover",
-                        manager=MANAGER,
-                    )
                 else:
                     self.herbs[herb] = UIModifiedImage(
                         ui_scale(pygame.Rect((108, 95), (396, 224))),
@@ -703,18 +713,14 @@ class MedDenScreen(Screens):
                         manager=MANAGER,
                         starting_height=2,
                     )
-                    self.den_base = UIImageButton(
-                        ui_scale(pygame.Rect((108, 95), (396, 224))),
-                        "",
-                        object_id="#med_cat_den_hover_big",
-                        manager=MANAGER,
-                    )
 
     def exit_screen(self):
         self.meds_messages.kill()
         self.last_med.kill()
         self.next_med.kill()
-        self.den_base.kill()
+        if self.den_base:
+            self.den_base.kill()
+            self.den_base = None
         for herb in self.herbs:
             self.herbs[herb].kill()
         self.herbs = {}
