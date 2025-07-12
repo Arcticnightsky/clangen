@@ -930,7 +930,7 @@ class Pelt:
         ):
             num = num - 90
         if self.white_patches == "FULLWHITE" or self.colour == "WHITE":
-            num -= 10
+            num -= 20
         for _par in parents:
             if _par.pelt.eye_colour2:
                 num -= 10
@@ -1002,15 +1002,15 @@ class Pelt:
             self.length = selected.length
             self.colour = selected.colour
             self.tortiebase = selected.tortiebase
-            return selected.white
     # If selected is a tortie and the kit is male, apply extra rarity
     # Safe to inherit (either not a tortie, or passed rare check)
-            if gender == "male" and selected.name in Pelt.torties:
+            if gender == "male" and self.tortiebase:
                # Very rare chance to *stay* male, otherwise switch to female
                 boosted_inheritance = max(200, direct_inheritance * 20)
                 if random.randint(1, boosted_inheritance) != 1:
                     print(f"Converting rare male tortie kit to female for realism.")
                     gender = "female"
+            return selected.white
 
         # ------------------------------------------------------------------------------------------------------------#
         #   PELT
