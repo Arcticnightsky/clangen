@@ -3686,7 +3686,7 @@
                 "exp": 10,
                 "weight": 20,
                 "new_cat": [
-                    ["loner"]
+                    ["loner", "status:warrior"]
                 ],
                 "relationships": [
                     {
@@ -3710,7 +3710,7 @@
                 "exp": 10,
                 "weight": 5,
                 "new_cat": [
-                    ["loner"]
+                    ["loner", "status:warrior"]
                 ],
                 "relationships": [
                     {
@@ -3735,7 +3735,7 @@
                 "weight": 20,
                 "stat_skill": ["SPEAKER,1"],
                 "new_cat": [
-                    ["loner"]
+                    ["loner", "status:warrior"]
                 ],
                 "relationships": [
                     {
@@ -3806,7 +3806,7 @@
                 "exp": 10,
                 "weight": 20,
                 "new_cat": [
-                    ["loner"]
+                    ["loner", "status:warrior"]
                 ],
                 "relationships": [
                     {
@@ -3830,7 +3830,7 @@
                 "exp": 10,
                 "weight": 5,
                 "new_cat": [
-                    ["loner"]
+                    ["loner", "status:warrior"]
                 ],
                 "relationships": [
                     {
@@ -3855,7 +3855,7 @@
                 "weight": 20,
                 "stat_skill": ["SPEAKER,1"],
                 "new_cat": [
-                    ["loner"]
+                    ["loner", "status:warrior"]
                 ],
                 "relationships": [
                     {
@@ -3928,7 +3928,7 @@
                 "exp": 20,
                 "weight": 20,
                 "new_cat": [
-                    ["kittypet"]
+                    ["kittypet", "status:warrior"]
                 ],
                 "relationships": [
                     {
@@ -3952,7 +3952,7 @@
                 "exp": 20,
                 "weight": 5,
                 "new_cat": [
-                    ["kittypet"]
+                    ["kittypet", "status:warrior"]
                 ],
                 "relationships": [
                     {
@@ -3977,7 +3977,7 @@
                 "weight": 20,
                 "stat_trait": ["adventurous", "playful", "strange", "childish", "shameless"],
                 "new_cat": [
-                    ["kittypet"]
+                    ["kittypet", "status:warrior"]
                 ],
                 "relationships": [
                     {
