@@ -2054,7 +2054,9 @@ class Cat:
             cat.pelt.scars.append("NOPAW")
         elif new_condition == "born without a tail":
             cat.pelt.scars.append("NOTAIL")
-
+        elif new_condition == "blind":
+            cat.pelt.scars.append("BLIND")
+            
         self.get_permanent_condition(new_condition, born_with=True)
 
     def get_permanent_condition(self, name, born_with=False, event_triggered=False):
@@ -3605,6 +3607,7 @@ def create_cat(rank, moons=None, biome=None):
         "NOLEFTEAR",
         "NORIGHTEAR",
         "MANLEG",
+        "BLIND",
     ]
 
     for scar in new_cat.pelt.scars:
