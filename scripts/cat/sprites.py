@@ -532,6 +532,7 @@ class Sprites:
                 "CATBITETWO",
                 "SNAKETWO",
                 "FOUR",
+                "BLIND",
             ],
         ]
 

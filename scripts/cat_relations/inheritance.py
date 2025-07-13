@@ -19,7 +19,7 @@ class RelationType(StrEnum):
 
     BLOOD = ""  # direct blood related - do not need a special print
     ADOPTIVE = "adoptive"  # not blood related but close (parents, kits, siblings)
-    HALF_BLOOD = "half sibling"  # only one blood parent is the same (siblings only)
+    HALF_BLOOD = ""  # only one blood parent is the same (siblings only)
     NOT_BLOOD = "not blood related"  # not blood related for parent siblings
     RELATED = "blood related"  # related by blood (different mates only)
 
@@ -464,6 +464,7 @@ class Inheritance:
         ):
             siblings = True
             rel_type = RelationType.HALF_BLOOD
+            additional_info.append("half sibling")
         elif (
             len(adoptive_overlap1) > 0
             or len(adoptive_overlap2) > 0
