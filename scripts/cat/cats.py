@@ -654,10 +654,15 @@ class Cat:
         # mark the sprite as outdated
         self.pelt.rebuild_sprite = True
 
-        # exiled cats are special, cus they get kicked out a heaven
-        if isoutside and self.status.is_exiled():
+        # outsider cats go to unknown residence
+        murder=history_data["murder"]
+        if isoutside and not self.status.is_exiled():
             self.status.add_to_group(CatGroup.UNKNOWN_RESIDENCE)
-
+            
+        # exiled cats are special, cus they get kicked out a heaven
+        if self.status.is_exiled(CatGroup.PLAYER_CLAN) and not CatGroup(entry["near"]) or "murder" in history_data:
+            self.status.add_to_group(CatGroup.DARK_FOREST)
+        
         if not self.status.is_outsider or self.status.is_former_clancat:
             Cat.dead_cats.append(self)
 
