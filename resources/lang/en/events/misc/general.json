@@ -241,7 +241,38 @@
                 "daring",
                 "strict"
             ]
-        }
+        },
+        "relationships": [
+            {
+                "cats_from": [
+                    "clan",
+                    "high_lawful"
+                ],
+                "cats_to": [
+                    "m_c"
+                ],
+                "mutual": false,
+                "values": [
+                    "dislike"
+                ],
+                "amount": 30
+            },
+            {
+                "cats_from": [
+                    "clan"
+                ],
+                "cats_to": [
+                    "m_c"
+                ],
+                "mutual": false,
+                "values": [
+                    "trust",
+                    "respect",
+                    "comfort"
+                ],
+                "amount": -30
+            }
+        ]
     },
     {
         "event_id": "gen_misc_murderreveal_any6",
@@ -284,7 +315,35 @@
             "status": [
                 "any"
             ]
-        }
+        },
+        "relationships": [
+            {
+                "cats_from": [
+                    "r_c"
+                ],
+                "cats_to": [
+                    "m_c"
+                ],
+                "mutual": false,
+                "values": [
+                    "dislike"
+                ],
+                "amount": 30
+            },
+            {
+                "cats_from": ["r_c"],
+                "cats_to": [
+                    "m_c"
+                ],
+                "mutual": false,
+                "values": [
+                    "trust",
+                    "respect",
+                    "comfort"
+                ],
+                "amount": -30
+            }
+        ]
     },
     {
         "event_id": "gen_misc_murderreveal_any7",
