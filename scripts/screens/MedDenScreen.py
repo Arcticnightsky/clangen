@@ -653,7 +653,7 @@ class MedDenScreen(Screens):
                 self.den_base = UIImageButton(
                     ui_scale(pygame.Rect((108, 95), (396, 224))),
                     "",
-                    object_id="#med_cat_den_hover_big",
+                    object_id="#med_cat_den_hover",
                     manager=MANAGER,
                 )
         # Draw herb images first, including the tooltip text on them
