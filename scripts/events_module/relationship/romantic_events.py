@@ -1013,28 +1013,24 @@ class RomanticEvents:
     def get_mate_string(key, poly, cat_from, cat_to):
         """Returns the mate string with the certain key, cats and poly."""
         RomanticEvents.rebuild_dicts()
-        if not poly:
-            return choice(RomanticEvents.MATE_DICTS[key])
-        else:
-            poly_key = ""
+        if poly:
             alive_inclan_from_mates = [
-                mate
-                for mate in cat_from.mate
-                if cat_from.fetch_cat(mate).status.alive_in_player_clan
+                mate for mate in cat_from.mate if cat_from.fetch_cat(mate).status.alive_in_player_clan
             ]
             alive_inclan_to_mates = [
-                mate
-                for mate in cat_to.mate
-                if cat_to.fetch_cat(mate).status.alive_in_player_clan
+                mate for mate in cat_to.mate if cat_to.fetch_cat(mate).status.alive_in_player_clan
             ]
             if len(alive_inclan_from_mates) > 0 and len(alive_inclan_to_mates) > 0:
                 poly_key = "both_mates"
-            elif len(alive_inclan_from_mates) > 0 and len(alive_inclan_to_mates) <= 0:
+            elif len(alive_inclan_from_mates) > 0:
                 poly_key = "m_c_mates"
-            elif len(alive_inclan_from_mates) <= 0 and len(alive_inclan_to_mates) > 0:
+            elif len(alive_inclan_to_mates) > 0:
                 poly_key = "r_c_mates"
+            else:
+                return choice(RomanticEvents.MATE_DICTS[key])
             return choice(RomanticEvents.POLY_MATE_DICTS[key][poly_key])
-
+        else:
+            return choice(RomanticEvents.MATE_DICTS[key])
     # ---------------------------------------------------------------------------- #
     #                             get/calculate chances                            #
     # ---------------------------------------------------------------------------- #
