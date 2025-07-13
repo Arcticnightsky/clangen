@@ -102,7 +102,35 @@
             "status": [
                 "any"
             ]
-        }
+        },
+        "relationships": [
+            {
+                "cats_from": [
+                    "r_c"
+                ],
+                "cats_to": [
+                    "m_c"
+                ],
+                "mutual": false,
+                "values": [
+                    "dislike"
+                ],
+                "amount": 30
+            },
+            {
+                "cats_from": ["r_c"],
+                "cats_to": [
+                    "m_c"
+                ],
+                "mutual": false,
+                "values": [
+                    "trust",
+                    "respect",
+                    "comfort"
+                ],
+                "amount": -30
+            }
+        ]
     },
     {
         "event_id": "gen_misc_murderreveal_any3",
@@ -145,7 +173,35 @@
             "status": [
                 "any"
             ]
-        }
+        },
+        "relationships": [
+            {
+                "cats_from": [
+                    "r_c"
+                ],
+                "cats_to": [
+                    "m_c"
+                ],
+                "mutual": false,
+                "values": [
+                    "dislike"
+                ],
+                "amount": 30
+            },
+            {
+                "cats_from": ["r_c"],
+                "cats_to": [
+                    "m_c"
+                ],
+                "mutual": false,
+                "values": [
+                    "trust",
+                    "respect",
+                    "comfort"
+                ],
+                "amount": -30
+            }
+        ]
     },
     {
         "event_id": "gen_misc_murderreveal_any4",
@@ -458,7 +514,7 @@
                 "cats_to": [
                     "m_c"
                 ],
-                "mutual": false,
+                "mutual": true,
                 "values": [
                     "dislike"
                 ],
@@ -545,7 +601,35 @@
             "status": [
                 "any"
             ]
-        }
+        },
+        "relationships": [
+            {
+                "cats_from": [
+                    "r_c"
+                ],
+                "cats_to": [
+                    "m_c"
+                ],
+                "mutual": false,
+                "values": [
+                    "dislike"
+                ],
+                "amount": 30
+            },
+            {
+                "cats_from": ["r_c"],
+                "cats_to": [
+                    "m_c"
+                ],
+                "mutual": false,
+                "values": [
+                    "trust",
+                    "respect",
+                    "comfort"
+                ],
+                "amount": -30
+            }
+        ]
     },
     {
         "event_id": "gen_misc_murderreveal_any10",
