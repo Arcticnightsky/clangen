@@ -1087,3 +1087,4 @@ class RomanticEvents:
         chance_number = max(chance_number, 5)
 
         return chance_number
+
