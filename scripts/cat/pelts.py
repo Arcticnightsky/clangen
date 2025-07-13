@@ -712,6 +712,7 @@ class Pelt:
     def __init__(
         self,
         name: str = "SingleColour",
+        gender: str = "male",
         length: str = "short",
         colour: str = "WHITE",
         white_patches: str = None,
@@ -738,6 +739,7 @@ class Pelt:
         reverse: bool = False,
     ) -> None:
         self.name = name
+        self.gender = gender
         self.colour = colour
         self.white_patches = white_patches
         self.eye_colour = eye_color
@@ -1004,13 +1006,13 @@ class Pelt:
             self.tortiebase = selected.tortiebase
     # If selected is a tortie and the kit is male, apply extra rarity
     # Safe to inherit (either not a tortie, or passed rare check)
-            if gender == "male" and self.tortiebase:
+            if self.gender == "male" and self.tortiebase:
                # Very rare chance to *stay* male, otherwise switch to female
                 direct_inheritance = constants.CONFIG["cat_generation"]["direct_inheritance"]
                 boosted_inheritance = max(200, direct_inheritance * 20)
                 if random.randint(1, boosted_inheritance) != 1:
                     print(f"Converting rare male tortie kit to female for realism.")
-                    gender = "female"
+                    self.gender = "female"
             return selected.white
 
         # ------------------------------------------------------------------------------------------------------------#
