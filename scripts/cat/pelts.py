@@ -1006,6 +1006,7 @@ class Pelt:
     # Safe to inherit (either not a tortie, or passed rare check)
             if gender == "male" and self.tortiebase:
                # Very rare chance to *stay* male, otherwise switch to female
+                direct_inheritance = constants.CONFIG["cat_generation"]["direct_inheritance"]
                 boosted_inheritance = max(200, direct_inheritance * 20)
                 if random.randint(1, boosted_inheritance) != 1:
                     print(f"Converting rare male tortie kit to female for realism.")
