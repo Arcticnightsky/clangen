@@ -596,6 +596,7 @@ class MedDenScreen(Screens):
             "",
             object_id="#med_cat_den_hover_big",
             manager=MANAGER,
+            tool_tip_text=herb_display,
         )
         # If there are no herbs at all, show "Empty"
         if not herb_supply.total:
