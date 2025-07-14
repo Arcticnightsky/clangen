@@ -716,9 +716,8 @@ class MedDenScreen(Screens):
         self.meds_messages.kill()
         self.last_med.kill()
         self.next_med.kill()
-        if self.den_base:
-            self.den_base.kill()
-            self.den_base = None
+        self.den_base.kill()
+        self.den_base = None
         for herb in self.herbs:
             self.herbs[herb].kill()
         self.herbs = {}
