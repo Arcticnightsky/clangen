@@ -132,7 +132,6 @@ class MedDenScreen(Screens):
 
     def screen_switches(self):
         super().screen_switches()
-        self.draw_med_den()
         self.show_mute_buttons()
         self.hide_menu_buttons()
         self.back_button = UISurfaceImageButton(
