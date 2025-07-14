@@ -670,7 +670,7 @@ class MedDenScreen(Screens):
                         )
                     continue
 
-                if len(herb_list) <= 10:
+                if len(herb_list) <= 1:
                     self.herbs[herb] = UIModifiedImage(
                         ui_scale(pygame.Rect((108, 95), (396, 224))),
                         pygame.transform.scale(
