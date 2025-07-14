@@ -591,18 +591,16 @@ class MedDenScreen(Screens):
     def draw_med_den(self):
         herb_list = []
         herb_supply = game.clan.herb_supply
-
+        self.den_base = UIImageButton(
+            ui_scale(pygame.Rect((108, 95), (396, 224))),
+            "",
+            object_id="#med_cat_den_hover_big",
+            manager=MANAGER,
+        )
         # If there are no herbs at all, show "Empty"
         if not herb_supply.total:
             herb_list = ["Empty"]
 
-        # Draw the den base background first (only once)
-            self.den_base = UIImageButton(
-                ui_scale(pygame.Rect((108, 95), (396, 224))),
-                "",
-                object_id="#med_cat_den_hover_big",
-                manager=MANAGER,
-            )
         # If not in classic mode, compile a list of all stored herbs
         elif game.clan.game_mode != "classic":
             for herb, count in herb_supply.entire_supply.items():
