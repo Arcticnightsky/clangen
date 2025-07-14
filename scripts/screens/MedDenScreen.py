@@ -132,6 +132,7 @@ class MedDenScreen(Screens):
 
     def screen_switches(self):
         super().screen_switches()
+        self.draw_med_den()
         self.show_mute_buttons()
         self.hide_menu_buttons()
         self.back_button = UISurfaceImageButton(
@@ -642,7 +643,7 @@ class MedDenScreen(Screens):
 
 
                 # Draw the den base background first (only once)
-            if herb_list >= 1:
+            if herb_list:
                 self.den_base = UIImageButton(
                     ui_scale(pygame.Rect((108, 95), (396, 224))),
                     "",
@@ -653,7 +654,7 @@ class MedDenScreen(Screens):
                 self.den_base = UIImageButton(
                     ui_scale(pygame.Rect((108, 95), (396, 224))),
                     "",
-                    object_id="#med_cat_den_hover_big",
+                    object_id="#med_cat_den_hover",
                     manager=MANAGER,
                 )
 
