@@ -591,13 +591,6 @@ class MedDenScreen(Screens):
     def draw_med_den(self):
         herb_list = []
         herb_supply = game.clan.herb_supply
-        self.den_base = UIImageButton(
-            ui_scale(pygame.Rect((108, 95), (396, 224))),
-            "",
-            object_id="#med_cat_den_hover_big",
-            manager=MANAGER,
-            tool_tip_text=herb_display,
-        )
         # If there are no herbs at all, show "Empty"
         if not herb_supply.total:
             herb_list = ["Empty"]
@@ -690,6 +683,13 @@ class MedDenScreen(Screens):
                         manager=MANAGER,
                         starting_height=2,
                     )
+                    self.den_base = UIImageButton(
+                        ui_scale(pygame.Rect((108, 95), (396, 224))),
+                            "",
+                            object_id="#med_cat_den_hover_big",
+                            manager=MANAGER,
+                            tool_tip_text=herb_display,
+                    )
                 else:
                     self.herbs[herb] = UIModifiedImage(
                         ui_scale(pygame.Rect((108, 95), (396, 224))),
@@ -703,7 +703,15 @@ class MedDenScreen(Screens):
                         manager=MANAGER,
                         starting_height=2,
                     )
+                    self.den_base = UIImageButton(
+                        ui_scale(pygame.Rect((108, 95), (396, 224))),
+                            "",
+                            object_id="#med_cat_den_hover_big",
+                            manager=MANAGER,
+                            tool_tip_text=herb_display,
+                    )
 
+    
     def exit_screen(self):
         self.meds_messages.kill()
         self.last_med.kill()
