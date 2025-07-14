@@ -703,13 +703,6 @@ class MedDenScreen(Screens):
                         manager=MANAGER,
                         starting_height=2,
                     )
-                    self.den_base = UIImageButton(
-                        ui_scale(pygame.Rect((108, 95), (396, 224))),
-                            "",
-                            object_id="#med_cat_den_hover_big",
-                            manager=MANAGER,
-                            tool_tip_text=herb_display,
-                    )
 
     
     def exit_screen(self):
@@ -717,7 +710,6 @@ class MedDenScreen(Screens):
         self.last_med.kill()
         self.next_med.kill()
         self.den_base.kill()
-        self.den_base = None
         for herb in self.herbs:
             self.herbs[herb].kill()
         self.herbs = {}
