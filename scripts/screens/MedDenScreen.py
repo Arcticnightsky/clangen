@@ -642,7 +642,7 @@ class MedDenScreen(Screens):
 
 
                 # Draw the den base background first (only once)
-            if len(herb_list) >= 1:
+            if herb_list >= 1:
                 self.den_base = UIImageButton(
                     ui_scale(pygame.Rect((108, 95), (396, 224))),
                     "",
