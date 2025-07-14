@@ -642,21 +642,13 @@ class MedDenScreen(Screens):
 
 
                 # Draw the den base background first (only once)
-            if herb_list:
-                self.den_base = UIImageButton(
-                    ui_scale(pygame.Rect((108, 95), (396, 224))),
-                    "",
-                    object_id="#med_cat_den_hover_big",
-                    manager=MANAGER,
-                )
-            else:
-                self.den_base = UIImageButton(
-                    ui_scale(pygame.Rect((108, 95), (396, 224))),
-                    "",
-                    object_id="#med_cat_den_hover",
-                    manager=MANAGER,
-                )
-
+            self.den_base = UIImageButton(
+                ui_scale(pygame.Rect((108, 95), (396, 224))),
+                "",
+                object_id="#med_cat_den_hover_big",
+                manager=MANAGER,
+            )
+            
         # Draw herb images first, including the tooltip text on them
             herbs = game.clan.herb_supply.entire_supply
 
@@ -719,9 +711,7 @@ class MedDenScreen(Screens):
         self.meds_messages.kill()
         self.last_med.kill()
         self.next_med.kill()
-        if self.den_base:
-            self.den_base.kill()
-            self.den_base = None
+        self.den_base = None
         for herb in self.herbs:
             self.herbs[herb].kill()
         self.herbs = {}
