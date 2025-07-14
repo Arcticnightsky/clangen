@@ -609,7 +609,7 @@ class MedDenScreen(Screens):
                 herb_list.append(f"{count} {display}")
 
         # Format the herb list into the tooltip text
-        if len(herb_list) <= 10:
+        if len(herb_list) <= 1:
             if game.clan.game_mode == "classic":
                 herb_display = None
             else:
