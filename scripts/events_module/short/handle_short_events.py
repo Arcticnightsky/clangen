@@ -352,10 +352,16 @@ class HandleShortEvents:
             possible_cats=possible_cats,
         )
 
+    
     def trigger_future_event(self, event):
         self.allowed_events = event.pool.get("event_id")
         self.excluded_events = event.pool.get("excluded_event_id")
 
+        random_cat = Cat.fetch_cat(event.involved_cats.get("r_c"))
+        if random_cat and random_cat.dead:
+            self.future_event_failed = True
+            return True
+        
         self.future_event_failed = True
         self.handle_event(
             event_type=event.event_type,

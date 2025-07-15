@@ -789,6 +789,19 @@ class Events:
             lost_cat = random.choice(eligible_cats)
             cat_IDs.append(lost_cat.ID)
 
+            additional_mates = []
+            for mate_id in lost_cat.mate:
+                mate = Cat.all_cats.get(mate_id)
+                if (
+                    mate
+                    and mate.ID in Cat.outside_cats
+                    and mate.status.is_outsider
+                    and not mate.dead
+                    and not CatStanding.EXILED
+                ):
+                    additional_mates.append(mate)
+
+            lost_cat.outside = False
             additional_cats = lost_cat.add_to_clan()
             cat_IDs.extend(additional_cats)
             text = i18n.t(f"hardcoded.event_lost{random.choice(range(1,5))}")
@@ -796,8 +809,14 @@ class Events:
             if additional_cats:
                 text += i18n.t("hardcoded.event_lost_kits", count=len(additional_cats))
 
-            text = event_text_adjust(Cat, text, main_cat=lost_cat, clan=game.clan)
+            if additional_mates:
+                additional_mate = random.choice(additional_mates)
+                additional_mate.add_to_clan()
+                additional_mate.backstory = "loner4"
+                cat_IDs.append(additional_mate.ID)
+                text += i18n.t("hardcoded.event_lost_mate")
 
+            text = event_text_adjust(Cat, text, main_cat=lost_cat, clan=game.clan)
             game.cur_events_list.append(Single_Event(text, "misc", cat_IDs))
 
         # Perform a ceremony if needed
@@ -1241,6 +1260,9 @@ class Events:
                         amount_per_med=get_amount_cat_for_one_medic(game.clan),
                     )
 
+                    # check if the Clan has more med cats than the med cat den can already hold!
+                    has_too_many_med = len([cat for cat in med_cat_list if cat.status.rank == CatRank.MEDICINE_CAT]) >= 3
+                    
                     # check if a med cat app already exists
                     has_med_app = any(
                         cat.status.rank == CatRank.MEDICINE_APPRENTICE
@@ -1268,6 +1290,9 @@ class Events:
                     elif has_med:
                         chance = int(chance * 2.22)
 
+                    if cat.skills in ["HEALER,1", "PROPHET,1", "OMEN,1"]:
+                        chance = int(chance / 2.5)
+                    
                     if cat.personality.trait in [
                         "careful",
                         "compassionate",
@@ -1282,7 +1307,7 @@ class Events:
                     if chance == 0:
                         chance = 1
 
-                    if not has_med_app and not int(random.random() * chance):
+                    if not has_med_app and not has_too_many_med and not int(random.random() * chance):
                         self.ceremony(cat, CatRank.MEDICINE_APPRENTICE)
                         self.ceremony_accessory = True
                         self.gain_accessories(cat)
@@ -2316,6 +2341,7 @@ class Events:
                 filter(
                     lambda x: x.status.alive_in_player_clan
                     and x.status.rank == CatRank.WARRIOR
+                    and x.experience_level not in ["untrained", "trainee", "prepared"]
                     and (x.apprentice or x.former_apprentices),
                     Cat.all_cats_list,
                 )
