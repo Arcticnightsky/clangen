@@ -642,14 +642,23 @@ class RelationshipScreen(Screens):
                         relation = "general.son"
                     else:
                         relation = "general.child"
-                elif self.inspect_cat.is_sibling(self.the_cat) or self.the_cat.is_sibling(self.inspect_cat):
-                    if self.inspect_cat.is_littermate(self.the_cat) or self.the_cat.is_littermate(self.inspect_cat):
-                        if self.inspect_cat.genderalign in ["female", "trans female"]:
-                            relation = "general.sister_littermate"
-                        elif self.inspect_cat.genderalign in ["male", "trans male"]:
-                            relation = "general.brother_littermate"
-                        else:
-                            relation = "general.sibling_littermate"
+
+                elif self.inspect_cat.is_sibling(
+                    self.the_cat
+                ) or self.the_cat.is_sibling(self.inspect_cat):
+                    if self.inspect_cat.genderalign in ("female", "trans female"):
+                        relation = "general.sister"
+                    elif self.inspect_cat.genderalign in ("male", "trans male"):
+                        relation = "general.brother"
+                    else:
+                        relation = "general.sibling"
+
+                    if self.inspect_cat.is_littermate(
+                        self.the_cat
+                    ) or self.the_cat.is_littermate(self.inspect_cat):
+                        relation = i18n.t(
+                            "general.sibling_littermate", relation=i18n.t(relation)
+                        )
                     elif self.inspect_cat.is_half_sibling(self.the_cat) or self.the_cat.is_half_sibling(self.inspect_cat):
                         if self.inspect_cat.genderalign in ["female", "trans female"]:
                             relation = "general.half_sister"
@@ -664,17 +673,16 @@ class RelationshipScreen(Screens):
                             relation = "general.adoptive_brother"
                         else:
                             relation = "general.adoptive_sibling"
-                    else:
-                        if self.inspect_cat.genderalign in ["female", "trans female"]:
-                            relation = "general.sister"
-                        elif self.inspect_cat.genderalign in ["male", "trans male"]:
-                            relation = "general.brother"
-                        else:
-                            relation = "general.sibling"
+                          
                 elif not get_clan_setting(
                     "first cousin mates"
                 ) and self.inspect_cat.is_cousin(self.the_cat):
-                    relation = "general.cousin"
+                    if self.inspect_cat.genderalign in ("female", "trans female"):
+                        relation = "general.cousin_female"
+                    elif self.inspect_cat.genderalign in ("male", "trans male"):
+                        relation = "general.cousin_male"
+                    else:
+                        relation = "general.cousin_nb"
                 col2.append(i18n.t("general.related_label", relation=i18n.t(relation)))
 
             col2_rect = ui_scale(pygame.Rect((0, 0), (90, 70)))
@@ -687,6 +695,7 @@ class RelationshipScreen(Screens):
                 manager=MANAGER,
                 container=self.selected_cat_container,
                 anchors={"right": "right", "top": "top"},
+                text_kwargs={"m_c": self.inspect_cat},
             )
             del col2_rect
 
