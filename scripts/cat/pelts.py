@@ -971,8 +971,6 @@ class Pelt:
 
                 # Gather pelt name
                 if p.pelt.name in Pelt.torties:
-                    tortie_chance_f = int(tortie_chance_f / 2)
-                    tortie_chance_m = tortie_chance_m - 1000
                     par_peltnames.add(p.pelt.tortiebase.capitalize())
                 else:
                     par_peltnames.add(p.pelt.name)
@@ -1061,9 +1059,7 @@ class Pelt:
         )
 
         # Tortie chance
-        tortie_chance_f = constants.CONFIG["cat_generation"][
-            "base_female_tortie"
-        ]  # There is a default chance for female tortie
+        tortie_chance_f = constants.CONFIG["cat_generation"]["base_female_tortie"]  # There is a default chance for female tortie
         tortie_chance_m = constants.CONFIG["cat_generation"]["base_male_tortie"]
         for p_ in par_pelts:
             if p_.name in Pelt.torties:
