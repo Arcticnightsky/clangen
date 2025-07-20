@@ -1026,10 +1026,10 @@ class RomanticEvents:
                 poly_key = "m_c_mates"
             elif len(alive_inclan_to_mates) > 0:
                 poly_key = "r_c_mates"
-            else:
-                return choice(RomanticEvents.MATE_DICTS[key])
-            return choice(RomanticEvents.POLY_MATE_DICTS[key][poly_key])
-        else:
+
+            if not poly_key:
+                # none of the other involved mates are alive
+                return None
             return choice(RomanticEvents.MATE_DICTS[key])
     # ---------------------------------------------------------------------------- #
     #                             get/calculate chances                            #
