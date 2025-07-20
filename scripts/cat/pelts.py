@@ -1004,7 +1004,7 @@ class Pelt:
             self.length = selected.length
             self.colour = selected.colour
             self.tortiebase = selected.tortiebase
-            if self.gender == "male" and self.tortiebase = selected.tortiebase:
+            if self.gender == "male" and self.tortiebase == selected.tortiebase:
                # Very rare chance to *stay* male, otherwise switch to female
                 direct_inheritance = constants.CONFIG["cat_generation"]["direct_inheritance"]
                 boosted_inheritance = max(200, direct_inheritance * 20)
