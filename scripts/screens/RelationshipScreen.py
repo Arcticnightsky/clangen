@@ -643,9 +643,7 @@ class RelationshipScreen(Screens):
                     else:
                         relation = "general.child"
 
-                elif self.inspect_cat.is_sibling(
-                    self.the_cat
-                ) or self.the_cat.is_sibling(self.inspect_cat):
+                elif self.inspect_cat.is_sibling(self.the_cat) or self.the_cat.is_sibling(self.inspect_cat):
                     if self.inspect_cat.genderalign in ("female", "trans female"):
                         relation = "general.sister"
                     elif self.inspect_cat.genderalign in ("male", "trans male"):
@@ -653,9 +651,7 @@ class RelationshipScreen(Screens):
                     else:
                         relation = "general.sibling"
 
-                    if self.inspect_cat.is_littermate(
-                        self.the_cat
-                    ) or self.the_cat.is_littermate(self.inspect_cat):
+                    if self.inspect_cat.is_littermate(self.the_cat) or self.the_cat.is_littermate(self.inspect_cat):
                         relation = i18n.t(
                             "general.sibling_littermate", relation=i18n.t(relation)
                         )
