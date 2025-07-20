@@ -533,6 +533,9 @@ class RomanticEvents:
             relationship_to.comfortable -= 10
             relationship_from.comfortable -= 10
 
+
+        if not RomanticEvents.BREAKUP_STRINGS:
+            RomanticEvents.rebuild_dicts()
         text = choice(RomanticEvents.BREAKUP_STRINGS[breakup_type])
         text = event_text_adjust(Cat, text, main_cat=cat_from, random_cat=cat_to)
         game.cur_events_list.append(
@@ -1010,31 +1013,24 @@ class RomanticEvents:
     def get_mate_string(key, poly, cat_from, cat_to):
         """Returns the mate string with the certain key, cats and poly."""
         RomanticEvents.rebuild_dicts()
-        if not poly:
-            return choice(RomanticEvents.MATE_DICTS[key])
-        else:
-            poly_key = ""
+        if poly:
             alive_inclan_from_mates = [
-                mate
-                for mate in cat_from.mate
-                if cat_from.fetch_cat(mate).status.alive_in_player_clan
+                mate for mate in cat_from.mate if cat_from.fetch_cat(mate).status.alive_in_player_clan
             ]
             alive_inclan_to_mates = [
-                mate
-                for mate in cat_to.mate
-                if cat_to.fetch_cat(mate).status.alive_in_player_clan
+                mate for mate in cat_to.mate if cat_to.fetch_cat(mate).status.alive_in_player_clan
             ]
             if len(alive_inclan_from_mates) > 0 and len(alive_inclan_to_mates) > 0:
                 poly_key = "both_mates"
-            elif len(alive_inclan_from_mates) > 0 and len(alive_inclan_to_mates) <= 0:
+            elif len(alive_inclan_from_mates) > 0:
                 poly_key = "m_c_mates"
-            elif len(alive_inclan_from_mates) <= 0 and len(alive_inclan_to_mates) > 0:
+            elif len(alive_inclan_to_mates) > 0:
                 poly_key = "r_c_mates"
+
             if not poly_key:
                 # none of the other involved mates are alive
                 return None
-            return choice(RomanticEvents.POLY_MATE_DICTS[key][poly_key])
-
+            return choice(RomanticEvents.MATE_DICTS[key])
     # ---------------------------------------------------------------------------- #
     #                             get/calculate chances                            #
     # ---------------------------------------------------------------------------- #
@@ -1087,3 +1083,4 @@ class RomanticEvents:
         chance_number = max(chance_number, 5)
 
         return chance_number
+

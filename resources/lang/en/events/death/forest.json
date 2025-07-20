@@ -162,5 +162,69 @@
                 "reg_death": "m_c was grabbed by an owl, never to be seen again."
             }
         ]
+    },
+    {
+        "event_id": "fst_courageous_leader_death",
+        "location": [
+            "forest"
+        ],
+        "season": [
+            "any"
+        ],
+        "tags": [
+            "some_lives",
+            "high_lives"
+        ],
+        "weight": 10,
+        "event_text": "Starclan said that m_c would die from a great danger that would threaten the clan this moon, but {PRONOUN/m_c/subject} didn't know when yet. {PRONOUN/m_c/subject/CAP} soon found out how soon when a pack of wolves was chasing r_c through the territory and r_c, blinded by pure terror, didn't know that {PRONOUN/r_c/subject} {VERB/r_c/were/was} leading the wolves toward the camp! Luckily, m_c was just nearby and noticed the wolves chasing r_c. So m_c distracts the wolves while r_c escapes and m_c loses a life or two as {PRONOUN/m_c/subject} gets mauled by the wolves, saving the cats of c_n from the danger foretold.",
+        "m_c": {
+            "status": [
+                "leader"
+            ],
+            "trait": [
+                "fierce",
+                "bold",
+                "daring",
+                "righteous",
+                "confident",
+                "adventurous",
+                "ambitious",
+                "loyal"
+            ]
+        },
+        "r_c": {
+            "status": [
+                "warrior",
+                "medicine cat",
+                "apprentice",
+                "medicine cat apprentice"
+            ]
+        },
+        "history": [
+            {
+                "cats": [
+                    "m_c"
+                ],
+                "scar": "",
+                "reg_death": "",
+                "lead_death": "were mauled by a pack of wolves while saving r_c and whole the Clan"
+            }
+        ],
+        "relationships": [
+            {
+                "cats_from": [
+                    "c_n"
+                ],
+                "cats_to": [
+                    "m_c"
+                ],
+                "mutual": false,
+                "values": [
+                    "admiration",
+                    "trust"
+                ],
+                "amount": 20
+            }
+        ]
     }
 ]
