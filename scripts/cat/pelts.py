@@ -953,6 +953,7 @@ class Pelt:
                     break
 
     def pattern_color_inheritance(self, parents: tuple = (), gender="female"):
+        gender = self.gender
         # setting parent pelt categories
         # We are using a set, since we don't need this to be ordered, and sets deal with removing duplicates.
         par_peltlength = set()
@@ -960,8 +961,6 @@ class Pelt:
         par_peltnames = set()
         par_pelts = []
         par_white = []
-        tortie_chance_f = constants.CONFIG["cat_generation"]["base_female_tortie"]  # There is a default chance for female tortie
-        tortie_chance_m = constants.CONFIG["cat_generation"]["base_male_tortie"]
         for p in parents:
             if p:
                 # Gather pelt color.
@@ -1000,13 +999,9 @@ class Pelt:
             return self.randomize_pattern_color(gender)
 
         # There is a 1/10 chance for kits to have the exact same pelt as one of their parents
-        if not random.randint(
-            0, constants.CONFIG["cat_generation"]["direct_inheritance"]
-        ):  # 1/10 chance
+        if not random.randint(0, constants.CONFIG["cat_generation"]["direct_inheritance"]):  # 1/10 chance
             selected = choice(par_pelts)
-            self.name = selected.name
-            self.length = selected.length
-            self.colour = selected.colour
+
             if self.gender == "male" and self.tortiebase == selected.tortiebase:
                # Very rare chance to *stay* male, otherwise switch to female
                 direct_inheritance = constants.CONFIG["cat_generation"]["direct_inheritance"]
@@ -1014,7 +1009,14 @@ class Pelt:
                 if random.randint(1, boosted_inheritance) != 1:
                     print(f"Converting rare male tortie kit to female for realism.")
                     self.gender = "female"
+                    gender = "female"
                     self.tortiebase = selected.tortiebase
+                else:
+                    self.tortiebase = selected.tortiebase
+            
+            self.name = selected.name
+            self.length = selected.length
+            self.colour = selected.colour
     # If selected is a tortie and the kit is male, apply extra rarity
     # Safe to inherit (either not a tortie, or passed rare check)
             return selected.white
