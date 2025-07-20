@@ -629,10 +629,6 @@ class Cat:
         if self.status.is_exiled(CatGroup.PLAYER_CLAN) and not CatGroup(entry["near"]):
             self.status.add_to_group(CatGroup.DARK_FOREST)
 
-        if not self.status.is_outsider or self.status.is_former_clancat:
-            Cat.dead_cats.append(self)
-
-
     def exile(self):
         """This is used to send a cat into exile."""
 
