@@ -2055,13 +2055,13 @@ class Events:
         hate_relation = [
             i
             for i in relationships
-            if i.dislike > 15 and Cat.fetch_cat(i.cat_to).status.alive_in_player_clan
+            if i.dislike > 35 and Cat.fetch_cat(i.cat_to).status.alive_in_player_clan
         ]
         targets.extend(hate_relation)
         resent_relation = [
             i
             for i in relationships
-            if i.jealousy > 15 and Cat.fetch_cat(i.cat_to).status.alive_in_player_clan
+            if i.jealousy > 25 and Cat.fetch_cat(i.cat_to).status.alive_in_player_clan
         ]
         targets.extend(resent_relation)
 
