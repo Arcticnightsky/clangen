@@ -82,7 +82,7 @@ class ClanScreen(Screens):
                 switch_set_value(Switch.cat, event.ui_element.return_cat_id())
                 self.change_screen("profile screen")
             if event.ui_element == self.label_toggle:
-                set_clan_setting("den labels", get_clan_setting("den_labels"))
+                set_clan_setting("den labels", not get_clan_setting("den_labels"))
                 self.update_buttons_and_text()
             if event.ui_element == self.med_den_label:
                 self.change_screen("med den screen")
