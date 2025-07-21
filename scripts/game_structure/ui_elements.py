@@ -1723,8 +1723,7 @@ class UIImageHorizontalSlider(pygame_gui.elements.UIHorizontalSlider):
 
 class UIModifiedImage(pygame_gui.elements.UIImage):
     """
-    UIImage class modified to prevent it from blocking hover actions in other elements,
-    and now supports tooltips.
+    UIImage class modified to prevent it from blocking hover actions in other elements
     """
 
     def __init__(
@@ -1740,7 +1739,6 @@ class UIModifiedImage(pygame_gui.elements.UIImage):
         visible: int = 1,
         *,
         starting_height: int = 1,
-        tool_tip_text: Optional[str] = None,  # <-- NEW ARGUMENT
     ):
         super().__init__(
             relative_rect=relative_rect,
@@ -1754,9 +1752,6 @@ class UIModifiedImage(pygame_gui.elements.UIImage):
             visible=visible,
             starting_height=starting_height,
         )
-
-        if tool_tip_text:
-            self.set_tooltip(tool_tip_text)  # <-- FIXED METHOD NAME
 
     def check_hover(self, time_delta: float, hovered_higher_element: bool) -> bool:
         """
