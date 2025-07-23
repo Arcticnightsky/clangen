@@ -407,7 +407,13 @@ class HandleShortEvents:
         for i, attribute_list in enumerate(self.chosen_event.new_cat):
             self.new_cats.append(
                 create_new_cat_block(
-                    Cat, Relationship, self, in_event_cats, i, attribute_list
+                    Cat,
+                    Relationship,
+                    self,
+                    in_event_cats,
+                    i,
+                    attribute_list,
+                    other_clan=self.other_clan,
                 )
             )
 
