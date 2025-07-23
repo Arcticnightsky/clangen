@@ -9901,8 +9901,15 @@
                 "medicine cat apprentice"
             ],
             "relationship_status": [
-                "mates",
-                "romantic_20"
+                "mates"
+            ],
+            "trait": [
+                "righteous",
+                "loyal",
+                "faithful",
+                "strict",
+                "nervous",
+                "insecure"
             ]
         },
         "r_c": {
