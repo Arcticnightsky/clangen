@@ -1001,7 +1001,16 @@ class Pelt:
             selected = choice(par_pelts)            
             self.name = selected.name
             self.length = selected.length
-            self.tortiebase = selected.tortiebase
+            kit = Cat(parent1=cat.ID, parent2=other_cat.ID, moons=0)
+# Force male tortie check here
+            if kit.gender == "male" and kit.pelt.name in Pelt.torties:
+                boosted_inheritance = max(200, constants.CONFIG["cat_generation"]["direct_inheritance"] * 20)
+                if random.randint(1, boosted_inheritance) != 1:
+                    print(f"Converting rare male tortie kit '{kit.name}' to female for realism.")
+                    kit.gender = "female"
+                    self.tortiebase = selected.tortiebase
+                else: 
+                    kit.gender = "male"
             self.colour = selected.colour
     # If selected is a tortie and the kit is male, apply extra rarity
     # Safe to inherit (either not a tortie, or passed rare check)
