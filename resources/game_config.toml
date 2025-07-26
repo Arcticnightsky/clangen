@@ -340,7 +340,7 @@ dev_tools = true
 
 [roles]
   # base 1/chance that a cat will be chosen as a mediator apprentice
-  mediator_app_chance = 50
+  mediator_app_chance = 5000
 
   # base 1/chance that a cat will be chosen as a med cat apprentice
   base_medicine_app_chance = 41
