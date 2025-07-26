@@ -807,6 +807,14 @@ class Pregnancy_Events:
                 all_adoptive_parents.append(_m)
 
         #############################
+        kit = Cat(parent1=cat.ID, parent2=other_cat.ID, moons=0)
+
+# Force male tortie check here
+        if kit.gender == "male" and kit.pelt.name in Pelt.torties:
+            boosted_inheritance = max(200, constants.CONFIG["cat_generation"]["direct_inheritance"] * 20)
+            if random.randint(1, boosted_inheritance) != 1:
+                print(f"Converting rare male tortie kit '{kit.name}' to female for realism.")
+                kit.gender = "female"
 
         #### GENERATE THE KITS ######
         for kit in range(kits_amount):
