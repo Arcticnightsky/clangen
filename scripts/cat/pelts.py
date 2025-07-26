@@ -998,22 +998,10 @@ class Pelt:
 
         # There is a 1/10 chance for kits to have the exact same pelt as one of their parents
         if not random.randint(0, constants.CONFIG["cat_generation"]["direct_inheritance"]):  # 1/10 chance
-            selected = choice(par_pelts)
-
-            if self.gender == "male" and self.tortiebase == selected.tortiebase:
-               # Very rare chance to *stay* male, otherwise switch to female
-                direct_inheritance = constants.CONFIG["cat_generation"]["direct_inheritance"]
-                boosted_inheritance = max(200, direct_inheritance * 20)
-                if random.randint(1, boosted_inheritance) != 1:
-                    print(f"Converting rare male tortie kit to female for realism.")
-                    self.gender = "female"
-                    gender = "female"
-                    self.tortiebase = selected.tortiebase
-                else:
-                    self.tortiebase = selected.tortiebase
-            
+            selected = choice(par_pelts)            
             self.name = selected.name
             self.length = selected.length
+            self.tortiebase = selected.tortiebase
             self.colour = selected.colour
     # If selected is a tortie and the kit is male, apply extra rarity
     # Safe to inherit (either not a tortie, or passed rare check)
