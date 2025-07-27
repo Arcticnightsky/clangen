@@ -1934,7 +1934,9 @@ class Cat:
             return
         if name == "torn ear" and "NOEAR" in self.pelt.scars:
             return
-
+        if name == "damaged eyes" and "BLIND" in self.pelt.scars:
+            return
+        
         injury = INJURIES[name]
         mortality = injury["mortality"][self.age.value]
         duration = injury["duration"]
