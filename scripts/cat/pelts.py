@@ -1291,6 +1291,8 @@ class Pelt:
 
         if "NOTAIL" in self.scars and "HALFTAIL" in self.scars:
             self.scars.remove("HALFTAIL")
+        if "BRIGHTHEART" in self.scars and "BLIND" in self.scars:
+            self.scars.remove("BLIND")
 
     def init_accessories(self, age):
         if age == "newborn":
