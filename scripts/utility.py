@@ -909,6 +909,7 @@ def create_new_cat(
             "NOLEFTEAR",
             "NORIGHTEAR",
             "MANLEG",
+            "BLIND",
         ]
         for scar in new_cat.pelt.scars:
             if scar in not_allowed:
@@ -956,6 +957,8 @@ def create_new_cat(
                     new_cat.pelt.scars.append("NOPAW")
                 elif chosen_condition in ("lost their tail", "born without a tail"):
                     new_cat.pelt.scars.append("NOTAIL")
+                elif chosen_condition in ("blind"):
+                    new_cat.pelt.scars.append("BLIND")
 
         # KILL >:D only if we're sposed to tho
         if not alive:
