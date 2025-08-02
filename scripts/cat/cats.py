@@ -626,7 +626,7 @@ class Cat:
         self.pelt.rebuild_sprite = True
 
         # exiled cats are special, cus they get kicked out a heaven
-        if self.status.is_exiled(CatGroup.PLAYER_CLAN) and not CatGroup("near"):
+        if CatStanding.EXILED:
             self.status.add_to_group(CatGroup.DARK_FOREST)
 
     def exile(self):
