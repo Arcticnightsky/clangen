@@ -473,7 +473,7 @@ class Events:
                             if invited_cat.status.rank == CatRank.APPRENTICE:
                                 invited_cat.update_mentor()
                                 
-                            elif invited_cat.status.rank == CatRank.MEDIATOR and get_clan_setting("become_mediator") is false:
+                            elif invited_cat.status.rank == CatRank.MEDIATOR and get_clan_setting("become_mediator") is False:
                                  invited_cat.status._change_rank(CatRank.WARRIOR)
                         
                         invited_cat.create_relationships_new_cat()
