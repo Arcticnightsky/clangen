@@ -1029,7 +1029,7 @@
         "location": ["any"],
         "season": ["any"],
         "tags": ["romantic"],
-        "weight": 5,
+        "frequency": 3,
         "event_text": "m_c introuduces a strange new cat into the clan, named n_c:0, claiming that {PRONOUN/n_c:0/subject} {PRONOUN/m_c/poss} mate. and most surpisingly, n_c:0 brings a litter of kits that are not just {PRONOUN/n_c:0/inposs}, but also m_c's... This makes the Clan a bit upset that m_c broke the warrior code and had kits with an outsider.",
         "m_c": {
             "age": ["young adult", "adult", "senior adult", "senior"],
