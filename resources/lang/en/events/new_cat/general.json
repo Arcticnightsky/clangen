@@ -1120,7 +1120,6 @@
         "new_cat": [
             [
                 "clancat",
-		"exists",
 		"other_clan",
                 "backstory:outsider1",
                 "status:warrior"
