@@ -1094,5 +1094,46 @@
                 "age:kitten"
             ]
         ]
-    }
+    },
+    {
+        "event_id": "gen_otherclan_friend",
+        "location": [
+            "any"
+        ],
+        "season": [
+            "any"
+        ],
+        "frequency": 4,
+        "event_text": "m_c spent hours chatting with a cat from o_c_n by the border.",
+        "m_c": {
+            "status": [
+                "leader",
+                "deputy",
+                "medicine cat",
+                "medicine cat apprentice",
+                "mediator",
+                "mediator apprentice",
+                "warrior",
+                "apprentice"
+            ]
+        },
+        "new_cat": [
+            [
+                "clancat",
+		"exists",
+		"other_clan",
+                "backstory:outsider1",
+                "status:warrior"
+            ]
+        ],
+        "relationships": [
+            {
+                "cats_from": [
+                    "m_c"
+                ],
+                "cats_to": [
+                    "n_c
+		]
+	    }
+	}
 ]
