@@ -205,8 +205,6 @@
                 "cats": [
                     "m_c"
                 ],
-                "scar": "",
-                "reg_death": "",
                 "lead_death": "were mauled by a pack of wolves while saving r_c and whole the Clan"
             }
         ],
@@ -220,7 +218,7 @@
                 ],
                 "mutual": false,
                 "values": [
-                    "admiration",
+                    "respect",
                     "trust"
                 ],
                 "amount": 20
