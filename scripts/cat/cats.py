@@ -26,7 +26,7 @@ from scripts.cat.status import Status, StatusDict
 from scripts.cat.thoughts import Thoughts
 from scripts.cat_relations.inheritance import Inheritance
 from scripts.cat_relations.relationship import Relationship
-from scripts.cat_relations.enums import RelType
+from scripts.cat_relations.enums import RelType, RelTier, rel_type_tiers
 from scripts.clan_package.settings import get_clan_setting
 from scripts.conditions import (
     Illness,
@@ -400,6 +400,20 @@ class Cat:
         """
         # trans cat chances
         self.genderalign = self.gender
+        trans_chance = randint(0, 50)
+        nb_chance = randint(0, 75)
+
+        # GENDER IDENTITY
+        if self.age.is_baby():
+            # newborns can't be trans, sorry babies
+            pass
+        elif nb_chance == 1:
+            self.genderalign = "nonbinary"
+        elif trans_chance == 1:
+            if self.gender == "female":
+                self.genderalign = "trans male"
+            else:
+                self.genderalign = "trans female"
 
         # PRONOUNS AUTO-GENERATE WHEN REQUIRED
 
@@ -626,10 +640,6 @@ class Cat:
         # mark the sprite as outdated
         self.pelt.rebuild_sprite = True
 
-        # exiled cats are special, cus they get kicked out a heaven
-        if self.status.is_exiled(CatGroup.PLAYER_CLAN) and not self.status.is_outsider:
-            self.status.add_to_group(CatGroup.DARK_FOREST)
-
     def exile(self):
         """This is used to send a cat into exile."""
 
@@ -670,23 +680,24 @@ class Cat:
                 continue
 
             family_relation = self.familial_grief(living_cat=cat)
-            very_high_values = []
-            high_values = []
-            very_low_values = []
+            very_high_types = []
+            high_types = []
+            very_low_types = []
 
-            # find what level of rel they had for each value
-            levels = rel_with_dead.get_reltype_tiers()
-            for level in levels:
-                if level.is_extreme_pos():
-                    very_high_values.append(level.get_rel_value)
-                elif level.is_low_pos():
-                    high_values.append(level.get_rel_value)
-                elif level.is_extrem_neg():
-                    very_low_values.append(level.get_rel_value)
+            # find what tier of rel they had for each type
+            tiers: list[RelTier] = rel_with_dead.get_reltype_tiers()
+            for tier in tiers:
+                rel_type = [k for k in rel_type_tiers if tier in k]
+                if tier.is_extreme_pos:
+                    very_high_types.extend(rel_type)
+                elif tier.is_low_pos:
+                    high_types.extend(rel_type)
+                elif tier.is_extreme_neg:
+                    very_low_types.extend(rel_type)
                 continue
 
             major_chance = 0
-            if very_high_values:
+            if very_high_types:
                 # major grief eligible cats.
 
                 major_chance = 3
@@ -714,7 +725,7 @@ class Cat:
                 grief_type = "major"
 
                 possible_strings = []
-                for x in very_high_values:
+                for x in very_high_types:
                     possible_strings.extend(
                         self.generate_events.possible_death_reactions(
                             family_relation, x, cat.personality.trait, body_status
@@ -733,7 +744,7 @@ class Cat:
 
             # If major grief fails, but there are still very_high or high values,
             # it can fail to to minor grief. If they have a family relation, bypass the roll.
-            elif (very_high_values or high_values) and (
+            elif (very_high_types or high_types) and (
                 family_relation != "general" or not int(random() * 5)
             ):
                 grief_type = "minor"
@@ -796,10 +807,10 @@ class Cat:
                 continue
 
             # Negative "grief" messages are just for flavor.
-            if very_low_values:
+            if very_low_types:
                 # Generate the event:
                 possible_strings = []
-                for x in very_low_values:
+                for x in very_low_types:
                     value = f"neg_{x}"
                     possible_strings.extend(
                         self.generate_events.possible_death_reactions(
@@ -1772,28 +1783,6 @@ class Cat:
         ]
         return other_cat.ID in litter_mates
 
-    def is_half_sibling(self, other_cat: Cat):
-        """Check if the cats are half siblings."""
-        if other_cat.ID not in self.inheritance.siblings.keys():
-            return False
-        half_siblings = [
-            key
-            for key, value in self.inheritance.siblings.items()
-            if "half sibling" in value["additional"]
-        ]
-        return other_cat.ID in half_siblings
-
-    def is_adoptive_sibling(self, other_cat: Cat):
-        """Check if the cats are adoptive siblings."""
-        if other_cat.ID not in self.inheritance.siblings.keys():
-            return False
-        adoptive_siblings = [
-            key
-            for key, value in self.inheritance.siblings.items()
-            if "adoptive" in value["additional"]
-        ]
-        return other_cat.ID in adoptive_siblings
-    
     def is_uncle_aunt(self, other_cat: Cat):
         """Check if the cats are related as uncle/aunt and niece/nephew."""
         if not self.inheritance:
@@ -1915,9 +1904,7 @@ class Cat:
             return
         if name == "torn ear" and "NOEAR" in self.pelt.scars:
             return
-        if name == "damaged eyes" and "BLIND" in self.pelt.scars:
-            return
-        
+
         injury = INJURIES[name]
         mortality = injury["mortality"][self.age.value]
         duration = injury["duration"]
@@ -2015,9 +2002,7 @@ class Cat:
             cat.pelt.scars.append("NOPAW")
         elif new_condition == "born without a tail":
             cat.pelt.scars.append("NOTAIL")
-        elif new_condition == "blind":
-            cat.pelt.scars.append("BLIND")
-            
+
         self.get_permanent_condition(new_condition, born_with=True)
 
     def get_permanent_condition(self, name, born_with=False, event_triggered=False):
@@ -3423,7 +3408,6 @@ def create_cat(rank, moons=None, biome=None):
         "NOLEFTEAR",
         "NORIGHTEAR",
         "MANLEG",
-        "BLIND",
     ]
 
     for scar in new_cat.pelt.scars:
