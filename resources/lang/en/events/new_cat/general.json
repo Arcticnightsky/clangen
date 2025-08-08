@@ -1103,8 +1103,8 @@
         "season": [
             "any"
         ],
-        "frequency": 4,
-        "event_text": "m_c spent hours chatting with a cat from o_c_n by the border.",
+        "frequency": 3,
+        "event_text": "m_c spent hours chatting with a o_c_n cat by the border.",
         "m_c": {
             "status": [
                 "leader",
@@ -1120,20 +1120,19 @@
         "new_cat": [
             [
                 "clancat",
-		"other_clan",
+				"other_clan",
                 "backstory:outsider1",
                 "status:warrior"
             ]
         ],
         "relationships": [
-            {
-                "cats_from": [
-                    "m_c"
-                ],
-                "cats_to": [
-                    "n_c
+          {
+            "cats_from": ["m_c"],
+            "cats_to": ["n_c:0"],
+            "mutual": true,
+              "values": ["like", "comfort"],
+            "amount": 20
+          },
 		]
-	    }
-	]
     }
 ]
