@@ -400,20 +400,6 @@ class Cat:
         """
         # trans cat chances
         self.genderalign = self.gender
-        trans_chance = randint(0, 50)
-        nb_chance = randint(0, 75)
-
-        # GENDER IDENTITY
-        if self.age.is_baby():
-            # newborns can't be trans, sorry babies
-            pass
-        elif nb_chance == 1:
-            self.genderalign = "nonbinary"
-        elif trans_chance == 1:
-            if self.gender == "female":
-                self.genderalign = "trans male"
-            else:
-                self.genderalign = "trans female"
 
         # PRONOUNS AUTO-GENERATE WHEN REQUIRED
 
@@ -639,6 +625,10 @@ class Cat:
 
         # mark the sprite as outdated
         self.pelt.rebuild_sprite = True
+
+        # exiled cats are special, cus they get kicked out a heaven
+        if self.status.is_exiled(CatGroup.PLAYER_CLAN) and not self.status.is_outsider:
+            self.status.add_to_group(CatGroup.DARK_FOREST)
 
     def exile(self):
         """This is used to send a cat into exile."""
@@ -1782,6 +1772,28 @@ class Cat:
         ]
         return other_cat.ID in litter_mates
 
+    def is_half_sibling(self, other_cat: Cat):
+        """Check if the cats are half siblings."""
+        if other_cat.ID not in self.inheritance.siblings.keys():
+            return False
+        half_siblings = [
+            key
+            for key, value in self.inheritance.siblings.items()
+            if "half sibling" in value["additional"]
+        ]
+        return other_cat.ID in half_siblings
+
+    def is_adoptive_sibling(self, other_cat: Cat):
+        """Check if the cats are adoptive siblings."""
+        if other_cat.ID not in self.inheritance.siblings.keys():
+            return False
+        adoptive_siblings = [
+            key
+            for key, value in self.inheritance.siblings.items()
+            if "adoptive" in value["additional"]
+        ]
+        return other_cat.ID in adoptive_siblings
+    
     def is_uncle_aunt(self, other_cat: Cat):
         """Check if the cats are related as uncle/aunt and niece/nephew."""
         if not self.inheritance:
@@ -1903,7 +1915,9 @@ class Cat:
             return
         if name == "torn ear" and "NOEAR" in self.pelt.scars:
             return
-
+        if name == "damaged eyes" and "BLIND" in self.pelt.scars:
+            return
+        
         injury = INJURIES[name]
         mortality = injury["mortality"][self.age.value]
         duration = injury["duration"]
@@ -2001,7 +2015,9 @@ class Cat:
             cat.pelt.scars.append("NOPAW")
         elif new_condition == "born without a tail":
             cat.pelt.scars.append("NOTAIL")
-
+        elif new_condition == "blind":
+            cat.pelt.scars.append("BLIND")
+            
         self.get_permanent_condition(new_condition, born_with=True)
 
     def get_permanent_condition(self, name, born_with=False, event_triggered=False):
@@ -3407,6 +3423,7 @@ def create_cat(rank, moons=None, biome=None):
         "NOLEFTEAR",
         "NORIGHTEAR",
         "MANLEG",
+        "BLIND",
     ]
 
     for scar in new_cat.pelt.scars:
