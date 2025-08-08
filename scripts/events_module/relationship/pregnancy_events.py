@@ -126,8 +126,8 @@ class Pregnancy_Events:
                 return
 
         chance = Pregnancy_Events.get_balanced_kit_chance(
-            cat, second_parent, is_affair, clan
-        )
+    cat, second_parent, is_affair, clan, kits_are_adopted
+    )
 
         if not int(random.random() * chance):
             # If you've reached here - congrats, kits!
@@ -1073,14 +1073,17 @@ class Pregnancy_Events:
 
     @staticmethod
     def get_balanced_kit_chance(
-        first_parent: Cat, second_parent: Cat, affair, clan
+        first_parent: Cat, second_parent: Cat, affair, clan, kits_are_adopted=False
     ) -> int:
         """Returns a chance based on different values."""
         # Now that the second parent is determined, we can calculate the balanced chance for kits
         # get the chance for pregnancy
-        inverse_chance = constants.CONFIG["pregnancy"]["primary_chance_unmated"]
-        if len(first_parent.mate) > 0 and not affair:
-            inverse_chance = constants.CONFIG["pregnancy"]["primary_chance_mated"]
+        if kits_are_adopted:
+            inverse_chance = constants.CONFIG["pregnancy"]["primary_chance_same_sex_adoption_unmated"]
+        else:
+            inverse_chance = constants.CONFIG["pregnancy"]["primary_chance_unmated"]
+            if len(first_parent.mate) > 0 and not affair:
+                inverse_chance = constants.CONFIG["pregnancy"]["primary_chance_mated"]
 
         # SETTINGS
         # - decrease inverse chance if only mated pairs can have kits
