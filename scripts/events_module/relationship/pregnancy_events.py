@@ -830,7 +830,13 @@ class Pregnancy_Events:
                     )[0]
                     blood_parent.thought = thought
 
-                kit = Cat(parent1=blood_parent.ID, moons=0, backstory=backstory)
+                # For adoption realism, give a chance for the kit to be a few moons old
+                if random.random() < 0.5:  # 50% newborn
+                    kit_age = 0
+                else:
+                    kit_age = random.randint(1, 5)  # 1–5 moons old
+
+                kit = Cat(parent1=blood_parent.ID, moons=kit_age, backstory=backstory)
 
             elif cat and other_cat:
                 # Two parents provided
@@ -844,8 +850,17 @@ class Pregnancy_Events:
                 kit.thought = i18n.t("hardcoded.new_kit_thought", name=str(cat.name))
                 kit.thought = event_text_adjust(Cat, kit.thought, random_cat=cat)
 
-            # Prevent duplicate prefixes in the same litter
-            while kit.name.prefix in [kitty.name.prefix for kitty in all_kitten]:
+            # Prevent duplicate prefixes in same litter
+            # and prevent duplicate full names (prefix + suffix) with ANY cat in history
+            existing_full_names = {
+                (c.name.prefix, c.name.suffix)
+                for c in Cat.all_cats.values()
+            }
+
+            while (
+                kit.name.prefix in [kitty.name.prefix for kitty in all_kitten] or
+                (kit.name.prefix, kit.name.suffix) in existing_full_names
+            ):
                 kit.name = Name("newborn")
 
             all_kitten.append(kit)
@@ -866,6 +881,8 @@ class Pregnancy_Events:
                         kit.pelt.scars.append("NOPAW")
                     elif kit.permanent_condition[condition] == "born without a tail":
                         kit.pelt.scars.append("NOTAIL")
+                    elif kit.permanent_condition[condition] == "blind":
+                        kit.pelt.scars.append("BLIND")
                 Condition_Events.handle_already_disabled(kit)
 
             # create and update relationships
