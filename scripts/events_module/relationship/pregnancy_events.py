@@ -851,18 +851,8 @@ class Pregnancy_Events:
                 kit.thought = event_text_adjust(Cat, kit.thought, random_cat=cat)
 
             # Prevent duplicate prefixes in same litter
-            # and prevent duplicate full names (prefix + suffix) with ANY cat in history
-            existing_full_names = {
-                (c.name.prefix, c.name.suffix)
-                for c in Cat.all_cats.values()
-            }
-
-            while (
-                kit.name.prefix in [kitty.name.prefix for kitty in all_kitten] or
-                (kit.name.prefix, kit.name.suffix) in existing_full_names
-            ):
+            while kit.name.prefix in [kitty.name.prefix for kitty in all_kitten]:
                 kit.name = Name("newborn")
-
             all_kitten.append(kit)
             # adoptive parents are set at the end, when everything else is decided
 
