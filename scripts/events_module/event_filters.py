@@ -10,7 +10,7 @@ from scripts.utility import (
     find_alive_cats_with_rank,
     filter_relationship_type,
 )
-
+from scripts.cat_relations.enums import RelType
 
 def event_for_location(locations: list) -> bool:
     """
