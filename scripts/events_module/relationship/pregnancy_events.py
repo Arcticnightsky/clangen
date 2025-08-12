@@ -126,8 +126,8 @@ class Pregnancy_Events:
                 return
 
         chance = Pregnancy_Events.get_balanced_kit_chance(
-            cat, second_parent, is_affair, clan
-        )
+    cat, second_parent, is_affair, clan, kits_are_adopted
+    )
 
         if not int(random.random() * chance):
             # If you've reached here - congrats, kits!
@@ -298,17 +298,18 @@ class Pregnancy_Events:
                 "moons": 0,
                 "amount": 0,
             }
-
+            involved_cats = [cat.ID]
+            other_cat_id = second_parent.ID
+            other_cat = Cat.all_cats.get(other_cat_id)
+            
             text = choice(Pregnancy_Events.PREGNANT_STRINGS["announcement"])
             severity = random.choices(["minor", "major"], [3, 1], k=1)
             pregnant_cat.get_injured("pregnant", severity=severity[0])
             text += choice(Pregnancy_Events.PREGNANT_STRINGS[f"{severity[0]}_severity"])
-            text = event_text_adjust(Cat, text, main_cat=pregnant_cat, clan=clan)
-            game.cur_events_list.append(
-                Single_Event(
-                    text, "birth_death", pregnant_cat.ID, cat_dict={"m_c": cat}
-                )
-            )
+            text = event_text_adjust(Cat, text, main_cat=pregnant_cat, random_cat=other_cat, clan=game.clan)
+            involved_cats = [pregnant_cat.ID]
+            involved_cats.append(second_parent.ID)
+            game.cur_events_list.append(Single_Event(text, "birth_death", involved_cats))
 
     @staticmethod
     def handle_one_moon_pregnant(cat: Cat, clan=game.clan):
@@ -829,7 +830,13 @@ class Pregnancy_Events:
                     )[0]
                     blood_parent.thought = thought
 
-                kit = Cat(parent1=blood_parent.ID, moons=0, backstory=backstory)
+                # For adoption realism, give a chance for the kit to be a few moons old
+                if random.random() < 0.5:  # 50% newborn
+                    kit_age = 0
+                else:
+                    kit_age = random.randint(1, 5)  # 1–5 moons old
+
+                kit = Cat(parent1=blood_parent.ID, moons=kit_age, backstory=backstory)
 
             elif cat and other_cat:
                 # Two parents provided
@@ -843,10 +850,9 @@ class Pregnancy_Events:
                 kit.thought = i18n.t("hardcoded.new_kit_thought", name=str(cat.name))
                 kit.thought = event_text_adjust(Cat, kit.thought, random_cat=cat)
 
-            # Prevent duplicate prefixes in the same litter
+            # Prevent duplicate prefixes in same litter
             while kit.name.prefix in [kitty.name.prefix for kitty in all_kitten]:
                 kit.name = Name("newborn")
-
             all_kitten.append(kit)
             # adoptive parents are set at the end, when everything else is decided
 
@@ -865,6 +871,8 @@ class Pregnancy_Events:
                         kit.pelt.scars.append("NOPAW")
                     elif kit.permanent_condition[condition] == "born without a tail":
                         kit.pelt.scars.append("NOTAIL")
+                    elif kit.permanent_condition[condition] == "blind":
+                        kit.pelt.scars.append("BLIND")
                 Condition_Events.handle_already_disabled(kit)
 
             # create and update relationships
@@ -1072,14 +1080,17 @@ class Pregnancy_Events:
 
     @staticmethod
     def get_balanced_kit_chance(
-        first_parent: Cat, second_parent: Cat, affair, clan
+        first_parent: Cat, second_parent: Cat, affair, clan, kits_are_adopted=False
     ) -> int:
         """Returns a chance based on different values."""
         # Now that the second parent is determined, we can calculate the balanced chance for kits
         # get the chance for pregnancy
-        inverse_chance = constants.CONFIG["pregnancy"]["primary_chance_unmated"]
-        if len(first_parent.mate) > 0 and not affair:
-            inverse_chance = constants.CONFIG["pregnancy"]["primary_chance_mated"]
+        if kits_are_adopted:
+            inverse_chance = constants.CONFIG["pregnancy"]["primary_chance_same_sex_adoption_mated"]
+        else:
+            inverse_chance = constants.CONFIG["pregnancy"]["primary_chance_unmated"]
+            if len(first_parent.mate) > 0 and not affair:
+                inverse_chance = constants.CONFIG["pregnancy"]["primary_chance_mated"]
 
         # SETTINGS
         # - decrease inverse chance if only mated pairs can have kits
