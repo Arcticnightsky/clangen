@@ -191,7 +191,7 @@ class Pregnancy_Events:
         if other_cat:
             cats_involved["r_c"] = other_cat
         for kit in kits:
-            kit.thought = "hardcoded.new_kit_thought"
+            kit.thought = "new_adopted_kit_thought"
             kit.thought = event_text_adjust(Cat, kit.thought, random_cat=cat)
 
         # Normally, birth cooldown is only applied to cat who gave birth
