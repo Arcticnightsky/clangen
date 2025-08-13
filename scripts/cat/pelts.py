@@ -1712,7 +1712,7 @@ class Pelt:
                 else:
                     base = ''
 
-                patches_color = cat.pelt.tortiecolour.lower()
+                patches_color = cat.pelt.tortie_colour.lower()
                 if patches_color in renamed_colors:
                     patches_color = renamed_colors[patches_color]
                 color_name = f"{color_name}/{patches_color}"
