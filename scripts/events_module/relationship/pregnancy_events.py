@@ -830,10 +830,6 @@ class Pregnancy_Events:
                     )[0]
                     blood_parent.thought = thought
 
-                # For adoption realism, give a chance for the kit to be a few moons old
-                if random.random() < 0.5:  # 50% newborn
-                    kit_age = 0
-                else:
                     kit_age = random.randint(1, 5)  # 1–5 moons old
 
                 kit = Cat(parent1=blood_parent.ID, moons=kit_age, backstory=backstory)
