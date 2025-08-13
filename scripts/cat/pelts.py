@@ -1706,13 +1706,13 @@ class Pelt:
                 else:
                     color_name = cat.pelt.name.lower()
             else:
-                base = cat.pelt.tortiebase.lower()
+                base = cat.pelt.tortie_base.lower()
                 if base in [tabby.lower() for tabby in Pelt.tabbies] + ['bengal', 'rosette', 'speckled']:
                     base = ' tabby'  # the extra space is intentional
                 else:
                     base = ''
 
-                patches_color = cat.pelt.tortie_colour.lower()
+                patches_color = cat.pelt.tortiecolour.lower()
                 if patches_color in renamed_colors:
                     patches_color = renamed_colors[patches_color]
                 color_name = f"{color_name}/{patches_color}"
