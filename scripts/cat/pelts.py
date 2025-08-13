@@ -1003,12 +1003,12 @@ class Pelt:
             self.name = selected.name
             self.length = selected.length
 # Force male tortie check here
-            if gender == "male" and self.tortiebase in Pelt.torties:
+            if gender == "male" and self.tortie_base in Pelt.torties:
                 boosted_inheritance = max(200, constants.CONFIG["cat_generation"]["direct_inheritance"] + 49)
                 if random.randint(1, boosted_inheritance) != 1:
                     print(f"Converting rare male tortie kit '{kit.name}' to female for realism.")
                     gender = "female"
-                    self.tortiebase = selected.tortiebase
+                    self.tortie_base = selected.tortie_base
                 else: 
                     gender = "male"
             self.colour = selected.colour
@@ -1701,24 +1701,24 @@ class Pelt:
                 # If using short, don't describe the colors of calicos and torties.
                 # Just call them calico, tortie, or mottled
                 if cat.pelt.colour in Pelt.black_colours + Pelt.brown_colours + Pelt.white_colours and \
-                        cat.pelt.tortiecolour in Pelt.black_colours + Pelt.brown_colours + Pelt.white_colours:
+                        cat.pelt.tortie_colour in Pelt.black_colours + Pelt.brown_colours + Pelt.white_colours:
                     color_name = "mottled"
                 else:
                     color_name = cat.pelt.name.lower()
             else:
-                base = cat.pelt.tortiebase.lower()
+                base = cat.pelt.tortie_base.lower()
                 if base in [tabby.lower() for tabby in Pelt.tabbies] + ['bengal', 'rosette', 'speckled']:
                     base = ' tabby'  # the extra space is intentional
                 else:
                     base = ''
 
-                patches_color = cat.pelt.tortiecolour.lower()
+                patches_color = cat.pelt.tortie_colour.lower()
                 if patches_color in renamed_colors:
                     patches_color = renamed_colors[patches_color]
                 color_name = f"{color_name}/{patches_color}"
 
                 if cat.pelt.colour in Pelt.black_colours + Pelt.brown_colours + Pelt.white_colours and \
-                        cat.pelt.tortiecolour in Pelt.black_colours + Pelt.brown_colours + Pelt.white_colours:
+                        cat.pelt.tortie_colour in Pelt.black_colours + Pelt.brown_colours + Pelt.white_colours:
                     color_name = f"{color_name} mottled{base}"
                 else:
                     color_name = f"{color_name} {cat.pelt.name.lower()}{base}"
