@@ -111,15 +111,6 @@ class HandleShortEvents:
         self.main_cat = main_cat
         self.random_cat = random_cat
         self.victim_cat = victim_cat
-
-
-        # Prevent random cat from being the same as main cat by reshuffling
-        if self.random_cat == self.main_cat:
-            possible_cats = [
-                c for c in Cat.all_cats.values()
-                if c.status.alive_in_player_clan and c != self.main_cat
-            ]
-            self.random_cat = random.choice(possible_cats) if possible_cats else None
             
         # random cat gets added to involved later on, only if the event chosen requires a random cat
         self.involved_cats = [self.main_cat.ID]
@@ -200,6 +191,14 @@ class HandleShortEvents:
 
         self.additional_event_text = ""
 
+        # Prevent random cat from being the same as main cat by reshuffling
+        if self.random_cat == self.main_cat:
+            possible_cats = [
+                c for c in Cat.all_cats.values()
+                if c.status.alive_in_player_clan and c != self.main_cat
+            ]
+            self.random_cat = random.choice(possible_cats) if possible_cats else None
+        
         # check if another cat is present
         if self.random_cat:
             self.involved_cats.append(self.random_cat.ID)
