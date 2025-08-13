@@ -34,7 +34,7 @@ from scripts.utility import (
     find_alive_cats_with_rank,
     adjust_list_text,
 )
-
+import random
 
 class HandleShortEvents:
     """Handles generating and executing ShortEvents"""
