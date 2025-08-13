@@ -2703,8 +2703,9 @@ def generate_sprite(
             new_sprite.blit(patches, (0, 0))
 
         # TINTS
+        # TINTS
         if (
-            cat.pelt.tint is not None
+            cat.pelt.tint != "none"
             and cat.pelt.tint in sprites.cat_tints["tint_colours"]
         ):
             # Multiply with alpha does not work as you would expect - it just lowers the alpha of the
@@ -2714,7 +2715,7 @@ def generate_sprite(
             tint.fill(tuple(sprites.cat_tints["tint_colours"][cat.pelt.tint]))
             new_sprite.blit(tint, (0, 0), special_flags=pygame.BLEND_RGB_MULT)
         if (
-            cat.pelt.tint is not None
+            cat.pelt.tint != "none"
             and cat.pelt.tint in sprites.cat_tints["dilute_tint_colours"]
         ):
             tint = pygame.Surface((sprites.size, sprites.size)).convert_alpha()
@@ -2729,7 +2730,7 @@ def generate_sprite(
 
             # Apply tint to white patches.
             if (
-                cat.pelt.white_patches_tint is not None
+                cat.pelt.white_patches_tint != "none"
                 and cat.pelt.white_patches_tint
                 in sprites.white_patches_tints["tint_colours"]
             ):
@@ -2750,7 +2751,7 @@ def generate_sprite(
         if cat.pelt.points:
             points = sprites.sprites["white" + cat.pelt.points + cat_sprite].copy()
             if (
-                cat.pelt.white_patches_tint is not None
+                cat.pelt.white_patches_tint != "none"
                 and cat.pelt.white_patches_tint
                 in sprites.white_patches_tints["tint_colours"]
             ):
@@ -2769,6 +2770,7 @@ def generate_sprite(
             new_sprite.blit(
                 sprites.sprites["white" + cat.pelt.vitiligo + cat_sprite], (0, 0)
             )
+
 
         # draw eyes & scars1
         eyes = sprites.sprites["eyes" + cat.pelt.eye_colour + cat_sprite].copy()
