@@ -552,6 +552,55 @@ class Pregnancy_Events:
             )
         )
 
+        kits_amount = game.clan.pregnancy_data[cat.ID]["amount"]
+        if kits_amount == 0:  # safety check, sometimes pregnancies were ending up with 0 due to save rollbacks
+            kits_amount = 1
+        stillborn_chance = 0
+
+        if kits_amount < 3:
+            stillborn_chance = 5000
+        elif kits_amount == 3:
+            stillborn_chance = 4500
+        elif kits_amount == 4:
+            stillborn_chance = 3000
+        elif kits_amount > 4:
+            stillborn_chance = 2500
+        elif kits_amount == 6:
+            stillborn_chance = 1000
+
+         if not int(random.random() * stillborn_chance):
+            kit.moons = 0
+            kit.dead = True
+            kit.thoughts(just_died=True)
+            kit.history.add_death(str(kit.name) + " was stillborn.")
+            possible_events = events["birth"]["stillborn_kit_death"]
+            # just makin sure meds aren't mentioned if they aren't around or if they are a parent
+            meds = find_alive_cats_with_rank(
+                Cat, [CatRank.MEDICINE_CAT, CatRank.MEDICINE_APPRENTICE], sort=True
+            )
+            mate_is_med = [mate_id for mate_id in cat.mate if mate_id in meds]
+            if not meds or cat in meds or len(mate_is_med) > 0:
+                for event in possible_events:
+                    if CatRank.MEDICINE_CAT in event:
+                        possible_events.remove(event)
+             # if the mother has died from the childbirth above, the stillbirth event wouldn't happen at all
+            if not cat.dead:
+                possible_events.remove(event)
+
+            event_list.append(choice(possible_events))
+
+        print_event = " ".join(event_list)
+        print_event = print_event.replace("{insert}", insert)
+
+        print_event = event_text_adjust(
+            Cat, print_event, main_cat=cat, random_cat=other_cat, clan=game.clan
+        )
+        # display event
+        game.cur_events_list.append(
+            Single_Event(
+                print_event, ["health", "birth_death"], involved_cats, cat_dict=cat_dict
+            )
+        )
     # ---------------------------------------------------------------------------- #
     #                          check if event is triggered                         #
     # ---------------------------------------------------------------------------- #
