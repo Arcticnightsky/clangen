@@ -1169,10 +1169,8 @@
                 "leader",
                 "deputy",
                 "medicine cat",
-                "medicine cat apprentice",
                 "mediator",
-                "mediator apprentice",
-                "warrior",
+                "warrior"
             ]
         },
         "new_cat": [
