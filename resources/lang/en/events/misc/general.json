@@ -4850,14 +4850,7 @@
             ]
         },
         "new_cat": [
-            [
-                "age": [
-                "adolescent",
-                "young adult",
-                "adult",
-                "senior adult",
-                "senior"
-            ],
+            [			
                 "clancat",
                 "exists",
 				"meeting"
@@ -4941,13 +4934,6 @@
         },
         "new_cat": [
             [
-                "age": [
-                "adolescent",
-                "young adult",
-                "adult",
-                "senior adult",
-                "senior"
-            ],
                 "clancat",
                 "exists",
 				"meeting"
@@ -4993,14 +4979,6 @@
             ]
         },
         "new_cat": [
-            [
-                "age": [
-                "adolescent",
-                "young adult",
-                "adult",
-                "senior adult",
-                "senior"
-            ],
                 "clancat",
                 "exists",
 				"meeting"
@@ -5046,13 +5024,6 @@
         },
         "new_cat": [
             [
-                "age": [
-                "adolescent",
-                "young adult",
-                "adult",
-                "senior adult",
-                "senior"
-            ],
                 "clancat",
                 "exists",
 				"meeting"
