@@ -177,11 +177,11 @@ class Pregnancy_Events:
         event = "hardcoded.adoption_kittens_single"
         cats_names = str(cat.name)
         if other_cat:
-            event = "hardcoded.adoption_kittens_pair{random.choice(range(1,5))}"
+            event = "hardcoded.adoption_kittens_pair"
             cats_names = adjust_list_text([str(cat.name), str(other_cat.name)])
 
         print_event = i18n.t(
-            event,
+            event{random.choice(range(1,5))},
             names=cats_names,
             insert=i18n.t("conditions.pregnancy.kit_amount", count=amount),
             count=amount,
