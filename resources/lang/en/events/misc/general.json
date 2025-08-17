@@ -6251,6 +6251,23 @@
                 "medicine cat"
             ]
         },
+        "new_cat": [
+            [
+                "clancat",
+				"status:medicine cat",
+                "exists",
+				"meeting"
+            ]
+        ],
+        "relationships": [
+            {
+                "cats_from": ["m_c"],
+                "cats_to": ["n_c:0"],
+                "mutual": true,
+                  "values": ["like"],
+                "amount": -10
+              }
+        ],
         "other_clan": {
             "current_rep": [
                 "any"
@@ -7113,6 +7130,14 @@
                 "adjust": ""
             }
         ],
+        "new_cat": [
+            [
+                "clancat",
+				"status:medicine cat",
+                "exists",
+				"meeting"
+            ]
+        ],
         "other_clan": {
             "current_rep": [
                 "ally",
@@ -7142,6 +7167,14 @@
                 ],
                 "adjust": ""
             }
+        ],
+        "new_cat": [
+            [
+                "clancat",
+				"status:medicine cat",
+                "exists",
+				"meeting"
+            ]
         ],
         "other_clan": {
             "current_rep": [
@@ -7173,6 +7206,14 @@
                 "adjust": "reduce_eighth"
             }
         ],
+        "new_cat": [
+            [
+                "clancat",
+				"status:medicine cat",
+                "exists",
+				"meeting"
+            ]
+        ],
         "other_clan": {
             "current_rep": [
                 "ally"
@@ -7201,6 +7242,14 @@
                 ],
                 "adjust": "reduce_eighth"
             }
+        ],
+        "new_cat": [
+            [
+                "clancat",
+				"status:medicine cat apprentice",
+                "exists",
+				"meeting"
+            ]
         ],
         "other_clan": {
             "current_rep": [
@@ -7232,6 +7281,14 @@
                 "adjust": ""
             }
         ],
+        "new_cat": [
+            [
+                "clancat",
+				"status:medicine cat",
+                "exists",
+				"meeting"
+            ]
+        ],
         "other_clan": {
             "current_rep": [
                 "any"
@@ -7260,6 +7317,14 @@
                 ],
                 "adjust": ""
             }
+        ],
+        "new_cat": [
+            [
+                "clancat",
+				"status:medicine cat apprentice",
+                "exists",
+				"meeting"
+            ]
         ],
         "other_clan": {
             "current_rep": [
@@ -7291,6 +7356,14 @@
                 "adjust": "reduce_eighth"
             }
         ],
+        "new_cat": [
+            [
+                "clancat",
+				"status:medicine cat apprentice",
+                "exists",
+				"meeting"
+            ]
+        ],
         "other_clan": {
             "current_rep": [
                 "any"
@@ -7321,6 +7394,14 @@
                 "adjust": "reduce_eighth"
             }
         ],
+        "new_cat": [
+            [
+                "clancat",
+				"status:medicine cat",
+                "exists",
+				"meeting"
+            ]
+        ],
         "other_clan": {
             "current_rep": [
                 "ally"
@@ -7349,6 +7430,14 @@
                 ],
                 "adjust": ""
             }
+        ],
+        "new_cat": [
+            [
+                "clancat",
+				"status:medicine cat apprentice",
+                "exists",
+				"meeting"
+            ]
         ],
         "other_clan": {
             "current_rep": [
@@ -7379,6 +7468,14 @@
                 ],
                 "adjust": ""
             }
+        ],
+        "new_cat": [
+            [
+                "clancat",
+				"status:medicine cat",
+                "exists",
+				"meeting"
+            ]
         ],
         "other_clan": {
             "current_rep": [
