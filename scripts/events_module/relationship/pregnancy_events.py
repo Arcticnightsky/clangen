@@ -568,7 +568,7 @@ class Pregnancy_Events:
         elif kits_amount == 6:
             stillborn_chance = 1000
 
-         if not int(random.random() * stillborn_chance):
+        if not int(random.random() * stillborn_chance):
             kit.moons = 0
             kit.dead = True
             kit.thoughts(just_died=True)
