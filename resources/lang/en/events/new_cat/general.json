@@ -1189,6 +1189,9 @@
               "values": ["like", "romance", "comfort"],
             "amount": 20
           }
-		]
+		],
+        "other_clan": {
+            "current_rep": ["hostile"]
+        }
     }
 ]
