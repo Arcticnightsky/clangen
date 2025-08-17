@@ -690,15 +690,12 @@ class Cat:
             # find what tier of rel they had for each type
             tiers: list[RelTier] = rel_with_dead.get_reltype_tiers()
             for tier in tiers:
-                rel_type = [k for k in rel_type_tiers if tier in rel_type_tiers[k]]
+                rel_type = [k for k in rel_type_tiers if tier in k]
                 if tier.is_extreme_pos:
                     very_high_types.extend(rel_type)
-                elif tier.is_mid_pos:
-                    list_to_extend = choice([very_low_types, very_high_types])
-                    list_to_extend.extend(rel_type)
                 elif tier.is_low_pos:
                     high_types.extend(rel_type)
-                elif tier.is_extreme_neg or tier.is_mid_neg:
+                elif tier.is_extreme_neg:
                     very_low_types.extend(rel_type)
                 continue
 
