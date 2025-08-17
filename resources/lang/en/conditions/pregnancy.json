@@ -162,6 +162,11 @@
         "lead_death": [
             "m_c lost one of {PRONOUN/m_c/poss} nine lives, but gave birth to a {insert}.",
             "Although m_c gave birth to a {insert}, it came at the cost of one of {PRONOUN/m_c/poss} nine lives."
+        ],
+        "stillborn_kit_death": [
+            "Wait a minute... m_c sniffs one of {PRONOUN/m_c/poss} kits as they haven't moved or made a sound yet, and it looked a bit smaller than usual. A medicine cat thoroughly examines the kit and gives m_c the heartbreaking news - r_c was stillborn...",
+            "As the medicine cat does one final check over m_c and {PRONOUN/m_c/poss} litter, they find out that one of the kits has become unresponsive. As m_c frowns and asks what was wrong, the medicine breaks the news to {PRONOUN/m_c/poss} that one of {PRONOUN/m_c/poss} kits has unfortunatley passed away.",
+			"m_c purrs over {PRONOUN/m_c/poss} litter and starts to name them, she was about to name the laziest one Sleepykit, but upon inspection, the kit seemed lifeless... a medicine cat confirms the grim truth and m_c, who was sick to the stomach, renames the kit and wails mournfully for {PRONOUN/m_c/poss} lost kit."
         ]
     }
 }
