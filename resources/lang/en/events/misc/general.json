@@ -4947,7 +4947,7 @@
                   "values": ["like"],
                 "amount": -2
               }
-        ]
+        ],
         "other_clan": {
             "current_rep": [
                 "any"
@@ -4993,7 +4993,7 @@
                   "values": ["like"],
                 "amount": -10
               }
-        ]
+        ],
         "other_clan": {
             "current_rep": [
                 "any"
@@ -5038,7 +5038,7 @@
                   "values": ["like"],
                 "amount": 5
               }
-        ]
+        ],
         "other_clan": {
             "current_rep": [
                 "any"
