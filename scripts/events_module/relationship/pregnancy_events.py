@@ -552,7 +552,7 @@ class Pregnancy_Events:
             )
         )
 
-        kits_amount = game.clan.pregnancy_data[cat.ID]["amount"]
+        kits_amount = clan.pregnancy_data[cat.ID]["amount"]
         if kits_amount == 0:  # safety check, sometimes pregnancies were ending up with 0 due to save rollbacks
             kits_amount = 1
         stillborn_chance = 0
