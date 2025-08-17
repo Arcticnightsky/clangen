@@ -586,18 +586,6 @@ class Pregnancy_Events:
 
             event_list.append(choice(possible_events))
 
-        print_event = " ".join(event_list)
-        print_event = print_event.replace("{insert}", insert)
-
-        print_event = event_text_adjust(
-            Cat, print_event, main_cat=cat, random_cat=other_cat, clan=game.clan
-        )
-        # display event
-        game.cur_events_list.append(
-            Single_Event(
-                print_event, ["health", "birth_death"], involved_cats, cat_dict=cat_dict
-            )
-        )
     # ---------------------------------------------------------------------------- #
     #                          check if event is triggered                         #
     # ---------------------------------------------------------------------------- #
