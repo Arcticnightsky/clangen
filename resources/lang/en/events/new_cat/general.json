@@ -1120,8 +1120,7 @@
         "new_cat": [
             [
                 "clancat",
-                "backstory:outsider1",
-                "status:warrior"
+				"meeting"
             ]
         ],
         "relationships": [
@@ -1131,7 +1130,65 @@
             "mutual": true,
               "values": ["like", "comfort"],
             "amount": 20
-          },
+          }
+		]
+    },
+    {
+        "event_id": "gen_kittypet_kit_rescue1",
+        "location": [
+            "any"
+        ],
+        "season": [
+            "any"
+        ],
+        "frequency": 1,
+        "event_text": "A border patrol ventured to the nearest thunderpath where they found a dead, obliterated monster that had crashed into a tree alongside the thunderpath! Before the patrol could go back to camp to report it, someone heard a tiny mewl coming from the wreckage. Upon closer discovery, there was a kit crying for {PRONOUN/n_c:0/object} Twolegs, who were nowhere to be found. The patrol quickly rescues the kit and promises {PRONOUN/n_c:0/object} a place in the Clan.",
+        "m_c": {},
+        "new_cat": [
+            [
+                "new_name",
+                "kittypet",
+                "backstory:orphaned3",
+                "status:kitten",
+                "age:kitten"
+            ]
+        ]
+    },
+    {
+        "event_id": "gen_secret_interclan_romance",
+        "location": [
+            "any"
+        ],
+        "season": [
+            "any"
+        ],
+        "frequency": 2,
+        "event_text": "The ongoing tensions between c_n and o_c_n have made it hard for m_c and n_c:0, a o_c_n cat, to meet eachother at the border every other night with ease, it's so hard... maintaining a secret inter-clan romance in such circumstances...",
+        "m_c": {
+            "status": [
+                "leader",
+                "deputy",
+                "medicine cat",
+                "medicine cat apprentice",
+                "mediator",
+                "mediator apprentice",
+                "warrior",
+            ]
+        },
+        "new_cat": [
+            [
+                "clancat",
+				"meeting"
+            ]
+        ],
+        "relationships": [
+          {
+            "cats_from": ["m_c"],
+            "cats_to": ["n_c:0"],
+            "mutual": true,
+              "values": ["like", "romance", "comfort"],
+            "amount": 20
+          }
 		]
     }
 ]
