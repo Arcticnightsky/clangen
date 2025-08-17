@@ -814,7 +814,6 @@ class Cat:
 
             # Negative "grief" messages are just for flavor.
             if very_low_types:
-                # Generate the event:
                 possible_strings = []
                 for x in very_low_types:
                     value = f"neg_{x}"
@@ -824,13 +823,16 @@ class Cat:
                         )
                     )
 
-                text = event_text_adjust(
-                    Cat, choice(possible_strings), main_cat=self, random_cat=cat
-                )
-                if cat.ID not in Cat.grief_strings:
-                    Cat.grief_strings[cat.ID] = []
-
-                Cat.grief_strings[cat.ID].append((text, (self.ID, cat.ID), "negative"))
+                if possible_strings:  # ✅ only pick if list is not empty
+                    text = event_text_adjust(
+                        Cat, choice(possible_strings), main_cat=self, random_cat=cat
+                    )
+                    if cat.ID not in Cat.grief_strings:
+                        Cat.grief_strings[cat.ID] = []
+                    Cat.grief_strings[cat.ID].append((text, (self.ID, cat.ID), "negative"))
+                else:
+                    # optional fallback so the game doesn’t silently skip
+                    print(f"WARNING: no negative grief strings found for {cat.name}")
 
     def familial_grief(self, living_cat: Cat):
         """
