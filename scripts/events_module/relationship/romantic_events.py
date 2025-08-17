@@ -907,13 +907,13 @@ class RomanticEvents:
             ]
             if len(alive_inclan_from_mates) > 0 and len(alive_inclan_to_mates) > 0:
                 poly_key = "both_mates"
-            elif len(alive_inclan_from_mates) > 0 and len(alive_inclan_to_mates) <= 0:
+            elif len(alive_inclan_from_mates) > 0:
                 poly_key = "m_c_mates"
-            elif len(alive_inclan_from_mates) <= 0 and len(alive_inclan_to_mates) > 0:
+            elif len(alive_inclan_to_mates) > 0:
                 poly_key = "r_c_mates"
             if not poly_key:
-                # none of the other involved mates are alive
-                return None
+                # fallback to regular mate strings
+                return choice(RomanticEvents.MATE_DICTS[key])
             return choice(RomanticEvents.POLY_MATE_DICTS[key][poly_key])
 
     # ---------------------------------------------------------------------------- #
