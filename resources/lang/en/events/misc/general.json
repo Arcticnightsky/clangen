@@ -4979,6 +4979,7 @@
             ]
         },
         "new_cat": [
+			[
                 "clancat",
                 "exists",
 				"meeting"
