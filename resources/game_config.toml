@@ -195,7 +195,7 @@ dev_tools = true
   unmated_random_affair_chance = 10
 
   # base chance for same-sex mates to adopt random kittens
-  primary_chance_same_sex_adoption_mated = 175
+  primary_chance_same_sex_adoption_mated = 250
 
   # The kit number is incremental. It is 1-6 as default so if you change these numbers, you should probably keep this in mind.
   # As in, your max kits number should probably be 5 more than the min kits number.
