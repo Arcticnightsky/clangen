@@ -7120,7 +7120,7 @@
             "clan_wide"
         ],
         "frequency": 1,
-        "event_text": "The o_c_n medicine cat comes asking if c_n has any herbs to spare. Unfortunately, the c_n herb stocks are far too low and c_n is unable to provide any help.",
+        "event_text": "n_c:0, the o_c_n medicine cat, comes asking if c_n has any herbs to spare. Unfortunately, the c_n herb stocks are far too low and c_n is unable to provide any help.",
         "supplies": [
             {
                 "type": "all_herb",
@@ -7158,7 +7158,7 @@
             "clan_wide"
         ],
         "frequency": 2,
-        "event_text": "A medicine cat from o_c_n comes to c_n, asking for herbs to heal their sick Clanmates. c_n quickly shoos them away, not willing to admit that they already don't have enough to support themselves.",
+        "event_text": "n_c:0, a medicine cat from o_c_n, comes to c_n asking for herbs to heal {PRONOUN/n_c:0/poss} sick Clanmates. c_n quickly shoos {PRONOUN/n_c:0/poss} away, not willing to admit that they already don't have enough to support themselves.",
         "supplies": [
             {
                 "type": "all_herb",
@@ -7196,7 +7196,7 @@
             "clan_wide"
         ],
         "frequency": 2,
-        "event_text": "The o_c_n medicine cat comes asking if c_n have any given_herb to spare. Graciously, your Clan decides to aid their allies and share the herbs.",
+        "event_text": "n_c:0, the o_c_n medicine cat, comes asking if c_n have any given_herb to spare. Graciously, your Clan decides to aid their allies and share the herbs.",
         "supplies": [
             {
                 "type": "any_herb",
@@ -7233,7 +7233,7 @@
             "clan_wide"
         ],
         "frequency": 2,
-        "event_text": "The medicine cat apprentice from o_c_n comes asking for given_herb. They refuse to say why their Clan needs them but c_n still provides them with what they need.",
+        "event_text": "n_c:0, the medicine cat apprentice from o_c_n, comes asking for given_herb. {PRONOUN/n_c:0/poss/CAP} refuses to say why {PRONOUN/n_c:0/poss} Clan needs them but c_n still provides them with what they need.",
         "supplies": [
             {
                 "type": "any_herb",
@@ -7271,7 +7271,7 @@
             "clan_wide"
         ],
         "frequency": 1,
-        "event_text": "The o_c_n medicine cat comes asking if c_n have any given_herb to spare. However, c_n only has enough for themselves and they refuse to share.",
+        "event_text": "n_c:0, the o_c_n medicine cat, comes asking if c_n have any given_herb to spare. However, c_n only has enough for themselves and they refuse to share.",
         "supplies": [
             {
                 "type": "any_herb",
@@ -7308,7 +7308,7 @@
             "clan_wide"
         ],
         "frequency": 2,
-        "event_text": "The medicine cat apprentice from o_c_n comes asking for herbs. They refuse to say why their Clan needs them and c_n decides not to share their precious few given_herb.",
+        "event_text": "n_c:0, the medicine cat apprentice from o_c_n, comes asking for herbs. {PRONOUN/n_c:0/poss/CAP} refuses to say why {PRONOUN/n_c:0/poss} Clan needs them and c_n decides not to share their precious few given_herb.",
         "supplies": [
             {
                 "type": "any_herb",
@@ -7345,7 +7345,7 @@
             "clan_wide"
         ],
         "frequency": 2,
-        "event_text": "The o_c_n medicine cat apprentice comes to c_n's camp, pleading for help with a yellowcough epidemic. c_n provides the cat with some of their extra lungwort.",
+        "event_text": "n_c:0, the o_c_n medicine cat apprentice, comes to c_n's camp, pleading for help with a yellowcough epidemic. c_n provides the cat with some of their extra lungwort.",
         "supplies": [
             {
                 "type": "lungwort",
@@ -7383,7 +7383,7 @@
             "clan_wide"
         ],
         "frequency": 2,
-        "event_text": "A medicine cat from o_c_n comes to c_n, asking for lungwort to heal a case of yellowcough. c_n has some extra, and so decides to share with their allies.",
+        "event_text": "n_c:0, a medicine cat from o_c_n, comes to c_n, asking for lungwort to heal a case of yellowcough. c_n has some extra, and so decides to share with their allies.",
         "supplies": [
             {
                 "type": "lungwort",
@@ -7421,7 +7421,7 @@
             "clan_wide"
         ],
         "frequency": 2,
-        "event_text": "The o_c_n medicine cat apprentice comes to c_n's camp, pleading for help with a yellowcough epidemic. However, c_n has nothing that they are willing to share.",
+        "event_text": "n_c:0, the o_c_n medicine cat apprentice, comes to c_n's camp, pleading for help with a yellowcough epidemic. However, c_n has nothing that they are willing to share.",
         "supplies": [
             {
                 "type": "lungwort",
@@ -7458,7 +7458,7 @@
             "clan_wide"
         ],
         "frequency": 2,
-        "event_text": "A medicine cat from o_c_n comes to c_n, asking for lungwort to heal a case of yellowcough. However, c_n hardly has enough for their own Clan and so refuses.",
+        "event_text": "n_c:0, a medicine cat from o_c_n, comes to c_n, asking for lungwort to heal a case of yellowcough. However, c_n hardly has enough for their own Clan and so refuses.",
         "supplies": [
             {
                 "type": "lungwort",
