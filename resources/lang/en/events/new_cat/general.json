@@ -1741,7 +1741,7 @@
         "season": [
             "any"
         ],
-        "frequency": 3,
+        "frequency": 2,
         "event_text": "m_c spent hours chatting with a o_c_n cat named n_c:0 by the border.",
         "m_c": {
             "status": [
