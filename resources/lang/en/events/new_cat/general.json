@@ -1643,7 +1643,7 @@
                 "litter",
                 "age:newborn",
                 "backstory:outsider_roots2",
-                "parent:m_c,0"
+                "parent:0,m_c"
             ]
         ],
         "outsider": {
