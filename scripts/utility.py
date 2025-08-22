@@ -960,16 +960,20 @@ def create_new_cat(
                 elif chosen_condition in ("blind"):
                     new_cat.pelt.scars.append("BLIND")
 
-                # Higher chance of deafness / partial hearing loss in blue-eyed white cats
+                deaf_chance = None
                 if (new_cat.pelt.colour == "WHITE" or new_cat.white_patches == "FULLWHITE") and new_cat.eye_colour in Pelt.blue_eyes:
-                    num = constants.CONFIG["cat_generation"]["base_permanent_condition"] - 40
-                    if num < 1:
-                        num = 1
+                    deaf_chance = constants.CONFIG["cat_generation"]["base_permanent_condition"] * 0.4
+                elif (new_cat.pelt.colour == "WHITE" or new_cat.white_patches == "FULLWHITE") and new_cat.eye_colour2 and new_cat.eye_colour2 in Pelt.blue_eyes:
+                    deaf_chance = constants.CONFIG["cat_generation"]["base_permanent_condition"] * 0.7
 
-                    if not random.randint(0, num):  # success means condition is applied
+                if deaf_chance:
+                    if deaf_chance < 1:
+                        deaf_chance = 1
+                    if not random.randint(0, deaf_chance):
                         chosen_condition = choice(["deaf", "partial hearing loss"])
                         new_cat.get_permanent_condition(chosen_condition, True)
                         new_cat.permanent_condition[chosen_condition]["moons_until"] = -2
+                        
 
         # KILL >:D only if we're sposed to tho
         if not alive:
