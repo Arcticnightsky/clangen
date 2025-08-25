@@ -408,20 +408,6 @@ class Cat:
         """
         # trans cat chances
         self.genderalign = self.gender
-        trans_chance = randint(0, 50)
-        nb_chance = randint(0, 75)
-
-        # GENDER IDENTITY
-        if self.age.is_baby() or disable_random:
-            # newborns can't be trans, sorry babies
-            pass
-        elif nb_chance == 1:
-            self.genderalign = "nonbinary"
-        elif trans_chance == 1:
-            if self.gender == "female":
-                self.genderalign = "trans male"
-            else:
-                self.genderalign = "trans female"
 
         # PRONOUNS AUTO-GENERATE WHEN REQUIRED
 
@@ -653,6 +639,10 @@ class Cat:
         # mark the sprite as outdated
         self.pelt.rebuild_sprite = True
 
+        # exiled cats are special, cus they get kicked out a heaven
+        if self.status.is_exiled(CatGroup.PLAYER_CLAN) and not self.status.is_outsider:
+            self.status.add_to_group(CatGroup.DARK_FOREST)
+
     def exile(self):
         """This is used to send a cat into exile."""
 
@@ -700,12 +690,14 @@ class Cat:
             # find what tier of rel they had for each type
             tiers: list[RelTier] = rel_with_dead.get_reltype_tiers()
             for tier in tiers:
-                rel_type = [k for k in rel_type_tiers if tier in k]
+                rel_type = [k for k in rel_type_tiers if tier in rel_type_tiers[k]]
                 if tier.is_extreme_pos:
                     very_high_types.extend(rel_type)
+                elif tier.is_mid_pos:
+                    high_types.extend(rel_type)
                 elif tier.is_low_pos:
                     high_types.extend(rel_type)
-                elif tier.is_extreme_neg:
+                elif tier.is_extreme_neg or tier.is_mid_neg:
                     very_low_types.extend(rel_type)
                 continue
 
@@ -730,7 +722,7 @@ class Cat:
                     )
 
                 if body_treated:
-                    major_chance -= 1
+                    major_chance += 1
 
             # If major_chance is not 0, there is a chance for major grief
             grief_type = None
@@ -821,7 +813,6 @@ class Cat:
 
             # Negative "grief" messages are just for flavor.
             if very_low_types:
-                # Generate the event:
                 possible_strings = []
                 for x in very_low_types:
                     value = f"neg_{x}"
@@ -831,13 +822,16 @@ class Cat:
                         )
                     )
 
-                text = event_text_adjust(
-                    Cat, choice(possible_strings), main_cat=self, random_cat=cat
-                )
-                if cat.ID not in Cat.grief_strings:
-                    Cat.grief_strings[cat.ID] = []
-
-                Cat.grief_strings[cat.ID].append((text, (self.ID, cat.ID), "negative"))
+                if possible_strings:  # ✅ only pick if list is not empty
+                    text = event_text_adjust(
+                        Cat, choice(possible_strings), main_cat=self, random_cat=cat
+                    )
+                    if cat.ID not in Cat.grief_strings:
+                        Cat.grief_strings[cat.ID] = []
+                    Cat.grief_strings[cat.ID].append((text, (self.ID, cat.ID), "negative"))
+                else:
+                    # optional fallback so the game doesn’t silently skip
+                    print(f"WARNING: no negative grief strings found for {cat.name}")
 
     def familial_grief(self, living_cat: Cat):
         """
@@ -1796,6 +1790,28 @@ class Cat:
         ]
         return other_cat.ID in litter_mates
 
+    def is_half_sibling(self, other_cat: Cat):
+        """Check if the cats are half siblings."""
+        if other_cat.ID not in self.inheritance.siblings.keys():
+            return False
+        half_siblings = [
+            key
+            for key, value in self.inheritance.siblings.items()
+            if "half sibling" in value["additional"]
+        ]
+        return other_cat.ID in half_siblings
+
+    def is_adoptive_sibling(self, other_cat: Cat):
+        """Check if the cats are adoptive siblings."""
+        if other_cat.ID not in self.inheritance.siblings.keys():
+            return False
+        adoptive_siblings = [
+            key
+            for key, value in self.inheritance.siblings.items()
+            if "adoptive" in value["additional"]
+        ]
+        return other_cat.ID in adoptive_siblings
+    
     def is_uncle_aunt(self, other_cat: Cat):
         """Check if the cats are related as uncle/aunt and niece/nephew."""
         if not self.inheritance:
@@ -1917,7 +1933,9 @@ class Cat:
             return
         if name == "torn ear" and "NOEAR" in self.pelt.scars:
             return
-
+        if name == "damaged eyes" and "BLIND" in self.pelt.scars:
+            return
+        
         injury = INJURIES[name]
         mortality = injury["mortality"][self.age.value]
         duration = injury["duration"]
@@ -2015,7 +2033,9 @@ class Cat:
             cat.pelt.scars.append("NOPAW")
         elif new_condition == "born without a tail":
             cat.pelt.scars.append("NOTAIL")
-
+        elif new_condition == "blind":
+            cat.pelt.scars.append("BLIND")
+            
         self.get_permanent_condition(new_condition, born_with=True)
 
     def get_permanent_condition(self, name, born_with=False, event_triggered=False):
@@ -3413,6 +3433,7 @@ def create_cat(rank, moons=None, biome=None):
         "NOLEFTEAR",
         "NORIGHTEAR",
         "MANLEG",
+        "BLIND",
     ]
 
     for scar in new_cat.pelt.scars:
