@@ -251,7 +251,7 @@ dev_tools = true
   base_female_tortie = 4
 
   # base 1/(chance + 1) that a cat will have heterochromia. gets modified further in code
-  base_heterochromia = 120
+  base_heterochromia = 170
 
   # 1/(chance + 1) for a cat to have same pelt as one of their parents
   direct_inheritance = 1
