@@ -958,10 +958,22 @@ def create_new_cat(
                 elif chosen_condition in ("blind"):
                     new_cat.pelt.scars.append("BLIND")
 
+
+                blue_eyes = [
+                    "BLUE",
+                    "DARKBLUE",
+                    "CYAN",
+                    "PALEBLUE",
+                    "HEATHERBLUE",
+                    "COBALT",
+                    "SUNLITICE",
+                    "GREY",
+                ]
+                
                 deaf_chance = None
-                if (new_cat.pelt.colour == "WHITE" or new_cat.pelt.white_patches == "FULLWHITE") and new_cat.pelt.eye_colour in Pelt.blue_eyes:
+                if (new_cat.pelt.colour == "WHITE" or new_cat.pelt.white_patches == "FULLWHITE") and new_cat.pelt.eye_colour in blue_eyes::
                     deaf_chance = constants.CONFIG["cat_generation"]["base_permanent_condition"] * 0.4
-                elif (new_cat.pelt.colour == "WHITE" or new_cat.pelt.white_patches == "FULLWHITE") and new_cat.eye_colour2 and new_cat.pelt.eye_colour2 in Pelt.blue_eyes:
+                elif (new_cat.pelt.colour == "WHITE" or new_cat.pelt.white_patches == "FULLWHITE") and new_cat.eye_colour2 and new_cat.pelt.eye_colour2 in blue_eyes:
                     deaf_chance = constants.CONFIG["cat_generation"]["base_permanent_condition"] * 0.7
 
                 if deaf_chance:
