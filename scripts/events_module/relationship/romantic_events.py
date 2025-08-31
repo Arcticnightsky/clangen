@@ -912,7 +912,6 @@ class RomanticEvents:
             elif len(alive_inclan_to_mates) > 0:
                 poly_key = "r_c_mates"
             if not poly_key:
-                # fallback to regular mate strings
                 return choice(RomanticEvents.MATE_DICTS[key])
             return choice(RomanticEvents.POLY_MATE_DICTS[key][poly_key])
 
