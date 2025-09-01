@@ -89,7 +89,7 @@
     "Flit", "Float", "Flood", "Flower", "Fluff", "Fluffy", "Flutter", "Fly", "Fog", "Foggy", "Freckle", "Frill", "Frilled", "Fringe", "Frog",   
     "Frond", "Fruit", "Fumble", "Furled", "Furze", "Fuzz", "Fuzzy", "Gale", "Gander", "Gardenia", "Garlic", "Gentle", "Gill", "Glacier", "Glade",   
     "Goose", "Gorge", "Gorse", "Grass", "Gravel", "Grouse", "Gull", "Guppy", "Gust", "Hail", "Half", "Hare", "Hatch", "Haven", "Hawk", "Hay", "Hazel", 
-    "Hazy", "Heart", "Heath", "Heavy", "Hemlock", "Heron", "Hibiscus", "Hill", "Hollow", "Holly", "Honey", "Hoot", "Hop", "Hope", "Hornet", 
+    "Hazy", "Heart", "Heath", "Heavy", "Hemlock", "Heron", "Hill", "Hollow", "Holly", "Honey", "Hoot", "Hop", "Hope", "Hornet", 
     "Hound", "Howl", "Humming", "Hush", "Hyacinth", "Iris", "Ivy", "Jackdaw", "Jagged", "Jay", "Jumble", "Jump", "Junco", "Juniper", 
     "Kestrel", "Kink", "Kite", "Lake", "Larch", "Lark", "Laurel", "Lavender", "Leaf", "Leap", "Leopard", "Lichen", "Light", "Lightning", "Lilac", 
     "Lily", "Lion", "Little", "Lizard", "Locust", "Long", "Lotus", "Loud", "Low", "Luck", "Lupine", "Lynx", "Mallow", "Mantis", 
@@ -225,7 +225,7 @@
     "Beach": [
     "Albatross", "Algae", "Anchovy", "Anemone", "Avocet", "Bass", "Barnacle", "Barracuda", "Beluga", "Brine", "Clam", "Coast",
     "Coconut", "Cod", "Conch", "Coral", "Cove", "Crab", "Current", "Delta", "Dolphin", "Dolphin", "Drip", "Drop", "Eel", "Fin", "Flounder",
-    "Foam", "Gannet", "Gull", "Gull", "Hermit", "Herring", "Island", "Jellyfish", "Kelp", "Lagoon", "Lake", "Lobster", "Manta", "Marlin", "Moray",
+    "Foam", "Gannet", "Gull", "Gull", "Hermit", "Herring", "Hibiscus", "Island", "Jellyfish", "Kelp", "Lagoon", "Lake", "Lobster", "Manta", "Marlin", "Moray",
     "Pearly", "Pelican", "Pool", "Pool", "Prawn", "Ripple", "Ripple", "Remora", "Reef", "Sago", "Salmon", "Salt", "Sand", "Sand", "Sardine",  "Scale", "Scale", "Sea",
     "Nacre", "Ocean", "Octopus", "Oyster", "Palm", "Pearl", "Pearl", "Seabass", "Seagull", "Shark", "Shell", "Shimmer", "Shrimp", "Shimmer", "Shore", "Slug", 
     "Snail", "Snook", "Splash", "Squid", "Sturgeon", "Tide", "Tidal", "Torrent", "Tuna", "Wave", "Wave", "Whale", "Coati"
