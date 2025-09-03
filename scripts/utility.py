@@ -981,8 +981,7 @@ def create_new_cat(
                         deaf_chance = 1
                     if not random.randint(0, deaf_chance):
                         chosen_condition = choice(["deaf", "partial hearing loss"])
-                        new_cat.get_permanent_condition(chosen_condition, True)
-                        new_cat.permanent_condition[chosen_condition]["moons_until"] = -2
+                        new_cat.get_permanent_condition(chosen_condition, born_with=True, True)
                         
 
         # KILL >:D only if we're sposed to tho
