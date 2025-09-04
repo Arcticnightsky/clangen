@@ -229,7 +229,7 @@ class Pregnancy_Events:
         if get_clan_setting("same sex birth"):
             # 50/50 for single cats to get pregnant or just bring a litter back
             if not other_cat and random.randint(0, 1):
-                amount = Pregnancy_Events._of_kits(cat)
+                amount = Pregnancy_Events.get_amount_of_kits(cat)
                 kits = Pregnancy_Events.get_kits(amount, cat, None, clan)
                 print_event = i18n.t(
                     "conditions.pregnancy.pregnant_secret",
@@ -265,7 +265,7 @@ class Pregnancy_Events:
             )
         else:
             if not other_cat and cat.gender == "male":
-                amount = Pregnancy_Events._of_kits(cat)
+                amount = Pregnancy_Events.get_amount_of_kits(cat)
                 kits = Pregnancy_Events.get_kits(amount, cat, None, clan)
                 print_event = i18n.t(
                     "conditions.pregnancy.pregnant_secret",
@@ -1116,7 +1116,7 @@ class Pregnancy_Events:
         # Now that the second parent is determined, we can calculate the balanced chance for kits
         # get the chance for pregnancy
         if kits_are_adopted:
-            if len(first_parent.mate) > 0 and not affair:
+            if len(first_parent.mate) > 0 and not affair: 
                 inverse_chance = constants.CONFIG["pregnancy"]["primary_chance_same_sex_adoption"]
         else:
             inverse_chance = constants.CONFIG["pregnancy"]["primary_chance_unmated"]
