@@ -1116,7 +1116,7 @@ class Pregnancy_Events:
         # Now that the second parent is determined, we can calculate the balanced chance for kits
         # get the chance for pregnancy
         if kits_are_adopted:
-            if len(first_parent.mate) > 0 and not affair: 
+            if len(first_parent.mate) > 0 and not affair:
                 inverse_chance = constants.CONFIG["pregnancy"]["primary_chance_same_sex_adoption"]
         else:
             inverse_chance = constants.CONFIG["pregnancy"]["primary_chance_unmated"]
