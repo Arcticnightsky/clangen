@@ -106,7 +106,9 @@
                 "amount": 30
             },
             {
-                "cats_from": ["r_c"],
+                "cats_from": [
+                    "r_c"
+                ],
                 "cats_to": [
                     "m_c"
                 ],
@@ -177,7 +179,9 @@
                 "amount": 30
             },
             {
-                "cats_from": ["r_c"],
+                "cats_from": [
+                    "r_c"
+                ],
                 "cats_to": [
                     "m_c"
                 ],
@@ -379,7 +383,9 @@
                 "amount": 30
             },
             {
-                "cats_from": ["r_c"],
+                "cats_from": [
+                    "r_c"
+                ],
                 "cats_to": [
                     "m_c"
                 ],
@@ -585,7 +591,9 @@
                 "amount": 30
             },
             {
-                "cats_from": ["r_c"],
+                "cats_from": [
+                    "r_c"
+                ],
                 "cats_to": [
                     "m_c"
                 ],
@@ -775,7 +783,9 @@
         "sub_type": [
             "murder_reveal"
         ],
-        "tags": ["clan_wide"],
+        "tags": [
+            "clan_wide"
+        ],
         "frequency": 3,
         "event_text": "c_n is surprised when m_c gathers everyone to say something important. {PRONOUN/m_c/subject/CAP} {VERB/m_c/have/has} decided it's time to make something clear: {PRONOUN/m_c/subject} killed mur_c, but not for the reasons they might think. m_c knew mur_c was planning to do something that would've damaged c_n greatly, and {PRONOUN/m_c/subject} needed to act quickly before it was too late.",
         "m_c": {
@@ -1386,8 +1396,13 @@
             ]
         },
         "r_c": {
-            "age": ["any"],
-            "skill": ["STAR,1", "PROPHET,1"]
+            "age": [
+                "any"
+            ],
+            "skill": [
+                "STAR,1",
+                "PROPHET,1"
+            ]
         },
         "relationships": [
             {
@@ -1432,8 +1447,12 @@
             ]
         },
         "r_c": {
-            "age": ["any"],
-            "skill": ["GHOST,1"]
+            "age": [
+                "any"
+            ],
+            "skill": [
+                "GHOST,1"
+            ]
         },
         "relationships": [
             {
@@ -1485,7 +1504,6 @@
         ]
     },
     {
-
         "event_id": "multi_misc_any_misc1",
         "location": [
             "forest",
@@ -6192,19 +6210,25 @@
         "new_cat": [
             [
                 "clancat",
-				"status:medicine cat",
+                "status:medicine cat",
                 "exists",
-				"meeting"
+                "meeting"
             ]
         ],
         "relationships": [
             {
-                "cats_from": ["m_c"],
-                "cats_to": ["n_c:0"],
+                "cats_from": [
+                    "m_c"
+                ],
+                "cats_to": [
+                    "n_c:0"
+                ],
                 "mutual": true,
-                  "values": ["like"],
+                "values": [
+                    "like"
+                ],
                 "amount": -10
-              }
+            }
         ],
         "other_clan": {
             "current_rep": [
@@ -7365,7 +7389,7 @@
                 "trigger": [
                     "low"
                 ],
-                "adjust": "increase_10"
+                "adjust": "increase_20"
             }
         ],
         "other_clan": {
@@ -7473,7 +7497,7 @@
                 "trigger": [
                     "low"
                 ],
-                "adjust": "increase_10"
+                "adjust": "increase_20"
             }
         ],
         "other_clan": {
@@ -7506,7 +7530,7 @@
                 "trigger": [
                     "low"
                 ],
-                "adjust": "increase_20"
+                "adjust": "increase_40"
             }
         ],
         "other_clan": {
@@ -9696,9 +9720,15 @@
     },
     {
         "event_id": "gen_doubtful_med_mate",
-        "location": ["any"],
-        "season": ["any"],
-        "tags": ["romance"],
+        "location": [
+            "any"
+        ],
+        "season": [
+            "any"
+        ],
+        "tags": [
+            "romance"
+        ],
         "frequency": 2,
         "event_text": "Though m_c is happy to have r_c as {PRONOUN/m_c/poss} mate, m_c can't help but feel as if StarClan is judging {PRONOUN/m_c/object} for loving r_c as {PRONOUN/m_c/poss} mate... After all, medicine cats technically aren't supposed to have mates, but m_c loves r_c too much to give {PRONOUN/r_c/object} up. m_c stays awake at night pondering about {PRONOUN/m_c/poss} love choices and the warrior code.",
         "m_c": {
@@ -9745,6 +9775,63 @@
                     "romance"
                 ],
                 "amount": "-15"
+            }
+        ]
+    },
+    {
+        "event_id": "gen_med_healer_herb_gather",
+        "location": [
+            "any"
+        ],
+        "season": [
+            "newleaf",
+            "greenleaf",
+            "leaf-fall"
+        ],
+        "frequency": 4,
+        "event_text": "m_c went out with r_c to help {PRONOUN/r_c/poss} gather herbs today and brought back a decent supply stock.",
+        "m_c": {
+            "age": [
+                "adolescent",
+                "young adult",
+                "adult",
+                "senior adult",
+                "senior"
+            ],
+            "skill": [
+                "HEALER,1"
+            ]
+        },
+        "r_c": {
+            "status": [
+                "medicine cat",
+                "medicine cat apprentice"
+            ]
+        },
+        "relationships": [
+            {
+                "cats_from": [
+                    "m_c"
+                ],
+                "cats_to": [
+                    "r_c"
+                ],
+                "mutual": true,
+                "values": [
+                    "like",
+                    "respect"
+                ],
+                "amount": 10
+            }
+        ],
+        "supplies": [
+            {
+                "type": "any_herb",
+                "trigger": [
+                    "always",
+                    "low"
+                ],
+                "adjust": "increase_40"
             }
         ]
     }
