@@ -907,6 +907,7 @@ def create_new_cat(
             "NOLEFTEAR",
             "NORIGHTEAR",
             "MANLEG",
+            "BLIND",
         ]
         for scar in new_cat.pelt.scars:
             if scar in not_allowed:
@@ -954,6 +955,34 @@ def create_new_cat(
                     new_cat.pelt.scars.append("NOPAW")
                 elif chosen_condition in ("lost their tail", "born without a tail"):
                     new_cat.pelt.scars.append("NOTAIL")
+                elif chosen_condition in ("blind"):
+                    new_cat.pelt.scars.append("BLIND")
+
+
+                blue_eyes = [
+                    "BLUE",
+                    "DARKBLUE",
+                    "CYAN",
+                    "PALEBLUE",
+                    "HEATHERBLUE",
+                    "COBALT",
+                    "SUNLITICE",
+                    "GREY",
+                ]
+                
+                deaf_chance = None
+                if (new_cat.pelt.colour == "WHITE" or new_cat.pelt.white_patches == "FULLWHITE") and new_cat.pelt.eye_colour in blue_eyes:
+                    deaf_chance = constants.CONFIG["cat_generation"]["base_permanent_condition"] * 0.4
+                elif (new_cat.pelt.colour == "WHITE" or new_cat.pelt.white_patches == "FULLWHITE") and new_cat.eye_colour2 and new_cat.pelt.eye_colour2 in blue_eyes:
+                    deaf_chance = constants.CONFIG["cat_generation"]["base_permanent_condition"] * 0.7
+
+                if deaf_chance:
+                    if deaf_chance < 1:
+                        deaf_chance = 1
+                    if not random.randint(0, deaf_chance):
+                        chosen_condition = choice(["deaf", "partial hearing loss"])
+                        new_cat.get_permanent_condition(chosen_condition, born_with=True)
+                        
 
         # KILL >:D only if we're sposed to tho
         if not alive:
@@ -2698,8 +2727,9 @@ def generate_sprite(
             new_sprite.blit(patches, (0, 0))
 
         # TINTS
+        # TINTS
         if (
-            cat.pelt.tint is not None
+            cat.pelt.tint != "none"
             and cat.pelt.tint in sprites.cat_tints["tint_colours"]
         ):
             # Multiply with alpha does not work as you would expect - it just lowers the alpha of the
@@ -2709,7 +2739,7 @@ def generate_sprite(
             tint.fill(tuple(sprites.cat_tints["tint_colours"][cat.pelt.tint]))
             new_sprite.blit(tint, (0, 0), special_flags=pygame.BLEND_RGB_MULT)
         if (
-            cat.pelt.tint is not None
+            cat.pelt.tint != "none"
             and cat.pelt.tint in sprites.cat_tints["dilute_tint_colours"]
         ):
             tint = pygame.Surface((sprites.size, sprites.size)).convert_alpha()
@@ -2724,7 +2754,7 @@ def generate_sprite(
 
             # Apply tint to white patches.
             if (
-                cat.pelt.white_patches_tint is not None
+                cat.pelt.white_patches_tint != "none"
                 and cat.pelt.white_patches_tint
                 in sprites.white_patches_tints["tint_colours"]
             ):
@@ -2745,7 +2775,7 @@ def generate_sprite(
         if cat.pelt.points:
             points = sprites.sprites["white" + cat.pelt.points + cat_sprite].copy()
             if (
-                cat.pelt.white_patches_tint is not None
+                cat.pelt.white_patches_tint != "none"
                 and cat.pelt.white_patches_tint
                 in sprites.white_patches_tints["tint_colours"]
             ):
@@ -2764,6 +2794,7 @@ def generate_sprite(
             new_sprite.blit(
                 sprites.sprites["white" + cat.pelt.vitiligo + cat_sprite], (0, 0)
             )
+
 
         # draw eyes & scars1
         eyes = sprites.sprites["eyes" + cat.pelt.eye_colour + cat_sprite].copy()
