@@ -5,7 +5,6 @@ import random
 import i18n
 import ujson
 
-from scripts.cat.skills import SkillPath
 from scripts.cat_relations.enums import RelType
 from scripts.events_module.event_filters import (
     event_for_location,
@@ -326,17 +325,11 @@ class GenerateEvents:
                         continue
 
             # check for old age
-            if "old_age" in event.sub_type:
-                old_age_limit = constants.CONFIG["death_related"]["old_age_death_start"]
-
-                # if the main cat is too young, skip
-                if cat.moons < old_age_limit:
-                    continue
-
-                # if a random cat is chosen and they're too young, skip
-                if random_cat and random_cat.moons < old_age_limit:
-                    continue
-
+            if (
+                "old_age" in event.sub_type
+                and cat.moons < constants.CONFIG["death_related"]["old_age_death_start"]
+            ):
+                continue
             # remove some non-old age events to encourage elders to die of old age more often
             if (
                 "old_age" not in event.sub_type
@@ -413,44 +406,10 @@ class GenerateEvents:
 
             elif event.supplies:
                 clan_size = get_living_clan_cat_count(Cat_class)
-
-                # finding cats with the CAMP skill
-                camp_cats = [
-                    c
-                    for c in Cat_class.all_cats_list
-                    if c.status.alive_in_player_clan
-                    and (
-                        (c.skills.primary and c.skills.primary.path == SkillPath.CAMP)
-                        or (
-                            c.skills.secondary
-                            and c.skills.secondary.path == SkillPath.CAMP
-                        )
-                    )
-                ]
-
-                avoidance_chance = 1
-                # each camp cat will increase the chance that significant reduction events do not occur
-                for c in camp_cats:
-                    # tiers are added in order to make the chance num, this means the higher tiers have greater influence
-                    if c.skills.primary.path == SkillPath.CAMP:
-                        # +1 bc primary paths should have a little bit larger influence
-                        avoidance_chance += c.skills.primary.tier + 1
-                    elif (
-                        c.skills.secondary and c.skills.secondary.path == SkillPath.CAMP
-                    ):
-                        avoidance_chance += c.skills.secondary.tier
-
                 discard = False
                 for supply in event.supplies:
                     trigger = supply["trigger"]
                     supply_type = supply["type"]
-
-                    if (
-                        supply["adjust"] in ["reduce_half", "reduce_full"]
-                        and random.randint(1, avoidance_chance) != 1
-                    ):
-                        continue
-
                     if supply_type == "freshkill":
                         if not freshkill_active:
                             continue
