@@ -555,15 +555,15 @@ class Pregnancy_Events:
         stillborn_chance = 0
 
         if kits_amount < 3:
-            stillborn_chance = 5000
-        elif kits_amount == 3:
-            stillborn_chance = 4500
-        elif kits_amount == 4:
-            stillborn_chance = 3000
-        elif kits_amount > 4:
             stillborn_chance = 2500
-        elif kits_amount == 6:
+        elif kits_amount == 3:
+            stillborn_chance = 2000
+        elif kits_amount == 4:
+            stillborn_chance = 1500
+        elif kits_amount == 5:
             stillborn_chance = 1000
+        elif kits_amount == 6:
+            stillborn_chance = 500
 
         if not int(random.random() * stillborn_chance):
             kit.moons = 0
