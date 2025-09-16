@@ -647,7 +647,7 @@ dev_tools = true
     base_risk_effect = 3
 
     # herb bonus applied when cats should gather a boosted number of herbs
-    general_amount_bonus = 2
+    general_amount_bonus = 4
 
     # adjust weights for finding [1 herb type, 2 herb types, 3 herb types] for each season
     [clan_resources.herbs.forest]
