@@ -512,6 +512,19 @@ class Pelt:
                     )  # choose from the remaining two lists
                     break
 
+        deaf_chance = None
+        if (self.pelt.colour == "WHITE" or self.pelt.white_patches == "FULLWHITE") and self.pelt.eye_colour in blue_eyes:
+            deaf_chance = constants.CONFIG["cat_generation"]["base_permanent_condition"] * 0.4
+        elif (self.pelt.colour == "WHITE" or self.pelt.white_patches == "FULLWHITE") and self.eye_colour2 and self.pelt.eye_colour2 in blue_eyes:
+            deaf_chance = constants.CONFIG["cat_generation"]["base_permanent_condition"] * 0.7
+
+        if deaf_chance:
+            if deaf_chance < 1:
+                deaf_chance = 1
+            if not random.randint(0, deaf_chance):
+                chosen_condition = choice(["deaf", "partial hearing loss"])
+                self.get_permanent_condition(chosen_condition, born_with=True)
+
     def pattern_color_inheritance(self, parents: tuple = (), gender="female"):
         # setting parent pelt categories
         # We are using a set, since we don't need this to be ordered, and sets deal with removing duplicates.
