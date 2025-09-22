@@ -475,7 +475,6 @@ class Condition_Events:
             "paralyzed",
             "raspy lungs",
             "wasting disease",
-            "blind",
             "failing eyesight",
             "one bad eye",
             "partial hearing loss",
