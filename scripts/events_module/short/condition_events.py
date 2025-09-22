@@ -462,6 +462,7 @@ class Condition_Events:
             "LEFTBLIND": ["one bad eye", "failing eyesight"],
             "RIGHTBLIND": ["one bad eye", "failing eyesight"],
             "BOTHBLIND": ["failing eyesight", "blind"],
+            "BLIND": ["blind"],
             "MANLEG": ["weak leg", "twisted leg"],
             "RATBITE": ["weak leg"],
             "LEGBITE": ["weak leg"],
