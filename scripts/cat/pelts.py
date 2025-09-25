@@ -205,6 +205,7 @@ class Pelt:
     def __init__(
         self,
         name: str = "SingleColour",
+        gender: str = "male",
         length: str = "short",
         colour: str = "WHITE",
         white_patches: str = None,
@@ -232,6 +233,7 @@ class Pelt:
         reverse: bool = False,
     ) -> None:
         self.name = name
+        self.gender = gender
         self.colour = colour
         self.white_patches = white_patches
         self.eye_colour = eye_color
