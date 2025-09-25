@@ -677,6 +677,13 @@ class Pelt:
             else:
                 add_weight = (0, 0, 0, 0)
 
+            for x in range(0, len(weights)):
+                weights[x] += add_weight[x]
+
+        # A quick check to make sure all the weights aren't 0
+        if all([x == 0 for x in weights]):
+            weights = [1, 1, 1]
+        
         chosen_pelt_color = choice(
             random.choices(Pelt.colour_categories, weights=weights, k=1)[0]
         )
