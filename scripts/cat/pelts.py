@@ -574,14 +574,14 @@ class Pelt:
             self.name = selected.name
             self.length = selected.length
 # Force male tortie check here
-            if self.gender == "male" and self.tortie_base in Pelt.torties:
+            if gender == "male" and self.tortie_base in Pelt.torties:
                 boosted_inheritance = max(200, constants.CONFIG["cat_generation"]["direct_inheritance"] + 49)
                 if random.randint(1, boosted_inheritance) != 1:
                     print(f"Converting rare male tortie kit '{kit.name}' to female for realism.")
-                    self.gender = "female"
+                    gender = "female"
                     self.tortie_base = selected.tortie_base
                 else: 
-                    self.gender = "male"
+                    gender = "male"
             self.colour = selected.colour
 
         # ------------------------------------------------------------------------------------------------------------#
@@ -636,7 +636,7 @@ class Pelt:
                 break
 
         # Determine tortie:
-        if self.gender == "female":
+        if gender == "female":
             torbie = random.getrandbits(tortie_chance_f) == 1
         else:
             torbie = random.getrandbits(tortie_chance_m) == 1
@@ -657,7 +657,7 @@ class Pelt:
         weights = [0, 0, 0, 0]
         for p_ in par_peltcolours:
             if p_ in Pelt.ginger_colours:
-                if self.gender == "female":
+                if gender == "female":
                     add_weight = (30, 0, 0, 25)
                 else:
                     add_weight = (40, 0, 0, 10)
@@ -666,12 +666,12 @@ class Pelt:
             elif p_ in Pelt.white_colours:
                 add_weight = (0, 5, 40, 0)
             elif p_ in Pelt.brown_colours:
-                if self.gender == "female":
+                if gender == "female":
                     add_weight = (3, 5, 0, 35)
                 else:
                     add_weight = (10, 5, 0, 35)
             elif p_ is None:
-                if self.gender == "female":
+                if gender == "female":
                     add_weight = (15, 40, 40, 40)
                 else:
                     add_weight = (40, 40, 40, 40)
