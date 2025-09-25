@@ -749,12 +749,13 @@ class Pelt:
         )
         return chosen_white
 
-    def randomize_pattern_color(self, gender):
+    def randomize_pattern_color(self):
         # ------------------------------------------------------------------------------------------------------------#
         #   PELT
         # ------------------------------------------------------------------------------------------------------------#
 
         # Determine pelt.
+        gender = self.gender
         possible_pelts = [
             Pelt.pelt_categories[x] for x in Pelt.pelt_categories if x != "torties"
         ]
@@ -816,13 +817,13 @@ class Pelt:
         )
         return chosen_white
 
-    def init_pattern_color(self, parents, gender) -> bool:
+    def init_pattern_color(self, parents) -> bool:
         """Initializes self.name, self.colour, self.length,
         self.tortie_base and determines if the cat
         will have white patche or not.
         Return TRUE is the cat should have white patches,
         false is not."""
-
+        gender = self.gender
         if parents:
             # If the cat has parents, use inheritance to decide pelt.
             chosen_white = self.pattern_color_inheritance(parents)
