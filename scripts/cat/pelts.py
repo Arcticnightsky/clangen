@@ -479,7 +479,7 @@ class Pelt:
                 self.eye_colour = choice((Pelt.yellow_eyes + Pelt.green_eyes) * 2 + Pelt.blue_eyes)
         else:
             self.eye_colour = choice(
-                [i.pelt.eye_colour for i in parents] + [choice(Pelt.eye_colours)]
+                [i.pelt.eye_colour for i in parents] + [choice(Pelt.all_eye_colours)]
             )
 
         # White patches must be initalized before eye color.
