@@ -370,7 +370,7 @@ class Pelt:
     def generate_new_pelt(gender: str, parents: tuple = (), age: str = "adult"):
         new_pelt = Pelt()
 
-        pelt_white = new_pelt.init_pattern_color(parents, gender)
+        pelt_white = new_pelt.init_pattern_color(parents)
         new_pelt.init_white_patches(pelt_white, parents)
         new_pelt.init_sprite()
         new_pelt.init_scars(age)
@@ -525,7 +525,7 @@ class Pelt:
                 chosen_condition = choice(["deaf", "partial hearing loss"])
                 self.get_permanent_condition(chosen_condition, born_with=True)
 
-    def pattern_color_inheritance(self, parents: tuple = (), gender=None):
+    def pattern_color_inheritance(self, parents: tuple = ()):
         gender = self.gender
         # setting parent pelt categories
         # We are using a set, since we don't need this to be ordered, and sets deal with removing duplicates.
@@ -825,9 +825,9 @@ class Pelt:
 
         if parents:
             # If the cat has parents, use inheritance to decide pelt.
-            chosen_white = self.pattern_color_inheritance(parents, gender)
+            chosen_white = self.pattern_color_inheritance(parents)
         else:
-            chosen_white = self.randomize_pattern_color(gender)
+            chosen_white = self.randomize_pattern_color()
 
         return chosen_white
 
