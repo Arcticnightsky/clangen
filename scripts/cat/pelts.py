@@ -525,7 +525,7 @@ class Pelt:
                 chosen_condition = choice(["deaf", "partial hearing loss"])
                 self.get_permanent_condition(chosen_condition, born_with=True)
 
-    def pattern_color_inheritance(self, parents: tuple = ()):
+    def pattern_color_inheritance(self, parents: tuple = (), gender=None):
         gender = self.gender
         # setting parent pelt categories
         # We are using a set, since we don't need this to be ordered, and sets deal with removing duplicates.
