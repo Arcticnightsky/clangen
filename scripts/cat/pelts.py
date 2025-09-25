@@ -513,9 +513,9 @@ class Pelt:
                     break
 
         deaf_chance = None
-        if (self.colour == "WHITE" or self.white_patches == "FULLWHITE") and self.eye_colour in blue_eyes:
+        if (self.colour == "WHITE" or self.white_patches == "FULLWHITE") and self.eye_colour in Pelt.blue_eyes:
             deaf_chance = constants.CONFIG["cat_generation"]["base_permanent_condition"] * 0.4
-        elif (self.colour == "WHITE" or self.white_patches == "FULLWHITE") and self.eye_colour2 and self.eye_colour2 in blue_eyes:
+        elif (self.colour == "WHITE" or self.white_patches == "FULLWHITE") and self.eye_colour2 and self.eye_colour2 in Pelt.blue_eyes:
             deaf_chance = constants.CONFIG["cat_generation"]["base_permanent_condition"] * 0.7
 
         if deaf_chance:
