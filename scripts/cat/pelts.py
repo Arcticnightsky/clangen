@@ -528,7 +528,6 @@ class Pelt:
     def pattern_color_inheritance(self, parents: tuple = (), gender="female"):
         # setting parent pelt categories
         # We are using a set, since we don't need this to be ordered, and sets deal with removing duplicates.
-        gender = self.gender
         par_peltlength = set()
         par_peltcolours = set()
         par_peltnames = set()
