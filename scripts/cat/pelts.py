@@ -599,6 +599,7 @@ class Pelt:
                 else: 
                     gender = "male"
             self.colour = selected.colour
+        return chosen_white
 
         # ------------------------------------------------------------------------------------------------------------#
         #   PELT
