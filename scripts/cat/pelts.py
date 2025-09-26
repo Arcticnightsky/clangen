@@ -479,7 +479,7 @@ class Pelt:
                 new_acc_list.append(acc)
         self.accessory = new_acc_list
 
-    def init_eyes(self, parents):
+    def init_eyes(self, cat, parents):
         """Sets eye color for this cat's pelt. Takes parents' eye colors into account.
         Heterochromia is possible based on the white-ness of the pelt, so the pelt color and white_patches must be
         set before this function is called.
