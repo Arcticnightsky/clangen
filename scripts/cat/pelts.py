@@ -583,7 +583,7 @@ class Pelt:
         # If this list is empty, something went wrong.
         if not par_peltcolours:
             print("Warning - no parents: pelt randomized")
-            return self.randomize_pattern_color(gender)
+            return self.randomize_pattern_color()
 
         if not random.randint(0, constants.CONFIG["cat_generation"]["direct_inheritance"]):  # 1/10 chance
             selected = choice(par_pelts)            
