@@ -479,7 +479,7 @@ class Pelt:
                 new_acc_list.append(acc)
         self.accessory = new_acc_list
 
-    def init_eyes(self, cat, parents):
+    def init_eyes(self, parents):
         """Sets eye color for this cat's pelt. Takes parents' eye colors into account.
         Heterochromia is possible based on the white-ness of the pelt, so the pelt color and white_patches must be
         set before this function is called.
@@ -527,19 +527,6 @@ class Pelt:
                         choice(colour_wheel)
                     )  # choose from the remaining two lists
                     break
-
-        deaf_chance = None
-        if (self.colour == "WHITE" or self.white_patches == "FULLWHITE") and self.eye_colour in Pelt.blue_eyes:
-            deaf_chance = int(constants.CONFIG["cat_generation"]["base_permanent_condition"] * 0.4)
-        elif (self.colour == "WHITE" or self.white_patches == "FULLWHITE") and self.eye_colour2 and self.eye_colour2 in Pelt.blue_eyes:
-            deaf_chance = int(constants.CONFIG["cat_generation"]["base_permanent_condition"] * 0.7)
-
-        if deaf_chance:
-            if deaf_chance < 1:
-                deaf_chance = 1
-            if not random.randint(0, deaf_chance):
-                chosen_condition = choice(["deaf", "partial hearing loss"])
-                self.get_permanent_condition(chosen_condition, born_with=True)
 
     def pattern_color_inheritance(self, parents: tuple = ()):
         gender = self.gender
