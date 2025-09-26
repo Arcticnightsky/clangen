@@ -599,7 +599,9 @@ class Pelt:
                 else: 
                     gender = "male"
             self.colour = selected.colour
-            return chosen_white
+    # If selected is a tortie and the kit is male, apply extra rarity
+    # Safe to inherit (either not a tortie, or passed rare check)
+            return selected.white
 
         # ------------------------------------------------------------------------------------------------------------#
         #   PELT
