@@ -9774,7 +9774,7 @@
                 "values": [
                     "romance"
                 ],
-                "amount": "-15"
+                "amount": "-20"
             }
         ]
     },
@@ -9834,99 +9834,5 @@
                 "adjust": "increase_40"
             }
         ]
-    },
-    {
-        "event_id": "gen_kittypet_mate_scandalous",
-        "location": ["any"],
-        "season": [
-            "any"
-        ],
-        "frequency": 3,
-        "event_text": "m_c snuck out of camp in the middle of the night to meet with his beloved n_c:0, who is secretly his mate.",
-        "m_c": {
-            "age": [
-                "young adult",
-                "adult",
-                "senior adult",
-                "senior"
-            ],
-            "relationship_status": [
-                "mates"
-            ]
-        },
-        "new_cat": [
-            [
-                "meeting",
-                "kittypet",
-                "exists"
-            ]
-        ],
-        "relationships": [
-            {
-                "cats_from": [
-                    "m_c"
-                ],
-                "cats_to": [
-                    "n_c:0"
-                ],
-                "mutual": true,
-                "values": [
-                    "like", "romance", "comfort"
-                ],
-                "amount": 15
-            }
-        ],
-        "outsider": {},
-        "current_rep": [
-            "any"
-        ],
-        "changed": 1
-    },
-    {
-        "event_id": "gen_loner_mate_scandalous",
-        "location": ["any"],
-        "season": [
-            "any"
-        ],
-        "frequency": 3,
-        "event_text": "m_c snuck out of camp in the middle of the night to meet with his beloved n_c:0, who is secretly his mate.",
-        "m_c": {
-            "age": [
-                "young adult",
-                "adult",
-                "senior adult",
-                "senior"
-            ],
-            "relationship_status": [
-                "mates"
-            ]
-        },
-        "new_cat": [
-            [
-                "meeting",
-                "loner",
-                "exists"
-            ]
-        ],
-        "relationships": [
-            {
-                "cats_from": [
-                    "m_c"
-                ],
-                "cats_to": [
-                    "n_c:0"
-                ],
-                "mutual": true,
-                "values": [
-                    "like", "romance", "comfort"
-                ],
-                "amount": 15
-            }
-        ],
-        "outsider": {},
-        "current_rep": [
-            "any"
-        ],
-        "changed": 1
     }
 ]
