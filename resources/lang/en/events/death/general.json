@@ -3000,7 +3000,7 @@
             "any"
         ],
         "tags": [],
-        "frequency": 4,
+        "frequency": 3,
         "event_text": "m_c was killed while trying to save the medicine cat of o_c_n.",
         "m_c": {
             "status": [
@@ -3056,7 +3056,7 @@
             "any"
         ],
         "tags": [],
-        "frequency": 4,
+        "frequency": 3,
         "event_text": "m_c was killed by the deputy of o_c_n.",
         "m_c": {
             "status": [
@@ -3095,7 +3095,7 @@
             "any"
         ],
         "tags": [],
-        "frequency": 4,
+        "frequency": 3,
         "event_text": "m_c was killed while trying to save the deputy of o_c_n.",
         "m_c": {
             "status": [
@@ -3150,7 +3150,7 @@
             "any"
         ],
         "tags": [],
-        "frequency": 4,
+        "frequency": 3,
         "event_text": "m_c was killed by the leader of o_c_n.",
         "m_c": {
             "status": [
@@ -3189,7 +3189,7 @@
             "any"
         ],
         "tags": [],
-        "frequency": 4,
+        "frequency": 3,
         "event_text": "m_c was killed while trying to save the leader of o_c_n.",
         "m_c": {
             "status": [
