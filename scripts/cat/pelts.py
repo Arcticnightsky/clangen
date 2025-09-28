@@ -1348,6 +1348,7 @@ _scar_details = [
     "NOLEFTEAR",
     "NORIGHTEAR",
     "NOEAR",
+    "BLIND",
 ]
 
 
