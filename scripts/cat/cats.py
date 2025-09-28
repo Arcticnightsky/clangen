@@ -478,7 +478,7 @@ class Cat:
     @dead.setter
     def dead(self, die: bool):
         if die:
-            murder_history = self.the_cat.history.murder
+            murder_history = self.history.murder
             if self.status.group.is_afterlife():
                 print(
                     f"WARNING: Tried to kill {self.name} ID: {self.ID} but this cat is already dead!"
