@@ -502,7 +502,7 @@ class Cat:
                     rejected_ID = CatGroup.STARCLAN_ID
 
                 # afterlife does not like this cat
-                if affinity < 0 or if murder_history and "is_murderer" in murder_history:
+                if affinity < 0 or murder_history and "is_murderer" in murder_history:
                     # might send them to the opposite afterlife instead
                     if random() < abs(affinity / 100):
                         self.history.add_afterlife_acceptance(
