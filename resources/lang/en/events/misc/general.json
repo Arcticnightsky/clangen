@@ -9844,7 +9844,7 @@
             "any"
         ],
         "tags": [],
-        "frequency": 3,
+        "frequency": 2,
         "event_text": "A cat from o_c_n died while saving m_c. c_n honors their bravery at the Gathering.",
         "m_c": {
             "age": [
@@ -9868,7 +9868,7 @@
             "any"
         ],
         "tags": [],
-        "frequency": 3,
+        "frequency": 2,
         "event_text": "m_c, only an apprentice, killed someone from o_c_n! Tensions are getting high between the two Clans now...",
         "m_c": {
             "age": [
@@ -9903,7 +9903,7 @@
             "any"
         ],
         "tags": [],
-        "frequency": 3,
+        "frequency": 2,
         "event_text": "A cat from o_c_n was killed while trying to save m_c. c_n honors their bravery at the Gathering for saving their medicine cat.",
         "m_c": {
             "status": [
@@ -9929,7 +9929,7 @@
             "any"
         ],
         "tags": [],
-        "frequency": 3,
+        "frequency": 2,
         "event_text": "m_c killed the deputy of o_c_n. Tensions are getting high between the two Clans now...",
         "m_c": {
             "status": [
@@ -9966,7 +9966,7 @@
             "any"
         ],
         "tags": [],
-        "frequency": 3,
+        "frequency": 2,
         "event_text": "The deputy of o_c_n was killed while trying to save m_c. c_n honors their bravery at the Gathering.",
         "m_c": {
             "status": [
@@ -9997,7 +9997,7 @@
             "any"
         ],
         "tags": [],
-        "frequency": 3,
+        "frequency": 2,
         "event_text": "m_c killed a cat from o_c_n. Tensions are getting high between the two Clans now and the other leaders feel uneasy around m_c at the next Gathering...",
         "m_c": {
             "status": [
@@ -10032,7 +10032,7 @@
             "any"
         ],
         "tags": [],
-        "frequency": 3,
+        "frequency": 2,
         "event_text": "The leader of o_c_n lost a life while trying to save m_c. c_n honors their bravery at the Gathering.",
         "m_c": {
             "status": [
