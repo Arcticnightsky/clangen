@@ -478,12 +478,13 @@ class Cat:
     @dead.setter
     def dead(self, die: bool):
         if die:
+            murder_history = self.the_cat.history.murder
             if self.status.group.is_afterlife():
                 print(
                     f"WARNING: Tried to kill {self.name} ID: {self.ID} but this cat is already dead!"
                 )
                 return
-
+            
             # kits are auto-accepted
             if self.age in (CatAge.KITTEN, CatAge.NEWBORN):
                 self.history.add_afterlife_acceptance(
@@ -501,7 +502,7 @@ class Cat:
                     rejected_ID = CatGroup.STARCLAN_ID
 
                 # afterlife does not like this cat
-                if affinity < 0 or self.history.murder["is_murderer"]:
+                if affinity < 0 or if murder_history and "is_murderer" in murder_history:
                     # might send them to the opposite afterlife instead
                     if random() < abs(affinity / 100):
                         self.history.add_afterlife_acceptance(
