@@ -9834,5 +9834,64 @@
                 "adjust": "increase_40"
             }
         ]
+    },
+    {
+        "event_id": "gen_misc_heroic_oc_cat_death",
+        "location": [
+            "any"
+        ],
+        "season": [
+            "any"
+        ],
+        "tags": [],
+        "frequency": 2,
+        "event_text": "A cat from o_c_n died while saving m_c - c_n honors them.",
+        "m_c": {
+            "age": [
+                "adolescent"
+            ]
+        },
+        "other_clan": {
+            "current_rep": [
+                "neutral",
+                "ally"
+            ],
+            "changed": 5
+        }
+    },
+    {
+        "event_id": "gen_misc_oc_cat_kill",
+        "location": [
+            "any"
+        ],
+        "season": [
+            "any"
+        ],
+        "tags": [],
+        "frequency": 2,
+        "event_text": "m_c killed someone from o_c_n! Tensions are getting high between the two Clans now...",
+        "m_c": {
+            "age": [
+                "adolescent"
+            ],
+            "skill": [
+                "FIGHTER,1"
+            ],
+            "trait": [
+                "vengeful",
+                "ambitious",
+                "bloodthirsty",
+                "righteous",
+                "fierce",
+                "cold"
+            ]
+        },
+        "other_clan": {
+            "current_rep": [
+                "hostile",
+                "neutral"
+            ],
+            "changed": -3
+        }
     }
 ]
