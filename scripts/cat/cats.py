@@ -504,7 +504,7 @@ class Cat:
                 # afterlife does not like this cat
                 if affinity < 0 or murder_history and "is_murderer" in murder_history:
                     # might send them to the opposite afterlife instead
-                    if random() < abs(affinity / 100):
+                    if not random.randint(0, 100):
                         self.history.add_afterlife_acceptance(
                             afterlife_group, rejected=True
                         )
