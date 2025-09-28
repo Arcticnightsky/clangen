@@ -9836,7 +9836,7 @@
         ]
     },
     {
-        "event_id": "gen_misc_heroic_oc_cat_death",
+        "event_id": "gen_misc_heroic_oc_cat_death1",
         "location": [
             "any"
         ],
@@ -9844,8 +9844,8 @@
             "any"
         ],
         "tags": [],
-        "frequency": 2,
-        "event_text": "A cat from o_c_n died while saving m_c - c_n honors them.",
+        "frequency": 3,
+        "event_text": "A cat from o_c_n died while saving m_c. c_n honors their bravery at the Gathering.",
         "m_c": {
             "age": [
                 "adolescent"
@@ -9860,7 +9860,7 @@
         }
     },
     {
-        "event_id": "gen_misc_oc_cat_kill",
+        "event_id": "gen_misc_oc_cat_kill1",
         "location": [
             "any"
         ],
@@ -9868,8 +9868,8 @@
             "any"
         ],
         "tags": [],
-        "frequency": 2,
-        "event_text": "m_c killed someone from o_c_n! Tensions are getting high between the two Clans now...",
+        "frequency": 3,
+        "event_text": "m_c, only an apprentice, killed someone from o_c_n! Tensions are getting high between the two Clans now...",
         "m_c": {
             "age": [
                 "adolescent"
@@ -9892,6 +9892,166 @@
                 "neutral"
             ],
             "changed": -3
+        }
+    },
+    {
+        "event_id": "gen_misc_heroic_oc_cat_death2",
+        "location": [
+            "any"
+        ],
+        "season": [
+            "any"
+        ],
+        "tags": [],
+        "frequency": 3,
+        "event_text": "A cat from o_c_n was killed while trying to save m_c. c_n honors their bravery at the Gathering for saving their medicine cat.",
+        "m_c": {
+            "status": [
+                "medicine cat apprentice",
+                "medicine cat"
+            ]
+        },
+        "other_clan": {
+            "current_rep": [
+                "hostile",
+                "neutral",
+                "ally"
+            ],
+            "changed": 5
+        }
+    },
+    {
+        "event_id": "gen_misc_oc_cat_kill2",
+        "location": [
+            "any"
+        ],
+        "season": [
+            "any"
+        ],
+        "tags": [],
+        "frequency": 3,
+        "event_text": "m_c killed the deputy of o_c_n. Tensions are getting high between the two Clans now...",
+        "m_c": {
+            "status": [
+                "warrior",
+                "deputy",
+                "leader"
+            ],
+            "skill": [
+                "FIGHTER,3"
+            ],
+            "trait": [
+                "vengeful",
+                "ambitious",
+                "bloodthirsty",
+                "righteous",
+                "fierce",
+                "cold"
+            ]
+        },
+        "other_clan": {
+            "current_rep": [
+                "hostile",
+                "neutral"
+            ],
+            "changed": -3
+        }
+    },
+    {
+        "event_id": "gen_misc_heroic_oc_cat_death3",
+        "location": [
+            "any"
+        ],
+        "season": [
+            "any"
+        ],
+        "tags": [],
+        "frequency": 3,
+        "event_text": "The deputy of o_c_n was killed while trying to save m_c. c_n honors their bravery at the Gathering",
+        "m_c": {
+            "status": [
+                "apprentice",
+                "warrior",
+                "deputy",
+                "leader",
+                "medicine cat apprentice",
+                "medicine cat",
+                "mediator apprentice",
+                "mediator"
+            ]
+        },
+        "other_clan": {
+            "current_rep": [
+                "neutral",
+                "ally"
+            ],
+            "changed": 5
+        }
+    },
+    {
+        "event_id": "gen_misc_oc_cat_kill3",
+        "location": [
+            "any"
+        ],
+        "season": [
+            "any"
+        ],
+        "tags": [],
+        "frequency": 3,
+        "event_text": "m_c killed a cat from o_c_n. Tensions are getting high between the two Clans now and the other leaders feel uneasy around m_c at the next Gathering...",
+        "m_c": {
+            "status": [
+                "leader"
+            ],
+            "skill": [
+                "FIGHTER,3"
+            ],
+            "trait": [
+                "vengeful",
+                "ambitious",
+                "bloodthirsty",
+                "righteous",
+                "fierce",
+                "cold"
+            ]
+        },
+        "other_clan": {
+            "current_rep": [
+                "hostile",
+                "neutral"
+            ],
+            "changed": -3
+        }
+    },
+    {
+        "event_id": "gen_misc_heroic_oc_cat_death4",
+        "location": [
+            "any"
+        ],
+        "season": [
+            "any"
+        ],
+        "tags": [],
+        "frequency": 3,
+        "event_text": "The leader of o_c_n lost a life while trying to save m_c. c_n honors their bravery at the Gathering.",
+        "m_c": {
+            "status": [
+                "apprentice",
+                "warrior",
+                "deputy",
+                "leader",
+                "medicine cat apprentice",
+                "medicine cat",
+                "mediator apprentice",
+                "mediator"
+            ]
+        },
+        "other_clan": {
+            "current_rep": [
+                "neutral",
+                "ally"
+            ],
+            "changed": 5
         }
     }
 ]
