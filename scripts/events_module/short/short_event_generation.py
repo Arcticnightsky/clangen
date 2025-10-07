@@ -380,7 +380,7 @@ def filter_events(
             old_age_limit = constants.CONFIG["death_related"]["old_age_death_start"]
 
             # if the main cat is too young, skip
-            if cat.moons < old_age_limit:
+            if main_cat.moons < old_age_limit:
                 continue
 
             # if a random cat is chosen and they're too young, skip
