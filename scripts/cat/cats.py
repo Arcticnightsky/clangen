@@ -499,13 +499,13 @@ class Cat:
                     affinity = self.starclan_affinity
                     afterlife_group = CatGroup.STARCLAN
                     rejected_ID = CatGroup.DARK_FOREST_ID
-                else:
+                elif game.clan.instructor.status.group == CatGroup.DARK_FOREST or self.skills in ["DARK,3", "DARK,4"]:
                     affinity = self.dark_forest_affinity
                     afterlife_group = CatGroup.DARK_FOREST
                     rejected_ID = CatGroup.STARCLAN_ID
 
                 # afterlife does not like this cat
-                if affinity < 0 or murder_history and "is_murderer" in murder_history:
+                if affinity < 0 or murder_history and "is_murderer" in murder_history or self.skills in ["DARK,1", "DARK,2"]:
                     # might send them to the opposite afterlife instead
                     if not random.randint(0, 100):
                         self.history.add_afterlife_acceptance(
