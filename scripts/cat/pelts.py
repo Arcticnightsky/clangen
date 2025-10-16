@@ -205,6 +205,7 @@ class Pelt:
     def __init__(
         self,
         name: str = "SingleColour",
+        gender: str = "male",
         length: str = "short",
         colour: str = "WHITE",
         white_patches: str = None,
@@ -232,6 +233,7 @@ class Pelt:
         reverse: bool = False,
     ) -> None:
         self.name = name
+        self.gender = gender
         self.colour = colour
         self.white_patches = white_patches
         self.eye_colour = eye_color
@@ -381,10 +383,10 @@ class Pelt:
         self._paralyzed = val
 
     @staticmethod
-    def generate_new_pelt(gender: str, parents: tuple = (), age: str = "adult"):
+    def generate_new_pelt(parents: tuple = (), age: str = "adult"):
         new_pelt = Pelt()
 
-        pelt_white = new_pelt.init_pattern_color(parents, gender)
+        pelt_white = new_pelt.init_pattern_color(parents)
         new_pelt.init_white_patches(pelt_white, parents)
         new_pelt.init_sprite()
         new_pelt.init_scars(age)
@@ -487,13 +489,16 @@ class Pelt:
         :return: None
         """
         if not parents:
-            self.eye_colour = choice(Pelt.all_eye_colours)
+            if self.white_patches == "FULLWHITE" or self.colour == "WHITE" or self.points:
+                self.eye_colour = choice((Pelt.blue_eyes * 3) + Pelt.yellow_eyes + Pelt.green_eyes)
+            else:
+                self.eye_colour = choice((Pelt.yellow_eyes + Pelt.green_eyes) * 2 + Pelt.blue_eyes)
         else:
             self.eye_colour = choice(
                 [i.pelt.eye_colour for i in parents] + [choice(Pelt.all_eye_colours)]
             )
 
-        # White patches must be initialized before eye color.
+        # White patches must be initalized before eye color.
         num = constants.CONFIG["cat_generation"]["base_heterochromia"]
         if (
             self.white_patches in Pelt.high_white
@@ -503,7 +508,7 @@ class Pelt:
         ):
             num = num - 90
         if self.white_patches == "FULLWHITE" or self.colour == "WHITE":
-            num -= 10
+            num -= 20
         for _par in parents:
             if _par.pelt.eye_colour2:
                 num -= 10
@@ -523,7 +528,8 @@ class Pelt:
                     )  # choose from the remaining two lists
                     break
 
-    def pattern_color_inheritance(self, parents: tuple = (), gender="female"):
+    def pattern_color_inheritance(self, parents: tuple = ()):
+        gender = self.gender
         # setting parent pelt categories
         # We are using a set, since we don't need this to be ordered, and sets deal with removing duplicates.
         par_peltlength = set()
@@ -564,17 +570,24 @@ class Pelt:
         # If this list is empty, something went wrong.
         if not par_peltcolours:
             print("Warning - no parents: pelt randomized")
-            return self.randomize_pattern_color(gender)
+            return self.randomize_pattern_color()
 
-        # There is a 1/10 chance for kits to have the exact same pelt as one of their parents
-        if not random.randint(
-            0, constants.CONFIG["cat_generation"]["direct_inheritance"]
-        ):  # 1/10 chance
-            selected = choice(par_pelts)
+        if not random.randint(0, constants.CONFIG["cat_generation"]["direct_inheritance"]):  # 1/10 chance
+            selected = choice(par_pelts)            
             self.name = selected.name
             self.length = selected.length
+# Force male tortie check here
+            if gender == "male" and self.tortie_base in Pelt.torties:
+                boosted_inheritance = max(200, constants.CONFIG["cat_generation"]["direct_inheritance"] + 49)
+                if random.randint(1, boosted_inheritance) != 1:
+                    print(f"Converting rare male tortie kit '{kit.name}' to female for realism.")
+                    gender = "female"
+                    self.tortie_base = selected.tortie_base
+                else: 
+                    gender = "male"
             self.colour = selected.colour
-            self.tortie_base = selected.tortie_base
+    # If selected is a tortie and the kit is male, apply extra rarity
+    # Safe to inherit (either not a tortie, or passed rare check)
             return selected.white
 
         # ------------------------------------------------------------------------------------------------------------#
@@ -620,14 +633,12 @@ class Pelt:
         )
 
         # Tortie chance
-        tortie_chance_f = constants.CONFIG["cat_generation"][
-            "base_female_tortie"
-        ]  # There is a default chance for female tortie
+        tortie_chance_f = constants.CONFIG["cat_generation"]["base_female_tortie"]  # There is a default chance for female tortie
         tortie_chance_m = constants.CONFIG["cat_generation"]["base_male_tortie"]
         for p_ in par_pelts:
             if p_.name in Pelt.torties:
                 tortie_chance_f = int(tortie_chance_f / 2)
-                tortie_chance_m = tortie_chance_m - 1
+                tortie_chance_m = max(1, tortie_chance_m)
                 break
 
         # Determine tortie:
@@ -652,25 +663,34 @@ class Pelt:
         weights = [0, 0, 0, 0]
         for p_ in par_peltcolours:
             if p_ in Pelt.ginger_colours:
-                add_weight = (40, 0, 0, 10)
+                if gender == "female":
+                    add_weight = (30, 0, 0, 25)
+                else:
+                    add_weight = (40, 0, 0, 10)
             elif p_ in Pelt.black_colours:
                 add_weight = (0, 40, 2, 5)
             elif p_ in Pelt.white_colours:
                 add_weight = (0, 5, 40, 0)
             elif p_ in Pelt.brown_colours:
-                add_weight = (10, 5, 0, 35)
+                if gender == "female":
+                    add_weight = (3, 5, 0, 35)
+                else:
+                    add_weight = (10, 5, 0, 35)
             elif p_ is None:
-                add_weight = (40, 40, 40, 40)
+                if gender == "female":
+                    add_weight = (15, 40, 40, 40)
+                else:
+                    add_weight = (40, 40, 40, 40)
             else:
                 add_weight = (0, 0, 0, 0)
 
             for x in range(0, len(weights)):
                 weights[x] += add_weight[x]
 
-            # A quick check to make sure all the weights aren't 0
-            if all([x == 0 for x in weights]):
-                weights = [1, 1, 1, 1]
-
+        # A quick check to make sure all the weights aren't 0
+        if all([x == 0 for x in weights]):
+            weights = [1, 1, 1, 1]
+        
         chosen_pelt_color = choice(
             random.choices(Pelt.colour_categories, weights=weights, k=1)[0]
         )
@@ -735,12 +755,13 @@ class Pelt:
         )
         return chosen_white
 
-    def randomize_pattern_color(self, gender):
+    def randomize_pattern_color(self):
         # ------------------------------------------------------------------------------------------------------------#
         #   PELT
         # ------------------------------------------------------------------------------------------------------------#
 
         # Determine pelt.
+        gender = self.gender
         possible_pelts = [
             Pelt.pelt_categories[x] for x in Pelt.pelt_categories if x != "torties"
         ]
@@ -802,18 +823,18 @@ class Pelt:
         )
         return chosen_white
 
-    def init_pattern_color(self, parents, gender) -> bool:
+    def init_pattern_color(self, parents) -> bool:
         """Initializes self.name, self.colour, self.length,
         self.tortie_base and determines if the cat
         will have white patche or not.
         Return TRUE is the cat should have white patches,
         false is not."""
-
+        gender = self.gender
         if parents:
             # If the cat has parents, use inheritance to decide pelt.
-            chosen_white = self.pattern_color_inheritance(parents, gender)
+            chosen_white = self.pattern_color_inheritance(parents)
         else:
-            chosen_white = self.randomize_pattern_color(gender)
+            chosen_white = self.randomize_pattern_color()
 
         return chosen_white
 
@@ -1327,6 +1348,7 @@ _scar_details = [
     "NOLEFTEAR",
     "NORIGHTEAR",
     "NOEAR",
+    "BLIND",
 ]
 
 
