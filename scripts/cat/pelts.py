@@ -383,8 +383,15 @@ class Pelt:
         self._paralyzed = val
 
     @staticmethod
-    def generate_new_pelt(parents: tuple = (), age: str = "adult"):
-        new_pelt = Pelt()
+    def generate_new_pelt(gender: str, parents: tuple = (), age: str = "adult"):
+
+        # Ensure parents is always a tuple or list of valid Cat objects
+        if isinstance(parents, str) or parents is None:
+            parents = []
+        elif not isinstance(parents, (list, tuple)):
+            parents = [parents]
+
+        new_pelt = Pelt(gender=gender)
 
         pelt_white = new_pelt.init_pattern_color(parents)
         new_pelt.init_white_patches(pelt_white, parents)
@@ -1303,43 +1310,64 @@ def _describe_pattern(cat, short=False):
 
 
 def _describe_torties(cat, color_name, short=False) -> (str, str):
-    # Calicos and Torties need their own descriptions
-    if short:
-        # If using short, don't describe the colors of calicos and torties.
-        # Just call them calico, tortie, or mottled
-        if (
-            cat.pelt.colour
-            in Pelt.black_colours + Pelt.brown_colours + Pelt.white_colours
-            and cat.pelt.tortie_colour
-            in Pelt.black_colours + Pelt.brown_colours + Pelt.white_colours
-        ):
-            return "cat.pelts.mottled", ""
+    # Make sure color_name is a string
+    if isinstance(color_name, list):
+        # Sometimes color_name is a list of strings like ["cat.pelts.BLACK"]
+        if color_name:
+            # Strip translation key prefixes
+            base_color = color_name[-1].replace("cat.pelts.", "").lower()
         else:
-            return f"cat.pelts.{cat.pelt.name}", ""
+            base_color = ""
+    else:
+        base_color = str(color_name).replace("cat.pelts.", "").lower()
 
-    base = cat.pelt.tortie_base.lower()
+    # Short description: just the pelt type
+    if short:
+        if (
+            cat.pelt.colour in Pelt.black_colours + Pelt.brown_colours + Pelt.white_colours
+            and cat.pelt.tortie_colour in Pelt.black_colours + Pelt.brown_colours + Pelt.white_colours
+        ):
+            color_name = "mottled"
+        else:
+            base = cat.pelt.tortie_base.lower()
+            if base in [tabby.lower() for tabby in Pelt.tabbies] + ["bengal", "rosette", "speckled"]:
+                # torbie/tabico for tabby bases
+                if cat.pelt.name.lower() == "tortie":
+                    color_name = "torbie"
+                elif cat.pelt.name.lower() == "calico":
+                    color_name = "tabico"
+                else:
+                    color_name = cat.pelt.name.lower()
+            else:
+                color_name = cat.pelt.name.lower()
+        return color_name, ""
 
-    patches_color = f"cat.pelts.{cat.pelt.tortie_colour}"
-    color_name.append("/")
-    color_name.append(patches_color)
+    # Long description
+    patches_color = cat.pelt.tortie_colour.lower().replace("cat.pelts.", "")
+    base_color = base_color.replace("cat.pelts.", "")
 
+    # Join the base color and patches color
+    color_text = f"{base_color}/{patches_color}"
+
+    # If both are neutral tones
     if (
         cat.pelt.colour in Pelt.black_colours + Pelt.brown_colours + Pelt.white_colours
-        and cat.pelt.tortie_colour
-        in Pelt.black_colours + Pelt.brown_colours + Pelt.white_colours
+        and cat.pelt.tortie_colour in Pelt.black_colours + Pelt.brown_colours + Pelt.white_colours
     ):
-        return "cat.pelts.mottled_long", color_name
+        color_text = f"{color_text} mottled"
     else:
-        if base in tuple(tabby.lower() for tabby in Pelt.tabbies) + (
-            "bengal",
-            "rosette",
-            "speckled",
-        ):
-            base = f"cat.pelts.{cat.pelt.tortie_base.capitalize()}_long"  # the extra space is intentional
+        base = cat.pelt.tortie_base.lower()
+        if base in [tabby.lower() for tabby in Pelt.tabbies] + ["bengal", "rosette", "speckled"]:
+            if cat.pelt.name.lower() == "tortie":
+                color_text = f"{color_text} torbie"
+            elif cat.pelt.name.lower() == "calico":
+                color_text = f"{color_text} tabico"
+            else:
+                color_text = f"{color_text} {cat.pelt.name.lower()} tabby"
         else:
-            base = ""
-        return base, color_name
+            color_text = f"{color_text} {cat.pelt.name.lower()}"
 
+    return color_text, ""
 
 _scar_details = [
     "NOTAIL",
