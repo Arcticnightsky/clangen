@@ -2261,7 +2261,7 @@ def event_text_adjust(
             )
 
         # acc_singular (only works for main_cat's acc)
-         if "acc_singular" in text:
+        if "acc_singular" in text:
             accessory_name = main_cat.pelt.accessory[-1]
             if sprites.COLLAR_DATA["palette_map"]:
                 potential_collar = "".join(
