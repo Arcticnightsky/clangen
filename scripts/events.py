@@ -1840,6 +1840,13 @@ class Events:
         """
         new cats
         """
+        if constants.CONFIG["event_generation"]["debug_type_override"] == "new_cat":
+            create_short_event(
+                event_type="new_cat",
+                main_cat=cat,
+            )
+            return
+
         chance = 200
 
         alive_cats = list(
@@ -1881,13 +1888,6 @@ class Events:
             chance = base_chance - reputation
 
         chance = max(chance, 1)
-
-        if constants.CONFIG["event_generation"]["debug_type_override"] == "new_cat":
-            create_short_event(
-                event_type="new_cat",
-                main_cat=cat,
-            )
-            return
 
         if (
             not int(random.random() * chance)
