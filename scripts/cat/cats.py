@@ -485,9 +485,13 @@ class Cat:
                     f"WARNING: Tried to kill {self.name} ID: {self.ID} but this cat is already dead!"
                 )
                 return
+
+            cat_default_afterlife_id = self.status.get_default_afterlife_id()
+            if cat_default_afterlife_id == CatGroup.UNKNOWN_RESIDENCE_ID:
+                pass
             
             # kits are auto-accepted
-            if self.age in (CatAge.KITTEN, CatAge.NEWBORN):
+            elif self.age in (CatAge.KITTEN, CatAge.NEWBORN):
                 self.history.add_afterlife_acceptance(
                     game.clan.instructor.status.group,
                     is_kit=True,
@@ -507,7 +511,7 @@ class Cat:
                     # might send them to the opposite afterlife instead
                     if not random.randint(0, 100):
                         self.history.add_afterlife_acceptance(
-                            afterlife_group, rejectedard=True
+                            afterlife_group, rejected=True
                         )
                         self.status.send_to_afterlife(rejected_ID)
                         return
