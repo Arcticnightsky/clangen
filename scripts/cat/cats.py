@@ -415,6 +415,7 @@ class Cat:
 
         # APPEARANCE
         self.pelt = Pelt.generate_new_pelt(
+            self.gender,
             [Cat.fetch_cat(i) for i in (self.parent1, self.parent2) if i],
             self.age,
         )
@@ -484,22 +485,19 @@ class Cat:
                     f"WARNING: Tried to kill {self.name} ID: {self.ID} but this cat is already dead!"
                 )
                 return
-
-            cat_default_afterlife_id = self.status.get_default_afterlife_id()
-            if cat_default_afterlife_id == CatGroup.UNKNOWN_RESIDENCE_ID:
-                pass
+            
             # kits are auto-accepted
-            elif self.age in (CatAge.KITTEN, CatAge.NEWBORN):
+            if self.age in (CatAge.KITTEN, CatAge.NEWBORN):
                 self.history.add_afterlife_acceptance(
                     game.clan.instructor.status.group,
                     is_kit=True,
                 )
             else:
-                if cat_default_afterlife_id == CatGroup.STARCLAN_ID:
+                if game.clan.instructor.status.group == CatGroup.STARCLAN and not self.skills in ["DARK,0", "DARK,1", "DARK,2", "DARK,3", "DARK,4", "DARK,5", "DARK,6","DARK,7", "DARK,8", "DARK,9", "DARK,10"]:
                     affinity = self.starclan_affinity
                     afterlife_group = CatGroup.STARCLAN
                     rejected_ID = CatGroup.DARK_FOREST_ID
-                elif game.clan.instructor.status.group == CatGroup.DARK_FOREST or self.skills in ["DARK,3", "DARK,4"]:
+                elif game.clan.instructor.status.group == CatGroup.DARK_FOREST or self.skills in ["DARK,3", "DARK,4", "DARK,5", "DARK,6","DARK,7", "DARK,8", "DARK,9", "DARK,10"]:
                     affinity = self.dark_forest_affinity
                     afterlife_group = CatGroup.DARK_FOREST
                     rejected_ID = CatGroup.STARCLAN_ID
@@ -509,7 +507,7 @@ class Cat:
                     # might send them to the opposite afterlife instead
                     if not random.randint(0, 100):
                         self.history.add_afterlife_acceptance(
-                            afterlife_group, rejected=True
+                            afterlife_group, rejectedard=True
                         )
                         self.status.send_to_afterlife(rejected_ID)
                         return
