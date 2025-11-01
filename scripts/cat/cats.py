@@ -5,7 +5,6 @@ Contains the Cat and Personality classes
 from __future__ import annotations
 
 import random as random_module
-if not random_module.randint(0, 100):
 import bisect
 import itertools
 import os.path
@@ -511,7 +510,7 @@ class Cat:
                 # afterlife does not like this cat
                 if affinity < 0 or murder_history and "is_murderer" in murder_history or self.skills in ["DARK,0", "DARK,1", "DARK,2"]:
                     # might send them to the opposite afterlife instead
-                    if not random.randint(0, 100):
+                    if not random_module.randint(0, 100):
                         self.history.add_afterlife_acceptance(
                             afterlife_group, rejected=True
                         )
