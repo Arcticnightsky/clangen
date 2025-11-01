@@ -3,6 +3,7 @@ from typing import Dict
 import i18n
 import pygame.transform
 import pygame_gui.elements
+import random
 
 from scripts.cat.cats import Cat
 from scripts.game_structure import image_cache
