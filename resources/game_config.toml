@@ -340,7 +340,7 @@ dev_tools = true
 
 [lost_cat]
   # 1/chance that a lost cat will return on their own
-  rejoin_chance = 20
+  rejoin_chance = 10
 
 [cat_ages]
   # represents ranges for cat ages
@@ -378,7 +378,7 @@ dev_tools = true
   fail_stat_cat_modifier = -15
 
   # base 1/chance for a romance patrol. gets modified further in code
-  chance_of_romance_patrol = 16
+  chance_of_romance_patrol = 10
 
   # forces patrol with this id to occur, assuming it's possible by constraints
   debug_ensure_patrol_id = ""
