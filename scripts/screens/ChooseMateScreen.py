@@ -395,7 +395,7 @@ class ChooseMateScreen(Screens):
         if self.selected_cat.ID not in self.the_cat.mate:
             self.the_cat.set_mate(self.selected_cat)
             become_mates_rect = ui_scale(pygame.Rect((0, 0), (160, 45)))
-            become_mates_rect.bottomleft = ui_scale_offset((0, -15))
+            become_mates_rect.bottomleft = ui_scale_offset((0, -5))
             self.selected_cat_elements[
                 "became mates"
             ] = pygame_gui.elements.UITextBox(
@@ -418,7 +418,7 @@ class ChooseMateScreen(Screens):
         else:
             self.the_cat.unset_mate(self.selected_cat, breakup=True)
             breakup_mates_rect = ui_scale(pygame.Rect((0, 0), (160, 45)))
-            breakup_mates_rect.bottomleft = ui_scale_offset((0, -15))
+            breakup_mates_rect.bottomleft = ui_scale_offset((0, -5))
             self.selected_cat_elements[
                 "breakup mates"
             ] = pygame_gui.elements.UITextBox(
