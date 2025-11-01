@@ -398,7 +398,7 @@ class ChooseMateScreen(Screens):
             self.selected_cat_elements[
                 "became mates"
             ] = pygame_gui.elements.UITextBox(
-                (f"screens.choose_mate.became_mates_text"{random.choice(range(1,34))}),
+                (f"screens.choose_mate.became_mates_text"{random.choice(range(1,34))}"),
                 become_mates_rect,
                 object_id=get_text_box_theme(
                     "#text_box_22_horizcenter_vertcenter_spacing_95"
@@ -421,7 +421,7 @@ class ChooseMateScreen(Screens):
             self.selected_cat_elements[
                 "breakup mates"
             ] = pygame_gui.elements.UITextBox(
-                (f"screens.choose_mate.breakup_mates_text"{random.choice(range(1,10))}),
+                (f"screens.choose_mate.breakup_mates_text"{random.choice(range(1,10))}"),
                 breakup_mates_rect,
                 object_id=get_text_box_theme(
                     "#text_box_22_horizcenter_vertcenter_spacing_95"
