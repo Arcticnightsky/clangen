@@ -845,39 +845,59 @@ class Events:
             text = event_text_adjust(Cat, text, main_cat=lost_cat, clan=game.clan)
             game.cur_events_list.append(Single_Event(text, "misc", cat_IDs))
 
-        # handles if a lost cat had a mate within the clan and they return, they reunite, no more regular become_mate events!
+        # Handles if a lost cat had a previous mate still in the clan — they may reunite.
         for clan_cat in Cat.all_cats.values():
-            if [
-                not clan_cat.status.alive_in_player_clan
-            ]:
+            # skip dead or non-player clan cats
+            if not clan_cat.status.alive_in_player_clan or clan_cat.dead:
                 continue
 
-            if [
+            # only check if they were previously mates
+            if (
                 clan_cat.ID in lost_cat.previous_mates
                 and lost_cat.ID in clan_cat.previous_mates
-            ]:
+            ):
+                rel_to_check = lost_cat.relationships.get(clan_cat.ID)
+                if not rel_to_check:
+                    # Create a new relationship entry if none exists
+                    lost_cat.create_relationships_new_cat(clan_cat)
+                    rel_to_check = lost_cat.relationships.get(clan_cat.ID)
+
                 become_mate = False
-                clan_cat_has_new_mate = [
+                clan_cat_has_new_mate = (
                     len(clan_cat.mate) > 0 and lost_cat.ID not in clan_cat.mate
-                ]
-                if clan_cat_has_new_mate:
+                )
+
+                # 35% chance of accepting a returning mate even if already bonded
+                if clan_cat_has_new_mate and random.random() < 0.35:
                     become_mate = True
                     text = i18n.t("hardcoded.event_mate_reunite_poly")
-                else:
+                elif not clan_cat_has_new_mate:
                     become_mate = True
                     text = i18n.t("hardcoded.event_mate_reunite")
 
                 cat_IDs.append(clan_cat.ID)
-                text = event_text_adjust(Cat, text, main_cat=lost_cat, random_cat=clan_cat, clan=game.clan)
-                game.cur_events_list.append(
-                    Single_Event(
-                        text,
-                        ["relation", "misc"],
-                        cat_IDs
-                    )
+                text = event_text_adjust(
+                    Cat, text, main_cat=lost_cat, random_cat=clan_cat, clan=game.clan
                 )
+
+                game.cur_events_list.append(
+                    Single_Event(text, ["relation", "misc"], cat_IDs)
+                )
+
+                # if they reunite, officially rebind as mates
                 if become_mate:
                     lost_cat.set_mate(clan_cat)
+                    # strengthen relationship
+                    rel_to_check.romance += 25
+                    rel_to_check.trust += 10
+                    rel_to_check.comfort += 10
+                    if lost_cat.ID in lost_cat.previous_mates:
+                        lost_cat.previous_mates.remove(lost_cat.ID)
+                    if clan_cat.ID in clan_cat.previous_mates:
+                        clan_cat.previous_mates.remove(clan_cat.ID)
+
+                # stop after first valid reunion
+                break
         
         # Perform a ceremony if needed
         for cat_ID in cat_IDs:
