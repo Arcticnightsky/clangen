@@ -848,7 +848,7 @@ class Events:
         # handles if a lost cat had a mate within the clan and they return, they reunite, no more regular become_mate events!
         for clan_cat in Cat.all_cats.values():
             if [
-                not c.status.alive_in_player_clan
+                not clan_cat.status.alive_in_player_clan
             ]:
                 continue
 
