@@ -340,7 +340,7 @@ dev_tools = true
 
 [lost_cat]
   # 1/chance that a lost cat will return on their own
-  rejoin_chance = 5
+  rejoin_chance = 10
 
 [cat_ages]
   # represents ranges for cat ages
@@ -378,17 +378,17 @@ dev_tools = true
   fail_stat_cat_modifier = -15
 
   # base 1/chance for a romance patrol. gets modified further in code
-  chance_of_romance_patrol = 10
+  chance_of_romance_patrol = 16
 
   # forces patrol with this id to occur, assuming it's possible by constraints
-  debug_ensure_patrol_id = "bch_hunt_gonetnr3"
+  debug_ensure_patrol_id = ""
 
   # set to true to remove all constraints for patrols regarding location, session, biomes, etc.
-  debug_override_patrol_stat_requirements = true
+  debug_override_patrol_stat_requirements = false
 
   # set to true (NO QUOTES) to ensure the debug patrol succeeds
   # set to false (NO QUOTES) to ensure the debug patrol fails
-  debug_ensure_patrol_outcome = false
+  debug_ensure_patrol_outcome = ""
 
 [event_generation]
   # forces event with this id to occur
