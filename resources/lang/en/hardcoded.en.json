@@ -125,6 +125,8 @@
         "consumed_prey": {
             "one": "One piece of prey was consumed.",
             "many": "%{count} pieces of prey were consumed."
-        }
+        },
+        "mate_reunite_poly": "Finally, after waiting for so long - day and night - with restless nights and prayers to Starclan, m_c is home. r_c and {PRONOUN/r_c/poss} mate reunite with {PRONOUN/r_c/object}, sharing a bittersweet moment in the clearing."
+        "mate_reunite": "Finally, after waiting for so long - day and night - with restless nights and prayers to Starclan, m_c is home. r_c reunites with {PRONOUN/r_c/poss} mate, sharing a bittersweet moment in the middle of the clearing." 
     }
 }
