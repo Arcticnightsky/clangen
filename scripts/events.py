@@ -57,7 +57,7 @@ from scripts.utility import (
     unpack_rel_block,
 )
 from scripts.cat_relations.relationship import RelType
-from scripts.cat_relations.romantic_events import RomanticEvents
+from scripts.events_module.relationship.romantic_events import RomanticEvents
 
 class Events:
     """
