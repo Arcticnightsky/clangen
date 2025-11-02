@@ -3,7 +3,6 @@ from typing import Dict
 import i18n
 import pygame.transform
 import pygame_gui.elements
-import random
 
 from scripts.cat.cats import Cat
 from scripts.game_structure import image_cache
@@ -394,50 +393,9 @@ class ChooseMateScreen(Screens):
 
         if self.selected_cat.ID not in self.the_cat.mate:
             self.the_cat.set_mate(self.selected_cat)
-            become_mates_rect = ui_scale(pygame.Rect((0, 0), (160, 45)))
-            become_mates_rect.bottomleft = ui_scale_offset((0, -5))
-            self.selected_cat_elements[
-                "became mates"
-            ] = pygame_gui.elements.UITextBox(
-                (f"screens.choose_mate.became_mates_text{random.choice(range(1,34))}"),
-                become_mates_rect,
-                object_id=get_text_box_theme(
-                    "#text_box_22_horizcenter_vertcenter_spacing_95"
-                ),
-                anchors={
-                    "centerx": "centerx",
-                    "bottom": "bottom",
-                    "bottom_target": self.toggle_mate,
-                },
-                text_kwargs={
-                    "m_c": self.the_cat,
-                    "r_c": self.selected_cat if self.selected_cat else None,
-                },
-            )
-            del become_mates_rect
+
         else:
             self.the_cat.unset_mate(self.selected_cat, breakup=True)
-            breakup_mates_rect = ui_scale(pygame.Rect((0, 0), (160, 45)))
-            breakup_mates_rect.bottomleft = ui_scale_offset((0, -5))
-            self.selected_cat_elements[
-                "breakup mates"
-            ] = pygame_gui.elements.UITextBox(
-                (f"screens.choose_mate.breakup_mates_text{random.choice(range(1,10))}"),
-                breakup_mates_rect,
-                object_id=get_text_box_theme(
-                    "#text_box_22_horizcenter_vertcenter_spacing_95"
-                ),
-                anchors={
-                    "centerx": "centerx",
-                    "bottom": "bottom",
-                    "bottom_target": self.toggle_mate,
-                },
-                text_kwargs={
-                    "m_c": self.the_cat,
-                    "r_c": self.selected_cat if self.selected_cat else None,
-                },
-            )
-            del breakup_mates_rect
 
     def update_both(self):
         """Updates both the current cat and selected cat info."""
