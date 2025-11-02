@@ -860,12 +860,12 @@ class Events:
                 clan_cat_has_new_mate = [
                     len(clan_cat.mate) > 0 and lost_cat.ID not in clan_cat.mate
                 ]
-                    if clan_cat_has_new_mate:
-                        become_mate = True
-                        text = i18n.t("hardcoded.event_mate_reunite_poly")
-                    else:
-                        become_mate = True
-                        text = i18n.t("hardcoded.event_mate_reunite")
+                if clan_cat_has_new_mate:
+                    become_mate = True
+                    text = i18n.t("hardcoded.event_mate_reunite_poly")
+                else:
+                    become_mate = True
+                    text = i18n.t("hardcoded.event_mate_reunite")
 
                 cat_IDs.append(clan_cat.ID)
                 text = event_text_adjust(Cat, text, main_cat=lost_cat, random_cat=clan_cat, clan=game.clan)
