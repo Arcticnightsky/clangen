@@ -126,7 +126,7 @@ class Events:
         # checking if a lost cat returns on their own
         rejoin_upperbound = constants.CONFIG["lost_cat"]["rejoin_chance"]
         if random.randint(1, rejoin_upperbound) == 1:
-            self.handle_lost_cats_return()
+            self.handle_lost_cats_return(cat=None)
 
         self.trigger_future_events()
 
@@ -794,7 +794,7 @@ class Events:
         if focus_text:
             game.cur_events_list.insert(0, Single_Event(focus_text, "misc"))
 
-    def handle_lost_cats_return(self, cat, predetermined_cat_IDs: list = None):
+    def handle_lost_cats_return(self, cat=None, predetermined_cat_IDs: list = None):
         """
         TODO: DOCS
         """
@@ -802,7 +802,7 @@ class Events:
         if predetermined_cat_IDs:
             cat_IDs = predetermined_cat_IDs
 
-        if not predetermined_cat_IDs:
+        if cat is None and not predetermined_cat_IDs:
             eligible_cats = [
                 cat
                 for cat in Cat.all_cats.values()
