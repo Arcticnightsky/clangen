@@ -804,7 +804,7 @@ class Events:
 
         if not predetermined_cat_IDs:
             eligible_cats = [
-                cat
+                Cat
                 for Cat in Cat.all_cats.values()
                 if not Cat.dead and Cat.status.is_lost(CatGroup.PLAYER_CLAN_ID)
             ]
