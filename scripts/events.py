@@ -56,7 +56,8 @@ from scripts.utility import (
     history_text_adjust,
     unpack_rel_block,
 )
-
+from scripts.cat_relations.relationship import RelType
+from scripts.cat_relations.romantic_events import RomanticEvents
 
 class Events:
     """
@@ -844,6 +845,40 @@ class Events:
             text = event_text_adjust(Cat, text, main_cat=lost_cat, clan=game.clan)
             game.cur_events_list.append(Single_Event(text, "misc", cat_IDs))
 
+        # handles if a lost cat had a mate within the clan and they return, they reunite, no more regular become_mate events!
+        for clan_cat in Cat.all_cats.values():
+            if [
+                not cat.status.alive_in_player_clan
+            ]:
+                continue
+
+            if [
+                clan_cat.ID in lost_cat.previous_mates
+                and lost_cat.ID in clan_cat.previous_mates
+            ]:
+                become_mate = False
+                clan_cat_has_new_mate = [
+                    len(clan_cat.mate) > 0 and lost_cat.ID not in clan_cat.mate
+                ]
+                    if clan_cat_has_new_mate:
+                        become_mate = True
+                        text = i18n.t("hardcoded.event_mate_reunite_poly")
+                    else:
+                        become_mate = True
+                        text = i18n.t("hardcoded.event_mate_reunite")
+
+                cat_IDs.append(clan_cat.ID)
+                text = event_text_adjust(Cat, text, main_cat=lost_cat, random_cat=clan_cat, clan=game.clan)
+                game.cur_events_list.append(
+                    Single_Event(
+                        text,
+                        ["relation", "misc"],
+                        cat_IDs
+                    )
+                )
+                if become_mate:
+                    lost_cat.set_mate(clan_cat)
+        
         # Perform a ceremony if needed
         for cat_ID in cat_IDs:
             x = Cat.fetch_cat(cat_ID)
