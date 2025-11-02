@@ -431,7 +431,7 @@ class Events:
                     outsider_cat.status.change_group_nearness(CatGroup.PLAYER_CLAN_ID)
 
                 elif info_dict["interaction_type"] in ("invite", "search"):
-                    # ADD TO CLAN AND CHECK FOR KITS
+                    # ADD TO CLAN AND CHECK FOR KITS AND MATES
                     additional_kits = outsider_cat.add_to_clan()
 
                     if additional_kits:
@@ -444,6 +444,18 @@ class Events:
                     invited_cats = [outsider_cat.ID]
                     invited_cats.extend(additional_kits)
 
+                    additional_mates = outsider_cat.add_to_clan()
+
+                    if additional_mates:
+                        event_text += i18n.t("hardcoded.event_lost_mate")
+
+                        for mate_id in lost_cat.mate:
+                            # add to involved cat list
+                            involved_cats.append(mate_id)
+
+                    invited_cats = [outsider_cat.ID]
+                    invited_cats.extend(additional_mates)
+                    
                     for cat_ID in invited_cats:
                         invited_cat = Cat.fetch_cat(cat_ID)
                         # some things to handle if the cat has not been in the clan before
