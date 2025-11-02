@@ -870,10 +870,10 @@ class Events:
                 # 35% chance of accepting a returning mate even if already bonded
                 if clan_cat_has_new_mate and random.random() < 0.35:
                     become_mate = True
-                    text = i18n.t("hardcoded.event_mate_reunite_poly")
+                    text = i18n.t("hardcoded.mate_reunite_poly")
                 elif not clan_cat_has_new_mate:
                     become_mate = True
-                    text = i18n.t("hardcoded.event_mate_reunite")
+                    text = i18n.t("hardcoded.mate_reunite")
 
                 cat_IDs.append(clan_cat.ID)
                 text = event_text_adjust(
