@@ -804,9 +804,9 @@ class Events:
 
         if cat is None and not predetermined_cat_IDs:
             eligible_cats = [
-                cat
-                for cat in Cat.all_cats.values()
-                if not cat.dead and cat.status.is_lost(CatGroup.PLAYER_CLAN_ID)
+                c
+                for c in Cat.all_cats.values()
+                if not c.dead and c.status.is_lost(CatGroup.PLAYER_CLAN_ID)
             ]
 
             if not eligible_cats:
@@ -848,7 +848,7 @@ class Events:
         # handles if a lost cat had a mate within the clan and they return, they reunite, no more regular become_mate events!
         for clan_cat in Cat.all_cats.values():
             if [
-                not cat.status.alive_in_player_clan
+                not c.status.alive_in_player_clan
             ]:
                 continue
 
