@@ -794,7 +794,7 @@ class Events:
         if focus_text:
             game.cur_events_list.insert(0, Single_Event(focus_text, "misc"))
 
-    def handle_lost_cats_return(self, predetermined_cat_IDs: list = None):
+    def handle_lost_cats_return(self, cat, predetermined_cat_IDs: list = None):
         """
         TODO: DOCS
         """
@@ -804,9 +804,9 @@ class Events:
 
         if not predetermined_cat_IDs:
             eligible_cats = [
-                Cat
-                for Cat in Cat.all_cats.values()
-                if not Cat.dead and Cat.status.is_lost(CatGroup.PLAYER_CLAN_ID)
+                cat
+                for cat in Cat.all_cats.values()
+                if not cat.dead and cat.status.is_lost(CatGroup.PLAYER_CLAN_ID)
             ]
 
             if not eligible_cats:
@@ -848,7 +848,7 @@ class Events:
         # handles if a lost cat had a mate within the clan and they return, they reunite, no more regular become_mate events!
         for clan_cat in Cat.all_cats.values():
             if [
-                not Cat.status.alive_in_player_clan
+                not cat.status.alive_in_player_clan
             ]:
                 continue
 
