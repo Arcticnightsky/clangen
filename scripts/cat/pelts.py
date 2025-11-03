@@ -535,7 +535,7 @@ class Pelt:
                     )  # choose from the remaining two lists
                     break
 
-    def pattern_color_inheritance(self, parents: tuple = ()):
+    def pattern_color_inheritance(self, parents: tuple = (), cat=None):
         gender = self.gender
         # setting parent pelt categories
         # We are using a set, since we don't need this to be ordered, and sets deal with removing duplicates.
@@ -583,15 +583,17 @@ class Pelt:
             selected = choice(par_pelts)            
             self.name = selected.name
             self.length = selected.length
-# Force male tortie check here
-            if gender == "male" and self.tortie_base in Pelt.torties:
+            # Force male tortie check here
+            if gender == "male" and selected.name in Pelt.torties:
                 boosted_inheritance = max(200, constants.CONFIG["cat_generation"]["direct_inheritance"] + 49)
                 if random.randint(1, boosted_inheritance) != 1:
-                    print(f"Converting rare male tortie kit '{kit.name}' to female for realism.")
-                    gender = "female"
+                    print(f"Converting rare male tortie kit '{cat.name if cat else 'unknown kit'}' to female for realism.")
+                    if cat:
+                        cat.gender = "female"   # actually change the cat’s gender
+                    self.gender = "female"
                     self.tortie_base = selected.tortie_base
-                else: 
-                    gender = "male"
+                else:
+                    self.gender = "male"
             self.colour = selected.colour
     # If selected is a tortie and the kit is male, apply extra rarity
     # Safe to inherit (either not a tortie, or passed rare check)
@@ -839,7 +841,7 @@ class Pelt:
         gender = self.gender
         if parents:
             # If the cat has parents, use inheritance to decide pelt.
-            chosen_white = self.pattern_color_inheritance(parents)
+            chosen_white = self.pattern_color_inheritance(parents, cat=self)
         else:
             chosen_white = self.randomize_pattern_color()
 
