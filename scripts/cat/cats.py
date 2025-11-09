@@ -502,7 +502,7 @@ class Cat:
                     is_kit=True,
                 )
             else:
-                    if game.clan.instructor.status.group == CatGroup.STARCLAN:
+                if game.clan.instructor.status.group == CatGroup.STARCLAN:
                     affinity = self.starclan_affinity
                     afterlife_group = CatGroup.STARCLAN
                     rejected_ID = CatGroup.DARK_FOREST_ID
