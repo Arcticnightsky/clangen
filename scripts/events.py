@@ -13,6 +13,7 @@ import traceback
 
 import i18n
 
+from scripts.cat.skills import SkillPath
 from scripts.cat import save_load
 from scripts.cat.cats import Cat, cat_class, BACKSTORIES
 from scripts.cat.enums import CatAge, CatRank, CatGroup, CatStanding, CatSocial
@@ -1346,6 +1347,12 @@ class Events:
                         for cat in med_cat_list
                     )
 
+                    # importing skills...    
+                    primary = cat.skills.primary.path
+                    secondary = None
+                    if cat.skills.secondary:
+                        secondary = cat.skills.secondary.path
+                    
                     # assign chance to become med app depending on current med cat and traits
                     chance = constants.CONFIG["roles"]["base_medicine_app_chance"]
                     if has_elder_med == med_cat_list:
@@ -1367,7 +1374,7 @@ class Events:
                     elif has_med:
                         chance = int(chance * 2.22)
 
-                    if cat.skills in ["HEALER,1", "PROPHET,1", "OMEN,1"]:
+                    if primary in [SkillPath.HEALER, SkillPath.PROPHET, SkillPath.OMEN] or secondary in [SkillPath.HEALER, SkillPath.PROPHET, SkillPath.OMEN]:
                         chance = int(chance / 2.5)
                     
                     if cat.personality.trait in [
