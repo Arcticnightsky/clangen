@@ -481,6 +481,10 @@ class Cat:
     def dead(self, die: bool):
         if die:
             murder_history = self.history.murder
+            primary = self.skills.primary.path
+            secondary = None
+            if self.skills.secondary:
+                secondary = self.skills.secondary.path
             if self.status.group.is_afterlife():
                 print(
                     f"WARNING: Tried to kill {self.name} ID: {self.ID} but this cat is already dead!"
@@ -498,17 +502,17 @@ class Cat:
                     is_kit=True,
                 )
             else:
-                if game.clan.instructor.status.group == CatGroup.STARCLAN and not self.skills in ["DARK,0", "DARK,1", "DARK,2", "DARK,3", "DARK,4", "DARK,5", "DARK,6","DARK,7", "DARK,8", "DARK,9", "DARK,10"]:
+                    if game.clan.instructor.status.group == CatGroup.STARCLAN:
                     affinity = self.starclan_affinity
                     afterlife_group = CatGroup.STARCLAN
                     rejected_ID = CatGroup.DARK_FOREST_ID
-                elif game.clan.instructor.status.group == CatGroup.DARK_FOREST or self.skills in ["DARK,3", "DARK,4", "DARK,5", "DARK,6","DARK,7", "DARK,8", "DARK,9", "DARK,10"]:
+                elif game.clan.instructor.status.group == CatGroup.DARK_FOREST:
                     affinity = self.dark_forest_affinity
                     afterlife_group = CatGroup.DARK_FOREST
                     rejected_ID = CatGroup.STARCLAN_ID
 
                 # afterlife does not like this cat
-                if affinity < 0 or murder_history and "is_murderer" in murder_history or self.skills in ["DARK,0", "DARK,1", "DARK,2"]:
+                if affinity < 0 or murder_history and "is_murderer" in murder_history or primary == SkillPath.DARK or secondary == SkillPath.DARK:
                     # might send them to the opposite afterlife instead
                     if not random_module.randint(0, 50):
                         self.history.add_afterlife_acceptance(
