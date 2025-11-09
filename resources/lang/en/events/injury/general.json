@@ -1607,7 +1607,7 @@
                 "cats": [
                     "m_c"
                 ],
-                "scar": "m_c was scarred from {PRONOUN/m_c/poss} broken bone after falling from a tall tree."
+                "scar": "m_c was scarred from {PRONOUN/m_c/poss} broken bone after falling from a tall tree.",
                 "reg_death": "m_c died from {PRONOUN/m_c/poss} wounds after falling from a tall tree."
             }
         ]
