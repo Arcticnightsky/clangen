@@ -515,7 +515,7 @@ class Cat:
                 # afterlife does not like this cat
                 if affinity < 0 or murder_history and "is_murderer" in murder_history or primary == SkillPath.DARK or secondary == SkillPath.DARK:
                     # might send them to the opposite afterlife instead
-                    if not random_module.randint(0, 50):
+                    if not random_module.randint(0, 20):
                         self.history.add_afterlife_acceptance(
                             afterlife_group, rejected=True
                         )
