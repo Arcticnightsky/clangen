@@ -604,16 +604,16 @@ class RomanticEvents:
                 cat_from.relationships[cat_to.ID].romance -= 10
                 cat_to.relationships[cat_from.ID].comfort -= 10
 
-            mate_string = RomanticEvents.prepare_relationship_string(
-                mate_string, cat_from, cat_to
+        mate_string = RomanticEvents.prepare_relationship_string(
+            mate_string, cat_from, cat_to
+        )
+        game.cur_events_list.append(
+            Single_Event(
+                mate_string,
+                ["relation", "misc"],
+                cat_dict={"m_c": cat_from, "r_c": cat_to},
             )
-            game.cur_events_list.append(
-                Single_Event(
-                    mate_string,
-                    ["relation", "misc"],
-                    cat_dict={"m_c": cat_from, "r_c": cat_to},
-                )
-            )
+        )
 
         if become_mate:
             cat_from.set_mate(cat_to)
