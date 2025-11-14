@@ -516,7 +516,7 @@ class RomanticEvents:
         return: bool if event is triggered or not
         """
 
-        # get the highest romantic love relationships
+        # get the highest romantic love relationships and
         rel_list = cat_from.relationships.values()
         highest_romantic_relation = get_highest_romantic_relation(
             rel_list, exclude_mate=True
@@ -556,7 +556,6 @@ class RomanticEvents:
         become_mate = False
         condition = constants.CONFIG["mates"]["confession"]["accept_confession"]
         rel_to_check = highest_romantic_relation.opposite_relationship
-
         if not rel_to_check:
             highest_romantic_relation.link_relationship()
             rel_to_check = highest_romantic_relation.opposite_relationship
@@ -575,7 +574,6 @@ class RomanticEvents:
                 mate_string = RomanticEvents.get_mate_string(
                     "high_romantic", poly, cat_from, cat_to
                 )
-
         # second acceptance chance if the romantic is high enough
         elif (
             RelType.ROMANCE in condition
@@ -596,9 +594,7 @@ class RomanticEvents:
                 mate_string = RomanticEvents.get_mate_string(
                     "high_romantic", poly, cat_from, cat_to
                 )
-
         else:
-            # rejection path
             if (
                 cat_from.ID in cat_to.previous_mates
                 and cat_to.ID in cat_from.previous_mates
