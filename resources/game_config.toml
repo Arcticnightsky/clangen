@@ -35,9 +35,9 @@ dev_tools = true
 
   [relationship.value_change_amount]
     # amount a relationship changes for "high", "medium", and "low" effects for interactions
-    low = 8
-    medium = 12
-    high = 16
+    low = 9
+    medium = 14
+    high = 19
 
   [relationship.value_intervals]
     # The cut-off for each value level. This starts at -100 with each int marking the end of that level. 
