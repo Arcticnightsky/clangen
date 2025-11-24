@@ -890,10 +890,6 @@ class Events:
                         rel_to_check.romance += 25
                         rel_to_check.trust += 10
                         rel_to_check.comfort += 10
-                        if lost_cat.ID in lost_cat.previous_mates:
-                            lost_cat.previous_mates.remove(lost_cat.ID)
-                        if clan_cat.ID in clan_cat.previous_mates:
-                            clan_cat.previous_mates.remove(clan_cat.ID)
                     break
         
         # Perform a ceremony if needed
