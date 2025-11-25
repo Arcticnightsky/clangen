@@ -340,7 +340,7 @@ dev_tools = true
 
 [lost_cat]
   # 1/chance that a lost cat will return on their own
-  rejoin_chance = 10
+  rejoin_chance = 6
 
 [cat_ages]
   # represents ranges for cat ages
