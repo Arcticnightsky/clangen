@@ -406,8 +406,8 @@ dev_tools = true
   leader_death_chance = 15
 
   # base 1/chance a cat will die
-  classic_death_chance = 500
-  expanded_death_chance = 350
+  classic_death_chance = 650
+  expanded_death_chance = 500
   "cruel season_death_chance" = 300
 
   # modifiers for death chance based on if a war is going badly
