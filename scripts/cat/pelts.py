@@ -961,17 +961,17 @@ class Pelt:
                         self.colour in Pelt.white_colours
                     ):
                         self.tortie_colour = choice(
-                            (Pelt.ginger_colours * 2) + Pelt.brown_colours
+                            (Pelt.ginger_colours * 4) + Pelt.brown_colours
                         )
                     elif self.colour in Pelt.ginger_colours:
                         self.tortie_colour = choice(
-                            Pelt.brown_colours + Pelt.black_colours * 2
+                            Pelt.brown_colours + (Pelt.black_colours * 2)
                         )
                     elif self.colour in Pelt.brown_colours:
                         possible_colors = Pelt.brown_colours.copy()
                         possible_colors.remove(self.colour)
                         possible_colors.extend(
-                            Pelt.black_colours + (Pelt.ginger_colours * 2)
+                            Pelt.black_colours + (Pelt.ginger_colours * 4)
                         )
                         self.tortie_colour = choice(possible_colors)
                     else:
