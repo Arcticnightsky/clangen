@@ -584,7 +584,7 @@ class Pelt:
             self.name = selected.name
             self.length = selected.length
             # Force male tortie check here
-            if gender == "male" and selected.name in Pelt.torties:
+            if gender == "male" and self.name in Pelt.torties:
                 boosted_inheritance = max(200, constants.CONFIG["cat_generation"]["direct_inheritance"] + 49)
                 if random.randint(1, boosted_inheritance) != 1:
                     print(f"Converting rare male tortie kit '{cat.name if cat else 'unknown kit'}' to female for realism.")
