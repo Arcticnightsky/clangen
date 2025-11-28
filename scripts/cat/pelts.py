@@ -588,12 +588,7 @@ class Pelt:
                 boosted_inheritance = max(200, constants.CONFIG["cat_generation"]["direct_inheritance"] + 49)
                 if random.randint(1, boosted_inheritance) != 1:
                     print(f"Converting rare male tortie kit '{cat.name if cat else 'unknown kit'}' to female for realism.")
-                    if cat:
-                        cat.gender = "female"   # actually change the cat’s gender
-                    self.gender = "female"
-                    self.tortie_base = selected.tortie_base
-                else:
-                    self.gender = "male"
+                    self.gender == "female"
             self.colour = selected.colour
     # If selected is a tortie and the kit is male, apply extra rarity
     # Safe to inherit (either not a tortie, or passed rare check)
