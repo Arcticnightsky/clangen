@@ -301,6 +301,12 @@ class Pregnancy_Events:
             other_cat_id = second_parent.ID
             other_cat = Cat.all_cats.get(other_cat_id)
             allow_affair = get_clan_setting("affair")
+            has_gay_mate = [
+                pregnant_cat.fetch_cat(mate_id)
+                for mate_id in pregnant_cat.mate
+                if pregnant_cat.fetch_cat(mate_id)
+                and pregnant_cat.fetch_cat(mate_id).gender == pregnant_cat.gender
+            ]
             
             if allow_affair is False:
                 text = choice(Pregnancy_Events.PREGNANT_STRINGS["announcement"])
@@ -324,8 +330,15 @@ class Pregnancy_Events:
                 text += choice(Pregnancy_Events.PREGNANT_STRINGS[f"{severity[0]}_severity"])
                 text = event_text_adjust(Cat, text, main_cat=pregnant_cat, clan=clan)
                 involved_cats = [pregnant_cat.ID]
-            elif allow_affair is True and second_parent.ID not in cat.mate and len(cat.mate) > 0:
+            elif allow_affair is True and second_parent.ID not in cat.mate and len(cat.mate) > 0 and has_gay_mate:
                 text = choice(Pregnancy_Events.PREGNANT_STRINGS["announcement_affair"])
+                severity = random.choices(["minor", "major"], [3, 1], k=1)
+                pregnant_cat.get_injured("pregnant", severity=severity[0])
+                text += choice(Pregnancy_Events.PREGNANT_STRINGS[f"{severity[0]}_severity"])
+                text = event_text_adjust(Cat, text, main_cat=pregnant_cat, clan=clan)
+                involved_cats = [pregnant_cat.ID]
+            elif allow_affair is True and second_parent.ID not in pregnant_cat.mate and len(pregnant_cat.mate) > 0 and has_gay_mate:
+                text = choice(Pregnancy_Events.PREGNANT_STRINGS["surprising_announcement_gay"])
                 severity = random.choices(["minor", "major"], [3, 1], k=1)
                 pregnant_cat.get_injured("pregnant", severity=severity[0])
                 text += choice(Pregnancy_Events.PREGNANT_STRINGS[f"{severity[0]}_severity"])
