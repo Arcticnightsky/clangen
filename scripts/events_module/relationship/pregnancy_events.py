@@ -301,11 +301,6 @@ class Pregnancy_Events:
             other_cat_id = second_parent.ID
             other_cat = Cat.all_cats.get(other_cat_id)
             allow_affair = get_clan_setting("affair")
-            has_mate = [
-                cat.fetch_cat(mate_id)
-                for mate_id in cat.mate
-                if cat.fetch_cat(mate_id) and cat.fetch_cat(mate_id).gender == "male"
-            ]
             
             if allow_affair is False:
                 text = choice(Pregnancy_Events.PREGNANT_STRINGS["announcement"])
@@ -322,14 +317,14 @@ class Pregnancy_Events:
                 text += choice(Pregnancy_Events.PREGNANT_STRINGS[f"{severity[0]}_severity"])
                 text = event_text_adjust(Cat, text, main_cat=pregnant_cat, random_cat=other_cat, clan=game.clan)
                 involved_cats = [pregnant_cat.ID]
-            elif allow_affair is True and second_parent.ID not in cat.mate and pregnant_cat not in has_mate:
+            elif allow_affair is True and second_parent.ID not in cat.mate and len(cat.mate) == 0:
                 text = choice(Pregnancy_Events.PREGNANT_STRINGS["surprising_announcement"])
                 severity = random.choices(["minor", "major"], [3, 1], k=1)
                 pregnant_cat.get_injured("pregnant", severity=severity[0])
                 text += choice(Pregnancy_Events.PREGNANT_STRINGS[f"{severity[0]}_severity"])
                 text = event_text_adjust(Cat, text, main_cat=pregnant_cat, clan=clan)
                 involved_cats = [pregnant_cat.ID]
-            elif allow_affair is True and second_parent.ID not in cat.mate and pregnant_cat in has_mate:
+            elif allow_affair is True and second_parent.ID not in cat.mate and len(cat.mate) > 0:
                 text = choice(Pregnancy_Events.PREGNANT_STRINGS["announcement_affair"])
                 severity = random.choices(["minor", "major"], [3, 1], k=1)
                 pregnant_cat.get_injured("pregnant", severity=severity[0])
