@@ -307,6 +307,7 @@ class Pregnancy_Events:
                 if pregnant_cat.fetch_cat(mate_id)
                 and pregnant_cat.fetch_cat(mate_id).gender == pregnant_cat.gender
             ]
+            gay_mate_cat = has_gay_mate[0] if has_gay_mate else None
             
             if allow_affair is False:
                 text = choice(Pregnancy_Events.PREGNANT_STRINGS["announcement"])
@@ -342,8 +343,9 @@ class Pregnancy_Events:
                 severity = random.choices(["minor", "major"], [3, 1], k=1)
                 pregnant_cat.get_injured("pregnant", severity=severity[0])
                 text += choice(Pregnancy_Events.PREGNANT_STRINGS[f"{severity[0]}_severity"])
-                text = event_text_adjust(Cat, text, main_cat=pregnant_cat, clan=clan)
+                text = event_text_adjust(Cat, text, main_cat=pregnant_cat, random_cat=gay_mate_cat, clan=clan)
                 involved_cats = [pregnant_cat.ID]
+                involved_cats.append(gay_mate_cat.ID)
             game.cur_events_list.append(Single_Event(text, "birth_death", involved_cats))
 
     @staticmethod
