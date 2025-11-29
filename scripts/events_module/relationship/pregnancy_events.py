@@ -451,9 +451,17 @@ class Pregnancy_Events:
         mate_gay_oc_cat = literal_mate_gay_oc[0] if literal_mate_gay_oc else None
 
         rel_to_check1 = mate_cat.relationships.get(cat.ID) if mate_cat else None
+        if rel_to_check1 is None:
+            rel_to_check1 =  mate_cat.create_one_relationship(cat)
         rel_to_check2 = mate_oc_cat.relationships.get(other_cat.ID) if mate_oc_cat else None
+        if rel_to_check2 is None:
+            rel_to_check2 = mate_oc_cat.create_one_relationship(other_cat)
         rel_to_check3 = mate_gay_cat.relationships.get(cat.ID) if mate_gay_cat else None
+        if rel_to_check3 is None:
+            rel_to_check3 =  mate_gay_cat.create_one_relationship(cat)
         rel_to_check4 = mate_gay_oc_cat.relationships.get(other_cat.ID) if mate_gay_oc_cat else None
+        if rel_to_check4 is None:
+            rel_to_check4 =  mate_gay_oc_cat.create_one_relationship(other_cat)
         
         kits = Pregnancy_Events.get_kits(kits_amount, cat, other_cat, clan)
         kits_amount = len(kits)
