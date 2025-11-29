@@ -482,6 +482,7 @@ class Pregnancy_Events:
             involved_cats.append(other_cat.ID)
             cat_dict["r_c"] = other_cat
             event_list.append(choice(events["birth"]["affair"]))
+            
             if len(cat.mate) > 0:
                 event_list.append(choice(events["birth"]["affair_mated"]))
         else:
@@ -567,6 +568,34 @@ class Pregnancy_Events:
             Cat, print_event, main_cat=cat, random_cat=other_cat, clan=game.clan
         )
 
+        # Relationship penalties for affair births
+        # Only apply if cat had mates AND other_cat is not one of them
+        if other_cat and len(cat.mate) > 0 and other_cat.ID not in cat.mate:
+            for mate_id in cat.mate:
+                mate = Cat.fetch_cat(mate_id)
+                if not mate:
+                    continue
+
+                rel = mate.relationships.get(cat.ID)
+                if rel:
+                    rel.romance -= 30
+                    rel.trust -= 20
+                    rel.like -= 25
+
+        # If OTHER_CAT had mates and CAT is not one of them,
+        # they also get a penalty for the affair
+        if other_cat and len(other_cat.mate) > 0 and cat.ID not in other_cat.mate:
+            for mate_id in other_cat.mate:
+                mate = Cat.fetch_cat(mate_id)
+                if not mate:
+                    continue
+
+                rel = mate.relationships.get(other_cat.ID)
+                if rel:
+                    rel.romance -= 30
+                    rel.trust -= 20
+                    rel.like -= 25
+
         # display event
         game.cur_events_list.append(
             Single_Event(
@@ -574,6 +603,7 @@ class Pregnancy_Events:
             )
         )
 
+        
         stillborn_chance = 0
 
         if kits_amount < 3:
