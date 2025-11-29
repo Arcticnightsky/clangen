@@ -430,6 +430,10 @@ class Pregnancy_Events:
             for mate_id in other_cat.mate
             if other_cat.fetch_cat(mate_id) and other_cat.fetch_cat(mate_id).gender == other_cat.gender
         ]
+        rel_to_check1 = literal_mate.relationships.get(cat.ID)
+        rel_to_check2 = literal_mate_oc.relationships.get(other_cat.ID)
+        rel_to_check3 = literal_mate_gay.relationships.get(cat.ID)
+        rel_to_check4 = literal_mate_gay_oc.relationships.get(other_cat.ID)
         
         kits = Pregnancy_Events.get_kits(kits_amount, cat, other_cat, clan)
         kits_amount = len(kits)
@@ -502,8 +506,14 @@ class Pregnancy_Events:
             involved_cats.append(other_cat.ID)
             cat_dict["r_c"] = other_cat
             event_list.append(choice(events["birth"]["affair_straight"]))
+            rel_to_check2.romance -= 30
+            rel_to_check2.trust -= 20
+            rel_to_check2.like -= 25
             if len(cat.mate) > 0 and literal_mate:
                 event_list.append(choice(events["birth"]["affair_mated_straight"]))
+                rel_to_check1.romance -= 30
+                rel_to_check1.trust -= 20
+                rel_to_check1.like -= 25
         elif (
             len(cat.mate) > 0 and other_cat.ID not in cat.mate and not other_cat.dead
          and literal_mate_gay) or (
@@ -514,8 +524,14 @@ class Pregnancy_Events:
             involved_cats.append(other_cat.ID)
             cat_dict["r_c"] = other_cat
             event_list.append(choice(events["birth"]["affair_gay"]))
+            rel_to_check4.romance -= 30
+            rel_to_check4.trust -= 20
+            rel_to_check4.like -= 25
             if len(cat.mate) > 0 and literal_mate_gay:
                 event_list.append(choice(events["birth"]["affair_mated_gay"]))
+                rel_to_check3.romance -= 30
+                rel_to_check3.trust -= 20
+                rel_to_check3.like -= 25
         else:
             event_list.append(choice(events["birth"]["unmated_parent"]))
 
