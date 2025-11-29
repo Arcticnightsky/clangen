@@ -410,7 +410,27 @@ class Pregnancy_Events:
             kits_amount = 1
         other_cat_id = clan.pregnancy_data[cat.ID]["second_parent"]
         other_cat = Cat.all_cats.get(other_cat_id)
-
+        literal_mate = [
+            cat.fetch_cat(mate_id)
+            for mate_id in cat.mate
+            if cat.fetch_cat(mate_id) and cat.fetch_cat(mate_id).gender != cat.gender
+        ]
+        literal_mate_oc = [
+            other_cat.fetch_cat(mate_id)
+            for mate_id in other_cat.mate
+            if other_cat.fetch_cat(mate_id) and other_cat.fetch_cat(mate_id).gender != other_cat.gender
+        ]
+        literal_mate_gay = [
+            cat.fetch_cat(mate_id)
+            for mate_id in cat.mate
+            if cat.fetch_cat(mate_id) and cat.fetch_cat(mate_id).gender == cat.gender
+        ]
+        literal_mate_gay_oc = [
+            other_cat.fetch_cat(mate_id)
+            for mate_id in other_cat.mate
+            if other_cat.fetch_cat(mate_id) and other_cat.fetch_cat(mate_id).gender == other_cat.gender
+        ]
+        
         kits = Pregnancy_Events.get_kits(kits_amount, cat, other_cat, clan)
         kits_amount = len(kits)
         Pregnancy_Events.set_biggest_family()
@@ -474,16 +494,28 @@ class Pregnancy_Events:
             event_list.append(choice(events["birth"]["both_unmated"]))
         elif (
             len(cat.mate) > 0 and other_cat.ID not in cat.mate and not other_cat.dead
-        ) or (
+         and literal_mate) or (
             len(other_cat.mate) > 0
             and cat.ID not in other_cat.mate
-            and not other_cat.dead
+            and not other_cat.dead and literal_mate_oc
         ):
             involved_cats.append(other_cat.ID)
             cat_dict["r_c"] = other_cat
-            event_list.append(choice(events["birth"]["affair"]))
-            if len(cat.mate) > 0:
-                event_list.append(choice(events["birth"]["affair_mated"]))
+            event_list.append(choice(events["birth"]["affair_straight"]))
+            if len(cat.mate) > 0 and literal_mate:
+                event_list.append(choice(events["birth"]["affair_mated_straight"]))
+        elif (
+            len(cat.mate) > 0 and other_cat.ID not in cat.mate and not other_cat.dead
+         and literal_mate_gay) or (
+            len(other_cat.mate) > 0
+            and cat.ID not in other_cat.mate
+            and not other_cat.dead and literal_mate_gay_oc
+        ):
+            involved_cats.append(other_cat.ID)
+            cat_dict["r_c"] = other_cat
+            event_list.append(choice(events["birth"]["affair_gay"]))
+            if len(cat.mate) > 0 and literal_mate_gay:
+                event_list.append(choice(events["birth"]["affair_mated_gay"]))
         else:
             event_list.append(choice(events["birth"]["unmated_parent"]))
 
