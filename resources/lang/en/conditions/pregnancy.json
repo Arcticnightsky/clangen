@@ -7,6 +7,7 @@
     	"Okay, m_c was a little surprised to find this out, but hey, what do you expect when you and your mate go on a romantic date while in heat? Seeing this as a pleasant surprise, m_c excitedly announcies {PRONOUN/m_c/poss} pregnancy!",
     	"After moons of mental preparation and talks with r_c, m_c is happy to announce that {PRONOUN/m_c/subject} {VERB/m_c/are/is} expecting kits.",
     	"With {PRONOUN/m_c/poss} mate r_c excitedly smiling behind {PRONOUN/m_c/object}, m_c announces that {PRONOUN/m_c/subject} {VERB/m_c/are/is} expecting kits!",
+		"r_c took m_c to the medicine cat den after {PRONOUN/m_c/subject} had been throwing up in the dirtplace a lot recently, complaning about an illness she can't explain. When m_c and r_c left the medicine cat den, r_c announces that m_c is pregnant!",
 		"m_c had been secretive for a while now and nobody could even begin to guess what about... until today, that is, when m_c announced {PRONOUN/m_c/poss} pregnancy!",
         "The entire Clan could see the signs way before m_c did. Everyone urged {PRONOUN/m_c/object} to get checked by a medicine cat, but to no avail. They just about gave up until, finally, m_c announced {PRONOUN/m_c/poss} pregnancy.",
 		"m_c's been worried sick over a recent illness {PRONOUN/m_c/subject} couldn't quite explain, until a thorough health check made everything clear. m_c's pregnant!" 
@@ -26,8 +27,13 @@
 		"m_c's been worried sick over a recent illness {PRONOUN/m_c/subject} couldn't quite explain, until a thorough health check made everything clear. m_c's pregnant! When other cats inquire about the father, m_c awkwardly dismisses the topic and refuses to reveal who the father is.",
 		"m_c announced her pregnancy and has been <i>very</i> shy about it since, especially when she doesn't currently have a mate, a mate who could impregnate her. But what was done was done, and now she must refuse every cat who questions her about it." ,
 		"m_c had been secretive for a while now and nobody could even begin to guess what about... until today, that is, when m_c announced {PRONOUN/m_c/poss} pregnancy. Though now everyone is wondering who sired her kits, m_c doesn't say...",
-		"m_c doesn't want to admit it, but the heat had taken advatage of her and a handsome, fellow Clanmate, and now she has to suffer the consequences of her actions - m_c's pregnant and everyone's asking the same question: who is the father?",
+		"m_c doesn't want to admit it, but heat had taken advatage of her and a handsome, fellow Clanmate, and now she has to suffer the consequences of her actions - m_c's pregnant and everyone's asking the same question: who is the father?",
 		"m_c found out that she's pregnant! She was just as shocked as her Clanmates when she announced it, but she knows what she did that night with one of the fine toms of this Clan, so she really shouldn't be. Her clanmates have been bombarding her with questions a lot this moon, and she refuses to answer all of them." 
+    ],
+    "surprising_announcement_gay": [
+        "The Clan is surpised when m_c announced that {PRONOUN/m_c/subject} {VERB/m_c/are/is} expecting kits, when {PRONOUN/m_c/subject} and r_c, a she-cat, are in a relationship together. m_c refuses to disclose the name of the father.", 
+		"m_c and r_c had always wanted to have kits of their own - they sometimes wished that they were a <b>tom</b> and <b>she-cat</b> pair for it to happen. Just then, m_c's got an idea. With r_c's approval, m_c meets with one of her tom friends and the rest is history. m_c announces her pregnancy to the very surprised Clan, and keeps her tom friend's name anonymous.",
+		"r_c took m_c to the medicine cat den after {PRONOUN/m_c/subject} had been throwing up in the dirtplace a lot recently, complaning about an illness she can't explain. When m_c and r_c left the medicine cat den, r_c announces that m_c is pregnant, much to r_c and the Clan's shock. Now everyone's questioning m_c about who the father is." 
     ],
     "litter_guess": [
         "m_c hopes the litter will be small - {PRONOUN/m_c/subject} {VERB/m_c/feel/feels} overwhelmed at the idea of a big litter.",
