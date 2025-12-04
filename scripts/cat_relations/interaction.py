@@ -176,22 +176,60 @@ def create_interaction(inter_list) -> list:
         created_list.append(
             SingleInteraction(
                 interact_id=inter["id"],
-                biome=inter.get("biome", ["any"]),
-                season=inter.get("season", ["any"]),
-                intensity=inter.get("intensity", "medium"),
-                interactions=inter.get("interactions", None),
-                get_injuries=inter.get("get_injuries", None),
-                has_injuries=inter.get("has_injuries", None),
-                relationship_constraint=(inter.get("relationship_constraint", None)),
-                backstory_constraint=(inter.get("backstory_constraint", None)),
-                main_status_constraint=(inter.get("main_status_constraint", None)),
-                random_status_constraint=(inter.get("random_status_constraint", None)),
-                main_trait_constraint=(inter.get("main_trait_constraint", None)),
-                random_trait_constraint=(inter.get("random_trait_constraint", None)),
-                main_skill_constraint=(inter.get("main_skill_constraint", None)),
-                random_skill_constraint=(inter.get("random_skill_constraint", None)),
-                reaction_random_cat=(inter.get("reaction_random_cat", None)),
-                also_influences=(inter.get("also_influences", None)),
+                biome=inter["biome"] if "biome" in inter else ["Any"],
+                season=inter["season"] if "season" in inter else ["Any"],
+                intensity=inter["intensity"] if "intensity" in inter else "medium",
+                interactions=inter["interactions"] if "interactions" in inter else None,
+                get_injuries=inter["get_injuries"] if "get_injuries" in inter else None,
+                has_injuries=inter["has_injuries"] if "has_injuries" in inter else None,
+                relationship_constraint=(
+                    inter["relationship_constraint"]
+                    if "relationship_constraint" in inter
+                    else None
+                ),
+                backstory_constraint=(
+                    inter["backstory_constraint"]
+                    if "backstory_constraint" in inter
+                    else None
+                ),
+                main_status_constraint=(
+                    inter["main_status_constraint"]
+                    if "main_status_constraint" in inter
+                    else None
+                ),
+                random_status_constraint=(
+                    inter["random_status_constraint"]
+                    if "random_status_constraint" in inter
+                    else None
+                ),
+                main_trait_constraint=(
+                    inter["main_trait_constraint"]
+                    if "main_trait_constraint" in inter
+                    else None
+                ),
+                random_trait_constraint=(
+                    inter["random_trait_constraint"]
+                    if "random_trait_constraint" in inter
+                    else None
+                ),
+                main_skill_constraint=(
+                    inter["main_skill_constraint"]
+                    if "main_skill_constraint" in inter
+                    else None
+                ),
+                random_skill_constraint=(
+                    inter["random_skill_constraint"]
+                    if "random_skill_constraint" in inter
+                    else None
+                ),
+                reaction_random_cat=(
+                    inter["reaction_random_cat"]
+                    if "reaction_random_cat" in inter
+                    else None
+                ),
+                also_influences=(
+                    inter["also_influences"] if "also_influences" in inter else None
+                ),
             )
         )
     return created_list
