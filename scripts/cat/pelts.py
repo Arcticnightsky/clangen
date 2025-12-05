@@ -590,7 +590,7 @@ class Pelt:
                     print(f"Converting rare male tortie kit '{cat.name if cat else 'unknown kit'}' to female for realism.")
                     self.gender == "female"
                     self.tortie_base = selected.tortie_base
-                    if self.gender == "male"
+                    if self.gender == "male":
                         self.tortie_base = None
             self.colour = selected.colour
     # If selected is a tortie and the kit is male, apply extra rarity
