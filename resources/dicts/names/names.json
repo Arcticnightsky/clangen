@@ -53,8 +53,8 @@
     "Agouti": ["back", "pelt", "fur"],
     "Singlestripe": ["stripe", "streak", "back", "shade", "stem", "shadow"],
     "Masked": ["stripe", "mask", "mask", "shade"],
-    "Tortie": ["dapple", "speckle", "spot", "dapple", "splash"],
-    "Calico": ["stripe", "dapple", "patch", "patch", "splash", "frost"]
+    "Tortie": ["dapple", "speckle", "spot", "dapple", "splash", "mottle"],
+    "Calico": ["stripe", "dapple", "patch", "patch", "splash", "frost", "mottle"]
   },
   "tortie_pelt_suffixes": {
     "single": ["dapple", "speckle", "spots", "splash"],
@@ -94,7 +94,7 @@
     "Kestrel", "Kink", "Kite", "Lake", "Larch", "Lark", "Laurel", "Lavender", "Leaf", "Leap", "Leopard", "Lichen", "Light", "Lightning", "Lilac", 
     "Lily", "Lion", "Little", "Lizard", "Locust", "Long", "Lotus", "Loud", "Low", "Luck", "Lupine", "Lynx", "Mallow", "Mantis", 
     "Maple", "Marigold", "Marsh", "Meadow", "Mellow", "Midge", "Milk", "Milkweed", "Mink", "Minnow", "Mistle", "Mite", "Mole", "Moon",
-    "Moor", "Morning", "Moss", "Mossy", "Moth", "Mottle", "Mottled", "Mouse", "Mumble", "Murk", "Myrtle", "Nectar", "Needle",
+    "Moor", "Morning", "Moss", "Mossy", "Moth", "Mouse", "Mumble", "Murk", "Myrtle", "Nectar", "Needle",
     "Nettle", "Newt", "Nightingale", "Nimble", "Nut", "Oak", "Oat", "Odd", "One", "Oriole", "Osprey", "Pansy", "Panther", "Parsley",
     "Partridge", "Patch", "Patchouli", "Peak", "Pear", "Peat", "Perch", "Petal", "Petunia", "Pheasant", "Pigeon", "Pike", "Pine",
     "Piper", "Plover", "Plum", "Pod", "Pond", "Pool", "Pop", "Poppy", "Posy", "Pounce", "Prance", "Prickle", "Prim", "Primrose",
