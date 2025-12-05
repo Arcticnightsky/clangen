@@ -1207,9 +1207,16 @@ class Cat:
         """Create a leader ceremony and add it to the history"""
 
         load_leader_ceremonies()
-
+        primary = self.skills.primary.path
+        secondary = None
+        if self.skills.secondary:
+            secondary = self.skills.secondary.path
+        
         # determine which dict we're pulling from
         if game.clan.instructor.status.group == CatGroup.DARK_FOREST:
+            starclan = False
+            ceremony_dict: Dict = LEAD_CEREMONY_DF
+        elif primary == SkillPath.DARK or secondary == SkillPath.DARK:
             starclan = False
             ceremony_dict: Dict = LEAD_CEREMONY_DF
         else:
