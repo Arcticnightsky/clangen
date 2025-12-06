@@ -111,7 +111,7 @@ class GroupInteraction:
 
 
 def cats_fulfill_single_interaction_constraints(
-    main_cat, random_cat, interaction, game_mode
+    main_cat, random_cat, interaction
 ) -> bool:
     """Check if the two cats fulfills the interaction constraints."""
     if len(interaction.main_status_constraint) >= 1:
