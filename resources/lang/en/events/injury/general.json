@@ -863,7 +863,7 @@
         "season": [
             "any"
         ],
-        "frequency": 3,
+        "frequency": 1,
         "event_text": "m_c was on a walk when {PRONOUN/m_c/subject} saw r_c being attacked by a dog! {PRONOUN/m_c/subject/CAP} helped r_c escape, but not before gaining a few wounds.",
         "m_c": {
             "age": [
@@ -1438,7 +1438,7 @@
         "season": [
             "leaf-bare"
         ],
-        "frequency": 3,
+        "frequency": 2,
         "event_text": "m_c went out for a walk, but slipped on the ice and broke a bone.",
         "m_c": {
             "age": [
@@ -5667,7 +5667,7 @@
         "season": [
             "any"
         ],
-        "frequency": 4,
+        "frequency": 2,
         "event_text": "m_c fought a rogue and, while {PRONOUN/m_c/subject} drove the trespasser away, {PRONOUN/m_c/subject} needed to be rushed to the medicine cat den afterwards.",
         "m_c": {
             "age": [
@@ -5735,7 +5735,7 @@
         "season": [
             "any"
         ],
-        "frequency": 4,
+        "frequency": 2,
         "event_text": "m_c got {PRONOUN/m_c/poss} paw stuck in a Twoleg trap, and while {PRONOUN/m_c/subject} eventually escaped, {PRONOUN/m_c/poss} leg is heavily injured.",
         "m_c": {
             "age": [
@@ -5866,7 +5866,7 @@
         "season": [
             "any"
         ],
-        "frequency": 4,
+        "frequency": 3,
         "event_text": "m_c's tail was badly injured by a dog.",
         "m_c": {
             "age": [
@@ -5915,7 +5915,7 @@
         "season": [
             "any"
         ],
-        "frequency": 4,
+        "frequency": 3,
         "event_text": "m_c's tail was badly injured by a fox.",
         "m_c": {
             "age": [
