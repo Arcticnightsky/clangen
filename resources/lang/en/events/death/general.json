@@ -1311,6 +1311,9 @@
             "status": [
                 "any"
             ],
+            "not_skill": [
+                "SWIMMER,2"
+            ],
             "dies": true
         },
         "r_c": {
@@ -1332,6 +1335,9 @@
                 "loyal",
                 "loving",
                 "responsible"
+            ],
+            "not_skill": [
+                "SWIMMER,2"
             ],
             "dies": true
         },
@@ -1355,7 +1361,7 @@
             "any"
         ],
         "tags": [],
-        "frequency": 4,
+        "frequency": 3,
         "event_text": "m_c and r_c are killed by a gang of rogues.",
         "m_c": {
             "age": [
@@ -2604,10 +2610,16 @@
         "history": [
             {
                 "cats": [
-                    "m_c",
-                    "r_c"
+                    "m_c"
                 ],
                 "reg_death": "m_c and r_c went to play on the ice of a frozen pond, not knowing it was too thin.",
+                "lead_death": "fell through thin ice and drowned"
+            },
+            {
+                "cats": [
+                    "r_c"
+                ],
+                "reg_death": "r_c and m_c went to play on the ice of a frozen pond, not knowing it was too thin.",
                 "lead_death": "fell through thin ice and drowned"
             }
         ]
