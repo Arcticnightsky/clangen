@@ -6,7 +6,7 @@ import i18n
 
 from scripts.game_structure import constants
 from scripts.cat_relations.interaction import (
-    rel_fulfill_rel_constraints
+    rel_fulfill_rel_constraints,
     cats_fulfill_single_interaction_constraints,
     rebuild_relationship_dicts,
 )
