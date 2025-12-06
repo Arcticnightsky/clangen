@@ -464,7 +464,7 @@
                     {
                         "cats": ["n_c:0"],
                         "injuries": ["blunt_force_injury"],
-                        "no_results": true
+                        "no_results": false
                     }
                 ],
                 "history_text": {
