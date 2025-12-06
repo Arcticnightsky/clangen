@@ -109,6 +109,105 @@ class GroupInteraction:
 #                some useful functions related to interactions                 #
 # ---------------------------------------------------------------------------- #
 
+def rel_fulfill_rel_constraints(relationship, constraint, interaction_id) -> bool:
+    """Check if the relationship fulfills the interaction relationship constraints."""
+    # if the constraints are not existing, they are considered to be fulfilled
+    if not constraint:
+        return True
+    if len(constraint) == 0:
+        return True
+
+    if "siblings" in constraint and not relationship.cat_from.is_sibling(
+        relationship.cat_to
+    ):
+        return False
+
+    if "mates" in constraint and (
+        relationship.cat_from.ID not in relationship.cat_to.mate
+        or relationship.cat_to.ID not in relationship.cat_from.mate
+    ):
+        return False
+
+    if "not_mates" in constraint and (
+        relationship.cat_from.ID in relationship.cat_to.mate
+        or relationship.cat_to.ID in relationship.cat_from.mate
+    ):
+        return False
+
+    if "parent/child" in constraint and not relationship.cat_from.is_parent(
+        relationship.cat_to
+    ):
+        return False
+
+    if "child/parent" in constraint and not relationship.cat_to.is_parent(
+        relationship.cat_from
+    ):
+        return False
+
+    value_types = [
+        "romance",
+        "like",
+        "respect",
+        "comfort",
+        "trust",
+    ]
+    for v_type in value_types:
+        tags = [i for i in constraint if v_type in i]
+        if len(tags) < 1:
+            continue
+        lower_than = False
+        # try to extract the value/threshold from the text
+        try:
+            splitted = tags[0].split("_")
+            threshold = int(splitted[1])
+            if len(splitted) >= 3:
+                lower_than = True
+        except:  # TODO: find out what this try-except is protecting against and explicitly guard for it
+            print(
+                f"ERROR: interaction {interaction_id} with the relationship constraint for "
+                f"the value {v_type} doesn't follow the formatting guidelines."
+            )
+            break
+
+        if threshold > 100:
+            print(
+                f"ERROR: interaction {interaction_id} has a relationship constraint for the value {v_type}, "
+                f"which is higher than the max value of a relationship (100)."
+            )
+            break
+        elif threshold <= 0:
+            print(
+                f"ERROR: interaction {interaction_id} has a relationship constraints for the value {v_type}, "
+                f"which is lower than the min value of a relationship or 0."
+            )
+            break
+
+        threshold_fulfilled = False
+        if v_type == "romance":
+            if not lower_than and relationship.romantic_love >= threshold:
+                threshold_fulfilled = True
+            elif lower_than and relationship.romantic_love <= threshold:
+                threshold_fulfilled = True
+        if v_type == "like":
+            if not lower_than and relationship.like >= threshold:
+                threshold_fulfilled = True
+            elif lower_than and relationship.like <= threshold:
+                threshold_fulfilled = True
+        if v_type == "comfort":
+            if not lower_than and relationship.comfort >= threshold:
+                threshold_fulfilled = True
+            elif lower_than and relationship.comfort <= threshold:
+                threshold_fulfilled = True
+        if v_type == "trust":
+            if not lower_than and relationship.trust >= threshold:
+                threshold_fulfilled = True
+            elif lower_than and relationship.trust <= threshold:
+                threshold_fulfilled = True
+
+        if not threshold_fulfilled:
+            return False
+
+    return True
 
 def cats_fulfill_single_interaction_constraints(
     main_cat, random_cat, interaction
