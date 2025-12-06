@@ -820,7 +820,7 @@
                         "values": ["respect", "trust"],
                         "amount": -20,
                         "log": {
-                            "cats_from": "to_cat was hiding {PRONOUN/p_l/poss} forbidden relationship with an outsider (which is against the warrior code) from the rest of the clan, and then <i>invited</i> them in.",
+                            "cats_from": "to_cat was hiding {PRONOUN/p_l/poss} forbidden relationship with an outsider (which is against the warrior code) from the rest of the clan, and then <i>invited</i> them in."
                         }
                     }
                 ],
