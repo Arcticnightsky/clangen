@@ -312,7 +312,7 @@
             "m_c decorates r_c's nest with colorful leaves to surprise {PRONOUN/r_c/object}!",
             "m_c and r_c enjoy a walk underneath a row of colorful trees together",
             "m_c purrs when r_c let out a cute kit-sized sneeze from the chilly breeze",
-            "m_c sees r_c struggle to keep {PRONOUN/r_c/poss} balance on a patch of ice while on patrol and purrs when {PRONOUN/r_c/subject} fell, thinking it was cute."
+            "m_c sees r_c struggle to keep {PRONOUN/r_c/poss} balance on a patch of ice while in camp and purrs when {PRONOUN/r_c/subject} fell, thinking it was cute."
         ],
         "reaction_random_cat": {
             "romance": "increase",
