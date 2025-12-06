@@ -111,33 +111,44 @@ class GroupInteraction:
 
 
 def cats_fulfill_single_interaction_constraints(
-    main_cat, random_cat, interaction
+    main_cat, random_cat, interaction, game_mode
 ) -> bool:
     """Check if the two cats fulfills the interaction constraints."""
+    if len(interaction.main_status_constraint) >= 1:
+        if main_cat.status not in interaction.main_status_constraint:
+            return False
 
-    main_constraint_dict = {
-        "status": interaction.main_status_constraint,
-        "trait": interaction.main_trait_constraint,
-        "backstory": interaction.backstory_constraint.get("m_c"),
-        "skills": interaction.main_skill_constraint,
-        "relationship_status": interaction.relationship_constraint,
-    }
-    random_constraint_dict = {
-        "status": interaction.random_status_constraint,
-        "trait": interaction.random_trait_constraint,
-        "backstory": interaction.backstory_constraint.get("r_c"),
-        "skill": interaction.random_skill_constraint,
-    }
+    if len(interaction.random_status_constraint) >= 1:
+        if random_cat.status not in interaction.random_status_constraint:
+            return False
 
-    main_cat_satisfied = event_for_cat(
-        main_constraint_dict, main_cat, [main_cat, random_cat], event_id=interaction.id
-    )
-    random_cat_satisfied = event_for_cat(
-        random_constraint_dict,
-        random_cat,
-        [random_cat, main_cat],
-        event_id=interaction.id,
-    )
+    if len(interaction.main_trait_constraint) >= 1:
+        if main_cat.personality.trait not in interaction.main_trait_constraint:
+            return False
+
+    if len(interaction.random_trait_constraint) >= 1:
+        if random_cat.personality.trait not in interaction.random_trait_constraint:
+            return False
+
+    if len(interaction.main_skill_constraint) >= 1:
+        if (
+            main_cat.skills.primary.skill or main_cat.skills.secondary.skill
+        ) not in interaction.main_skill_constraint:
+            return False
+
+    if len(interaction.random_skill_constraint) >= 1:
+        if (
+            random_cat.skills.primary.skill or random_cat.skills.secondary.skill
+        ) not in interaction.random_skill_constraint:
+            return False
+
+    if len(interaction.backstory_constraint) >= 1:
+        if "m_c" in interaction.backstory_constraint:
+            if main_cat.backstory not in interaction.backstory_constraint["m_c"]:
+                return False
+        if "r_c" in interaction.backstory_constraint:
+            if random_cat.backstory not in interaction.backstory_constraint["r_c"]:
+                return False
 
     if len(interaction.has_injuries) >= 1:
         if "m_c" in interaction.has_injuries:
@@ -159,11 +170,7 @@ def cats_fulfill_single_interaction_constraints(
             if len(injuries_in_needed) <= 0:
                 return False
 
-    if main_cat_satisfied and random_cat_satisfied:
-        return True
-
-    return False
-
+    return True
 
 # ---------------------------------------------------------------------------- #
 #                            BUILD MASTER DICTIONARY                           #
