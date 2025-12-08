@@ -513,18 +513,27 @@ class Cat:
                     rejected_ID = CatGroup.STARCLAN_ID
 
                 # afterlife does not like this cat
-                if affinity < 0 or murder_history and "is_murderer" in murder_history or primary == SkillPath.DARK or secondary == SkillPath.DARK:
+                if affinity < 0 or murder_history and "is_murderer" in murder_history or primary == SkillPath.DARK or secondary == SkillPath.DARK or self.status.is_leader and self.personality.trait in ["bloodthirsty", "vengeful", "fierce"]:
                     # might send them to the opposite afterlife instead
                     if not random_module.randint(0, 5):
                         self.history.add_afterlife_acceptance(
                             afterlife_group, rejected=True
                         )
                         self.status.send_to_afterlife(rejected_ID)
-                        return
+                        if self.status.is_leader and self.personality.trait in ["bloodthirsty", "vengeful", "fierce"]:
+                            self.history.add_afterlife_acceptance(
+                                afterlife_group, tyrant_leader_bad=True
+                            )
+                            self.status.send_to_afterlife(rejected_ID)
+                            return
                     # fine, they can go to afterlife, but some cats don't like it
                     self.history.add_afterlife_acceptance(
                         afterlife_group, contentious=True
                     )
+                    if self.status.is_leader and self.personality.trait in ["bloodthirsty", "vengeful", "fierce"]:
+                        self.history.add_afterlife_acceptance(
+                            afterlife_group, tyrant_leader_ok=True
+                        )
                 # afterlife thinks this cat is ok
                 else:
                     self.history.add_afterlife_acceptance(afterlife_group)
