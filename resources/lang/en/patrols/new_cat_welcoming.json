@@ -842,12 +842,12 @@
                     {
                         "cats": ["n_c:0"],
                         "injuries": ["blunt_force_injury"],
-                        "no_results": false
+                        "no_results": true
                     }
                 ],
                 "history_text": {
-                    "scar": "n_c:0 was heavily injured by a monster and carries the scars from it.",
-                    "reg_death": "n_c:0 was hit by a monster and later died from {PRONOUN/n_c:0/poss} injuries."
+                    "scar": "m_c was heavily injured by a monster and carries the scars from it.",
+                    "reg_death": "m_c was hit by a monster and later died from {PRONOUN/m_c/poss} injuries."
                 },
                 "new_cat": [
                     ["loner"]
@@ -921,12 +921,12 @@
                     {
                         "cats": ["n_c:0"],
                         "injuries": ["blunt_force_injury"],
-                        "no_results": false
+                        "no_results": true
                     }
                 ],
                 "history_text": {
-                    "scar": "n_c:0 was heavily injured by a monster and carries the scars from it.",
-                    "reg_death": "n_c:0 was hit by a monster and later died from {PRONOUN/n_c:0/poss} injuries."
+                    "scar": "m_c was heavily injured by a monster and carries the scars from it.",
+                    "reg_death": "m_c was hit by a monster and later died from {PRONOUN/m_c/poss} injuries."
                 },
                 "new_cat": [
                     ["loner"]
