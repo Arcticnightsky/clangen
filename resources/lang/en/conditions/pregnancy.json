@@ -185,6 +185,10 @@
         "lead_death": [
             "m_c lost one of {PRONOUN/m_c/poss} nine lives, but gave birth to a {insert}.",
             "Although m_c gave birth to a {insert}, it came at the cost of one of {PRONOUN/m_c/poss} nine lives."
+        ],
+        "stillborn_kit_death": [
+            "Unfortunatley, one of m_c's kits didn't make it...",
+			"The medicine cat has tried their best to revive one of the kits in m_c's litter, but unfortunatley the kit seemed to have already passed before it even got a chance at life...",
         ]
     }
 }
