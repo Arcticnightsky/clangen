@@ -583,18 +583,9 @@ class Pelt:
             selected = choice(par_pelts)            
             self.name = selected.name
             self.length = selected.length
-            # Force male tortie check here
-            if self.gender == "male" and self.name in Pelt.torties:
-                boosted_inheritance = max(200, constants.CONFIG["cat_generation"]["direct_inheritance"] + 49)
-                if random.randint(1, boosted_inheritance) != 1:
-                    self.gender == "female"
-                    self.tortie_base = selected.tortie_base
-                if self.gender == "male":
-                    self.tortie_base = None
-                print(f"If you see this, the code didn't fucking work, AGAIN bruh...")
+            self.tortie_base = selected.tortie_base
             self.colour = selected.colour
-    # If selected is a tortie and the kit is male, apply extra rarity
-    # Safe to inherit (either not a tortie, or passed rare check)
+
             return selected.white
 
         # ------------------------------------------------------------------------------------------------------------#
@@ -645,14 +636,13 @@ class Pelt:
         for p_ in par_pelts:
             if p_.name in Pelt.torties:
                 tortie_chance_f = int(tortie_chance_f / 2)
-                tortie_chance_m = max(1, tortie_chance_m)
                 break
 
         # Determine tortie:
-        if gender == "female":
-            torbie = random.getrandbits(tortie_chance_f) == 1
+        if self.gender == "male":
+            torbie = random.randint(1, tortie_chance_m) == 1
         else:
-            torbie = random.getrandbits(tortie_chance_m) == 1
+            torbie = random.randint(1, tortie_chance_f) == 1
 
         chosen_tortie_base = None
         if torbie:
