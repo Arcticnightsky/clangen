@@ -417,10 +417,10 @@ dev_tools = true
 
   # base 1/2^(chance) a completely random murder occurs
   # aggression and instability will make the denominator lower and increase chance of murder
-  base_random_murder_chance = 300
+  base_random_murder_chance = 250
 
   # base 1/chance a disliked cat will be murdered
-  base_murder_kill_chance = 150
+  base_murder_kill_chance = 80
 
   # age cats will start dying of old age based on old_age_death_curve
   old_age_death_start = 150
