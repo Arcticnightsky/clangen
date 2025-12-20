@@ -536,7 +536,6 @@ class Pelt:
                     break
 
     def pattern_color_inheritance(self, parents: tuple = (), cat=None):
-        gender = self.gender
         # setting parent pelt categories
         # We are using a set, since we don't need this to be ordered, and sets deal with removing duplicates.
         par_peltlength = set()
@@ -654,6 +653,7 @@ class Pelt:
             chosen_pelt = random.choice(Pelt.torties)
             self.no_kits = False
             if self.gender == "male":
+                print("RARE MALE TORTIE GENERATED")
                 self.no_kits = True
 
         # ------------------------------------------------------------------------------------------------------------#
@@ -1406,3 +1406,42 @@ def unpack_appearance_ruleset(cat, rule, short, pelt, color):
     else:
         raise Exception(f"Unmatched ruleset item {rule} in describe_appearance!")
     return ""
+
+def test_male_tortie_generation(trials=10000):
+    male_torties = 0
+    female_torties = 0
+    male_total = 0
+    female_total = 0
+
+    for _ in range(trials):
+        # Force a random gender (50/50 like normal kit generation)
+        gender = random.choice(["male", "female"])
+
+        pelt = Pelt(gender=gender)
+        pelt.randomize_pattern_color()
+        pelt.init_pattern()
+
+        if pelt.name in Pelt.torties:
+            if gender == "male":
+                male_torties += 1
+            else:
+                female_torties += 1
+
+        if gender == "male":
+            male_total += 1
+        else:
+            female_total += 1
+
+    print("==== TORTIE TEST RESULTS ====")
+    print(f"Trials: {trials}")
+    print(f"Male cats: {male_total}")
+    print(f"Female cats: {female_total}")
+    print(f"Male torties: {male_torties}")
+    print(f"Female torties: {female_torties}")
+
+    if male_torties > 0:
+        print(f"Male tortie rate: 1 / {trials // male_torties}")
+    else:
+        print("Male torties: 0 (expected if trials < rarity)")
+if __name__ == "__main__":
+    test_male_tortie_generation(20000)
