@@ -23,7 +23,8 @@ from scripts.utility import (
     find_alive_cats_with_rank,
     adjust_list_text,
 )
-
+from scripts.cat.pelts import Pelt
+from random import randint
 
 class Pregnancy_Events:
     """All events which are related to pregnancy such as kitting and defining who are the parents."""
@@ -424,7 +425,8 @@ class Pregnancy_Events:
                     age=kit.age, social=cat.status.social, group_ID=cat.status.group_ID
                 )
                 kit.backstory = "outsider1"
-
+                name = choice(names.names_dict["loner_names"])
+                kit.name = Name(prefix=name, suffix="", cat=kit)
                 if cat.status.is_exiled(CatGroup.PLAYER_CLAN_ID):
                     name = choice(names.names_dict["normal_prefixes"])
                     kit.name = Name(prefix=name, suffix="", cat=kit)
@@ -1012,6 +1014,12 @@ class Pregnancy_Events:
                 kitten.relationships[second_kitten.ID].trust += 10 + y
 
             kitten.create_inheritance_new_cat()  # Calculate inheritance.
+            # --- Male tortie rarity enforcement (FINAL, POST-INHERITANCE) ---
+            if kitten.pelt.name in Pelt.torties and kitten.gender == "male":
+                # 1 in 3000 chance to remain male
+                if randint(1, 3000) != 1:
+                    kitten.gender = "female"
+                    kitten.genderalign = "female"
 
         # check if the possible adoptive cat is not already in the family tree and
         # add them as adoptive parents if not
