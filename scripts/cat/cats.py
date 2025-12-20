@@ -426,6 +426,7 @@ class Cat:
             # 1 / 3000 chance to keep male tortie
             if random_module.randint(1, 3000) != 1:
                 self.gender = "female"
+                self.genderalign = "female"
         # Personality
         if disable_random:
             self.personality = Personality(
