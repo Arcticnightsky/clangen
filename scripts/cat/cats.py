@@ -421,7 +421,11 @@ class Cat:
             [Cat.fetch_cat(i) for i in (self.parent1, self.parent2) if i],
             self.age,
         )
-
+        # --- Male tortie rarity enforcement (KITS ONLY) ---
+        if self.born and self.pelt.name in Pelt.torties and self.gender == "male":
+            # 1 / 3000 chance to keep male tortie
+            if random.randint(1, 3000) != 1:
+                self.gender = "female"
         # Personality
         if disable_random:
             self.personality = Personality(
