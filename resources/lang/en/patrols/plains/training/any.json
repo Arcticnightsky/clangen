@@ -396,7 +396,9 @@
                         "scars": ["SIDE"]
                     }
                 ],
-                "history_text": { "scar": "This cat was scarred by a badger." }
+                "history_text": { "scar": "This cat was scarred by a badger.",
+                    "reg_death": "m_c died from {PRONOUN/m_c/poss} injuries after being hurt by a badger while on patrol.",
+                    "lead_death": "died from {PRONOUN/m_c/poss} injuries after being hurt by a badger while on patrol." }
             }
         ]
     },
