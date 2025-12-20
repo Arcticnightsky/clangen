@@ -39,7 +39,7 @@
 	"wing", "wish", "wisp", "zoom"
   ],
   "pelt_suffixes": {
-    "TwoColour": ["patch", "spot", "frost", "splash", "patch", "spots", "frost", "swan"],
+    "TwoColour": ["patch", "spot", "frost", "splash", "patch", "frost", "swan"],
     "Tabby": ["stripe", "feather", "leaf", "stripe", "shade", "swirl", "ripple"],
     "Marbled": ["stripe", "feather", "leaf", "stripe", "shade", "swirl"],
     "Speckled": ["dapple", "speckle", "spot", "spots", "speck", "freckle", "fleck"],
