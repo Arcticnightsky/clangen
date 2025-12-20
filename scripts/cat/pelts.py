@@ -652,6 +652,9 @@ class Pelt:
                 chosen_tortie_base = "Single"
             chosen_tortie_base = chosen_tortie_base.lower()
             chosen_pelt = random.choice(Pelt.torties)
+            self.no_kits = False
+            if self.gender == "male":
+                self.no_kits = True
 
         # ------------------------------------------------------------------------------------------------------------#
         #   PELT COLOUR
