@@ -663,7 +663,7 @@ class Pelt:
         weights = [0, 0, 0, 0]
         for p_ in par_peltcolours:
             if p_ in Pelt.ginger_colours:
-                if gender == "female":
+                if self.gender == "female":
                     add_weight = (30, 0, 0, 25)
                 else:
                     add_weight = (40, 0, 0, 10)
@@ -672,12 +672,12 @@ class Pelt:
             elif p_ in Pelt.white_colours:
                 add_weight = (0, 5, 40, 0)
             elif p_ in Pelt.brown_colours:
-                if gender == "female":
+                if self.gender == "female":
                     add_weight = (3, 5, 0, 35)
                 else:
                     add_weight = (10, 5, 0, 35)
             elif p_ is None:
-                if gender == "female":
+                if self.gender == "female":
                     add_weight = (15, 40, 40, 40)
                 else:
                     add_weight = (40, 40, 40, 40)
