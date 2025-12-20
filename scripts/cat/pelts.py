@@ -383,8 +383,15 @@ class Pelt:
         self._paralyzed = val
 
     @staticmethod
-    def generate_new_pelt(parents: tuple = (), age: str = "adult"):
-        new_pelt = Pelt()
+    def generate_new_pelt(gender: str, parents: tuple = (), age: str = "adult"):
+
+        # Ensure parents is always a tuple or list of valid Cat objects
+        if isinstance(parents, str) or parents is None:
+            parents = []
+        elif not isinstance(parents, (list, tuple)):
+            parents = [parents]
+
+        new_pelt = Pelt(gender=gender)
 
         pelt_white = new_pelt.init_pattern_color(parents)
         new_pelt.init_white_patches(pelt_white, parents)
@@ -528,8 +535,7 @@ class Pelt:
                     )  # choose from the remaining two lists
                     break
 
-    def pattern_color_inheritance(self, parents: tuple = ()):
-        gender = self.gender
+    def pattern_color_inheritance(self, parents: tuple = (), cat=None):
         # setting parent pelt categories
         # We are using a set, since we don't need this to be ordered, and sets deal with removing duplicates.
         par_peltlength = set()
@@ -576,18 +582,9 @@ class Pelt:
             selected = choice(par_pelts)            
             self.name = selected.name
             self.length = selected.length
-# Force male tortie check here
-            if gender == "male" and self.tortie_base in Pelt.torties:
-                boosted_inheritance = max(200, constants.CONFIG["cat_generation"]["direct_inheritance"] + 49)
-                if random.randint(1, boosted_inheritance) != 1:
-                    print(f"Converting rare male tortie kit '{kit.name}' to female for realism.")
-                    gender = "female"
-                    self.tortie_base = selected.tortie_base
-                else: 
-                    gender = "male"
+            self.tortie_base = selected.tortie_base
             self.colour = selected.colour
-    # If selected is a tortie and the kit is male, apply extra rarity
-    # Safe to inherit (either not a tortie, or passed rare check)
+
             return selected.white
 
         # ------------------------------------------------------------------------------------------------------------#
@@ -638,14 +635,13 @@ class Pelt:
         for p_ in par_pelts:
             if p_.name in Pelt.torties:
                 tortie_chance_f = int(tortie_chance_f / 2)
-                tortie_chance_m = max(1, tortie_chance_m)
                 break
 
         # Determine tortie:
-        if gender == "female":
-            torbie = random.getrandbits(tortie_chance_f) == 1
+        if self.gender == "male":
+            torbie = random.randint(1, tortie_chance_m) == 1
         else:
-            torbie = random.getrandbits(tortie_chance_m) == 1
+            torbie = random.randint(1, tortie_chance_f) == 1
 
         chosen_tortie_base = None
         if torbie:
@@ -655,6 +651,10 @@ class Pelt:
                 chosen_tortie_base = "Single"
             chosen_tortie_base = chosen_tortie_base.lower()
             chosen_pelt = random.choice(Pelt.torties)
+            self.no_kits = False
+            if self.gender == "male":
+                print("RARE MALE TORTIE GENERATED")
+                self.no_kits = True
 
         # ------------------------------------------------------------------------------------------------------------#
         #   PELT COLOUR
@@ -832,7 +832,7 @@ class Pelt:
         gender = self.gender
         if parents:
             # If the cat has parents, use inheritance to decide pelt.
-            chosen_white = self.pattern_color_inheritance(parents)
+            chosen_white = self.pattern_color_inheritance(parents, cat=self)
         else:
             chosen_white = self.randomize_pattern_color()
 
@@ -952,17 +952,17 @@ class Pelt:
                         self.colour in Pelt.white_colours
                     ):
                         self.tortie_colour = choice(
-                            (Pelt.ginger_colours * 2) + Pelt.brown_colours
+                            (Pelt.ginger_colours * 4) + Pelt.brown_colours
                         )
                     elif self.colour in Pelt.ginger_colours:
                         self.tortie_colour = choice(
-                            Pelt.brown_colours + Pelt.black_colours * 2
+                            Pelt.brown_colours + (Pelt.black_colours * 2)
                         )
                     elif self.colour in Pelt.brown_colours:
                         possible_colors = Pelt.brown_colours.copy()
                         possible_colors.remove(self.colour)
                         possible_colors.extend(
-                            Pelt.black_colours + (Pelt.ginger_colours * 2)
+                            Pelt.black_colours + (Pelt.ginger_colours * 4)
                         )
                         self.tortie_colour = choice(possible_colors)
                     else:
@@ -1303,43 +1303,64 @@ def _describe_pattern(cat, short=False):
 
 
 def _describe_torties(cat, color_name, short=False) -> (str, str):
-    # Calicos and Torties need their own descriptions
-    if short:
-        # If using short, don't describe the colors of calicos and torties.
-        # Just call them calico, tortie, or mottled
-        if (
-            cat.pelt.colour
-            in Pelt.black_colours + Pelt.brown_colours + Pelt.white_colours
-            and cat.pelt.tortie_colour
-            in Pelt.black_colours + Pelt.brown_colours + Pelt.white_colours
-        ):
-            return "cat.pelts.mottled", ""
+    # Make sure color_name is a string
+    if isinstance(color_name, list):
+        # Sometimes color_name is a list of strings like ["cat.pelts.BLACK"]
+        if color_name:
+            # Strip translation key prefixes
+            base_color = color_name[-1].replace("cat.pelts.", "").lower()
         else:
-            return f"cat.pelts.{cat.pelt.name}", ""
+            base_color = ""
+    else:
+        base_color = str(color_name).replace("cat.pelts.", "").lower()
 
-    base = cat.pelt.tortie_base.lower()
+    # Short description: just the pelt type
+    if short:
+        if (
+            cat.pelt.colour in Pelt.black_colours + Pelt.brown_colours + Pelt.white_colours
+            and cat.pelt.tortie_colour in Pelt.black_colours + Pelt.brown_colours + Pelt.white_colours
+        ):
+            color_name = "mottled"
+        else:
+            base = cat.pelt.tortie_base.lower()
+            if base in [tabby.lower() for tabby in Pelt.tabbies] + ["bengal", "rosette", "speckled"]:
+                # torbie/tabico for tabby bases
+                if cat.pelt.name.lower() == "tortie":
+                    color_name = "torbie"
+                elif cat.pelt.name.lower() == "calico":
+                    color_name = "tabico"
+                else:
+                    color_name = cat.pelt.name.lower()
+            else:
+                color_name = cat.pelt.name.lower()
+        return color_name, ""
 
-    patches_color = f"cat.pelts.{cat.pelt.tortie_colour}"
-    color_name.append("/")
-    color_name.append(patches_color)
+    # Long description
+    patches_color = cat.pelt.tortie_colour.lower().replace("cat.pelts.", "")
+    base_color = base_color.replace("cat.pelts.", "")
 
+    # Join the base color and patches color
+    color_text = f"{base_color}/{patches_color}"
+
+    # If both are neutral tones
     if (
         cat.pelt.colour in Pelt.black_colours + Pelt.brown_colours + Pelt.white_colours
-        and cat.pelt.tortie_colour
-        in Pelt.black_colours + Pelt.brown_colours + Pelt.white_colours
+        and cat.pelt.tortie_colour in Pelt.black_colours + Pelt.brown_colours + Pelt.white_colours
     ):
-        return "cat.pelts.mottled_long", color_name
+        color_text = f"{color_text} mottled"
     else:
-        if base in tuple(tabby.lower() for tabby in Pelt.tabbies) + (
-            "bengal",
-            "rosette",
-            "speckled",
-        ):
-            base = f"cat.pelts.{cat.pelt.tortie_base.capitalize()}_long"  # the extra space is intentional
+        base = cat.pelt.tortie_base.lower()
+        if base in [tabby.lower() for tabby in Pelt.tabbies] + ["bengal", "rosette", "speckled"]:
+            if cat.pelt.name.lower() == "tortie":
+                color_text = f"{color_text} torbie"
+            elif cat.pelt.name.lower() == "calico":
+                color_text = f"{color_text} tabico"
+            else:
+                color_text = f"{color_text} {cat.pelt.name.lower()} tabby"
         else:
-            base = ""
-        return base, color_name
+            color_text = f"{color_text} {cat.pelt.name.lower()}"
 
+    return color_text, ""
 
 _scar_details = [
     "NOTAIL",
@@ -1385,3 +1406,42 @@ def unpack_appearance_ruleset(cat, rule, short, pelt, color):
     else:
         raise Exception(f"Unmatched ruleset item {rule} in describe_appearance!")
     return ""
+
+def test_male_tortie_generation(trials=10000):
+    male_torties = 0
+    female_torties = 0
+    male_total = 0
+    female_total = 0
+
+    for _ in range(trials):
+        # Force a random gender (50/50 like normal kit generation)
+        gender = random.choice(["male", "female"])
+
+        pelt = Pelt(gender=gender)
+        pelt.randomize_pattern_color()
+        pelt.init_pattern()
+
+        if pelt.name in Pelt.torties:
+            if gender == "male":
+                male_torties += 1
+            else:
+                female_torties += 1
+
+        if gender == "male":
+            male_total += 1
+        else:
+            female_total += 1
+
+    print("==== TORTIE TEST RESULTS ====")
+    print(f"Trials: {trials}")
+    print(f"Male cats: {male_total}")
+    print(f"Female cats: {female_total}")
+    print(f"Male torties: {male_torties}")
+    print(f"Female torties: {female_torties}")
+
+    if male_torties > 0:
+        print(f"Male tortie rate: 1 / {trials // male_torties}")
+    else:
+        print("Male torties: 0 (expected if trials < rarity)")
+if __name__ == "__main__":
+    test_male_tortie_generation(20000)

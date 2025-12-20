@@ -965,7 +965,7 @@ def create_new_cat(
                 deaf_chance = None
                 if (new_cat.pelt.colour == "WHITE" or new_cat.pelt.white_patches == "FULLWHITE") and new_cat.pelt.eye_colour in blue_eyes:
                     deaf_chance = constants.CONFIG["cat_generation"]["base_permanent_condition"] * 0.4
-                elif (new_cat.pelt.colour == "WHITE" or new_cat.pelt.white_patches == "FULLWHITE") and new_cat.eye_colour2 and new_cat.pelt.eye_colour2 in blue_eyes:
+                elif (new_cat.pelt.colour == "WHITE" or new_cat.pelt.white_patches == "FULLWHITE") and new_cat.pelt.eye_colour2 and new_cat.pelt.eye_colour2 in blue_eyes:
                     deaf_chance = constants.CONFIG["cat_generation"]["base_permanent_condition"] * 0.7
 
                 if deaf_chance:
@@ -1979,7 +1979,7 @@ def history_text_adjust(text, other_clan_name, clan, other_cat_rc=None):
         text = text.replace("o_c_n", str(other_clan_name))
 
     if "c_n" in text:
-        text = text.replace("c_n", clan.displayname + "Clan")
+        text = text.replace("c_n", clan.displayname)
     if "r_c" in text and other_cat_rc:
         text = selective_replace(text, "r_c", str(other_cat_rc.name))
     return text

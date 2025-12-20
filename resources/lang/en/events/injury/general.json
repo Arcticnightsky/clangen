@@ -863,7 +863,7 @@
         "season": [
             "any"
         ],
-        "frequency": 3,
+        "frequency": 1,
         "event_text": "m_c was on a walk when {PRONOUN/m_c/subject} saw r_c being attacked by a dog! {PRONOUN/m_c/subject/CAP} helped r_c escape, but not before gaining a few wounds.",
         "m_c": {
             "age": [
@@ -1438,7 +1438,7 @@
         "season": [
             "leaf-bare"
         ],
-        "frequency": 3,
+        "frequency": 2,
         "event_text": "m_c went out for a walk, but slipped on the ice and broke a bone.",
         "m_c": {
             "age": [
@@ -1607,7 +1607,7 @@
                 "cats": [
                     "m_c"
                 ],
-                "scar": "m_c was scarred from {PRONOUN/m_c/poss} broken bone after falling from a tall tree."
+                "scar": "m_c was scarred from {PRONOUN/m_c/poss} broken bone after falling from a tall tree.",
                 "reg_death": "m_c died from {PRONOUN/m_c/poss} wounds after falling from a tall tree."
             }
         ]
@@ -1728,7 +1728,7 @@
                     "m_c"
                 ],
                 "scar": "m_c was scarred by an eagle.",
-                "reg_death": "m_c died from {PRONOUN/m_c/poss} wounds after fighting an eagle.",
+                "reg_death": "m_c died from {PRONOUN/m_c/poss} wounds after trying to fight off an eagle.",
                 "lead_death": "died from {PRONOUN/m_c/poss} wounds after fighting an eagle"
             }
         ]
@@ -5667,7 +5667,7 @@
         "season": [
             "any"
         ],
-        "frequency": 4,
+        "frequency": 2,
         "event_text": "m_c fought a rogue and, while {PRONOUN/m_c/subject} drove the trespasser away, {PRONOUN/m_c/subject} needed to be rushed to the medicine cat den afterwards.",
         "m_c": {
             "age": [
@@ -5735,7 +5735,7 @@
         "season": [
             "any"
         ],
-        "frequency": 4,
+        "frequency": 2,
         "event_text": "m_c got {PRONOUN/m_c/poss} paw stuck in a Twoleg trap, and while {PRONOUN/m_c/subject} eventually escaped, {PRONOUN/m_c/poss} leg is heavily injured.",
         "m_c": {
             "age": [
@@ -5866,7 +5866,7 @@
         "season": [
             "any"
         ],
-        "frequency": 4,
+        "frequency": 3,
         "event_text": "m_c's tail was badly injured by a dog.",
         "m_c": {
             "age": [
@@ -5915,7 +5915,7 @@
         "season": [
             "any"
         ],
-        "frequency": 4,
+        "frequency": 3,
         "event_text": "m_c's tail was badly injured by a fox.",
         "m_c": {
             "age": [

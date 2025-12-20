@@ -35,16 +35,16 @@ dev_tools = true
 
   [relationship.value_change_amount]
     # amount a relationship changes for "high", "medium", and "low" effects for interactions
-    low = 8
-    medium = 12
-    high = 16
+    low = 9
+    medium = 14
+    high = 19
 
   [relationship.value_intervals]
     # The cut-off for each value level. This starts at -100 with each int marking the end of that level. 
     # For example, extreme_neg ends at -70, making its full range -100 to -70. mid_neg starts from -69 and continues till -25.
     # NOTE: increasing extreme_pos past 100 or decreasing extreme_neg below -100 will probably break things
       extreme_neg = -100
-      mid_neg = -25
+      mid_neg = -45
       low_neg = -6
       neutral = 5
       low_pos = 24
@@ -182,17 +182,17 @@ dev_tools = true
   birth_cooldown = 6
 
   # 1/chance that kits, relationship and other factors will influence this chance
-  primary_chance_mated = 80
+  primary_chance_mated = 60
 
   # 1/chance that kits, relationship and other factors will influence this chance
-  primary_chance_unmated = 130
+  primary_chance_unmated = 135
 
   # 1/chance that a mated cat to has an affair
-  random_affair_chance = 50
+  random_affair_chance = 60
 
   # special 1/chance for an unmated cat to have an affair
   # for this check, only other unmated cats can be the affair partner
-  unmated_random_affair_chance = 10
+  unmated_random_affair_chance = 200
 
   # base chance for same-sex mates to adopt random kittens
   primary_chance_same_sex_adoption = 500
@@ -340,7 +340,7 @@ dev_tools = true
 
 [lost_cat]
   # 1/chance that a lost cat will return on their own
-  rejoin_chance = 20
+  rejoin_chance = 6
 
 [cat_ages]
   # represents ranges for cat ages
@@ -403,11 +403,11 @@ dev_tools = true
 
 [death_related]
   # base 1/chance that leader will die
-  leader_death_chance = 20
+  leader_death_chance = 15
 
   # base 1/chance a cat will die
-  classic_death_chance = 500
-  expanded_death_chance = 350
+  classic_death_chance = 650
+  expanded_death_chance = 500
   "cruel season_death_chance" = 300
 
   # modifiers for death chance based on if a war is going badly
@@ -417,10 +417,10 @@ dev_tools = true
 
   # base 1/2^(chance) a completely random murder occurs
   # aggression and instability will make the denominator lower and increase chance of murder
-  base_random_murder_chance = 800
+  base_random_murder_chance = 300
 
   # base 1/chance a disliked cat will be murdered
-  base_murder_kill_chance = 200
+  base_murder_kill_chance = 150
 
   # age cats will start dying of old age based on old_age_death_curve
   old_age_death_start = 150
@@ -432,17 +432,17 @@ dev_tools = true
 
 [condition_related]
   # 10/chance an illness will occur
-  expanded_illness_chance = 250
+  expanded_illness_chance = 350
   "cruel season_illness_chance" = 200
   classic_illness_chance = 500
 
   # 5/chance (for most personalities) or 15/chance (for some personalities) an injury will occur 
-  classic_injury_chance = 450
-  expanded_injury_chance = 250
+  classic_injury_chance = 550
+  expanded_injury_chance = 350
   "cruel season_injury_chance" = 150
 
   # 1/chance a cat will get a permanent condition from an event with that possibility 
-  permanent_condition_chance = 15
+  permanent_condition_chance = 20
 
   # modifiers for injury chance based on if a war is going badly
   # SUBTRACTS from the denominator so higher = more likely to get injured

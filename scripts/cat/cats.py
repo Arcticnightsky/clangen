@@ -4,6 +4,7 @@ Contains the Cat and Personality classes
 
 from __future__ import annotations
 
+import random as random_module
 import bisect
 import itertools
 import os.path
@@ -22,6 +23,7 @@ from scripts.cat.names import Name
 from scripts.cat.pelts import Pelt
 from scripts.cat.personality import Personality
 from scripts.cat.skills import CatSkills
+from scripts.cat.skills import SkillPath
 from scripts.cat.status import Status, StatusDict
 from scripts.cat.thoughts import Thoughts
 from scripts.cat_relations.inheritance import Inheritance
@@ -415,6 +417,7 @@ class Cat:
 
         # APPEARANCE
         self.pelt = Pelt.generate_new_pelt(
+            self.gender,
             [Cat.fetch_cat(i) for i in (self.parent1, self.parent2) if i],
             self.age,
         )
@@ -479,6 +482,10 @@ class Cat:
     def dead(self, die: bool):
         if die:
             murder_history = self.history.murder
+            primary = self.skills.primary.path
+            secondary = None
+            if self.skills.secondary:
+                secondary = self.skills.secondary.path
             if self.status.group.is_afterlife():
                 print(
                     f"WARNING: Tried to kill {self.name} ID: {self.ID} but this cat is already dead!"
@@ -488,6 +495,7 @@ class Cat:
             cat_default_afterlife_id = self.status.get_default_afterlife_id()
             if cat_default_afterlife_id == CatGroup.UNKNOWN_RESIDENCE_ID:
                 pass
+            
             # kits are auto-accepted
             elif self.age in (CatAge.KITTEN, CatAge.NEWBORN):
                 self.history.add_afterlife_acceptance(
@@ -495,28 +503,37 @@ class Cat:
                     is_kit=True,
                 )
             else:
-                if cat_default_afterlife_id == CatGroup.STARCLAN_ID:
+                if game.clan.instructor.status.group == CatGroup.STARCLAN:
                     affinity = self.starclan_affinity
                     afterlife_group = CatGroup.STARCLAN
                     rejected_ID = CatGroup.DARK_FOREST_ID
-                else:
+                elif game.clan.instructor.status.group == CatGroup.DARK_FOREST:
                     affinity = self.dark_forest_affinity
                     afterlife_group = CatGroup.DARK_FOREST
                     rejected_ID = CatGroup.STARCLAN_ID
 
                 # afterlife does not like this cat
-                if affinity < 0 or murder_history and "is_murderer" in murder_history:
+                if affinity < 0 or murder_history and "is_murderer" in murder_history or primary == SkillPath.DARK or secondary == SkillPath.DARK or self.status.is_leader and self.personality.trait in ["bloodthirsty", "vengeful", "fierce"]:
                     # might send them to the opposite afterlife instead
-                    if not random.randint(0, 100):
+                    if not random_module.randint(0, 5):
                         self.history.add_afterlife_acceptance(
                             afterlife_group, rejected=True
                         )
                         self.status.send_to_afterlife(rejected_ID)
-                        return
+                        if self.status.is_leader and self.personality.trait in ["bloodthirsty", "vengeful", "fierce"]:
+                            self.history.add_afterlife_acceptance(
+                                afterlife_group, tyrant_leader_bad=True
+                            )
+                            self.status.send_to_afterlife(rejected_ID)
+                            return
                     # fine, they can go to afterlife, but some cats don't like it
                     self.history.add_afterlife_acceptance(
                         afterlife_group, contentious=True
                     )
+                    if self.status.is_leader and self.personality.trait in ["bloodthirsty", "vengeful", "fierce"]:
+                        self.history.add_afterlife_acceptance(
+                            afterlife_group, tyrant_leader_ok=True
+                        )
                 # afterlife thinks this cat is ok
                 else:
                     self.history.add_afterlife_acceptance(afterlife_group)
@@ -1199,9 +1216,16 @@ class Cat:
         """Create a leader ceremony and add it to the history"""
 
         load_leader_ceremonies()
-
+        primary = self.skills.primary.path
+        secondary = None
+        if self.skills.secondary:
+            secondary = self.skills.secondary.path
+        
         # determine which dict we're pulling from
         if game.clan.instructor.status.group == CatGroup.DARK_FOREST:
+            starclan = False
+            ceremony_dict: Dict = LEAD_CEREMONY_DF
+        elif primary == SkillPath.DARK or secondary == SkillPath.DARK:
             starclan = False
             ceremony_dict: Dict = LEAD_CEREMONY_DF
         else:

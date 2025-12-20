@@ -845,6 +845,10 @@
                         "no_results": true
                     }
                 ],
+                "history_text": {
+                    "scar": "m_c was heavily injured by a monster and carries the scars from it.",
+                    "reg_death": "m_c was hit by a monster and later died from {PRONOUN/m_c/poss} injuries."
+                },
                 "new_cat": [
                     ["loner"]
                 ],
@@ -920,6 +924,10 @@
                         "no_results": true
                     }
                 ],
+                "history_text": {
+                    "scar": "m_c was heavily injured by a monster and carries the scars from it.",
+                    "reg_death": "m_c was hit by a monster and later died from {PRONOUN/m_c/poss} injuries."
+                },
                 "new_cat": [
                     ["loner"]
                 ],
@@ -2723,7 +2731,11 @@
                         "injuries": ["battle_injury"],
                         "no_results": true
                     }
-                ]
+                ],
+                "history_text": {
+                    "scar": "n_c:0 was heavily injured by a monster and carries the scars from it.",
+                    "reg_death": "n_c:0 was hit by a monster and later died from {PRONOUN/n_c:0/poss} injuries."
+                }
             },
             {
                 "text": "The patrol approaches cautiously. The loner lifts {PRONOUN/n_c:0/poss} head and asks for help. p_l agrees. They can't leave a fellow cat to die.",
@@ -2843,7 +2855,11 @@
                         "injuries": ["battle_injury"],
                         "no_results": true
                     }
-                ]
+                ],
+                "history_text": {
+                    "scar": "n_c:0 was heavily injured by a monster and carries the scars from it.",
+                    "reg_death": "n_c:0 was hit by a monster and later died from {PRONOUN/n_c:0/poss} injuries."
+                }
             },
             {
                 "text": "p_l approaches cautiously. The loner lifts {PRONOUN/n_c:0/poss} head and asks for help. p_l agrees. {PRONOUN/p_l/subject/CAP} can't leave a fellow cat to die.",
