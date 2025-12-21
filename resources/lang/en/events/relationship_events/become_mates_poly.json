@@ -56,7 +56,7 @@
 			"After a talk with {PRONOUN/m_c/poss} (m_c_mate/mates), m_c asked r_c if they could become mates again, r_c accepted, and they have gotten back together."
 		],
 		"r_c_mates": [
-            "m_c wants to start things over with r_c. After {PRONOUN/r_c/subject} talked with [r_c_mates], m_c and r_c have gotten back together.",
+            "m_c wants to start things over with r_c. After r_c talked with [r_c_mates], m_c and r_c have gotten back together.",
             "m_c told r_c that {PRONOUN/m_c/subject} {VERB/m_c/want/wants} to get back with {PRONOUN/r_c/object}. After r_c talked with {PRONOUN/r_c/poss} (r_c_mate/mates), m_c and r_c have become mates again."
 		],
 		"both_mates": [
@@ -73,7 +73,7 @@
             "After r_c talked with {PRONOUN/r_c/poss} (r_c_mate/mates) about {PRONOUN/r_c/poss} left over feelings for m_c, m_c and r_c have gotten back together."
 		],
 		"both_mates": [
-			"m_c and r_c realized they still had feelings for each other, and after talking with their mates, they got back together."
+			"m_c and r_c realized they still have feelings for each other, and after talking with their mates, they got back together."
 		]
 	},
 	"makeup_fail":{
@@ -85,7 +85,7 @@
 			"m_c wants to get back with r_c, so {PRONOUN/m_c/subject} confessed {PRONOUN/m_c/poss} feelings to r_c. After r_c consulted with {PRONOUN/r_c/poss} (r_c_mate/mates), r_c rejected {PRONOUN/m_c/object}."
 		],
 		"both_mates": [
-			"Even though they broke up and have taken up new mates, m_c still wants to start things over with r_c. Unfortunatley, r_c doesn't feel the same and rejects {PRONOUN/m_c/object}, already content with {PRONOUN/r_c/poss} current (r_c_mate/mates)."
+			"Even though they broke up and have taken up new mates, m_c still wants to start things over with r_c. Unfortunately, r_c doesn't feel the same and rejects {PRONOUN/m_c/object}, already content with {PRONOUN/r_c/poss} current (r_c_mate/mates)."
 		]
 	}
 }
