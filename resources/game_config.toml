@@ -35,21 +35,21 @@ dev_tools = true
 
   [relationship.value_change_amount]
     # amount a relationship changes for "high", "medium", and "low" effects for interactions
-    low = 9
-    medium = 14
-    high = 19
+    low = 8
+    medium = 12
+    high = 16
 
   [relationship.value_intervals]
     # The cut-off for each value level. This starts at -100 with each int marking the end of that level. 
     # For example, extreme_neg ends at -70, making its full range -100 to -70. mid_neg starts from -69 and continues till -25.
     # NOTE: increasing extreme_pos past 100 or decreasing extreme_neg below -100 will probably break things
-      extreme_neg = -100
-      mid_neg = -45
-      low_neg = -6
+      extreme_neg = -70
+      mid_neg = -35
+      low_neg = -16
       neutral = 5
-      low_pos = 24
-      mid_pos = 69
-      extreme_pos = 100
+      low_pos = 15
+      mid_pos = 35
+      extreme_pos = 70
 
 [mates]
   # maximum age difference allowed for cats to be romantic with each other
@@ -381,7 +381,7 @@ dev_tools = true
   chance_of_romance_patrol = 16
 
   # forces patrol with this id to occur, assuming it's possible by constraints
-  debug_ensure_patrol_id = "gen_train_BFFs_platonic502locked1"
+  debug_ensure_patrol_id = ""
 
   # set to true to remove all constraints for patrols regarding location, session, biomes, etc.
   debug_override_patrol_stat_requirements = false
