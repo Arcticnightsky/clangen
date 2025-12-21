@@ -5,7 +5,7 @@ TODO: Docs
 
 
 """  # pylint: enable=line-too-long
-
+import random as random_module
 import logging
 import os
 import re
@@ -971,7 +971,7 @@ def create_new_cat(
                 if deaf_chance:
                     if deaf_chance < 1:
                         deaf_chance = 1
-                    if not random.randint(0, deaf_chance):
+                    if not random_module.randint(1, deaf_chance):
                         chosen_condition = choice(["deaf", "partial hearing loss"])
                         new_cat.get_permanent_condition(chosen_condition, born_with=True)
 
