@@ -635,6 +635,7 @@ class Pelt:
         for p_ in par_pelts:
             if p_.name in Pelt.torties:
                 tortie_chance_f = int(tortie_chance_f / 2)
+                tortie_chance_m = tortie_chance_m - 200
                 break
 
         # Determine tortie:
