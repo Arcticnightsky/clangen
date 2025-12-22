@@ -242,11 +242,12 @@ class PatrolOutcome:
 
         # pronounify the relationship log
         for block in self.relationship_effects:
-            if "log" in block:
-                for group in block["log"]:
-                    block["log"][group] = event_text_adjust(
+            if block.get("log"):
+                log = block.get("log") + " "
+                if isinstance(log, str):
+                    block["log"] = event_text_adjust(
                         Cat,
-                        block["log"][group],
+                        log,
                         patrol_leader=patrol.patrol_leader,
                         random_cat=patrol.random_cat,
                         stat_cat=self.stat_cat,
@@ -256,7 +257,20 @@ class PatrolOutcome:
                         clan=game.clan,
                         other_clan=patrol.other_clan,
                     )
-
+                elif isinstance(log, list):
+                    for i in range(1, len(log)):
+                        block["log"][i] = event_text_adjust(
+                            Cat,
+                            block["log"][i] + " ",
+                            patrol_leader=patrol.patrol_leader,
+                            random_cat=patrol.random_cat,
+                            stat_cat=self.stat_cat,
+                            patrol_cats=patrol.patrol_cats,
+                            patrol_apprentices=patrol.patrol_apprentices,
+                            new_cats=patrol.new_cats,
+                            clan=game.clan,
+                            other_clan=patrol.other_clan,
+                        )
 
         results.append(
             unpack_rel_block(
