@@ -639,10 +639,10 @@ class Pelt:
                 break
 
         # Determine tortie:
-        if self.gender == "male":
-            torbie = random.randint(1, tortie_chance_m) == 1
-        else:
+        if gender == "female":
             torbie = random.randint(1, tortie_chance_f) == 1
+        else:
+            torbie = random.randint(1, tortie_chance_m) == 1
 
         chosen_tortie_base = None
         if torbie:
@@ -652,10 +652,6 @@ class Pelt:
                 chosen_tortie_base = "Single"
             chosen_tortie_base = chosen_tortie_base.lower()
             chosen_pelt = random.choice(Pelt.torties)
-            self.no_kits = False
-            if self.gender == "male":
-                print("RARE MALE TORTIE GENERATED")
-                self.no_kits = True
 
         # ------------------------------------------------------------------------------------------------------------#
         #   PELT COLOUR
@@ -664,7 +660,7 @@ class Pelt:
         weights = [0, 0, 0, 0]
         for p_ in par_peltcolours:
             if p_ in Pelt.ginger_colours:
-                if self.gender == "female":
+                if gender == "female":
                     add_weight = (30, 0, 0, 25)
                 else:
                     add_weight = (40, 0, 0, 10)
@@ -673,12 +669,12 @@ class Pelt:
             elif p_ in Pelt.white_colours:
                 add_weight = (0, 5, 40, 0)
             elif p_ in Pelt.brown_colours:
-                if self.gender == "female":
+                if gender == "female":
                     add_weight = (3, 5, 0, 35)
                 else:
                     add_weight = (10, 5, 0, 35)
             elif p_ is None:
-                if self.gender == "female":
+                if gender == "female":
                     add_weight = (15, 40, 40, 40)
                 else:
                     add_weight = (40, 40, 40, 40)
@@ -881,6 +877,8 @@ class Pelt:
 
         if "NOTAIL" in self.scars and "HALFTAIL" in self.scars:
             self.scars.remove("HALFTAIL")
+        if "BLIND" in self.scars and "BRIGHTHEART" in self.scars:
+            self.scars.remove("BLIND")
 
     def init_accessories(self, age):
         if age == "newborn":
