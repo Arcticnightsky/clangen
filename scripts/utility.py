@@ -1649,6 +1649,8 @@ def change_relationship_values(
                   " /Comfort: " + str(comfort) +
                   " /Trust: " + str(trust)) if changed else print("No relationship change")"""
 
+            if not log:
+                log = i18n.t("relationships.relationship_log")
             if log and isinstance(log, str):
                 replace_dict = {}
                 if "from_cat" in log:
