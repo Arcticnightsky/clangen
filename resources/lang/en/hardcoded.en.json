@@ -41,11 +41,24 @@
             "one": "%{names} found a %{insert} and decides to adopt it.",
             "many": "%{names} found a %{insert} and decides to adopt them."
         },
-        "adoption_kittens_pair": {
+        "adoption_kittens_pair1": {
             "one": "%{names} found a %{insert} and decide to adopt it.",
             "many": "%{names} found a %{insert} and decide to adopt them."
         },
+        "adoption_kittens_pair2": {
+            "one": "While they were out on a casual stroll through the territory, %{names} heard the cries of a %{insert}, looking for its mother! They stayed with the kit till its mother came for it. After hours of waiting and no sign of its mother, %{names} decide to adopt the kit as their own.",
+            "many": "While they were out on a casual stroll through the territory, %{names} heard the cries of a %{insert}, looking for their mother! They stayed with the kits till their mother came for them. After hours of waiting and no sign of their mother, %{names} decide to adopt them as their own."
+        },
+        "adoption_kittens_pair3": {
+            "one": "%{names} were out on a date and found a %{insert} walking their direction, looking utterly distressed. When confronting the kit, the kit cries and explains that its mother basically left it and never returned, it's been days since it's seen its mother. Feeling waves of sympathy for the kit, %{names} decide to adopt the kit into the Clan.",
+            "many": "%{names} were out on a date and found a %{insert} walking their direction, looking utterly distressed. When confronting the kits, the eldest kit cries and explains that their mother basically left them and never returned, it's been days since they've seen their mother. Feeling waves of sympathy for the kits, %{names} decide to adopt them into the Clan."
+        },
+        "adoption_kittens_pair4": {
+            "one": "%{names} wished they were able to have kits of their own, sometimes they wished that they were a tom and she-cat pair for it to happen. Just then, they find a %{insert}, lost and alone with no mother - they tell the kit to not worry, as they will be its parents from now on.",
+            "many": "%{names} wished they were able to have kits of their own, sometimes they wished that they were a tom and she-cat pair for it to happen. Just then, they find a %{insert}, lost with no mother - they tell the kits to not worry, as they will be their parents from now on."
+        },
         "new_kit_thought": "Snuggles up to the belly of r_c",
+        "new_adopted_kit_thought": "Snuggles close to r_c",
         "event_mediator_app": "m_c has chosen to use {PRONOUN/m_c/poss} skills and experience to help solve the Clan's disagreements. A meeting is called, and {PRONOUN/m_c/subject} {VERB/m_c/become/becomes} the Clan's newest mediator.",
         "herbs_found": {
             "zero": "med_name could not find any herbs this moon.",
@@ -87,6 +100,7 @@
             "one": " {PRONOUN/m_c/subject/CAP} {VERB/m_c/bring/brings} along {PRONOUN/m_c/poss} kitten.",
             "many": " {PRONOUN/m_c/subject/CAP} {VERB/m_c/bring/brings} along {PRONOUN/m_c/poss} kittens."
         },
+        "event_lost_mate": " To everyone's surprise, {PRONOUN/m_c/subject} {VERB/m_c/bring/brings} along a cat who m_c introduces as {PRONOUN/m_c/poss} mate.",
         "kittencough_spread": {
             "one": "Kittencough has spread around the nursery. %{kits} is affected.",
             "many": "Kittencough has spread around the nursery. %{kits} are affected."},
@@ -111,6 +125,8 @@
         "consumed_prey": {
             "one": "One piece of prey was consumed.",
             "many": "%{count} pieces of prey were consumed."
-        }
+        },
+        "mate_reunite_poly": "Finally, after waiting for so long - day and night - with restless nights and prayers to Starclan, m_c is home. r_c and {PRONOUN/r_c/poss} mate reunite with {PRONOUN/r_c/object}, sharing a bittersweet moment in the clearing.",
+        "mate_reunite": "Finally, after waiting for so long - day and night - with restless nights and prayers to Starclan, m_c is home. r_c reunites with {PRONOUN/r_c/poss} mate, sharing a bittersweet moment in the middle of the clearing." 
     }
 }

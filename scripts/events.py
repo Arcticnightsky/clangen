@@ -13,6 +13,7 @@ import traceback
 
 import i18n
 
+from scripts.cat.skills import SkillPath
 from scripts.cat import save_load
 from scripts.cat.cats import Cat, cat_class, BACKSTORIES
 from scripts.cat.enums import CatAge, CatRank, CatGroup, CatStanding, CatSocial
@@ -21,6 +22,7 @@ from scripts.cat.save_load import save_cats, add_cat_to_fade_id
 from scripts.clan_package.settings import get_clan_setting, set_clan_setting
 from scripts.clan_resources.freshkill import FRESHKILL_EVENT_ACTIVE
 from scripts.conditions import (
+    amount_clanmembers_covered,
     medicine_cats_can_cover_clan,
     get_amount_cat_for_one_medic,
 )
@@ -56,7 +58,8 @@ from scripts.utility import (
     history_text_adjust,
     unpack_rel_block,
 )
-
+from scripts.cat_relations.relationship import RelType
+from scripts.events_module.relationship.romantic_events import RomanticEvents
 
 all_events = {}
 new_cat_invited = False
@@ -328,7 +331,9 @@ def trigger_future_events():
     for event in removals:
         if event in game.clan.future_events:
             game.clan.future_events.remove(event)
-
+                elif info_dict["interaction_type"] in ("invite", "search"):
+                    # ADD TO CLAN AND CHECK FOR KITS AND MATES
+                    additional_kits = outsider_cat.add_to_clan()
 
 def handle_lead_den_event():
     """
@@ -413,6 +418,75 @@ def handle_lead_den_event():
                         other_clan_name=None,
                         clan=game.clan,
                     ),
+                    additional_mates = outsider_cat.add_to_clan()
+
+                    if additional_mates:
+                        event_text += i18n.t("hardcoded.event_lost_mate")
+
+                        for mate_id in lost_cat.mate:
+                            # add to involved cat list
+                            involved_cats.append(mate_id)
+
+                    invited_cats = [outsider_cat.ID]
+                    invited_cats.extend(additional_mates)
+                    
+                    for cat_ID in invited_cats:
+                        invited_cat = Cat.fetch_cat(cat_ID)
+                        # some things to handle if the cat has not been in the clan before
+                        if (
+                            CatStanding.EXILED
+                            not in invited_cat.status.get_standing_with_group(
+                                CatGroup.PLAYER_CLAN_ID
+                            )
+                        ):
+                            # reset to make sure backstory makes sense
+                            if "guided" in invited_cat.backstory:
+                                invited_cat.backstory = "outsider1"
+                            # if the cat is a healer, give healer rank
+                            elif (
+                                invited_cat.backstory
+                                in BACKSTORIES["backstory_categories"][
+                                    "healer_backstories"
+                                ]
+                            ):
+                                invited_cat.status._change_rank(CatRank.MEDICINE_CAT)
+                            # if cat is a little baby, check name
+                            elif invited_cat.age in (CatAge.NEWBORN, CatAge.KITTEN):
+                                if not invited_cat.name.suffix:
+                                    invited_cat.name = Name(
+                                        invited_cat.name.prefix,
+                                        invited_cat.name.suffix,
+                                        game.clan.biome,
+                                        cat=invited_cat,
+                                    )
+                                    invited_cat.name.give_suffix(
+                                        pelt=None,
+                                        biome=game.clan.biome
+                                        if not game.clan.override_biome
+                                        else game.clan.override_biome,
+                                        tortie_pattern=None,
+                                    )
+                                    invited_cat.specsuffix_hidden = False
+                            # if cat is an apprentice, make sure they get a mentor!
+                            if invited_cat.status.rank == CatRank.APPRENTICE:
+                                invited_cat.update_mentor()
+
+                            elif invited_cat.status.rank == CatRank.MEDIATOR and get_clan_setting("become_mediator") is False:
+                                 invited_cat.status._change_rank(CatRank.WARRIOR)
+                        
+                        invited_cat.create_relationships_new_cat()
+
+                # this handles ceremonies for cats coming into the clan
+                if invited_cats:
+                    self.handle_lost_cats_return(invited_cats)
+
+            # give new thought to cats
+            if "new_thought" in cat_dict:
+                outsider_cat.thought = event_text_adjust(
+                    Cat,
+                    text=cat_dict["new_thought"],
+                    main_cat=outsider_cat,
+                    clan=game.clan,
                 )
                 outsider_cat.die()
 
@@ -757,115 +831,185 @@ def handle_focus():
         game.cur_events_list.insert(0, Single_Event(focus_text, "misc"))
 
 
-def handle_lost_cats_return(predetermined_cat_IDs: list = None):
-    """
-    TODO: DOCS
-    """
-    cat_IDs = []
-    if predetermined_cat_IDs:
-        cat_IDs = predetermined_cat_IDs
+    def handle_lost_cats_return(self, cat=None, predetermined_cat_IDs: list = None):
+        """
+        TODO: DOCS
+        """
+        cat_IDs = []
+        if predetermined_cat_IDs:
+            cat_IDs = predetermined_cat_IDs
 
-    if not predetermined_cat_IDs:
-        eligible_cats = [
-            cat
-            for cat in Cat.all_cats.values()
-            if not cat.dead and cat.status.is_lost(CatGroup.PLAYER_CLAN_ID)
-        ]
+        if cat is None and not predetermined_cat_IDs:
+            eligible_cats = [
+                c
+                for c in Cat.all_cats.values()
+                if not c.dead and c.status.is_lost(CatGroup.PLAYER_CLAN_ID)
+            ]
 
-        if not eligible_cats:
-            return
+            if not eligible_cats:
+                return
 
-        lost_cat = random.choice(eligible_cats)
-        cat_IDs.append(lost_cat.ID)
+            lost_cat = random.choice(eligible_cats)
+            cat_IDs.append(lost_cat.ID)
 
-        additional_cats = lost_cat.add_to_clan()
-        cat_IDs.extend(additional_cats)
-        text = i18n.t(f"hardcoded.event_lost{random.choice(range(1,5))}")
+            additional_mates = []
+            for mate_id in lost_cat.mate:
+                mate = Cat.all_cats.get(mate_id)
+                if (
+                    mate
+                    and mate.ID in Cat.outside_cats
+                    and mate.status.is_outsider
+                    and not mate.dead
+                    and not CatStanding.EXILED
+                ):
+                    additional_mates.append(mate)
 
-        if additional_cats:
-            text += i18n.t("hardcoded.event_lost_kits", count=len(additional_cats))
+            lost_cat.outside = False
+            additional_cats = lost_cat.add_to_clan()
+            cat_IDs.extend(additional_cats)
+            text = i18n.t(f"hardcoded.event_lost{random.choice(range(1,5))}")
 
-        text = event_text_adjust(Cat, text, main_cat=lost_cat, clan=game.clan)
+            if additional_cats:
+                text += i18n.t("hardcoded.event_lost_kits", count=len(additional_cats))
 
-        game.cur_events_list.append(Single_Event(text, "misc", cat_IDs))
+            if additional_mates:
+                additional_mate = random.choice(additional_mates)
+                additional_mate.add_to_clan()
+                additional_mate.backstory = "loner4"
+                cat_IDs.append(additional_mate.ID)
+                text += i18n.t("hardcoded.event_lost_mate")
 
-    # Perform a ceremony if needed
-    for cat_ID in cat_IDs:
-        x = Cat.fetch_cat(cat_ID)
-        if x.status.rank in [
-            CatRank.APPRENTICE,
-            CatRank.MEDICINE_APPRENTICE,
-            CatRank.MEDIATOR_APPRENTICE,
-            CatRank.KITTEN,
-            CatRank.NEWBORN,
-        ]:
-            if x.moons >= 15:
-                if x.status.rank == CatRank.MEDICINE_APPRENTICE:
-                    ceremony(x, CatRank.MEDICINE_CAT)
-                elif x.status.rank == CatRank.MEDIATOR_APPRENTICE:
-                    ceremony(x, CatRank.MEDIATOR)
-                else:
-                    ceremony(x, CatRank.WARRIOR)
-            elif not x.status.rank.is_any_apprentice_rank() and x.moons >= 6:
-                ceremony(x, CatRank.APPRENTICE)
+            text = event_text_adjust(Cat, text, main_cat=lost_cat, clan=game.clan)
+            game.cur_events_list.append(Single_Event(text, "misc", cat_IDs))
 
+            # Handles if a lost cat had a previous mate still in the clan — they may reunite.
+            for clan_cat in Cat.all_cats.values():
+                # skip dead or non-player clan cats
+                if not clan_cat.status.alive_in_player_clan or clan_cat.dead:
+                    continue
 
-def handle_fading(cat):
-    """
-    TODO: DOCS
-    """
-    if (
-        get_clan_setting("fading")
-        and not cat.prevent_fading
-        and cat.ID != game.clan.instructor.ID
-        and not cat.faded
-    ):
-        age_to_fade = constants.CONFIG["fading"]["age_to_fade"]
-        opacity_at_fade = constants.CONFIG["fading"]["opacity_at_fade"]
-        fading_speed = constants.CONFIG["fading"]["visual_fading_speed"]
-        # Handle opacity
-        cat.pelt.opacity = int(
-            (100 - opacity_at_fade) * (1 - (cat.dead_for / age_to_fade) ** fading_speed)
-            + opacity_at_fade
-        )
+                # only check if they were previously mates
+                if (
+                    clan_cat.ID in lost_cat.previous_mates
+                    and lost_cat.ID in clan_cat.previous_mates
+                ):
+                    rel_to_check = lost_cat.relationships.get(clan_cat.ID)
+                    if not rel_to_check:
+                    # Create a new relationship entry if none exists
+                        lost_cat.create_relationships_new_cat(clan_cat)
+                        rel_to_check = lost_cat.relationships.get(clan_cat.ID)
 
-        # Deal with fading the cat if they are old enough.
-        if cat.dead_for > age_to_fade:
-            # If order not to add a cat to the faded list
-            # twice, we can't remove them or add them to
-            # faded cat list here. Rather, they are added to
-            # a list of cats that will be "faded" at the next save.
+                    become_mate = False
+                    clan_cat_has_new_mate = (
+                        len(clan_cat.mate) > 0 and lost_cat.ID not in clan_cat.mate
+                    )
 
-            # Remove from med cat list, just in case.
-            # This should never be triggered, but I've has an issue or
-            # two with this, so here it is.
-            if cat.ID in game.clan.med_cat_list:
-                game.clan.med_cat_list.remove(cat.ID)
+                    # 35% chance of accepting a returning mate even if already bonded
+                    if clan_cat_has_new_mate and random.random() < 0.35:
+                        become_mate = True
+                        text = i18n.t("hardcoded.mate_reunite_poly")
+                    elif not clan_cat_has_new_mate:
+                        become_mate = True
+                        text = i18n.t("hardcoded.mate_reunite")
 
-            # Unset their mate, if they have one
-            if len(cat.mate) > 0:
-                for mate_id in cat.mate:
-                    if Cat.all_cats.get(mate_id):
-                        cat.unset_mate(Cat.all_cats.get(mate_id))
+                    cat_IDs.append(clan_cat.ID)
+                    text = event_text_adjust(
+                        Cat, text, main_cat=lost_cat, random_cat=clan_cat, clan=game.clan
+                    )
 
-            # If the cat is the current med, leader, or deputy, remove them
-            if game.clan.leader:
-                if game.clan.leader.ID == cat.ID:
-                    game.clan.leader = None
-            if game.clan.deputy:
-                if game.clan.deputy.ID == cat.ID:
-                    game.clan.deputy = None
-            if game.clan.medicine_cat:
-                if game.clan.medicine_cat.ID == cat.ID:
-                    if game.clan.med_cat_list:  # If there are other med cats
-                        game.clan.medicine_cat = Cat.fetch_cat(
-                            game.clan.med_cat_list[0]
-                        )
+                    game.cur_events_list.append(
+                        Single_Event(text, ["relation", "misc"], cat_IDs)
+                    )
+
+                    # if they reunite, officially rebind as mates
+                    if become_mate:
+                        lost_cat.set_mate(clan_cat)
+                        # strengthen relationship
+                        rel_to_check.romance += 25
+                        rel_to_check.trust += 10
+                        rel_to_check.comfort += 10
+
+                    # stop after first valid reunion
+                    break
+        
+        # Perform a ceremony if needed
+        for cat_ID in cat_IDs:
+            x = Cat.fetch_cat(cat_ID)
+            if x.status.rank in [
+                CatRank.APPRENTICE,
+                CatRank.MEDICINE_APPRENTICE,
+                CatRank.MEDIATOR_APPRENTICE,
+                CatRank.KITTEN,
+                CatRank.NEWBORN,
+            ]:
+                if x.moons >= 15:
+                    if x.status.rank == CatRank.MEDICINE_APPRENTICE:
+                        self.ceremony(x, CatRank.MEDICINE_CAT)
+                    elif x.status.rank == CatRank.MEDIATOR_APPRENTICE:
+                        self.ceremony(x, CatRank.MEDIATOR)
                     else:
-                        game.clan.medicine_cat = None
+                        self.ceremony(x, CatRank.WARRIOR)
+                elif not x.status.rank.is_any_apprentice_rank() and x.moons >= 6:
+                    self.ceremony(x, CatRank.APPRENTICE)
 
-            add_cat_to_fade_id(cat.ID)
-            cat.set_faded()
+
+    def handle_fading(cat):
+        """
+        TODO: DOCS
+        """
+        if (
+            get_clan_setting("fading")
+            and not cat.prevent_fading
+            and cat.ID != game.clan.instructor.ID
+            and not cat.faded
+        ):
+            age_to_fade = constants.CONFIG["fading"]["age_to_fade"]
+            opacity_at_fade = constants.CONFIG["fading"]["opacity_at_fade"]
+            fading_speed = constants.CONFIG["fading"]["visual_fading_speed"]
+            # Handle opacity
+            cat.pelt.opacity = int(
+                (100 - opacity_at_fade)
+                * (1 - (cat.dead_for / age_to_fade) ** fading_speed)
+                + opacity_at_fade
+            )
+
+            # Deal with fading the cat if they are old enough.
+            if cat.dead_for > age_to_fade:
+                # If order not to add a cat to the faded list
+                # twice, we can't remove them or add them to
+                # faded cat list here. Rather, they are added to
+                # a list of cats that will be "faded" at the next save.
+
+                # Remove from med cat list, just in case.
+                # This should never be triggered, but I've has an issue or
+                # two with this, so here it is.
+                if cat.ID in game.clan.med_cat_list:
+                    game.clan.med_cat_list.remove(cat.ID)
+
+                # Unset their mate, if they have one
+                if len(cat.mate) > 0:
+                    for mate_id in cat.mate:
+                        if Cat.all_cats.get(mate_id):
+                            cat.unset_mate(Cat.all_cats.get(mate_id))
+
+                # If the cat is the current med, leader, or deputy, remove them
+                if game.clan.leader:
+                    if game.clan.leader.ID == cat.ID:
+                        game.clan.leader = None
+                if game.clan.deputy:
+                    if game.clan.deputy.ID == cat.ID:
+                        game.clan.deputy = None
+                if game.clan.medicine_cat:
+                    if game.clan.medicine_cat.ID == cat.ID:
+                        if game.clan.med_cat_list:  # If there are other med cats
+                            game.clan.medicine_cat = Cat.fetch_cat(
+                                game.clan.med_cat_list[0]
+                            )
+                        else:
+                            game.clan.medicine_cat = None
+
+                add_cat_to_fade_id(cat.ID)
+                cat.set_faded()
 
 
 def one_moon_outside_cat(cat, other_clan_cats: list = None):
@@ -1297,6 +1441,54 @@ def perform_ceremonies(cat):
                             break
 
                     chance = constants.CONFIG["roles"]["mediator_app_chance"]
+                    # check if the Clan has more med cats than the med cat den can already hold!
+                    has_too_many_med = len([cat for cat in med_cat_list if cat.status.rank == CatRank.MEDICINE_CAT]) >= 3
+                    
+                    # check if a med cat app already exists
+                    has_med_app = any(
+                        cat.status.rank == CatRank.MEDICINE_APPRENTICE
+                        for cat in med_cat_list
+                    )
+
+                    # importing skills...    
+                    primary = cat.skills.primary.path
+                    secondary = None
+                    if cat.skills.secondary:
+                        secondary = cat.skills.secondary.path
+
+                    all_cats = game.cat_class.all_cats.values()
+                    relevant_cats = [c for c in all_cats if c.status.alive_in_player_clan]
+
+                    amount_per_med = get_amount_cat_for_one_medic(game.clan)
+                    covered = amount_clanmembers_covered(all_cats, amount_per_med)
+                    
+                    # assign chance to become med app depending on current med cat and traits
+                    chance = constants.CONFIG["roles"]["base_medicine_app_chance"]
+                    if has_elder_med == med_cat_list:
+                        # These chances apply if all the current medicine cats are elders.
+                        if has_med:
+                            chance = int(chance / 2.22)
+                        else:
+                            chance = int(chance / 13.67)
+                    elif very_old_med == med_cat_list:
+                        # These chances apply is all the current medicine cats are very old.
+                        if has_med:
+                            chance = int(chance / 3)
+                        else:
+                            chance = int(chance / 14)
+                    # These chances will only be reached if the
+                    # Clan has at least one non-elder medicine cat.
+                    elif not has_med:
+                        chance = int(chance / 7.125)
+                    elif has_med:
+                        chance = int(chance * 2.22)
+
+                    if primary in [SkillPath.HEALER, SkillPath.PROPHET, SkillPath.OMEN] or secondary in [SkillPath.HEALER, SkillPath.PROPHET, SkillPath.OMEN]:
+                        chance = int(chance / 2.5)
+
+                    if covered < len(relevant_cats):
+                        chance = int(chance / 5)
+                    
                     if cat.personality.trait in [
                         "charismatic",
                         "loving",
@@ -1951,6 +2143,28 @@ def handle_injuries_or_general_death(cat):
         triggered_death = Condition_Events.handle_injuries(cat)
 
         return triggered_death
+        # Check to see if random murder is triggered.
+        # If so, we allow targets to be anyone they have even the smallest amount of negativity for
+        if random.getrandbits(max(1, int(random_murder_chance))) == 1:
+            targets = [
+                i
+                for i in relationships
+                if i.total_relationship_value < -30
+                and Cat.fetch_cat(i.cat_to).status.alive_in_player_clan
+            ]
+            if not targets:
+                return
+
+            chosen_target = random.choice(targets)
+
+            create_short_event(
+                event_type="birth_death",
+                main_cat=Cat.fetch_cat(chosen_target.cat_to),
+                random_cat=cat,
+                sub_type=["murder"],
+            )
+
+            return
 
 
 def handle_murder(cat):
@@ -2287,6 +2501,7 @@ def check_and_promote_deputy():
             filter(
                 lambda x: x.status.alive_in_player_clan
                 and x.status.rank == CatRank.WARRIOR
+                and x.experience_level not in ["untrained", "trainee", "prepared"]
                 and (x.apprentice or x.former_apprentices),
                 Cat.all_cats_list,
             )
