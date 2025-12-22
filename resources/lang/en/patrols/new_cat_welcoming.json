@@ -3205,7 +3205,10 @@
                         "cats_from": ["n_c:0"],
                         "cats_to": ["patrol"],
                         "values": ["like", "trust", "comfort"],
-                        "amount": 10
+                        "amount": 10,
+                        "log": {
+                            "cats_from": "to_cat was part of the patrol that invited n_c:0 to c_n."
+                        }
                     }
                 ],
                 "other_clan_rep": -1
@@ -3222,7 +3225,10 @@
                         "cats_from": ["n_c:0"],
                         "cats_to": ["patrol"],
                         "values": ["like", "trust", "comfort"],
-                        "amount": 10
+                        "amount": 10,
+                        "log": {
+                            "cats_from": "to_cat was part of the patrol that invited n_c:0 to c_n."
+                        }
                     }
                 ],
                 "other_clan_rep": -1
@@ -3248,7 +3254,10 @@
                         "cats_from": ["n_c:0"],
                         "cats_to": ["patrol"],
                         "values": ["like", "trust", "comfort"],
-                        "amount": 10
+                        "amount": 10,
+                        "log": {
+                            "cats_from": "to_cat was part of the patrol that invited n_c:0 to c_n."
+                        }
                     },
                     {
                         "cats_from": ["n_c:0"],
