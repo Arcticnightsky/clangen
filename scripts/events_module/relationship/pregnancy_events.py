@@ -886,7 +886,11 @@ class Pregnancy_Events:
             for _m in _par.mate:
                 if _m not in birth_parents and _m not in all_adoptive_parents:
                     all_adoptive_parents.append(_m)
-
+                elif cat and _m in other_cat.mate and _m not in all_adoptive_parents:
+                    all_adoptive_parents.append(_m)
+                elif cat not in other_cat.mate and _m in other_cat.mate:
+                    for kitty in all_kitten:
+                        kitty.unset_adoptive_parent(_m)
         # Then, add any additional adoptive parents that were provided passed directly into the
         # function.
         for _m in adoptive_parents:
@@ -913,11 +917,12 @@ class Pregnancy_Events:
                         ),
                         alive=False,
                         thought=thought,
-                        moons=randint(15, 120),
+                        moons=randint(20, 120),
                         outside=True,
                     )[0]
                     blood_parent.thought = thought
-
+                    blood_parent.gender = "female"
+                    
                     kit_age = random.randint(1, 5)  # 1–5 moons old
 
                 kit = Cat(parent1=blood_parent.ID, moons=kit_age, backstory=backstory)
