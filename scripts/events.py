@@ -1379,7 +1379,7 @@ class Events:
                     if primary in [SkillPath.HEALER, SkillPath.PROPHET, SkillPath.OMEN] or secondary in [SkillPath.HEALER, SkillPath.PROPHET, SkillPath.OMEN]:
                         chance = int(chance / 2.5)
 
-                    if amount_clanmembers_covered(all_cats, amount_per_med) <= len(relevant_cats):
+                    if amount_clanmembers_covered(save_cats, amount_per_med) <= len(relevant_cats):
                         chance = int(chance / 5)
                     
                     if cat.personality.trait in [
