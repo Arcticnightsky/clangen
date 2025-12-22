@@ -121,7 +121,7 @@ def one_moon():
     # checking if a lost cat returns on their own
     rejoin_upperbound = constants.CONFIG["lost_cat"]["rejoin_chance"]
     if random.randint(1, rejoin_upperbound) == 1:
-        handle_lost_cats_return(self, cat=None)
+        handle_lost_cats_return()
 
     trigger_future_events()
 
@@ -436,17 +436,7 @@ def handle_lead_den_event():
                 invited_cats = [outsider_cat.ID]
                 invited_cats.extend(additional_kits)
 
-                additional_mates = outsider_cat.add_to_clan()
-
-                if additional_mates:
-                    event_text += i18n.t("hardcoded.event_lost_mate")
-
-                    for mate_id in lost_cat.mate:
-                            # add to involved cat list
-                        involved_cats.append(mate_id)
-
                 invited_cats = [outsider_cat.ID]
-                invited_cats.extend(additional_mates)
                 
                 for cat_ID in invited_cats:
                     invited_cat = Cat.fetch_cat(cat_ID)
@@ -772,7 +762,7 @@ def handle_focus():
         game.cur_events_list.insert(0, Single_Event(focus_text, "misc"))
 
 
-def handle_lost_cats_return(self, cat=None, predetermined_cat_IDs: list = None):
+def handle_lost_cats_return(predetermined_cat_IDs: list = None):
     """
     TODO: DOCS
     """
@@ -780,11 +770,11 @@ def handle_lost_cats_return(self, cat=None, predetermined_cat_IDs: list = None):
     if predetermined_cat_IDs:
         cat_IDs = predetermined_cat_IDs
 
-    if cat is None and not predetermined_cat_IDs:
+    if not predetermined_cat_IDs:
         eligible_cats = [
-            c
-            for c in Cat.all_cats.values()
-            if not c.dead and c.status.is_lost(CatGroup.PLAYER_CLAN_ID)
+            cat
+            for cat in Cat.all_cats.values()
+            if not cat.dead and cat.status.is_lost(CatGroup.PLAYER_CLAN_ID)
         ]
 
         if not eligible_cats:
@@ -793,19 +783,6 @@ def handle_lost_cats_return(self, cat=None, predetermined_cat_IDs: list = None):
         lost_cat = random.choice(eligible_cats)
         cat_IDs.append(lost_cat.ID)
 
-        additional_mates = []
-        for mate_id in lost_cat.mate:
-            mate = Cat.all_cats.get(mate_id)
-            if (
-                mate
-                and mate.ID in Cat.outside_cats
-                and mate.status.is_outsider
-                and not mate.dead
-                and not CatStanding.EXILED
-            ):
-                additional_mates.append(mate)
-
-        lost_cat.outside = False
         additional_cats = lost_cat.add_to_clan()
         cat_IDs.extend(additional_cats)
         text = i18n.t(f"hardcoded.event_lost{random.choice(range(1,5))}")
@@ -813,65 +790,9 @@ def handle_lost_cats_return(self, cat=None, predetermined_cat_IDs: list = None):
         if additional_cats:
             text += i18n.t("hardcoded.event_lost_kits", count=len(additional_cats))
 
-        if additional_mates:
-            additional_mate = random.choice(additional_mates)
-            additional_mate.add_to_clan()
-            additional_mate.backstory = "loner4"
-            cat_IDs.append(additional_mate.ID)
-            text += i18n.t("hardcoded.event_lost_mate")
-
         text = event_text_adjust(Cat, text, main_cat=lost_cat, clan=game.clan)
+
         game.cur_events_list.append(Single_Event(text, "misc", cat_IDs))
-
-        # Handles if a lost cat had a previous mate still in the clan — they may reunite.
-        for clan_cat in Cat.all_cats.values():
-            # skip dead or non-player clan cats
-            if not clan_cat.status.alive_in_player_clan or clan_cat.dead:
-                continue
-
-            # only check if they were previously mates
-            if (
-                clan_cat.ID in lost_cat.previous_mates
-                and lost_cat.ID in clan_cat.previous_mates
-            ):
-                rel_to_check = lost_cat.relationships.get(clan_cat.ID)
-                if not rel_to_check:
-                # Create a new relationship entry if none exists
-                    lost_cat.create_relationships_new_cat(clan_cat)
-                    rel_to_check = lost_cat.relationships.get(clan_cat.ID)
-
-                become_mate = False
-                clan_cat_has_new_mate = (
-                    len(clan_cat.mate) > 0 and lost_cat.ID not in clan_cat.mate
-                )
-
-                # 35% chance of accepting a returning mate even if already bonded
-                if clan_cat_has_new_mate and random.random() < 0.35:
-                    become_mate = True
-                    text = i18n.t("hardcoded.mate_reunite_poly")
-                elif not clan_cat_has_new_mate:
-                    become_mate = True
-                    text = i18n.t("hardcoded.mate_reunite")
-
-                cat_IDs.append(clan_cat.ID)
-                text = event_text_adjust(
-                    Cat, text, main_cat=lost_cat, random_cat=clan_cat, clan=game.clan
-                )
-
-                game.cur_events_list.append(
-                    Single_Event(text, ["relation", "misc"], cat_IDs)
-                )
-
-                # if they reunite, officially rebind as mates
-                if become_mate:
-                    lost_cat.set_mate(clan_cat)
-                    # strengthen relationship
-                    rel_to_check.romance += 25
-                    rel_to_check.trust += 10
-                    rel_to_check.comfort += 10
-
-                # stop after first valid reunion
-                break
 
     # Perform a ceremony if needed
     for cat_ID in cat_IDs:
@@ -892,7 +813,6 @@ def handle_lost_cats_return(self, cat=None, predetermined_cat_IDs: list = None):
                     ceremony(x, CatRank.WARRIOR)
             elif not x.status.rank.is_any_apprentice_rank() and x.moons >= 6:
                 ceremony(x, CatRank.APPRENTICE)
-
 
 def handle_fading(cat):
     """
