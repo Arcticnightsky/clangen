@@ -13,8 +13,6 @@ import traceback
 
 import i18n
 
-from scripts.conditions import amount_clanmembers_covered
-from scripts.conditions import medicine_cats_can_cover_clan
 from scripts.cat.skills import SkillPath
 from scripts.cat import save_load
 from scripts.cat.cats import Cat, cat_class, BACKSTORIES
@@ -1354,6 +1352,12 @@ class Events:
                     secondary = None
                     if cat.skills.secondary:
                         secondary = cat.skills.secondary.path
+
+                    all_cats = game.cat_class.all_cats.values()
+                    relevant_cats = [c for c in all_cats if c.status.alive_in_player_clan]
+
+                    amount_per_med = get_amount_cat_for_one_medic(game.clan)
+                    covered = amount_clanmembers_covered(all_cats, amount_per_med)
                     
                     # assign chance to become med app depending on current med cat and traits
                     chance = constants.CONFIG["roles"]["base_medicine_app_chance"]
@@ -1379,7 +1383,7 @@ class Events:
                     if primary in [SkillPath.HEALER, SkillPath.PROPHET, SkillPath.OMEN] or secondary in [SkillPath.HEALER, SkillPath.PROPHET, SkillPath.OMEN]:
                         chance = int(chance / 2.5)
 
-                    if medicine_cats_can_cover_clan <= len(relevant_cats):
+                    if covered < len(relevant_cats):
                         chance = int(chance / 5)
                     
                     if cat.personality.trait in [
