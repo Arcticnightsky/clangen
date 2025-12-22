@@ -13,6 +13,8 @@ import traceback
 
 import i18n
 
+from scripts.conditions import amount_clanmembers_covered
+from scripts.conditions import medicine_cats_can_cover_clan
 from scripts.cat.skills import SkillPath
 from scripts.cat import save_load
 from scripts.cat.cats import Cat, cat_class, BACKSTORIES
@@ -1376,6 +1378,9 @@ class Events:
 
                     if primary in [SkillPath.HEALER, SkillPath.PROPHET, SkillPath.OMEN] or secondary in [SkillPath.HEALER, SkillPath.PROPHET, SkillPath.OMEN]:
                         chance = int(chance / 2.5)
+
+                    if amount_clanmembers_covered(all_cats, amount_per_med) <= len(relevant_cats):
+                        chance = int(chance / 5)
                     
                     if cat.personality.trait in [
                         "careful",
@@ -1391,7 +1396,7 @@ class Events:
                     if chance == 0:
                         chance = 1
 
-                    if not has_med_app and not has_too_many_med and not int(random.random() * chance):
+                    if not has_med_app and not int(random.random() * chance):
                         self.ceremony(cat, CatRank.MEDICINE_APPRENTICE)
                         self.ceremony_accessory = True
                         self.gain_accessories(cat)
