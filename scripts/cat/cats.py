@@ -427,6 +427,7 @@ class Cat:
             if random_module.randint(1, 2800) != 1:
                 self.gender = "female"
                 self.genderalign = "female"
+                print("Regular female tortie :)")
             self.no_kits = False
             if self.gender == "male":
                 print("RARE MALE TORTIE GENERATED")
