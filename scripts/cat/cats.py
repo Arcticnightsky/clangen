@@ -487,10 +487,8 @@ class Cat:
     def dead(self, die: bool):
         if die:
             murder_history = self.history.murder
-            primary = self.skills.primary.path
-            secondary = None
-            if self.skills.secondary:
-                secondary = self.skills.secondary.path
+            primary = self.skills.primary.path if self.skills.primary else None
+            secondary = self.skills.secondary.path if self.skills.secondary else None
             if self.status.group.is_afterlife():
                 print(
                     f"WARNING: Tried to kill {self.name} ID: {self.ID} but this cat is already dead!"
@@ -518,7 +516,16 @@ class Cat:
                     rejected_ID = CatGroup.STARCLAN_ID
 
                 # afterlife does not like this cat
-                if affinity < 0 or murder_history and "is_murderer" in murder_history or primary == SkillPath.DARK or secondary == SkillPath.DARK or self.status.is_leader and self.personality.trait in ["bloodthirsty", "vengeful", "fierce"]:
+                if (
+                    affinity < 0
+                    or (murder_history and "is_murderer" in murder_history)
+                    or primary == SkillPath.DARK
+                    or secondary == SkillPath.DARK
+                    or (
+                        self.status.is_leader
+                        and self.personality.trait in ["bloodthirsty", "vengeful", "fierce"]
+                    )
+                ):
                     # might send them to the opposite afterlife instead
                     if not random_module.randint(0, 5):
                         self.history.add_afterlife_acceptance(
@@ -1223,10 +1230,9 @@ class Cat:
         """Create a leader ceremony and add it to the history"""
 
         load_leader_ceremonies()
-        primary = self.skills.primary.path
-        secondary = None
-        if self.skills.secondary:
-            secondary = self.skills.secondary.path
+        primary = self.skills.primary.path if self.skills.primary else None
+        secondary = self.skills.secondary.path if self.skills.secondary else None
+
         
         # determine which dict we're pulling from
         if game.clan.instructor.status.group == CatGroup.DARK_FOREST:
