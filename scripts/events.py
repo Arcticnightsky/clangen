@@ -331,9 +331,9 @@ def trigger_future_events():
     for event in removals:
         if event in game.clan.future_events:
             game.clan.future_events.remove(event)
-                elif info_dict["interaction_type"] in ("invite", "search"):
-                    # ADD TO CLAN AND CHECK FOR KITS AND MATES
-                    additional_kits = outsider_cat.add_to_clan()
+            elif info_dict["interaction_type"] in ("invite", "search"):
+                # ADD TO CLAN AND CHECK FOR KITS AND MATES
+                additional_kits = outsider_cat.add_to_clan()
 
 def handle_lead_den_event():
     """
