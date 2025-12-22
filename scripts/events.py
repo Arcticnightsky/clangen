@@ -121,7 +121,7 @@ def one_moon():
     # checking if a lost cat returns on their own
     rejoin_upperbound = constants.CONFIG["lost_cat"]["rejoin_chance"]
     if random.randint(1, rejoin_upperbound) == 1:
-        handle_lost_cats_return(cat=None)
+        handle_lost_cats_return(self, cat=None)
 
     trigger_future_events()
 
