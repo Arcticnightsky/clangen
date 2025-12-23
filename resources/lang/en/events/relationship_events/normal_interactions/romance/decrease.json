@@ -122,6 +122,7 @@
             "m_c and r_c had an extremley heated fight over if they would take a new mate if one of them died or went missing."
 		],
 		"relationship_constraint": [
+			"adores",
 			"mates"
 		],
         "reaction_random_cat": {
