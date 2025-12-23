@@ -187,7 +187,7 @@
         "season": ["any"],
         "types": ["border"],
         "tags": ["new_cat"],
-        "patrol_art": "bord_general_intro",
+        "patrol_art": "gen_bord_newcatkittypet1",
         "min_cats": 2,
         "max_cats": 6,
         "min_max_status": {},
@@ -269,7 +269,7 @@
         "season": ["any"],
         "types": ["border"],
         "tags": ["new_cat"],
-        "patrol_art": "bord_general_intro",
+        "patrol_art": "gen_bord_newcatkittypet1",
         "min_cats": 1,
         "max_cats": 1,
         "min_max_status": {},
@@ -364,6 +364,7 @@
                 "text": "The patrol approaches the injured cat and sees signs of life. They gingerly pick up the cat and take {PRONOUN/n_c:0/object} back to camp to be treated by the medicine cat. The cat is grateful for their help and decides to join the Clan.",
                 "exp": 10,
                 "weight": 20,
+                "art": "gen_bord_patrolwoundedlonerrescue",
                 "new_cat": [
                     ["status:warrior"]
                 ],
@@ -403,6 +404,7 @@
                 "text": "The cats attempt to carry the cat back to camp, but {PRONOUN/n_c:0/subject} {VERB/n_c:0/pass/passes} on the way. They stop to bury the cat before continuing home.",
                 "exp": 0,
                 "weight": 20,
+                "art": "gen_bord_patrolwoundedlonerrescue",
                 "outsider_rep": 0,
                 "new_cat": [
                     ["meeting", "dead"]
@@ -448,6 +450,7 @@
                 "text": "p_l approaches the injured cat and sees signs of life. {PRONOUN/p_l/subject/CAP} gingerly {VERB/p_l/pick/picks} up the cat and {VERB/p_l/take/takes} {PRONOUN/n_c:0/object} back to camp to be treated by the medicine cat. The cat is grateful for their help and decides to join the Clan.",
                 "exp": 10,
                 "weight": 20,
+                "art": "gen_bord_patrolwoundedlonerrescue",
                 "new_cat": [
                     ["status:warrior"]
                 ],
@@ -487,6 +490,7 @@
                 "text": "p_l attempts to carry the cat back to camp, but the cat passes on the way. {PRONOUN/p_l/subject/CAP} {VERB/p_l/stop/stops} to bury the cat before continuing home.",
                 "exp": 0,
                 "weight": 20,
+                "art": "gen_bord_patrolwoundedlonerrescue",
                 "outsider_rep": 0
             }
         ],
@@ -1009,7 +1013,7 @@
         "season": ["any"],
         "types": ["border"],
         "tags": ["new_cat"],
-        "patrol_art": "bord_general_intro",
+        "patrol_art": "gen_gen_newmed",
         "min_cats": 2,
         "max_cats": 6,
         "min_max_status": {},
@@ -1100,7 +1104,7 @@
         "season": ["any"],
         "types": ["border"],
         "tags": ["new_cat"],
-        "patrol_art": "bord_general_intro",
+        "patrol_art": "gen_gen_newmed",
         "min_cats": 1,
         "max_cats": 1,
         "min_max_status": {},
@@ -3981,7 +3985,7 @@
         "season": ["any"],
         "types": ["border"],
         "tags": ["new_cat"],
-        "patrol_art": "bord_general_intro",
+        "patrol_art": "gen_bord_rescue",
         "min_cats": 3,
         "max_cats": 6,
         "min_max_status": {},
@@ -3994,6 +3998,7 @@
                 "text": "The patrol races towards the sound. They're puzzled when they only see a Twoleg, but realization soon dawns when the bag it holds thrashes and wails. Jumping into action, the c_n cats startle the Twoleg into letting go of the bag. While the angered Twoleg is distracted, p_l and r_c hurriedly get the shivering old cat out of sight, promising {PRONOUN/n_c:0/object} safety in c_n for as long as {PRONOUN/n_c:0/subject} {VERB/n_c:0/wish/wishes}.",
                 "exp": 10,
                 "weight": 20,
+                "art": "fst_hunt_fun3",
                 "new_cat": [
                     ["status:elder", "age:senior", "kittypet"]
                 ],
@@ -4018,6 +4023,7 @@
                 "text": "s_c sees the Twoleg, the thrashing bag, the stones piled within - it's now or never to save this poor cat. The patrol leaps and claws at the Twoleg while s_c sneaks over to the bag, gently hurrying the elderly cat to a safe hiding place. As the patrol retreats, s_c softly reassures the old cat, promising that c_n would be honored to take {PRONOUN/n_c:0/object} in.",
                 "exp": 10,
                 "weight": 20,
+                "art": "fst_hunt_fun3",
                 "stat_trait": ["wise", "thoughtful"],
                 "can_have_stat": ["adult"],
                 "new_cat": [
@@ -4045,6 +4051,7 @@
             {
                 "text": "As soon as {PRONOUN/r_c/subject} {VERB/r_c/see/sees} a Twoleg holding a thrashing, screaming bag, {PRONOUN/r_c/subject} {VERB/r_c/leap/leaps} into action. Unfortunately r_c is just a tad too slow, earning quite a hard kick against a tree. p_l orders the patrol to protect and carry r_c while they retreat, hearts aching for the cat they couldn't save.",
                 "exp": 0,
+                "art": "fst_hunt_fun3",
                 "weight": 10,
                 "injury": [
                     {
@@ -4053,12 +4060,17 @@
                         "scars": []
                     }
                 ],
+                "history_text": {
+                    "scar": "m_c was scarred after being kicked by a Twoleg and thrown against a tree.",
+                    "death": "m_c died from injuries {PRONOUN/p_l/subject} sustained after being being kicked by a Twoleg and thrown against a tree."
+                },
                 "outsider_rep": -1
             },
             {
                 "text": "s_c can't take the sight of the Twoleg clutching the screeching bag. {PRONOUN/s_c/subject/CAP} {VERB/s_c/leap/leaps} into action without waiting for the rest of the patrol to back {PRONOUN/s_c/object} up, and {VERB/s_c/pay/pays} the price. Grabbed by the scruff and thrown hard to the ground, all the patrol can do is grab s_c and flee to the safety of c_n.",
                 "exp": 0,
                 "weight": 10,
+                "art": "fst_hunt_fun3",
                 "stat_trait": ["loving", "compassionate"],
                 "can_have_stat": ["adult"],
                 "injury": [
@@ -4068,6 +4080,10 @@
                         "scars": []
                     }
                 ],
+                "history_text": {
+                    "scar": "m_c was scarred after being dropped by a Twoleg.",
+                    "death": "m_c died from injuries {PRONOUN/p_l/subject} sustained after being being dropped by a Twoleg."
+                },
                 "outsider_rep": -1
             }
         ],
