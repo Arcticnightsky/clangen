@@ -1286,6 +1286,8 @@ def perform_ceremonies(cat):
 
                 if covered < len(relevant_cats):
                     chance = int(chance / 5)
+                elif covered >= len(relevant_cats):
+                    chance = int(chance * 3)
                 
                 if cat.personality.trait in [
                     "careful",
