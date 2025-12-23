@@ -432,13 +432,13 @@ dev_tools = true
 
 [condition_related]
   # 10/chance an illness will occur
-  expanded_illness_chance = 350
+  expanded_illness_chance = 450
   "cruel season_illness_chance" = 200
-  classic_illness_chance = 500
+  classic_illness_chance = 600
 
   # 5/chance (for most personalities) or 15/chance (for some personalities) an injury will occur 
-  classic_injury_chance = 550
-  expanded_injury_chance = 350
+  classic_injury_chance = 600
+  expanded_injury_chance = 450
   "cruel season_injury_chance" = 150
 
   # 1/chance a cat will get a permanent condition from an event with that possibility 
