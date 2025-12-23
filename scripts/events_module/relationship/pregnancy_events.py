@@ -906,9 +906,11 @@ class Pregnancy_Events:
             for _m in _par.mate:
                 if _m not in birth_parents and _m not in all_adoptive_parents:
                     all_adoptive_parents.append(_m)
-                elif cat and _m in other_cat.mate and _m not in all_adoptive_parents:
-                    all_adoptive_parents.append(_m)
-                elif cat not in other_cat.mate and _m in other_cat.mate:
+        for _m in cat.mate:
+            if cat and _m and other_cat in cat.mate and _m not in all_adoptive_parents and _m not in birth_parents:
+                all_adoptive_parents.append(_m)
+            for _m in other_cat.mate:
+                if other_cat not in cat.mate and _m in other_cat.mate:
                     for kitty in all_kitten:
                         kitty.unset_adoptive_parent(_m)
         # Then, add any additional adoptive parents that were provided passed directly into the
