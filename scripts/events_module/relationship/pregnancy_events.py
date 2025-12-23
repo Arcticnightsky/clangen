@@ -335,7 +335,7 @@ class Pregnancy_Events:
                     text += choice(Pregnancy_Events.PREGNANT_STRINGS[f"{severity[0]}_severity"])
                     text = event_text_adjust(Cat, text, main_cat=pregnant_cat, clan=clan)
                     involved_cats = [pregnant_cat.ID]
-            game.cur_events_list.append(Single_Event(text, "birth_death", involved_cats))
+                game.cur_events_list.append(Single_Event(text, "birth_death", involved_cats))
 
     @staticmethod
     def handle_one_moon_pregnant(cat: Cat, clan=game.clan):
