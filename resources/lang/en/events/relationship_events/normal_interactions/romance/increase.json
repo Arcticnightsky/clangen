@@ -61,6 +61,30 @@
         ]
     },
     {
+        "id": "rom_inc_low6",
+        "intensity": "low",
+        "interactions": [
+            "As weird as it may sounds, m_c finds r_c's cold sternness kinda hot... in a way."
+        ],
+        "random_trait_constraint": [
+            "cold",
+            "strict",
+            "grumpy"
+        ]
+    },
+    {
+        "id": "rom_inc_low7",
+        "intensity": "low",
+        "interactions": [
+            "As weird as it may sounds, m_c finds r_c's ferociousness kinda hot... in a way."
+        ],
+        "random_trait_constraint": [
+            "fierce",
+            "vengeful",
+            "bloodthirsty"
+        ]
+    },
+    {
         "id": "rom_inc_medium1",
         "intensity": "medium",
         "interactions": [
@@ -69,7 +93,7 @@
             "m_c goes for a nice long walk with r_c.",
             "m_c nuzzles against r_c and purrs.",
             "m_c told r_c a flirtatious joke which made {PRONOUN/r_c/object} laugh.",
-            "m_c was practicing lame, corny pick-up lines with r_c, but something tells m_c that they weren't so corny to {PRONOUN/r_c/poss} after all..."
+            "m_c was practicing lame, corny pick-up lines with r_c, but something tells m_c that those pick-up lines weren't so corny to r_c after all..."
         ],
         "reaction_random_cat": {
             "like": "increase",
@@ -259,6 +283,64 @@
             "romance": "increase",
             "like": "increase"
         }
+    },
+    {
+        "id": "rom_inc_med10",
+        "intensity": "medium",
+        "interactions": [
+            "m_c and r_c were practicing intense battle moves with eachother. Though it may seem intense to the other cats, m_c admires r_c's strength and ferocity a little more afterwards.",
+            "m_c loves how r_c seems to match {PRONOUN/m_c/poss} stern values when no other cat does.",
+            "m_c admires how r_c has the willingness to fight for what {PRONOUN/r_c/subject} {VERB/m_c/believe/believes} is right."
+        ],
+        "relationship_constraint": [
+            "fancies"
+        ],
+        "main_trait_constraint": [
+            "bold",
+            "daring",
+            "fierce",
+            "vengeful",
+            "strict",
+            "cold",
+            "bloodthirsty"
+        ],
+        "random_trait_constraint": [
+            "bold",
+            "daring",
+            "fierce",
+            "vengeful",
+            "strict",
+            "cold",
+            "bloodthirsty"
+        ],
+        "reaction_main_cat": {
+            "romance": "increase",
+            "respect": "increase",
+            "like": "increase"
+        }
+    },
+    {
+        "id": "rom_inc_med11",
+        "intensity": "medium",
+        "interactions": [
+            "m_c's cold demeanor felt touched by r_c's warmth today...",
+            "m_c's felt {PRONOUN/m_c/self} nearly boil over in anger today, but r_c managed to soothe {PRONOUN/m_c/object}, being the kind, sweet, empathetic cat {PRONOUN/m_c/subject} {VERB/m_c/are/is}.",
+            "m_c usually snorts at cats who {PRONOUN/m_c/subject} thinks are too 'soft' and 'kind', but r_c... r_c somehow made {PRONOUN/r_c/object} way into {PRONOUN/m_c/poss} heart.",
+            "It's rare for m_c to smile, but {PRONOUN/m_c/subject} can't help but smile when around r_c."
+        ],
+        "relationship_constraint": [
+            "fancies"
+        ],
+        "main_trait_constraint": [
+            "cold",
+            "strict",
+            "grumpy"
+        ],
+        "random_trait_constraint": [
+            "loving",
+            "compassionate",
+            "sincere"
+        ]
     },
     {
         "id": "rom_inc_high1",
