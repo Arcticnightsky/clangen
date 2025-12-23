@@ -641,9 +641,9 @@ class Pelt:
 
         # Determine tortie:
         if gender == "female":
-            torbie = random.randint(1, tortie_chance_f) == 1
+            torbie = random.getrandbits(tortie_chance_f) == 1
         else:
-            torbie = random.randint(1, tortie_chance_m) == 1
+            torbie = random.getrandbits(tortie_chance_m) == 1
 
         chosen_tortie_base = None
         if torbie:
