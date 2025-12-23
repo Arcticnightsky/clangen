@@ -1285,7 +1285,7 @@ def perform_ceremonies(cat):
                     chance = int(chance / 2.5)
 
                 if covered < len(relevant_cats):
-                    chance = int(chance / 5)
+                    chance = int(chance / 4)
                 elif covered >= len(relevant_cats):
                     chance = int(chance * 3)
                 
