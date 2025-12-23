@@ -8,7 +8,10 @@
 			"m_c heard r_c express an ideal {PRONOUN/m_c/subject} cannot agree with.",
 			"m_c heard r_c talking badly about {PRONOUN/m_c/object}.",
 			"m_c catches r_c staring at another cat."
-		]
+		],
+        "reaction_random_cat": {
+            "romance": "decrease"
+        }
 	},
 	{
 		"id": "rom_dec_medium1",
@@ -48,6 +51,9 @@
 			"m_c heard r_c discussing potential mates but {PRONOUN/m_c/poss} name never came up.",
 			"m_c thinks {PRONOUN/m_c/poss} dreams might not come true with r_c.",
 			"r_c was seen tossing out a gift m_c gave {PRONOUN/r_c/object}."
+		],
+		"relationship_constraint": [
+			"not_mates"
 		]
 	},
 	{
@@ -61,15 +67,55 @@
 		]
 	},
 	{
+		"id": "rom_dec_low2",
+		"intensity": "low",
+		"interactions": [
+			"m_c feels a bit overwhelmed trying to make time for r_c when {PRONOUN/m_c/subject} still has other important clan duties to tend to."
+		],
+		"main_status_constraint": [
+			"leader",
+			"deputy",
+			"medicine cat"
+		]
+	},
+	{
+		"id": "rom_dec_medium5",
+		"intensity": "medium",
+		"interactions": [
+			"m_c loves r_c, {PRONOUN/m_c/subject} does, but m_c loves {PRONOUN/m_c/poss} me-time as well. It seems like r_c hasn't been respecting m_c's requests for some time to {PRONOUN/m_c/self} lately."
+		],
+		"relationship_constraint": [
+			"mates"
+		],
+        "main_trait_constraint": [
+            "cold",
+            "lonesome",
+            "gloomy",
+            "grumpy"
+        ]
+	},
+	{
 		"id": "rom_dec_medium4",
 		"intensity": "medium",
 		"interactions": [
 			"m_c had a disagreement with r_c over kits.",
+			"m_c feels like r_c hasn't been respecting {PRONOUN/m_c/poss} romantic boundaries lately.",
 			"m_c and r_c had a disagreement on how to raise kits.",
-            		"m_c and r_c had a fight over if they would take a new mate if one of them died or went missing."
+			"m_c and r_c have been bickering about every little thing for the past moon.",
+            "m_c and r_c had a fight over if they would take a new mate if one of them died or went missing."
 		],
 		"relationship_constraint": [
 			"mates"
-		]
+		],
+        "reaction_random_cat": {
+            "romance": "decrease",
+            "like": "decrease",
+            "respect": "decrease"
+        },
+        "reaction_main_cat": {
+            "romance": "decrease",
+            "like": "decrease",
+            "respect": "decrease"
+        }
 	}
 ]
