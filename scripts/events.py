@@ -2006,7 +2006,7 @@ def handle_murder(cat):
         targets = [
             i
             for i in relationships
-            if i.total_relationship_value < 0
+            if i.total_relationship_value < -10
             and Cat.fetch_cat(i.cat_to).status.alive_in_player_clan
         ]
         if not targets:
