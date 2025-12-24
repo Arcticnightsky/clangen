@@ -895,12 +895,6 @@ class Pregnancy_Events:
         # as adoptive parents.
         all_adoptive_parents = []
         birth_parents = [i.ID for i in (cat, other_cat) if i]
-        for _par in (cat, other_cat):
-            if not _par:
-                continue
-            for _m in _par.mate:
-                if _m not in birth_parents and _m not in all_adoptive_parents:
-                    all_adoptive_parents.append(_m)
         for _m in cat.mate:
             if not _m:
                 continue
