@@ -484,13 +484,7 @@ class Pregnancy_Events:
             involved_cats.append(other_cat.ID)
             cat_dict["r_c"] = other_cat
             event_list.append(choice(events["birth"]["both_unmated"]))
-        elif (
-            len(cat.mate) > 0 and other_cat.ID not in cat.mate and not other_cat.dead
-        ) or (
-            len(other_cat.mate) > 0
-            and cat.ID not in other_cat.mate
-            and not other_cat.dead
-        ):
+        elif len(cat.mate) > 0 and other_cat.ID not in cat.mate and not other_cat.dead:
             for mate_id in cat.mate:
                 mate = Cat.fetch_cat(mate_id)
                 if not mate:
@@ -499,14 +493,15 @@ class Pregnancy_Events:
                     involved_cats.append(other_cat.ID)
                     cat_dict["r_c"] = other_cat
                     event_list.append(choice(events["birth"]["affair_mated"]))
-                for mate_id in other_cat.mate:
-                    other_mate = Cat.fetch_cat(mate_id)
-                    if not mate:
-                        continue
-                    elif len(other_cat.mate) > 0 and not other_mate.dead:
-                        involved_cats.append(other_cat.ID)
-                        cat_dict["r_c"] = other_cat
-                        event_list.append(choice(events["birth"]["affair"]))
+        elif: len(other_cat.mate) > 0 and cat.ID not in other_cat.mate and not other_cat.dead:        
+            for mate_id in other_cat.mate:
+                other_mate = Cat.fetch_cat(mate_id)
+                if not mate:
+                    continue
+                if len(other_cat.mate) > 0 and not other_mate.dead:
+                    involved_cats.append(other_cat.ID)
+                    cat_dict["r_c"] = other_cat
+                    event_list.append(choice(events["birth"]["affair"]))
         else:
             event_list.append(choice(events["birth"]["unmated_parent"]))
 
