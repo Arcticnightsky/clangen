@@ -532,7 +532,7 @@ class Cat:
                     )
                 ):
                     # might send them to the opposite afterlife instead
-                    if not random_module.randint(0, 5):
+                    if not random_module.randint(0, 1) == 0:
                         self.history.add_afterlife_acceptance(
                             afterlife_group, rejected=True
                         )
