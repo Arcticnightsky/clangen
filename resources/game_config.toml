@@ -205,14 +205,14 @@ dev_tools = true
 
   # number / total for that age across all kit amounts = chance of having that many kits for that age
   [pregnancy.one_kit_possibility]
-    "young adult" = 8
-    adult = 9
+    "young adult" = 4
+    adult = 7
     "senior adult" = 10
     senior = 4
 
   [pregnancy.two_kit_possibility]
     "young adult" = 10
-    adult = 13
+    adult = 10
     "senior adult" = 15
     senior = 3
 
@@ -223,19 +223,19 @@ dev_tools = true
     senior = 2
 
   [pregnancy.four_kit_possibility]
-    "young adult" = 12
+    "young adult" = 14
     adult = 8
-    "senior adult" = 2
+    "senior adult" = 3
     senior = 1
 
   [pregnancy.five_kit_possibility]
     "young adult" = 6
-    adult = 2
+    adult = 3
     "senior adult" = 0
     senior = 0
 
   [pregnancy.max_kit_possibility]
-    "young adult" = 2
+    "young adult" = 3
     adult = 1
     "senior adult" = 0
     senior = 0
