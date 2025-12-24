@@ -8,10 +8,7 @@
 			"m_c heard r_c express an ideal {PRONOUN/m_c/subject} cannot agree with.",
 			"m_c heard r_c talking badly about {PRONOUN/m_c/object}.",
 			"m_c catches r_c staring at another cat."
-		],
-        "reaction_random_cat": {
-            "romance": "decrease"
-        }
+		]
 	},
 	{
 		"id": "rom_dec_medium1",
@@ -71,6 +68,9 @@
 		"intensity": "low",
 		"interactions": [
 			"m_c feels a bit overwhelmed trying to make time for r_c when {PRONOUN/m_c/subject} still has other important clan duties to tend to."
+		],
+		"relationship_constraint": [
+			"mates"
 		],
 		"main_status_constraint": [
 			"leader",
