@@ -907,9 +907,13 @@ class Pregnancy_Events:
                 if _m not in birth_parents and _m not in all_adoptive_parents:
                     all_adoptive_parents.append(_m)
         for _m in cat.mate:
+            if not _m:
+                continue
             if cat and _m and other_cat in cat.mate and _m not in all_adoptive_parents and _m not in birth_parents:
                 all_adoptive_parents.append(_m)
             for _m in other_cat.mate:
+                if not _m:
+                    continue
                 if other_cat not in cat.mate and _m in other_cat.mate:
                     for kitty in all_kitten:
                         kitty.unset_adoptive_parent(_m)
