@@ -2339,7 +2339,7 @@
         "season": [
             "any"
         ],
-        "frequency": 4,
+        "frequency": 2,
         "event_text": "m_c fought a dog and got hurt.",
         "m_c": {
             "status": [
@@ -2393,7 +2393,7 @@
         "season": [
             "any"
         ],
-        "frequency": 4,
+        "frequency": 1,
         "event_text": "m_c saved r_c from a fox, but was hurt.",
         "m_c": {
             "status": [
@@ -2480,7 +2480,7 @@
         "season": [
             "any"
         ],
-        "frequency": 4,
+        "frequency": 2,
         "event_text": "m_c was hurt while protecting r_c, the leader, from a fox.",
         "m_c": {
             "status": [
@@ -2559,7 +2559,7 @@
         "season": [
             "any"
         ],
-        "frequency": 4,
+        "frequency": 2,
         "event_text": "m_c fought a rogue and got hurt.",
         "m_c": {
             "status": [
@@ -2635,7 +2635,7 @@
         "season": [
             "any"
         ],
-        "frequency": 4,
+        "frequency": 2,
         "event_text": "m_c fought a big dog and was badly injured.",
         "m_c": {
             "status": [
@@ -2689,7 +2689,7 @@
         "season": [
             "any"
         ],
-        "frequency": 4,
+        "frequency": 2,
         "event_text": "m_c saved r_c from a big dog, but was badly injured.",
         "m_c": {
             "status": [
@@ -5667,7 +5667,7 @@
         "season": [
             "any"
         ],
-        "frequency": 2,
+        "frequency": 1,
         "event_text": "m_c fought a rogue and, while {PRONOUN/m_c/subject} drove the trespasser away, {PRONOUN/m_c/subject} needed to be rushed to the medicine cat den afterwards.",
         "m_c": {
             "age": [
@@ -5866,7 +5866,7 @@
         "season": [
             "any"
         ],
-        "frequency": 3,
+        "frequency": 2,
         "event_text": "m_c's tail was badly injured by a dog.",
         "m_c": {
             "age": [
