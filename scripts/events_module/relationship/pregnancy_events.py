@@ -330,7 +330,7 @@ class Pregnancy_Events:
                 text = event_text_adjust(Cat, text, main_cat=pregnant_cat, clan=clan)
                 involved_cats = [pregnant_cat.ID]
             elif allow_affair is True and second_parent.ID not in pregnant_cat.mate and len(pregnant_cat.mate) > 0 and has_female_mate:
-                text = choice(Pregnancy_Events.PREGNANT_STRINGS["surprising_announcement"])
+                text = choice(Pregnancy_Events.PREGNANT_STRINGS["announcement_affair_samesex"])
                 severity = random.choices(["minor", "major"], [3, 1], k=1)
                 pregnant_cat.get_injured("pregnant", severity=severity[0])
                 text += choice(Pregnancy_Events.PREGNANT_STRINGS[f"{severity[0]}_severity"])
@@ -422,7 +422,12 @@ class Pregnancy_Events:
             kits_amount = 1
         other_cat_id = clan.pregnancy_data[cat.ID]["second_parent"]
         other_cat = Cat.all_cats.get(other_cat_id)
-
+        has_female_mate = any(
+            Cat.fetch_cat(mate_id)
+            and Cat.fetch_cat(mate_id).gender == "female"
+            for mate_id in cat.mate
+        )
+        
         kits = Pregnancy_Events.get_kits(kits_amount, cat, other_cat, clan)
         kits_amount = len(kits)
         Pregnancy_Events.set_biggest_family()
@@ -502,6 +507,10 @@ class Pregnancy_Events:
                     involved_cats.append(other_cat.ID)
                     cat_dict["r_c"] = other_cat
                     event_list.append(choice(events["birth"]["affair"]))
+        elif len(cat.mate) > 0 and other_cat.ID not in cat.mate and has_female_mate:        
+            involved_cats.append(other_cat.ID)
+            cat_dict["r_c"] = other_cat
+            event_list.append(choice(events["birth"]["affair_mated_samesex"]))
         else:
             event_list.append(choice(events["birth"]["unmated_parent"]))
 
