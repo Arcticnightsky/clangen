@@ -537,8 +537,8 @@ class Cat:
                             afterlife_group, rejected=True
                         )
                         self.status.send_to_afterlife(rejected_ID)
-                        return
                         if self.status.is_leader and self.personality.trait in ["bloodthirsty", "vengeful", "fierce"]:
+                            afterlife_group = CatGroup.DARK_FOREST
                             self.history.add_afterlife_acceptance(
                                 afterlife_group, tyrant_leader_bad=True
                             )
