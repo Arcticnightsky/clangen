@@ -894,18 +894,32 @@ class Pregnancy_Events:
         # First, gather all the mates of the provided bio parents to be added
         # as adoptive parents.
         all_adoptive_parents = []
+
         birth_parents = [i.ID for i in (cat, other_cat) if i]
-        for _m in cat.mate:
-            if _m == None:
-                continue
-            if cat and _m and other_cat in cat.mate and _m not in all_adoptive_parents and _m not in birth_parents:
-                all_adoptive_parents.append(_m)
-            for _m in other_cat.mate:
-                if _m == None:
+
+        # ----- CAT MATES -----
+        if cat and cat.mate:
+            for mate_id in cat.mate:
+                if mate_id is None:
                     continue
-                if other_cat not in cat.mate and _m in other_cat.mate:
+
+                if (
+                    other_cat
+                    and other_cat in cat.mate
+                    and mate_id not in all_adoptive_parents
+                    and mate_id not in birth_parents
+                ):
+                    all_adoptive_parents.append(mate_id)
+
+        # ----- OTHER CAT MATES -----
+        if other_cat and other_cat.mate:
+            for mate_id in other_cat.mate:
+                if mate_id is None:
+                    continue
+
+                if not cat or other_cat not in cat.mate:
                     for kitty in all_kitten:
-                        kitty.unset_adoptive_parent(_m)
+                        kitty.unset_adoptive_parent(mate_id)
         # Then, add any additional adoptive parents that were provided passed directly into the
         # function.
         for _m in adoptive_parents:
