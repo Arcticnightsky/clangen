@@ -188,7 +188,7 @@ dev_tools = true
   primary_chance_unmated = 135
 
   # 1/chance that a mated cat to has an affair
-  random_affair_chance = 60
+  random_affair_chance = 110
 
   # special 1/chance for an unmated cat to have an affair
   # for this check, only other unmated cats can be the affair partner
