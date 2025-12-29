@@ -4334,7 +4334,7 @@
         "current_rep": [
             "any"
         ],
-        "changed": -5
+        "changed": -2
     },
     {
         "event_id": "multi_misc_any_scandalous_kittypet2",
@@ -4399,7 +4399,7 @@
         "current_rep": [
             "any"
         ],
-        "changed": 5
+        "changed": 2
     },
     {
         "event_id": "multi_misc_any_scandalous_kittypet3",
@@ -4465,7 +4465,7 @@
         "current_rep": [
             "any"
         ],
-        "changed": 7
+        "changed": 2
     },
     {
         "event_id": "multi_misc_any_scandalous_kittypet4",
@@ -4515,7 +4515,7 @@
             "current_rep": [
                 "any"
             ],
-            "changed": -5
+            "changed": -2
         }
     },
     {
@@ -5516,7 +5516,7 @@
             "current_rep": [
                 "any"
             ],
-            "changed": -5
+            "changed": -2
         },
         "new_cat": [
             [
