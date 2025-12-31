@@ -5,7 +5,7 @@ TODO: Docs
 
 
 """  # pylint: enable=line-too-long
-
+import random as random_module
 import logging
 import os
 import re
@@ -907,6 +907,7 @@ def create_new_cat(
             "NOLEFTEAR",
             "NORIGHTEAR",
             "MANLEG",
+            "BLIND",
         ]
         for scar in new_cat.pelt.scars:
             if scar in not_allowed:
@@ -954,6 +955,32 @@ def create_new_cat(
                     new_cat.pelt.scars.append("NOPAW")
                 elif chosen_condition in ("lost their tail", "born without a tail"):
                     new_cat.pelt.scars.append("NOTAIL")
+                elif chosen_condition in ("blind"):
+                    new_cat.pelt.scars.append("BLIND")
+
+                blue_eyes = [
+                    "BLUE",
+                    "DARKBLUE",
+                    "CYAN",
+                    "PALEBLUE",
+                    "HEATHERBLUE",
+                    "COBALT",
+                    "SUNLITICE",
+                    "GREY",
+                ]
+                
+                deaf_chance = None
+                if (new_cat.pelt.colour == "WHITE" or new_cat.pelt.white_patches == "FULLWHITE") and new_cat.pelt.eye_colour in blue_eyes:
+                    deaf_chance = constants.CONFIG["cat_generation"]["base_permanent_condition"] * 0.4
+                elif (new_cat.pelt.colour == "WHITE" or new_cat.pelt.white_patches == "FULLWHITE") and new_cat.pelt.eye_colour2 and new_cat.pelt.eye_colour2 in blue_eyes:
+                    deaf_chance = constants.CONFIG["cat_generation"]["base_permanent_condition"] * 0.7
+
+                if deaf_chance:
+                    if deaf_chance < 1:
+                        deaf_chance = 1
+                    if not random_module.randint(1, deaf_chance):
+                        chosen_condition = choice(["deaf", "partial hearing loss"])
+                        new_cat.get_permanent_condition(chosen_condition, born_with=True)
 
         # KILL >:D only if we're sposed to tho
         if not alive:
@@ -1983,7 +2010,7 @@ def history_text_adjust(text, other_clan_name, clan, other_cat_rc=None):
         text = text.replace("o_c_n", str(other_clan_name))
 
     if "c_n" in text:
-        text = text.replace("c_n", clan.displayname + "Clan")
+        text = text.replace("c_n", clan.displayname)
     if "r_c" in text and other_cat_rc:
         text = selective_replace(text, "r_c", str(other_cat_rc.name))
     return text

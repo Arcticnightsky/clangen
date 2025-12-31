@@ -659,7 +659,7 @@
                     "reg_death": "m_c followed the scent of a trespassing cat and was killed by a dog.",
                     "lead_death": "followed the scent of a trespassing cat and {VERB/m_c/were/was} killed by a dog"
                 },
-                "other_clan_rep": -1
+                "other_clan_rep": -3
             },
             {
                 "text": "r_c follows the scent to a o_c_n cat taking refuge up a tree. The cat yowls a warning and r_c sprints for the same tree when they hear the cry. Just in time, too, as a large dog jumps at them, catching r_c but thankfully only injuring {PRONOUN/r_c/object} before r_c tears {PRONOUN/r_c/self} free and scales the tree.",
@@ -872,7 +872,7 @@
                     "reg_death": "m_c lost {PRONOUN/m_c/poss} life in an ambush on the border.",
                     "lead_death": "{VERB/m_c/were/was} killed in a border ambush"
                 },
-                "other_clan_rep": -1
+                "other_clan_rep": -5
             },
             {
                 "text": "r_c is having trouble focusing today and puts a mark in the wrong place - and at the worst possible moment, because a o_c_n patrol sees them doing it! The diplomatic incident spirals into a full-blown conflict, and r_c hauls themselves back to camp, wounded and bleeding.",
@@ -3343,7 +3343,7 @@
                         "amount": -10
                     }
                 ],
-                "other_clan_rep": -3
+                "other_clan_rep": -5
             }
         ],
         "antag_fail_outcomes": [

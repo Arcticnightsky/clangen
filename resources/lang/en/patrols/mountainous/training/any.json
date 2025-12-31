@@ -74,7 +74,7 @@
         "min_cats": 1,
         "max_cats": 1,
         "min_max_status": {},
-        "weight": 20,
+        "weight": 15,
         "intro_text": "r_c wanders past an old badger sett dug into the rocky hillside, only to freeze. There's new scent here, acrid and sour.",
         "decline_text": "Surely it must be nothing... Uneasily, r_c continues on.",
         "chance_of_success": 60,
@@ -234,7 +234,7 @@
         "min_cats": 2,
         "max_cats": 6,
         "min_max_status": {},
-        "weight": 20,
+        "weight": 15,
         "intro_text": "p_l wanders past an old badger sett dug into the rocky hillside, only to freeze. There's new scent here, acrid and sour.",
         "decline_text": "Surely it must be nothing... Uneasily, the patrol continues on.",
         "chance_of_success": 60,
@@ -343,7 +343,9 @@
                         "scars": ["SIDE"]
                     }
                 ],
-                "history_text": { "scar": "This cat was scarred by a badger." }
+                "history_text": { "scar": "This cat was scarred by a badger.",
+                    "reg_death": "m_c died from {PRONOUN/m_c/poss} injuries after being hurt by a badger while on patrol.",
+                    "lead_death": "died from {PRONOUN/m_c/poss} injuries after being hurt by a badger while on patrol." }
             }
         ]
     },

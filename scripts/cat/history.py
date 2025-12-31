@@ -424,7 +424,7 @@ class History:
         )
 
     def add_afterlife_acceptance(
-        self, guide_afterlife: CatGroup, is_kit=False, contentious=False, rejected=False
+        self, guide_afterlife: CatGroup, is_kit=False, contentious=False, rejected=False, tyrant_leader_bad=False, tyrant_leader_ok=False
     ):
         """
         Adds afterlife acceptance text to the cat's history. If using an optional parameter, should set only one out of
@@ -457,6 +457,14 @@ class History:
             elif rejected:
                 self.afterlife_acceptance = random.choice(
                     afterlife_acceptance_options[f"{afterlife}_rejected"]
+                )
+            elif tyrant_leader_bad:
+                self.afterlife_acceptance = random.choice(
+                    afterlife_acceptance_options[f"{afterlife}_tyrant_lead_bad"]
+                )
+            elif tyrant_leader_ok:
+                self.afterlife_acceptance = random.choice(
+                    afterlife_acceptance_options[f"{afterlife}_tyrant_lead_ok"]
                 )
             else:
                 self.afterlife_acceptance = random.choice(
