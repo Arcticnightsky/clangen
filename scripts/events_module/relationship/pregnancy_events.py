@@ -427,7 +427,6 @@ class Pregnancy_Events:
             and Cat.fetch_cat(mate_id).gender == "female"
             for mate_id in cat.mate
         )
-        
         kits = Pregnancy_Events.get_kits(kits_amount, cat, other_cat, clan)
         kits_amount = len(kits)
         Pregnancy_Events.set_biggest_family()
@@ -489,6 +488,10 @@ class Pregnancy_Events:
             involved_cats.append(other_cat.ID)
             cat_dict["r_c"] = other_cat
             event_list.append(choice(events["birth"]["both_unmated"]))
+        elif len(cat.mate) > 0 and has_female_mate and other_cat.ID not in cat.mate:        
+            involved_cats.append(other_cat.ID)
+            cat_dict["r_c"] = other_cat
+            event_list.append(choice(events["birth"]["affair_mated_samesex"]))
         elif len(cat.mate) > 0 and other_cat.ID not in cat.mate and not other_cat.dead:
             for mate_id in cat.mate:
                 mate = Cat.fetch_cat(mate_id)
@@ -507,10 +510,6 @@ class Pregnancy_Events:
                     involved_cats.append(other_cat.ID)
                     cat_dict["r_c"] = other_cat
                     event_list.append(choice(events["birth"]["affair"]))
-        elif len(cat.mate) > 0 and other_cat.ID not in cat.mate and has_female_mate:        
-            involved_cats.append(other_cat.ID)
-            cat_dict["r_c"] = other_cat
-            event_list.append(choice(events["birth"]["affair_mated_samesex"]))
         else:
             event_list.append(choice(events["birth"]["unmated_parent"]))
 
