@@ -180,9 +180,7 @@ class Name:
         if constants.CONFIG["cat_name_controls"]["always_name_after_appearance"]:
             named_after_appearance = True
         else:
-            named_after_appearance = not random.getrandbits(
-                2
-            )  # Chance for True is '1/4'
+            named_after_appearance = not random.randint(0, 2) != 0  # Chance for True is '1/3'
 
         named_after_biome_ = not random.getrandbits(3)  # chance for True is 1/8
 
