@@ -555,7 +555,7 @@ class Cat:
                                 afterlife_group, tyrant_leader_bad=True
                             )
                             self.status.send_to_afterlife(rejected_ID)
-                            return
+                        return
                     # fine, they can go to afterlife, but some cats don't like it
                     self.history.add_afterlife_acceptance(
                         afterlife_group, contentious=True
