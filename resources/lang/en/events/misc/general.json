@@ -10434,7 +10434,10 @@
                 "values": [
                     "romance"
                 ],
-                "amount": "-20"
+                "amount": "-25",
+                "log": {
+                    "cats_from": "from_cat was second-guessing {PRONOUN/from_cat/poss} relationship with to_cat as a medicine cat."
+                }
             }
         ]
     },
@@ -10481,7 +10484,10 @@
                     "like",
                     "respect"
                 ],
-                "amount": 10
+                "amount": 10,
+                "log": {
+                    "cats_from": "from_cat helped to_cat collect herbs."
+                }
             }
         ],
         "supplies": [
