@@ -403,7 +403,7 @@ dev_tools = true
 
 [death_related]
   # base 1/chance that leader will die
-  leader_death_chance = 15
+  leader_death_chance = 10
 
   # base 1/chance a cat will die
   classic_death_chance = 650
