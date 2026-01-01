@@ -434,14 +434,13 @@ class Cat:
                 self.no_kits = True
 
         # --- Female ginger rarity enforcement ---
-        if self.pelt.name in Pelt.ginger_colours and self.gender == "female":
-            # Only 20% of ginger cats remain female
+        if self.pelt.colour in Pelt.ginger_colours and self.gender == "female":
+            # Only 20% of ginger cats are female
             if random_module.randint(1, 5) != 1:
                 self.gender = "male"
                 self.genderalign = "male"
-                print("Regular ginger tom :)")
             if self.gender == "female":
-                print("CONGRATS! Uncommon ginger she-cat generated!!!")
+                print("Uncommon ginger she-cat generated!!!")
                     
         # Personality
         if disable_random:
