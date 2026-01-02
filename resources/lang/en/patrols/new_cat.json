@@ -1019,7 +1019,7 @@
         "season": ["any"],
         "types": ["border"],
         "tags": ["new_cat"],
-        "patrol_art": "gen_gen_med_newmed",
+        "patrol_art": "gen_med_newmed",
         "min_cats": 2,
         "max_cats": 6,
         "min_max_status": {},
