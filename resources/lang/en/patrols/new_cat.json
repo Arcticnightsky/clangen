@@ -53,6 +53,7 @@
                         }
                     }
                 ],
+                "art": "gen_cat_with_kit_loner",
                 "outsider_rep": 1
             }
         ],
@@ -154,6 +155,7 @@
                         }
                     }
                 ],
+                "art": "gen_cat_with_kit_loner",
                 "outsider_rep": 1
             }
         ],
@@ -207,7 +209,7 @@
         "season": ["any"],
         "types": ["border"],
         "tags": ["new_cat"],
-        "patrol_art": "bord_general_intro",
+        "patrol_art": "gen_bord_newcatkittypet1",
         "min_cats": 2,
         "max_cats": 6,
         "min_max_status": {},
@@ -255,6 +257,7 @@
                         }
                     }
                 ],
+                "art": "gen_cat_with_kit_loner",
                 "outsider_rep": 1
             }
         ],
@@ -295,7 +298,7 @@
         "season": ["any"],
         "types": ["border"],
         "tags": ["new_cat"],
-        "patrol_art": "bord_general_intro",
+        "patrol_art": "gen_bord_newcatkittypet1",
         "min_cats": 1,
         "max_cats": 1,
         "min_max_status": {},
@@ -343,6 +346,7 @@
                         }
                     }
                 ],
+                "art": "gen_cat_with_kit_loner",
                 "outsider_rep": 1
             }
         ],
@@ -410,6 +414,7 @@
                         }
                     }
                 ],
+                "art": "gen_bord_patrolwoundedlonerrescue",
                 "outsider_rep": 1,
                 "injury": [
                     {
@@ -417,7 +422,11 @@
                         "injuries": ["blunt_force_injury"],
                         "no_results": true
                     }
-                ]
+                ],
+                "history_text": {
+                    "scar": "n_c:0 was heavily injured by a monster and carries the scars from it.",
+                    "reg_death": "n_c:0 was hit by a monster and later died from {PRONOUN/n_c:0/poss} injuries."
+                }
             }
         ],
         "fail_outcomes": [
@@ -446,6 +455,7 @@
                 "exp": 0,
                 "weight": 20,
                 "outsider_rep": -1,
+                "art": "gen_bord_patrolwoundedlonerrescue"
                 "new_cat": [
                     ["meeting", "dead"]
                 ]
@@ -493,6 +503,7 @@
                         }
                     }
                 ],
+                "art": "gen_bord_patrolwoundedlonerrescue",
                 "outsider_rep": 1,
                 "injury": [
                     {
@@ -500,7 +511,11 @@
                         "injuries": ["blunt_force_injury"],
                         "no_results": true
                     }
-                ]
+                ],
+                "history_text": {
+                    "scar": "m_c was heavily injured by a monster and carries the scars from it.",
+                    "reg_death": "m_c was hit by a monster and later died from {PRONOUN/m_c/poss} injuries."
+                }
             }
         ],
         "fail_outcomes": [
@@ -760,6 +775,7 @@
                         }
                     }
                 ],
+                "art": "gen_bump_heads_warrior_loner",
                 "outsider_rep": 1
             },
             {
@@ -789,6 +805,7 @@
                         }
                     }
                 ],
+                "art": "gen_outsiderwar_mates_headbump",
                 "outsider_rep": 1
             },
             {
@@ -828,6 +845,7 @@
                         }
                     }
                 ],
+                "art": "gen_outsiderwar_mates_headbump",
                 "outsider_rep": 1
             }
         ],
@@ -859,6 +877,7 @@
                         }
                     }
                 ],
+                "art": "gen_flower_date_warrior_loner",
                 "outsider_rep": 0
             },
             {
@@ -1091,7 +1110,7 @@
         "season": ["any"],
         "types": ["border"],
         "tags": ["new_cat"],
-        "patrol_art": "bord_general_intro",
+        "patrol_art": "gen_med_newmed",
         "min_cats": 2,
         "max_cats": 6,
         "min_max_status": {},
@@ -1192,7 +1211,7 @@
         "season": ["any"],
         "types": ["border"],
         "tags": ["new_cat"],
-        "patrol_art": "bord_general_intro",
+        "patrol_art": "gen_gen_newmed",
         "min_cats": 1,
         "max_cats": 1,
         "min_max_status": {},
@@ -4036,7 +4055,11 @@
                         "injuries": ["battle_injury"],
                         "no_results": true
                     }
-                ]
+                ],
+                "history_text": {
+                    "scar": "n_c:0 was scarred after being attacked by cats while trespassing on their territory.",
+                    "reg_death": "n_c:0 was attacked by cats while trespassing on their territory and later died from {PRONOUN/n_c:0/poss} injuries."
+                }
             },
             {
                 "text": "The patrol approaches cautiously. The loner lifts {PRONOUN/n_c:0/poss} head and asks for help. p_l agrees. {PRONOUN/p_l/subject/CAP} can't leave a fellow cat to die.",
@@ -4063,7 +4086,11 @@
                         "injuries": ["battle_injury"],
                         "no_results": true
                     }
-                ]
+                ],
+                "history_text": {
+                    "scar": "n_c:0 was scarred after being attacked by cats while trespassing on their territory.",
+                    "reg_death": "n_c:0 was attacked by cats while trespassing on their territory and later died from {PRONOUN/n_c:0/poss} injuries."
+                }
             },
             {
                 "text": "The loner hisses defensively as the patrol comes closer. s_c speaks soothingly to the loner, assuring {PRONOUN/n_c:0/object} that {PRONOUN/s_c/subject} {VERB/s_c/mean/means} no harm and simply {VERB/s_c/want/wants} to help. The loner seems distrustful but allows p_l to help {PRONOUN/n_c:0/object} back to camp.",
@@ -4392,7 +4419,7 @@
         "season": ["any"],
         "types": ["border"],
         "tags": ["new_cat"],
-        "patrol_art": "bord_general_intro",
+        "patrol_art": "gen_bord_rescue",
         "min_cats": 3,
         "max_cats": 6,
         "min_max_status": {},
@@ -4415,11 +4442,12 @@
                         "values": ["like", "trust", "comfort"],
                         "amount": 10,
                         "log": {
-                            "cats_from": "to_cat was part of the patrol that rescued from_cat from a cruel Twoleg and brought to {PRONOUN/from_cat/object} c_n."
+                            "cats_from": "to_cat was part of the patrol that rescued from_cat from a cruel Twoleg and brought {PRONOUN/from_cat/object} to c_n."
                         }
                     }
                 ],
                 "outsider_rep": 1,
+                "art": "fst_hunt_fun3",
                 "injury": [
                     {
                         "cats": ["n_c:0"],
@@ -4444,7 +4472,7 @@
                         "values": ["like", "trust", "comfort"],
                         "amount": 10,
                         "log": {
-                            "cats_from": "to_cat was part of the patrol that rescued from_cat from a cruel Twoleg and brought to {PRONOUN/from_cat/object} c_n."
+                            "cats_from": "to_cat was part of the patrol that rescued from_cat from a cruel Twoleg and brought {PRONOUN/from_cat/object} to c_n."
                         }
                     }
                 ],
