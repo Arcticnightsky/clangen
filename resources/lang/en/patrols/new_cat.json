@@ -455,7 +455,7 @@
                 "exp": 0,
                 "weight": 20,
                 "outsider_rep": -1,
-                "art": "gen_bord_patrolwoundedlonerrescue"
+                "art": "gen_bord_patrolwoundedlonerrescue",
                 "new_cat": [
                     ["meeting", "dead"]
                 ]
