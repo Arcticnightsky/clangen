@@ -592,6 +592,7 @@
                 "text": "The patrol tries to drive the cat away, but {PRONOUN/n_c:0/subject} {VERB/n_c:0/trip/trips} and {VERB/n_c:0/stumble/stumbles} over a loose twig. {PRONOUN/n_c:0/subject/CAP} {VERB/n_c:0/lie/lies} on the ground and {VERB/n_c:0/don't/doesn't} get back up. The patrol takes a bit of time to bury {PRONOUN/n_c:0/object} - just to keep the scavengers away.",
                 "exp": 0,
                 "outsider_rep": -1,
+                "art": "gen_bord_patrolwoundedlonerrescue",
                 "new_cat": [
                     [
                         "meeting",
@@ -6284,6 +6285,7 @@
                     }
                 ],
                 "outsider_rep": 1,
+                "art": "fst_hunt_fun3",
                 "injury": [
                     {
                         "cats": [

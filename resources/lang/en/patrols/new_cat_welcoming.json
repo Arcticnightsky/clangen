@@ -1753,6 +1753,10 @@
                         "no_results": true
                     }
                 ],
+                "history_text": {
+                    "scar": "m_c was heavily injured by a monster and carries the scars from it.",
+                    "reg_death": "m_c was hit by a monster and later died from {PRONOUN/m_c/poss} injuries."
+                },
                 "new_cat": [
                     [
                         "loner"
