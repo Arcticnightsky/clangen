@@ -442,7 +442,12 @@ class Cat:
                 print("Regular orange tomcat :)")
             if self.gender == "female":
                 print("Uncommon ginger she-cat generated!!!")
-                    
+
+        # Male torties are actually intersex and sterile - they shouldn't have kits at all
+         if self.age not in (CatAge.NEWBORN, CatAge.KITTEN) and self.pelt.name in Pelt.torties and self.gender == "male":
+             self.no_kits = True
+             print("RARE MALE TORTIE GENERATED!!!")
+             
         # Personality
         if disable_random:
             self.personality = Personality(
