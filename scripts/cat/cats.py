@@ -439,6 +439,7 @@ class Cat:
             if random_module.randint(1, 5) != 1:
                 self.gender = "male"
                 self.genderalign = "male"
+                print("Regular orange tomcat :)")
             if self.gender == "female":
                 print("Uncommon ginger she-cat generated!!!")
                     
