@@ -789,8 +789,6 @@ class Pelt:
                 chosen_tortie_base = "Single"
             chosen_tortie_base = chosen_tortie_base.lower()
             chosen_pelt = random.choice(Pelt.torties)
-            if gender == "male":
-                print("RARE MALE TORTIE GENERATED!!!")
         # ------------------------------------------------------------------------------------------------------------#
         #   PELT COLOUR
         # ------------------------------------------------------------------------------------------------------------#
