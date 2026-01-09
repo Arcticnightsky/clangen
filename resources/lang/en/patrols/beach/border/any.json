@@ -11,7 +11,7 @@
             "border"
         ],
         "tags": [],
-        "patrol_art": "bord_general_intro",
+        "patrol_art": "gen_outsider_ambush",
         "min_cats": 4,
         "max_cats": 6,
         "min_max_status": {},
@@ -40,6 +40,7 @@
                         "amount": 5
                     }
                 ],
+                "art": "gen_bord_roguerunaway",
                 "frequency": 4
             },
             {
@@ -65,6 +66,7 @@
                         "amount": 5
                     }
                 ],
+                "art": "gen_bord_roguerunaway",
                 "frequency": 4
             },
             {
@@ -92,6 +94,7 @@
                         "amount": 5
                     }
                 ],
+                "art": "gen_bord_roguerunaway",
                 "frequency": 4
             }
         ],
@@ -107,6 +110,7 @@
                     "reg_death": "m_c was killed when rogues ambushed {PRONOUN/m_c/poss} patrol.",
                     "lead_death": "killed in a rogue ambush"
                 },
+                "art": "gen_bord_otherclan_hostile",
                 "frequency": 4
             },
             {
@@ -130,6 +134,7 @@
                     "reg_death": "m_c died of injuries sustained in a rogue ambush.",
                     "lead_death": "died of injuries sustained in a rogue ambush"
                 },
+                "art": "gen_bord_otherclan_hostile",
                 "frequency": 4
             }
         ]
@@ -146,7 +151,7 @@
             "border"
         ],
         "tags": [],
-        "patrol_art": "bord_general_intro",
+        "patrol_art": "gen_outsider_ambush",
         "min_cats": 1,
         "max_cats": 1,
         "min_max_status": {},
@@ -174,6 +179,7 @@
                         "amount": 15
                     }
                 ],
+                "art": "fst_hunt_fun1",
                 "frequency": 4
             },
             {
@@ -197,7 +203,8 @@
                         ],
                         "amount": 15
                     }
-                ],
+                ]
+                "art": "gen_angry_cat_warrior",
                 "frequency": 4
             }
         ],
@@ -226,6 +233,7 @@
                         "amount": 15
                     }
                 ],
+                "art": "gen_battle_warrior_danger",
                 "frequency": 4
             },
             {
@@ -254,6 +262,8 @@
                         "amount": 15
                     }
                 ],
+                "art": "gen_dead_cat_EXPLICIT",
+                "art_clean": "gen_dead_cat",
                 "frequency": 3
             }
         ]
@@ -270,7 +280,7 @@
             "border"
         ],
         "tags": [],
-        "patrol_art": "bord_general_intro",
+        "patrol_art": "gen_angry_cat_danger",
         "min_cats": 4,
         "max_cats": 6,
         "min_max_status": {},
@@ -298,6 +308,7 @@
                         "amount": 5
                     }
                 ],
+                "art": "gen_bord_roguerunaway",
                 "frequency": 4
             },
             {
@@ -319,6 +330,7 @@
                         "amount": 5
                     }
                 ],
+                "art": "gen_bord_roguerunaway",
                 "frequency": 1
             },
             {
@@ -343,6 +355,7 @@
                         "amount": 5
                     }
                 ],
+                "art": "gen_speaking_cat_w2",
                 "frequency": 4
             },
             {
@@ -368,6 +381,7 @@
                         "amount": 5
                     }
                 ],
+                "art": "gen_speaking_cat_w2",
                 "frequency": 4
             }
         ],
@@ -399,6 +413,7 @@
                         "amount": -5
                     }
                 ],
+                "art": "gen_bord_otherclan_hostile",
                 "frequency": 4
             },
             {
@@ -438,6 +453,7 @@
                         "amount": -5
                     }
                 ],
+                "art": "gen_bord_otherclan_hostile",
                 "frequency": 4
             }
         ],
@@ -445,6 +461,7 @@
             {
                 "text": "The patrol descends into battle without a second thought, but the rogues are stronger than expected, and eventually the patrol is forced to retreat.",
                 "exp": 0,
+                "art": "gen_battle_warrior_danger",
                 "frequency": 4
             }
         ],
@@ -452,6 +469,7 @@
             {
                 "text": "The patrol descends into battle without a second thought, eventually driving the rogues away.",
                 "exp": 30,
+                "art": "gen_bord_roguerunaway",
                 "frequency": 4
             }
         ]
@@ -517,6 +535,7 @@
                         "amount": 5
                     }
                 ],
+                "art": "gen_train_soggykitty_happy_warrior",
                 "frequency": 1
             },
             {
@@ -581,6 +600,7 @@
                     "reg_death": "This cat was drowned by floodwaters.",
                     "lead_death": "drowned in floodwaters"
                 },
+                "art": "gen_drowning_warrior",
                 "frequency": 3
             },
             {
@@ -593,6 +613,7 @@
                     "reg_death": "m_c was drowned by floodwaters.",
                     "lead_death": "drowned in floodwaters"
                 },
+                "art": "gen_drowning_warrior",
                 "frequency": 4
             }
         ]
@@ -626,6 +647,7 @@
             {
                 "text": "r_c gets wet in the rain, but otherwise, the patrol is successful.",
                 "exp": 20,
+                "art": "gen_train_soggykitty_happy_warrior",
                 "frequency": 1
             },
             {
@@ -659,6 +681,7 @@
                     "reg_death": "m_c was drowned by floodwaters.",
                     "lead_death": "drowned in floodwaters"
                 },
+                "art": "gen_drowning_warrior",
                 "frequency": 4
             },
             {
@@ -681,6 +704,7 @@
                     "reg_death": "m_c was drowned by floodwaters.",
                     "lead_death": "drowned in floodwaters"
                 },
+                "art": "gen_drowning_warrior",
                 "frequency": 4
             },
             {
@@ -702,6 +726,7 @@
                 "history_text": {
                     "scar": "m_c was injured in a flood."
                 },
+                "art": "gen_drowning_warrior",
                 "frequency": 4
             }
         ]
