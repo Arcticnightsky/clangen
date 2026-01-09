@@ -15,7 +15,7 @@
         ],
         "patrol_art": "med_general_intro",
         "min_cats": 2,
-        "max_cats": 6,
+        "max_cats": 2,
         "min_max_status": {
             "healer cats": [
                 1,
@@ -542,7 +542,8 @@
                     }
                 ],
                 "history_text": {
-                    "scar": "m_c was scarred by frostbite from searching for herbs in leaf-bare."
+                    "scar": "m_c was scarred by frostbite from searching for herbs in leaf-bare.",
+                    "reg_death": "m_c died from frostbite after falling into a snowbank trying to gather blackberry leaves."
                 },
                 "relationships": [
                     {
@@ -714,7 +715,9 @@
                     }
                 ],
                 "history_text": {
-                    "scar": "m_c was scarred by frostbite from searching for herbs in leaf-bare."
+                    "scar": "m_c was scarred by frostbite from searching for herbs in leaf-bare.",
+                    "reg_death": "m_c died from frostbite after falling into a snowbank trying to gather blackberry leaves.",
+                    "lead_death": "died from frostbite after falling into a snowbank trying to gather blackberry leaves."
                 },
                 "relationships": [
                     {
@@ -976,7 +979,9 @@
                     }
                 ],
                 "history_text": {
-                    "scar": "m_c was scarred by frostbite from searching for herbs in leaf-bare."
+                    "scar": "m_c was scarred by frostbite from searching for herbs in leaf-bare.",
+                    "reg_death": "m_c died from frostbite after failing to find burdock root in leaf-bare.",
+                    "lead_death": "died from frostbite after failing to find burdock root in leaf-bare."
                 },
                 "relationships": [
                     {
@@ -1145,7 +1150,9 @@
                     }
                 ],
                 "history_text": {
-                    "scar": "m_c was scarred by frostbite from searching for herbs in leaf-bare."
+                    "scar": "m_c was scarred by frostbite from searching for herbs in leaf-bare.",
+                    "reg_death": "m_c died from frostbite after failing to find burdock root in leaf-bare.",
+                    "lead_death": "died from frostbite after failing to find burdock root in leaf-bare."
                 },
                 "relationships": [
                     {
@@ -1407,7 +1414,9 @@
                     }
                 ],
                 "history_text": {
-                    "scar": "m_c was scarred by frostbite from searching for herbs in leaf-bare."
+                    "scar": "m_c was scarred by frostbite from searching for herbs in leaf-bare.",
+                    "reg_death": "m_c died from frostbite after failing to find daisies in leaf-bare.",
+                    "lead_death": "died from frostbite after failing to find daisies in leaf-bare."
                 },
                 "relationships": [
                     {
@@ -1580,7 +1589,9 @@
                     }
                 ],
                 "history_text": {
-                    "scar": "m_c was scarred by frostbite from searching for herbs in leaf-bare."
+                    "scar": "m_c was scarred by frostbite from searching for herbs in leaf-bare.",
+                    "reg_death": "m_c died from frostbite after failing to find daisies in leaf-bare.",
+                    "lead_death": "died from frostbite after failing to find daisies in leaf-bare."
                 },
                 "relationships": [
                     {
@@ -1848,7 +1859,9 @@
                     }
                 ],
                 "history_text": {
-                    "scar": "m_c was scarred by frostbite from searching for herbs in leaf-bare."
+                    "scar": "m_c was scarred by frostbite from searching for herbs in leaf-bare.",
+                    "reg_death": "m_c died from frostbite after failing to find herbs in leaf-bare.",
+                    "lead_death": "died from frostbite after failing to find herbs in leaf-bare."
                 },
                 "relationships": [
                     {
@@ -2028,7 +2041,9 @@
                     }
                 ],
                 "history_text": {
-                    "scar": "m_c was scarred by frostbite from searching for herbs in leaf-bare."
+                    "scar": "m_c was scarred by frostbite from searching for herbs in leaf-bare.",
+                    "reg_death": "m_c died from frostbite after failing to find herbs in leaf-bare.",
+                    "lead_death": "died from frostbite after failing to find herbs in leaf-bare."
                 },
                 "relationships": [
                     {
@@ -2732,7 +2747,9 @@
                     }
                 ],
                 "history_text": {
-                    "scar": "m_c was scarred by frostbite from searching for herbs in leaf-bare."
+                    "scar": "m_c was scarred by frostbite from searching for herbs in leaf-bare.",
+                    "reg_death": "m_c died from frostbite after failing to find herbs in leaf-bare.",
+                    "lead_death": "died from frostbite after failing to find herbs in leaf-bare."
                 },
                 "relationships": [
                     {
@@ -2907,7 +2924,9 @@
                     }
                 ],
                 "history_text": {
-                    "scar": "m_c was scarred by frostbite from searching for herbs in leaf-bare."
+                    "scar": "m_c was scarred by frostbite from searching for herbs in leaf-bare.",
+                    "reg_death": "m_c died from frostbite after failing to find herbs in leaf-bare.",
+                    "lead_death": "died from frostbite after failing to find herbs in leaf-bare."
                 },
                 "relationships": [
                     {

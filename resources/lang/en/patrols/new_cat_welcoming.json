@@ -1753,6 +1753,10 @@
                         "no_results": true
                     }
                 ],
+                "history_text": {
+                    "scar": "m_c was heavily injured by a monster and carries the scars from it.",
+                    "reg_death": "m_c was hit by a monster and later died from {PRONOUN/m_c/poss} injuries."
+                },
                 "new_cat": [
                     [
                         "loner"
@@ -2647,7 +2651,7 @@
         "season": ["any"],
         "types": ["border"],
         "tags": ["new_cat"],
-        "patrol_art": "gen_med_newmed",
+        "patrol_art": "gen_gen_newmed",
         "min_cats": 2,
         "max_cats": 6,
         "min_max_status": {},
@@ -2777,7 +2781,7 @@
         "season": ["any"],
         "types": ["border"],
         "tags": ["new_cat"],
-        "patrol_art": "gen_med_newmed",
+        "patrol_art": "gen_gen_newmed",
         "min_cats": 1,
         "max_cats": 1,
         "min_max_status": {},
