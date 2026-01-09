@@ -11,7 +11,7 @@
             "border"
         ],
         "tags": [],
-        "patrol_art": "bord_general_intro",
+        "patrol_art": "gen_outsider_ambush",
         "min_cats": 4,
         "max_cats": 6,
         "min_max_status": {},
@@ -39,6 +39,7 @@
                         }
                     }
                 ],
+                "art": "gen_bord_roguerunaway",
                 "frequency": 4
             },
             {
@@ -59,6 +60,7 @@
                         }
                     }
                 ],
+                "art": "gen_bord_roguerunaway",
                 "frequency": 4
             },
             {
@@ -85,6 +87,7 @@
                         }
                     }
                 ],
+                "art": "gen_bord_roguerunaway",
                 "frequency": 4
             }
         ],
@@ -116,6 +119,7 @@
                         }
                     }
                 ],
+                "art": "gen_bord_otherclan_hostile",
                 "frequency": 4
             },
             {
@@ -155,6 +159,7 @@
                         }
                     }
                 ],
+                "art": "gen_bord_otherclan_hostile",
                 "frequency": 4
             }
         ]
@@ -171,7 +176,7 @@
             "border"
         ],
         "tags": [],
-        "patrol_art": "bord_general_intro",
+        "patrol_art": "gen_outsider_ambush",
         "min_cats": 1,
         "max_cats": 1,
         "min_max_status": {},
@@ -195,6 +200,7 @@
                         }
                     }
                 ],
+                "art": "fst_hunt_fun1",
                 "frequency": 4
             },
             {
@@ -219,6 +225,7 @@
                         }
                     }
                 ],
+                "art": "gen_angry_cat_warrior",
                 "frequency": 4
             }
         ],
@@ -247,6 +254,7 @@
                         }
                     }
                 ],
+                "art": "gen_battle_warrior_danger",
                 "frequency": 4
             },
             {
@@ -271,6 +279,8 @@
                         }
                     }
                 ],
+                "art": "gen_dead_cat_EXPLICIT",
+                "art_clean": "gen_dead_cat",
                 "frequency": 3
             }
         ]
@@ -287,7 +297,7 @@
             "border"
         ],
         "tags": [],
-        "patrol_art": "bord_general_intro",
+        "patrol_art": "gen_angry_cat_danger",
         "min_cats": 4,
         "max_cats": 6,
         "min_max_status": {},
@@ -311,6 +321,7 @@
                         }
                     }
                 ],
+                "art": "gen_bord_roguerunaway",
                 "frequency": 4
             },
             {
@@ -332,6 +343,7 @@
                         }
                     }
                 ],
+                "art": "gen_bord_roguerunaway",
                 "frequency": 1
             },
             {
@@ -352,6 +364,7 @@
                         }
                     }
                 ],
+                "art": "gen_speaking_cat_w2",
                 "frequency": 4
             },
             {
@@ -373,6 +386,7 @@
                         }
                     }
                 ],
+                "art": "gen_speaking_cat_w2",
                 "frequency": 4
             }
         ],
@@ -401,6 +415,7 @@
                         }
                     }
                 ],
+                "art": "gen_bord_otherclan_hostile",
                 "frequency": 4
             },
             {
@@ -436,6 +451,7 @@
                         }
                     }
                 ],
+                "art": "gen_bord_otherclan_hostile",
                 "frequency": 4
             }
         ],
@@ -443,6 +459,7 @@
             {
                 "text": "The patrol descends into battle without a second thought, but the rogues are stronger than expected, and eventually the patrol is forced to retreat.",
                 "exp": 0,
+                "art": "gen_battle_warrior_danger",
                 "frequency": 4
             }
         ],
@@ -450,6 +467,7 @@
             {
                 "text": "The patrol descends into battle without a second thought, eventually driving the rogues away.",
                 "exp": 20,
+                "art": "gen_bord_roguerunaway",
                 "frequency": 4
             }
         ]
@@ -2095,7 +2113,7 @@
             "border"
         ],
         "tags": [],
-        "patrol_art": "bord_general_intro",
+        "patrol_art": "gen_border_dogscent_clanmember",
         "min_cats": 1,
         "max_cats": 1,
         "min_max_status": {},
@@ -2126,6 +2144,7 @@
                         }
                     }
                 ],
+                "art": "fst_hunt_fun1",
                 "frequency": 4
             },
             {
@@ -2153,6 +2172,7 @@
                         }
                     }
                 ],
+                "art": "gen_angry_cat_warrior",
                 "frequency": 4
             },
             {
@@ -2188,6 +2208,7 @@
                         }
                     }
                 ],
+                "art": "gen_bord_chase",
                 "frequency": 4
             }
         ],
@@ -2221,6 +2242,7 @@
                         }
                     }
                 ],
+                "art": "gen_coyote_danger2_w2",
                 "frequency": 4
             },
             {
@@ -2262,6 +2284,7 @@
                         }
                     }
                 ],
+                "art": "gen_coyote_danger2_w2",
                 "frequency": 4
             }
         ]
@@ -2278,7 +2301,7 @@
             "border"
         ],
         "tags": [],
-        "patrol_art": "bord_general_intro",
+        "patrol_art": "gen_border_dogscent_clanmember",
         "min_cats": 2,
         "max_cats": 3,
         "min_max_status": {},
@@ -2412,6 +2435,7 @@
                         }
                     }
                 ],
+                "art": "gen_angry_cat_warrior",
                 "frequency": 4
             }
         ],
@@ -2514,6 +2538,7 @@
                         }
                     }
                 ],
+                "art": "gen_coyote_danger2_w1",
                 "frequency": 3
             },
             {
@@ -2555,6 +2580,7 @@
                         }
                     }
                 ],
+                "art": "gen_coyote_danger2_w1",
                 "frequency": 3
             }
         ]
@@ -2571,7 +2597,7 @@
             "border"
         ],
         "tags": [],
-        "patrol_art": "bord_general_intro",
+        "patrol_art": "gen_patrol_dog_warrior",
         "min_cats": 4,
         "max_cats": 6,
         "min_max_status": {},
@@ -2715,6 +2741,7 @@
                         }
                     }
                 ],
+                "art": "gen_angry_cat_warrior",
                 "frequency": 4
             }
         ],
@@ -2809,6 +2836,7 @@
                         }
                     }
                 ],
+                "art": "gen_coyote_danger2_w1",
                 "frequency": 3
             },
             {
@@ -2850,6 +2878,7 @@
                         }
                     }
                 ],
+                "art": "gen_coyote_danger2_w1",
                 "frequency": 3
             }
         ]
@@ -2878,11 +2907,13 @@
             {
                 "text": "r_c hisses at the dog, warning it off. It skitters back, yapping loudly but headed in the right direction. Maybe {PRONOUN/r_c/subject} should add dog herding to {PRONOUN/r_c/poss} list of accomplishments?",
                 "exp": 10,
+                "art": "gen_angry_cat_warrior",
                 "frequency": 4
             },
             {
                 "text": "r_c unsheathes {PRONOUN/r_c/poss} claws, puffs {PRONOUN/r_c/poss} fur out as far as it'll go, gathers {PRONOUN/r_c/poss} courage, and drives the small dog from the border.",
                 "exp": 10,
+                "art": "gen_angry_cat_warrior",
                 "frequency": 1
             },
             {
@@ -2903,6 +2934,7 @@
                         }
                     }
                 ],
+                "art": "gen_angry_cat_warrior",
                 "frequency": 4
             }
         ],
@@ -2986,7 +3018,7 @@
             "border"
         ],
         "tags": [],
-        "patrol_art": "bord_general_intro",
+        "patrol_art": "gen_bord_smalldog",
         "min_cats": 2,
         "max_cats": 6,
         "min_max_status": {},
@@ -3017,6 +3049,7 @@
                         }
                     }
                 ],
+                "art": "gen_angry_cat_warrior",
                 "frequency": 4
             },
             {
@@ -3041,6 +3074,7 @@
                         }
                     }
                 ],
+                "art": "gen_angry_cat_warrior",
                 "frequency": 1
             },
             {
@@ -3068,6 +3102,7 @@
                         }
                     }
                 ],
+                "art": "gen_angry_cat_warrior",
                 "frequency": 4
             },
             {
