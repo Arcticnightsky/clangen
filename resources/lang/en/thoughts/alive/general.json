@@ -2601,6 +2601,30 @@
         ]
     },
     {
+        "id": "darkforest_skill_gen",
+        "thoughts": [
+            "Gives thanks to the Dark Forest",
+            "Is acting suspicious",
+            "Has been washing {PRONOUN/m_c/poss} paws a lot lately",
+            "Growls to {PRONOUN/m_c/self}",
+            "Has been disappearing often recently",
+            "Is practicing forbidden battle moves in the Dark Forest in {PRONOUN/m_c/poss} sleep",
+            "Thinks {PRONOUN/m_c/subject} saw a splash of mud out of the corner of {PRONOUN/m_c/poss} eye",
+            "Prays to the Dark Forest for guidance",
+            "Woders about what did the warriors in the Dark Forest do to be there...",
+            "Promises to always serve the Dark Forest",
+			"Snuck out in the middle of the night last night to preform Dark Forest rituals deep in the territory",
+            "Wonders if the Dark Forest can hear {PRONOUN/m_c/object}",
+            "Prays to the Dark Forest for the day to go {PRONOUN/m_c/poss} way today",
+            "Hopes that the forbidden skills {PRONOUN/m_c/subject} learned in the Dark Forest will protect {PRONOUN/m_c/poss} loved ones...",
+            "Calms {PRONOUN/m_c/self} down by thinking about how Dark Forest cats would handle things",
+            "Knows that {PRONOUN/m_c/subject}'ll never have {PRONOUN/m_c/poss} own star shine in Silverpelt"
+        ],
+        "main_skill_constraint": [
+            "DARK,1"
+        ]
+    },
+    {
         "id": "starclan_df_skill_2_to_kit",
         "thoughts": [
             "Rolls {PRONOUN/m_c/poss} eyes at the kits laughing about spirits not being real"
