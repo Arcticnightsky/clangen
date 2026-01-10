@@ -4,6 +4,7 @@ from typing import Dict, List, Union, Optional
 
 import i18n
 
+from scripts.cat.skills import SkillPath
 from scripts.cat.cats import Cat
 from scripts.cat.enums import CatAge, CatGroup, CatRank, CatSocial, CatCompatibility
 from scripts.cat.names import names, Name
@@ -955,10 +956,10 @@ class Pregnancy_Events:
                         alive=False,
                         thought=thought,
                         moons=randint(20, 120),
+                        blood_parent.gender = "female"
                         outside=True,
                     )[0]
                     blood_parent.thought = thought
-                    blood_parent.gender = "female"
                     
                     kit_age = random.randint(1, 5)  # 1–5 moons old
 
@@ -1299,10 +1300,20 @@ class Pregnancy_Events:
 
         # AGE
         # - decrease the inverse chance if the whole clan is really old
+        # - ex of what this does (from what I calculated manually at the time):
+        # - 122+79+162+153+146+114+61+48+10+172+165+156+136+105+76+55+133+124+
+        # - 119+118+117+116+116+116+115+109+109+108+108+107+102+100+94+92+92+
+        # - 92+92+84+84+84+81+81+81+81+81+81+79+79+79+77+77+76+73+73+64+61+60+
+        # - 59+59+59+56+55+55+55+55+55+54+52+52+51+49+49+49+49+49+46+35+35+33+
+        # - 33+33+25+25+21+21+21+21+21+18+18+18+18+18+16+15+7+7+7+6+6+6+179+163+
+        # - 163+163+163+162+153+153+153+153+152+140+137+137+133+129+129+127+124+
+        # - 124+109+2+2+2+2+2 = 10,123 / 131 (amount of cats I had at the time) = 77.275 = avg age of my clan's cats
         avg_age = int(sum((cat.moons for cat in Cat.all_cats.values())) / living_cats)
         if avg_age > 80:
             inverse_chance = int(inverse_chance * 0.8)
-
+            
+        # If any of thr mated cats have the 'KIT' skill, they're more likely to have kits because, well... they love kits no? TBD
+        
         # 'INBREED' counter
         # - increase inverse chance if one of the current cats belongs in the biggest family
         if not Pregnancy_Events.biggest_family:  # set the family if not already
