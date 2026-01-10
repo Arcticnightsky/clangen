@@ -220,7 +220,7 @@ dev_tools = true
   birth_cooldown = 6
 
   # 1/chance that kits, relationship and other factors will influence this chance
-  primary_chance_mated = 60
+  primary_chance_mated = 45
 
   # 1/chance that kits, relationship and other factors will influence this chance
   primary_chance_unmated = 135
