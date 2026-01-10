@@ -956,7 +956,7 @@ class Pregnancy_Events:
                         alive=False,
                         thought=thought,
                         moons=randint(20, 120),
-                        blood_parent.gender=="female"
+                        blood_parent.gender=="female",
                         outside=True,
                     )[0]
                     blood_parent.thought = thought
