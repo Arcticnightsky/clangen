@@ -955,11 +955,11 @@ class Pregnancy_Events:
                         ),
                         alive=False,
                         thought=thought,
-                        gender=female,
                         moons=randint(20, 120),
                         outside=True,
                     )[0]
                     blood_parent.thought = thought
+                    blood_parent.gender = "female"
                     
                     kit_age = random.randint(1, 5)  # 1–5 moons old
 
