@@ -1331,10 +1331,13 @@ def perform_ceremonies(cat):
                     chance = int(chance * 2.22)
 
                 if primary in [SkillPath.STAR, SkillPath.PROPHET, SkillPath.OMEN, SkillPath.GHOST] or secondary in [SkillPath.STAR, SkillPath.PROPHET, SkillPath.OMEN, SkillPath.GHOST]:
-                    chance = int(chance / 2.5)
+                    chance = int(chance / 1.5)
 
                 if primary == SkillPath.HEALER or secondary == SkillPath.HEALER:
                     chance = int(chance / 4)
+
+                if primary in [SkillPath.FIGHTER, SkillPath.DARK] or secondary in [SkillPath.FIGHTER, SkillPath.DARK]:
+                    chance = int(chance * 3)
                 
                 if cat.personality.trait in [
                     "careful",
@@ -1344,6 +1347,15 @@ def perform_ceremonies(cat):
                     "faithful",
                 ]:
                     chance = int(chance / 1.3)
+
+                if cat.personality.trait in [
+                    "bloodthirsty",
+                    "fierce",
+                    "vengeful",
+                    "cold",
+                    "arrogant",
+                ]:
+                    chance = int(chance * 4)
                     
                 if cat.is_disabled():
                     chance = int(chance / 2)
