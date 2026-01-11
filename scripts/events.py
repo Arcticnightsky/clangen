@@ -1351,7 +1351,7 @@ def perform_ceremonies(cat):
                 if chance == 0:
                     chance = 1
 
-                if not has_med_app and not covered > len(relevant_cats) + 10 and not int(random.random() * chance):
+                if not has_med_app and not covered > len(relevant_cats) and not int(random.random() * chance):
                     ceremony(cat, CatRank.MEDICINE_APPRENTICE)
                     ceremony_accessory = True
                     gain_accessories(cat)
