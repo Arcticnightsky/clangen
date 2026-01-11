@@ -45,9 +45,9 @@ dev_tools = true
     # NOTE: increasing extreme_pos past 100 or decreasing extreme_neg below -100 will probably break things
       extreme_neg = -70
       mid_neg = -35
-      low_neg = -15
+      low_neg = -10
       neutral = 5
-      low_pos = 15
+      low_pos = 10
       mid_pos = 35
       extreme_pos = 70
 
