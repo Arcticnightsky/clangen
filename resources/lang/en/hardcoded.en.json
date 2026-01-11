@@ -59,7 +59,7 @@
         },
         "adoption_kittens_pair5": {
             "one": "%{names} came across a dying loner with their %{insert} while on a date. The two tried to bring back the loner and their kit back to camp for help, but the loner, using their last words, told them to leave them here to die and to take care of their kit. %{names} obeyed. They buried the loner and adopted the poor kit into their care.",
-            "many": "%{names} came across a dying loner with their %{insert} while on a date. The two tried to bring back the loner and their kits back to camp for help, but the loner, using their last words, told them to leave them here to die and to take care of their kits. %{names} obeyed. They buried the loner and adopted the poor kits into their care.",
+            "many": "%{names} came across a dying loner with their %{insert} while on a date. The two tried to bring back the loner and their kits back to camp for help, but the loner, using their last words, told them to leave them here to die and to take care of their kits. %{names} obeyed. They buried the loner and adopted the poor kits into their care."
         },
         "new_kit_thought": "Snuggles up to the belly of r_c",
         "new_adopted_kit_thought": "Snuggles close to r_c",
