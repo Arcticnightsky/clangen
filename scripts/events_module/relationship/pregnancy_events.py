@@ -193,6 +193,7 @@ class Pregnancy_Events:
         for kit in kits:
             kit.thought = "Snuggles close to r_c"
             kit.thought = event_text_adjust(Cat, kit.thought, random_cat=cat)
+            cats_involved.append(kit.ID)
 
         # Normally, birth cooldown is only applied to cat who gave birth
         # However, if we don't apply birth cooldown to adoption, we get
