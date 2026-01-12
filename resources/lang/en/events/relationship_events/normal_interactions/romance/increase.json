@@ -21,16 +21,16 @@
 			"m_c stayed up all night thinking of ways to impress r_c.",
 			"m_c thinks r_c is really funny.",
 			"m_c had a dream about r_c.",
-            		"m_c thinks r_c has very soft fur.",
-            		"m_c and r_c sunbathe together.",
-            		"m_c and r_c take a nap together."
+      "m_c thinks r_c has very soft fur.",
 		]
 	},
 	{
 		"id": "rom_inc_low3",
 		"intensity": "low",
 		"interactions": [
-			"m_c is prancing around in front of r_c."
+			"m_c is prancing around in front of r_c.",
+      "m_c and r_c sunbathe together.",
+      "m_c and r_c take a nap together."
 		],
 		"reaction_random_cat": {
 			"romance": "increase"
@@ -55,11 +55,35 @@
 			"m_c can't help but smile when around r_c."
 		],
 		"random_trait_constraint": [
-			"charming",
-            		"charismatic",
-            		"flamboyant"
+			"cunning",
+      "charismatic",
+      "flamboyant"
 		]
 	},
+  {
+      "id": "rom_inc_low6",
+      "intensity": "low",
+      "interactions": [
+          "As weird as it may sound, m_c finds r_c's toughness kinda hot... in a way."
+      ],
+      "random_trait_constraint": [
+          "cold",
+          "strict",
+          "grumpy"
+      ]
+  },
+  {
+      "id": "rom_inc_low7",
+      "intensity": "low",
+      "interactions": [
+          "As weird as it may sound, m_c finds r_c's ferociousness kinda hot... in a way."
+      ],
+       "random_trait_constraint": [
+          "fierce",
+          "vengeful",
+          "bloodthirsty"
+      ]
+  },
 	{
 		"id": "rom_inc_medium1",
 		"intensity": "medium",
@@ -83,9 +107,9 @@
             		"m_c charms r_c with endless compliments."
 		],
 		"main_trait_constraint": [
-			"charming",
-            		"flamboyant",
-            		"charismatic"
+			"cunning",
+      "charismatic",
+      "flamboyant"
 		],
 		"reaction_random_cat": {
 			"romance": "increase",
@@ -135,6 +159,8 @@
             		"m_c saw r_c in pain and was surprised how much it hurt {PRONOUN/m_c/object} to see r_c like that.",
             		"m_c talked generally about the idea of mates with r_c.",
             		"m_c realizes {PRONOUN/m_c/poss} chest hurts when {PRONOUN/m_c/subject} {VERB/m_c/see/sees} r_c in pain or upset...",
+                  "m_c feels {PRONOUN/m_c/poss} jaw drop and {PRONOUN/m_c/poss} heart swoon when the sun catches just right on r_c's pelt.",
+            "m_c really couldn't help but admire how beautiful r_c's pelt shines in the moonlight.",
             		"m_c realizes {PRONOUN/m_c/subject} {VERB/m_c/have/has} more than just a crush on r_c."
 		],
 		"relationship_constraint": [
@@ -234,6 +260,16 @@
             		"m_c and r_c got so into playing around that they got separated from the rest of the patrol, earning themselves an earful back at camp.",
 			"m_c feels giddy about getting on the same patrol as r_c."
 		],
+    "main_trait_constraint": [
+          "playful",
+          "childish",
+          "troublesome"
+     ],
+    "random_trait_constraint": [
+          "playful",
+          "childish",
+          "troublesome"
+     ],
 		"main_status_constraint":[
 			"warrior",
 			"deputy",
@@ -259,6 +295,29 @@
 			"like": "increase"
 		}
 	},
+    {
+        "id": "rom_inc_med10",
+        "intensity": "medium",
+        "interactions": [
+            "m_c's cold demeanor felt touched by r_c's warmth today...",
+            "m_c's felt {PRONOUN/m_c/self} nearly boil over in anger today, but r_c managed to soothe {PRONOUN/m_c/object}, being the kind, sweet, empathetic cat {PRONOUN/m_c/subject} {VERB/m_c/are/is}.",
+            "m_c usually snorts at cats who {PRONOUN/m_c/subject} thinks are too 'soft' and 'kind', but r_c... r_c somehow made {PRONOUN/r_c/object} way into {PRONOUN/m_c/poss} heart.",
+            "It's rare for m_c to smile, but {PRONOUN/m_c/subject} can't help but smile when around r_c."
+        ],
+        "relationship_constraint": [
+            "fancies"
+        ],
+        "main_trait_constraint": [
+            "cold",
+            "strict",
+            "grumpy"
+        ],
+        "random_trait_constraint": [
+            "loving",
+            "compassionate",
+            "sincere"
+        ]
+    },
 	{
 		"id": "rom_inc_high1",
 		"intensity": "high",
@@ -282,26 +341,53 @@
 			"comfort": "increase"
 		}
 	},
-	{
-		"id": "rom_inc_high2",
-		"intensity": "high",
-		"season": [
-			"newleaf",
-			"greenleaf"
-		],
-		"interactions": [
-			"m_c gave a pretty flower {PRONOUN/m_c/subject} found to r_c.",
-			"m_c picks some fragrant flowers for r_c.",
-			"m_c decorates r_c's nest with flowers to surprise {PRONOUN/r_c/object}!",
-			"m_c rolls around in some herbs after hearing r_c likes their smell.",
-			"m_c gave r_c a sprig of catmint {PRONOUN/m_c/subject} found."
-		],
-		"reaction_random_cat": {
-			"romance": "increase",
-			"like": "increase",
-			"comfort": "increase"
-		}
-	},
+    {
+        "id": "rom_inc_high2",
+        "intensity": "high",
+        "season": [
+            "newleaf",
+            "greenleaf"
+        ],
+        "interactions": [
+            "m_c gave a pretty flower {PRONOUN/m_c/subject} found to r_c.",
+            "m_c picks some fragrant flowers for r_c.",
+            "m_c decorates r_c's nest with flowers to surprise {PRONOUN/r_c/object}!",
+            "m_c and r_c enjoy a walk underneath a row of blossoming trees together",
+            "m_c and r_c nuzzled eachothers noses as petals gently fell around them",
+            "m_c purrs when r_c let out a cute kit-sized sneeze from all the pollen in the air",
+            "m_c purrs lovingly when {PRONOUN/m_c/subject} sees r_c playfully prance around in a field of flowers",
+            "m_c rolls around in some herbs after hearing r_c likes their smell."
+        ],
+        "reaction_random_cat": {
+            "romance": "increase",
+            "like": "increase",
+            "comfort": "increase"
+        }
+    },
+    {
+        "id": "rom_inc_high2.5",
+        "intensity": "high",
+        "season": [
+            "leaf-fall",
+            "leaf-bare"
+        ],
+        "interactions": [
+            "m_c gave a pretty leaf {PRONOUN/m_c/subject} found to r_c.",
+            "m_c and r_c snuggle close together during a chilly night.",
+            "m_c and r_c frolicked playfully in the snow together",
+            "m_c and r_c nuzzled eachothers noses as snow gently fell around them",
+            "m_c purrs lovingly when {PRONOUN/m_c/subject} sees r_c playfully pounce into a pile of leaves",
+            "m_c decorates r_c's nest with colorful leaves to surprise {PRONOUN/r_c/object}!",
+            "m_c and r_c enjoy a walk underneath a row of colorful trees together",
+            "m_c purrs when r_c let out a cute kit-sized sneeze from the chilly breeze",
+            "m_c sees r_c struggle to keep {PRONOUN/r_c/poss} balance on a patch of ice while in camp and purrs when {PRONOUN/r_c/subject} fell, thinking it was cute."
+        ],
+        "reaction_random_cat": {
+            "romance": "increase",
+            "like": "increase",
+            "comfort": "increase"
+        }
+    },
 	{
 		"id": "rom_inc_high3",
 		"intensity": "high",
@@ -309,7 +395,8 @@
 			"m_c is rolling around a little too playfully with r_c...",
 			"m_c could spend hours listening to r_c's voice.",
 			"m_c hopes to dream of r_c tonight.",
-			"m_c is the only cat who can make r_c laugh."
+			"m_c is the only cat who can make r_c laugh.",
+      "m_c can't stop staring deep into r_c's eyes, they're just too pretty..."
 		],
 		"relationship_constraint": [
 			"adores"
@@ -346,7 +433,11 @@
 		"intensity": "high",
 		"interactions": [
 			"m_c purrs for a long time at one of r_c's lame jokes.",
-			"m_c can't stop gushing over r_c."
+			"m_c can't stop gushing over r_c.",
+            "m_c wonders what r_c thinks about having kits.",
+            "m_c can never help but drown in the wave of r_c's loving gaze.",
+            "m_c and r_c shyly exchange glances with eachother as the Clan talks about kits.",
+            "m_c and r_c were caught grooming eachother's pelts a little too softly and slowly..."
 		],
 		"relationship_constraint": [
 			"mates"
@@ -357,22 +448,23 @@
 			"comfort": "increase"
 		}
 	},
-	{
-		"id": "rom_inc_high6",
-		"intensity": "high",
-		"interactions": [
-			"m_c takes r_c out to look at the stars, explaining the constellations to {PRONOUN/r_c/object}.",
-            		"m_c tells r_c romantic stories of old."
-		],
-		"main_skill_constraint": [
-			"STORY,3"
-		],
-		"reaction_random_cat": {
-			"romance": "increase",
-			"like": "increase",
-			"comfort": "increase"
-		}
-	},
+    {
+        "id": "rom_inc_high6",
+        "intensity": "high",
+        "interactions": [
+            "m_c takes r_c out to look at the stars, explaining the constellations to {PRONOUN/r_c/object} whilst admiring {PRONOUN/r_c/poss} beauty in the starlight.",
+            "m_c tells r_c romantic stories from old times, with r_c listening to {PRONOUN/m_c/object} with such wonder and admiration."
+        ],
+        "main_skill_constraint": [
+            "STORY,3",
+            "LORE,3"
+        ],
+        "reaction_random_cat": {
+            "romance": "increase",
+            "like": "increase",
+            "comfort": "increase"
+        }
+    },
 	{
 		"id": "rom_inc_high_warrior7",
 		"intensity": "high",

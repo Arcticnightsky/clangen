@@ -137,7 +137,7 @@
                     "m_c"
                 ],
                 "reg_death": "m_c died from {PRONOUN/m_c/poss} wounds after falling from a tall tree and breaking {PRONOUN/m_c/poss} back.",
-                "scar": "",
+                "scar": "m_c was scarred after {PRONOUN/m_c/subject} was dared to climb up a tree and fell.",
                 "lead_death": ""
             }
         ],
