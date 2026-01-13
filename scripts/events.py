@@ -1330,13 +1330,27 @@ def perform_ceremonies(cat):
                 elif has_med:
                     chance = int(chance * 2.22)
 
-                if primary in [SkillPath.STAR, SkillPath.PROPHET, SkillPath.OMEN, SkillPath.GHOST] or secondary in [SkillPath.STAR, SkillPath.PROPHET, SkillPath.OMEN, SkillPath.GHOST]:
+                if primary in [
+                    SkillPath.STAR, 
+                    SkillPath.PROPHET, 
+                    SkillPath.OMEN, 
+                    SkillPath.GHOST, 
+                    SkillPath.INSIGHTFUL,
+                    SkillPath.SENSE
+                ] or secondary in [
+                    SkillPath.STAR,
+                    SkillPath.PROPHET, 
+                    SkillPath.OMEN, 
+                    SkillPath.GHOST, 
+                    SkillPath.INSIGHTFUL,
+                    SkillPath.SENSE
+                ]:
                     chance = int(chance / 1.5)
 
                 if primary == SkillPath.HEALER or secondary == SkillPath.HEALER:
                     chance = int(chance / 4)
 
-                if primary in [SkillPath.FIGHTER, SkillPath.DARK] or secondary in [SkillPath.FIGHTER, SkillPath.DARK]:
+                if primary in [SkillPath.FIGHTER, SkillPath.HUNTER, SkillPath.DARK] or secondary in [SkillPath.FIGHTER, SkillPath.HUNTER, SkillPath.DARK]:
                     chance = int(chance * 3)
                 
                 if cat.personality.trait in [
