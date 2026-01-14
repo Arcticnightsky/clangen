@@ -109,7 +109,7 @@
 		],
 		"relationship_constraint": [
 			"likes"
-		]
+		],
 		"reaction_random_cat": {
 			"like": "increase",
 			"comfort": "increase"
@@ -245,7 +245,7 @@
 		],
 		"relationship_constraint": [
 			"likes"
-		]
+		],
 		"main_trait_constraint": [
 			"grumpy",
             		"strict",
@@ -378,6 +378,9 @@
             "m_c purrs lovingly when {PRONOUN/m_c/subject} sees r_c playfully prance around in a field of flowers",
             "m_c rolls around in some herbs after hearing r_c likes their smell."
         ],
+		"relationship_constraint": [
+			"likes"
+		],
         "reaction_random_cat": {
             "romance": "increase",
             "like": "increase",
@@ -402,6 +405,9 @@
             "m_c purrs when r_c let out a cute kit-sized sneeze from the chilly breeze",
             "m_c sees r_c struggle to keep {PRONOUN/r_c/poss} balance on a patch of ice while in camp and purrs when {PRONOUN/r_c/subject} fell, thinking it was cute."
         ],
+		"relationship_constraint": [
+			"likes"
+		],
         "reaction_random_cat": {
             "romance": "increase",
             "like": "increase",
