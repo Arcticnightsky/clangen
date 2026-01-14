@@ -84,6 +84,20 @@
           "bloodthirsty"
       ]
   },
+  {
+      "id": "rom_inc_low8",
+      "intensity": "low",
+      "interactions": [
+          "m_c can't help but admire just how brave r_c is..."
+      ],
+       "random_trait_constraint": [
+          "fierce",
+          "bold",
+          "daring",
+		  "rebellious",
+		  "confident"
+      ]
+  },
 	{
 		"id": "rom_inc_medium1",
 		"intensity": "medium",
@@ -93,6 +107,9 @@
 			"m_c goes for a nice long walk with r_c.",
 			"m_c nuzzles against r_c and purrs."
 		],
+		"relationship_constraint": [
+			"likes"
+		]
 		"reaction_random_cat": {
 			"like": "increase",
 			"comfort": "increase"
@@ -226,6 +243,9 @@
 			"m_c wonders why r_c keeps spending time with {PRONOUN/m_c/object} when others usually don't like {PRONOUN/m_c/poss} attitude, but {PRONOUN/m_c/subject} certainly won't object.",
             		"r_c offered to groom m_c and, despite {PRONOUN/m_c/poss} grumbling, {PRONOUN/m_c/subject} awkwardly accepted."
 		],
+		"relationship_constraint": [
+			"likes"
+		]
 		"main_trait_constraint": [
 			"grumpy",
             		"strict",
@@ -300,7 +320,7 @@
         "intensity": "medium",
         "interactions": [
             "m_c's cold demeanor felt touched by r_c's warmth today...",
-            "m_c's felt {PRONOUN/m_c/self} nearly boil over in anger today, but r_c managed to soothe {PRONOUN/m_c/object}, being the kind, sweet, empathetic cat {PRONOUN/m_c/subject} {VERB/m_c/are/is}.",
+            "m_c felt {PRONOUN/m_c/self} nearly boil over in anger today, but r_c managed to soothe {PRONOUN/m_c/object}, being the kind, sweet, empathetic cat {PRONOUN/r_c/subject} {VERB/r_c/are/is}.",
             "m_c usually snorts at cats who {PRONOUN/m_c/subject} thinks are too 'soft' and 'kind', but r_c... r_c somehow made {PRONOUN/r_c/object} way into {PRONOUN/m_c/poss} heart.",
             "It's rare for m_c to smile, but {PRONOUN/m_c/subject} can't help but smile when around r_c."
         ],
@@ -434,6 +454,7 @@
 		"interactions": [
 			"m_c purrs for a long time at one of r_c's lame jokes.",
 			"m_c can't stop gushing over r_c.",
+			"m_c lets r_c weave around {PRONOUN/m_c/object}, drinking in {PRONOUN/r_c/poss} scent.",
             "m_c wonders what r_c thinks about having kits.",
             "m_c can never help but drown in the wave of r_c's loving gaze.",
             "m_c and r_c shyly exchange glances with eachother as the Clan talks about kits.",
@@ -492,5 +513,31 @@
 			"like": "increase",
 			"comfort": "increase"
 		}
-	}
+	},
+    {
+        "id": "rom_inc_high8",
+        "intensity": "high",
+        "interactions": [
+            "m_c felt {PRONOUN/m_c/self} hot with rage today, but r_c managed to soothe {PRONOUN/m_c/object} back to calmness.",
+			"m_c would <b>never</b> let any of {PRONOUN/m_c/poss} enemies hurt {PRONOUN/m_c/poss} sweet, gentle, beloved r_c. <b>Never ever.</b>",
+            "m_c wants to train and fight extra hard to protect r_c whenever {PRONOUN/r_c/subject}'s in danger - {PRONOUN/r_c/subject}'s just like a soft, delicate flower!",
+            "r_c's scent is the only thing that can calm m_c's ferociousness. Whenever m_c breathes into {PRONOUN/r_c/poss} fur and listens to {PRONOUN/r_c/poss} voice, {PRONOUN/m_c/subject} forgets about all the things that made {PRONOUN/m_c/object} so upset.",
+            "m_c dug {PRONOUN/m_c/poss} claws in the ground after another cat said something that made {PRONOUN/m_c/object} angry, but r_c brushes up against {PRONOUN/m_c/object} and {PRONOUN/m_c/subject} calms down.",
+			"m_c blushes whenever {PRONOUN/m_c/poss} Clanmates wonder in awe about how such a fierce, hot-headed cat like {PRONOUN/m_c/self} got with such a calm, gentle cat like r_c."
+        ],
+        "relationship_constraint": [
+            "mates"
+        ],
+        "main_trait_constraint": [
+          "fierce",
+          "vengeful",
+          "bloodthirsty"
+        ],
+        "random_trait_constraint": [
+            "calm",
+            "compassionate",
+			"loving",
+            "wise"
+        ]
+    }
 ]
