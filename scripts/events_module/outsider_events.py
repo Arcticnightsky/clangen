@@ -41,6 +41,27 @@ class OutsiderEvents:
                 death_history = (
                     "m_c died while being lost and trying to get back to the Clan."
                 )
+            elif cat.moons >= 150 and not cat.dead and not (self.status.is_exiled(CatGroup.PLAYER_CLAN) or cat.status.is_lost()) and cat.status.is_outsider:
+                age_start = constants.CONFIG["death_related"]["old_age_death_start"]
+                death_curve_setting = constants.CONFIG["death_related"]["old_age_death_curve"]
+                death_curve_value = 0.001 * death_curve_setting
+                # made old_age_death_chance into a separate value to make testing with print statements easier
+                old_age_death_chance = ((1 + death_curve_value) ** (cat.moons - age_start)) - 1
+                if random.random() <= old_age_death_chance:
+                    social = i18n.t(f"general.{cat.status.social}", count=1)
+                    text = (
+                        f"Rumors reach your Clan that the {social}, "
+                        f"{cat.name}, has died recently."
+                    )
+                    death_history = "m_c died of old age."
+                # max age has been indicated to be 300, so if a cat reaches that age, they die of old age
+                elif cat.moons >= 300:
+                    social = i18n.t(f"general.{cat.status.social}", count=1)
+                    text = (
+                        f"Rumors reach your Clan that the {social}, "
+                        f"{cat.name}, has died recently."
+                    )
+                    death_history = "m_c died while roaming around."
             else:
                 social = i18n.t(f"general.{cat.status.social}", count=1)
                 text = (
