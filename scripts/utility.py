@@ -537,7 +537,10 @@ def create_new_cat_block(
             if (
                 i.status.is_outsider
                 and not i.dead
-                and any(not entry.get("near", False) for entry in i.standing_history)
+                and any(
+                    not entry.get("near", False)
+                    for entry in getattr(i.status, "standing_history", [])
+                )
             )
         ]
         possible_outsiders = []
