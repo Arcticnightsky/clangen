@@ -41,7 +41,7 @@ class OutsiderEvents:
                 death_history = (
                     "m_c died while being lost and trying to get back to the Clan."
                 )
-            elif cat.moons >= 150 and not cat.dead and not (self.status.is_exiled(CatGroup.PLAYER_CLAN) or cat.status.is_lost()) and cat.status.is_outsider:
+            elif cat.moons >= 150 and not cat.dead and not (cat.status.is_exiled(CatGroup.PLAYER_CLAN) or cat.status.is_lost()) and cat.status.is_outsider:
                 age_start = constants.CONFIG["death_related"]["old_age_death_start"]
                 death_curve_setting = constants.CONFIG["death_related"]["old_age_death_curve"]
                 death_curve_value = 0.001 * death_curve_setting
