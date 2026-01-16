@@ -537,10 +537,7 @@ def create_new_cat_block(
             if (
                 i.status.is_outsider
                 and not i.dead
-                and any(
-                    not entry.get("near", False)
-                    for entry in getattr(i.status, "standing_history", [])
-                )
+                and not i.status.is_near(CatGroup.PLAYER_CLAN_ID)
             )
         ]
         possible_outsiders = []
