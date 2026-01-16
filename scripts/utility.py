@@ -858,7 +858,7 @@ def create_new_cat(
         # NAMES and accs
         # clancat adults should have already generated with a clan-ish name, thus they skip all of this re-naming
         # little babies will take a clancat name, we love indoctrination
-        if (kit or litter or moons < 12) and original_group != CatGroup.OTHER_CLAN:
+        if (kit or litter or moons < 12 and not original_social in (CatSocial.LONER, CatSocial.ROGUE, CatSocial.KITTYPET)) and original_group != CatGroup.OTHER_CLAN:
             # babies change name, in case their initial name isn't clan-ish
             new_cat.change_name()
         elif original_group != CatGroup.OTHER_CLAN:
@@ -982,8 +982,6 @@ def create_new_cat(
                     deaf_chance = constants.CONFIG["cat_generation"]["base_permanent_condition"] * 0.7
 
                 if deaf_chance:
-                    if deaf_chance < 1:
-                        deaf_chance = 1
                     if not random_module.randint(1, deaf_chance):
                         chosen_condition = choice(["deaf", "partial hearing loss"])
                         new_cat.get_permanent_condition(chosen_condition, born_with=True)
