@@ -4,6 +4,7 @@ from typing import TYPE_CHECKING
 
 import i18n
 
+from scripts.game_structure import constants
 from scripts.cat.enums import CatGroup, CatSocial
 from scripts.clan_package.settings import get_clan_setting
 from scripts.event_class import Single_Event
