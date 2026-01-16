@@ -532,7 +532,13 @@ def create_new_cat_block(
     chosen_cat: Optional["Cat"] = None
     if "exists" in attribute_list:
         existing_outsiders = [
-            i for i in Cat.all_cats.values() if i.status.is_outsider and not i.dead and not entry["near"] for entry in i.standing_history
+            i
+            for i in Cat.all_cats.values()
+            if (
+                i.status.is_outsider
+                and not i.dead
+                and any(not entry.get("near", False) for entry in i.standing_history)
+            )
         ]
         possible_outsiders = []
         for cat in existing_outsiders:
