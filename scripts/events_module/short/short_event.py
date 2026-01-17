@@ -241,6 +241,23 @@ class ShortEvent:
             if len(self.multi_cat_objects) <= 2:
                 return
 
+        # checking if a murder reveal should happen
+        if event_type == "misc":
+            self.victim_cat = None
+            cat_history = History.get_murders(self.main_cat)
+            if cat_history:
+                if "is_murderer" in cat_history:
+                    murder_history = cat_history["is_murderer"]
+                    for murder in murder_history:
+                        self.murder_index = murder_history.index(murder)
+                        if murder_history[self.murder_index]["revealed"] is True:
+                            continue
+                        self.victim_cat = Cat.fetch_cat(
+                            murder_history[self.murder_index]["victim"]
+                        )
+                        self.sub_types.append("murder_reveal")
+                        break
+        
         # create new cats (must happen here so that new cats can be included in further changes)
         self.handle_new_cats()
 
