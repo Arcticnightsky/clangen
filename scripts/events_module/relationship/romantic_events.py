@@ -162,8 +162,7 @@ class RomanticEvents:
         if cat_to.ID in cat_from.mate and not cat_to.dead:
             relevant_dict = deepcopy(RomanticEvents.MATE_INTERACTIONS)
 
-        if cat_from.gender == cat_to.gender and random_module.randint(1, 150) != 1:
-            print(f"Muahaha yay my code works! Now go find someone u can reproduce with, {cat_from.name} and {cat_to.name}")
+        if cat_from.gender == cat_to.gender and cat_to.ID not in cat_from.mate and random_module.randint(1, 150) != 1:
             return False # balancing same-sex relationships - there are too many and I just want more kits in my clans, sorry >:(
         
         # check if it should be a positive or negative interaction
