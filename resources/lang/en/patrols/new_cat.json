@@ -4369,11 +4369,13 @@
                     [
                         "status:warrior",
                         "age:young adult",
+                        "male",
                         "backstory:rogue1"
                     ],
                     [
                         "status:warrior",
                         "age:young adult",
+                        "female",
                         "backstory:rogue1"
                     ]
                 ],
