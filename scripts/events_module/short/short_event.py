@@ -242,7 +242,8 @@ class ShortEvent:
                 return
 
         # checking if a murder reveal should happen
-        if event_type == "misc":
+        if "misc" not in self.types:
+            self.types.append("misc")
             self.victim_cat = None
             cat_history = History.get_murders(self.main_cat)
             if cat_history:
