@@ -247,8 +247,8 @@ class ShortEvent:
         self.victim_cat = None
         self.murder_index = None
 
-        if self.main_cat.history and self.main_cat.history.murders:
-            murder_history = self.main_cat.history.murders.get("is_murderer", [])
+        if self.main_cat.history and self.main_cat.history.murder:
+            murder_history = self.main_cat.history.murder.get("is_murderer", [])
 
             for idx, murder in enumerate(murder_history):
                 if murder.get("revealed"):
