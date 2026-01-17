@@ -242,18 +242,22 @@ class ShortEvent:
                 return
 
         # checking if a murder reveal should happen
-        self.victim_cat = None
+        # --- Murder reveal check (modern History system) ---
 
-        cat_history = History.get_murders(self.main_cat)
-        if cat_history and "is_murderer" in cat_history:
-            for idx, murder in enumerate(cat_history["is_murderer"]):
+        self.victim_cat = None
+        self.murder_index = None
+
+        if self.main_cat.history and self.main_cat.history.murders:
+            murder_history = self.main_cat.history.murders.get("is_murderer", [])
+
+            for idx, murder in enumerate(murder_history):
                 if murder.get("revealed"):
                     continue
 
                 self.murder_index = idx
-                self.victim_cat = Cat.fetch_cat(murder["victim"])
+                self.victim_cat = Cat.fetch_cat(murder.get("victim"))
 
-                # ensure correct routing
+                # ensure correct routing so reveal events can be selected
                 if "misc" not in self.types:
                     self.types.append("misc")
 
@@ -261,6 +265,7 @@ class ShortEvent:
                     self.sub_types.append("murder_reveal")
 
                 break
+
         
         # create new cats (must happen here so that new cats can be included in further changes)
         self.handle_new_cats()
