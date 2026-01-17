@@ -20,7 +20,7 @@ from scripts.utility import (
     process_text,
     change_relationship_values,
 )
-
+import random as random_module
 
 class RomanticEvents:
     """
@@ -162,6 +162,9 @@ class RomanticEvents:
         if cat_to.ID in cat_from.mate and not cat_to.dead:
             relevant_dict = deepcopy(RomanticEvents.MATE_INTERACTIONS)
 
+        if cat_from.gender == cat_to.gender and random_module.randint(1, 50) != 1:
+            return False # balancing same-sex relationships - there are too many and I just want more kits in my clans, sorry >:(
+        
         # check if it should be a positive or negative interaction
         relationship = cat_from.relationships[cat_to.ID]
         positive = relationship.positive_interaction()
