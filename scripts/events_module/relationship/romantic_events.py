@@ -163,7 +163,6 @@ class RomanticEvents:
             relevant_dict = deepcopy(RomanticEvents.MATE_INTERACTIONS)
 
         if cat_from.gender == cat_to.gender and random_module.randint(1, 50) != 1:
-            print("Muahaha yay my code works! Now go find someone u can reproduce with >:)")
             return False # balancing same-sex relationships - there are too many and I just want more kits in my clans, sorry >:(
         
         # check if it should be a positive or negative interaction
