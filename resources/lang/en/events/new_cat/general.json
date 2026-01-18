@@ -1624,53 +1624,5 @@
                 "age:kitten"
             ]
         ]
-    },
-    {
-        "event_id": "gen_secret_interclan_romance",
-        "location": [
-            "any"
-        ],
-        "season": [
-            "any"
-        ],
-        "frequency": 2,
-        "event_text": "The ongoing tensions between c_n and o_c_n have made it hard for m_c and n_c:0, a o_c_n cat, to meet eachother at the border every other night with ease, it's so hard... maintaining a secret inter-clan romance in such circumstances...",
-        "m_c": {
-            "status": [
-                "leader",
-                "deputy",
-                "medicine cat",
-                "mediator",
-                "warrior"
-            ]
-        },
-        "new_cat": [
-            [
-                "clancat",
-                "meeting"
-            ]
-        ],
-        "relationships": [
-            {
-                "cats_from": [
-                    "m_c"
-                ],
-                "cats_to": [
-                    "n_c:0"
-                ],
-                "mutual": true,
-                "values": [
-                    "like",
-                    "romance",
-                    "comfort"
-                ],
-                "amount": 20
-            }
-        ],
-        "other_clan": {
-            "current_rep": [
-                "hostile"
-            ]
-        }
     }
 ]
