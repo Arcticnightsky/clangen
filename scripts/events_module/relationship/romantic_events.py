@@ -155,6 +155,7 @@ class RomanticEvents:
             return False
 
         if cat_from.gender == cat_to.gender and cat_to.ID not in cat_from.mate and random_module.randint(1, 2500) != 1:
+            print(f"No gay shit for {cat_from} and {cat_to} today")
             return False # balancing same-sex relationships - there are too many and I just want more kits in my clans, sorry >:(
         
         if RomanticEvents.current_loaded_lang != i18n.config.get("locale"):
