@@ -154,6 +154,9 @@ class RomanticEvents:
         if cat_from.ID == cat_to.ID:
             return False
 
+        if cat_from.gender == cat_to.gender and cat_to.ID not in cat_from.mate and random_module.randint(1, 1500) != 1:
+            return False # balancing same-sex relationships - there are too many and I just want more kits in my clans, sorry >:(
+        
         if RomanticEvents.current_loaded_lang != i18n.config.get("locale"):
             RomanticEvents.rebuild_dicts()
             RomanticEvents.current_loaded_lang = i18n.config.get("locale")
@@ -161,9 +164,6 @@ class RomanticEvents:
         relevant_dict = deepcopy(RomanticEvents.ROMANTIC_INTERACTIONS)
         if cat_to.ID in cat_from.mate and not cat_to.dead:
             relevant_dict = deepcopy(RomanticEvents.MATE_INTERACTIONS)
-
-        if cat_from.gender == cat_to.gender and cat_to.ID not in cat_from.mate and random_module.randint(1, 1500) != 1:
-            return False # balancing same-sex relationships - there are too many and I just want more kits in my clans, sorry >:(
         
         # check if it should be a positive or negative interaction
         relationship = cat_from.relationships[cat_to.ID]
