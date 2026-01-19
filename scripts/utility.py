@@ -189,6 +189,9 @@ def get_free_possible_mates(cat):
         if inter_cat.ID == cat.ID:
             continue
 
+        if cat.gender == inter_cat.gender and random_module.randint(1, 2500) != 1:
+            continue  # balancing same-sex relationships - there are too many and I just want more kits in my clans, sorry >:(
+        
         if inter_cat.ID not in cat.relationships:
             cat.create_one_relationship(inter_cat)
             if cat.ID not in inter_cat.relationships:
