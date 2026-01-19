@@ -96,7 +96,7 @@ class Relation_Events:
                 continue
                 
             if cat.gender == inter_cat.gender and random_module.randint(1, 2500) != 1:
-                print(f"No gay shit for {cat} and {inter_cat} today")
+                print(f"No gay shit for {cat.name} and {inter_cat.name} today")
                 continue # balancing same-sex relationships - there are too many and I just want more kits in my clans, sorry >:(
             
             if inter_cat.ID not in cat.relationships:
