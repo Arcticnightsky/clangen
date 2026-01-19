@@ -11,7 +11,7 @@
             "border"
         ],
         "tags": [],
-        "patrol_art": "bord_general_intro",
+        "patrol_art": "gen_outsider_ambush",
         "min_cats": 4,
         "max_cats": 6,
         "min_max_status": {},
@@ -213,6 +213,7 @@
                     "reg_death": "m_c was killed when rogues ambushed {PRONOUN/m_c/poss} patrol.",
                     "lead_death": "{VERB/m_c/were/was} killed in a rogue ambush"
                 },
+                "art": "gen_bord_otherclan_hostile",
                 "frequency": 4
             }
         ]
@@ -229,7 +230,7 @@
             "border"
         ],
         "tags": [],
-        "patrol_art": "bord_general_intro",
+        "patrol_art": "gen_outsider_ambush",
         "min_cats": 1,
         "max_cats": 1,
         "min_max_status": {},
@@ -241,6 +242,7 @@
             {
                 "text": "Stunned for a moment, r_c is nearly caught in the teeth of the first rogue, but {PRONOUN/r_c/subject} {VERB/r_c/use/uses} {PRONOUN/r_c/poss} superior knowledge of the rocky terrain to dodge and weave through the onslaught of attacks, eventually escaping the fray and pelting towards camp with yowls of warning bursting from {PRONOUN/r_c/poss} lungs.",
                 "exp": 30,
+                "art": "fst_hunt_fun1",
                 "frequency": 4
             },
             {
@@ -249,6 +251,7 @@
                 "stat_skill": [
                     "FIGHTER,3"
                 ],
+                "art": "gen_angry_cat_warrior",
                 "frequency": 4
             }
         ],
@@ -261,6 +264,7 @@
                     "fierce",
                     "vengeful"
                 ],
+                "art": "gen_battle_warrior_danger",
                 "frequency": 4
             },
             {
@@ -273,6 +277,8 @@
                     "reg_death": "This cat was killed when rogues ambushed {PRONOUN/m_c/object} while on a solo patrol.",
                     "lead_death": "{VERB/m_c/were/was} killed in a rogue ambush"
                 },
+                "art": "gen_dead_cat_EXPLICIT",
+                "art_clean": "gen_dead_cat",
                 "frequency": 3
             }
         ]
@@ -289,7 +295,7 @@
             "border"
         ],
         "tags": [],
-        "patrol_art": "bord_general_intro",
+        "patrol_art": "gen_angry_cat_danger",
         "min_cats": 4,
         "max_cats": 6,
         "min_max_status": {},
@@ -317,6 +323,7 @@
                         }
                     }
                 ],
+                "art": "gen_bord_roguerunaway",
                 "frequency": 4
             },
             {
@@ -338,6 +345,7 @@
                         }
                     }
                 ],
+                "art": "gen_bord_roguerunaway",
                 "frequency": 1
             },
             {
@@ -363,6 +371,7 @@
                         }
                     }
                 ],
+                "art": "gen_speaking_cat_w2",
                 "frequency": 4
             },
             {
@@ -388,6 +397,7 @@
                         }
                     }
                 ],
+                "art": "gen_speaking_cat_w2",
                 "frequency": 4
             }
         ],
@@ -479,7 +489,7 @@
             "border"
         ],
         "tags": [],
-        "patrol_art": "bord_general_intro",
+        "patrol_art": "gen_outsider_ambush",
         "min_cats": 1,
         "max_cats": 1,
         "min_max_status": {},
@@ -509,6 +519,7 @@
                 "stat_skill": [
                     "DARK,1"
                 ],
+                "art": "gen_angry_cat_warrior",
                 "frequency": 3
             }
         ],
@@ -722,6 +733,7 @@
                         }
                     }
                 ],
+                "art": "gen_train_waterdive",
                 "frequency": 4
             },
             {
@@ -751,6 +763,7 @@
                         }
                     }
                 ],
+                "art": "gen_train_waterdive",
                 "frequency": 4
             }
         ],
@@ -803,6 +816,7 @@
                     "reg_death": "This cat died trying to cross a dangerous river.",
                     "lead_death": "died trying to cross a dangerous river"
                 },
+                "art": "gen_drowning_warrior",
                 "frequency": 2
             },
             {
@@ -815,6 +829,7 @@
                     "reg_death": "This cat died trying to cross a dangerous river.",
                     "lead_death": "died trying to cross a dangerous river"
                 },
+                "art": "gen_drowning_warrior",
                 "frequency": 2
             },
             {
@@ -847,6 +862,7 @@
                     "reg_death": "This cat died from injuries obtained by trying to cross a dangerous river.",
                     "lead_death": "died from injuries obtained by trying to cross a dangerous river"
                 },
+                "art": "gen_train_soggykitty_mad_warrior",
                 "frequency": 4
             },
             {
@@ -863,6 +879,7 @@
                     "reg_death": "This cat died trying to cross a dangerous river.",
                     "lead_death": "died trying to cross a dangerous river"
                 },
+                "art": "gen_drowning_warrior",
                 "frequency": 2
             },
             {
@@ -903,6 +920,7 @@
                     "reg_death": "This cat died from injuries obtained by trying to cross a dangerous river.",
                     "lead_death": "died from injuries obtained by trying to cross a dangerous river"
                 },
+                "art": "gen_train_soggykitty_mad_warrior",
                 "frequency": 4
             }
         ]
@@ -1098,7 +1116,7 @@
             "border"
         ],
         "tags": [],
-        "patrol_art": "bord_general_intro",
+        "patrol_art": "gen_border_dogscent_clanmember",
         "min_cats": 1,
         "max_cats": 1,
         "min_max_status": {},
@@ -1129,6 +1147,7 @@
                         }
                     }
                 ],
+                "art": "fst_hunt_fun1",
                 "frequency": 4
             },
             {
@@ -1153,6 +1172,7 @@
                         }
                     }
                 ],
+                "art": "fst_hunt_fun1",
                 "frequency": 3
             },
             {
@@ -1181,6 +1201,7 @@
                         }
                     }
                 ],
+                "art": "fst_hunt_fun1",
                 "frequency": 4
             },
             {
@@ -1239,6 +1260,7 @@
                     }
                 }
               ],
+                "art": "fst_hunt_fun1",
                 "frequency": 4
             },
             {
@@ -1266,6 +1288,7 @@
                         }
                     }
                 ],
+                "art": "gen_angry_cat_warrior",
                 "frequency": 4
             },
             {
@@ -1301,6 +1324,7 @@
                         }
                     }
                 ],
+                "art": "fst_hunt_fun1",
                 "frequency": 4
             }
         ],
@@ -1334,6 +1358,7 @@
                         }
                     }
                 ],
+                "art": "gen_coyote_danger2_w1",
                 "frequency": 3
             },
             {
@@ -1376,6 +1401,7 @@
                         }
                     }
                 ],
+                "art": "gen_coyote_danger2_w1",
                 "frequency": 3
             },
             {
@@ -1419,6 +1445,7 @@
                         "amount": -5
                     }
                 ],
+                "art": "gen_coyote_danger2_w1",
                 "frequency": 4
             },
             {
@@ -1435,6 +1462,7 @@
                     "reg_death": "This cat died from a confrontation with a large wolf.",
                     "lead_death": "died from a confrontation with a large wolf"
                 },
+                "art": "gen_coyote_danger2_w1",
                 "frequency": 3
             },
             {
@@ -1451,6 +1479,7 @@
                     "reg_death": "This cat died from a confrontation with a large wolf.",
                     "lead_death": "died from a confrontation with a large wolf"
                 },
+                "art": "gen_coyote_danger2_w1",
                 "frequency": 3
             },
             {
@@ -1493,6 +1522,7 @@
                     "reg_death": "This cat died due to a large wolf.",
                     "lead_death": "died from a confrontation with a large wolf"
                 },
+                "art": "gen_coyote_danger2_w1",
                 "frequency": 4
             }
         ]
