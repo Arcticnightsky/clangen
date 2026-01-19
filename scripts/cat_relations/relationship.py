@@ -1,4 +1,4 @@
-import random as random_module
+import random
 from random import choice
 from typing import Optional
 
