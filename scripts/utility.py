@@ -1650,8 +1650,6 @@ def change_relationship_values(
             rel.respect += respect
             rel.comfort += comfort
             rel.trust += trust
-            if single_cat_from.gender == single_cat_to.gender and random_module.randint(1, 2500) != 1:
-                print(f"Other relationships gained just fine for {single_cat_from.name} and {single_cat_to.name} today")
             
             # for testing purposes - DON'T DELETE - you can use this to test if relationships are changing
             """
