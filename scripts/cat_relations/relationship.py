@@ -1,4 +1,3 @@
-import random
 import random as random_module
 from random import choice
 from typing import Optional
