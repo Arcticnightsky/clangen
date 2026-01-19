@@ -1,5 +1,5 @@
 import os
-import random
+import random as random_module
 from random import choice, randint
 
 import ujson
