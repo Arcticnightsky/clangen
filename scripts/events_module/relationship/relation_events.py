@@ -95,8 +95,9 @@ class Relation_Events:
             if inter_cat.status.is_outsider:
                 continue
                 
-            if cat.gender == inter_cat.gender:
-                print(f"Perhaps there IS some gay shit for {cat.name} and {inter_cat.name} today :L") # balancing same-sex relationships - there are too many and I just want more kits in my clans, sorry >:(
+            if cat.gender == inter_cat.gender and random_module.randint(1, 2500) != 1:
+                print(f"No gay shit for {cat.name} and {inter_cat.name} today :L")
+                continue # balancing same-sex relationships - there are too many and I just want more kits in my clans, sorry >:(
             
             if inter_cat.ID not in cat.relationships:
                 cat.create_one_relationship(inter_cat)
