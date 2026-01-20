@@ -411,6 +411,8 @@ class ClanSettingsScreen(Screens):
         starclan = 0
         df = 0
         ur = 0
+        male = 0
+        female = 0
         for cat in Cat.all_cats_list:
             if cat.faded:
                 faded_cats += 1
@@ -447,6 +449,11 @@ class ClanSettingsScreen(Screens):
             elif cat.status.rank.is_baby():
                 kits += 1
 
+            if cat.gender == "male":
+                male += 1
+            elif cat.gender == "female":
+                female += 1
+
         self.checkboxes_text["stat_box"] = pygame_gui.elements.UITextBox(
             "screens.clan_settings.stats_text",
             ui_scale(pygame.Rect((150, 200), (530, 345))),
@@ -465,6 +472,8 @@ class ClanSettingsScreen(Screens):
                 "elders": str(elders),
                 "kits": str(kits),
                 "faded": str(faded_cats),
+                "male": str(male),
+                "female": str(female),
             },
         )
 
