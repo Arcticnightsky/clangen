@@ -1,4 +1,5 @@
 import os
+import random as random_module
 import random
 from random import choice, randint
 
@@ -93,7 +94,11 @@ class Relation_Events:
             # toss out cats who are outside
             if inter_cat.status.is_outsider:
                 continue
-
+                
+            if cat.gender == inter_cat.gender and random_module.randint(1, 5500) != 1:
+                print(f"No gay shit for {cat.name} and {inter_cat.name} today")
+                continue # balancing same-sex relationships - there are too many and I just want more kits in my clans, sorry >:(
+            
             if inter_cat.ID not in cat.relationships:
                 cat.create_one_relationship(inter_cat)
             if cat.ID not in inter_cat.relationships:

@@ -11,7 +11,7 @@
             "border"
         ],
         "tags": [],
-        "patrol_art": "bord_general_intro",
+        "patrol_art": "gen_outsider_ambush",
         "min_cats": 4,
         "max_cats": 6,
         "min_max_status": {},
@@ -39,6 +39,7 @@
                         "amount": 5
                     }
                 ],
+                "art": "gen_bord_roguerunaway",
                 "frequency": 4
             },
             {
@@ -63,6 +64,7 @@
                         "amount": 5
                     }
                 ],
+                "art": "gen_bord_roguerunaway",
                 "frequency": 4
             },
             {
@@ -89,6 +91,7 @@
                         "amount": 5
                     }
                 ],
+                "art": "gen_bord_roguerunaway",
                 "frequency": 4
             }
         ],
@@ -119,6 +122,7 @@
                         "amount": -5
                     }
                 ],
+                "art": "gen_bord_otherclan_hostile",
                 "frequency": 4
             },
             {
@@ -157,6 +161,7 @@
                         "amount": -5
                     }
                 ],
+                "art": "gen_bord_otherclan_hostile",
                 "frequency": 4
             }
         ]
@@ -173,7 +178,7 @@
             "border"
         ],
         "tags": [],
-        "patrol_art": "bord_general_intro",
+        "patrol_art": "gen_outsider_ambush",
         "min_cats": 1,
         "max_cats": 1,
         "min_max_status": {},
@@ -185,6 +190,7 @@
             {
                 "text": "Stunned for a moment, r_c is nearly caught in the teeth of the first rogue, but {PRONOUN/r_c/subject} {VERB/r_c/manage/manages} to dodge and weave through the onslaught of attacks, eventually escaping the fray and pelting towards camp with yowls of warning bursting from {PRONOUN/r_c/poss} lungs.",
                 "exp": 30,
+                "art": "fst_hunt_fun1",
                 "frequency": 4
             },
             {
@@ -193,6 +199,7 @@
                 "stat_skill": [
                     "FIGHTER,3"
                 ],
+                "art": "gen_angry_cat_warrior",
                 "frequency": 4
             }
         ],
@@ -205,6 +212,7 @@
                     "fierce",
                     "vengeful"
                 ],
+                "art": "gen_battle_warrior_danger",
                 "frequency": 4
             },
             {
@@ -216,6 +224,8 @@
                 "history_text": {
                     "death": "This cat was killed when rogues ambushed {PRONOUN/m_c/object} while on a solo patrol."
                 },
+                "art": "gen_dead_cat_EXPLICIT",
+                "art_clean": "gen_dead_cat",
                 "frequency": 3
             }
         ]
@@ -232,7 +242,7 @@
             "border"
         ],
         "tags": [],
-        "patrol_art": "bord_general_intro",
+        "patrol_art": "gen_angry_cat_danger",
         "min_cats": 4,
         "max_cats": 6,
         "min_max_status": {},
@@ -260,6 +270,7 @@
                         "amount": 5
                     }
                 ],
+                "art": "gen_bord_roguerunaway",
                 "frequency": 4
             },
             {
@@ -281,6 +292,7 @@
                         "amount": 5
                     }
                 ],
+                "art": "gen_bord_roguerunaway",
                 "frequency": 1
             },
             {
@@ -305,6 +317,7 @@
                         "amount": 5
                     }
                 ],
+                "art": "gen_speaking_cat_w2",
                 "frequency": 4
             },
             {
@@ -330,6 +343,7 @@
                         "amount": 5
                     }
                 ],
+                "art": "gen_speaking_cat_w2",
                 "frequency": 4
             }
         ],
@@ -344,6 +358,7 @@
                     "scar": "m_c was badly scarred when rogues attacked {PRONOUN/m_c/poss} patrol.",
                     "death": "This cat was killed when rogues attacked {PRONOUN/m_c/poss} patrol."
                 },
+                "art": "gen_bord_otherclan_hostile",
                 "frequency": 4
             },
             {
@@ -366,6 +381,7 @@
                     "scar": "m_c was badly scarred when rogues attacked {PRONOUN/m_c/poss} patrol.",
                     "death": "This cat was killed when rogues attacked {PRONOUN/m_c/poss} patrol."
                 },
+                "art": "gen_bord_otherclan_hostile",
                 "frequency": 4
             }
         ],
@@ -373,6 +389,7 @@
             {
                 "text": "The patrol descends into battle without a second thought, but the rogues are stronger than expected, and eventually the patrol is forced to retreat.",
                 "exp": 0,
+                "art": "gen_battle_warrior_danger",
                 "frequency": 4
             }
         ],
@@ -380,6 +397,7 @@
             {
                 "text": "The patrol descends into battle without a second thought, eventually driving the rogues away.",
                 "exp": 30,
+                "art": "gen_bord_roguerunaway",
                 "frequency": 4
             }
         ]
@@ -1751,7 +1769,7 @@
             "border"
         ],
         "tags": [],
-        "patrol_art": "bord_general_intro",
+        "patrol_art": "gen_bord_story",
         "min_cats": 3,
         "max_cats": 6,
         "min_max_status": {},

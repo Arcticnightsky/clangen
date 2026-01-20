@@ -28,7 +28,7 @@ from scripts.cat.enums import CatAge, CatRank
 from scripts.cat.personality import Personality
 from scripts.cat.skills import SkillPath
 from scripts.game_structure import constants
-
+from scripts.cat.history import History
 
 class ShortEvent:
     """
@@ -241,6 +241,32 @@ class ShortEvent:
             if len(self.multi_cat_objects) <= 2:
                 return
 
+        # checking if a murder reveal should happen
+        # --- Murder reveal check (modern History system) ---
+
+        self.victim_cat = None
+        self.murder_index = None
+
+        if self.main_cat.history and self.main_cat.history.murder:
+            murder_history = self.main_cat.history.murder.get("is_murderer", [])
+
+            for idx, murder in enumerate(murder_history):
+                if murder.get("revealed"):
+                    continue
+
+                self.murder_index = idx
+                self.victim_cat = Cat.fetch_cat(murder.get("victim"))
+
+                # ensure correct routing so reveal events can be selected
+                if "misc" not in self.types:
+                    self.types.append("misc")
+
+                if "murder_reveal" not in self.sub_types:
+                    self.sub_types.append("murder_reveal")
+
+                break
+
+        
         # create new cats (must happen here so that new cats can be included in further changes)
         self.handle_new_cats()
 

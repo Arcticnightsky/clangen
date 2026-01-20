@@ -1286,7 +1286,7 @@
             "any"
         ],
         "tags": [],
-        "frequency": 3,
+        "frequency": 1,
         "event_text": "m_c fell into the river. r_c drowned alongside m_c while trying to rescue {PRONOUN/m_c/object}.",
         "m_c": {
             "age": [
@@ -1298,6 +1298,9 @@
             ],
             "status": [
                 "any"
+            ],
+            "not_skill": [
+                "SWIMMER,2"
             ],
             "dies": true
         },
@@ -1321,6 +1324,9 @@
                 "loving",
                 "responsible"
             ],
+            "not_skill": [
+                "SWIMMER,2"
+            ],
             "dies": true
         },
         "history": [
@@ -1342,7 +1348,7 @@
             "any"
         ],
         "tags": [],
-        "frequency": 4,
+        "frequency": 3,
         "event_text": "m_c and r_c are killed by a gang of rogues.",
         "m_c": {
             "age": [
@@ -2072,53 +2078,6 @@
         ]
     },
     {
-        "event_id": "gen_death_age_any5",
-        "location": [
-            "any"
-        ],
-        "season": [
-            "any"
-        ],
-        "sub_type": [
-            "old_age"
-        ],
-        "tags": [
-            "all_lives"
-        ],
-        "frequency": 4,
-        "event_text": "m_c and r_c loved each other so much they could not be parted, even by death. c_n found their bodies still wrapped around each other in the morning.",
-        "m_c": {
-            "age": [
-                "senior"
-            ],
-            "status": [
-                "any"
-            ],
-            "relationship_status": [
-                "mates"
-            ],
-            "dies": true
-        },
-        "r_c": {
-            "age": [
-                "senior"
-            ],
-            "status": [
-                "any"
-            ],
-            "dies": true
-        },
-        "history": [
-            {
-                "cats": [
-                    "m_c",
-                    "r_c"
-                ],
-                "death": "This cat died from old age."
-            }
-        ]
-    },
-    {
         "event_id": "gen_death_predator_any1",
         "location": [
             "any"
@@ -2571,8 +2530,7 @@
         "history": [
             {
                 "cats": [
-                    "m_c",
-                    "r_c"
+                    "m_c", "r_c"
                 ],
                 "death": "m_c and r_c went to play on the ice of a frozen pond, not knowing it was too thin."
             }
@@ -2954,7 +2912,7 @@
             "any"
         ],
         "tags": [],
-        "frequency": 4,
+        "frequency": 3,
         "event_text": "m_c was killed while trying to save the medicine cat of o_c_n.",
         "m_c": {
             "status": [
@@ -3009,7 +2967,7 @@
             "any"
         ],
         "tags": [],
-        "frequency": 4,
+        "frequency": 3,
         "event_text": "m_c was killed by the deputy of o_c_n.",
         "m_c": {
             "status": [
@@ -3047,7 +3005,7 @@
             "any"
         ],
         "tags": [],
-        "frequency": 4,
+        "frequency": 3,
         "event_text": "m_c was killed while trying to save the deputy of o_c_n.",
         "m_c": {
             "status": [
@@ -3101,7 +3059,7 @@
             "any"
         ],
         "tags": [],
-        "frequency": 4,
+        "frequency": 3,
         "event_text": "m_c was killed by the leader of o_c_n.",
         "m_c": {
             "status": [
@@ -3139,7 +3097,7 @@
             "any"
         ],
         "tags": [],
-        "frequency": 4,
+        "frequency": 3,
         "event_text": "m_c was killed while trying to save the leader of o_c_n.",
         "m_c": {
             "status": [
@@ -3810,7 +3768,7 @@
             "greenleaf"
         ],
         "tags": [],
-        "frequency": 4,
+        "frequency": 2,
         "event_text": "m_c fell into a river and drowned.",
         "m_c": {
             "age": [
