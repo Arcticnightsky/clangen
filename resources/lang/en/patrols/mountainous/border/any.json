@@ -186,8 +186,7 @@
                 ],
                 "history_text": {
                     "scar": "m_c was badly scarred when rogues ambushed {PRONOUN/m_c/poss} patrol.",
-                    "reg_death": "This cat was killed when rogues ambushed {PRONOUN/m_c/poss} patrol.",
-                    "lead_death": "{VERB/m_c/were/was} killed in a rogue ambush"
+                    "death": "This cat was killed when rogues ambushed {PRONOUN/m_c/poss} patrol."
                 },
                 "art": "gen_bord_otherclan_hostile",
                 "frequency": 4
@@ -210,8 +209,7 @@
                 ],
                 "history_text": {
                     "scar": "m_c was badly scarred when rogues ambushed {PRONOUN/m_c/poss} patrol.",
-                    "reg_death": "m_c was killed when rogues ambushed {PRONOUN/m_c/poss} patrol.",
-                    "lead_death": "{VERB/m_c/were/was} killed in a rogue ambush"
+                    "death": "m_c was killed when rogues ambushed {PRONOUN/m_c/poss} patrol."
                 },
                 "art": "gen_bord_otherclan_hostile",
                 "frequency": 4
@@ -274,8 +272,7 @@
                     "r_c"
                 ],
                 "history_text": {
-                    "reg_death": "This cat was killed when rogues ambushed {PRONOUN/m_c/object} while on a solo patrol.",
-                    "lead_death": "{VERB/m_c/were/was} killed in a rogue ambush"
+                    "death": "This cat was killed when rogues ambushed {PRONOUN/m_c/object} while on a solo patrol."
                 },
                 "art": "gen_dead_cat_EXPLICIT",
                 "art_clean": "gen_dead_cat",
@@ -410,8 +407,7 @@
                 ],
                 "history_text": {
                     "scar": "m_c was badly scarred when rogues attacked {PRONOUN/m_c/poss} patrol.",
-                    "reg_death": "This cat was killed when rogues attacked {PRONOUN/m_c/poss} patrol.",
-                    "lead_death": "{VERB/m_c/were/was} killed in a rogue ambush"
+                    "death": "This cat was killed when rogues attacked {PRONOUN/m_c/poss} patrol."
                 },
                 "art": "gen_bord_otherclan_hostile",
                 "frequency": 4
@@ -434,8 +430,7 @@
                 ],
                 "history_text": {
                     "scar": "m_c was badly scarred when rogues attacked {PRONOUN/m_c/poss} patrol.",
-                    "reg_death": "This cat was killed when rogues attacked {PRONOUN/m_c/poss} patrol.",
-                    "lead_death": "{VERB/m_c/were/was} killed in a rogue ambush"
+                    "death": "This cat was killed when rogues attacked {PRONOUN/m_c/poss} patrol."
                 },
                 "relationships": [
                     {
@@ -542,8 +537,7 @@
                     "r_c"
                 ],
                 "history_text": {
-                    "reg_death": "This cat was killed when rogues ambushed {PRONOUN/m_c/object} while on a solo patrol.",
-                    "lead_death": "{VERB/m_c/were/was} killed in a rogue ambush"
+                    "death": "This cat was killed when rogues ambushed {PRONOUN/m_c/object} while on a solo patrol."
                 },
                 "art": "gen_bord_otherclan_hostile",
                 "frequency": 3
@@ -813,8 +807,7 @@
                     "patrol"
                 ],
                 "history_text": {
-                    "reg_death": "This cat died trying to cross a dangerous river.",
-                    "lead_death": "died trying to cross a dangerous river"
+                    "death": "This cat died trying to cross a dangerous river."
                 },
                 "art": "gen_drowning_warrior",
                 "frequency": 2
@@ -826,8 +819,7 @@
                     "multi"
                 ],
                 "history_text": {
-                    "reg_death": "This cat died trying to cross a dangerous river.",
-                    "lead_death": "died trying to cross a dangerous river"
+                    "death": "This cat died trying to cross a dangerous river."
                 },
                 "art": "gen_drowning_warrior",
                 "frequency": 2
@@ -859,8 +851,7 @@
                 ],
                 "history_text": {
                     "scar": "m_c was scarred from the injuries obtained by trying to cross a dangerous river.",
-                    "reg_death": "This cat died from injuries obtained by trying to cross a dangerous river.",
-                    "lead_death": "died from injuries obtained by trying to cross a dangerous river"
+                    "death": "This cat died from injuries obtained by trying to cross a dangerous river."
                 },
                 "art": "gen_train_soggykitty_mad_warrior",
                 "frequency": 4
@@ -876,8 +867,7 @@
                     "multi"
                 ],
                 "history_text": {
-                    "reg_death": "This cat died trying to cross a dangerous river.",
-                    "lead_death": "died trying to cross a dangerous river"
+                    "death": "This cat died trying to cross a dangerous river."
                 },
                 "art": "gen_drowning_warrior",
                 "frequency": 2
@@ -917,8 +907,7 @@
                 ],
                 "history_text": {
                     "scar": "m_c was scarred from the injuries obtained by trying to cross a dangerous river.",
-                    "reg_death": "This cat died from injuries obtained by trying to cross a dangerous river.",
-                    "lead_death": "died from injuries obtained by trying to cross a dangerous river"
+                    "death": "This cat died from injuries obtained by trying to cross a dangerous river."
                 },
                 "art": "gen_train_soggykitty_mad_warrior",
                 "frequency": 4
@@ -1018,8 +1007,7 @@
                     "r_c"
                 ],
                 "history_text": {
-                    "reg_death": "m_c was taken as the Mothman's snack.",
-                    "lead_death": "{VERB/m_c/were/was} taken as the Mothman's snack"
+                    "death": "m_c was taken as the Mothman's snack."
                 },
                 "art": "mothman_OUTCOME",
                 "frequency": 4
@@ -1031,8 +1019,7 @@
                     "r_c"
                 ],
                 "history_text": {
-                    "reg_death": "m_c was killed by the collapsing mountain slopes, an event predicted by the appearance of the Mothman.",
-                    "lead_death": "{VERB/m_c/were/was} killed by the collapsing mountain slopes after {PRONOUN/m_c/subject} saw the Mothman"
+                    "death": "m_c was killed by the collapsing mountain slopes, an event predicted by the appearance of the Mothman."
                 },
                 "art": "mothman_OUTCOME",
                 "frequency": 4
@@ -1097,8 +1084,7 @@
                 ],
                 "history_text": {
                     "scar": "m_c was scarred during {PRONOUN/m_c/poss} frantic escape from a Jersey Devil.",
-                    "reg_death": "m_c died from the shock of meeting a Jersey Devil.",
-                    "lead_death": "died from the shock of meeting a Jersey Devil"
+                    "death": "m_c died from the shock of meeting a Jersey Devil."
                 },
                 "frequency": 4
             }
@@ -1336,8 +1322,7 @@
                     "r_c"
                 ],
                 "history_text": {
-                    "reg_death": "This cat died to keep c_n safe from a wolf.",
-                    "lead_death": "died to keep c_n safe from a wolf"
+                    "death": "This cat died to keep c_n safe from a wolf."
                 },
                 "relationships": [
                     {
@@ -1379,8 +1364,7 @@
                 ],
                 "history_text": {
                     "scar": "This cat is scarred from bravely defending c_n against a wolf.",
-                    "reg_death": "This cat died to keep c_n safe from a large wolf.",
-                    "lead_death": "died to keep c_n safe from a large wolf"
+                    "death": "This cat died to keep c_n safe from a large wolf."
                 },
                 "relationships": [
                     {
@@ -1426,8 +1410,7 @@
                 ],
                 "history_text": {
                     "scar": "This cat bears a mangled leg from a confrontation with a large wolf.",
-                    "reg_death": "This cat died from a confrontation with a large wolf.",
-                    "lead_death": "died from a confrontation with a large wolf"
+                    "death": "This cat died from a confrontation with a large wolf."
                 },
                 "relationships": [
                     {
@@ -1459,8 +1442,7 @@
                     "s_c"
                 ],
                 "history_text": {
-                    "reg_death": "This cat died from a confrontation with a large wolf.",
-                    "lead_death": "died from a confrontation with a large wolf"
+                    "death": "This cat died from a confrontation with a large wolf."
                 },
                 "art": "gen_coyote_danger2_w1",
                 "frequency": 3
@@ -1476,8 +1458,7 @@
                     "s_c"
                 ],
                 "history_text": {
-                    "reg_death": "This cat died from a confrontation with a large wolf.",
-                    "lead_death": "died from a confrontation with a large wolf"
+                    "death": "This cat died from a confrontation with a large wolf."
                 },
                 "art": "gen_coyote_danger2_w1",
                 "frequency": 3
@@ -1500,8 +1481,7 @@
                 ],
                 "history_text": {
                     "scar": "This cat's tail was mangled by a wolf.",
-                    "reg_death": "This cat died from the wounds suffered in a confrontation with a large wolf.",
-                    "lead_death": "died from a confrontation with a large wolf"
+                    "death": "This cat died from the wounds suffered in a confrontation with a large wolf."
                 },
                 "frequency": 4
             },
@@ -1519,8 +1499,7 @@
                     "oblivious"
                 ],
                 "history_text": {
-                    "reg_death": "This cat died due to a large wolf.",
-                    "lead_death": "died from a confrontation with a large wolf"
+                    "death": "This cat died due to a large wolf."
                 },
                 "art": "gen_coyote_danger2_w1",
                 "frequency": 4
