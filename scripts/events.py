@@ -1337,7 +1337,7 @@ def perform_ceremonies(cat):
                 # These chances will only be reached if the
                 # Clan has at least one non-elder medicine cat.
                 elif not has_med:
-                    chance = int(chance / 7.125)
+                    chance = int(chance / 2)
                     print(f"Not enough healthy medicine cats")
                     print(f"Chance updated to {chance}")
                 elif has_med:
