@@ -10573,8 +10573,7 @@
             {
                 "type": "any_herb",
                 "trigger": [
-                    "always",
-                    "low"
+                    "always"
                 ],
                 "adjust": "increase_40"
             }
