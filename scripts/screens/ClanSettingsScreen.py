@@ -431,8 +431,10 @@ class ClanSettingsScreen(Screens):
             if cat.status.is_outsider:
                 cats_outside += 1
                 continue
-
-            living_cats += 1
+                
+            if not cat.status.is_outsider and not cat.dead:
+                living_cats += 1
+                
             if cat.status.rank == CatRank.MEDICINE_CAT:
                 med_cats += 1
             elif cat.status.rank == CatRank.MEDICINE_APPRENTICE:
