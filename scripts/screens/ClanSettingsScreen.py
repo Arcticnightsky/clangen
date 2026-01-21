@@ -455,7 +455,7 @@ class ClanSettingsScreen(Screens):
             elif cat.gender == "female":
                 female += 1
                 
-            avg_age = int(sum((cat.moons for cat in Cat.all_cats.values())) / living_cats)
+            avg_age = int(sum((cat.moons for cat in living_cats())) / living_cats)
         
         self.checkboxes_text["stat_box"] = pygame_gui.elements.UITextBox(
             "screens.clan_settings.stats_text",
@@ -477,6 +477,7 @@ class ClanSettingsScreen(Screens):
                 "faded": str(faded_cats),
                 "male": str(male),
                 "female": str(female),
+                "catsoutside": str(cats_outside),
                 "avg_age": str(avg_age),
             },
         )
