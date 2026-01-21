@@ -225,47 +225,29 @@ class ShortEvent:
         if other_clan:
             self.other_clan_name = f"{other_clan.name}Clan"
 
+        # --- Assign murder victim from future event (CRITICAL) ---
+        if "murder_reveal" in self.sub_type or "hidden_murder_reveal" in self.sub_type:
+            if hasattr(self, "future_event") and self.future_event:
+                mur_id = self.future_event.get("mur_c")
+                if mur_id:
+                    self.victim_cat = Cat.fetch_cat(mur_id)
+
+        # now register involved cats
         self.all_involved_cat_ids.append(self.main_cat.ID)
 
-        # check if another cat is present
         if self.r_c:
             self.all_involved_cat_ids.append(self.random_cat.ID)
+
         if self.victim_cat:
             self.all_involved_cat_ids.append(self.victim_cat.ID)
 
-        # checking if a mass death should happen, happens here so that we can toss the event if needed
+        # checking if a mass death should happen
         if "mass_death" in self.sub_type:
             if game.clan and not get_clan_setting("disasters"):
                 return
             self.handle_mass_death()
             if len(self.multi_cat_objects) <= 2:
                 return
-
-        # checking if a murder reveal should happen
-        # --- Murder reveal check (modern History system) ---
-
-        self.victim_cat = None
-        self.murder_index = None
-
-        if self.main_cat.history and self.main_cat.history.murder:
-            murder_history = self.main_cat.history.murder.get("is_murderer", [])
-
-            for idx, murder in enumerate(murder_history):
-                if murder.get("revealed"):
-                    continue
-
-                self.murder_index = idx
-                self.victim_cat = Cat.fetch_cat(murder.get("victim"))
-
-                # ensure correct routing so reveal events can be selected
-                if "misc" not in self.types:
-                    self.types.append("misc")
-
-                if "murder_reveal" not in self.sub_types:
-                    self.sub_types.append("murder_reveal")
-
-                break
-
         
         # create new cats (must happen here so that new cats can be included in further changes)
         self.handle_new_cats()
