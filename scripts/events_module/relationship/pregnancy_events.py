@@ -912,11 +912,10 @@ class Pregnancy_Events:
             for mate_id in cat.mate:
                 if mate_id is None:
                     continue
-
                 if (
                     other_cat
                     and other_cat in cat.mate
-                    and mate_id not in all_adoptive_parents
+                    and mate_id.gender == "female"
                     and mate_id not in birth_parents
                 ):
                     all_adoptive_parents.append(mate_id)
