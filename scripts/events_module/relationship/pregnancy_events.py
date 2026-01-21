@@ -1311,7 +1311,17 @@ class Pregnancy_Events:
         if avg_age > 80:
             inverse_chance = int(inverse_chance * 0.8)
             
-        # If any of thr mated cats have the 'KIT' skill, they're more likely to have kits because, well... they love kits no? TBD
+        # If any of the mated cats have the 'KIT' skill, they're more likely to have kits because, well... they love kits no? TBD
+        
+        # If the parent(s) are young adults, the chance for kits is higher because the hormones are still raging lmao
+        if first_parent.age == CatAge.YOUNG_ADULT:
+            if second_parent:
+                if second_parent.age == CatAge.YOUNG_ADULT
+                    inverse_chance = int(inverse_chance / 1.4) # young tom cats can be stupid and horny - such as male human youth today, smh
+                else:
+                    inverse_chance = int(inverse_chance / 1.2) # chance is kinda low for adult toms because... perhaps their young adult wife is just sexy????
+            else: 
+                inverse_chance = int(inverse_chance / 1.3)
         
         # 'INBREED' counter
         # - increase inverse chance if one of the current cats belongs in the biggest family
