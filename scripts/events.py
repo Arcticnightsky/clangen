@@ -1272,7 +1272,7 @@ def perform_ceremonies(cat):
                 has_elder_med = [
                     c
                     for c in med_cat_list
-                    if c.age == "senior" and c.status.rank == CatRank.MEDICINE_CAT
+                    if c.age == "senior" and c.moons < 150 and c.status.rank == CatRank.MEDICINE_CAT
                 ]
 
                 very_old_med = [
