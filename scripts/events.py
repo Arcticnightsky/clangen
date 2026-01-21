@@ -1311,24 +1311,39 @@ def perform_ceremonies(cat):
                 
                 # assign chance to become med app depending on current med cat and traits
                 chance = constants.CONFIG["roles"]["base_medicine_app_chance"]
+                print(f"Medcat app {cat.name} starting chance: {chance}")
                 if has_elder_med == med_cat_list:
                     # These chances apply if all the current medicine cats are elders.
                     if has_med:
                         chance = int(chance / 2.22)
+                        print(f"Senior medicine cat")
+                        print(f"Chance updated to {chance}")
                     else:
                         chance = int(chance / 13.67)
+                        print(f"Senior medicine cat")
+                        print(f"Not enough healthy medicine cats")
+                        print(f"Chance updated to {chance}")
                 elif very_old_med == med_cat_list:
                     # These chances apply is all the current medicine cats are very old.
                     if has_med:
                         chance = int(chance / 3)
+                        print(f"Very old medicine cat")
+                        print(f"Chance updated to {chance}")
                     else:
                         chance = int(chance / 14)
+                        print(f"Very old medicine cat")
+                        print(f"Not enough healthy medicine cats")
+                        print(f"Chance updated to {chance}")
                 # These chances will only be reached if the
                 # Clan has at least one non-elder medicine cat.
                 elif not has_med:
                     chance = int(chance / 7.125)
+                    print(f"Not enough healthy medicine cats")
+                    print(f"Chance updated to {chance}")
                 elif has_med:
                     chance = int(chance * 2.22)
+                    print(f"You have enough medicine cats")
+                    print(f"Chance updated to {chance}")
 
                 if primary in [
                     SkillPath.STAR, 
@@ -1346,12 +1361,18 @@ def perform_ceremonies(cat):
                     SkillPath.SENSE
                 ]:
                     chance = int(chance / 1.5)
+                    print(f"{cat.name} {primary or secondary}")
+                    print(f"Chance updated to {chance}")
 
                 if primary == SkillPath.HEALER or secondary == SkillPath.HEALER:
                     chance = int(chance / 4)
+                    print(f"{cat.name}'s a natural healer!")
+                    print(f"Chance updated to {chance}")
 
                 if primary in [SkillPath.FIGHTER, SkillPath.HUNTER, SkillPath.DARK] or secondary in [SkillPath.FIGHTER, SkillPath.HUNTER, SkillPath.DARK]:
                     chance = int(chance * 3)
+                    print(f"{cat.name} {primary or secondary}")
+                    print(f"Chance updated to {chance}")
                 
                 if cat.personality.trait in [
                     "careful",
@@ -1361,6 +1382,8 @@ def perform_ceremonies(cat):
                     "faithful",
                 ]:
                     chance = int(chance / 1.3)
+                    print(f"{cat.name} {cat.personality.trait}")
+                    print(f"Chance updated to {chance}")
 
                 if cat.personality.trait in [
                     "bloodthirsty",
@@ -1370,17 +1393,24 @@ def perform_ceremonies(cat):
                     "arrogant",
                 ]:
                     chance = int(chance * 4)
+                    print(f"{cat.name} {cat.personality.trait}")
+                    print(f"Chance updated to {chance}")
                     
                 if cat.is_disabled():
                     chance = int(chance / 2)
+                    print(f"{cat.name} is disabled")
+                    print(f"Chance updated to {chance}")
 
                 if chance == 0:
                     chance = 1
 
+                print(f"Final medcat app chance {cat.name}: {chance}")
+                
                 if not has_med_app and not covered > len(relevant_cats) and not int(random.random() * chance):
                     ceremony(cat, CatRank.MEDICINE_APPRENTICE)
                     ceremony_accessory = True
                     gain_accessories(cat)
+                    print(f"Yippee! Made {cat.name} medicine cat apprentice!")
                 else:
                     # Chance for mediator apprentice
                     mediator_list = list(
