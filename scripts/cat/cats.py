@@ -423,7 +423,7 @@ class Cat:
         )
         # --- Male tortie rarity enforcement (KITS ONLY) ---
         if self.age in (CatAge.NEWBORN, CatAge.KITTEN) and self.pelt.name in Pelt.torties and self.gender == "male":
-            # 1 / 3000 chance to keep male tortie
+            # 1 / 3000 chance to keep male tortie, slightly increased as per what pelts.py should've done - increased tortie chance if the mom's a tortie herself
             if random_module.randint(1, 2800) != 1:
                 self.gender = "female"
                 self.genderalign = "female"
