@@ -1316,7 +1316,7 @@ class Pregnancy_Events:
         # If the parent(s) are young adults, the chance for kits is higher because the hormones are still raging lmao
         if first_parent.age == CatAge.YOUNG_ADULT:
             if second_parent:
-                if second_parent.age == CatAge.YOUNG_ADULT
+                if second_parent.age == CatAge.YOUNG_ADULT:
                     inverse_chance = int(inverse_chance / 1.4) # young tom cats can be stupid and horny - such as male human youth today, smh
                 else:
                     inverse_chance = int(inverse_chance / 1.2) # chance is kinda low for adult toms because... perhaps their young adult wife is just sexy????
