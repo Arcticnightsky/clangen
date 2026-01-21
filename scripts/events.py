@@ -1352,8 +1352,13 @@ def perform_ceremonies(cat):
                     SkillPath.GHOST, 
                     SkillPath.INSIGHTFUL,
                     SkillPath.SENSE
-                ] or secondary in [
-                    SkillPath.STAR,
+                ]:
+                    chance = int(chance / 1.5)
+                    print(f"{cat.name} {primary}")
+                    print(f"Chance updated to {chance}")
+
+                if secondary in [
+                    SkillPath.STAR, 
                     SkillPath.PROPHET, 
                     SkillPath.OMEN, 
                     SkillPath.GHOST, 
@@ -1361,17 +1366,22 @@ def perform_ceremonies(cat):
                     SkillPath.SENSE
                 ]:
                     chance = int(chance / 1.5)
-                    print(f"{cat.name} {primary or secondary}")
+                    print(f"{cat.name} {secondary}")
                     print(f"Chance updated to {chance}")
-
+                
                 if primary == SkillPath.HEALER or secondary == SkillPath.HEALER:
                     chance = int(chance / 4)
                     print(f"{cat.name}'s a natural healer!")
                     print(f"Chance updated to {chance}")
 
-                if primary in [SkillPath.FIGHTER, SkillPath.HUNTER, SkillPath.DARK] or secondary in [SkillPath.FIGHTER, SkillPath.HUNTER, SkillPath.DARK]:
+                if primary in [SkillPath.FIGHTER, SkillPath.HUNTER, SkillPath.DARK]:
                     chance = int(chance * 3)
-                    print(f"{cat.name} {primary or secondary}")
+                    print(f"{cat.name} {primary}")
+                    print(f"Chance updated to {chance}")
+
+                if secondary in [SkillPath.FIGHTER, SkillPath.HUNTER, SkillPath.DARK]:
+                    chance = int(chance * 3)
+                    print(f"{cat.name} {secondary}")
                     print(f"Chance updated to {chance}")
                 
                 if cat.personality.trait in [
