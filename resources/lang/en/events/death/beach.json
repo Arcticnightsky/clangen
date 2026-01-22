@@ -67,7 +67,7 @@
             "no_body",
             "all_lives"
         ],
-        "frequency": 3,
+        "frequency": 2,
         "event_text": "m_c was lost to the sea while trying to save r_c from drowning.",
         "m_c": {
             "age": [
@@ -260,7 +260,7 @@
         ],
         "tags": [],
         "frequency": 2,
-        "event_text": "r_c discovered m_c's dead body. It seems {PRONOUN/m_c/subject} died to dehydration and heat.",
+        "event_text": "r_c discovered m_c's dead body. It seems {PRONOUN/m_c/subject} died to dehydration and heat while out in the territory.",
         "m_c": {
             "age": [
                 "adolescent"
