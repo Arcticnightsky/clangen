@@ -43,7 +43,7 @@ from scripts.game_structure.game.switches import (
 )
 from scripts.game_structure import game
 from scripts.game_structure.localization import load_lang_resource
-from scripts.game_structure.windows import SaveError
+from scripts.ui.windows.save_error import SaveErrorWindow
 from scripts.utility import (
     change_clan_relations,
     change_clan_reputation,
@@ -301,7 +301,7 @@ def one_moon():
             game.clan.save_pregnancy(game.clan)
             game.save_events()
         except:
-            SaveError(traceback.format_exc())
+            SaveErrorWindow(traceback.format_exc())
 
 
 def update_afterlife_temper():
