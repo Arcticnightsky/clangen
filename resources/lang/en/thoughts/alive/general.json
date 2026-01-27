@@ -2527,7 +2527,6 @@
         ]
     },
     {
-<<<<<<< HEAD
         "id": "teacher_skill_gen",
         "thoughts": [
             "Breaks something complicated down into easy steps",
@@ -2820,10 +2819,7 @@
         ]
     },
     {
-        "id": "camp_skill_gen",
-=======
         "id": "campkeeper_gen",
->>>>>>> parent of ffeacb027 (Merge pull request #39 from Arcticnightsky/dev-to-custom-merge-branch)
         "thoughts": [
             "Is padding back and forth across the camp",
             "Is helping to reinforce the nursery walls",
