@@ -187,13 +187,14 @@ class Pregnancy_Events:
             count=amount,
         )
 
-        cats_involved = {"m_c": cat}
+        cat_dict = {"m_c": cat}
+        cats_involved = [cat.ID]
         if other_cat:
-            cats_involved["r_c"] = other_cat
+            cats_involved.append(other_cat.ID)
         for kit in kits:
             kit.thought = "Snuggles close to r_c"
             kit.thought = event_text_adjust(Cat, kit.thought, random_cat=cat)
-            cats_involved = [cat.ID] + [kit.ID for kit in kits]
+            cats_involved.append(kit.ID)
 
         # Normally, birth cooldown is only applied to cat who gave birth
         # However, if we don't apply birth cooldown to adoption, we get
@@ -204,7 +205,7 @@ class Pregnancy_Events:
         cat.birth_cooldown = constants.CONFIG["pregnancy"]["birth_cooldown"]
 
         game.cur_events_list.append(
-            Single_Event(print_event, "misc", cat_dict=cats_involved)
+            Single_Event(print_event, "misc", cats_involved, cat_dict=cat_dict)
         )
 
     @staticmethod
