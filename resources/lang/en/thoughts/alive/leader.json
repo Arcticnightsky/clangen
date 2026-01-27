@@ -37,6 +37,16 @@
         ]
     },
     {
+        "id": "leader_DF_skill",
+        "thoughts": [
+            "Thinks {PRONOUN/m_c/subject} {VERB/m_c/have/has} been hearing the voices of Dark Forest cats...",
+            "Is pondering recent dreams {PRONOUN/m_c/subject} {VERB/m_c/have/has} had... perhaps from the Dark Forest?"
+        ],
+        "main_skill_constraint": [
+            "DARK,2"
+        ]
+    },
+    {
         "id": "leader_alive_kits",
         "thoughts": [
             "Has recently picked up the scent of mischievous kits in {PRONOUN/m_c/poss} den...",

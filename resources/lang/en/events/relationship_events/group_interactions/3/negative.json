@@ -53,7 +53,7 @@
 			"r_c1": {
 				"injury_names": ["claw-wound"],
 				"scar_text": "Got a scar while punishing r_c2 in the name of m_c.",
-				"death_text": "Died after punishing r_c2 in the name of m_c.",
+				"death_text": "r_c1 died after punishing r_c2 in the name of m_c.",
 				"death_leader_text": "{VERB/r_c1/were/was} punishing r_c2"
 			},
 			"r_c2": {
