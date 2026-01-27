@@ -433,15 +433,38 @@ class Cat:
                 print("RARE MALE TORTIE GENERATED")
                 self.no_kits = True
 
-        # --- Female ginger rarity enforcement ---
-        if self.pelt.colour in Pelt.ginger_colours and self.gender == "female" and not self.pelt.name in Pelt.torties:
-            # Only 20% of ginger cats are female
-            if random_module.randint(1, 5) != 1:
-                self.gender = "male"
-                self.genderalign = "male"
-                print("Regular orange tomcat :)")
-            if self.gender == "female":
-                print("Uncommon ginger she-cat generated!!!")
+        # --- Female ginger genetics + rarity enforcement ---
+        if (
+            self.pelt.colour in Pelt.ginger_colours
+            and self.gender == "female"
+            and self.pelt.name not in Pelt.torties
+        ):
+            allow_female_ginger = False
+            # Genetics exception ONLY for kits/newborns with parents
+            if self.age in (CatAge.NEWBORN, CatAge.KITTEN) and self.parent1 and self.parent2:
+                mother = Cat.fetch_cat(self.parent1) if self.parent1 else None
+                father = Cat.fetch_cat(self.parent2) if self.parent2 else None
+
+                if mother and father:
+                    mother_has_orange = (
+                        mother.pelt.name in Pelt.torties
+                        or mother.pelt.colour in Pelt.ginger_colours
+                    )
+                    father_is_ginger = father.pelt.colour in Pelt.ginger_colours
+
+                    if mother_has_orange and father_is_ginger:
+                        allow_female_ginger = True
+
+            # If genetics do NOT allow it, apply 20% rule
+            if not allow_female_ginger:
+                if random_module.randint(1, 5) != 1:
+                    self.gender = "male"
+                    self.genderalign = "male"
+                    print("Regular orange tomcat :)")
+                else:
+                    print("Uncommon ginger she-cat generated!!!")
+            else:
+                print("Uncommon ginger she-cat generated thanks to her genetics!!!")
 
         if self.age not in (CatAge.NEWBORN, CatAge.KITTEN) and self.pelt.name in Pelt.torties and self.gender == "male":
             self.no_kits = True
