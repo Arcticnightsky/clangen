@@ -2778,7 +2778,7 @@
         ]
     },
     {
-        "id": "insight_skill_gen",
+        "id": "insightful_skill_gen",
         "thoughts": [
             "Notes the underlying causes behind r_c's behavior",
             "Considers the future of the Clan",
@@ -2790,7 +2790,7 @@
             "Considers explanations for r_c's recent strange behavior"
         ],
         "main_skill_constraint": [
-            "INSIGHT,1"
+            "INSIGHTFUL,1"
         ]
     },
     {
