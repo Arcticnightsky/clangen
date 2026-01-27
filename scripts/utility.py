@@ -1639,7 +1639,6 @@ def change_relationship_values(
                 or single_cat_to.ID in single_cat_from.mate
             ):
                 if single_cat_from.gender == single_cat_to.gender and single_cat_to.ID not in single_cat_from.mate and random_module.randint(1, 5500) != 1:
-                    print(f"No gay shit for {single_cat_from.name} and {single_cat_to.name} today")
                     continue # balancing same-sex relationships - there are too many and I just want more kits in my clans, sorry >:(
                 elif single_cat_from.gender != single_cat_to.gender:
                     # now gain the romance
