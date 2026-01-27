@@ -1722,6 +1722,44 @@
         }
     },
     {
+        "event_id": "multi_misc_any_collar_accessory1",
+        "location": [
+            "forest",
+            "beach",
+            "plains"
+        ],
+        "season": [
+            "any"
+        ],
+        "sub_type": [
+            "accessory"
+        ],
+        "frequency": 1,
+        "event_text": "m_c disappears for a few days, then returns to camp with a acc_singular around {PRONOUN/m_c/poss} neck.",
+        "new_accessory": [
+            "COLLAR"
+        ],
+        "m_c": {
+            "age": [
+                "adolescent",
+                "young adult",
+                "adult",
+                "senior adult",
+                "senior"
+            ]
+        },
+        "relationships": {
+            "cats_from": ["high_lawful"],
+            "cats_to": ["m_c"],
+            "values": ["respect"],
+            "amount": -10,
+            "mutual": false,
+            "log": {
+                "cats_from": "from_cat disapproved of to_cat wearing a collar."
+            }
+        }
+    },
+    {
         "event_id": "multi_misc_any_misc1",
         "location": [
             "forest",
@@ -10917,420 +10955,5 @@
                 "apprentice"
             ]
         }
-    }    {
-    "event_id": "gen_misc_hitmanfailedmurder1",
-    "location": ["any"],
-    "season": ["any"],
-    "sub_type": ["failed_murder"],
-    "tags": [],
-    "frequency": 2,
-    "event_text": "m_c was seen speaking to n_c:0 on the border. n_c:0 later attacked r_c's patrol, and though {PRONOUN/n_c:0/subject} {VERB/n_c:0/were/was} driven off, r_c was injured and can't shake the feeling n_c:0 was targeting {PRONOUN/r_c/object}.",
-    "m_c": {
-        "age": ["young adult", "adult", "senior adult"]
-    },
-    "r_c": {
-        "age": [],
-        "status": ["apprentice", "mediator apprentice", "medicine cat apprentice", "mediator", "medicine cat", "warrior", "deputy"]
-    },
-    "new_cat": [
-        ["age:adult", "rogue", "meeting", "exists"]
-    ],
-    "injury": [
-        {
-            "cats": ["r_c"],
-            "injuries": ["cat bite"]
-        }
-    ],
-    "history:": [
-        {
-            "cats": ["r_c"],
-            "scar": "r_c was scarred after a rogue targeted {PRONOUN/r_c/object} in a fight.",
-            "death": "r_c died in the wake of a fight with a rogue who seemed to be targeting {PRONOUN/r_c/object}."
-        }
-    ],
-    "relationships": [
-        {
-            "cats_from": ["m_c"],
-            "cats_to": ["n_c:0"],
-            "mutual": false,
-            "values": ["trust"],
-            "amount": 10,
-            "log": {
-                "cats_from": "from_cat hired to_cat to kill r_c."
-            }
-        }
-    ]
-    },
-    {
-    "event_id": "gen_misc_hitmanfailedmurder2",
-    "location": ["any"],
-    "season": ["any"],
-    "sub_type": ["failed_murder"],
-    "tags": [],
-    "frequency": 2,
-    "event_text": "m_c was seen speaking to n_c:0 on the border. n_c:0 later attacks r_c's patrol, but {PRONOUN/n_c:0/subject} underestimated r_c's strength, and r_c, fighting for {PRONOUN/r_c/poss} life, kills {PRONOUN/n_c:0/object}.",
-    "m_c": {
-        "age": ["young adult", "adult", "senior adult"]
-    },
-    "r_c": {
-        "age": [],
-        "status": ["mediator", "medicine cat", "warrior", "deputy"],
-        "skill": ["FIGHTER,2"]
-    },
-    "new_cat": [
-        ["age:adult", "rogue", "meeting", "dead", "exists"]
-    ],
-    "relationships": [
-        {
-            "cats_from": ["m_c"],
-            "cats_to": ["n_c:0"],
-            "mutual": false,
-            "values": ["trust"],
-            "amount": 10,
-            "log": {
-                "cats_from": "from_cat hired to_cat to kill r_c."
-            }
-        }
-    ]
-    },
-    {
-       "event_id": "gen_doubtful_med_mate",
-        "location": [
-            "any"
-        ],
-        "season": [
-            "any"
-        ],
-        "tags": [
-            "romance"
-        ],
-        "frequency": 2,
-        "event_text": "Though m_c is happy to have r_c as {PRONOUN/m_c/poss} mate, m_c can't help but feel as if StarClan is judging {PRONOUN/m_c/object} for loving r_c as {PRONOUN/m_c/poss} mate... After all, medicine cats technically aren't supposed to have mates, but m_c loves r_c too much to give {PRONOUN/r_c/object} up. m_c stays awake at night pondering about {PRONOUN/m_c/poss} love choices and the warrior code.",
-        "m_c": {
-            "age": [
-                "young adult",
-                "adult",
-                "senior adult",
-                "senior"
-            ],
-            "status": [
-                "medicine cat",
-                "medicine cat apprentice"
-            ],
-            "relationship_status": [
-                "mates"
-            ],
-            "trait": [
-                "righteous",
-                "loyal",
-                "faithful",
-                "strict",
-                "nervous",
-                "insecure"
-            ]
-        },
-        "r_c": {
-            "age": [
-                "senior",
-                "senior adult",
-                "adult",
-                "young adult"
-            ]
-        },
-        "relationships": [
-            {
-                "cats_from": [
-                    "m_c"
-                ],
-                "cats_to": [
-                    "r_c"
-                ],
-                "mutual": false,
-                "values": [
-                    "romance"
-                ],
-                "amount": "-25",
-                "log": {
-                    "cats_from": "from_cat was second-guessing {PRONOUN/from_cat/poss} relationship with to_cat as a medicine cat."
-                }
-            }
-        ]
-    },
-    {
-        "event_id": "gen_med_healer_herb_gather",
-        "location": [
-            "any"
-        ],
-        "season": [
-            "newleaf",
-            "greenleaf",
-            "leaf-fall"
-        ],
-        "frequency": 4,
-        "event_text": "m_c went out with r_c to help {PRONOUN/r_c/poss} gather herbs today and brought back a decent supply stock.",
-        "m_c": {
-            "age": [
-                "adolescent",
-                "young adult",
-                "adult",
-                "senior adult",
-                "senior"
-            ],
-            "skill": [
-                "HEALER,1"
-            ]
-        },
-        "r_c": {
-            "status": [
-                "medicine cat",
-                "medicine cat apprentice"
-            ]
-        },
-        "relationships": [
-            {
-                "cats_from": [
-                    "m_c"
-                ],
-                "cats_to": [
-                    "r_c"
-                ],
-                "mutual": true,
-                "values": [
-                    "like",
-                    "respect"
-                ],
-                "amount": 10,
-                "log": {
-                    "cats_from": "from_cat helped to_cat collect herbs."
-                }
-            }
-        ],
-        "supplies": [
-            {
-                "type": "any_herb",
-                "trigger": [
-                    "always"
-                ],
-                "adjust": "increase_40"
-            }
-        ]
-    },
-    {
-        "event_id": "gen_misc_heroic_oc_cat_death1",
-        "location": [
-            "any"
-        ],
-        "season": [
-            "any"
-        ],
-        "tags": [],
-        "frequency": 1,
-        "event_text": "A cat from o_c_n died while saving m_c. c_n honors their bravery at the Gathering.",
-        "m_c": {
-            "age": [
-                "adolescent"
-            ]
-        },
-        "other_clan": {
-            "current_rep": [
-                "neutral",
-                "ally"
-            ],
-            "changed": 3
-        }
-    },
-    {
-        "event_id": "gen_misc_oc_cat_kill1",
-        "location": [
-            "any"
-        ],
-        "season": [
-            "any"
-        ],
-        "tags": [],
-        "frequency": 1,
-        "event_text": "m_c, only an apprentice, killed someone from o_c_n! Tensions are getting high between the two Clans now...",
-        "m_c": {
-            "age": [
-                "adolescent"
-            ],
-            "skill": [
-                "FIGHTER,1"
-            ],
-            "trait": [
-                "vengeful",
-                "ambitious",
-                "bloodthirsty",
-                "righteous",
-                "fierce",
-                "cold"
-            ]
-        },
-        "other_clan": {
-            "current_rep": [
-                "hostile",
-                "neutral"
-            ],
-            "changed": -3
-        }
-    },
-    {
-        "event_id": "gen_misc_heroic_oc_cat_death2",
-        "location": [
-            "any"
-        ],
-        "season": [
-            "any"
-        ],
-        "tags": [],
-        "frequency": 1,
-        "event_text": "A cat from o_c_n was killed while trying to save m_c. c_n honors their bravery at the Gathering for saving their medicine cat.",
-        "m_c": {
-            "status": [
-                "medicine cat apprentice",
-                "medicine cat"
-            ]
-        },
-        "other_clan": {
-            "current_rep": [
-                "hostile",
-                "neutral",
-                "ally"
-            ],
-            "changed": 3
-        }
-    },
-    {
-        "event_id": "gen_misc_oc_cat_kill2",
-        "location": [
-            "any"
-        ],
-        "season": [
-            "any"
-        ],
-        "tags": [],
-        "frequency": 1,
-        "event_text": "m_c killed the deputy of o_c_n. Tensions are getting high between the two Clans now...",
-        "m_c": {
-            "status": [
-                "warrior",
-                "deputy",
-                "leader"
-            ],
-            "skill": [
-                "FIGHTER,3"
-            ],
-            "trait": [
-                "vengeful",
-                "ambitious",
-                "bloodthirsty",
-                "righteous",
-                "fierce",
-                "cold"
-            ]
-        },
-        "other_clan": {
-            "current_rep": [
-                "hostile",
-                "neutral"
-            ],
-            "changed": -3
-        }
-    },
-    {
-        "event_id": "gen_misc_heroic_oc_cat_death3",
-        "location": [
-            "any"
-        ],
-        "season": [
-            "any"
-        ],
-        "tags": [],
-        "frequency": 1,
-        "event_text": "The deputy of o_c_n was killed while trying to save m_c. c_n honors their bravery at the Gathering.",
-        "m_c": {
-            "status": [
-                "apprentice",
-                "warrior",
-                "deputy",
-                "leader",
-                "medicine cat apprentice",
-                "medicine cat",
-                "mediator apprentice",
-                "mediator"
-            ]
-        },
-        "other_clan": {
-            "current_rep": [
-                "neutral",
-                "ally"
-            ],
-            "changed": 3
-        }
-    },
-    {
-        "event_id": "gen_misc_oc_cat_kill3",
-        "location": [
-            "any"
-        ],
-        "season": [
-            "any"
-        ],
-        "tags": [],
-        "frequency": 1,
-        "event_text": "m_c killed a cat from o_c_n. Tensions are getting high between the two Clans now and the other leaders feel uneasy around m_c at the next Gathering...",
-        "m_c": {
-            "status": [
-                "leader"
-            ],
-            "skill": [
-                "FIGHTER,3"
-            ],
-            "trait": [
-                "vengeful",
-                "ambitious",
-                "bloodthirsty",
-                "righteous",
-                "fierce",
-                "cold"
-            ]
-        },
-        "other_clan": {
-            "current_rep": [
-                "hostile",
-                "neutral"
-            ],
-            "changed": -3
-        }
-    },
-    {
-        "event_id": "gen_misc_heroic_oc_cat_death4",
-        "location": [
-            "any"
-        ],
-        "season": [
-            "any"
-        ],
-        "tags": [],
-        "frequency": 1,
-        "event_text": "The leader of o_c_n lost a life while trying to save m_c. c_n honors their bravery at the Gathering.",
-        "m_c": {
-            "status": [
-                "apprentice",
-                "warrior",
-                "deputy",
-                "leader",
-                "medicine cat apprentice",
-                "medicine cat",
-                "mediator apprentice",
-                "mediator"
-            ]
-        },
-        "other_clan": {
-            "current_rep": [
-                "neutral",
-                "ally"
-            ],
-            "changed": 5
-        }
-    }]
+    }
+]
