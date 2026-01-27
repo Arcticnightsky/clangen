@@ -454,7 +454,7 @@ class Cat:
 
                     if mother_has_orange and father_is_ginger:
                         allow_female_ginger = True
-
+                        print("Uncommon ginger she-cat generated thanks to her genetics!!!")
             # If genetics do NOT allow it, apply 20% rule
             if not allow_female_ginger:
                 if random_module.randint(1, 5) != 1:
@@ -463,8 +463,6 @@ class Cat:
                     print("Regular orange tomcat :)")
                 else:
                     print("Uncommon ginger she-cat generated!!!")
-            else:
-                print("Uncommon ginger she-cat generated thanks to her genetics!!!")
 
         if self.age not in (CatAge.NEWBORN, CatAge.KITTEN) and self.pelt.name in Pelt.torties and self.gender == "male":
             self.no_kits = True
