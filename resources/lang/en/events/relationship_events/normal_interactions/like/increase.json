@@ -544,8 +544,8 @@
 		"interactions": [
 			"m_c is happy to have r_c as {PRONOUN/m_c/poss} mentor.",
 			"m_c thinks that {PRONOUN/m_c/subject}'s learned a lot more information from r_c than the other apprentices have from their own mentors.",
-			"m_c and r_c relax together after r_c taught m_c a new technique",
-			"m_c and r_c relax together after m_c completed {PRONOUN/m_c/poss} assesment",
+			"m_c and r_c relax together after r_c taught m_c a new technique.",
+			"m_c and r_c relax together after m_c completed {PRONOUN/m_c/poss} assesment.",
 			"r_c went easy on m_c during training today."
 		],
 		"relationship_constraint": [
