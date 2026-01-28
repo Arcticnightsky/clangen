@@ -279,22 +279,52 @@
         "thoughts": [
             "Can't believe the new litter is finally here",
             "Stops r_c from falling out of the nest",
-            "Makes sure r_c has fed enough",
             "Grooms the new litter",
             "Hasn't stopped purring since the litter arrived",
             "Hasn't left the nursery since the litter arrived",
             "Hissed at a Clanmate who got too close to r_c",
             "Won't let anyone look at the new litter just yet",
-            "Wants to show every cat the new litter",
-            "Is still indecisive on names",
-            "Considers renaming r_c",
-            "Fondly remembers sleeping through the night",
-            "Hopes the new litter's crying isn't keeping everyone up",
-            "Is proud of r_c for sleeping through the night",
-            "Has never been so exhausted in all {PRONOUN/m_c/poss} life"
+            "Wants to show every cat the new litter"
         ],
         "random_age_constraint": ["newborn"],
         "relationship_constraint": ["parent/child"]
+    },
+    {
+        "id": "recovering_from_birth_parent_to_newborn",
+        "thoughts": [
+            "Is grooming r_c clean",
+			"Makes sure r_c has fed enough",
+            "Fondly remembers sleeping through the night",
+            "Feels r_c suckling on her teat",
+            "Considers renaming r_c",
+            "Is proud of r_c for sleeping through the night",
+            "Has never been so exhausted in all {PRONOUN/m_c/poss} life",
+            "Is still indecisive on names",
+            "Already came up with a suffix for r_c for when {PRONOUN/r_c/poss}'s older, just gotta tell the leader first...",
+            "Wonders if r_c was just like her when she was a newborn",
+            "Wonders which path r_c will take, medicine cat or a warrior?",
+            "Can't help but wonder if r_c will become the future leader of the Clan someday...",
+			"Can't help but wonder if r_c will become very important to the Clan history someday...",
+            "Is cleaning up r_c's rump after {PRONOUN/r_c/subject} made dirt",
+            "Hopes she was right in naming r_c",
+			"Hopes the new litter's crying isn't keeping everyone up",
+            "Can't believe she was as small as r_c when she was a newborn!",
+            "Can't wait for r_c's permanent eye color to come in, would {PRONOUN/r_c/subject} have her or {PRONOUN/r_c/poss} father's eyes?",
+            "Is purring with joy after r_c mewled out {PRONOUN/r_c/poss} first word!",
+            "Is purring with joy after r_c opened {PRONOUN/r_c/poss} eyes for the first time!",
+            "Is purring while watching r_c crawl around the nest"
+        ],
+        "has_injuries": {
+            "m_c": [
+                "recovering from birth"
+            ]
+        },
+        "relationship_constraint": [
+            "parent/child"
+        ],
+        "random_status_constraint": [
+            "newborn"
+        ]
     },
     {
         "id": "gen_to_deputy",
@@ -2883,11 +2913,7 @@
         ]
     },
     {
-<<<<<<< HEAD
-        "id": "campkeeper_gen",
-=======
         "id": "camp_skill_gen",
->>>>>>> parent of 6ed593b4e (revert to see what happens?)
         "thoughts": [
             "Is padding back and forth across the camp",
             "Is helping to reinforce the nursery walls",
@@ -3007,7 +3033,7 @@
             "Hopes the Dark Forest will give {PRONOUN/m_c/object} guidance",
             "Wonders about what did the warriors in the Dark Forest do to be there...",
             "Promises to always serve the Dark Forest",
-			      "Snuck out in the middle of the night last night to preform Dark Forest rituals deep in the territory",
+			"Snuck out in the middle of the night last night to preform Dark Forest rituals deep in the territory",
             "Wonders if the Dark Forest can hear {PRONOUN/m_c/object}",
             "Prays to the Dark Forest for the day to go {PRONOUN/m_c/poss} way today",
             "Hopes that the forbidden skills {PRONOUN/m_c/subject} learned in the Dark Forest will protect {PRONOUN/m_c/poss} loved ones...",
@@ -6809,6 +6835,7 @@
             "Carried her litter outside the nursery to get some fresh air",
             "Wishes {PRONOUN/m_c/subject} wasn't so confined to the nursery",
             "Still feels heavy and bloated, despite already have given birth",
+			"Feels a tiny bit of post-partum sadness...",
             "Readjusts to {PRONOUN/m_c/poss} body after the pregnancy"
         ],
         "has_injuries": {
@@ -6998,8 +7025,9 @@
             "Hopes her litter will be born healthy",
             "Hopes the pregnancy will go just fine...",
             "Hopes the birth will turn out just fine...",
-	    "Is pissed over a small thing",
+	    	"Is pissed over a small thing",
             "Can't help but wonder if one of the kits she's carrying will become the future leader of the Clan someday...",
+			"Can't help but wonder if one of the kits she's carrying will become important to the Clan's history someday...",
             "Feels like {PRONOUN/m_c/poss} entire existence is one long trip between water and the dirtplace, again and again",
             "Has mood swings and weird cravings now, thanks to her pregnancy hormones",
             "Is trying to figure out how many kits she'll have based on the weight of her belly",
@@ -7024,7 +7052,7 @@
             "Is purring while r_c gently grooms her belly",
             "Feels grateful for r_c's love and support",
             "Has been given some delicious, plump prey from r_c",
-            "Is purring happily as she sees r_c come back from patrol with nesting material in his jaws"
+            "Is purring happily as she sees r_c come back into camp with nesting material in {PRONOUN/r_c/poss} jaws"
         ],
         "has_injuries": {
             "m_c": [
@@ -7050,7 +7078,7 @@
             "Wants to be the best father he can be once the kits are born",
             "Is looking for soft nesting material for r_c outside of camp",
             "Is hunting fat, juicy prey for r_c",
-            "Is excited to become a {ADJ/m_c/parent/father/mother}!",
+            "Is excited to become a father!",
             "Is feeling proud to be the father of r_c's kits",
             "Is making sure r_c doesn't stress herself out too much"
         ],
@@ -7061,38 +7089,6 @@
         },
         "relationship_constraint": [
             "mates"
-        ],
-        "random_living_status": [
-            "living"
-        ]
-    },
-    {
-        "id": "recovering_from_birth_parent_to_alive_newborn",
-        "thoughts": [
-            "Is grooming r_c clean",
-            "Feels r_c suckling on her teat",
-            "Already came up with a suffix for r_c for when {PRONOUN/r_c/poss}'s older, just gotta tell the leader first...",
-            "Wonders if r_c was just like her when she was a newborn",
-            "Wonders which path r_c will take, medicine cat or a warrior?",
-            "Can't help but wonder if r_c will become the future leader of the Clan someday...",
-            "Is cleaning up r_c's rump after {PRONOUN/r_c/subject} made dirt",
-            "Hopes she was right in naming r_c",
-            "Can't believe she was as small as r_c when she was a newborn!",
-            "Can't wait for r_c's permanent eye color to come in, would {PRONOUN/r_c/subject} have her or {PRONOUN/r_c/poss} father's eyes?",
-            "Is purring with joy after r_c mewled out {PRONOUN/r_c/poss} first word!",
-            "Is purring with joy after r_c opened {PRONOUN/r_c/poss} eyes for the first time!",
-            "Is purring while watching r_c crawl around the nest"
-        ],
-        "has_injuries": {
-            "m_c": [
-                "recovering from birth"
-            ]
-        },
-        "relationship_constraint": [
-            "parent/child"
-        ],
-        "random_status_constraint": [
-            "newborn"
         ],
         "random_living_status": [
             "living"
