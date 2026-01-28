@@ -3552,14 +3552,16 @@
             "any"
         ],
         "tags": [],
-        "frequency": 3,
+        "frequency": 1,
         "event_text": "m_c grew weak as the days passed and now walks the stars of Silverpelt.",
         "m_c": {
             "age": [
-                "kitten"
+                "kitten",
+                "newborn"
             ],
             "status": [
-                "kitten"
+                "kitten",
+                "newborn"
             ],
             "dies": true
         },
