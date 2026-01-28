@@ -1939,65 +1939,6 @@
         ]
     },
     {
-        "event_id": "gen_death_age_any5",
-        "location": [
-            "any"
-        ],
-        "season": [
-            "any"
-        ],
-        "sub_type": [
-            "old_age"
-        ],
-        "tags": [
-            "all_lives"
-        ],
-        "frequency": 4,
-        "event_text": "m_c and r_c loved each other so much they could not be parted, even by death. c_n found their bodies still wrapped around each other in the morning.",
-        "m_c": {
-            "age": [
-                "senior"
-            ],
-            "status": [
-                "any"
-            ],
-            "relationship_status": [
-                "mates"
-            ],
-            "dies": true
-        },
-        "r_c": {
-            "age": [
-                "senior"
-            ],
-            "status": [
-                "any"
-            ],
-            "dies": true
-        },
-        "history": [
-            {
-                "cats": [
-                    "m_c",
-                    "r_c"
-                ],
-                "death": "This cat died from old age."
-            }
-        ],
-        "relationships": [
-            {
-                "cats_from": ["high_social"],
-                "cats_to": ["r_c", "m_c"],
-                "values": ["like", "comfort"],
-                "amount": 10,
-                "mutual": false,
-                "log": {
-                    "cats_from": "from_cat was touched by how deeply r_c and m_c loved each other."
-                }
-            }
-        ]
-    },
-    {
         "event_id": "gen_death_predator_any1",
         "location": [
             "any"
@@ -3611,14 +3552,16 @@
             "any"
         ],
         "tags": [],
-        "frequency": 3,
+        "frequency": 1,
         "event_text": "m_c grew weak as the days passed and now walks the stars of Silverpelt.",
         "m_c": {
             "age": [
-                "kitten"
+                "kitten",
+                "newborn"
             ],
             "status": [
-                "kitten"
+                "kitten",
+                "newborn"
             ],
             "dies": true
         },
