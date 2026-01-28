@@ -379,7 +379,7 @@
          "m_c rolls around in some herbs after hearing r_c likes their smell."
       ],
       "relationship_constraint":[
-         "likes"
+         "enjoys"
       ],
       "reaction_random_cat":{
          "romance":"increase",
@@ -406,7 +406,7 @@
          "m_c sees r_c struggle to keep {PRONOUN/r_c/poss} balance on a patch of ice while in camp and purrs when {PRONOUN/r_c/subject} fell, thinking it was cute."
       ],
       "relationship_constraint":[
-         "likes"
+         "enjoys"
       ],
       "reaction_random_cat":{
          "romance":"increase",
