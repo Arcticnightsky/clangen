@@ -1353,7 +1353,7 @@ def perform_ceremonies(cat):
                     SkillPath.INSIGHTFUL,
                     SkillPath.SENSE
                 ]:
-                    chance = int(chance / 1.5)
+                    chance = int(chance / 2)
                     print(f"{cat.name} {primary}")
                     print(f"Chance updated to {chance}")
 
@@ -1365,7 +1365,7 @@ def perform_ceremonies(cat):
                     SkillPath.INSIGHTFUL,
                     SkillPath.SENSE
                 ]:
-                    chance = int(chance / 1.5)
+                    chance = int(chance / 2)
                     print(f"{cat.name} {secondary}")
                     print(f"Chance updated to {chance}")
                 
