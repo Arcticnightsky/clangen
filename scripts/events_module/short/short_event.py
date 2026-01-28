@@ -28,7 +28,7 @@ from scripts.cat.enums import CatAge, CatRank
 from scripts.cat.personality import Personality
 from scripts.cat.skills import SkillPath
 from scripts.game_structure import constants
-
+from scripts.cat.history import History
 
 class ShortEvent:
     """
@@ -225,22 +225,30 @@ class ShortEvent:
         if other_clan:
             self.other_clan_name = f"{other_clan.name}Clan"
 
+        # --- Assign murder victim from future event (CRITICAL) ---
+        if "murder_reveal" in self.sub_type or "hidden_murder_reveal" in self.sub_type:
+            if hasattr(self, "future_event") and self.future_event:
+                mur_id = self.future_event.get("mur_c")
+                if mur_id:
+                    self.victim_cat = Cat.fetch_cat(mur_id)
+
+        # now register involved cats
         self.all_involved_cat_ids.append(self.main_cat.ID)
 
-        # check if another cat is present
         if self.r_c:
             self.all_involved_cat_ids.append(self.random_cat.ID)
+
         if self.victim_cat:
             self.all_involved_cat_ids.append(self.victim_cat.ID)
 
-        # checking if a mass death should happen, happens here so that we can toss the event if needed
+        # checking if a mass death should happen
         if "mass_death" in self.sub_type:
             if game.clan and not get_clan_setting("disasters"):
                 return
             self.handle_mass_death()
             if len(self.multi_cat_objects) <= 2:
                 return
-
+        
         # create new cats (must happen here so that new cats can be included in further changes)
         self.handle_new_cats()
 

@@ -5,7 +5,7 @@ TODO: Docs
 
 
 """  # pylint: enable=line-too-long
-
+import random as random_module
 import logging
 import os
 import re
@@ -189,6 +189,9 @@ def get_free_possible_mates(cat):
         if inter_cat.ID == cat.ID:
             continue
 
+        if cat.gender == inter_cat.gender and random_module.randint(1, 2500) != 1:
+            continue  # balancing same-sex relationships - there are too many and I just want more kits in my clans, sorry >:(
+        
         if inter_cat.ID not in cat.relationships:
             cat.create_one_relationship(inter_cat)
             if cat.ID not in inter_cat.relationships:
@@ -401,7 +404,7 @@ def create_new_cat_block(
             break
 
         if match.group(1) == "has_kits":
-            age = randint(19, 120)
+            age = randint(20, 120)
             break
 
     if rank and not age:
@@ -532,7 +535,13 @@ def create_new_cat_block(
     chosen_cat: Optional["Cat"] = None
     if "exists" in attribute_list:
         existing_outsiders = [
-            i for i in Cat.all_cats.values() if i.status.is_outsider and not i.dead
+            i
+            for i in Cat.all_cats.values()
+            if (
+                i.status.is_outsider
+                and not i.dead
+                and i.status.is_near(CatGroup.PLAYER_CLAN_ID)
+            )
         ]
         possible_outsiders = []
         for cat in existing_outsiders:
@@ -907,6 +916,7 @@ def create_new_cat(
             "NOLEFTEAR",
             "NORIGHTEAR",
             "MANLEG",
+            "BLIND",
         ]
         for scar in new_cat.pelt.scars:
             if scar in not_allowed:
@@ -954,6 +964,30 @@ def create_new_cat(
                     new_cat.pelt.scars.append("NOPAW")
                 elif chosen_condition in ("lost their tail", "born without a tail"):
                     new_cat.pelt.scars.append("NOTAIL")
+                elif chosen_condition in ("blind"):
+                    new_cat.pelt.scars.append("BLIND")
+
+                blue_eyes = [
+                    "BLUE",
+                    "DARKBLUE",
+                    "CYAN",
+                    "PALEBLUE",
+                    "HEATHERBLUE",
+                    "COBALT",
+                    "SUNLITICE",
+                    "GREY",
+                ]
+                
+                deaf_chance = None
+                if (new_cat.pelt.colour == "WHITE" or new_cat.pelt.white_patches == "FULLWHITE") and new_cat.pelt.eye_colour in blue_eyes:
+                    deaf_chance = constants.CONFIG["cat_generation"]["base_permanent_condition"] * 0.4
+                elif (new_cat.pelt.colour == "WHITE" or new_cat.pelt.white_patches == "FULLWHITE") and new_cat.pelt.eye_colour2 and new_cat.pelt.eye_colour2 in blue_eyes:
+                    deaf_chance = constants.CONFIG["cat_generation"]["base_permanent_condition"] * 0.7
+
+                if deaf_chance:
+                    if not random_module.randint(1, deaf_chance):
+                        chosen_condition = choice(["deaf", "partial hearing loss"])
+                        new_cat.get_permanent_condition(chosen_condition, born_with=True)
 
         # KILL >:D only if we're sposed to tho
         if not alive:
@@ -1604,15 +1638,18 @@ def change_relationship_values(
                 single_cat_from.is_potential_mate(single_cat_to, for_love_interest=True)
                 or single_cat_to.ID in single_cat_from.mate
             ):
-                # now gain the romance
-                rel.romance += romance
+                if single_cat_from.gender == single_cat_to.gender and single_cat_to.ID not in single_cat_from.mate and random_module.randint(1, 5500) != 1:
+                    continue # balancing same-sex relationships - there are too many and I just want more kits in my clans, sorry >:(
+                elif single_cat_from.gender != single_cat_to.gender:
+                    # now gain the romance
+                    rel.romance += romance
 
             # gain other rel values
             rel.like += like
             rel.respect += respect
             rel.comfort += comfort
             rel.trust += trust
-
+            
             # for testing purposes - DON'T DELETE - you can use this to test if relationships are changing
             """
             print(str(single_cat_from.name) + " gained relationship with " + str(rel.cat_to.name) + ": " +
@@ -1985,7 +2022,7 @@ def history_text_adjust(text, other_clan_name, clan, other_cat_rc=None):
         text = text.replace("o_c_n", str(other_clan_name))
 
     if "c_n" in text:
-        text = text.replace("c_n", clan.displayname + "Clan")
+        text = text.replace("c_n", clan.displayname)
     if "r_c" in text and other_cat_rc:
         text = selective_replace(text, "r_c", str(other_cat_rc.name))
     return text
