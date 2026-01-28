@@ -1349,7 +1349,7 @@ def perform_ceremonies(cat):
                     print(f"Chance updated to {chance}")
 
                 if has_med and one_singular_med:
-                    chance = int(chance - 20)
+                    chance = int(chance * 0.8)
                     print(f"We only have one poor medicine cat caring for the Clan - they need help: chances lowered")
 
                 if primary in [
