@@ -1290,6 +1290,9 @@ def perform_ceremonies(cat):
                 # check if the Clan has more med cats than the med cat den can already hold!
                 has_too_many_med = len([cat for cat in med_cat_list if cat.status.rank == CatRank.MEDICINE_CAT]) >= 3
                 # defunct for now
+
+                # check if the clan only has 1 med
+                one_singular_med = len([cat for cat in med_cat_list if cat.status.rank == CatRank.MEDICINE_CAT]) == 1
                 
                 # check if a med cat app already exists
                 has_med_app = any(
@@ -1344,6 +1347,10 @@ def perform_ceremonies(cat):
                     chance = int(chance * 2.22)
                     print(f"You have enough medicine cats")
                     print(f"Chance updated to {chance}")
+
+                if has_med and one_singular_med:
+                    chance = int(chance - 20)
+                    print(f"We only have one poor medicine cat caring for the Clan - they need help: chances lowered")
 
                 if primary in [
                     SkillPath.STAR, 
