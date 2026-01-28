@@ -440,6 +440,7 @@ class Cat:
             and self.pelt.name not in Pelt.torties
         ):
             allow_female_ginger = False
+            no_female_ginger = False
             # Genetics exception ONLY for kits/newborns with parents
             if self.age in (CatAge.NEWBORN, CatAge.KITTEN) and self.parent1 and self.parent2:
                 mother = Cat.fetch_cat(self.parent1) if self.parent1 else None
@@ -455,15 +456,22 @@ class Cat:
                     if mother_has_orange and father_is_ginger:
                         allow_female_ginger = True
                         print("Uncommon ginger she-cat generated thanks to her genetics!!!")
+                    elif father_is_ginger and not mother_has_orange:
+                        no_female_ginger = True
             # If genetics do NOT allow it, apply 20% rule
-            if not allow_female_ginger:
+            if not allow_female_ginger and not no_female_ginger:
                 if random_module.randint(1, 5) != 1:
                     self.gender = "male"
                     self.genderalign = "male"
                     print("Regular orange tomcat :)")
                 else:
                     print("Uncommon ginger she-cat generated!!!")
-
+                    
+            if no_female_ginger:
+                self.gender = "male"
+                self.genderalign = "male"
+                print("Regular orange tomcat :)")
+        
         if self.age not in (CatAge.NEWBORN, CatAge.KITTEN) and self.pelt.name in Pelt.torties and self.gender == "male":
             self.no_kits = True
             print("RARE MALE TORTIE GENERATED!!!")
