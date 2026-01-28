@@ -1132,6 +1132,13 @@ class Pelt:
         ):
             self.points = None
 
+        # tryna stop a bug that I have where a "calico" has a little/mid white patch for some reason
+        if self.name == "Calico" and self.white_patches in (
+            Pelt.little_white,
+            Pelt.mid_white,
+        ):
+            self.name == "Tortie"
+            
     def init_white_patches(self, pelt_white, parents: tuple):
         # Vit can roll for anyone, not just cats who rolled to have white in their pelt.
         par_vit = []
