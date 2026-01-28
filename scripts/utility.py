@@ -1884,13 +1884,7 @@ def get_special_snippet_list(
     """
     clan = game.clan
 
-    biome = (
-        clan.override_biome
-        if clan and clan.override_biome
-        else clan.biome
-        if clan
-        else constants.CONFIG["default_biome"]
-    )
+    biome = game.clan.biome
 
     global SNIPPETS
     if langs["snippet"] != i18n.config.get("locale"):
