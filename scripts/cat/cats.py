@@ -458,6 +458,8 @@ class Cat:
                         print("Uncommon ginger she-cat generated thanks to her genetics!!!")
                     elif father_is_ginger and not mother_has_orange:
                         no_female_ginger = True
+                    elif mother_has_orange and not father_is_ginger:
+                        no_female_ginger = True
             # If genetics do NOT allow it, apply 20% rule
             if not allow_female_ginger and not no_female_ginger:
                 if random_module.randint(1, 5) != 1:
