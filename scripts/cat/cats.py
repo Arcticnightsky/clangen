@@ -568,7 +568,14 @@ class Cat:
                     afterlife_group = CatGroup.DARK_FOREST
                     rejected_ID = CatGroup.STARCLAN_ID
 
-                # afterlife does not like this cat
+                 # exiled cats are special, cus they get kicked out of heaven
+                if self.status.is_exiled(CatGroup.PLAYER_CLAN):
+                    afterlife_group = CatGroup.DARK_FOREST
+                    self.history.add_afterlife_acceptance(afterlife_group)
+                    self.status.send_to_afterlife()
+                    return
+                    
+                 # afterlife does not like this cat 
                 if (
                     affinity < 0
                     or (murder_history and "is_murderer" in murder_history)
@@ -765,7 +772,7 @@ class Cat:
         self.pelt.rebuild_sprite = True
 
         # exiled cats are special, cus they get kicked out a heaven
-        if self.status.is_exiled(CatGroup.PLAYER_CLAN) and not self.status.is_outsider:
+        if self.status.is_exiled(CatGroup.PLAYER_CLAN):
             self.status.add_to_group(CatGroup.DARK_FOREST)
 
     def exile(self):
