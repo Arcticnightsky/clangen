@@ -484,7 +484,7 @@ class HerbSupply:
 
         # the amount of herb types the med has found
         amount_of_herbs = (
-            choices(population=[1, 2, 3], weights=weight, k=1)[0] + amount_modifier
+            choices(population=[4, 8, 12], weights=weight, k=1)[0] + amount_modifier
         )
         if general_amount_bonus:
             amount_of_herbs *= constants.CONFIG["clan_resources"]["herbs"][
