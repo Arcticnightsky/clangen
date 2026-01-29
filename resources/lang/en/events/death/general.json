@@ -1939,6 +1939,37 @@
         ]
     },
     {
+        "event_id": "gen_death_age_any5",
+        "location": [
+            "any"
+        ],
+        "season": [
+            "any"
+        ],
+        "sub_type": [
+            "old_age"
+        ],
+        "tags": [
+            "all_lives"
+        ],
+        "frequency": 4,
+        "event_text": "m_c has lived a long life filled with many memories, good and bad. {PRONOUN/m_c/subject/CAP} is grateful to have been a part of such a wonderful Clan, but {PRONOUN/m_c/subject} knows {PRONOUN/m_c/poss} time here is up. m_c closes {PRONOUN/m_c/poss} eyes one final time with no regrets, letting death to claim {PRONOUN/m_c/object} for the first and last time.",
+        "m_c": {
+            "age": [
+                "senior"
+            ],
+            "dies": true
+        },
+        "history": [
+            {
+                "cats": [
+                    "m_c"
+                ],
+                "death": "m_c died of old age."
+            }
+        ]
+    },
+    {
         "event_id": "gen_death_predator_any1",
         "location": [
             "any"
