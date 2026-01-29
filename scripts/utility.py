@@ -1883,7 +1883,8 @@ def get_special_snippet_list(
     :return: a list of the chosen items from chosen_list or a formatted string if format is True
     """
     clan = game.clan
-
+    snippets = []
+    
     if clan is None:
         biome = None
     else:
@@ -1900,7 +1901,8 @@ def get_special_snippet_list(
             chosen_list == "story_list"
         ):  # story list has some biome specific things to collect
             snippets.extend(snippet_group.get("general", []))
-            snippets.extend(snippet_group.get(biome, []))
+            if biome:
+                snippets.extend(snippet_group.get(biome, []))
         elif (
             chosen_list == "clair_list"
         ):  # the clair list also pulls from the dream list
@@ -1922,7 +1924,8 @@ def get_special_snippet_list(
         for sense in sense_groups:
             snippet_group = SNIPPETS[chosen_list][sense]
             snippets.extend(snippet_group.get("general", []))
-            snippets.extend(snippet_group.get(biome, []))
+            if biome:
+                snippets.extend(snippet_group.get(biome, []))
 
     # now choose a unique snippet from each snip list
     unique_snippets = []
