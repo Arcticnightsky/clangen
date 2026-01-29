@@ -520,8 +520,8 @@ dev_tools = true
 
   [focus.hunting]
     # Defines how much a working warrior(leader/deputy) or apprentice gathers additionally
-    warrior = 2
-    apprentice = 1
+    warrior = 3
+    apprentice = 2
 
   [focus.outsiders]
     # Defines how much increase or decrease the reputation is.
@@ -564,10 +564,10 @@ dev_tools = true
 
   [focus.hoarding]
     # how much prey each working warrior(leader/deputy) will gather
-    prey_warrior = 1
+    prey_warrior = 5
 
     # how much herb each working medicine cat will gather
-    herb_medicine = 2
+    herb_medicine = 5
 
     # injury chance of each warrior(leader/deputy) or medicine cat to get injured
     injury_chance_warrior = 25
@@ -666,7 +666,7 @@ dev_tools = true
     # Clan size * required_herbs_per_cat / adequate number will determine adequate supply qualifier.
     # Clan size * required_herbs_per_cat * excess number will determine excess supply qualifier
     required_herbs_per_cat = 1
-    adequate = 3
+    adequate = 4
     excess = 2
 
     # amount of herbs types found modifier for medcats with skill SENSE
