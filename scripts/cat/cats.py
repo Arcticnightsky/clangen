@@ -469,7 +469,7 @@ class Cat:
                 else:
                     print("Uncommon ginger she-cat generated!!!")
                     
-            if no_female_ginger:
+            if no_female_ginger and not allow_female_ginger:
                 self.gender = "male"
                 self.genderalign = "male"
                 print("Regular orange tomcat :)")
