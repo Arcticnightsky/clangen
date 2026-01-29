@@ -1903,7 +1903,9 @@ def get_special_snippet_list(
             chosen_list == "story_list"
         ):  # story list has some biome specific things to collect
             snippets = SNIPPETS[chosen_list]["general"]
-            snippets.extend(SNIPPETS[chosen_list][biome])
+            snippets.extend(
+                SNIPPETS[chosen_list].get(biome, SNIPPETS[chosen_list]["general"])
+            )
         elif (
             chosen_list == "clair_list"
         ):  # the clair list also pulls from the dream list
