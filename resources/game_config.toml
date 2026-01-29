@@ -369,7 +369,7 @@ dev_tools = true
   mediator_app_chance = 5000
 
   # base 1/chance that a cat will be chosen as a med cat apprentice
-  base_medicine_app_chance = 100
+  base_medicine_app_chance = 75
 
 [roles.become_mediator_chances]
   # 1/chance that a cat will switch to mediator. rolls every moon, so keep it high.
