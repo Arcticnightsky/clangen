@@ -1884,7 +1884,7 @@ def get_special_snippet_list(
     """
     clan = game.clan
     snippets = []
-    
+
     if clan is None:
         biome = None
     else:
@@ -1896,20 +1896,19 @@ def get_special_snippet_list(
         SNIPPETS = load_lang_resource("snippet_collections.json")
 
     # these lists don't get sense specific snippets, so is handled first
-    if chosen_list in ["dream_list", "story_list"]:
-        if (
-            chosen_list == "story_list"
-        ):  # story list has some biome specific things to collect
+    if chosen_list in ["dream_list", "story_list", "clair_list"]:
+        if chosen_list == "story_list":
+            snippet_group = SNIPPETS[chosen_list]
             snippets.extend(snippet_group.get("general", []))
             if biome:
                 snippets.extend(snippet_group.get(biome, []))
-        elif (
-            chosen_list == "clair_list"
-        ):  # the clair list also pulls from the dream list
-            snippets = SNIPPETS[chosen_list]
-            snippets.extend(SNIPPETS["dream_list"])
-        else:  # the dream list just gets the one
-            snippets = SNIPPETS[chosen_list]
+
+        elif chosen_list == "clair_list":
+            snippets.extend(SNIPPETS.get("clair_list", []))
+            snippets.extend(SNIPPETS.get("dream_list", []))
+
+        else:  # dream_list
+            snippets.extend(SNIPPETS.get(chosen_list, []))
 
     else:
         # if no sense groups were specified, use all of them
@@ -1919,8 +1918,6 @@ def get_special_snippet_list(
             else:
                 sense_groups = ["sight", "sound", "smell", "emotional", "touch"]
 
-        # find the correct lists and compile them
-        snippets = []
         for sense in sense_groups:
             snippet_group = SNIPPETS[chosen_list][sense]
             snippets.extend(snippet_group.get("general", []))
