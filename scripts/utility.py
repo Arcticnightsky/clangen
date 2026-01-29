@@ -1884,13 +1884,10 @@ def get_special_snippet_list(
     """
     clan = game.clan
 
-    biome = (
-        clan.override_biome
-        if clan and clan.override_biome
-        else clan.biome
-        if clan
-        else game.clan.biome
-    )
+    if clan is None:
+        biome = None
+    else:
+        biome = (clan.override_biome or clan.biome).casefold()
 
     global SNIPPETS
     if langs["snippet"] != i18n.config.get("locale"):
@@ -1902,10 +1899,8 @@ def get_special_snippet_list(
         if (
             chosen_list == "story_list"
         ):  # story list has some biome specific things to collect
-            snippets = SNIPPETS[chosen_list]["general"]
-            snippets.extend(
-                SNIPPETS[chosen_list].get(biome, SNIPPETS[chosen_list]["general"])
-            )
+            snippets.extend(snippet_group.get("general", []))
+            snippets.extend(snippet_group.get(biome, []))
         elif (
             chosen_list == "clair_list"
         ):  # the clair list also pulls from the dream list
@@ -1926,10 +1921,8 @@ def get_special_snippet_list(
         snippets = []
         for sense in sense_groups:
             snippet_group = SNIPPETS[chosen_list][sense]
-            snippets.extend(snippet_group["general"])
-            snippets.extend(
-                SNIPPETS[chosen_list].get(biome, SNIPPETS[chosen_list]["general"])
-            )
+            snippets.extend(snippet_group.get("general", []))
+            snippets.extend(snippet_group.get(biome, []))
 
     # now choose a unique snippet from each snip list
     unique_snippets = []
