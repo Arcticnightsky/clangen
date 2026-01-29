@@ -1927,7 +1927,9 @@ def get_special_snippet_list(
         for sense in sense_groups:
             snippet_group = SNIPPETS[chosen_list][sense]
             snippets.extend(snippet_group["general"])
-            snippets.extend(snippet_group[biome])
+            snippets.extend(
+                SNIPPETS[chosen_list].get(biome, SNIPPETS[chosen_list]["general"])
+            )
 
     # now choose a unique snippet from each snip list
     unique_snippets = []
