@@ -4233,9 +4233,10 @@
         ],
         "outsider": {},
         "current_rep": [
-            "any"
+            "hostile",
+            "neutral"
         ],
-        "changed": -5
+        "changed": -1
     },
     {
         "event_id": "multi_misc_any_scandalous_kittypet2",
@@ -4300,7 +4301,7 @@
         "current_rep": [
             "any"
         ],
-        "changed": 5
+        "changed": 1
     },
     {
         "event_id": "multi_misc_any_scandalous_kittypet3",
@@ -4366,7 +4367,7 @@
         "current_rep": [
             "any"
         ],
-        "changed": 7
+        "changed": 1
     },
     {
         "event_id": "multi_misc_any_scandalous_kittypet4",
@@ -4414,9 +4415,10 @@
         ],
         "outsider": {
             "current_rep": [
-                "any"
+            "hostile",
+            "neutral"
             ],
-            "changed": -5
+            "changed": -1
         }
     },
     {
@@ -5452,7 +5454,7 @@
             "current_rep": [
                 "any"
             ],
-            "changed": -5
+            "changed": -1
         },
         "new_cat": [
             [
