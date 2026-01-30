@@ -19,7 +19,7 @@ from scripts.events_module.event_filters import (
     get_highest_romantic_relation,
     get_personality_compatibility,
 )
-
+import random as random_module
 
 class RomanticEvents:
     """
@@ -152,7 +152,7 @@ class RomanticEvents:
         """
         if cat_from.ID == cat_to.ID:
             return False
-
+        
         if RomanticEvents.current_loaded_lang != i18n.config.get("locale"):
             RomanticEvents.rebuild_dicts()
             RomanticEvents.current_loaded_lang = i18n.config.get("locale")
@@ -160,7 +160,7 @@ class RomanticEvents:
         relevant_dict = deepcopy(RomanticEvents.ROMANTIC_INTERACTIONS)
         if cat_to.ID in cat_from.mate and not cat_to.dead:
             relevant_dict = deepcopy(RomanticEvents.MATE_INTERACTIONS)
-
+        
         # check if it should be a positive or negative interaction
         relationship = cat_from.relationships[cat_to.ID]
         positive = relationship.positive_interaction()
@@ -179,6 +179,9 @@ class RomanticEvents:
             )
             return False
 
+        if cat_from.gender == cat_to.gender and cat_to.ID not in cat_from.mate and random_module.randint(1, 5500) != 1:
+            return False # balancing same-sex relationships - there are too many and I just want more kits in my clans, sorry >:(
+        
         # chose interaction
         chosen_interaction = choice(filtered_interactions)
         # check if the current interaction id is already used and us another if so
@@ -563,15 +566,16 @@ class RomanticEvents:
             rel_to_check = highest_romantic_relation.opposite_relationship
 
         if RomanticEvents.relationship_fulfill_condition(rel_to_check, condition):
-            become_mate = True
             if (
                 cat_from.ID in cat_to.previous_mates
                 and cat_to.ID in cat_from.previous_mates
             ):
+                become_mate = True
                 mate_string = RomanticEvents.get_mate_string(
                     "high_romantic_makeup", poly, cat_from, cat_to
                 )
             else:
+                become_mate = True
                 mate_string = RomanticEvents.get_mate_string(
                     "high_romantic", poly, cat_from, cat_to
                 )
@@ -582,15 +586,16 @@ class RomanticEvents:
             and condition[RelType.ROMANCE] > 0
             and rel_to_check.romance >= condition[RelType.ROMANCE] * 1.5
         ):
-            become_mates = True
             if (
                 cat_from.ID in cat_to.previous_mates
                 and cat_to.ID in cat_from.previous_mates
             ):
+                become_mate = True
                 mate_string = RomanticEvents.get_mate_string(
                     "high_romantic_makeup", poly, cat_from, cat_to
                 )
             else:
+                become_mate = True
                 mate_string = RomanticEvents.get_mate_string(
                     "high_romantic", poly, cat_from, cat_to
                 )
@@ -716,15 +721,16 @@ class RomanticEvents:
                 relationship_to, constants.CONFIG["mates"]["mate_condition"]
             )
         ):
-            become_mates = True
             if (
                 cat_from.ID in cat_to.previous_mates
                 and cat_to.ID in cat_from.previous_mates
             ):
+                become_mates = True
                 mate_string = RomanticEvents.get_mate_string(
                     "low_romantic_makeup", poly, cat_from, cat_to
                 )
             else:
+                become_mates = True
                 mate_string = RomanticEvents.get_mate_string(
                     "low_romantic", poly, cat_from, cat_to
                 )
@@ -737,15 +743,16 @@ class RomanticEvents:
                 relationship_to, constants.CONFIG["mates"]["like_to_romance"]
             )
         ):
-            become_mates = True
             if (
                 cat_from.ID in cat_to.previous_mates
                 and cat_to.ID in cat_from.previous_mates
             ):
+                become_mates = True
                 mate_string = RomanticEvents.get_mate_string(
                     "low_romantic_makeup", poly, cat_from, cat_to
                 )
             else:
+                become_mates = True
                 mate_string = RomanticEvents.get_mate_string(
                     "like_to_romance", poly, cat_from, cat_to
                 )
