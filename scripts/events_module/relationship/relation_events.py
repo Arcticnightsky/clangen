@@ -93,7 +93,6 @@ class Relation_Events:
             if inter_cat.status.is_outsider:
                 continue
                 
-            
             if inter_cat.ID not in cat.relationships:
                 cat.create_one_relationship(inter_cat)
             if cat.ID not in inter_cat.relationships:
@@ -108,7 +107,7 @@ class Relation_Events:
                 or inter_cat.relationships[cat.ID].comfort > 10
             )
             
-            if cat.gender == inter_cat.gender and not (inter_cat.relationships[cat.ID].romance > 0 or inter_cat.relationships[cat.ID].romance > 0) and random_module.randint(1, 5500) != 1:
+            if cat.gender == inter_cat.gender and random_module.randint(1, 10500) != 1 and not (inter_cat.relationships[cat.ID].romance > 0 or inter_cat.relationships[cat.ID].romance > 0):
                 continue # balancing same-sex relationships - there are too many and I just want more kits in my clans, sorry >:(
             
             if cat_to_inter and inter_to_cat:
