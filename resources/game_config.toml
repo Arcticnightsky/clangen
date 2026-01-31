@@ -123,7 +123,7 @@ dev_tools = true
   # these denote how relationships change upon a breakup
   [mates.breakup]
     threshold = 150
-    variability = [-10, 10]
+    variability = [-20, 20]
     [mates.breakup.default_weights]
       had_fight = 3
       decided_to_be_friends = 3
@@ -405,7 +405,7 @@ dev_tools = true
   # the Cruel Season difficulty modifier needs to have a space rather than an underscore 
   # due to how it's written in the save files. So don't try to 'fix' it.
   classic_difficulty_modifier = 1
-  expanded_difficulty_modifier = 2.5
+  expanded_difficulty_modifier = 2
   "cruel season_difficulty_modifier" = 3
 
   # amount to modify patrol success based on patrol stats
@@ -455,10 +455,10 @@ dev_tools = true
 
   # base 1/2^(chance) a completely random murder occurs
   # aggression and instability will make the denominator lower and increase chance of murder
-  base_random_murder_chance = 450
+  base_random_murder_chance = 550
 
   # base 1/chance a disliked cat will be murdered
-  base_murder_kill_chance = 160
+  base_murder_kill_chance = 150
 
   # age cats will start dying of old age based on old_age_death_curve
   old_age_death_start = 150
@@ -520,8 +520,8 @@ dev_tools = true
 
   [focus.hunting]
     # Defines how much a working warrior(leader/deputy) or apprentice gathers additionally
-    warrior = 3
-    apprentice = 2
+    warrior = 4
+    apprentice = 3
 
   [focus.outsiders]
     # Defines how much increase or decrease the reputation is.
