@@ -518,7 +518,7 @@ class HerbSupply:
                 == 1
             ):
                 found_herbs[herb] = int(
-                    choices(population=[3, 4, 5], weights=weight, k=1)[0]
+                    choices(population=[1, 2, 3], weights=weight, k=1)[0]
                     * quantity_modifier
                 )
                 amount_of_herbs -= 1
