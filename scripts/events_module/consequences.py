@@ -4,6 +4,7 @@ from typing import Optional, List, Union, Type
 
 import i18n
 
+import random as random_module
 from scripts.cat.cats import Cat
 from scripts.cat.enums import CatRank, CatAge, CatSocial, CatGroup, CatStanding
 from scripts.cat.names import names
