@@ -2805,6 +2805,120 @@
         ]
     },
     {
+        "event_id": "gen_injury_clawwound_anymultiagemultistatusnotfightermultitraitothercatleader1",
+        "location": [
+            "any"
+        ],
+        "season": [
+            "any"
+        ],
+        "frequency": 4,
+        "event_text": "m_c was hurt while protecting the leader, r_c, from a rogue.",
+        "m_c": {
+            "status": [
+                "warrior",
+                "deputy"
+            ],
+            "not_skill": [
+                "FIGHTER,2"
+            ],
+            "trait": [
+                "compassionate",
+                "loving",
+                "responsible",
+                "loyal",
+                "adventurous",
+                "ambitious",
+                "bloodthirsty",
+                "bold",
+                "daring",
+                "fierce",
+                "vengeful"
+            ]
+        },
+        "r_c": {
+            "status": [
+                "leader"
+            ]
+        },
+        "injury": [
+            {
+                "cats": [
+                    "m_c"
+                ],
+                "injuries": [
+                    "claw-wound"
+                ],
+                "scars": [
+                    "SNOUT"
+                ]
+            }
+        ],
+        "history": [
+            {
+                "cats": [
+                    "m_c"
+                ],
+                "scar": "m_c was scarred by a rogue while protecting r_c.",
+                "death": "m_c died from {PRONOUN/m_c/poss} wounds after protecting r_c from a rogue."
+            }
+        ],
+        "relationships": [
+            {
+                "cats_from": [
+                    "r_c"
+                ],
+                "cats_to": [
+                    "m_c"
+                ],
+                "values": [
+                    "trust",
+                    "respect"
+                ],
+                "amount": 10,
+                "log": {
+                    "cats_from": "to_cat protected from_cat from a rogue."
+                }
+            },
+            {
+                "cats_from": [
+                    "high_lawful"
+                ],
+                "cats_to": [
+                    "m_c"
+                ],
+                "values": [
+                    "trust",
+                    "respect"
+                ],
+                "amount": 10,
+                "log": {
+                    "cats_from": "from_cat gained a greater respect for to_cat's loyalty when {PRONOUN/to_cat/subject} protected r_c from a rogue."
+                }
+            },
+            {
+                "cats_from": [
+                    "n_c:0"
+                ],
+                "cats_to": [
+                    "m_c", "r_c"
+                ],
+                "values": [ "like" ],
+                "amount": 10,
+                "mutual": true,
+                "log": {
+                    "cats_from": "n_c:0 attacked r_c, but m_c fought {PRONOUN/n_c:0/object} off."
+                }
+            }
+        ],
+        "new_cat": [
+            [
+                "meeting",
+                "rogue"
+            ]
+        ]
+    },
+    {
         "event_id": "gen_injury_catbite_anymultiagestatustraitnotfighter1",
         "location": [
             "any"
