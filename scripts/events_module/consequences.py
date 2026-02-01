@@ -88,6 +88,24 @@ def create_new_cat_block(
 
                 give_mates.append(in_event_cats[index])
 
+    # gather romance
+    give_romance = []
+    for tag in attribute_list:
+        match = re.match(r"romance:([_,0-9a-zA-Z]+)", tag)
+        if not match:
+            continue
+            
+        romance_indexes = match.group(1).split(",")
+            
+        # TODO: make this less ugly
+        for index in romance_indexes:
+            if index in in_event_cats:
+                if in_event_cats[index].status.rank.is_any_apprentice_rank():
+                    print("Can't romance apprentices")
+                    continue
+                    
+                give_romance.append(in_event_cats[index])
+                
     # determine gender
     if "male" in attribute_list:
         gender = "male"
@@ -145,8 +163,13 @@ def create_new_cat_block(
             age = randint(min_age, max_age)
             break
 
+        if match.group(1) == "romance" and give_romance:
+            min_age, max_age = Cat.age_moons[give_romance[0].age]
+            age = randint(min_age, max_age)
+            break
+        
         if match.group(1) == "has_kits":
-            age = randint(19, 120)
+            age = randint(20, 120)
             break
 
     if rank and not age:
@@ -268,7 +291,7 @@ def create_new_cat_block(
         thought = i18n.t("hardcoded.thought_meeting")
         if age is not None and age <= 6 and not bs_override:
             chosen_backstory = "outsider1"
-
+        
     # IS THE CAT DEAD?
     alive = True
     if "dead" in attribute_list:
@@ -614,6 +637,13 @@ def create_new_cat(
         ) and original_group not in game.clan.other_clan_IDs:
             # babies change name, in case their initial name isn't clan-ish
             new_cat.change_name()
+            if (moons < 12 and moons >= 6) and not kit or litter and cat.status.is_outsider:
+                if bool(getrandbits(1)):
+                    name = choice(names.names_dict["loner_names"])
+                    # otherwise give name from prefix list (more nature-y names)
+                else:
+                    name = choice(names.names_dict["normal_prefixes"])
+                
         elif original_group not in game.clan.other_clan_IDs:
             # give kittypets a kittypet name
             if original_social == CatSocial.KITTYPET:
