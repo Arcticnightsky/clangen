@@ -104,6 +104,7 @@
             "one": " {PRONOUN/m_c/subject/CAP} {VERB/m_c/bring/brings} along {PRONOUN/m_c/poss} kitten.",
             "many": " {PRONOUN/m_c/subject/CAP} {VERB/m_c/bring/brings} along {PRONOUN/m_c/poss} kittens."
         },
+        "event_returning_child_of_lost": "m_c approaches the Clan and asks to join, claiming to be %{parent_name}'s kitten.",
         "event_lost_mate": " To everyone's surprise, {PRONOUN/m_c/subject} {VERB/m_c/bring/brings} along a cat who m_c introduces as {PRONOUN/m_c/poss} mate.",
         "kittencough_spread": {
             "one": "Kittencough has spread around the nursery. %{kits} is affected.",
