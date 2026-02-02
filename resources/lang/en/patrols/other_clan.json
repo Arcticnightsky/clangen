@@ -781,7 +781,7 @@
                     "scar": "m_c followed the scent of a trespassing cat and {VERB/m_c/were/was} scarred by a dog.",
                     "death": "m_c followed the scent of a trespassing cat and {VERB/m_c/were/was} killed by a dog."
                 },
-                "other_clan_rep": -1,
+                "other_clan_rep": -5,
                 "frequency": 3
             },
             {
@@ -925,7 +925,7 @@
                     "scar": "m_c followed the scent of a trespassing cat and was scarred by a dog.",
                     "death": "m_c followed the scent of a trespassing cat and was killed by a dog."
                 },
-                "other_clan_rep": -1,
+                "other_clan_rep": -5,
                 "frequency": 3
             },
             {
@@ -4358,7 +4358,7 @@
                 "history_text": {
                     "death": "m_c was slain by o_c_n warriors"
                 },
-                "other_clan_rep": -3,
+                "other_clan_rep": -10,
                 "frequency": 3
             }
         ],

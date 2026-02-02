@@ -1,4 +1,5 @@
 import os
+import random as random_module
 import random
 from random import choice, randint
 
@@ -91,7 +92,7 @@ class Relation_Events:
             # toss out cats who are outside
             if inter_cat.status.is_outsider:
                 continue
-
+                
             if inter_cat.ID not in cat.relationships:
                 cat.create_one_relationship(inter_cat)
             if cat.ID not in inter_cat.relationships:
@@ -105,6 +106,10 @@ class Relation_Events:
                 inter_cat.relationships[cat.ID].like > 10
                 or inter_cat.relationships[cat.ID].comfort > 10
             )
+            
+            if cat.gender == inter_cat.gender and random_module.randint(1, 10500) != 1 and not (inter_cat.relationships[cat.ID].romance > 0 or inter_cat.relationships[cat.ID].romance > 0):
+                continue # balancing same-sex relationships - there are too many and I just want more kits in my clans, sorry >:(
+            
             if cat_to_inter and inter_to_cat:
                 cat_to_choose_from.append(inter_cat)
 
