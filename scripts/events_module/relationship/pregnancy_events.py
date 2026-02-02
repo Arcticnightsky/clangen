@@ -1042,9 +1042,9 @@ class Pregnancy_Events:
 
             # make lost status match parent
             if cat and cat.status.is_lost():
-                kit.status.make_standing_unknown(CatGroup.PLAYER_CLAN)
+                kit.status.make_standing_unknown(CatGroup.PLAYER_CLAN_ID)
                 kit.status.become_lost(
-                    cat.status.social, specific_group=CatGroup.PLAYER_CLAN
+                    cat.status.social, specific_group=CatGroup.PLAYER_CLAN_ID
                 )
 
             # Prevent duplicate prefixes in the same litter
@@ -1074,43 +1074,53 @@ class Pregnancy_Events:
                 Condition_Events.handle_already_disabled(kit)
 
             # create and update relationships
-
+            relationships_to_update = []
             # if kits are in a clan, the whole clan gets to know
-            for cat_id in clan.clan_cats:
-                if cat_id == kit.ID:
-                    continue
-                the_cat = Cat.all_cats.get(cat_id)
-                if the_cat.dead or the_cat.status.is_outsider:
-                    continue
-                if the_cat.ID in kit.get_parents():
-                    parent_to_kit = constants.CONFIG["new_cat"]["parent_buff"][
-                        "parent_to_kit"
-                    ]
-                    y = random.randrange(0, 15)
-                    start_relation = Relationship(the_cat, kit, False, True)
-                    start_relation.like = parent_to_kit[RelType.LIKE] + y
-                    start_relation.comfort = parent_to_kit[RelType.COMFORT] + y
-                    start_relation.respect = parent_to_kit[RelType.RESPECT] + y
-                    start_relation.trust = parent_to_kit[RelType.TRUST] + y
-                    the_cat.relationships[kit.ID] = start_relation
+            if cat and cat.status.alive_in_player_clan:
+                relationships_to_update = clan.clan_cats
+            # if they aren't, then they only know parents, sibling rels will be added later
+            elif cat:
+                relationships_to_update = [cat.ID]
+                # other parent only knows if they're in the same group
+                if other_cat and other_cat.status.group == cat.status.group:
+                    relationships_to_update.append(other_cat.ID)
 
-                    kit_to_parent = constants.CONFIG["new_cat"]["parent_buff"][
-                        "kit_to_parent"
-                    ]
-                    y = random.randrange(0, 15)
-                    start_relation = Relationship(kit, the_cat, False, True)
-                    start_relation.like += kit_to_parent[RelType.LIKE] + y
-                    start_relation.comfort = kit_to_parent[RelType.COMFORT] + y
-                    start_relation.respect = kit_to_parent[RelType.RESPECT] + y
-                    start_relation.trust = kit_to_parent[RelType.TRUST] + y
-                    kit.relationships[the_cat.ID] = start_relation
-                else:
-                    the_cat.relationships[kit.ID] = Relationship(the_cat, kit)
-                    kit.relationships[the_cat.ID] = Relationship(kit, the_cat)
+            if relationships_to_update:
+                for cat_id in relationships_to_update:
+                    if cat_id == kit.ID:
+                        continue
+                    the_cat = Cat.all_cats.get(cat_id)
+                    if the_cat.dead:
+                        continue
+                    if the_cat.ID in kit.get_parents():
+                        parent_to_kit = constants.CONFIG["new_cat"]["parent_buff"][
+                            "parent_to_kit"
+                        ]
+                        y = random.randrange(0, 15)
+                        start_relation = Relationship(the_cat, kit, False, True)
+                        start_relation.like = parent_to_kit[RelType.LIKE] + y
+                        start_relation.comfort = parent_to_kit[RelType.COMFORT] + y
+                        start_relation.respect = parent_to_kit[RelType.RESPECT] + y
+                        start_relation.trust = parent_to_kit[RelType.TRUST] + y
+                        the_cat.relationships[kit.ID] = start_relation
+
+                        kit_to_parent = constants.CONFIG["new_cat"]["parent_buff"][
+                            "kit_to_parent"
+                        ]
+                        y = random.randrange(0, 15)
+                        start_relation = Relationship(kit, the_cat, False, True)
+                        start_relation.like += kit_to_parent[RelType.LIKE] + y
+                        start_relation.comfort = kit_to_parent[RelType.COMFORT] + y
+                        start_relation.respect = kit_to_parent[RelType.RESPECT] + y
+                        start_relation.trust = kit_to_parent[RelType.TRUST] + y
+                        kit.relationships[the_cat.ID] = start_relation
+                    else:
+                        the_cat.relationships[kit.ID] = Relationship(the_cat, kit)
+                        kit.relationships[the_cat.ID] = Relationship(kit, the_cat)
+
             #### REMOVE ACCESSORY ######
             kit.pelt.accessory = []
-            if not kit.status.is_outsider:
-                clan.add_cat(kit)
+            clan.add_cat(kit)
 
             #### GIVE HISTORY ######
             kit.history.add_beginning(clan_born=bool(cat))
