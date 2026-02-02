@@ -978,7 +978,7 @@ class Pregnancy_Events:
 
                 kit = Cat(
                     parent1=blood_parent.ID,
-                    moons=0,
+                    moons=kit_age,
                     backstory=backstory,
                     status=kitten_status,
                 )
