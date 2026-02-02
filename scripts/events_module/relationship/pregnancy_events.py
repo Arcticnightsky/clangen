@@ -662,41 +662,6 @@ class Pregnancy_Events:
                 print_event, ["health", "birth_death"], involved_cats, cat_dict=cat_dict
             )
         )
-
-        
-        stillborn_chance = 0
-
-        if kits_amount < 3:
-            stillborn_chance = 1500
-        elif kits_amount == 3:
-            stillborn_chance = 1200
-        elif kits_amount == 4:
-            stillborn_chance = 900
-        elif kits_amount == 5:
-            stillborn_chance = 600
-        elif kits_amount == 6:
-            stillborn_chance = 300
-        for kit in range(kits_amount):
-            if not int(random.random() * stillborn_chance):
-                kit.moons = 0
-                kit.dead = True
-                kit.thoughts(just_died=True)
-                kit.history.add_death(str(kit.name) + " was stillborn.")
-                possible_events = events["birth"]["stillborn_kit_death"]
-                # just makin sure meds aren't mentioned if they aren't around or if they are a parent
-                meds = find_alive_cats_with_rank(
-                    Cat, [CatRank.MEDICINE_CAT, CatRank.MEDICINE_APPRENTICE], sort=True
-                )
-                mate_is_med = [mate_id for mate_id in cat.mate if mate_id in meds]
-                if not meds or cat in meds or len(mate_is_med) > 0:
-                    for event in possible_events:
-                        if CatRank.MEDICINE_CAT in event:
-                            possible_events.remove(event)
-                 # if the mother has died from the childbirth above, the stillbirth event wouldn't happen at all
-                if not cat.dead:
-                    possible_events.remove(event)
-
-                event_list.append(choice(possible_events))
     
     # ---------------------------------------------------------------------------- #
     #                          check if event is triggered                         #
