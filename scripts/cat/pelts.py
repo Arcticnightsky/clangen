@@ -1137,7 +1137,7 @@ class Pelt:
             Pelt.little_white,
             Pelt.mid_white,
         ):
-            self.name == "Tortie"
+            self.name = "Tortie"
             
     def init_white_patches(self, pelt_white, parents: tuple):
         # Vit can roll for anyone, not just cats who rolled to have white in their pelt.
