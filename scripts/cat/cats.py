@@ -5,7 +5,6 @@ Contains the Cat and Personality classes
 from __future__ import annotations
 
 import random as random_module
-from random import choice
 import bisect
 import itertools
 import os.path
@@ -473,16 +472,16 @@ class Cat:
             if not allow_female_ginger:
                 if allow_tortie_instead:
                     if random_module.randint(1, 3) == 1:
-                        self.pelt.name = random.choice(Pelt.torties)
-                        self.pelt.tortie_base = random.choice(Pelt.pelt_patterns)
+                        self.pelt.name = choice(Pelt.torties)
+                        self.pelt.tortie_base = choice(Pelt.pelt_patterns)
                         print("Tortie kit generated thanks to her genetics!!!")
                     else:
                         self.gender = "male"
                         self.genderalign = "male"
                         print("Regular orange tomcat :)")
                 elif only_female_torties:
-                    self.pelt.name = random.choice(Pelt.torties)
-                    self.pelt.tortie_base = random.choice(Pelt.pelt_patterns)
+                    self.pelt.name = choice(Pelt.torties)
+                    self.pelt.tortie_base = choice(Pelt.pelt_patterns)
                     print("Tortie kit generated thanks to her genetics!!!")
             
             if not allow_female_ginger and not allow_tortie_instead and not only_female_torties:
