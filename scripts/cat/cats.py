@@ -457,8 +457,8 @@ class Cat:
                 and (mother.pelt.colour in Pelt.ginger_colours or mother.pelt.name in Pelt.torties)
             )
             father_is_ginger = father and father.pelt.colour in Pelt.ginger_colours
-            mother_is_dark = mother.pelt.colour in (Pelt.black_colours or Pelt.brown_colours or ("SILVER", "PALEGREY")) 
-            father_is_dark = father.pelt.colour in (Pelt.black_colours or Pelt.brown_colours or ("SILVER", "PALEGREY"))
+            mother_is_dark = mother and mother.pelt.colour in (Pelt.black_colours or Pelt.brown_colours or ("SILVER", "PALEGREY")) 
+            father_is_dark = father and father.pelt.colour in (Pelt.black_colours or Pelt.brown_colours or ("SILVER", "PALEGREY"))
             
             if self.age in (CatAge.NEWBORN, CatAge.KITTEN) and mother and father:
                 if mother_has_orange and father_is_ginger:
@@ -492,7 +492,8 @@ class Cat:
                     print("Regular orange tomcat :)")
                 else:
                     print("Uncommon ginger she-cat generated!!!")
-        
+
+        # Making sure if older "male" are infertile, as they're really just intersex cats and therefore sterile
         if self.age not in (CatAge.NEWBORN, CatAge.KITTEN) and self.pelt.name in Pelt.torties and self.gender == "male":
             self.no_kits = True
             print("RARE MALE TORTIE GENERATED!!!")
