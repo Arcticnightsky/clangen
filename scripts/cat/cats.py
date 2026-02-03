@@ -490,6 +490,8 @@ class Cat:
                     self.gender = "male"
                     self.genderalign = "male"
                     print("Regular orange tomcat :)")
+                else:
+                    print("Uncommon ginger she-cat generated!!!")
         
         if self.age not in (CatAge.NEWBORN, CatAge.KITTEN) and self.pelt.name in Pelt.torties and self.gender == "male":
             self.no_kits = True
