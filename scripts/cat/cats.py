@@ -493,6 +493,16 @@ class Cat:
                 else:
                     print("Uncommon ginger she-cat generated!!!")
 
+        # Black she-cat rarity, not as intense as the last code because you're more likely to see a black female cat than a ginger female cat
+        if (
+            self.pelt.colour in ("BLACK", "GHOST")
+            and self.gender == "female"
+            and self.pelt.name not in Pelt.torties
+        ):
+            if random_module.randint(1, 3) != 1:
+                self.gender = "male"
+                self.genderalign = "male"
+            
         # Making sure if older "male" are infertile, as they're really just intersex cats and therefore sterile
         if self.age not in (CatAge.NEWBORN, CatAge.KITTEN) and self.pelt.name in Pelt.torties and self.gender == "male":
             self.no_kits = True
