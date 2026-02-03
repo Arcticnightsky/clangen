@@ -122,7 +122,7 @@ dev_tools = true
 
   # these denote how relationships change upon a breakup
   [mates.breakup]
-    threshold = 150
+    threshold = 200
     variability = [-20, 20]
     [mates.breakup.default_weights]
       had_fight = 3
@@ -458,7 +458,7 @@ dev_tools = true
   base_random_murder_chance = 550
 
   # base 1/chance a disliked cat will be murdered
-  base_murder_kill_chance = 150
+  base_murder_kill_chance = 100
 
   # age cats will start dying of old age based on old_age_death_curve
   old_age_death_start = 150
