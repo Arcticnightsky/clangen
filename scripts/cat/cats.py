@@ -5,7 +5,7 @@ Contains the Cat and Personality classes
 from __future__ import annotations
 
 import random as random_module
-from random import choice
+import random
 import bisect
 import itertools
 import os.path
