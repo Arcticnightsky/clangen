@@ -4,6 +4,7 @@ from typing import Optional, List, Union, Type
 
 import i18n
 
+import random as random_module
 from scripts.cat.cats import Cat
 from scripts.cat.enums import CatRank, CatAge, CatSocial, CatGroup, CatStanding
 from scripts.cat.names import names
@@ -87,6 +88,24 @@ def create_new_cat_block(
 
                 give_mates.append(in_event_cats[index])
 
+    # gather romance
+    give_romance = []
+    for tag in attribute_list:
+        match = re.match(r"romance:([_,0-9a-zA-Z]+)", tag)
+        if not match:
+            continue
+            
+        romance_indexes = match.group(1).split(",")
+            
+        # TODO: make this less ugly
+        for index in romance_indexes:
+            if index in in_event_cats:
+                if in_event_cats[index].status.rank.is_any_apprentice_rank():
+                    print("Can't romance apprentices")
+                    continue
+                    
+                give_romance.append(in_event_cats[index])
+                
     # determine gender
     if "male" in attribute_list:
         gender = "male"
@@ -144,8 +163,13 @@ def create_new_cat_block(
             age = randint(min_age, max_age)
             break
 
+        if match.group(1) == "romance" and give_romance:
+            min_age, max_age = Cat.age_moons[give_romance[0].age]
+            age = randint(min_age, max_age)
+            break
+        
         if match.group(1) == "has_kits":
-            age = randint(19, 120)
+            age = randint(20, 120)
             break
 
     if rank and not age:
@@ -267,7 +291,7 @@ def create_new_cat_block(
         thought = i18n.t("hardcoded.thought_meeting")
         if age is not None and age <= 6 and not bs_override:
             chosen_backstory = "outsider1"
-
+        
     # IS THE CAT DEAD?
     alive = True
     if "dead" in attribute_list:
@@ -280,7 +304,7 @@ def create_new_cat_block(
         existing_outsiders = [
             i
             for i in Cat.all_cats.values()
-            if i.status.is_outsider and not i.dead and i not in in_event_cats.values()
+            if i.status.is_outsider and not i.dead and i.status.is_near(CatGroup.PLAYER_CLAN_ID) and i not in in_event_cats.values()
         ]
         possible_outsiders = []
         for cat in existing_outsiders:
@@ -609,6 +633,13 @@ def create_new_cat(
         ) and original_group not in game.clan.other_clan_IDs:
             # babies change name, in case their initial name isn't clan-ish
             new_cat.change_name()
+            if new_cat.status.is_outsider:
+                if bool(getrandbits(1)):
+                    name = choice(names.names_dict["loner_names"])
+                    # otherwise give name from prefix list (more nature-y names)
+                else:
+                    name = choice(names.names_dict["normal_prefixes"])
+                
         elif original_group not in game.clan.other_clan_IDs:
             # give kittypets a kittypet name
             if original_social == CatSocial.KITTYPET:
@@ -661,6 +692,7 @@ def create_new_cat(
             "NOLEFTEAR",
             "NORIGHTEAR",
             "MANLEG",
+            "BLIND",
         ]
         for scar in new_cat.pelt.scars:
             if scar in not_allowed:
@@ -708,6 +740,36 @@ def create_new_cat(
                     new_cat.pelt.scars.append("NOPAW")
                 elif chosen_condition in ("lost their tail", "born without a tail"):
                     new_cat.pelt.scars.append("NOTAIL")
+                elif chosen_condition in ("blind"):
+                    new_cat.pelt.scars.append("BLIND")
+
+            blue_eyes = [
+                "BLUE",
+                "DARKBLUE",
+                "CYAN",
+                "PALEBLUE",
+                "HEATHERBLUE",
+                "COBALT",
+                "SUNLITICE",
+                "GREY",
+            ]
+                
+            deaf_chance = None
+            partial_deaf_chance = None
+            if (new_cat.pelt.colour == "WHITE" or new_cat.pelt.white_patches == "FULLWHITE") and new_cat.pelt.eye_colour in blue_eyes:
+                deaf_chance = constants.CONFIG["cat_generation"]["base_permanent_condition"] * 0.4
+            elif (new_cat.pelt.colour == "WHITE" or new_cat.pelt.white_patches == "FULLWHITE") and new_cat.pelt.eye_colour2 and new_cat.pelt.eye_colour2 in blue_eyes:
+                partial_deaf_chance = constants.CONFIG["cat_generation"]["base_permanent_condition"] * 0.7
+
+            if deaf_chance:
+                if not random_module.randint(1, deaf_chance):
+                    chosen_condition = ("deaf")
+                    new_cat.get_permanent_condition(chosen_condition, born_with=True)
+            elif partial_deaf_chance:
+                if not random_module.randint(1, deaf_chance):
+                    chosen_condition = ("partial hearing loss")
+                    new_cat.get_permanent_condition(chosen_condition, born_with=True)
+
 
         # KILL >:D only if we're sposed to tho
         if not alive:
@@ -946,6 +1008,8 @@ def change_relationship_values(
                 single_cat_from.is_potential_mate(single_cat_to, for_love_interest=True)
                 or single_cat_to.ID in single_cat_from.mate
             ):
+                if single_cat_from.gender == single_cat_to.gender and single_cat_to.ID not in single_cat_from.mate and random_module.randint(1, 10500) != 1:
+                    continue # balancing same-sex relationships - there are too many and I just want more kits in my clans, sorry >:(
                 # now gain the romance
                 rel.romance += romance
 
