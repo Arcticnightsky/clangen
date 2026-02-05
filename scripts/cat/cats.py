@@ -2037,7 +2037,14 @@ class Cat:
                 "event_triggered": new_illness.new,
             }
 
-    def get_injured(self, name, event_triggered=False, lethal=True, severity="default"):
+    def get_injured(
+        self,
+        name,
+        event_triggered=False,
+        lethal=True,
+        potential_scars=None,
+        severity="default",
+    ):
         """Add an injury to this cat.
 
         :param name: The injury to add
@@ -2046,6 +2053,8 @@ class Cat:
         :type event_triggered: bool, optional
         :param lethal: _description_, defaults to True
         :type lethal: bool, optional
+        :param potential_scars: List of possible scars to get upon healing, defaults to None
+        :type potential_scars: array, optional
         :param severity: _description_, defaults to 'default'
         :type severity: str, optional
         """
@@ -2097,6 +2106,7 @@ class Cat:
             also_got=injury["also_got"],
             cause_permanent=injury["cause_permanent"],
             event_triggered=event_triggered,
+            potential_scars=potential_scars,
         )
 
         if new_injury.name not in self.injuries:
@@ -2110,6 +2120,7 @@ class Cat:
                 "complication": None,
                 "cause_permanent": new_injury.cause_permanent,
                 "event_triggered": new_injury.new,
+                "potential_scars": new_injury.potential_scars,
             }
 
         if len(new_injury.also_got) > 0 and not int(random() * 5):
