@@ -3360,7 +3360,13 @@
                 "mates"
             ]
         },
-        "r_c": {},
+        "r_c": {
+            "age": [
+                "young adult",
+                "adult",
+                "senior adult"
+            ]
+        },
         "relationships": [
             {
                 "cats_to": [
