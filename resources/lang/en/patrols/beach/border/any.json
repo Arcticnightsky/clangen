@@ -110,7 +110,7 @@
                     "death": "m_c was killed when rogues ambushed {PRONOUN/m_c/poss} patrol."
                 },
                 "art": "gen_bord_otherclan_hostile",
-                "frequency": 4
+                "frequency": 2
             },
             {
                 "text": "Taken by surprise, the patrol scatters and loses cohesion. The rogues are quick to take advantage of the confusion and r_c is badly wounded, forcing the patrol to retreat.",
@@ -410,7 +410,7 @@
                     }
                 ],
                 "art": "gen_bord_otherclan_hostile",
-                "frequency": 4
+                "frequency": 2
             },
             {
                 "text": "The rogues posture and jeer, eventually provoking a battle. They prove to be strong fighters, and r_c is badly injured, forcing the patrol to retreat.",
@@ -607,7 +607,7 @@
                     "death": "m_c was drowned by floodwaters."
                 },
                 "art": "gen_drowning_warrior",
-                "frequency": 4
+                "frequency": 2
             }
         ]
     },
@@ -674,7 +674,7 @@
                     "death": "m_c was drowned by floodwaters."
                 },
                 "art": "gen_drowning_warrior",
-                "frequency": 4
+                "frequency": 3
             },
             {
                 "text": "There is a downpour, and a sudden flood from the overflowing river sweeps r_c away. Injured, gasping for air and paddling desperately, r_c remembers enough of {PRONOUN/r_c/poss} training to keep an eye out for driftwood. {PRONOUN/r_c/subject/CAP} {VERB/r_c/sink/sinks} {PRONOUN/r_c/poss} claws into the first piece that's swept past {PRONOUN/r_c/object}. It saves {PRONOUN/r_c/poss} life.",
@@ -945,7 +945,7 @@
                         "amount": -5
                     }
                 ],
-                "frequency": 3
+                "frequency": 1
             },
             {
                 "text": "Following the trail with {PRONOUN/s_c/poss} nose to the ground, s_c doesn't see the blow coming. {PRONOUN/s_c/subject/CAP} {VERB/s_c/haul/hauls} {PRONOUN/s_c/self} to {PRONOUN/s_c/poss} feet, spitting with outrage, but the rogue that did it has already turned and run.",
@@ -1075,7 +1075,7 @@
                     "scar": "m_c was scarred by an invading rogue.",
                     "death": "m_c was killed by an invading rogue."
                 },
-                "frequency": 3
+                "frequency": 1
             },
             {
                 "text": "Following the trail with {PRONOUN/app1/poss} nose to the ground, app1 doesn't see the blow coming. {PRONOUN/app1/subject/CAP} {VERB/app1/haul/hauls} {PRONOUN/app1/self} to {PRONOUN/app1/poss} feet, squealing with pain, and {VERB/app1/run/runs} for home.",
