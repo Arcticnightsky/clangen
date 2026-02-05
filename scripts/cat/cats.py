@@ -4,6 +4,7 @@ Contains the Cat and Personality classes
 
 from __future__ import annotations
 
+import random as random_module
 import bisect
 import itertools
 import os.path
@@ -22,6 +23,7 @@ from scripts.cat.names import Name
 from scripts.cat.pelts import Pelt
 from scripts.cat.personality import Personality
 from scripts.cat.skills import CatSkills
+from scripts.cat.skills import SkillPath
 from scripts.cat.status import Status, StatusDict
 from scripts.events_module.thoughts.generate_thoughts import (
     new_death_thought,
@@ -412,20 +414,6 @@ class Cat:
         """
         # trans cat chances
         self.genderalign = self.gender
-        trans_chance = randint(0, 50)
-        nb_chance = randint(0, 75)
-
-        # GENDER IDENTITY
-        if self.age.is_baby() or disable_random:
-            # newborns can't be trans, sorry babies
-            pass
-        elif nb_chance == 1:
-            self.genderalign = "nonbinary"
-        elif trans_chance == 1:
-            if self.gender == "female":
-                self.genderalign = "trans male"
-            else:
-                self.genderalign = "trans female"
 
         # PRONOUNS AUTO-GENERATE WHEN REQUIRED
 
@@ -435,7 +423,91 @@ class Cat:
             [Cat.fetch_cat(i) for i in (self.parent1, self.parent2) if i],
             self.age,
         )
+        # ================================
+        #  GENETICS ENFORCEMENT (REALISM)
+        # ================================
+        
+        # --- Male tortie rarity enforcement (KITS ONLY) ---
+        if self.age in (CatAge.NEWBORN, CatAge.KITTEN) and self.pelt.name in Pelt.torties and self.gender == "male":
+            # 1 / 3000 chance to keep male tortie, slightly increased as per what pelts.py should've done - increased tortie chance if the mom's a tortie herself
+            if random_module.randint(1, 2800) != 1:
+                self.gender = "female"
+                self.genderalign = "female"
+                print("Regular female tortie :)")
+            self.no_kits = False
+            if self.gender == "male":
+                print("RARE MALE TORTIE GENERATED")
+                self.no_kits = True
 
+        # --- Female ginger rarity ---
+        if (
+            self.pelt.colour in Pelt.ginger_colours
+            and self.gender == "female"
+            and self.pelt.name not in Pelt.torties
+        ):
+            allow_female_ginger = False
+            only_female_torties = False
+            allow_tortie_instead = False
+            
+            mother = Cat.fetch_cat(self.parent1) if self.parent1 else None
+            father = Cat.fetch_cat(self.parent2) if self.parent2 else None
+
+            mother_has_orange = (
+                mother
+                and (mother.pelt.colour in Pelt.ginger_colours or mother.pelt.name in Pelt.torties)
+            )
+            father_is_ginger = father and father.pelt.colour in Pelt.ginger_colours
+            mother_is_dark = mother and mother.pelt.colour in (Pelt.black_colours or Pelt.brown_colours or ("SILVER", "PALEGREY")) 
+            father_is_dark = father and father.pelt.colour in (Pelt.black_colours or Pelt.brown_colours or ("SILVER", "PALEGREY"))
+            
+            if self.age in (CatAge.NEWBORN, CatAge.KITTEN) and mother and father:
+                if mother_has_orange and father_is_ginger:
+                    allow_female_ginger = True
+                    print("Uncommon ginger she-cat generated thanks to her genetics!!!")
+                elif mother_is_dark and father_is_ginger:
+                    only_female_torties = True
+                elif mother_has_orange and father_is_dark:
+                    allow_tortie_ginger_male_instead = True
+            
+            if not allow_female_ginger:
+                if allow_tortie_instead:
+                    if random_module.randint(1, 3) == 1:
+                        self.pelt.name = choice(Pelt.torties)
+                        self.pelt.tortie_base = choice(Pelt.pelt_patterns)
+                        print("Tortie kit generated thanks to her genetics!!!")
+                    else:
+                        self.gender = "male"
+                        self.genderalign = "male"
+                        print("Regular orange tomcat :)")
+                elif only_female_torties:
+                    self.pelt.name = choice(Pelt.torties)
+                    self.pelt.tortie_base = choice(Pelt.pelt_patterns)
+                    print("Tortie kit generated thanks to her genetics!!!")
+            
+            if not allow_female_ginger and not allow_tortie_instead and not only_female_torties:
+                # If this is a ginger she-cat spawned randomly out of the wild, apply 20% rule - only 20% of ginger cats are female
+                if random_module.randint(1, 5) != 1:
+                    self.gender = "male"
+                    self.genderalign = "male"
+                    print("Regular orange tomcat :)")
+                else:
+                    print("Uncommon ginger she-cat generated!!!")
+
+        # Black she-cat rarity, not as intense as the last code because you're more likely to see a black female cat than a ginger female cat
+        if (
+            self.pelt.colour in ("BLACK", "GHOST")
+            and self.gender == "female"
+            and self.pelt.name not in Pelt.torties
+        ):
+            if random_module.randint(1, 3) != 1:
+                self.gender = "male"
+                self.genderalign = "male"
+            
+        # Making sure if older "male" are infertile, as they're really just intersex cats and therefore sterile
+        if self.age not in (CatAge.NEWBORN, CatAge.KITTEN) and self.pelt.name in Pelt.torties and self.gender == "male":
+            self.no_kits = True
+            print("RARE MALE TORTIE GENERATED!!!")
+            
         # Personality
         if disable_random:
             self.personality = Personality(
@@ -495,6 +567,9 @@ class Cat:
     @dead.setter
     def dead(self, die: bool):
         if die:
+            murder_history = self.history.murder
+            primary = self.skills.primary.path if self.skills.primary else None
+            secondary = self.skills.secondary.path if self.skills.secondary else None
             if self.status.group.is_afterlife():
                 print(
                     f"WARNING: Tried to kill {self.name} ID: {self.ID} but this cat is already dead!"
@@ -514,28 +589,54 @@ class Cat:
                     is_kit=True,
                 )
             else:
-                if cat_default_afterlife_id == CatGroup.STARCLAN_ID:
+                if game.clan.instructor.status.group == CatGroup.STARCLAN:
                     affinity = self.starclan_affinity
                     afterlife_group = CatGroup.STARCLAN
                     rejected_ID = CatGroup.DARK_FOREST_ID
-                else:
+                elif game.clan.instructor.status.group == CatGroup.DARK_FOREST:
                     affinity = self.dark_forest_affinity
                     afterlife_group = CatGroup.DARK_FOREST
                     rejected_ID = CatGroup.STARCLAN_ID
 
-                # afterlife does not like this cat
-                if affinity < 0:
+                 # exiled cats are special, cus they get kicked out of heaven
+                if self.status.is_exiled(CatGroup.PLAYER_CLAN):
+                    afterlife_group = CatGroup.DARK_FOREST
+                    self.history.add_afterlife_acceptance(afterlife_group)
+                    self.status.send_to_afterlife()
+                    return
+                    
+                 # afterlife does not like this cat 
+                if (
+                    affinity < 0
+                    or (murder_history and "is_murderer" in murder_history)
+                    or primary == SkillPath.DARK
+                    or secondary == SkillPath.DARK
+                    or (
+                        self.status.is_leader
+                        and self.personality.trait in ["bloodthirsty", "vengeful", "fierce"]
+                    )
+                ):
                     # might send them to the opposite afterlife instead
-                    if random() < abs(affinity / 100):
+                    if not random_module.randint(0, 1) == 0:
                         self.history.add_afterlife_acceptance(
                             afterlife_group, rejected=True
                         )
                         self.status.send_to_afterlife(rejected_ID)
+                        if self.status.is_leader and self.personality.trait in ["bloodthirsty", "vengeful", "fierce"]:
+                            afterlife_group = CatGroup.DARK_FOREST
+                            self.history.add_afterlife_acceptance(
+                                afterlife_group, tyrant_leader_bad=True
+                            )
+                            self.status.send_to_afterlife(rejected_ID)
                         return
                     # fine, they can go to afterlife, but some cats don't like it
                     self.history.add_afterlife_acceptance(
                         afterlife_group, contentious=True
                     )
+                    if self.status.is_leader and self.personality.trait in ["bloodthirsty", "vengeful", "fierce"]:
+                        self.history.add_afterlife_acceptance(
+                            afterlife_group, tyrant_leader_ok=True
+                        )
                 # afterlife thinks this cat is ok
                 else:
                     self.history.add_afterlife_acceptance(afterlife_group)
@@ -699,6 +800,10 @@ class Cat:
 
         # mark the sprite as outdated
         self.pelt.rebuild_sprite = True
+
+        # exiled cats are special, cus they get kicked out a heaven
+        if self.status.is_exiled(CatGroup.PLAYER_CLAN):
+            self.status.add_to_group(CatGroup.DARK_FOREST)
 
     def exile(self):
         """This is used to send a cat into exile."""
@@ -1210,9 +1315,15 @@ class Cat:
         """Create a leader ceremony and add it to the history"""
 
         load_leader_ceremonies()
+        primary = self.skills.primary.path if self.skills.primary else None
+        secondary = self.skills.secondary.path if self.skills.secondary else None
 
+        
         # determine which dict we're pulling from
         if game.clan.instructor.status.group == CatGroup.DARK_FOREST:
+            starclan = False
+            ceremony_dict: Dict = LEAD_CEREMONY_DF
+        elif primary == SkillPath.DARK or secondary == SkillPath.DARK:
             starclan = False
             ceremony_dict: Dict = LEAD_CEREMONY_DF
         else:
@@ -1806,6 +1917,28 @@ class Cat:
         ]
         return other_cat.ID in litter_mates
 
+    def is_half_sibling(self, other_cat: Cat):
+        """Check if the cats are half siblings."""
+        if other_cat.ID not in self.inheritance.siblings.keys():
+            return False
+        half_siblings = [
+            key
+            for key, value in self.inheritance.siblings.items()
+            if "half sibling" in value["additional"]
+        ]
+        return other_cat.ID in half_siblings
+
+    def is_adoptive_sibling(self, other_cat: Cat):
+        """Check if the cats are adoptive siblings."""
+        if other_cat.ID not in self.inheritance.siblings.keys():
+            return False
+        adoptive_siblings = [
+            key
+            for key, value in self.inheritance.siblings.items()
+            if "adoptive" in value["additional"]
+        ]
+        return other_cat.ID in adoptive_siblings
+    
     def is_uncle_aunt(self, other_cat: Cat):
         """Check if the cats are related as uncle/aunt and niece/nephew."""
         if not self.inheritance:
@@ -1936,7 +2069,9 @@ class Cat:
             return
         if name == "torn ear" and "NOEAR" in self.pelt.scars:
             return
-
+        if name == "damaged eyes" and "BLIND" in self.pelt.scars:
+            return
+        
         injury = INJURIES[name]
         mortality = injury["mortality"][self.age.value]
         duration = injury["duration"]
@@ -2040,7 +2175,9 @@ class Cat:
             cat.pelt.scars.append("NOPAW")
         elif new_condition == "born without a tail":
             cat.pelt.scars.append("NOTAIL")
-
+        elif new_condition == "blind":
+            cat.pelt.scars.append("BLIND")
+        
         self.get_permanent_condition(new_condition, born_with=True)
 
     def get_permanent_condition(self, name, born_with=False, event_triggered=False):
@@ -3449,6 +3586,7 @@ def create_cat(rank, moons=None, biome=None):
         "NOLEFTEAR",
         "NORIGHTEAR",
         "MANLEG",
+        "BLIND",
     ]
 
     for scar in new_cat.pelt.scars:

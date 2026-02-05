@@ -212,8 +212,6 @@ def get_special_snippet_list(
             else:
                 sense_groups = ["sight", "sound", "smell", "emotional", "touch"]
 
-        # find the correct lists and compile them
-        snippets = []
         for sense in sense_groups:
             snippet_group = SNIPPETS[chosen_list][sense]
             snippets.extend(snippet_group["general"])
@@ -233,7 +231,6 @@ def get_special_snippet_list(
         return text
     else:
         return final_snippets
-
 
 def find_special_list_types(text):
     """
