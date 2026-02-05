@@ -12264,9 +12264,9 @@
             {
                 "type": "any_herb",
                 "trigger": [
-                    "always"
+                    "low"
                 ],
-                "adjust": "increase_40"
+                "adjust": "increase_20"
             }
         ]
     },
@@ -12342,7 +12342,7 @@
                 "trigger": [
                     "low"
                 ],
-                "adjust": "increase_40"
+                "adjust": "increase_20"
             }
         ]
     },
