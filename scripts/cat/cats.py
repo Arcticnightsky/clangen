@@ -2889,8 +2889,6 @@ class Cat:
             if not os.path.exists(relation_cat_directory):
                 self.init_all_relationships()
                 for cat in Cat.all_cats.values():
-                    if cat == self:
-                        continue
                     cat.create_one_relationship(self)
                 return
             try:
