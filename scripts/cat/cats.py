@@ -626,9 +626,15 @@ class Cat:
             game.updated_afterlife_cats.add(self)
 
             cat_default_afterlife_id = self.status.get_default_afterlife_id()
-            if cat_default_afterlife_id == CatGroup.UNKNOWN_RESIDENCE_ID:
+            if cat_default_afterlife_id == CatGroup.UNKNOWN_RESIDENCE_ID and self.status.is_exiled(CatGroup.PLAYER_CLAN_ID):
+                # exiled cats are special, cus they get kicked out of heaven
+                afterlife_group = CatGroup.DARK_FOREST
+                self.history.add_afterlife_acceptance(afterlife_group)
+                self.status.send_to_afterlife()
+                return
+            elif cat_default_afterlife_id == CatGroup.UNKNOWN_RESIDENCE_ID:
                 pass
-
+                
             # kits are auto-accepted
             elif self.age in (CatAge.KITTEN, CatAge.NEWBORN):
                 self.history.add_afterlife_acceptance(
@@ -645,7 +651,7 @@ class Cat:
                     afterlife_group = CatGroup.DARK_FOREST
                     rejected_ID = CatGroup.STARCLAN_ID
 
-                 # exiled cats are special, cus they get kicked out of heaven
+                 # extra check for exiled cats
                 if self.status.is_exiled(CatGroup.PLAYER_CLAN):
                     afterlife_group = CatGroup.DARK_FOREST
                     self.history.add_afterlife_acceptance(afterlife_group)
@@ -884,7 +890,7 @@ class Cat:
 
         # apply grief to cats with high positive relationships to dead cat
         for cat in Cat.all_cats.values():
-            if cat.dead or cat.status.is_outsider or cat.moons < 1:
+            if cat.dead or cat.status.is_outsider or cat.status.is_exiled(CatGroup.PLAYER_CLAN_ID) or cat.moons < 1:
                 continue
 
             rel_with_dead = cat.relationships.get(self.ID)
