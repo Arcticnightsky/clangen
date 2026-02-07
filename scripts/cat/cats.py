@@ -457,12 +457,12 @@ class Cat:
                 and (mother.pelt.colour in Pelt.ginger_colours or mother.pelt.name in Pelt.torties)
             )
             father_is_ginger = father and father.pelt.colour in Pelt.ginger_colours
-            mother_is_dark = mother and mother.pelt.colour in (
+            mother_is_dark = mother and (mother.pelt.colour in 
                                             Pelt.black_colours
                                             + Pelt.brown_colours
                                             + ("SILVER", "PALEGREY")
                                         ) 
-            father_is_dark = father and father.pelt.colour in (
+            father_is_dark = father and (father.pelt.colour in 
                                             Pelt.black_colours
                                             + Pelt.brown_colours
                                             + ("SILVER", "PALEGREY")
