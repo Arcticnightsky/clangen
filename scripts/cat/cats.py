@@ -494,7 +494,7 @@ class Cat:
                             self.pelt.tortie_patches = choice(Pelt.tortie_patches)
 
                         if not self.pelt.tortie_marking:
-                            self.pelt.tortie_marking = choice(Pelt.tortie_markings)
+                            self.pelt.tortie_marking = choice(Pelt.tortie_marking)
 
                         # Calicos MUST have white
                         if self.pelt.name == "Calico" and not self.pelt.white_patches:
@@ -520,7 +520,7 @@ class Cat:
                         self.pelt.tortie_patches = choice(Pelt.tortie_patches)
 
                     if not self.pelt.tortie_marking:
-                        self.pelt.tortie_marking = choice(Pelt.tortie_markings)
+                        self.pelt.tortie_marking = choice(Pelt.tortie_marking)
 
                     # Calicos MUST have white
                     if self.pelt.name == "Calico" and not self.pelt.white_patches:
