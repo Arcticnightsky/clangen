@@ -490,8 +490,8 @@ class Cat:
                             elif mother.pelt.name in Pelt.torties:
                                 self.pelt.tortie_colour = mother.pelt.tortie_colour
 
-                        if not self.pelt.tortie_pattern:
-                            self.pelt.tortie_pattern = choice(Pelt.tortie_patterns)
+                        if not self.pelt.tortie_patches:
+                            self.pelt.tortie_patches = choice(Pelt.tortie_patches)
 
                         if not self.pelt.tortie_marking:
                             self.pelt.tortie_marking = choice(Pelt.tortie_markings)
@@ -516,8 +516,8 @@ class Cat:
                     if not self.pelt.tortie_colour:
                         self.pelt.tortie_color = father.pelt.colour
 
-                    if not self.pelt.tortie_pattern:
-                        self.pelt.tortie_pattern = choice(Pelt.tortie_patterns)
+                    if not self.pelt.tortie_patches:
+                        self.pelt.tortie_patches = choice(Pelt.tortie_patches)
 
                     if not self.pelt.tortie_marking:
                         self.pelt.tortie_marking = choice(Pelt.tortie_markings)
