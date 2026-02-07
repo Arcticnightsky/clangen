@@ -21,6 +21,9 @@
                 "senior adult",
                 "senior"
             ],
+            "skill": [
+                "-SWIMMER,2"
+            ],
             "dies": true
         },
         "history": [
@@ -88,6 +91,9 @@
                 "loving",
                 "responsible"
             ],
+            "skill": [
+                "-SWIMMER,2"
+            ],
             "dies": true
         },
         "r_c": {
@@ -96,6 +102,9 @@
             ],
             "status": [
                 "any"
+            ],
+            "skill": [
+                "-SWIMMER,2"
             ]
         },
         "injury": [
