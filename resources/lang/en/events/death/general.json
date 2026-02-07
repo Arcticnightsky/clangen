@@ -681,10 +681,11 @@
             "any"
         ],
         "season": [
-            "any"
+			"newleaf",
+            "greenleaf"
         ],
         "tags": [],
-        "frequency": 3,
+        "frequency": 2,
         "event_text": "m_c was bitten by a snake and succumbed to the venom.",
         "m_c": {
             "age": [
@@ -707,9 +708,10 @@
             "any"
         ],
         "season": [
-            "any"
+			"newleaf",
+            "greenleaf"
         ],
-        "frequency": 3,
+        "frequency": 2,
         "event_text": "m_c saved r_c from a snake but was bitten in the process. The venom killed {PRONOUN/m_c/object}.",
         "m_c": {
             "age": [
@@ -3749,10 +3751,11 @@
             "any"
         ],
         "season": [
-            "any"
+			"newleaf",
+            "greenleaf"
         ],
         "tags": [],
-        "frequency": 3,
+        "frequency": 1,
         "event_text": "m_c was killed in {PRONOUN/m_c/poss} sleep by a snake that had snuck into camp.",
         "m_c": {
             "age": [
@@ -5191,13 +5194,14 @@
     {
         "event_id": "gen_death_snake_anylead2",
         "location": [
-            "any"
+			"newleaf",
+            "greenleaf"
         ],
         "season": [
             "any"
         ],
         "tags": [],
-        "frequency": 4,
+        "frequency": 2,
         "event_text": "m_c saved r_c from a snake and was bitten in the process. The venom killed {PRONOUN/m_c/object}.",
         "m_c": {
             "age": [
