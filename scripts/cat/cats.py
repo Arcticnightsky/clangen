@@ -484,8 +484,11 @@ class Cat:
                         self.pelt.tortie_base = choice(Pelt.pelt_patterns)
 
                         # --- ensure tortie data is fully assigned ---
-                        if not self.pelt.tortie_color:
-                            self.pelt.tortie_color = choice(Pelt.ginger_colours)
+                        if not self.pelt.tortie_colour:
+                            if mother.pelt.colour in Pelt.ginger_colours:
+                                self.pelt.tortie_colour = mother.pelt.colour
+                            elif mother.pelt.name in Pelt.torties:
+                                self.pelt.tortie_colour = mother.pelt.tortie_colour
 
                         if not self.pelt.tortie_pattern:
                             self.pelt.tortie_pattern = choice(Pelt.tortie_patterns)
@@ -510,8 +513,8 @@ class Cat:
                     self.pelt.tortie_base = choice(Pelt.pelt_patterns)
 
                     # --- ensure tortie data is fully assigned ---
-                    if not self.pelt.tortie_color:
-                        self.pelt.tortie_color = choice(Pelt.ginger_colours)
+                    if not self.pelt.tortie_colour:
+                        self.pelt.tortie_color = father.pelt.colour
 
                     if not self.pelt.tortie_pattern:
                         self.pelt.tortie_pattern = choice(Pelt.tortie_patterns)
