@@ -460,12 +460,12 @@ class Cat:
             mother_is_dark = mother and (mother.pelt.colour in 
                                             list(Pelt.black_colours)
                                             + list(Pelt.brown_colours)
-                                            + ("SILVER", "PALEGREY")
+                                            + ["SILVER", "PALEGREY"]
                                         ) 
             father_is_dark = father and (father.pelt.colour in 
                                             list(Pelt.black_colours)
                                             + list(Pelt.brown_colours)
-                                            + ("SILVER", "PALEGREY")
+                                            + ["SILVER", "PALEGREY"]
                                         )
             
             if self.age in (CatAge.NEWBORN, CatAge.KITTEN) and mother and father:
@@ -498,7 +498,7 @@ class Cat:
                             self.pelt.white_patches = choice(
                                 list(Pelt.high_white)
                                 + list(Pelt.mostly_white)
-                                + ("FULLWHITE")
+                                + ["FULLWHITE"]
                             )
                         print("Tortie kit generated thanks to her genetics!!!")
                     else:
@@ -524,7 +524,7 @@ class Cat:
                         self.pelt.white_patches = choice(
                             list(Pelt.high_white)
                             + list(Pelt.mostly_white)
-                            + ("FULLWHITE")
+                            + ["FULLWHITE"]
                         )
                     print("Tortie kit generated thanks to her genetics!!!")
             
