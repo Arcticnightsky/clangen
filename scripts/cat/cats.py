@@ -475,7 +475,7 @@ class Cat:
                 elif mother_is_dark and father_is_ginger:
                     only_female_torties = True
                 elif mother_has_orange and father_is_dark:
-                    allow_tortie_ginger_male_instead = True
+                    allow_tortie_instead = True
             
             if not allow_female_ginger:
                 if allow_tortie_instead:
@@ -522,8 +522,8 @@ class Cat:
                     # Calicos MUST have white
                     if self.pelt.name == "Calico" and not self.pelt.white_patches:
                         self.pelt.white_patches = choice(
-                            Pelt.high_white
-                            + Pelt.mostly_white
+                            list(Pelt.high_white)
+                            + list(Pelt.mostly_white)
                             + ("FULLWHITE")
                         )
                     print("Tortie kit generated thanks to her genetics!!!")
