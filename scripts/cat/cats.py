@@ -458,13 +458,13 @@ class Cat:
             )
             father_is_ginger = father and father.pelt.colour in Pelt.ginger_colours
             mother_is_dark = mother and (mother.pelt.colour in 
-                                            Pelt.black_colours
-                                            + Pelt.brown_colours
+                                            list(Pelt.black_colours)
+                                            + list(Pelt.brown_colours)
                                             + ("SILVER", "PALEGREY")
                                         ) 
             father_is_dark = father and (father.pelt.colour in 
-                                            Pelt.black_colours
-                                            + Pelt.brown_colours
+                                            list(Pelt.black_colours)
+                                            + list(Pelt.brown_colours)
                                             + ("SILVER", "PALEGREY")
                                         )
             
@@ -496,8 +496,8 @@ class Cat:
                         # Calicos MUST have white
                         if self.pelt.name == "Calico" and not self.pelt.white_patches:
                             self.pelt.white_patches = choice(
-                                Pelt.high_white
-                                + Pelt.mostly_white
+                                list(Pelt.high_white)
+                                + list(Pelt.mostly_white)
                                 + ("FULLWHITE")
                             )
                         print("Tortie kit generated thanks to her genetics!!!")
