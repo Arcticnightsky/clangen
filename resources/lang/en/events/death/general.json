@@ -44,6 +44,11 @@
                 "pool": {
                     "sub_type": [
                         "murder_reveal"
+                    ],
+                    "excluded_event_id": [
+                        "gen_misc_murderreveal_tattletail1",
+                        "gen_misc_murderreveal_tattletail2",
+                        "gen_misc_murderreveal_tattletail3"
                     ]
                 },
                 "moon_delay": [
@@ -107,6 +112,11 @@
                 "pool": {
                     "sub_type": [
                         "murder_reveal"
+                    ],
+                    "excluded_event_id": [
+                        "gen_misc_murderreveal_tattletail1",
+                        "gen_misc_murderreveal_tattletail2",
+                        "gen_misc_murderreveal_tattletail3"
                     ]
                 },
                 "moon_delay": [
@@ -173,6 +183,11 @@
                 "pool": {
                     "sub_type": [
                         "murder_reveal"
+                    ],
+                    "excluded_event_id": [
+                        "gen_misc_murderreveal_tattletail1",
+                        "gen_misc_murderreveal_tattletail2",
+                        "gen_misc_murderreveal_tattletail3"
                     ]
                 },
                 "moon_delay": [
@@ -240,6 +255,11 @@
                 "pool": {
                     "sub_type": [
                         "murder_reveal"
+                    ],
+                    "excluded_event_id": [
+                        "gen_misc_murderreveal_tattletail1",
+                        "gen_misc_murderreveal_tattletail2",
+                        "gen_misc_murderreveal_tattletail3"
                     ]
                 },
                 "moon_delay": [
@@ -304,6 +324,11 @@
                 "pool": {
                     "sub_type": [
                         "murder_reveal"
+                    ],
+                    "excluded_event_id": [
+                        "gen_misc_murderreveal_tattletail1",
+                        "gen_misc_murderreveal_tattletail2",
+                        "gen_misc_murderreveal_tattletail3"
                     ]
                 },
                 "moon_delay": [
@@ -371,6 +396,11 @@
                 "pool": {
                     "sub_type": [
                         "murder_reveal"
+                    ],
+                    "excluded_event_id": [
+                        "gen_misc_murderreveal_tattletail1",
+                        "gen_misc_murderreveal_tattletail2",
+                        "gen_misc_murderreveal_tattletail3"
                     ]
                 },
                 "moon_delay": [
@@ -438,6 +468,11 @@
                 "pool": {
                     "sub_type": [
                         "murder_reveal"
+                    ],
+                    "excluded_event_id": [
+                        "gen_misc_murderreveal_tattletail1",
+                        "gen_misc_murderreveal_tattletail2",
+                        "gen_misc_murderreveal_tattletail3"
                     ]
                 },
                 "moon_delay": [
@@ -507,6 +542,11 @@
                 "pool": {
                     "sub_type": [
                         "murder_reveal"
+                    ],
+                    "excluded_event_id": [
+                        "gen_misc_murderreveal_tattletail1",
+                        "gen_misc_murderreveal_tattletail2",
+                        "gen_misc_murderreveal_tattletail3"
                     ]
                 },
                 "moon_delay": [
@@ -574,6 +614,11 @@
                 "pool": {
                     "sub_type": [
                         "murder_reveal"
+                    ],
+                    "excluded_event_id": [
+                        "gen_misc_murderreveal_tattletail1",
+                        "gen_misc_murderreveal_tattletail2",
+                        "gen_misc_murderreveal_tattletail3"
                     ]
                 },
                 "moon_delay": [
@@ -601,7 +646,7 @@
             "any"
         ],
         "tags": [],
-        "frequency": 3,
+        "frequency": 2,
         "event_text": "m_c was found dead near a fox den.",
         "m_c": {
             "age": [
@@ -1055,7 +1100,7 @@
             "any"
         ],
         "tags": [],
-        "frequency": 3,
+        "frequency": 1,
         "event_text": "m_c fell into the river. r_c drowned alongside m_c while trying to rescue {PRONOUN/m_c/object}.",
         "m_c": {
             "age": [
@@ -1063,6 +1108,9 @@
             ],
             "status": [
                 "any"
+            ],
+            "not_skill": [
+                "SWIMMER,2"
             ],
             "dies": true
         },
@@ -1086,6 +1134,9 @@
                 "loving",
                 "responsible"
             ],
+            "not_skill": [
+                "SWIMMER,2"
+            ],
             "dies": true
         },
         "history": [
@@ -1107,7 +1158,7 @@
             "any"
         ],
         "tags": [],
-        "frequency": 4,
+        "frequency": 1,
         "event_text": "m_c and r_c are killed by a gang of rogues.",
         "m_c": {
             "age": [
@@ -1839,47 +1890,19 @@
             "all_lives"
         ],
         "frequency": 4,
-        "event_text": "m_c and r_c loved each other so much they could not be parted, even by death. c_n found their bodies still wrapped around each other in the morning.",
+        "event_text": "m_c has lived a long life filled with many memories, good and bad. {PRONOUN/m_c/subject/CAP} is grateful to have been a part of such a wonderful Clan, but {PRONOUN/m_c/subject} knows {PRONOUN/m_c/poss} time here is up. m_c closes {PRONOUN/m_c/poss} eyes one final time with no regrets, letting death claim {PRONOUN/m_c/object} for the first and last time.",
         "m_c": {
             "age": [
                 "senior"
-            ],
-            "status": [
-                "any"
-            ],
-            "relationship_status": [
-                "mates"
-            ],
-            "dies": true
-        },
-        "r_c": {
-            "age": [
-                "senior"
-            ],
-            "status": [
-                "any"
             ],
             "dies": true
         },
         "history": [
             {
                 "cats": [
-                    "m_c",
-                    "r_c"
+                    "m_c"
                 ],
-                "death": "This cat died from old age."
-            }
-        ],
-        "relationships": [
-            {
-                "cats_from": ["clan", "high_social"],
-                "cats_to": ["r_c", "m_c"],
-                "values": ["like", "comfort"],
-                "amount": 10,
-                "mutual": false,
-                "log": {
-                    "cats_from": "from_cat was touched by how deeply r_c and m_c loved each other."
-                }
+                "death": "m_c died of old age."
             }
         ]
     },
@@ -1895,7 +1918,7 @@
             "no_body",
             "all_lives"
         ],
-        "frequency": 4,
+        "frequency": 2,
         "event_text": "m_c met their end to the long claws of a predator. Later, c_n found only {PRONOUN/m_c/poss} blood and a foul smell.",
         "m_c": {
             "age": [
@@ -1969,6 +1992,11 @@
                 "pool": {
                     "sub_type": [
                         "murder_reveal"
+                    ],
+                    "excluded_event_id": [
+                        "gen_misc_murderreveal_tattletail1",
+                        "gen_misc_murderreveal_tattletail2",
+                        "gen_misc_murderreveal_tattletail3"
                     ]
                 },
                 "moon_delay": [
@@ -2044,6 +2072,11 @@
                 "pool": {
                     "sub_type": [
                         "murder_reveal"
+                    ],
+                    "excluded_event_id": [
+                        "gen_misc_murderreveal_tattletail1",
+                        "gen_misc_murderreveal_tattletail2",
+                        "gen_misc_murderreveal_tattletail3"
                     ]
                 },
                 "moon_delay": [
@@ -2108,6 +2141,11 @@
                 "pool": {
                     "sub_type": [
                         "murder_reveal"
+                    ],
+                    "excluded_event_id": [
+                        "gen_misc_murderreveal_tattletail1",
+                        "gen_misc_murderreveal_tattletail2",
+                        "gen_misc_murderreveal_tattletail3"
                     ]
                 },
                 "moon_delay": [
@@ -2179,6 +2217,11 @@
                 "pool": {
                     "sub_type": [
                         "murder_reveal"
+                    ],
+                    "excluded_event_id": [
+                        "gen_misc_murderreveal_tattletail1",
+                        "gen_misc_murderreveal_tattletail2",
+                        "gen_misc_murderreveal_tattletail3"
                     ]
                 },
                 "moon_delay": [
@@ -2209,7 +2252,7 @@
         "tags": [
             "all_lives"
         ],
-        "frequency": 3,
+        "frequency": 2,
         "event_text": "Last c_n heard, m_c and r_c were going out to play. They don't return, and the ice on a nearby pond is cracked.",
         "m_c": {
             "age": [
@@ -2634,7 +2677,7 @@
             "any"
         ],
         "tags": [],
-        "frequency": 4,
+        "frequency": 1,
         "event_text": "m_c was killed while trying to save the medicine cat of o_c_n.",
         "m_c": {
             "status": [
@@ -2695,7 +2738,7 @@
             "any"
         ],
         "tags": [],
-        "frequency": 4,
+        "frequency": 1,
         "event_text": "m_c was killed by the deputy of o_c_n.",
         "m_c": {
             "status": [
@@ -2733,7 +2776,7 @@
             "any"
         ],
         "tags": [],
-        "frequency": 4,
+        "frequency": 1,
         "event_text": "m_c was killed while trying to save the deputy of o_c_n.",
         "m_c": {
             "status": [
@@ -2781,7 +2824,7 @@
             "any"
         ],
         "tags": [],
-        "frequency": 4,
+        "frequency": 1,
         "event_text": "m_c was killed by the leader of o_c_n.",
         "m_c": {
             "status": [
@@ -2819,7 +2862,7 @@
             "any"
         ],
         "tags": [],
-        "frequency": 4,
+        "frequency": 1,
         "event_text": "m_c was killed while trying to save the leader of o_c_n.",
         "m_c": {
             "status": [
@@ -3121,6 +3164,11 @@
                 "pool": {
                     "sub_type": [
                         "murder_reveal"
+                    ],
+                    "excluded_event_id": [
+                        "gen_misc_murderreveal_tattletail1",
+                        "gen_misc_murderreveal_tattletail2",
+                        "gen_misc_murderreveal_tattletail3"
                     ]
                 },
                 "moon_delay": [
@@ -3420,14 +3468,16 @@
             "any"
         ],
         "tags": [],
-        "frequency": 3,
+        "frequency": 1,
         "event_text": "m_c grew weak as the days passed and now walks the stars of Silverpelt.",
         "m_c": {
             "age": [
-                "kitten"
+                "kitten",
+                "newborn"
             ],
             "status": [
-                "kitten"
+                "kitten",
+                "newborn"
             ],
             "dies": true
         },
@@ -3437,6 +3487,96 @@
                     "m_c"
                 ],
                 "death": "m_c failed to thrive."
+            }
+        ]
+    },
+    {
+        "event_id": "gen_death_newborn_death1",
+        "location": [
+            "any"
+        ],
+        "season": [
+            "any"
+        ],
+        "tags": [],
+        "frequency": 1,
+        "event_text": "As the medicine cat looks over r_c's newborn litter one last time, they noticed something was very off... little m_c hadn't moved since {PRONOUN/m_c/subject} was birthed, nor did {PRONOUN/m_c/subject} have a pulse... After a few unsuccessful attempts on reviving the kit, a heartbreaking realization dawns over the medicine cat and r_c - it seems that m_c was stillborn.",
+        "m_c": {
+            "age": [
+                "newborn"
+            ],
+            "status": [
+                "newborn"
+            ],
+		    "relationship_constraint": [
+			    "child/parent"
+		    ],
+            "dies": true
+        },
+        "r_c": {
+            "age": [
+                "young adult",
+                "adult",
+                "senior adult",
+                "senior"
+            ],
+        "has_injuries": {
+            "r_c": [
+                "recovering from birth"
+            ]
+		  }
+        },
+        "history": [
+            {
+                "cats": [
+                    "m_c"
+                ],
+                "death": "m_c was stillborn."
+            }
+        ]
+    },
+    {
+        "event_id": "gen_death_newborn_death2",
+        "location": [
+            "any"
+        ],
+        "season": [
+            "any"
+        ],
+        "tags": [],
+        "frequency": 1,
+        "event_text": "The birth was hard, it really was, and r_c knew that m_c was smaller than a typical newborn kit, but she didn't expect m_c to have been so weak that {PRONOUN/m_c/subject}'d be sent to Starclan not even an hour after birth... r_c wails in agony as m_c's tiny body is moved for {PRONOUN/m_c/poss} vigil.",
+        "m_c": {
+            "age": [
+                "newborn"
+            ],
+            "status": [
+                "newborn"
+            ],
+		    "relationship_constraint": [
+			    "child/parent"
+		    ],
+            "dies": true
+        },
+        "r_c": {
+            "age": [
+                "young adult",
+                "adult",
+                "senior adult",
+                "senior"
+            ],
+        "has_injuries": {
+            "r_c": [
+                "recovering from birth"
+            ]
+		  }
+        },
+        "history": [
+            {
+                "cats": [
+                    "m_c"
+                ],
+                "death": "m_c died shortly after birth."
             }
         ]
     },
@@ -3453,7 +3593,7 @@
             "greenleaf"
         ],
         "tags": [],
-        "frequency": 4,
+        "frequency": 2,
         "event_text": "m_c fell into a river and drowned.",
         "m_c": {
             "age": [
@@ -3543,7 +3683,7 @@
             "any"
         ],
         "tags": [],
-        "frequency": 4,
+        "frequency": 1,
         "event_text": "m_c was killed when {PRONOUN/m_c/subject} snuck out of camp.",
         "m_c": {
             "age": [
@@ -3782,6 +3922,11 @@
                 "pool": {
                     "sub_type": [
                         "murder_reveal"
+                    ],
+                    "excluded_event_id": [
+                        "gen_misc_murderreveal_tattletail1",
+                        "gen_misc_murderreveal_tattletail2",
+                        "gen_misc_murderreveal_tattletail3"
                     ]
                 },
                 "moon_delay": [
@@ -3842,6 +3987,11 @@
                 "pool": {
                     "sub_type": [
                         "murder_reveal"
+                    ],
+                    "excluded_event_id": [
+                        "gen_misc_murderreveal_tattletail1",
+                        "gen_misc_murderreveal_tattletail2",
+                        "gen_misc_murderreveal_tattletail3"
                     ]
                 },
                 "moon_delay": [
@@ -3910,6 +4060,11 @@
                 "pool": {
                     "sub_type": [
                         "murder_reveal"
+                    ],
+                    "excluded_event_id": [
+                        "gen_misc_murderreveal_tattletail1",
+                        "gen_misc_murderreveal_tattletail2",
+                        "gen_misc_murderreveal_tattletail3"
                     ]
                 },
                 "moon_delay": [
@@ -5930,6 +6085,11 @@
                 "pool": {
                     "sub_type": [
                         "murder_reveal"
+                    ],
+                    "excluded_event_id": [
+                        "gen_misc_murderreveal_tattletail1",
+                        "gen_misc_murderreveal_tattletail2",
+                        "gen_misc_murderreveal_tattletail3"
                     ]
                 },
                 "moon_delay": [
@@ -6004,6 +6164,11 @@
                 "pool": {
                     "sub_type": [
                         "murder_reveal"
+                    ],
+                    "excluded_event_id": [
+                        "gen_misc_murderreveal_tattletail1",
+                        "gen_misc_murderreveal_tattletail2",
+                        "gen_misc_murderreveal_tattletail3"
                     ]
                 },
                 "moon_delay": [
@@ -6106,6 +6271,11 @@
                 "pool": {
                     "sub_type": [
                         "murder_reveal"
+                    ],
+                    "excluded_event_id": [
+                        "gen_misc_murderreveal_tattletail1",
+                        "gen_misc_murderreveal_tattletail2",
+                        "gen_misc_murderreveal_tattletail3"
                     ]
                 },
                 "moon_delay": [
@@ -6173,6 +6343,11 @@
                 "pool": {
                     "sub_type": [
                         "murder_reveal"
+                    ],
+                    "excluded_event_id": [
+                        "gen_misc_murderreveal_tattletail1",
+                        "gen_misc_murderreveal_tattletail2",
+                        "gen_misc_murderreveal_tattletail3"
                     ]
                 },
                 "moon_delay": [
@@ -6269,6 +6444,11 @@
                 "pool": {
                     "sub_type": [
                         "murder_reveal"
+                    ],
+                    "excluded_event_id": [
+                        "gen_misc_murderreveal_tattletail1",
+                        "gen_misc_murderreveal_tattletail2",
+                        "gen_misc_murderreveal_tattletail3"
                     ]
                 },
                 "moon_delay": [
@@ -6595,6 +6775,11 @@
                 "pool": {
                     "sub_type": [
                         "murder_reveal"
+                    ],
+                    "excluded_event_id": [
+                        "gen_misc_murderreveal_tattletail1",
+                        "gen_misc_murderreveal_tattletail2",
+                        "gen_misc_murderreveal_tattletail3"
                     ]
                 },
                 "moon_delay": [
@@ -7213,6 +7398,11 @@
                 "pool": {
                     "sub_type": [
                         "murder_reveal"
+                    ],
+                    "excluded_event_id": [
+                        "gen_misc_murderreveal_tattletail1",
+                        "gen_misc_murderreveal_tattletail2",
+                        "gen_misc_murderreveal_tattletail3"
                     ]
                 },
                 "moon_delay": [
@@ -7298,6 +7488,11 @@
                 "pool": {
                     "sub_type": [
                         "murder_reveal"
+                    ],
+                    "excluded_event_id": [
+                        "gen_misc_murderreveal_tattletail1",
+                        "gen_misc_murderreveal_tattletail2",
+                        "gen_misc_murderreveal_tattletail3"
                     ]
                 },
                 "moon_delay": [
@@ -7370,6 +7565,11 @@
                 "pool": {
                     "sub_type": [
                         "murder_reveal"
+                    ],
+                    "excluded_event_id": [
+                        "gen_misc_murderreveal_tattletail1",
+                        "gen_misc_murderreveal_tattletail2",
+                        "gen_misc_murderreveal_tattletail3"
                     ]
                 },
                 "moon_delay": [
@@ -7437,6 +7637,11 @@
                 "pool": {
                     "sub_type": [
                         "murder_reveal"
+                    ],
+                    "excluded_event_id": [
+                        "gen_misc_murderreveal_tattletail1",
+                        "gen_misc_murderreveal_tattletail2",
+                        "gen_misc_murderreveal_tattletail3"
                     ]
                 },
                 "moon_delay": [
@@ -7511,6 +7716,11 @@
                 "pool": {
                     "sub_type": [
                         "murder_reveal"
+                    ],
+                    "excluded_event_id": [
+                        "gen_misc_murderreveal_tattletail1",
+                        "gen_misc_murderreveal_tattletail2",
+                        "gen_misc_murderreveal_tattletail3"
                     ]
                 },
                 "moon_delay": [
