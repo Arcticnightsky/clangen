@@ -50,7 +50,7 @@
 			"r_c was seen tossing out a gift m_c gave {PRONOUN/r_c/object}."
 		],
 		"relationship_constraint": [
-			"not_mates"
+			"-mates"
 		]
 	},
 	{
