@@ -626,13 +626,13 @@ class Cat:
             game.updated_afterlife_cats.add(self)
 
             cat_default_afterlife_id = self.status.get_default_afterlife_id()
-            if cat_default_afterlife_id == CatGroup.UNKNOWN_RESIDENCE_ID and self.status.is_exiled(CatGroup.PLAYER_CLAN_ID):
+            if self.status.is_exiled(CatGroup.PLAYER_CLAN_ID):
                 # exiled cats are special, cus they get kicked out of heaven
                 afterlife_group = CatGroup.DARK_FOREST
                 self.history.add_afterlife_acceptance(afterlife_group)
                 self.status.send_to_afterlife()
                 return
-            elif cat_default_afterlife_id == CatGroup.UNKNOWN_RESIDENCE_ID:
+            elif cat_default_afterlife_id == CatGroup.UNKNOWN_RESIDENCE_ID and not self.status.is_exiled(CatGroup.PLAYER_CLAN_ID):
                 pass
                 
             # kits are auto-accepted
@@ -854,9 +854,9 @@ class Cat:
         # mark the sprite as outdated
         self.pelt.rebuild_sprite = True
 
-        # exiled cats are special, cus they get kicked out a heaven
+        # exiled cats are special, cus they get kicked out of heaven
         if self.status.is_exiled(CatGroup.PLAYER_CLAN):
-            self.status.add_to_group(CatGroup.DARK_FOREST)
+            afterlife_group = CatGroup.DARK_FOREST
 
     def exile(self):
         """This is used to send a cat into exile."""
