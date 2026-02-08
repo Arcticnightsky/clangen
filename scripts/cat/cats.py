@@ -481,6 +481,7 @@ class Cat:
                 if allow_tortie_instead:
                     if random_module.randint(1, 3) == 1:
                         self.pelt.name = choice(Pelt.torties)
+                        self.pelt.colour = father.pelt.colour
                         self.pelt.tortie_base = choice(Pelt.pelt_patterns)
 
                         # --- ensure tortie data is fully assigned ---
@@ -510,6 +511,7 @@ class Cat:
                         print("Regular orange tomcat :)")
                 elif only_female_torties:
                     self.pelt.name = choice(Pelt.torties)
+                    self.pelt.colour = mother.pelt.colour
                     self.pelt.tortie_base = choice(Pelt.pelt_patterns)
 
                     # --- ensure tortie data is fully assigned ---
