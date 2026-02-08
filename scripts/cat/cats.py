@@ -514,7 +514,7 @@ class Cat:
 
                     # --- ensure tortie data is fully assigned ---
                     if not self.pelt.tortie_colour:
-                        self.pelt.tortie_color = father.pelt.colour
+                        self.pelt.tortie_colour = father.pelt.colour
 
                     if not self.pelt.tortie_pattern:
                         self.pelt.tortie_pattern = choice(Pelt.pelt_patterns)
