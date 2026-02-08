@@ -368,6 +368,7 @@ def trigger_future_events():
                 random_cat=Cat.fetch_cat(event.involved_cats.get("r_c")),
                 victim_cat=Cat.fetch_cat(event.involved_cats.get("mur_c")),
                 sub_type=event.pool.get("sub_type"),
+                event_id=event.pool.get("event_id"),
                 future_event=event,
             )
             if event.triggered:
