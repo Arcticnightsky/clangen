@@ -20,7 +20,7 @@ from scripts.cat import save_load, pronouns
 from scripts.cat.enums import CatAge, CatRank, CatSocial, CatGroup, CatCompatibility
 from scripts.cat.history import History
 from scripts.cat.names import Name
-from scripts.cat.pelts import Pelt, tortie_marking
+from scripts.cat.pelts import Pelt
 from scripts.cat.personality import Personality
 from scripts.cat.skills import CatSkills
 from scripts.cat.skills import SkillPath
@@ -490,11 +490,11 @@ class Cat:
                             elif mother.pelt.name in Pelt.torties:
                                 self.pelt.tortie_colour = mother.pelt.tortie_colour
 
-                        if not self.pelt.tortie_patches:
-                            self.pelt.tortie_patches = choice(Pelt.tortie_patches)
+                        if not self.pelt.tortie_pattern:
+                            self.pelt.tortie_pattern = choice(Pelt.pelt_patterns)
 
                         if not self.pelt.tortie_marking:
-                            self.pelt.tortie_marking = choice(Pelt.tortie_marking)
+                            self.pelt.tortie_marking = choice(Pelt.tortie_patches)
 
                         # Calicos MUST have white
                         if self.pelt.name == "Calico" and not self.pelt.white_patches:
@@ -516,8 +516,8 @@ class Cat:
                     if not self.pelt.tortie_colour:
                         self.pelt.tortie_color = father.pelt.colour
 
-                    if not self.pelt.tortie_patches:
-                        self.pelt.tortie_patches = choice(Pelt.tortie_patches)
+                    if not self.pelt.tortie_pattern:
+                        self.pelt.tortie_pattern = choice(Pelt.pelt_patterns)
 
                     if not self.pelt.tortie_marking:
                         self.pelt.tortie_marking = choice(Pelt.tortie_marking)
