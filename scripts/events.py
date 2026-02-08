@@ -1391,7 +1391,7 @@ def perform_ceremonies(cat):
                     print(f"Chance updated to {chance}")
                 
                 if primary == SkillPath.HEALER or secondary == SkillPath.HEALER:
-                    chance = int(chance / 4)
+                    chance = int(chance / 8)
                     print(f"{cat.name}'s a natural healer!")
                     print(f"Chance updated to {chance}")
 
