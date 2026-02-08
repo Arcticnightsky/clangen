@@ -520,7 +520,7 @@ class Cat:
                         self.pelt.tortie_pattern = choice(Pelt.pelt_patterns)
 
                     if not self.pelt.tortie_marking:
-                        self.pelt.tortie_marking = choice(Pelt.tortie_marking)
+                        self.pelt.tortie_marking = choice(Pelt.tortie_patches)
 
                     # Calicos MUST have white
                     if self.pelt.name == "Calico" and not self.pelt.white_patches:
