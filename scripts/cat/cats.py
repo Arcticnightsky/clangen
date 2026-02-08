@@ -481,6 +481,16 @@ class Cat:
                 if allow_tortie_instead:
                     if random_module.randint(1, 3) == 1:
                         self.pelt.name = choice(Pelt.torties)
+                        if self.pelt.name == "Calico" and mother.pelt.white_patches not in (
+                            list(Pelt.high_white)
+                            + list(Pelt.mostly_white)
+                            + ["FULLWHITE"]
+                        ) or father.pelt.white_patches not in (
+                            list(Pelt.high_white)
+                            + list(Pelt.mostly_white)
+                            + ["FULLWHITE"]
+                        ):
+                            self.pelt.name = "Tortie"
                         self.pelt.colour = father.pelt.colour
                         self.pelt.tortie_base = choice(Pelt.pelt_patterns)
 
@@ -511,6 +521,16 @@ class Cat:
                         print("Regular orange tomcat :)")
                 elif only_female_torties:
                     self.pelt.name = choice(Pelt.torties)
+                    if self.pelt.name == "Calico" and mother.pelt.white_patches not in (
+                        list(Pelt.high_white)
+                        + list(Pelt.mostly_white)
+                        + ["FULLWHITE"]
+                    ) or father.pelt.white_patches not in (
+                        list(Pelt.high_white)
+                        + list(Pelt.mostly_white)
+                        + ["FULLWHITE"]
+                    ):
+                        self.pelt.name = "Tortie"
                     self.pelt.colour = mother.pelt.colour
                     self.pelt.tortie_base = choice(Pelt.pelt_patterns)
 
