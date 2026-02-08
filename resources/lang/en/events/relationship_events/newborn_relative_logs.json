@@ -1,13 +1,40 @@
 {
         "positive_log": [
             "m_c visits the new litter and can't help feeling warmly toward this new addition to the family.",
+            "m_c can't wait to play with the new family member!",
+            "m_c has tears of joy in {PRONOUN/m_c/poss} eyes just from looking at the new litter!",
+            "m_c <i>knows</i> just by looking at this kit that they're going to be a great Clanmate when they grow up!",
+            "m_c is happy to have this new litter be a part of {PRONOUN/m_c/poss} family.",
+            "m_c has high hopes for this litter in the future.",
+            "m_c said {PRONOUN/m_c/subject} wasn't gonna play favorites, but r_c just stands out to {PRONOUN/m_c/poss} the most.",
+            "m_c thinks r_c has a bright future ahead of {PRONOUN/r_c/object}.",
+            "m_c can't wait to see the type of cat r_c becomes when {PRONOUN/r_c/subject} grows up.",
+            "m_c has trouble leaving the nursery - {PRONOUN/m_c/subject} wants to keep looking at the new litter just a little longer.",
+            "m_c is happy to see new life in the Clan and in {PRONOUN/m_c/poss} family.",
+            "m_c thinks that r_c is a literal gift from Starclan.",
+            "While looking down at the new litter, m_c purrs and just can't help but fuss over how cute r_c is!",
             "m_c is excited for {PRONOUN/m_c/poss} family to grow further."
         ],
         "negative_log": [
             "m_c finds {PRONOUN/m_c/self} judging the new kitten by {PRONOUN/r_c/poss} parent's actions.",
+            "m_c didn't want to feel this way towards an innocent kit, but something about r_c just feels off to {PRONOUN/m_c/object}...",
+            "m_c can't help but feel scorn looking at the new litter, more mouths to feed in this Clan, eh?",
+            "m_c is in tears looking at a new family member {PRONOUN/m_c/subject} didn't want...",
+            "m_c feels unease just by looking at r_c. What were {PRONOUN/r_c/poss} parents thinking? Surely it isn't the right time to have kits in the Clan?",
+            "m_c pretends to look happy for the new addition to the family, but deep down m_c doesn't have high hopes for {PRONOUN/r_c/poss} future...",
+            "m_c hopes this new kit can redeem {PRONOUN/r_c/self} in the future, because m_c doesn't think that positively of the new litter.",
+            "No matter how much m_c tries to, m_c just can't think positively of the new litter.",
+            "m_c feels like when r_c grows up, {PRONOUN/r_c/subject} will be such an <b>annoying</b> Clanmate. {PRONOUN/m_c/subject/CAP} could just tell by all the mewling and movement, and the fact {PRONOUN/r_c/subject} just <i>looks</i> annoying.",
+            "m_c doesn't like this new addition to {PRONOUN/m_c/poss} family - Just another mouth to feed.",
+            "m_c <i>knows</i> it isn't the kit's fault for being born, but {PRONOUN/m_c/subject} <i>really</i> didn't want any more family members...",
             "m_c doesn't see how {PRONOUN/m_c/subject} could be expected to celebrate the new litter."
         ],
         "neutral_log": [
+            "m_c hangs back in the nursery, looking over the litter with an unreadable expression on {PRONOUN/m_c/poss} face.",
+            "m_c looked over the new litter in the nursery for a few minutes and left without saying a word.",
+            "m_c doesn't really care about the new addition to the family, {PRONOUN/m_c/subject} just congratulated the parents and moved on.",
+            "m_c has no strong opinions over the new litter - {PRONOUN/m_c/subject}'d rather just wait for the kit the grow up and see how {PRONOUN/r_c/subject} behaves as a Clanmate before making assumptions.",
+            "m_c feels conflicted towards the new family addition. On one hand, r_c is so very cute, but on the other hand, m_c just doesn't feel much for the new litter.",
             "m_c finds {PRONOUN/m_c/poss} feelings conflicted towards the new family addition."
         ]
 }
