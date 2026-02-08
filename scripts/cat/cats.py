@@ -632,7 +632,7 @@ class Cat:
                 # exiled cats are special, cus they get kicked out of heaven
                 afterlife_group = CatGroup.DARK_FOREST
                 self.history.add_afterlife_acceptance(afterlife_group)
-                self.status.send_to_afterlife(afterlife_group)
+                self.status.send_to_afterlife()
                 return
             elif cat_default_afterlife_id == CatGroup.UNKNOWN_RESIDENCE_ID and not CatStanding.EXILED:
                 pass
@@ -657,7 +657,7 @@ class Cat:
                 if CatStanding.EXILED:
                     afterlife_group = CatGroup.DARK_FOREST
                     self.history.add_afterlife_acceptance(afterlife_group)
-                    self.status.send_to_afterlife(afterlife_group)
+                    self.status.send_to_afterlife()
                     return
                     
                  # afterlife does not like this cat 
