@@ -536,20 +536,30 @@ class History:
         """
         if aware_individuals is None:
             aware_individuals = []
+        # --- ensure murder history exists ---
+        if "is_murderer" not in self.murder:
+            return
 
-        for murder in self.murder["is_murderer"]:
+        # update murderer side
+        for murder in self.murder.get("is_murderer", []):
             if murder["victim"] == victim.ID:
                 if clan_reveal:
                     murder["revealed"]["to_clan"] = True
                 else:
-                    murder["revealed"]["aware_individuals"].extend(aware_individuals)
-        
-        for murder in victim.history.murder["is_victim"]:
-            if murder["murderer"] == murderer_id:
-                if clan_reveal:
-                    murder["revealed"]["to_clan"] = True
-                else:
-                    murder["revealed"]["aware_individuals"].extend(aware_individuals)
+                    for cat_id in aware_individuals:
+                        if cat_id not in murder["revealed"]["aware_individuals"]:
+                            murder["revealed"]["aware_individuals"].append(cat_id)
+
+        # update victim side
+        if "is_victim" in victim.history.murder:
+            for murder in victim.history.murder["is_victim"]:
+                if murder["murderer"] == murderer_id:
+                    if clan_reveal:
+                        murder["revealed"]["to_clan"] = True
+                    else:
+                        for cat_id in aware_individuals:
+                            if cat_id not in murder["revealed"]["aware_individuals"]:
+                                murder["revealed"]["aware_individuals"].append(cat_id)
 
     @staticmethod
     def get_murder_status_text(murder: dict, Cat) -> str:
