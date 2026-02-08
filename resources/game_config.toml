@@ -460,7 +460,7 @@ dev_tools = true
   base_random_murder_chance = 550
 
   # base 1/chance a disliked cat will be murdered
-  base_murder_kill_chance = 100
+  base_murder_kill_chance = 125
 
   # age cats will start dying of old age based on old_age_death_curve
   old_age_death_start = 150
