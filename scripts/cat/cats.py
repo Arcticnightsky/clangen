@@ -628,13 +628,13 @@ class Cat:
             game.updated_afterlife_cats.add(self)
 
             cat_default_afterlife_id = self.status.get_default_afterlife_id()
-            if self.status.is_exiled(CatGroup.PLAYER_CLAN_ID):
+            if self.status.is_exiled(CatGroup.PLAYER_CLAN_ID) or CatStanding.EXILED:
                 # exiled cats are special, cus they get kicked out of heaven
                 afterlife_group = CatGroup.DARK_FOREST
                 self.history.add_afterlife_acceptance(afterlife_group)
                 self.status.send_to_afterlife()
                 return
-            elif cat_default_afterlife_id == CatGroup.UNKNOWN_RESIDENCE_ID and not self.status.is_exiled(CatGroup.PLAYER_CLAN_ID):
+            elif cat_default_afterlife_id == CatGroup.UNKNOWN_RESIDENCE_ID and not CatStanding.EXILED:
                 pass
                 
             # kits are auto-accepted
@@ -654,7 +654,7 @@ class Cat:
                     rejected_ID = CatGroup.STARCLAN_ID
 
                  # extra check for exiled cats
-                if self.status.is_exiled(CatGroup.PLAYER_CLAN):
+                if CatStanding.EXILED:
                     afterlife_group = CatGroup.DARK_FOREST
                     self.history.add_afterlife_acceptance(afterlife_group)
                     self.status.send_to_afterlife()
@@ -856,10 +856,6 @@ class Cat:
         # mark the sprite as outdated
         self.pelt.rebuild_sprite = True
 
-        # exiled cats are special, cus they get kicked out of heaven
-        if self.status.is_exiled(CatGroup.PLAYER_CLAN):
-            afterlife_group = CatGroup.DARK_FOREST
-
     def exile(self):
         """This is used to send a cat into exile."""
 
@@ -875,6 +871,9 @@ class Cat:
                 fetched_cat.update_mentor()
         self.update_mentor()
 
+        # exiled cats are special, cus they get kicked out of heaven
+        afterlife_group = CatGroup.DARK_FOREST
+    
     def grief(self, body: bool):
         """
         compiles grief moon event text
