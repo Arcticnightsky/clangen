@@ -674,7 +674,7 @@ class Cat:
                     rejected_ID = CatGroup.STARCLAN_ID
 
                  # extra check for exiled cats
-                if CatStanding.EXILED:
+                if self.status.is_exiled(CatGroup.PLAYER_CLAN_ID) and CatStanding.EXILED:
                     afterlife_group = CatGroup.DARK_FOREST
                     self.history.add_afterlife_acceptance(afterlife_group)
                     self.status.send_to_afterlife()
