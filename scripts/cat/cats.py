@@ -20,7 +20,7 @@ from scripts.cat import save_load, pronouns
 from scripts.cat.enums import CatAge, CatRank, CatSocial, CatGroup, CatCompatibility
 from scripts.cat.history import History
 from scripts.cat.names import Name
-from scripts.cat.pelts import Pelt
+from scripts.cat.pelts import Pelt, tortie_marking
 from scripts.cat.personality import Personality
 from scripts.cat.skills import CatSkills
 from scripts.cat.skills import SkillPath
