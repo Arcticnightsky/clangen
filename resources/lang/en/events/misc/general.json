@@ -1299,6 +1299,9 @@
         "season": [
             "any"
         ],
+        "sub_type": [
+            "murder_reveal"
+        ],
         "tags": [
             "clan_wide"
         ],
@@ -1363,6 +1366,9 @@
         "season": [
             "any"
         ],
+        "sub_type": [
+            "murder_reveal"
+        ],
         "tags": [
             "clan_wide"
         ],
@@ -1422,6 +1428,9 @@
         ],
         "season": [
             "any"
+        ],
+        "sub_type": [
+            "murder_reveal"
         ],
         "tags": [
             "clan_wide"
