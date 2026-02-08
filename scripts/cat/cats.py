@@ -648,13 +648,7 @@ class Cat:
             game.updated_afterlife_cats.add(self)
 
             cat_default_afterlife_id = self.status.get_default_afterlife_id()
-            if self.status.is_exiled(CatGroup.PLAYER_CLAN_ID) or CatStanding.EXILED:
-                # exiled cats are special, cus they get kicked out of heaven
-                afterlife_group = CatGroup.DARK_FOREST
-                self.history.add_afterlife_acceptance(afterlife_group)
-                self.status.send_to_afterlife()
-                return
-            elif cat_default_afterlife_id == CatGroup.UNKNOWN_RESIDENCE_ID and not CatStanding.EXILED:
+            if cat_default_afterlife_id == CatGroup.UNKNOWN_RESIDENCE_ID and not CatStanding.EXILED:
                 pass
                 
             # kits are auto-accepted
@@ -674,11 +668,10 @@ class Cat:
                     rejected_ID = CatGroup.STARCLAN_ID
 
                  # extra check for exiled cats
-                if self.status.is_exiled(CatGroup.PLAYER_CLAN_ID) and CatStanding.EXILED:
+                if self.status.is_exiled(CatGroup.PLAYER_CLAN_ID):
                     afterlife_group = CatGroup.DARK_FOREST
                     self.history.add_afterlife_acceptance(afterlife_group)
                     self.status.send_to_afterlife()
-                    return
                     
                  # afterlife does not like this cat 
                 if (
