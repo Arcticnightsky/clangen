@@ -871,8 +871,9 @@ class Cat:
                 fetched_cat.update_mentor()
         self.update_mentor()
 
-        # exiled cats are special, cus they get kicked out of heaven
-        afterlife_group = CatGroup.DARK_FOREST
+        if self.status.is_exiled(CatGroup.PLAYER_CLAN_ID):
+            # exiled cats are special, cus they get kicked out of heaven
+            afterlife_group = CatGroup.DARK_FOREST
     
     def grief(self, body: bool):
         """
