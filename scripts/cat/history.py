@@ -543,7 +543,12 @@ class History:
                     murder["revealed"]["to_clan"] = True
                 else:
                     murder["revealed"]["aware_individuals"].extend(aware_individuals)
-
+                    # making double reveals happen, ex: cat1 knows about cat2 murdering cat3 and later on decides to reveal cat2's murder to the clan
+                    if aware_individuals and murder["revealed"]["to_clan"] == False:
+                        if murder["victim"] == victim.ID:
+                            if clan_reveal:
+                                murder["revealed"]["to_clan"] = True
+        
         for murder in victim.history.murder["is_victim"]:
             if murder["murderer"] == murderer_id:
                 if clan_reveal:
