@@ -670,8 +670,8 @@ class Cat:
                  # extra check for exiled cats
                 if self.status.is_exiled(CatGroup.PLAYER_CLAN_ID):
                     afterlife_group = CatGroup.DARK_FOREST
-                    self.history.add_afterlife_acceptance(afterlife_group)
-                    self.status.send_to_afterlife()
+                    rejected_ID = CatGroup.DARK_FOREST_ID
+                    self.status.send_to_afterlife(rejected_ID)
                     
                  # afterlife does not like this cat 
                 if (
