@@ -24,7 +24,7 @@
             {
                 "cats_from": ["n_c:0"],
                 "cats_to": ["m_c"],
-                "values": ["respect"],
+                "values": ["respect", "trust"],
                 "amount": 30,
                 "mutual": false,
                 "log": {
@@ -62,7 +62,7 @@
             {
                 "cats_from": ["n_c:0"],
                 "cats_to": ["m_c"],
-                "values": ["respect"],
+                "values": ["respect", "trust"],
                 "amount": 30,
                 "mutual": false,
                 "log": {
@@ -104,7 +104,7 @@
             {
                 "cats_from": ["n_c:0"],
                 "cats_to": ["m_c"],
-                "values": ["respect"],
+                "values": ["respect", "trust"],
                 "amount": 30,
                 "mutual": false,
                 "log": {
@@ -142,7 +142,7 @@
             {
                 "cats_from": ["n_c:0"],
                 "cats_to": ["m_c"],
-                "values": ["respect"],
+                "values": ["respect", "trust"],
                 "amount": 30,
                 "mutual": false,
                 "log": {
@@ -238,7 +238,7 @@
             {
                 "cats_from": ["n_c:0"],
                 "cats_to": ["m_c"],
-                "values": ["respect"],
+                "values": ["respect", "trust"],
                 "amount": 30,
                 "mutual": false,
                 "log": {
@@ -292,7 +292,7 @@
             {
                 "cats_from": ["n_c:0"],
                 "cats_to": ["m_c"],
-                "values": ["respect"],
+                "values": ["respect", "trust"],
                 "amount": 30,
                 "mutual": false,
                 "log": {
@@ -338,7 +338,7 @@
             {
                 "cats_from": ["n_c:0"],
                 "cats_to": ["m_c"],
-                "values": ["respect"],
+                "values": ["respect", "trust"],
                 "amount": 30,
                 "mutual": false,
                 "log": {
@@ -528,7 +528,7 @@
                 "amount": 20,
                 "mutual": true,
                 "log": {
-                    "cats_from": "m_c found n_c:0 and was the one to bring {PRONOUN/n_c:0/object} into the Clan."
+                    "cats_from": "m_c found n_c:0 and brought {PRONOUN/n_c:0/object} into the Clan."
                 }
             }
         ]
@@ -597,7 +597,7 @@
                 "amount": 20,
                 "mutual": true,
                 "log": {
-                    "cats_from": "m_c found n_c:0 and was the one to bring {PRONOUN/n_c:0/object} into the Clan."
+                    "cats_from": "m_c found n_c:0 and brought {PRONOUN/n_c:0/object} into the Clan."
                 }
             }
         ]
@@ -632,7 +632,7 @@
                 "amount": 20,
                 "mutual": true,
                 "log": {
-                    "cats_from": "m_c found n_c:0 and was the one to bring {PRONOUN/n_c:0/object} into the Clan."
+                    "cats_from": "m_c found n_c:0 and brought {PRONOUN/n_c:0/object} into the Clan."
                 }
             }
         ]
@@ -737,7 +737,7 @@
                 "amount": 20,
                 "mutual": true,
                 "log": {
-                    "cats_from": "m_c found n_c:0 and was the one to bring {PRONOUN/n_c:0/object} into the Clan."
+                    "cats_from": "m_c found n_c:0 and brought {PRONOUN/n_c:0/object} into the Clan."
                 }
             }
         ]
@@ -772,7 +772,7 @@
                 "amount": 20,
                 "mutual": true,
                 "log": {
-                    "cats_from": "m_c found n_c:0 and was the one to bring {PRONOUN/n_c:0/object} into the Clan."
+                    "cats_from": "m_c found n_c:0 and brought {PRONOUN/n_c:0/object} into the Clan."
                 }
             }
         ]
@@ -876,7 +876,7 @@
                 "amount": 20,
                 "mutual": true,
                 "log": {
-                    "cats_from": "m_c found n_c:0 and was the one to bring {PRONOUN/n_c:0/object} into the Clan."
+                    "cats_from": "m_c found n_c:0 and brought {PRONOUN/n_c:0/object} into the Clan."
                 }
             }
         ]
@@ -952,11 +952,11 @@
                 "amount": 20,
                 "mutual": true,
                 "log": {
-                    "cats_from": "m_c found n_c:0 and was the one to bring {PRONOUN/n_c:0/object} into the Clan."
+                    "cats_from": "m_c found n_c:0 and brought {PRONOUN/n_c:0/object} into the Clan."
                 }
             },
             {
-                "cats_from": ["high_lawful"],
+                "cats_from": ["clan", "high_lawful"],
                 "cats_to": ["n_c:0"],
                 "values": ["trust"],
                 "amount": -10,
@@ -998,11 +998,11 @@
                 "amount": 20,
                 "mutual": true,
                 "log": {
-                    "cats_from": "m_c found n_c:0 and was the one to bring {PRONOUN/n_c:0/object} into the Clan."
+                    "cats_from": "m_c found n_c:0 and brought {PRONOUN/n_c:0/object} into the Clan."
                 }
             },
             {
-                "cats_from": ["high_lawful"],
+                "cats_from": ["clan", "high_lawful"],
                 "cats_to": ["n_c:0"],
                 "values": ["trust"],
                 "amount": -15,
@@ -1044,11 +1044,11 @@
                 "amount": 20,
                 "mutual": true,
                 "log": {
-                    "cats_from": "m_c found n_c:0 and was the one to bring {PRONOUN/n_c:0/object} into the Clan."
+                    "cats_from": "m_c found n_c:0 and brought {PRONOUN/n_c:0/object} into the Clan."
                 }
             },
             {
-                "cats_from": ["high_lawful"],
+                "cats_from": ["clan", "high_lawful"],
                 "cats_to": ["n_c:0"],
                 "values": ["trust"],
                 "amount": -15,
@@ -1092,11 +1092,11 @@
                 "amount": 20,
                 "mutual": true,
                 "log": {
-                    "cats_from": "m_c found n_c:0 and was the one to bring {PRONOUN/n_c:0/object} into the Clan."
+                    "cats_from": "m_c found n_c:0 and brought {PRONOUN/n_c:0/object} into the Clan."
                 }
             },
             {
-                "cats_from": ["high_social"],
+                "cats_from": ["clan", "high_social"],
                 "cats_to": ["n_c:0"],
                 "values": ["like", "respect"],
                 "amount": 10,
@@ -1130,7 +1130,7 @@
             [
                 "can_birth",
                 "age:has_kits",
-                "rogue",
+                "former clancat",
                 "meeting",
                 "new_name"
             ],
@@ -1138,7 +1138,8 @@
                 "litter",
                 "new_name",
                 "backstory:stolenkit1",
-                "age:newborn"
+                "age:newborn",
+                "parent:0"
             ]
         ],
         "relationships": [
@@ -1176,11 +1177,30 @@
         },
         "new_cat": [
             [
+                "can_birth",
+                "age:has_kits",
+                "clancat",
+                "meeting"
+            ],
+            [
                 "new_name",
                 "backstory:stolenkit1",
                 "adoptive:m_c",
-                "age:newborn"
+                "age:newborn",
+                "parent:0"
             ]
+        ],
+        "relationships": [
+            {
+                "cats_from": ["n_c:0"],
+                "cats_to": ["m_c"],
+                "mutual": false,
+                "values": ["trust", "like"],
+                "amount": -60,
+                "log": {
+                    "cats_from": "to_cat stole from_cat's kits, and from_cat will do anything to get them back."
+                }
+            }
         ],
         "other_clan": {
             "current_rep": ["any"],
@@ -1208,7 +1228,7 @@
         ],
         "relationships": [
             {
-                "cats_from": ["high_stable"],
+                "cats_from": ["clan", "high_stable"],
                 "cats_to": ["n_c:0"],
                 "mutual": false,
                 "values": ["trust", "like"],
@@ -1265,7 +1285,7 @@
         ],
         "relationships": [
             {
-                "cats_from": ["high_stable"],
+                "cats_from": ["clan", "high_stable"],
                 "cats_to": ["n_c:0", "n_c:1", "n_c:2"],
                 "mutual": false,
                 "values": ["trust", "like"],
@@ -1310,7 +1330,7 @@
         ],
         "relationships": [
             {
-                "cats_from": ["high_stable"],
+                "cats_from": ["clan", "high_stable"],
                 "cats_to": ["n_c:0"],
                 "mutual": false,
                 "values": ["trust", "like"],
@@ -1367,7 +1387,7 @@
         ],
         "relationships": [
             {
-                "cats_from": ["high_stable"],
+                "cats_from": ["clan", "high_stable"],
                 "cats_to": ["n_c:0", "n_c:1", "n_c:2"],
                 "mutual": false,
                 "values": ["trust", "like"],
