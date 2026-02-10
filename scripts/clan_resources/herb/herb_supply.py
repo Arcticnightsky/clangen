@@ -432,6 +432,7 @@ class HerbSupply:
         # meds with relevant skills will get a boost to the herbs they find
         # SENSE finds larger amount of herbs
         # CLEVER finds greater quantity of herbs
+        # and HUNTER find a significant amount of herbs because, well, they hunt for herbs pretty well, no?
         primary = med_cat.skills.primary.path
         secondary = None
         if med_cat.skills.secondary:
@@ -447,6 +448,8 @@ class HerbSupply:
             quantity_modifier = constants.CONFIG["clan_resources"]["herbs"][
                 "primary_clever"
             ]
+        elif primary == SkillPath.HUNTER:
+            quantity_modifier = constants.CONFIG["clan_resources"]["herbs"]["primary_hunter"]
 
         if secondary == SkillPath.SENSE:
             amount_modifier = constants.CONFIG["clan_resources"]["herbs"][
@@ -456,6 +459,8 @@ class HerbSupply:
             quantity_modifier = constants.CONFIG["clan_resources"]["herbs"][
                 "secondary_clever"
             ]
+        elif secondary == SkillPath.HUNTER:
+            quantity_modifier = constants.CONFIG["clan_resources"]["herbs"]["secondary_hunter"]
 
         # list of the herbs, sorted by most need
         herb_list = self.sorted_by_need
@@ -474,7 +479,7 @@ class HerbSupply:
 
         # the amount of herb types the med has found
         amount_of_herbs = (
-            choices(population=[1, 2, 3], weights=weight, k=1)[0] + amount_modifier
+            choices(population=[5, 10, 15], weights=weight, k=1)[0] + amount_modifier
         )
         if general_amount_bonus:
             amount_of_herbs *= constants.CONFIG["clan_resources"]["herbs"][
@@ -513,7 +518,7 @@ class HerbSupply:
                 == 1
             ):
                 found_herbs[herb] = int(
-                    choices(population=[3, 4, 5], weights=weight, k=1)[0]
+                    choices(population=[4, 5, 6], weights=weight, k=1)[0]
                     * quantity_modifier
                 )
                 amount_of_herbs -= 1

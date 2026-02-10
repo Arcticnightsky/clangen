@@ -454,8 +454,8 @@
                     "scar": "m_c followed the scent of a trespassing cat and was scarred by a dog.",
                     "death": "m_c followed the scent of a trespassing cat and was killed by a dog."
                 },
-                "other_clan_rep": -1,
-                "frequency": 3
+                "other_clan_rep": -10,
+                "frequency": 2
             },
             {
                 "text": "The patrol follows the scent to a o_c_n cat taking refuge up a tree. The cat yowls a warning and the patrol scatters when they hear the cry. Just in time, too, as a large dog jumps at the patrol, catching r_c but thankfully only injuring {PRONOUN/r_c/object} before r_c tears {PRONOUN/r_c/self} free and sprints away.",
@@ -478,7 +478,7 @@
                     "scar": "m_c followed the scent of a trespassing cat and was scarred by a dog.",
                     "death": "m_c followed the scent of a trespassing cat and was killed by a dog."
                 },
-                "other_clan_rep": -1,
+                "other_clan_rep": -10,
                 "frequency": 3
             }
         ],
@@ -574,8 +574,8 @@
                     "scar": "m_c followed the scent of a trespassing cat and was scarred by a dog.",
                     "death": "m_c followed the scent of a trespassing cat and was killed by a dog."
                 },
-                "other_clan_rep": -1,
-                "frequency": 3
+                "other_clan_rep": -10,
+                "frequency": 2
             },
             {
                 "text": "r_c follows the scent to a o_c_n cat taking refuge up a tree. The cat yowls a warning and r_c sprints for the same tree when they hear the cry. Just in time, too, as a large dog jumps at them, catching r_c but thankfully only injuring {PRONOUN/r_c/object} before r_c tears {PRONOUN/r_c/self} free and scales the tree.",
@@ -598,7 +598,7 @@
                     "scar": "m_c followed the scent of a trespassing cat and was scarred by a dog.",
                     "death": "m_c followed the scent of a trespassing cat and was killed by a dog."
                 },
-                "other_clan_rep": -1,
+                "other_clan_rep": -10,
                 "frequency": 3
             }
         ],
@@ -926,7 +926,7 @@
                     "r_c"
                 ],
                 "other_clan_rep": -4,
-                "frequency": 2
+                "frequency": 1
             }
         ]
     },
@@ -1400,7 +1400,7 @@
                     "r_c"
                 ],
                 "other_clan_rep": -4,
-                "frequency": 2
+                "frequency": 1
             }
         ]
     },
@@ -1874,7 +1874,7 @@
                     "r_c"
                 ],
                 "other_clan_rep": -4,
-                "frequency": 2
+                "frequency": 1
             }
         ]
     },
@@ -2348,7 +2348,7 @@
                     "r_c"
                 ],
                 "other_clan_rep": -4,
-                "frequency": 2
+                "frequency": 1
             }
         ]
     },
@@ -2802,8 +2802,8 @@
                         "amount": -10
                     }
                 ],
-                "other_clan_rep": -3,
-                "frequency": 3
+                "other_clan_rep": -15,
+                "frequency": 1
             }
         ],
         "antag_fail_outcomes": [
