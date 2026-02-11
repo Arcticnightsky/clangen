@@ -493,9 +493,9 @@ class Cat:
                             self.pelt.name = "Tortie"
                         self.pelt.colour = father.pelt.colour
                         if mother.pelt.colour in Pelt.ginger_colours:
-                            self.pelt.tortie_base = choice([mother.pelt.name, father.pelt.name])
+                            self.pelt.tortie_base = choice([mother.pelt.name, father.pelt.name]).lower()
                         elif mother.pelt.name in Pelt.torties:
-                            self.pelt.tortie_base = choice([mother.pelt.tortie_base, father.pelt.name])
+                            self.pelt.tortie_base = choice([mother.pelt.tortie_base, father.pelt.name]).lower()
                         # --- ensure tortie data is fully assigned ---
                         if not self.pelt.tortie_colour:
                             if mother.pelt.colour in Pelt.ginger_colours:
@@ -504,7 +504,7 @@ class Cat:
                                 self.pelt.tortie_colour = mother.pelt.tortie_colour
 
                         if not self.pelt.tortie_pattern:
-                            self.pelt.tortie_pattern = choice([mother.pelt.name, father.pelt.name])
+                            self.pelt.tortie_pattern = self.pelt.tortie_base
 
                         if not self.pelt.tortie_marking:
                             self.pelt.tortie_marking = choice(Pelt.tortie_patches)
@@ -534,14 +534,14 @@ class Cat:
                     ):
                         self.pelt.name = "Tortie"
                     self.pelt.colour = mother.pelt.colour
-                    self.pelt.tortie_base = choice([mother.pelt.name, father.pelt.name])
+                    self.pelt.tortie_base = choice([mother.pelt.name, father.pelt.name]).lower()
 
                     # --- ensure tortie data is fully assigned ---
                     if not self.pelt.tortie_colour:
                         self.pelt.tortie_colour = father.pelt.colour
 
                     if not self.pelt.tortie_pattern:
-                        self.pelt.tortie_pattern = choice([mother.pelt.name, father.pelt.name])
+                        self.pelt.tortie_pattern = self.pelt.tortie_base
 
                     if not self.pelt.tortie_marking:
                         self.pelt.tortie_marking = choice(Pelt.tortie_patches)
