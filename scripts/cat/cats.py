@@ -650,7 +650,7 @@ class Cat:
             game.updated_afterlife_cats.add(self)
 
             cat_default_afterlife_id = self.status.get_default_afterlife_id()
-            if cat_default_afterlife_id == CatGroup.UNKNOWN_RESIDENCE_ID and not CatStanding.EXILED:
+            if cat_default_afterlife_id == CatGroup.UNKNOWN_RESIDENCE_ID:
                 pass
                 
             # kits are auto-accepted
@@ -884,10 +884,6 @@ class Cat:
             if fetched_cat:
                 fetched_cat.update_mentor()
         self.update_mentor()
-
-        if self.status.is_exiled(CatGroup.PLAYER_CLAN_ID):
-            # exiled cats are special, cus they get kicked out of heaven
-            afterlife_group = CatGroup.DARK_FOREST
     
     def grief(self, body: bool):
         """
