@@ -312,17 +312,20 @@ class Pregnancy_Events:
             other_cat_id = second_parent.ID
             other_cat = Cat.all_cats.get(other_cat_id)
             allow_affair = get_clan_setting("affair")
-            has_female_mate = any(
+            female_mates = [
                 Cat.fetch_cat(mate_id)
-                and Cat.fetch_cat(mate_id).gender == "female"
                 for mate_id in pregnant_cat.mate
-            )
+                if Cat.fetch_cat(mate_id) and Cat.fetch_cat(mate_id).gender == "female"
+            ]
 
-            mate = any(
+            male_mates = [
                 Cat.fetch_cat(mate_id)
-                and Cat.fetch_cat(mate_id).gender == "male"
                 for mate_id in pregnant_cat.mate
-            )
+                if Cat.fetch_cat(mate_id) and Cat.fetch_cat(mate_id).gender == "male"
+            ]
+
+            has_female_mate = len(female_mates) > 0
+            has_male_mate = len(male_mates) > 0
             
             if allow_affair is False:
                 text = choice(Pregnancy_Events.PREGNANT_STRINGS["announcement"])
@@ -351,14 +354,14 @@ class Pregnancy_Events:
                 severity = random.choices(["minor", "major"], [3, 1], k=1)
                 pregnant_cat.get_injured("pregnant", severity=severity[0])
                 text += choice(Pregnancy_Events.PREGNANT_STRINGS[f"{severity[0]}_severity"])
-                text = event_text_adjust(Cat, text, main_cat=pregnant_cat, random_cat=has_female_mate.ID, clan=clan)
+                text = event_text_adjust(Cat, text, main_cat=pregnant_cat, random_cat=female_mates[0] if female_mates else None, clan=clan)
                 involved_cats = [pregnant_cat.ID]
             elif allow_affair is True and second_parent.ID not in pregnant_cat.mate and len(pregnant_cat.mate) > 0 and not has_female_mate:
                 text = choice(Pregnancy_Events.PREGNANT_STRINGS["announcement_affair"])
                 severity = random.choices(["minor", "major"], [3, 1], k=1)
                 pregnant_cat.get_injured("pregnant", severity=severity[0])
                 text += choice(Pregnancy_Events.PREGNANT_STRINGS[f"{severity[0]}_severity"])
-                text = event_text_adjust(Cat, text, main_cat=pregnant_cat, random_cat=mate.ID, clan=clan)
+                text = event_text_adjust(Cat, text, main_cat=pregnant_cat, random_cat=male_mates[0] if male_mates else None, clan=clan)
                 involved_cats = [pregnant_cat.ID]
             game.cur_events_list.append(Single_Event(text, "birth_death", involved_cats))
 
