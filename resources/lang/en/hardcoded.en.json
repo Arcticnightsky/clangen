@@ -41,7 +41,6 @@
             "one": "%{names} found a %{insert} and decides to adopt it.",
             "many": "%{names} found a %{insert} and decides to adopt them."
         },
-        "adoption_kittens_pair": {
         "adoption_kittens_pair1": {
             "one": "%{names} found a %{insert} and decide to adopt it.",
             "many": "%{names} found a %{insert} and decide to adopt them."
