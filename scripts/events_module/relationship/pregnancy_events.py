@@ -1391,8 +1391,6 @@ class Pregnancy_Events:
         )
         if living_cats < 10:
             inverse_chance = int(inverse_chance * 0.5)
-        elif living_cats > 30:
-            inverse_chance = int(inverse_chance * (living_cats / 30))
 
         # COMPATIBILITY
         # - decrease / increase depending on the compatibility
