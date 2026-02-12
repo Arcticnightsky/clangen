@@ -17,7 +17,7 @@ import ujson  # type: ignore
 
 import scripts.game_structure.localization as pronouns
 from scripts.cat import save_load, pronouns
-<<<<<<< HEAD
+
 from scripts.cat.enums import (
     CatAge,
     CatRank,
@@ -25,10 +25,8 @@ from scripts.cat.enums import (
     CatGroup,
     CatCompatibility,
     CatThought,
+    CatStanding,
 )
-=======
-from scripts.cat.enums import CatAge, CatRank, CatSocial, CatStanding, CatGroup, CatCompatibility
->>>>>>> 38cad471ca26dc6a201dcf818793cd8108c28254
 from scripts.cat.history import History
 from scripts.cat.names import Name
 from scripts.cat.pelts import Pelt
