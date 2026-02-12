@@ -642,14 +642,15 @@ def create_new_cat(
         if (
             kit or litter or moons < 12
         ) and original_group not in game.clan.other_clan_IDs:
-            # babies change name, in case their initial name isn't clan-ish
-            new_cat.change_name()
             if new_cat.status.is_outsider:
                 if bool(getrandbits(1)):
                     name = choice(names.names_dict["loner_names"])
                     # otherwise give name from prefix list (more nature-y names)
                 else:
                     name = choice(names.names_dict["normal_prefixes"])
+            else:
+                # babies change name, in case their initial name isn't clan-ish
+                new_cat.change_name()
                 
         elif original_group not in game.clan.other_clan_IDs:
             # give kittypets a kittypet name
