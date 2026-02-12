@@ -206,21 +206,13 @@ class Pregnancy_Events:
         cats_involved = {"m_c": cat}
         cat.get_new_thought(CatThought.ON_BIRTH)
         if other_cat:
-            cats_involved["r_c"] = other_cat
+            cats_involved.append(other_cat.ID)
             other_cat.get_new_thought(CatThought.ON_BIRTH)
 
-        for kit in kits:
-            kit.get_new_thought()
-=======
-        cat_dict = {"m_c": cat}
-        cats_involved = [cat.ID]
-        if other_cat:
-            cats_involved.append(other_cat.ID)
         for kit in kits:
             kit.thought = "Snuggles close to r_c"
             kit.thought = event_text_adjust(Cat, kit.thought, random_cat=cat)
             cats_involved.append(kit.ID)
->>>>>>> 38cad471ca26dc6a201dcf818793cd8108c28254
 
         # Normally, birth cooldown is only applied to cat who gave birth
         # However, if we don't apply birth cooldown to adoption, we get
