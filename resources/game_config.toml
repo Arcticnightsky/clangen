@@ -122,8 +122,8 @@ dev_tools = true
 
   # these denote how relationships change upon a breakup
   [mates.breakup]
-    threshold = 200
-    variability = [-20, 20]
+    threshold = 175
+    variability = [-10, 10]
     [mates.breakup.default_weights]
       had_fight = 3
       decided_to_be_friends = 3
