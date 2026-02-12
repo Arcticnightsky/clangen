@@ -45,8 +45,6 @@
             "one": "%{names} found a %{insert} and decide to adopt it.",
             "many": "%{names} found a %{insert} and decide to adopt them."
         },
-<<<<<<< HEAD
-=======
         "adoption_kittens_pair2": {
             "one": "While they were out on a casual stroll through the territory, %{names} heard the cries of a %{insert}, looking for its parent! They stayed with the kit till its parent came for it. After hours of waiting and no sign of its parent, %{names} decide to adopt the kit as their own.",
             "many": "While they were out on a casual stroll through the territory, %{names} heard the cries of a %{insert}, looking for their parent! They stayed with the kits till their parent came for them. After hours of waiting and no sign of their parent, %{names} decide to adopt them as their own."
@@ -65,7 +63,6 @@
         },
         "new_kit_thought": "Snuggles up to the belly of r_c",
         "new_adopted_kit_thought": "Snuggles close to r_c",
->>>>>>> 38cad471ca26dc6a201dcf818793cd8108c28254
         "event_mediator_app": "m_c has chosen to use {PRONOUN/m_c/poss} skills and experience to help solve the Clan's disagreements. A meeting is called, and {PRONOUN/m_c/subject} {VERB/m_c/become/becomes} the Clan's newest mediator.",
         "herbs_found": {
             "zero": "med_name could not find any herbs this moon.",
