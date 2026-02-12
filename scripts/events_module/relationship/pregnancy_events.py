@@ -202,7 +202,6 @@ class Pregnancy_Events:
             count=amount,
         )
 
-<<<<<<< HEAD
         cats_involved = {"m_c": cat}
         cat.get_new_thought(CatThought.ON_BIRTH)
         if other_cat:
@@ -982,12 +981,8 @@ class Pregnancy_Events:
                             (CatSocial.LONER, CatSocial.KITTYPET)
                         ),
                         alive=False,
-<<<<<<< HEAD
-                        moons=randint(15, 120),
-=======
                         thought=thought,
                         moons=randint(20, 120),
->>>>>>> 38cad471ca26dc6a201dcf818793cd8108c28254
                         outside=True,
                     )[0]
                     thought = event_text_adjust(
