@@ -6,7 +6,14 @@ import i18n
 
 from scripts.cat.skills import SkillPath
 from scripts.cat.cats import Cat
-from scripts.cat.enums import CatAge, CatGroup, CatRank, CatSocial, CatCompatibility
+from scripts.cat.enums import (
+    CatAge,
+    CatGroup,
+    CatRank,
+    CatSocial,
+    CatCompatibility,
+    CatThought,
+)
 from scripts.cat.names import names, Name
 from scripts.cat.status import StatusDict
 from scripts.cat_relations.relationship import Relationship, RelType
@@ -195,10 +202,13 @@ class Pregnancy_Events:
             count=amount,
         )
 
-        cat_dict = {"m_c": cat}
-        cats_involved = [cat.ID]
+<<<<<<< HEAD
+        cats_involved = {"m_c": cat}
+        cat.get_new_thought(CatThought.ON_BIRTH)
         if other_cat:
             cats_involved.append(other_cat.ID)
+            other_cat.get_new_thought(CatThought.ON_BIRTH)
+
         for kit in kits:
             kit.thought = "Snuggles close to r_c"
             kit.thought = event_text_adjust(Cat, kit.thought, random_cat=cat)
@@ -972,10 +982,17 @@ class Pregnancy_Events:
                             (CatSocial.LONER, CatSocial.KITTYPET)
                         ),
                         alive=False,
+<<<<<<< HEAD
+                        moons=randint(15, 120),
+=======
                         thought=thought,
                         moons=randint(20, 120),
+>>>>>>> 38cad471ca26dc6a201dcf818793cd8108c28254
                         outside=True,
                     )[0]
+                    thought = event_text_adjust(
+                        Cat, text=thought, main_cat=blood_parent
+                    )
                     blood_parent.thought = thought
                     
                     kit_age = random.randint(1, 5)  # 1–5 moons old
@@ -1002,8 +1019,6 @@ class Pregnancy_Events:
                     moons=0,
                     status_dict=kitten_status,
                 )
-                kit.thought = i18n.t("hardcoded.new_kit_thought", name=str(cat.name))
-                kit.thought = event_text_adjust(Cat, kit.thought, random_cat=cat)
             else:
                 # A one blood parent litter is the only option left.
                 kit = Cat(
@@ -1012,8 +1027,8 @@ class Pregnancy_Events:
                     backstory=backstory,
                     status_dict=kitten_status,
                 )
-                kit.thought = i18n.t("hardcoded.new_kit_thought", name=str(cat.name))
-                kit.thought = event_text_adjust(Cat, kit.thought, random_cat=cat)
+
+            kit.get_new_thought()
 
             # make lost status match parent
             if cat and cat.status.is_lost():
@@ -1119,8 +1134,13 @@ class Pregnancy_Events:
         # add them as adoptive parents if not
         final_adoptive_parents = []
         for adoptive_p in all_adoptive_parents:
+            Cat.fetch_cat(adoptive_p).get_new_thought(CatThought.ON_BIRTH)
             if adoptive_p not in all_kitten[0].inheritance.all_involved:
                 final_adoptive_parents.append(adoptive_p)
+        if not adoptive_parents:
+            cat.get_new_thought(CatThought.ON_BIRTH)
+            if other_cat:
+                cat.get_new_thought(CatThought.ON_BIRTH)
 
         # Add the adoptive parents.
         if final_adoptive_parents:

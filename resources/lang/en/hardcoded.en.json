@@ -115,10 +115,6 @@
             "many": "Fleas have been hopping from pelt to pelt and now %{cats} are all infested."
         },
         "illness_spread": "%{illness} has spread around the camp. %{cats} have been infected.",
-        "thought_new_cat": "Is looking around the camp with wonder",
-        "thought_new_kitten": "Is snuggled safe in the nursery",
-        "thought_meeting": "Is wondering about those new cats",
-        "thought_new_dead": "Explores a new, starry world",
         "scar_event0": "m_c's %{injury} has healed, but {PRONOUN/m_c/subject}'ll always carry evidence of it on {PRONOUN/m_c/poss} pelt.",
         "scar_event1": "m_c healed from {PRONOUN/m_c/poss} %{injury} but will forever be marked by a scar.",
         "scar_event2": "m_c's %{injury} has healed, but the injury left {PRONOUN/m_c/object} scarred.",
