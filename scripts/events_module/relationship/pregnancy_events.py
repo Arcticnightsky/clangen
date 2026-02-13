@@ -1505,7 +1505,7 @@ class Pregnancy_Events:
             else: 
                 inverse_chance = int(inverse_chance * 2.3)
 
-        # In real life, cats are most likely to have concieve kits during the spring and summer months
+        # In real life, cats are most likely to have kits during the spring and summer months
         if game.clan.current_season in ["Newleaf", "Greenleaf"]:
             inverse_chance = int(inverse_chance * 0.7)
         
