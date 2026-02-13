@@ -1492,6 +1492,20 @@ class Pregnancy_Events:
                     inverse_chance = int(inverse_chance / 1.2) # chance is kinda low for adult toms because... perhaps their young adult wife is just sexy????
             else: 
                 inverse_chance = int(inverse_chance / 1.3)
+
+        # If the parent(s) are seniors, the chance for kits is lower because... they're old - a little too old to have kits
+        if first_parent.age == CatAge.SENIOR:
+            if second_parent:
+                if second_parent.age == CatAge.SENIOR:
+                    inverse_chance = int(inverse_chance * 2.4) 
+                else:
+                    inverse_chance = int(inverse_chance * 2.2)
+            else: 
+                inverse_chance = int(inverse_chance * 2.3)
+
+        # In real life, cats are most likely to have concieve kits during the spring and summer months
+        if game.clan.current_season in ["Newleaf", "Greenleaf"]:
+            inverse_chance = int(inverse_chance * 0.7)
         
         # 'INBREED' counter
         # - increase inverse chance if one of the current cats belongs in the biggest family
