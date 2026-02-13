@@ -1497,9 +1497,9 @@ class Pregnancy_Events:
         if first_parent.age == CatAge.SENIOR:
             if second_parent:
                 if second_parent.age == CatAge.SENIOR:
-                    inverse_chance = int(inverse_chance * 2.4) 
+                    inverse_chance = int(inverse_chance * 2.2) 
                 else:
-                    inverse_chance = int(inverse_chance * 2.2)
+                    inverse_chance = int(inverse_chance * 2.4)
             else: 
                 inverse_chance = int(inverse_chance * 2.3)
 
