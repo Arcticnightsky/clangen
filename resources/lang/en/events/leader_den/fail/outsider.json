@@ -1004,5 +1004,25 @@
       "status": ["rogue"],
       "new_thought": "Is perfectly happy where {PRONOUN/m_c/subject} {VERB/m_c/are/is}"
     }
+  },
+  {
+    "interaction_type": "invite",
+    "event_text": "c_n finds m_c and invites {PRONOUN/m_c/object} to join the Clan. Hesitantly, m_c declines - {PRONOUN/m_c/subject} doesn't want to leave {PRONOUN/m_c/poss} Twolegs and make them upset by leaving them.",
+    "reputation": ["welcoming", "neutral"],
+    "rep_change": 0,
+    "m_c": {
+      "status": ["kittypet"],
+      "new_thought": "Watches the Clan cats retreat, wondering if {PRONOUN/m_c/poss} Twolegs would've minded at all..."
+    }
+  },
+  {
+    "interaction_type": "invite",
+    "event_text": "c_n tracks m_c's scent to {PRONOUN/m_c/poss} housefolk's nest and, while peering through a small window, sees m_c all snuggled up and coddled by {PRONOUN/m_c/poss} Twoleg. They can't speak to {PRONOUN/m_c/object} right now - {PRONOUN/m_c/subject}'s too comfortable with {PRONOUN/m_c/poss} Twoleg.",
+    "reputation": ["welcoming", "neutral"],
+    "rep_change": 0,
+    "m_c": {
+      "status": ["kittypet"],
+      "new_thought": "Thought {PRONOUN/m_c/subject} saw a Clan cat at the corner of {PRONOUN/m_c/poss} eye peering through the window."
+    }
   }
 ]
