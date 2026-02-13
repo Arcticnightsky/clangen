@@ -613,7 +613,7 @@ class Relationship:
         group = self._get_tier_group(self.like)
 
         if group == "extreme_neg":
-            return RelTier.LOATHES
+            return RelTier.DISCREDITS
         elif group == "mid_neg":
             return RelTier.HATES
         elif group == "low_neg":
