@@ -1014,6 +1014,8 @@ class Pregnancy_Events:
                     moons=0,
                     status_dict=kitten_status,
                 )
+                kit.thought = "Snuggles up to the belly of r_c"
+                kit.thought = event_text_adjust(Cat, kit.thought, random_cat=cat)
             else:
                 # A one blood parent litter is the only option left.
                 kit = Cat(
@@ -1022,8 +1024,8 @@ class Pregnancy_Events:
                     backstory=backstory,
                     status_dict=kitten_status,
                 )
-
-            kit.get_new_thought()
+                kit.thought = "Snuggles up to the belly of r_c"
+                kit.thought = event_text_adjust(Cat, kit.thought, random_cat=cat)
 
             # make lost status match parent
             if cat and cat.status.is_lost():
