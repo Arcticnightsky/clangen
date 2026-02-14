@@ -545,8 +545,9 @@ def handle_lead_den_event():
                         # if cat is an apprentice, make sure they get a mentor!
                         if invited_cat.status.rank == CatRank.APPRENTICE:
                             invited_cat.update_mentor()
-                        elif invited_cat.status.rank == CatRank.MEDIATOR and get_clan_setting("become_mediator") is False:
-                            invited_cat.status._change_rank(CatRank.WARRIOR)
+                        # if the cat chose to become a mediator but the settings don't allow it, make them a warrior or medicine cat instead
+                        if invited_cat.status.rank == CatRank.MEDIATOR and not get_clan_setting("become_mediator"):
+                            invited_cat.status._change_rank(choice([CatRank.WARRIOR, CatRank.MEDICINE_CAT]))
                     
                     invited_cat.create_relationships_new_cat()
 
