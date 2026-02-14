@@ -1038,86 +1038,6 @@
                     "cats_from": "from_cat was impressed that to_cat had the guts to confront from_cat alone about mur_c's death."
                 }
             }
-        ]
-    },
-    {
-        "event_id": "gen_misc_murderreveal_any15",
-        "location": [
-            "any"
-        ],
-        "season": [
-            "any"
-        ],
-        "sub_type": [
-            "murder_reveal"
-        ],
-        "frequency": 2,
-        "event_text": "One day, when m_c and r_c are alone together, r_c gathers the courage to finally tell m_c what {PRONOUN/r_c/subject}{VERB/r_c/'ve/'s} been holding off for so long: {PRONOUN/r_c/subject} {VERB/r_c/know/knows} m_c was the one who killed mur_c, and has been waiting for {PRONOUN/m_c/object} to do the right thing and confess, but if {PRONOUN/m_c/subject} {VERB/m_c/don't/doesn't} do it, then r_c will have to be the one to tell the Clan. m_c is shocked, but also kind of admires r_c's guts to tell {PRONOUN/m_c/object} that when they're all alone together.",
-        "m_c": {
-            "age": [
-                "any"
-            ],
-            "status": [
-                "any"
-            ]
-        },
-        "r_c": {
-            "age": [
-                "adolescent",
-                "young adult",
-                "adult",
-                "senior adult",
-                "senior"
-            ],
-            "status": [
-                "any"
-            ],
-            "trait": [
-                "bold",
-                "daring",
-                "strict",
-                "righteous",
-                "strange",
-                "arrogant",
-                "confident"
-            ]
-        },
-        "relationships": [
-            {
-                "cats_from": [
-                    "r_c"
-                ],
-                "cats_to": [
-                    "m_c"
-                ],
-                "mutual": true,
-                "values": [
-                    "trust",
-                    "respect",
-                    "comfort",
-                    "like"
-                ],
-                "amount": -30,
-                "log": {
-                    "cats_from": "from_cat confronted to_cat's over the truth of mur_c's death and insisted {PRONOUN/to_cat/subject} come clean to the Clan."
-                }
-            },
-            {
-                "cats_from": [
-                    "m_c"
-                ],
-                "cats_to": [
-                    "r_c"
-                ],
-                "mutual": false,
-                "values": [
-                    "respect"
-                ],
-                "amount": 10,
-                "log": {
-                    "cats_from": "from_cat was impressed that to_cat had the guts to confront from_cat alone about mur_c's death."
-                }
-            }
         ],
     "future_event": [
             {
@@ -1137,7 +1057,7 @@
         ]
     },
     {
-        "event_id": "gen_misc_murderreveal_any16",
+        "event_id": "gen_misc_murderreveal_any15",
         "location": [
             "any"
         ],
@@ -1217,7 +1137,7 @@
         ]
     },
     {
-        "event_id": "gen_misc_murderreveal_any17",
+        "event_id": "gen_misc_murderreveal_any16",
         "location": [
             "any"
         ],
