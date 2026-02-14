@@ -479,6 +479,8 @@ def handle_lead_den_event():
                 additional_kits = outsider_cat.add_to_clan()
                 for mate_id in outsider_cat.mate:
                     mate = Cat.all_cats.get(mate_id)
+                    if not mate:
+                        continue
                     if (
                         mate
                         and mate.status.is_outsider
