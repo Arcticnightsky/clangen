@@ -23,7 +23,11 @@ from scripts.events_module.short.condition_events import Condition_Events
 from scripts.game_structure import constants
 from scripts.game_structure import game
 from scripts.game_structure.localization import load_lang_resource
-from scripts.events_module.text_adjust import event_text_adjust, adjust_list_text
+from scripts.events_module.text_adjust import (
+    event_text_adjust,
+    adjust_list_text,
+    process_text,
+)
 from scripts.events_module.consequences import (
     create_new_cat,
     change_relationship_values,
@@ -660,9 +664,23 @@ class Pregnancy_Events:
 
                 rel = mate.relationships.get(cat.ID)
                 if rel:
-                    rel.romance -= 30
-                    rel.trust -= 20
-                    rel.like -= 25
+                    rel.romance -= 50
+                    rel.trust -= 30
+                    rel.like -= 40
+                    rel.log.append(
+                        process_text(
+                            "m_c found out that r_c cheated on {PRONOUN/m_c/object} and had kits with another cat.",
+                            {
+                                "m_c": (str(mate.name), choice(mate.pronouns)),
+                                "r_c": (str(cat.name), choice(cat.pronouns)),
+                            },
+                        )
+                        + i18n.t(
+                            "relationships.age_postscript",
+                            name=str(cat.name),
+                            count=cat.moons,
+                        )
+                    )
 
         # If OTHER_CAT had mates and CAT is not one of them,
         # they also get a penalty for the affair
@@ -674,9 +692,23 @@ class Pregnancy_Events:
 
                 rel = mate.relationships.get(other_cat.ID)
                 if rel:
-                    rel.romance -= 30
-                    rel.trust -= 20
-                    rel.like -= 25
+                    rel.romance -= 50
+                    rel.trust -= 30
+                    rel.like -= 40
+                    rel.log.append(
+                        process_text(
+                            "m_c found out that r_c cheated on {PRONOUN/m_c/object} and had kits with another cat.",
+                            {
+                                "m_c": (str(mate.name), choice(mate.pronouns)),
+                                "r_c": (str(other_cat.name), choice(other_cat.pronouns)),
+                            },
+                        )
+                        + i18n.t(
+                            "relationships.age_postscript",
+                            name=str(other_cat.name),
+                            count=other_cat.moons,
+                        )
+                    )
 
         # display event
         game.cur_events_list.append(
