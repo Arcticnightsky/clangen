@@ -457,8 +457,8 @@ def handle_lead_den_event():
         # ADJUST REP
         game.clan.reputation += chosen_event["rep_change"]
 
-        additional_mates = None
-        additional_kits = None
+        additional_mates = []
+        additional_kits = []
         # SUCCESS/FAIL
         if info_dict["success"]:
             if info_dict["interaction_type"] == "hunt":
@@ -487,8 +487,8 @@ def handle_lead_den_event():
                         and not mate.dead
                         and not CatStanding.EXILED
                     ):
-                        additional_mates.append(mate)
-                    additional_mates = outsider_cat.add_to_clan()
+                        mate.add_to_clan()
+                        additional_mates.append(mate.ID)
                 
                 if additional_kits:
                     event_text += i18n.t(
@@ -501,15 +501,11 @@ def handle_lead_den_event():
 
                 if additional_mates:
                     event_text += i18n.t("hardcoded.event_lost_mate")
-                    
-                    for mate_id in lost_cat.mate:
-                            # add to involved cat list
-                        involved_cats.append(mate_id)
+                    involved_cats.extend(additional_mates)
                 
                 invited_cats = [outsider_cat.ID]
                 invited_cats.extend(additional_kits)
                 invited_cats.extend(additional_mates)
-                invited_cats = [outsider_cat.ID]
                 
                 for cat_ID in invited_cats:
                     invited_cat = Cat.fetch_cat(cat_ID)
