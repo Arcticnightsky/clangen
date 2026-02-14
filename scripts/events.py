@@ -486,7 +486,7 @@ def handle_lead_den_event():
                         and not CatStanding.EXILED
                     ):
                         additional_mates.append(mate)
-                        additional_mates = outsider_cat.add_to_clan()
+                    additional_mates = outsider_cat.add_to_clan()
                 
                 if additional_kits:
                     event_text += i18n.t(
