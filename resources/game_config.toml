@@ -446,8 +446,8 @@ dev_tools = true
   leader_death_chance = 10
 
   # base 1/chance a cat will die
-  classic_death_chance = 650
-  expanded_death_chance = 500
+  classic_death_chance = 850
+  expanded_death_chance = 750
   "cruel season_death_chance" = 300
 
   # modifiers for death chance based on if a war is going badly
@@ -472,9 +472,9 @@ dev_tools = true
 
 [condition_related]
   # 10/chance an illness will occur
-  expanded_illness_chance = 450
+  expanded_illness_chance = 600
   "cruel season_illness_chance" = 200
-  classic_illness_chance = 600
+  classic_illness_chance = 700
 
   # 5/chance (for most personalities) or 15/chance (for some personalities) an injury will occur 
   classic_injury_chance = 600
