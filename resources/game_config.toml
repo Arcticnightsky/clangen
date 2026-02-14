@@ -245,40 +245,40 @@ dev_tools = true
 
   # number / total for that age across all kit amounts = chance of having that many kits for that age
   [pregnancy.one_kit_possibility]
-    "young adult" = 4
-    adult = 7
-    "senior adult" = 10
-    senior = 4
+    "young adult" = 2
+    "adult" = 2
+    "senior adult" = 5
+    "senior" = 7
 
   [pregnancy.two_kit_possibility]
-    "young adult" = 10
-    adult = 10
-    "senior adult" = 15
-    senior = 3
+    "young adult" = 6
+    "adult" = 6
+    "senior adult" = 10
+    "senior" = 5
 
   [pregnancy.three_kit_possibility]
-    "young adult" = 17
-    adult = 15
-    "senior adult" = 5
-    senior = 2
+    "young adult" = 14
+    "adult" = 16
+    "senior adult" = 6
+    "senior" = 2
 
   [pregnancy.four_kit_possibility]
-    "young adult" = 14
-    adult = 8
+    "young adult" = 16
+    "adult" = 14
     "senior adult" = 3
-    senior = 1
+    "senior" = 1
 
   [pregnancy.five_kit_possibility]
-    "young adult" = 6
-    adult = 3
-    "senior adult" = 0
-    senior = 0
+    "young adult" = 8
+    "adult" = 6
+    "senior adult" = 1
+    "senior" = 0
 
   [pregnancy.max_kit_possibility]
     "young adult" = 3
-    adult = 1
+    "adult" = 2
     "senior adult" = 0
-    senior = 0
+    "senior" = 0
 
 [cat_generation]
   # base 1/chance that a cat will generate with a permanent condition. gets modified further in code
