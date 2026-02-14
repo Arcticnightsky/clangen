@@ -160,6 +160,10 @@
 			"m_c gave birth to a {insert}, made from her and r_c. m_c's mate will help raise them as well - The perfect opportunity for the same-sex pair to become parents for once.",
             "m_c's mate looks over m_c's new {insert} with mixed feelings - on one hand, m_c did cheat on her with r_c... but at the same time, she can help m_c raise this {insert} together since they could never have kits of their own! Seems like r_c did them a favor there."
         ],
+        "affair_mated_dead_mate": [
+            "m_c's mate was such a wonderful cat, deserving of being a parent, even after death... so why does m_c's {insert} look more like r_c instead?",
+            "This was supposed to be a bittersweet moment - m_c birthing her new {insert}, a last gift from her mate. Except, this {insert} isn't m_c's mate's at all... they're r_c's."
+        ],
         "death": [
             "Later, as the medicine cat wails with m_c's blood streaked through their pelt and a warrior comes to move the body for the vigil, no one knows what to do with the {insert}.",
             "As the sun tracks across the sky, m_c's bleeding gets worse and worse. It was still worth it, m_c decides, even as the medicine cat fights an impossible battle to keep {PRONOUN/m_c/object} out of StarClan. Still so worth it.",
