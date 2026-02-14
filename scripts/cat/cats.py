@@ -503,12 +503,12 @@ class Cat:
                         self.pelt.colour = father.pelt.colour
                         if mother.pelt.colour in Pelt.ginger_colours:
                             self.pelt.tortie_base = choice([mother.pelt.name, father.pelt.name]).lower()
-                            if mother.pelt.name == "TwoColour" or father.pelt.name == "TwoColour":
-                                self.pelt.tortie_base = "singlecolour"
+                            if mother.pelt.name in ["Singlecolour", "TwoColour"] or father.pelt.name in ["Singlecolour", "TwoColour"]:
+                                self.pelt.tortie_base = "single"
                         elif mother.pelt.name in Pelt.torties:
                             self.pelt.tortie_base = choice([mother.pelt.tortie_base, father.pelt.name]).lower()
-                            if father.pelt.name == "TwoColour":
-                                self.pelt.tortie_base = "singlecolour"
+                            if father.pelt.name in ["Singlecolour", "TwoColour"]:
+                                self.pelt.tortie_base = "single"
                         # --- ensure tortie data is fully assigned ---
                         if not self.pelt.tortie_colour:
                             if mother.pelt.colour in Pelt.ginger_colours:
@@ -548,8 +548,8 @@ class Cat:
                         self.pelt.name = "Tortie"
                     self.pelt.colour = mother.pelt.colour
                     self.pelt.tortie_base = choice([mother.pelt.name, father.pelt.name]).lower()
-                    if mother.pelt.name == "TwoColour" or father.pelt.name == "TwoColour":
-                        self.pelt.tortie_base = "singlecolour"
+                    if mother.pelt.name in ["Singlecolour", "TwoColour"] or father.pelt.name in ["Singlecolour", "TwoColour"]:
+                        self.pelt.tortie_base = "single"
 
                     # --- ensure tortie data is fully assigned ---
                     if not self.pelt.tortie_colour:
