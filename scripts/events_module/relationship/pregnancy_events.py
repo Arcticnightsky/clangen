@@ -202,9 +202,13 @@ class Pregnancy_Events:
             count=amount,
         )
 
-        cats_involved = {"m_c": cat}
+        cat_dict = {"m_c": cat}
+        cats_involved = [cat.ID]
+
         cat.get_new_thought(CatThought.ON_BIRTH)
+
         if other_cat:
+            cat_dict["r_c"] = other_cat
             cats_involved.append(other_cat.ID)
             other_cat.get_new_thought(CatThought.ON_BIRTH)
 
