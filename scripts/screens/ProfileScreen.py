@@ -1291,7 +1291,7 @@ class ProfileScreen(Screens):
                 body_history.append(death_history)
             # separate scar and death
             if body_history:
-                life_history.append("\n".join(body_history))
+                life_history.append("<br>".join(body_history))
 
             murder = self.get_murder_text()
             if murder:
@@ -1302,7 +1302,7 @@ class ProfileScreen(Screens):
                 life_history.append(afterlife_acceptance)
 
             # join together history list with line breaks
-            output = "\n\n".join(life_history)
+            output = "<br><br>".join(life_history)
         return output
 
     def get_afterlife_acceptance_text(self):
@@ -2184,11 +2184,12 @@ class ProfileScreen(Screens):
                 self.see_relationships_button.enable()
                 self.change_adoptive_parent_button.enable()
 
-            if (
-                self.the_cat.age
-                not in ["young adult", "adult", "senior adult", "senior"]
-                or not self.the_cat.status.alive_in_player_clan
-            ):
+            if self.the_cat.age not in [
+                "young adult",
+                "adult",
+                "senior adult",
+                "senior",
+            ]:
                 self.choose_mate_button.disable()
             else:
                 self.choose_mate_button.enable()

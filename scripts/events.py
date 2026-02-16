@@ -261,7 +261,7 @@ def one_moon():
     # handle the herb supply for the moon
     game.clan.herb_supply.handle_moon(
         clan_size=get_living_clan_cat_count(Cat),
-        clan_cats=Cat.all_cats_list,
+        clan_cats=[c for c in Cat.all_cats_list if c.status.alive_in_player_clan],
         med_cats=find_alive_cats_with_rank(
             Cat,
             ranks=[CatRank.MEDICINE_CAT, CatRank.MEDICINE_APPRENTICE],
