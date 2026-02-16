@@ -899,6 +899,8 @@ class Pelt:
             self.scars = tuple(scar for scar in self.scars if scar != "HALFTAIL")
         if "BLIND" in self.scars and "BRIGHTHEART" in self.scars:
             self.scars = tuple(scar for scar in self.scars if scar != "BLIND")
+        if "BLIND" in self.scars and "BOTHBLIND" in self.scars:
+            self.scars = tuple(scar for scar in self.scars if scar != "BLIND")
 
     def init_accessories(self, age):
         if age == "newborn":
