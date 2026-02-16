@@ -751,10 +751,15 @@ class ProfileScreen(Screens):
         output += "\n"
 
         # PELT TYPE
-        output += i18n.t(
-            "screens.profile.pelt_label",
-            pelt=i18n.t(f"cat.pelts.{the_cat.pelt.name}").lower(),
-        )
+        if the_cat.pelt.white_patches == "FULLWHITE":
+            output +=  i18n.t(
+                "screens.profile.pelt_label",
+                pelt="fullwhite") 
+        else:
+            output += i18n.t(
+                "screens.profile.pelt_label",
+                pelt=i18n.t(f"cat.pelts.{the_cat.pelt.name}").lower(),
+            )
         # NEWLINE ----------
         output += "\n"
 
