@@ -3083,7 +3083,7 @@
         "season": [
             "any"
         ],
-        "frequency": 4,
+        "frequency": 3,
         "event_text": "m_c fought a hawk and got hurt.",
         "m_c": {
             "status": [
@@ -3136,7 +3136,7 @@
         "season": [
             "any"
         ],
-        "frequency": 4,
+        "frequency": 2,
         "event_text": "m_c saved r_c from a hawk but was hurt.",
         "m_c": {
             "status": [
@@ -3639,7 +3639,7 @@
                     "damaged eyes"
                 ],
                 "scars": [
-                    "LEFTBLIND", "FACE", "RIGHTBLIND"
+                    "LEFTBLIND", "FACE", "RIGHTBLIND", "BOTHBLIND", "THREE"
                 ]
             }
         ],
@@ -5817,7 +5817,7 @@
         "season": [
             "any"
         ],
-        "frequency": 4,
+        "frequency": 3,
         "event_text": "m_c fought a rogue and, while {PRONOUN/m_c/subject} drove the trespasser away, {PRONOUN/m_c/subject} needed to be rushed to the medicine cat den afterwards.",
         "m_c": {
             "age": [
@@ -5861,7 +5861,7 @@
                     "claw-wound"
                 ],
                 "scars": [
-                    "FACE", "LEFTBLIND", "RIGHTBLIND", "SIDE", "THREE", "THROAT"
+                    "FACE", "LEFTBLIND", "RIGHTBLIND", "SIDE", "THREE", "THROAT", "ONE", "BELLY"
                 ]
             }
         ],
@@ -6003,7 +6003,7 @@
         "season": [
             "any"
         ],
-        "frequency": 4,
+        "frequency": 3,
         "event_text": "m_c's tail was badly injured by a dog.",
         "m_c": {
             "age": [
@@ -6047,7 +6047,7 @@
         "season": [
             "any"
         ],
-        "frequency": 4,
+        "frequency": 3,
         "event_text": "m_c's tail was badly injured by a fox.",
         "m_c": {
             "age": [
