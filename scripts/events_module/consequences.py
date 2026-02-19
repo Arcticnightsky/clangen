@@ -406,6 +406,7 @@ def create_new_cat_block(
             parent1=parent1.ID if parent1 else None,
             parent2=parent2.ID if parent2 else None,
             adoptive_parents=adoptive_parents if adoptive_parents else None,
+            skip_female_rarity_roll="can_birth" in attribute_list,
         )
 
         # NEXT
@@ -513,6 +514,7 @@ def create_new_cat(
     parent1: str = None,
     parent2: str = None,
     adoptive_parents: list = None,
+    skip_female_rarity_roll: bool = False,
 ) -> list:
     """
     This function creates new cats and then returns a list of those cats
@@ -619,7 +621,7 @@ def create_new_cat(
             parent1=parent1,
             parent2=parent2,
             adoptive_parents=adoptive_parents if adoptive_parents else [],
-            skip_female_rarity_roll="can_birth" in attribute_list,
+            skip_female_rarity_roll=skip_female_rarity_roll,
         )
         # this simulates a "history" as whomever they used to be
         new_cat.status.change_current_moons_as(moons)
