@@ -578,7 +578,7 @@ class Status:
         if self.is_exiled(CatGroup.PLAYER_CLAN_ID):
             return CatGroup.DARK_FOREST_ID
 
-        if cat.status.is_lost(CatGroup.PLAYER_CLAN_ID):
+        if self.status.is_lost(CatGroup.PLAYER_CLAN_ID):
             return CatGroup.STARCLAN_ID
         # meanwhile clan cats go wherever their guide points them
         if game.clan:
