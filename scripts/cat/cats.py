@@ -226,6 +226,7 @@ class Cat:
         self.no_kits = False
         self.no_mates = False
         self.no_retire = False
+        self.skip_female_rarity_roll = kwargs.get("skip_female_rarity_roll", False)
 
         self.prevent_fading = False  # Prevents a cat from fading
 
@@ -572,7 +573,9 @@ class Cat:
             
             if not allow_female_ginger and not allow_tortie_instead and not only_female_torties:
                 # If this is a ginger she-cat spawned randomly out of the wild, apply 20% rule - only 20% of ginger cats are female
-                if random_module.randint(1, 5) != 1:
+                if self.skip_female_rarity_roll:
+                    print("Event can_birth cat keeps female rarity-restricted pelt")
+                elif random_module.randint(1, 5) != 1:
                     self.gender = "male"
                     self.genderalign = "male"
                     print("Regular orange tomcat :)")
@@ -585,7 +588,9 @@ class Cat:
             and self.gender == "female"
             and self.pelt.name not in Pelt.torties
         ):
-            if random_module.randint(1, 3) != 1:
+            if self.skip_female_rarity_roll:
+                print("Event can_birth cat keeps female rarity-restricted pelt")
+            elif random_module.randint(1, 3) != 1:
                 self.gender = "male"
                 self.genderalign = "male"
             
