@@ -619,6 +619,7 @@ def create_new_cat(
             parent1=parent1,
             parent2=parent2,
             adoptive_parents=adoptive_parents if adoptive_parents else [],
+            skip_female_rarity_roll="can_birth" in attribute_list,
         )
         # this simulates a "history" as whomever they used to be
         new_cat.status.change_current_moons_as(moons)
