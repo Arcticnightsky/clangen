@@ -966,26 +966,36 @@ class Pregnancy_Events:
 
         # ----- CAT MATES -----
         if cat and cat.mate:
+            cat_had_affair = bool(other_cat and other_cat.ID not in cat.mate)
+            cat_has_poly_parenting = bool(other_cat and other_cat.ID in cat.mate)
+
             for mate_id in cat.mate:
                 if mate_id is None:
                     continue
+
+                mate = Cat.fetch_cat(mate_id)
+                if not mate:
+                    continue
+
+                # For affairs, only female non-birth mates are added as adoptive parents.
+                should_add_affair_mate = cat_had_affair and mate.gender == "female"
+
+                # For polycules, any additional non-birth mate can be an adoptive parent.
+                should_add_poly_mate = cat_has_poly_parenting and mate.ID != other_cat.ID
+
                 if (
-                    other_cat
-                    and other_cat in cat.mate
-                    and mate_id.gender == "female"
-                    and mate_id not in birth_parents
+                    (should_add_affair_mate or should_add_poly_mate)
+                    and mate.ID not in birth_parents
+                    and mate.ID not in all_adoptive_parents
                 ):
                     all_adoptive_parents.append(mate_id)
 
         # ----- OTHER CAT MATES -----
         if other_cat and other_cat.mate:
-            for mate_id in other_cat.mate:
-                if mate_id is None:
-                    continue
-
-                if not cat or other_cat not in cat.mate:
-                    for kitty in all_kitten:
-                        kitty.unset_adoptive_parent(mate_id)
+            # `other_cat` is always the male parent in this path.
+            # Per design, none of `other_cat`'s mates should be set as adoptive parents
+            # (regardless of mate gender), so we intentionally skip adding them here.
+            pass
         # Then, add any additional adoptive parents that were provided passed directly into the
         # function.
         for _m in adoptive_parents:
