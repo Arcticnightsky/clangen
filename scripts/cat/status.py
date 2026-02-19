@@ -570,14 +570,16 @@ class Status:
         """
         # if we have an outsider who has never been a clancat, they go to the unknown residence
         if self.is_outsider and (
-           not self.is_exiled(CatGroup.PLAYER_CLAN_ID) or not self.is_former_clancat
+           not self.is_exiled(CatGroup.PLAYER_CLAN_ID) or not cat.status.is_lost(CatGroup.PLAYER_CLAN_ID) or not self.is_former_clancat
         ):
             return CatGroup.UNKNOWN_RESIDENCE_ID
 
         # exiled cats are special, cus they get kicked out of heaven
         if self.is_exiled(CatGroup.PLAYER_CLAN_ID):
             return CatGroup.DARK_FOREST_ID
-            
+
+        if cat.status.is_lost(CatGroup.PLAYER_CLAN_ID):
+            return CatGroup.STARCLAN_ID
         # meanwhile clan cats go wherever their guide points them
         if game.clan:
             return game.clan.instructor.status.group_ID
