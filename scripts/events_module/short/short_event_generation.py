@@ -391,17 +391,23 @@ def filter_events(
                 if int(main_cat.moons) < 150 and int(random.random() * 5):
                     continue
 
-         # check for old age
-        if "old_age" in event.sub_type:
-            old_age_limit = constants.CONFIG["death_related"]["old_age_death_start"]
-
-            # if the main cat is too young, skip
-            if main_cat.moons < old_age_limit:
-                continue
-
-            # if a random cat is chosen and they're too young, skip
-            if random_cat and random_cat.moons < old_age_limit:
-                continue
+        # check for old age
+        if (
+            "old_age" in event.sub_type
+            and main_cat.moons
+            < constants.CONFIG["death_related"]["old_age_death_start"]
+        ):
+            continue
+            
+        # check for old age for r_c when they die
+        if (
+            random_cat
+            and "old_age" in event.sub_type
+            and event.r_c.get("dies", False)
+            and random_cat.moons
+            < constants.CONFIG["death_related"]["old_age_death_start"]
+        ):
+            continue
 
         # remove some non-old age events to encourage elders to die of old age more often
         if (
