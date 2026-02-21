@@ -489,7 +489,7 @@ class Cat:
             
             if not allow_female_ginger:
                 if allow_tortie_instead:
-                    if random_module.randint(1, 3) == 1:
+                    if random_module.randint(1, 2) == 1:
                         self.pelt.name = choice(Pelt.torties)
                         if self.pelt.name == "Calico" and mother.pelt.white_patches not in (
                             list(Pelt.high_white)
@@ -612,7 +612,7 @@ class Cat:
                     allow_female_black = True
                     print("Uncommon black she-cat generated thanks to her genetics!!!")
                 elif mother_is_dark and father_is_ginger:
-                    allow_tortie_instead = True
+                    only_female_torties = True
                 elif mother_has_orange and father_is_dark:
                     allow_tortie_instead = True
 
