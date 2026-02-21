@@ -661,7 +661,8 @@ class Cat:
                     else:
                         self.gender = "male"
                         self.genderalign = "male"
-                        print("Regular black tomcat :)")
+                        if self.pelt.colour in ("BLACK", "GHOST"):
+                            print("Regular black tomcat :)")
                 elif only_female_torties:
                     self.pelt.name = choice(Pelt.torties)
                     if self.pelt.name == "Calico" and mother.pelt.white_patches not in (
