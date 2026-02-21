@@ -614,7 +614,8 @@ class Cat:
             if self.age in (CatAge.NEWBORN, CatAge.KITTEN) and mother and father:
                 if mother_is_dark and father_is_dark:
                     allow_female_black = True
-                    print("Uncommon black she-cat generated thanks to her genetics!!!")
+                    if self.pelt.colour in ("BLACK", "GHOST"):
+                        print("Uncommon black she-cat generated thanks to her genetics!!!")
                 elif mother_is_dark and father_is_ginger:
                     only_female_torties = True
                 elif mother_has_orange and father_is_dark:
