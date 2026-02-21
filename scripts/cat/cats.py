@@ -595,11 +595,7 @@ class Cat:
             mother = Cat.fetch_cat(self.parent1) if self.parent1 else None
             father = Cat.fetch_cat(self.parent2) if self.parent2 else None
 
-            dark_colours = (
-                list(Pelt.black_colours)
-                + list(Pelt.brown_colours)
-                + ["SILVER", "PALEGREY"]
-            )
+            dark_colours = ["BLACK", "GHOST"]
             mother_is_dark = mother and mother.pelt.colour in dark_colours
             father_is_dark = father and father.pelt.colour in dark_colours
             mother_has_orange = (
@@ -619,8 +615,6 @@ class Cat:
                     allow_tortie_instead = True
                 elif mother_has_orange and father_is_dark:
                     allow_tortie_instead = True
-                elif mother_has_orange and father_is_ginger:
-                    only_female_torties = True
 
             if not allow_female_black:
                 if allow_tortie_instead:
