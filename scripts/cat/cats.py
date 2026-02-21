@@ -595,7 +595,11 @@ class Cat:
             mother = Cat.fetch_cat(self.parent1) if self.parent1 else None
             father = Cat.fetch_cat(self.parent2) if self.parent2 else None
 
-            dark_colours = ["BLACK", "GHOST"]
+            dark_colours = (
+                list(Pelt.black_colours)
+                + list(Pelt.brown_colours)
+                + ["SILVER", "PALEGREY"]
+            )
             mother_is_dark = mother and mother.pelt.colour in dark_colours
             father_is_dark = father and father.pelt.colour in dark_colours
             mother_has_orange = (
