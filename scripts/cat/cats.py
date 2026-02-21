@@ -590,7 +590,7 @@ class Cat:
         ):
             if self.skip_female_rarity_roll:
                 print("Event can_birth cat keeps female rarity-restricted pelt")
-            elif random_module.randint(1, 3) != 1:
+            elif random_module.randint(1, 4) != 1:
                 self.gender = "male"
                 self.genderalign = "male"
             
