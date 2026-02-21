@@ -582,17 +582,131 @@ class Cat:
                 else:
                     print("Uncommon ginger she-cat generated!!!")
 
-        # Black she-cat rarity, not as intense as the last code because you're more likely to see a black female cat than a ginger female cat
+        # --- Female black rarity ---
         if (
             self.pelt.colour in ("BLACK", "GHOST")
             and self.gender == "female"
             and self.pelt.name not in Pelt.torties
         ):
-            if self.skip_female_rarity_roll:
-                print("Event can_birth cat keeps female rarity-restricted pelt")
-            elif random_module.randint(1, 4) != 1:
-                self.gender = "male"
-                self.genderalign = "male"
+            allow_female_black = False
+            allow_tortie_instead = False
+            only_female_torties = False
+
+            mother = Cat.fetch_cat(self.parent1) if self.parent1 else None
+            father = Cat.fetch_cat(self.parent2) if self.parent2 else None
+
+            dark_colours = (
+                list(Pelt.black_colours)
+                + list(Pelt.brown_colours)
+                + ["SILVER", "PALEGREY"]
+            )
+            mother_is_dark = mother and mother.pelt.colour in dark_colours
+            father_is_dark = father and father.pelt.colour in dark_colours
+            mother_has_orange = (
+                mother
+                and (
+                    mother.pelt.colour in Pelt.ginger_colours
+                    or mother.pelt.name in Pelt.torties
+                )
+            )
+            father_is_ginger = father and father.pelt.colour in Pelt.ginger_colours
+
+            if self.age in (CatAge.NEWBORN, CatAge.KITTEN) and mother and father:
+                if mother_is_dark and father_is_dark:
+                    allow_female_black = True
+                    print("Uncommon black she-cat generated thanks to her genetics!!!")
+                elif mother_is_dark and father_is_ginger:
+                    allow_tortie_instead = True
+                elif mother_has_orange and father_is_dark:
+                    allow_tortie_instead = True
+                elif mother_has_orange and father_is_ginger:
+                    only_female_torties = True
+
+            if not allow_female_black:
+                if allow_tortie_instead:
+                    if random_module.randint(1, 2) == 1:
+                        self.pelt.name = choice(Pelt.torties)
+                        if self.pelt.name == "Calico" and mother.pelt.white_patches not in (
+                            list(Pelt.high_white)
+                            + list(Pelt.mostly_white)
+                            + ["FULLWHITE"]
+                        ) or father.pelt.white_patches not in (
+                            list(Pelt.high_white)
+                            + list(Pelt.mostly_white)
+                            + ["FULLWHITE"]
+                        ):
+                            self.pelt.name = "Tortie"
+                        self.pelt.colour = choice([mother.pelt.colour, father.pelt.colour])
+                        self.pelt.tortie_base = choice([mother.pelt.name, father.pelt.name]).lower()
+                        if mother.pelt.name in ["Singlecolour", "TwoColour"] or father.pelt.name in ["Singlecolour", "TwoColour"]:
+                            self.pelt.tortie_base = "single"
+
+                        if not self.pelt.tortie_colour:
+                            self.pelt.tortie_colour = choice(
+                                [c for c in (mother.pelt.colour, father.pelt.colour) if c in (list(Pelt.ginger_colours) + dark_colours)]
+                            )
+
+                        if not self.pelt.tortie_pattern:
+                            self.pelt.tortie_pattern = self.pelt.tortie_base
+
+                        if not self.pelt.tortie_marking:
+                            self.pelt.tortie_marking = choice(Pelt.tortie_patches)
+
+                        if self.pelt.name == "Calico" and not self.pelt.white_patches:
+                            self.pelt.white_patches = choice(
+                                list(Pelt.high_white)
+                                + list(Pelt.mostly_white)
+                                + ["FULLWHITE"]
+                            )
+                        print("Tortie kit generated thanks to her genetics!!!")
+                    else:
+                        self.gender = "male"
+                        self.genderalign = "male"
+                        print("Regular black tomcat :)")
+                elif only_female_torties:
+                    self.pelt.name = choice(Pelt.torties)
+                    if self.pelt.name == "Calico" and mother.pelt.white_patches not in (
+                        list(Pelt.high_white)
+                        + list(Pelt.mostly_white)
+                        + ["FULLWHITE"]
+                    ) or father.pelt.white_patches not in (
+                        list(Pelt.high_white)
+                        + list(Pelt.mostly_white)
+                        + ["FULLWHITE"]
+                    ):
+                        self.pelt.name = "Tortie"
+                    self.pelt.colour = choice([mother.pelt.colour, father.pelt.colour])
+                    self.pelt.tortie_base = choice([mother.pelt.name, father.pelt.name]).lower()
+                    if mother.pelt.name in ["Singlecolour", "TwoColour"] or father.pelt.name in ["Singlecolour", "TwoColour"]:
+                        self.pelt.tortie_base = "single"
+
+                    if not self.pelt.tortie_colour:
+                        self.pelt.tortie_colour = choice([mother.pelt.colour, father.pelt.colour])
+
+                    if not self.pelt.tortie_pattern:
+                        self.pelt.tortie_pattern = self.pelt.tortie_base
+
+                    if not self.pelt.tortie_marking:
+                        self.pelt.tortie_marking = choice(Pelt.tortie_patches)
+
+                    if self.pelt.name == "Calico" and not self.pelt.white_patches:
+                        self.pelt.white_patches = choice(
+                            list(Pelt.high_white)
+                            + list(Pelt.mostly_white)
+                            + ["FULLWHITE"]
+                        )
+                    print("Tortie kit generated thanks to her genetics!!!")
+
+            if not allow_female_black and not allow_tortie_instead and not only_female_torties:
+                # If this is a black she-cat spawned randomly out of the wild, apply 25% rule
+                if self.skip_female_rarity_roll:
+                    print("Event can_birth cat keeps female rarity-restricted pelt")
+                elif random_module.randint(1, 4) != 1:
+                    self.gender = "male"
+                    self.genderalign = "male"
+                    print("Regular black tomcat :)")
+                else:
+                    print("Uncommon black she-cat generated!!!")
             
         # Making sure if older "male" are infertile, as they're really just intersex cats and therefore sterile
         if self.age not in (CatAge.NEWBORN, CatAge.KITTEN) and self.pelt.name in Pelt.torties and self.gender == "male":
