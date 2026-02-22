@@ -561,28 +561,61 @@ class Cat:
         if (
             self.pelt.colour in Pelt.ginger_colours
             and self.gender == "male"
-            and self.pelt.name not in Pelt.torties
         ):
+            copy_mothers_pelt = False
+            make_white_cat = False
+            
             mother = Cat.fetch_cat(self.parent1) if self.parent1 else None
-            if self.age in (CatAge.NEWBORN, CatAge.KITTEN) and mother:
-                mother_has_orange = (
-                    mother.pelt.colour in Pelt.ginger_colours
-                    or mother.pelt.tortie_colour in Pelt.ginger_colours)
-                if not mother_has_orange:
+            father = Cat.fetch_cat(self.parent2) if self.parent2 else None
+
+            mother_has_orange = (
+                mother
+                and (mother.pelt.colour in Pelt.ginger_colours or mother.pelt.tortie_colour in Pelt.ginger_colours)
+            )
+            father_is_ginger = father and father.pelt.colour in Pelt.ginger_colours
+            
+            if self.age in (CatAge.NEWBORN, CatAge.KITTEN) and mother and father:
+                if not mother_has_orange and father_is_ginger:
+                    copy_mothers_pelt = True
+                elif mother_has_orange and not father_is_ginger:
+                    copy_mothers_pelt = True
+                elif mother.pelt.colour == "WHITE" and father_is_orange:
+                    make_white_cat = True
+                    
+                if copy_mothers_pelt or make_white_cat:
                     self.pelt.colour = mother.pelt.colour
 
         # Male dark cat genetic realism
         if (
-            self.pelt.colour in Pelt.ginger_colours
+             self.pelt.colour in (
+                list(Pelt.black_colours)
+                + list(Pelt.brown_colours)
+                + ["SILVER", "PALEGREY"]
+            )
             and self.gender == "male"
-            and self.pelt.name not in Pelt.torties
         ):
+            copy_mothers_pelt = False
+            make_white_cat = False
+            
             mother = Cat.fetch_cat(self.parent1) if self.parent1 else None
-            if self.age in (CatAge.NEWBORN, CatAge.KITTEN) and mother:
-                mother_has_orange = (
-                    mother.pelt.colour in Pelt.ginger_colours
-                    or mother.pelt.tortie_colour in Pelt.ginger_colours)
-                if not mother_has_orange:
+            father = Cat.fetch_cat(self.parent2) if self.parent2 else None
+            dark_colours = (
+                list(Pelt.black_colours)
+                + list(Pelt.brown_colours)
+                + ["SILVER", "PALEGREY"]
+            )
+            mother_is_dark = mother and mother.pelt.colour in dark_colours
+            father_is_dark = father and father.pelt.colour in dark_colours
+
+            if self.age in (CatAge.NEWBORN, CatAge.KITTEN) and mother and father:
+                if not mother_is_dark and father_is_dark:
+                    copy_mothers_pelt = True
+                elif mother_is_dark and not father_is_dark:
+                    copy_mothers_pelt = True
+                elif mother.pelt.colour == "WHITE" and father_is_dark:
+                    make_white_cat = True
+
+                if copy_mothers_pelt or make_white_cat:
                     self.pelt.colour = mother.pelt.colour
 
         # --- Female dark cat rarity ---
@@ -689,22 +722,6 @@ class Cat:
                     print("Regular black tomcat :)")
                 else:
                     print("Uncommon black she-cat generated!!!")
-
-        # --- Male dark cat realism - make em ginger---
-        if (
-            self.pelt.colour in (
-                list(Pelt.black_colours)
-                + list(Pelt.brown_colours)
-                + ["SILVER", "PALEGREY"]
-            )
-            and self.gender == "male"
-            and self.pelt.name not in Pelt.torties
-        ):
-            mother = Cat.fetch_cat(self.parent1) if self.parent1 else None
-            if self.age in (CatAge.NEWBORN, CatAge.KITTEN) and mother:
-                mother_is_ginger = mother.pelt.colour in Pelt.ginger_colours
-                if mother_is_ginger:
-                    self.pelt.colour = mother.pelt.colour
                     
         # Making sure if older "male" torties are infertile, as they're really just intersex cats and therefore sterile
         if self.age not in (CatAge.NEWBORN, CatAge.KITTEN) and self.pelt.name in Pelt.torties and self.gender == "male":
