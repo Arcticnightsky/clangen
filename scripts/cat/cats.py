@@ -628,7 +628,7 @@ class Cat:
                 elif mother.pelt.colour == "WHITE" and father_is_dark:
                     make_white_cat = True
             
-            if not allow_female_black:
+            if not allow_female_dark:
                 if allow_tortie_instead:
                     # Tortie construction time!
                     self.pelt.name = choice(Pelt.torties)
@@ -679,7 +679,7 @@ class Cat:
                 elif make_white_cat:
                     self.pelt.colour = mother.pelt.colour
 
-            if not allow_female_black and not allow_tortie_instead and not only_female_torties and self.pelt.colour in ("BLACK", "GHOST"):
+            if not allow_female_dark and not allow_tortie_instead and not make_white_cat and self.pelt.colour in ("BLACK", "GHOST"):
                 # If this is a black she-cat spawned randomly out of the wild, apply 25% rule - Roughly 70-75% of black cats are female
                 if self.skip_female_rarity_roll:
                     print("Event can_birth cat keeps female rarity-restricted pelt")
