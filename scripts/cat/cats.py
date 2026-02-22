@@ -696,7 +696,7 @@ class Cat:
                         )
                     print("Tortie kit generated thanks to her genetics!!!")
 
-            if not allow_female_dark and not allow_tortie_instead and not make_white_cat and self.pelt.colour in ("BLACK", "GHOST"):
+            if not allow_female_dark and not allow_tortie_instead and  self.pelt.colour in ("BLACK", "GHOST"):
                 # If this is a black she-cat spawned randomly out of the wild, apply 25% rule - Roughly 70-75% of black cats are female
                 if self.skip_female_rarity_roll:
                     print("Event can_birth cat keeps female rarity-restricted pelt")
