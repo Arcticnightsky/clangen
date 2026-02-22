@@ -458,6 +458,7 @@ class Cat:
             allow_female_ginger = False
             only_female_torties = False
             allow_tortie_instead = False
+            only_ginger_males = False
             
             mother = Cat.fetch_cat(self.parent1) if self.parent1 else None
             father = Cat.fetch_cat(self.parent2) if self.parent2 else None
@@ -486,7 +487,9 @@ class Cat:
                     only_female_torties = True
                 elif mother_has_orange and father_is_dark:
                     allow_tortie_instead = True
-            
+                elif not mother_is_dark and not mother_has_orange and father_is_orange:
+                    only_ginger_males = True
+
             if not allow_female_ginger:
                 if allow_tortie_instead:
                     if random_module.randint(1, 2) == 1:
@@ -570,6 +573,11 @@ class Cat:
                             + ["FULLWHITE"]
                         )
                     print("Tortie kit generated thanks to her genetics!!!")
+
+                elif only_ginger_males:
+                    self.gender = "male"
+                    self.genderalign = "male"
+                    print("Regular orange tomcat :)")
             
             if not allow_female_ginger and not allow_tortie_instead and not only_female_torties:
                 # If this is a ginger she-cat spawned randomly out of the wild, apply 20% rule - only 20% of ginger cats are female
@@ -591,15 +599,12 @@ class Cat:
             allow_female_black = False
             allow_tortie_instead = False
             only_female_torties = False
-
+            only_black_males = False
+            
             mother = Cat.fetch_cat(self.parent1) if self.parent1 else None
             father = Cat.fetch_cat(self.parent2) if self.parent2 else None
 
-            dark_colours = (
-                list(Pelt.black_colours)
-                + list(Pelt.brown_colours)
-                + ["SILVER", "PALEGREY"]
-            )
+            dark_colours = ("BLACK", "GHOST")
             mother_is_dark = mother and mother.pelt.colour in dark_colours
             father_is_dark = father and father.pelt.colour in dark_colours
             mother_has_orange = (
@@ -614,13 +619,14 @@ class Cat:
             if self.age in (CatAge.NEWBORN, CatAge.KITTEN) and mother and father:
                 if mother_is_dark and father_is_dark:
                     allow_female_black = True
-                    if self.pelt.colour in ("BLACK", "GHOST"):
-                        print("Uncommon black she-cat generated thanks to her genetics!!!")
+                    print("Uncommon black she-cat generated thanks to her genetics!!!")
                 elif mother_is_dark and father_is_ginger:
                     only_female_torties = True
                 elif mother_has_orange and father_is_dark:
                     allow_tortie_instead = True
-
+                elif not mother_is_dark and not mother_has_orange and father_is_dark:
+                    only_black_males = True
+            
             if not allow_female_black:
                 if allow_tortie_instead:
                     if random_module.randint(1, 2) == 1:
@@ -697,8 +703,13 @@ class Cat:
                         )
                     print("Tortie kit generated thanks to her genetics!!!")
 
+                elif only_black_males:
+                    self.gender = "male"
+                    self.genderalign = "male"
+                    print("Regular black tomcat :)")
+
             if not allow_female_black and not allow_tortie_instead and not only_female_torties:
-                # If this is a black she-cat spawned randomly out of the wild, apply 25% rule
+                # If this is a black she-cat spawned randomly out of the wild, apply 25% rule - Roughly 70-75% of black cats are female
                 if self.skip_female_rarity_roll:
                     print("Event can_birth cat keeps female rarity-restricted pelt")
                 elif random_module.randint(1, 4) != 1:
@@ -708,7 +719,7 @@ class Cat:
                 else:
                     print("Uncommon black she-cat generated!!!")
             
-        # Making sure if older "male" are infertile, as they're really just intersex cats and therefore sterile
+        # Making sure if older "male" torties are infertile, as they're really just intersex cats and therefore sterile
         if self.age not in (CatAge.NEWBORN, CatAge.KITTEN) and self.pelt.name in Pelt.torties and self.gender == "male":
             self.no_kits = True
             print("RARE MALE TORTIE GENERATED!!!")
