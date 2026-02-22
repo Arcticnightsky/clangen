@@ -457,7 +457,6 @@ class Cat:
         ):
             allow_female_ginger = False
             allow_tortie_instead = False
-            make_white_cat = False
             
             mother = Cat.fetch_cat(self.parent1) if self.parent1 else None
             father = Cat.fetch_cat(self.parent2) if self.parent2 else None
@@ -486,8 +485,6 @@ class Cat:
                     allow_tortie_instead = True
                 elif mother_has_orange and father_is_dark:
                     allow_tortie_instead = True
-                elif mother.pelt.colour == "WHITE" and father_is_orange:
-                    make_white_cat = True
 
             if not allow_female_ginger:
                 if allow_tortie_instead:
@@ -543,10 +540,8 @@ class Cat:
                             + ["FULLWHITE"]
                         )
                     print("Tortie kit generated thanks to her genetics!!!")
-                elif make_white_cat:
-                    self.pelt.name = mother.pelt.name
             
-            if not allow_female_ginger and not allow_tortie_instead and not make_white_cat:
+            if not allow_female_ginger and not allow_tortie_instead:
                 # If this is a ginger she-cat spawned randomly out of the wild, apply 20% rule - only 20% of ginger cats are female
                 if self.skip_female_rarity_roll:
                     print("Event can_birth cat keeps female rarity-restricted pelt")
@@ -563,7 +558,6 @@ class Cat:
             and self.gender == "male"
         ):
             copy_mothers_pelt = False
-            make_white_cat = False
             
             mother = Cat.fetch_cat(self.parent1) if self.parent1 else None
             father = Cat.fetch_cat(self.parent2) if self.parent2 else None
@@ -579,10 +573,8 @@ class Cat:
                     copy_mothers_pelt = True
                 elif mother_has_orange and not father_is_ginger:
                     copy_mothers_pelt = True
-                elif mother.pelt.colour == "WHITE" and father_is_orange:
-                    make_white_cat = True
                     
-                if copy_mothers_pelt or make_white_cat:
+                if copy_mothers_pelt:
                     self.pelt.colour = mother.pelt.colour
 
         # Male dark cat genetic realism
@@ -595,7 +587,6 @@ class Cat:
             and self.gender == "male"
         ):
             copy_mothers_pelt = False
-            make_white_cat = False
             
             mother = Cat.fetch_cat(self.parent1) if self.parent1 else None
             father = Cat.fetch_cat(self.parent2) if self.parent2 else None
@@ -612,10 +603,8 @@ class Cat:
                     copy_mothers_pelt = True
                 elif mother_is_dark and not father_is_dark:
                     copy_mothers_pelt = True
-                elif mother.pelt.colour == "WHITE" and father_is_dark:
-                    make_white_cat = True
 
-                if copy_mothers_pelt or make_white_cat:
+                if copy_mothers_pelt:
                     self.pelt.colour = mother.pelt.colour
 
         # --- Female dark cat rarity ---
@@ -630,7 +619,6 @@ class Cat:
         ):
             allow_female_dark = False
             allow_tortie_instead = False
-            make_white_cat = False
             
             mother = Cat.fetch_cat(self.parent1) if self.parent1 else None
             father = Cat.fetch_cat(self.parent2) if self.parent2 else None
@@ -658,8 +646,6 @@ class Cat:
                     allow_tortie_instead = True
                 elif mother_has_orange and father_is_dark:
                     allow_tortie_instead = True
-                elif mother.pelt.colour == "WHITE" and father_is_dark:
-                    make_white_cat = True
             
             if not allow_female_dark:
                 if allow_tortie_instead:
@@ -709,8 +695,6 @@ class Cat:
                             + ["FULLWHITE"]
                         )
                     print("Tortie kit generated thanks to her genetics!!!")
-                elif make_white_cat:
-                    self.pelt.colour = mother.pelt.colour
 
             if not allow_female_dark and not allow_tortie_instead and not make_white_cat and self.pelt.colour in ("BLACK", "GHOST"):
                 # If this is a black she-cat spawned randomly out of the wild, apply 25% rule - Roughly 70-75% of black cats are female
