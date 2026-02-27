@@ -3561,7 +3561,7 @@
         ],
         "tags": [],
         "frequency": 1,
-        "event_text": "As the medicine cat looks over r_c's newborn litter one last time, they noticed something was very off... little m_c hadn't moved since {PRONOUN/m_c/subject} was birthed, nor did {PRONOUN/m_c/subject} have a pulse... After a few unsuccessful attempts on reviving the kit, a heartbreaking realization dawns over the medicine cat and r_c - it seems that m_c was stillborn.",
+        "event_text": "As the medicine cat looks over r_c's newborn litter one last time, they noticed something was very off... little m_c hasn't moved since {PRONOUN/m_c/subject} was birthed, nor did {PRONOUN/m_c/subject} have a pulse... After a few unsuccessful attempts on reviving the kit, a heartbreaking realization dawns over the medicine cat and r_c - it seems that m_c was stillborn.",
         "m_c": {
             "age": [
                 "newborn"
