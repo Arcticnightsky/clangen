@@ -3561,7 +3561,7 @@
         ],
         "tags": [],
         "frequency": 1,
-        "event_text": "As the medicine cat looks over r_c's newborn litter one last time, they noticed something was very off... little m_c hasn't moved since {PRONOUN/m_c/subject} was birthed, nor did {PRONOUN/m_c/subject} have a pulse... After a few unsuccessful attempts on reviving the kit, a heartbreaking realization dawns over the medicine cat and r_c - it seems that m_c was stillborn.",
+        "event_text": "As the medicine cat looks over r_c's newborn litter one last time, they noticed something was very off... little m_c hasn't moved since {PRONOUN/m_c/subject} was birthed, nor did {PRONOUN/m_c/subject} have a pulse... After a few unsuccessful attempts of reviving the kit, a heartbreaking realization dawns over the medicine cat and r_c - m_c was stillborn.",
         "m_c": {
             "age": [
                 "newborn"
@@ -3606,7 +3606,7 @@
         ],
         "tags": [],
         "frequency": 1,
-        "event_text": "The birth was hard, it really was, and r_c knew that m_c was smaller than a typical newborn kit, but she didn't expect m_c to have been so weak that {PRONOUN/m_c/subject}'d be sent to Starclan not even an hour after birth... r_c wails in agony as m_c's tiny body is moved for {PRONOUN/m_c/poss} vigil.",
+        "event_text": "r_c knew that m_c was smaller than a typical newborn kit, but she didn't expect m_c to have been so weak that {PRONOUN/m_c/subject}'d be sent to Starclan not even an hour after birth... r_c wails in agony as m_c's tiny body is moved for {PRONOUN/m_c/poss} vigil.",
         "m_c": {
             "age": [
                 "newborn"
