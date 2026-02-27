@@ -2,7 +2,9 @@
     {
         "id": "general_meeting",
         "thoughts": [
-            "Is wondering about those new cats"
+            "Is wondering about those new cats",
+            "Wonders if the cats {PRONOUN/m_c/subject} just met are actually Clan cats",
+            "Can't believe {PRONOUN/m_c/subject} actually encountered Clan cats for the first time"
         ]
     }
 ]

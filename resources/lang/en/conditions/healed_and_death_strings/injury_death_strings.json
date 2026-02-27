@@ -1,11 +1,16 @@
 {
     "claw-wound": [
-        "m_c died from a claw-wound."
+        "m_c died from a claw-wound.",
+        "m_c's claw-wound was so deep that it caused irreversible damage internally, m_c died as a result."
     ],
     "bite-wound": [
-        "m_c died from a bite-wound."
+        "m_c died from a bite-wound.",
+        "All bites are nasty, that's a fact. m_c died from whatever bacteria was infesting {PRONOUN/m_c/poss} bite-wound.",
+        "m_c's bite-wound was so deep that
+it caused irreversible damage internally, m_c died as a result."
     ],
     "cat bite": [
+        ""All bites are nasty, that's a fact. m_c died from whatever bacteria was infesting {PRONOUN/m_c/poss} bite-wound.",
         "m_c died from a cat bite."
     ],
     "beak bite": [
