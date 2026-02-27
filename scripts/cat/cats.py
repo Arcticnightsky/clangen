@@ -2639,6 +2639,11 @@ class Cat:
         ):
             return False
         if (
+            self.status.rank == CatRank.APPRENTICE
+            and potential_mentor.moons < 24
+        ):
+            return False
+        if (
             self.status.rank == CatRank.MEDIATOR_APPRENTICE
             and potential_mentor.status.rank != CatRank.MEDIATOR
         ):

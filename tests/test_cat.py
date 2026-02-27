@@ -436,6 +436,27 @@ class TestUpdateMentor(unittest.TestCase):
         self.assertIsNone(app.mentor)
 
 
+    def test_warrior_mentor_must_be_at_least_24_moons(self):
+        app = Cat(
+            moons=7, status_dict={"rank": CatRank.APPRENTICE}, disable_random=True
+        )
+        young_mentor = Cat(
+            moons=23, status_dict={"rank": CatRank.WARRIOR}, disable_random=True
+        )
+
+        self.assertFalse(app.is_valid_mentor(young_mentor))
+
+    def test_warrior_mentor_eligible_at_24_moons(self):
+        app = Cat(
+            moons=7, status_dict={"rank": CatRank.APPRENTICE}, disable_random=True
+        )
+        mentor = Cat(
+            moons=24, status_dict={"rank": CatRank.WARRIOR}, disable_random=True
+        )
+
+        self.assertTrue(app.is_valid_mentor(mentor))
+
+
 class TestNameRepr(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
