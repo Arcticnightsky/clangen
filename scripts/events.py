@@ -2612,7 +2612,7 @@ def check_and_promote_deputy():
                     weight += 2
 
                 if average_respect >= 20 and respected_by_count >= one_half_threshold:
-                    weight += 2
+                    weight += 3
 
                 if average_respect >= 15:
                     respect_target_bonus = max(0, 5 - int(abs(average_respect - 20) // 2))
