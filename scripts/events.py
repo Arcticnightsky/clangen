@@ -2562,9 +2562,37 @@ def check_and_promote_deputy():
             )
         )
 
+        # If the leader is present, prioritize warriors they highly respect.
+        leader = game.clan.leader
+        use_mentor_weighting = False
+        if leader and leader.status.alive_in_player_clan:
+            respected_deputies = [
+                cat
+                for cat in possible_deputies
+                if leader.relationships.get(cat.ID)
+                and leader.relationships[cat.ID].respect >= 20
+            ]
+
+            if respected_deputies:
+                possible_deputies = respected_deputies
+            else:
+                # If no one is respected enough, give a slight edge to experienced mentors.
+                use_mentor_weighting = True
+
         # If there are possible deputies, choose from that list.
         if possible_deputies:
-            random_cat = random.choice(possible_deputies)
+            if use_mentor_weighting:
+                deputy_weights = [
+                    2 if len(cat.former_apprentices) >= 2 else 1
+                    for cat in possible_deputies
+                ]
+                random_cat = random.choices(
+                    possible_deputies,
+                    weights=deputy_weights,
+                    k=1,
+                )[0]
+            else:
+                random_cat = random.choice(possible_deputies)
             involved_cats = [random_cat.ID]
 
             # Gather deputy and leader status, for determination of the text.
