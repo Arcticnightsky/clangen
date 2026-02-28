@@ -2562,66 +2562,37 @@ def check_and_promote_deputy():
             )
         )
 
-        # If the leader is present, only include warriors they highly respect.
+        # If the leader is present, prioritize warriors they highly respect.
         leader = game.clan.leader
+        use_mentor_weighting = False
         if leader and leader.status.alive_in_player_clan:
-            possible_deputies = [
+            respected_deputies = [
                 cat
                 for cat in possible_deputies
                 if leader.relationships.get(cat.ID)
-                and leader.relationships[cat.ID].respect > 30
+                and leader.relationships[cat.ID].respect >= 20
             ]
+
+            if respected_deputies:
+                possible_deputies = respected_deputies
+            else:
+                # If no one is respected enough, give a slight edge to experienced mentors.
+                use_mentor_weighting = True
 
         # If there are possible deputies, choose from that list.
         if possible_deputies:
-            living_clan_cats = [
-                cat for cat in Cat.all_cats_list if cat.status.alive_in_player_clan
-            ]
-
-            def get_deputy_weight(candidate):
-                """Calculate weighted chance for a warrior to become deputy."""
-                weight = 1
-
-                if len(candidate.former_apprentices) >= 2:
-                    weight += 2
-
-                # Gauge how many clanmates respect this cat and how close that
-                # respect is to the ideal amount.
-                respect_values = []
-                respected_by_count = 0
-                for clanmate in living_clan_cats:
-                    if clanmate.ID == candidate.ID:
-                        continue
-
-                    relation = clanmate.relationships.get(candidate.ID)
-                    respect = relation.respect if relation else 0
-                    respect_values.append(respect)
-
-                    if respect >= 15:
-                        respected_by_count += 1
-
-                if respect_values:
-                    average_respect = sum(respect_values) / len(respect_values)
-                else:
-                    average_respect = 0
-
-                one_third_threshold = max(1, len(living_clan_cats) // 3)
-                one_half_threshold = max(1, len(living_clan_cats) // 2)
-
-                if average_respect >= 20 and respected_by_count >= one_third_threshold:
-                    weight += 2
-
-                if average_respect >= 20 and respected_by_count >= one_half_threshold:
-                    weight += 3
-
-                if average_respect >= 15:
-                    respect_target_bonus = max(0, 5 - int(abs(average_respect - 20) // 2))
-                    weight += respect_target_bonus
-
-                return weight
-
-            deputy_weights = [get_deputy_weight(cat) for cat in possible_deputies]
-            random_cat = random.choices(possible_deputies, weights=deputy_weights, k=1)[0]
+            if use_mentor_weighting:
+                deputy_weights = [
+                    2 if len(cat.former_apprentices) >= 2 else 1
+                    for cat in possible_deputies
+                ]
+                random_cat = random.choices(
+                    possible_deputies,
+                    weights=deputy_weights,
+                    k=1,
+                )[0]
+            else:
+                random_cat = random.choice(possible_deputies)
             involved_cats = [random_cat.ID]
 
             # Gather deputy and leader status, for determination of the text.
