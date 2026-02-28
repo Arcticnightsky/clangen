@@ -7,8 +7,7 @@
         "fleas": 2,
         "stomachache":1,
         "heat exhaustion":3,
-        "heat stroke":1,
-        "tick bites":2
+        "heat stroke":1
     },
     "Leaf-fall":{
         "stomachache":1,
