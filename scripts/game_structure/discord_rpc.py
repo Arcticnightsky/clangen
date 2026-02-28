@@ -11,6 +11,8 @@ import asyncio
 import threading
 from time import time
 
+from scripts.cat.cats import Cat
+
 from scripts.game_structure.game.settings import game_setting_get
 from scripts.game_structure.game.switches import switch_get_value, Switch
 from scripts.game_structure import game
@@ -33,7 +35,7 @@ class _DiscordRPC(threading.Thread):
         self._rpc = None
         self._client_id = client_id
         self._connected = False
-        self._start_time = round(time() * 1000)
+        self._start_time = int(time())
         self._rpc_supported = False
         self._event_loop = asyncio.new_event_loop()
 
@@ -115,7 +117,9 @@ class _DiscordRPC(threading.Thread):
 
             if game.clan:
                 clan_name = f"{game.clan.displayname}Clan"
-                cats_amount = len(game.clan.clan_cats)
+                cats_amount = sum(
+                    1 for cat in Cat.all_cats.values() if cat.status.alive_in_player_clan
+                )
                 clan_age = game.clan.age
             else:
                 clan_name = "Loading..."
