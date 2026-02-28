@@ -534,7 +534,9 @@
             "any"
         ],
         "season": [
-            "any"
+            "greenleaf",
+            "leaf-fall",
+            "newleaf"
         ],
         "frequency": 4,
         "event_text": "m_c has collected quite a lot of ticks in {PRONOUN/m_c/poss} pelt, and grumbles about the itchy bites dotted throughout.",
@@ -564,7 +566,9 @@
             "any"
         ],
         "season": [
-            "any"
+            "greenleaf",
+            "leaf-fall",
+            "newleaf"
         ],
         "frequency": 4,
         "event_text": "m_c has been yowling about {PRONOUN/m_c/poss} ticks for the better part of the day, the itchy bites maddening to {PRONOUN/m_c/object}.",
@@ -603,7 +607,9 @@
             "any"
         ],
         "season": [
-            "any"
+            "greenleaf",
+            "leaf-fall",
+            "newleaf"
         ],
         "tags": [
             "clan:apprentice"
@@ -616,7 +622,7 @@
                 "senior"
             ],
             "status": [
-                "any"
+                "elder"
             ],
             "trait": [
                 "cold",
@@ -645,7 +651,9 @@
             "any"
         ],
         "season": [
-            "any"
+            "greenleaf",
+            "leaf-fall",
+            "newleaf"
         ],
         "tags": [
             "clan:warrior"
@@ -667,6 +675,41 @@
                 "lonesome",
                 "nervous",
                 "thoughtful"
+            ]
+        },
+        "injury": [
+            {
+                "cats": [
+                    "m_c"
+                ],
+                "injuries": [
+                    "tick bites"
+                ]
+            }
+        ]
+    },
+    {
+        "event_id": "gen_injury_tickbites_anysenioradultsenior5",
+        "location": [
+            "any"
+        ],
+        "season": [
+            "greenleaf",
+            "leaf-fall",
+            "newleaf"
+        ],
+        "tags": [
+            "clan:apprentice"
+        ],
+        "frequency": 4,
+        "event_text": "Clearly, the apprentices haven't been doing their job for the elders yet - m_c has ticks all over {PRONOUN/m_c/poss} pelt.",
+        "m_c": {
+            "age": [
+                "senior adult",
+                "senior"
+            ],
+            "status": [
+                "elder"
             ]
         },
         "injury": [
