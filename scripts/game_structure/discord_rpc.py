@@ -44,9 +44,10 @@ class _DiscordRPC(threading.Thread):
     def run(self):
         self.start_rpc.wait()
         self.get_rpc()
-        self.connect()
         while not self.close_rpc.is_set():
-            self.update_rpc.wait()
+            self.update_rpc.wait(1)
+            if self.close_rpc.is_set():
+                break
             self.update()
         self.close()
 
@@ -144,6 +145,17 @@ class _DiscordRPC(threading.Thread):
         self.update_rpc.clear()
 
     def close(self):
-        if self._connected:
-            self._rpc.close()
-            self._connected = False
+        if self._rpc:
+            try:
+                self._rpc.clear()
+            except BaseException:  # pylint: disable=broad-except
+                pass
+
+            try:
+                self._rpc.close()
+            except BaseException:  # pylint: disable=broad-except
+                pass
+
+        self._connected = False
+        self._rpc_supported = False
+        self._rpc = None
