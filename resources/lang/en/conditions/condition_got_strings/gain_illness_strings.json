@@ -46,7 +46,7 @@
         "m_c has plucked {PRONOUN/m_c/poss} pelt throroughly to get rid any ticks that {PRONOUN/m_c/subject} must've picked up.",
         "m_c doesn't know why all these insects love {PRONOUN/m_c/poss} pelt so much - {PRONOUN/m_c/subject} {VERB/m_c/have/has} tick bites all over {PRONOUN/m_c/object}.",
         "m_c has been scratching and itching all day. It seems {PRONOUN/m_c/subject} {VERB/m_c/have/has} ticks."
-    ]
+    ],
     "tick fever": [
         "r_c worries over m_c, looking for any tick-heads an apprentice might have left, but {PRONOUN/r_c/subject} can only find a distinctive rash. m_c knows what it means- tick illness.",
         "m_c's heart sinks as {PRONOUN/m_c/poss} fur starts falling out. The apprentices must have missed a tick- r_c confirms it's tick illness.",
