@@ -606,6 +606,16 @@ def filter_events(
             failed_ids.append(chosen_event.event_id)
             final_events.remove(chosen_event)
             chosen_event = None
+        elif (
+            "old_age" in chosen_event.sub_type
+            and chosen_event.r_c.get("dies", False)
+            and chosen_cat.moons
+            < constants.CONFIG["death_related"]["old_age_death_start"]
+        ):
+            failed_ids.append(chosen_event.event_id)
+            final_events.remove(chosen_event)
+            chosen_event = None
+            chosen_cat = None
         else:
             break
 
