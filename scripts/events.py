@@ -2570,7 +2570,7 @@ def check_and_promote_deputy():
                 cat
                 for cat in possible_deputies
                 if leader.relationships.get(cat.ID)
-                and leader.relationships[cat.ID].respect >= 20
+                and leader.relationships[cat.ID].respect >= 20 or leader.relationships[cat.ID].trust >= 30
             ]
 
             if respected_deputies:
