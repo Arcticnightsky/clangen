@@ -403,6 +403,7 @@ def create_new_cat_block(
             gender=gender,
             alive=alive,
             outside=outside,
+            is_meeting_cat="meeting" in attribute_list,
             parent1=parent1.ID if parent1 else None,
             parent2=parent2.ID if parent2 else None,
             adoptive_parents=adoptive_parents if adoptive_parents else None,
@@ -511,6 +512,7 @@ def create_new_cat(
     gender: str = None,
     alive: bool = True,
     outside: bool = False,
+    is_meeting_cat: bool = False,
     parent1: str = None,
     parent2: str = None,
     adoptive_parents: list = None,
@@ -530,6 +532,7 @@ def create_new_cat(
     :param original_group: set as the cat's old group - default: None (cat will not be given any past group)
     :param str thought: if you need to give a custom thought, set it here
     :param bool outside: set this as True to generate the cat as an outsider instead of as part of the Clan - default: False (Clan cat)
+    :param bool is_meeting_cat: set this as True when generated from a meeting new-cat block
     :param int moons: set the age of the new cat(s) - default: None (will be random or if kit/litter is true, will be kitten.
     :param str gender: set the gender (BIRTH SEX) of the cat - default: None (will be random)
     :param bool alive: set this as False to generate the cat as already dead - default: True (alive)
@@ -650,16 +653,18 @@ def create_new_cat(
         if (
             kit or litter or moons < 12
         ) and original_group not in game.clan.other_clan_IDs:
-            if new_cat.status.is_outsider:
-                if bool(getrandbits(1)):
-                    name = choice(names.names_dict["loner_names"])
-                    # otherwise give name from prefix list (more nature-y names)
-                else:
-                    name = choice(names.names_dict["normal_prefixes"])
+            if (
+                is_meeting_cat
+                and outside
+                and original_social in (CatSocial.LONER, CatSocial.KITTYPET, CatSocial.ROGUE)
+            ):
+                # meeting-event youngsters should keep loner-style outsider names
+                name = choice(names.names_dict["loner_names"])
+                new_cat.change_name(new_prefix=name, new_suffix="")
             else:
                 # babies change name, in case their initial name isn't clan-ish
                 new_cat.change_name()
-                
+
         elif original_group not in game.clan.other_clan_IDs:
             # give kittypets a kittypet name
             if original_social == CatSocial.KITTYPET:
