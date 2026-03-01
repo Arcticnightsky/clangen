@@ -650,12 +650,17 @@ def create_new_cat(
         if (
             kit or litter or moons < 12
         ) and original_group not in game.clan.other_clan_IDs:
-            if new_cat.status.is_outsider:
-                if bool(getrandbits(1)):
-                    name = choice(names.names_dict["loner_names"])
-                    # otherwise give name from prefix list (more nature-y names)
+            if original_social in (CatSocial.LONER, CatSocial.KITTYPET, CatSocial.ROGUE):
+                # young outsiders always receive a loner-style name while they are outside the Clan
+                name = choice(names.names_dict["loner_names"])
+                if new_cat.status.is_outsider:
+                    new_cat.change_name(new_prefix=name, new_suffix="")
                 else:
-                    name = choice(names.names_dict["normal_prefixes"])
+                    # if they join, keep their original outsider name as the prefix and add
+                    # a Clan suffix that remains hidden behind special rank suffixes (-kit/-paw)
+                    new_cat.change_name(new_prefix=name)
+                    new_cat.specsuffix_hidden = False
+                    new_cat.name.specsuffix_hidden = False
             else:
                 # babies change name, in case their initial name isn't clan-ish
                 new_cat.change_name()
