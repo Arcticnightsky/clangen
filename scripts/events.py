@@ -530,7 +530,7 @@ def handle_lead_den_event():
                         ):
                             invited_cat.status._change_rank(CatRank.MEDICINE_CAT)
                         # if cat is a little baby, check name
-                        elif invited_cat.age in (CatAge.NEWBORN, CatAge.KITTEN):
+                        elif invited_cat.age in (CatAge.NEWBORN, CatAge.KITTEN, CatAge.ADOLESCENT):
                             if not invited_cat.name.suffix:
                                 invited_cat.name = Name(
                                     invited_cat.name.prefix,
