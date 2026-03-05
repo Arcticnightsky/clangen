@@ -460,7 +460,7 @@ dev_tools = true
   base_random_murder_chance = 550
 
   # base 1/chance a disliked cat will be murdered
-  base_murder_kill_chance = 150
+  base_murder_kill_chance = 180
 
   # age cats will start dying of old age based on old_age_death_curve
   old_age_death_start = 150
@@ -472,7 +472,7 @@ dev_tools = true
 
 [condition_related]
   # 10/chance an illness will occur
-  expanded_illness_chance = 600
+  expanded_illness_chance = 550
   "cruel season_illness_chance" = 200
   classic_illness_chance = 700
 
