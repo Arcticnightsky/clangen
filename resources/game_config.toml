@@ -11,7 +11,7 @@ dev_tools = true
   max_interaction = 4
 
   # sets the max amount of interactions a cat with a special role (leader, deputy, medicine cat, or mediator) can have each moon
-  max_interaction_special = 6
+  max_interaction_special = 8
 
   # sets the positive or negative effect that interactions will have on other cats based on personality compatibility
   compatibility_effect = 5
