@@ -579,7 +579,7 @@ class Status:
             return CatGroup.UNKNOWN_RESIDENCE_ID
 
         # exiled cats are special, cus they get kicked out of heaven
-        if self.is_exiled(CatGroup.PLAYER_CLAN_ID):
+        if self.is_exiled(CatGroup.PLAYER_CLAN_ID) and self.is_outsider:
             return CatGroup.DARK_FOREST_ID
 
         if self.is_lost(CatGroup.PLAYER_CLAN_ID):
