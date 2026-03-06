@@ -90,6 +90,13 @@
       "interactions":[
          "m_c can't help but admire just how brave r_c is..."
       ],
+      "main_trait_constraint":[
+         "-fierce",
+         "-bold",
+         "-daring",
+         "-rebellious",
+         "-confident"
+      ],
       "random_trait_constraint":[
          "fierce",
          "bold",
@@ -337,6 +344,56 @@
          "compassionate",
          "sincere"
       ]
+   },
+   {
+      "id":"rom_inc_med11",
+      "intensity":"medium",
+      "interactions":[
+         "Though m_c and r_c were on a serious patrol, r_c couldn't help but play around and throw the whole patrol off. Even though m_c was angry that the patrol failed, {PRONOUN/m_c/subject} thought that r_c's playfullness was kinda cute.",
+         "m_c unexpectedly felt {PRONOUN/m_c/self} blush when r_c flirtatiously teased {PRONOUN/m_c/object} about {PRONOUN/m_c/poss} strictness while on patrol.",
+         "m_c was cold and dead-serious while on patrol until {PRONOUN/m_c/subject} felt {PRONOUN/m_c/poss} fur grow hot when r_c brushed against {PRONOUN/m_c/object} seemingly on purpose...",
+         "m_c doesn't know how r_c did it, but m_c feels like {PRONOUN/m_c/subject} can loosen up with r_c.",
+         "m_c typically doesn't find foolish, reckless, silly behavior attractive, but r_c's behavior somehow, someway, made {PRONOUN/r_c/object} so attractive to m_c.",
+         "While m_c and r_c were out training together, r_c gets carried away playing around. After m_c scolded {PRONOUN/r_c/poss}, r_c somehow encouraged m_c to loosen up. The two ended up having fun while training and afterward, felt a new, unexpected closeness toward eachother.",
+         "After m_c's strictness and r_c's frolicsomeness made a patrol successful, m_c and r_c realize how opposites can make excellent teamwork and also attract...",
+         "It's rare for m_c to smile, but {PRONOUN/m_c/subject} can't help but smile when around r_c."
+      ],
+      "relationship_constraint":[
+         "fancies"
+      ],
+      "main_trait_constraint":[
+         "cold",
+         "strict"
+      ],
+      "random_trait_constraint":[
+         "playful",
+         "childish",
+         "troublesome"
+      ],
+      "main_status_constraint":[
+         "warrior",
+         "deputy",
+         "leader",
+         "apprentice",
+         "medicine cat apprentice",
+         "medicine cat"
+      ],
+      "random_status_constraint":[
+         "warrior",
+         "deputy",
+         "leader",
+         "apprentice",
+         "medicine cat apprentice",
+         "medicine cat"
+      ],
+      "reaction_random_cat":{
+         "romance":"increase",
+         "like":"increase"
+      },
+      "reaction_main_cat":{
+         "romance":"increase",
+         "like":"increase"
+      }
    },
    {
       "id":"rom_inc_high1",
