@@ -552,7 +552,8 @@ def handle_lead_den_event():
                         # if the cat chose to become a mediator but the settings don't allow it, make them a warrior or medicine cat instead
                         if invited_cat.status.rank == CatRank.MEDIATOR and not get_clan_setting("become_mediator"):
                             invited_cat.status._change_rank(random.choice([CatRank.WARRIOR, CatRank.MEDICINE_CAT]))
-                    
+                        if invited_cat.age == CatAge.ADOLESCENT:
+                            event_text += " Since {PRONOUN/m_c/subject} is only an apprentice, {PRONOUN/m_c/subject} decides to assimilate into {PRONOUN/m_c/poss} new Clan by taking on a more Clan-like name and is now called m_c."
                     invited_cat.create_relationships_new_cat()
 
             # this handles ceremonies for cats coming into the clan
