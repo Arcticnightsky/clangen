@@ -359,6 +359,7 @@
          "It's rare for m_c to smile, but {PRONOUN/m_c/subject} can't help but smile when around r_c."
       ],
       "relationship_constraint":[
+         "-mates",
          "fancies"
       ],
       "main_trait_constraint":[
