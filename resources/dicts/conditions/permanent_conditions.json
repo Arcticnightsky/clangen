@@ -702,6 +702,10 @@
             {
                 "name": "running nose",
                 "chance": 20
+            },
+            {
+                "name": "sore throat",
+                "chance": 20
             }
         ],
         "herbs": {
