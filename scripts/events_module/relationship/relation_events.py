@@ -53,10 +53,26 @@ class Relation_Events:
 
         Relation_Events.same_age_events(cat)
 
-        # 1/16 for an additional event
-        if not random.getrandbits(4):
-            Relation_Events.romantic_events(cat)
+        trigger_romantic_event = not random.getrandbits(4)
 
+        # cats with strong romantic feelings have a much higher chance of having
+        # a romantic interaction in a moon
+        if not trigger_romantic_event:
+            has_romance_interest = any(
+                relationship.romance > 10
+                and relationship.cat_to.status.alive_in_player_clan
+                for relationship in cat.relationships.values()
+            )
+            if has_romance_interest and random_module.random() < 0.75:
+                if cat.gender == inter_cat.gender and random_module.randint(1, 25000) != 1:
+                    trigger_romantic_event = False
+                    return # balancing same-sex relationships - there are too many and I just want more kits in my clans, sorry >:(
+                else:
+                    trigger_romantic_event = True
+
+        if trigger_romantic_event:
+            Relation_Events.romantic_events(cat)
+            
         RomanticEvents.handle_mating_and_breakup(cat)
 
     # ---------------------------------------------------------------------------- #
@@ -107,7 +123,7 @@ class Relation_Events:
                 or inter_cat.relationships[cat.ID].comfort > 10
             )
             
-            if cat.gender == inter_cat.gender and random_module.randint(1, 10500) != 1 and not (inter_cat.relationships[cat.ID].romance > 0 or inter_cat.relationships[cat.ID].romance > 0):
+            if cat.gender == inter_cat.gender and random_module.randint(1, 25000) != 1 and not (inter_cat.relationships[cat.ID].romance > 0 or inter_cat.relationships[cat.ID].romance > 0):
                 continue # balancing same-sex relationships - there are too many and I just want more kits in my clans, sorry >:(
             
             if cat_to_inter and inter_to_cat:
