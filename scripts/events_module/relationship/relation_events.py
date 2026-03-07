@@ -58,12 +58,13 @@ class Relation_Events:
         # cats with strong romantic feelings have a much higher chance of having
         # a romantic interaction in a moon
         if not trigger_romantic_event:
-            has_romance_interest = any(
-                relationship.romance > 10
-                and relationship.cat_to.status.alive_in_player_clan
+            romance_interests = [
+                relationship.cat_to
                 for relationship in cat.relationships.values()
-            )
-            if has_romance_interest and random_module.random() < 0.75:
+                if relationship.romance > 0 and relationship.cat_to.status.alive_in_player_clan
+            ]
+            if romance_interests and random_module.random() < 0.75:
+                inter_cat = random_module.choice(romance_interests)
                 if cat.gender == inter_cat.gender and random_module.randint(1, 25000) != 1:
                     trigger_romantic_event = False
                     return # balancing same-sex relationships - there are too many and I just want more kits in my clans, sorry >:(
