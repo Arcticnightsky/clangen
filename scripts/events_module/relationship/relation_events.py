@@ -54,20 +54,7 @@ class Relation_Events:
         Relation_Events.same_age_events(cat)
 
         # 1/16 for an additional event
-        trigger_romantic_event = not random.getrandbits(4)
-
-        # cats with strong romantic feelings have a much higher chance of having
-        # a romantic interaction in a moon
-        if not trigger_romantic_event:
-            has_high_romance_interest = any(
-                relationship.romance > 25
-                and relationship.cat_to.status.alive_in_player_clan
-                for relationship in cat.relationships.values()
-            )
-            if has_high_romance_interest and random_module.random() < 0.75:
-                trigger_romantic_event = True
-
-        if trigger_romantic_event:
+        if not random.getrandbits(4):
             Relation_Events.romantic_events(cat)
 
         RomanticEvents.handle_mating_and_breakup(cat)
@@ -101,9 +88,6 @@ class Relation_Events:
 
         # only adding cats which already have SOME relationship with each other
         cat_to_choose_from = []
-        opposite_gender_fallback = []
-        high_romance_options = []
-        same_sex_balance_blocked = False
         for inter_cat in possible_cats:
             # toss out cats who are outside
             if inter_cat.status.is_outsider:
@@ -122,22 +106,8 @@ class Relation_Events:
                 inter_cat.relationships[cat.ID].like > 10
                 or inter_cat.relationships[cat.ID].comfort > 10
             )
-
-            if cat_to_inter and inter_to_cat and inter_cat.gender != cat.gender:
-                opposite_gender_fallback.append(inter_cat)
-
-            if (
-                cat_to_inter
-                and inter_to_cat
-                and (
-                    cat.relationships[inter_cat.ID].romance > 25
-                    or inter_cat.relationships[cat.ID].romance > 25
-                )
-            ):
-                high_romance_options.append(inter_cat)
             
-            if cat.gender == inter_cat.gender and random_module.randint(1, 10500) != 1 and not (cat.relationships[inter_cat.ID].romance > 0 or inter_cat.relationships[cat.ID].romance > 0):
-                same_sex_balance_blocked = True
+            if cat.gender == inter_cat.gender and random_module.randint(1, 10500) != 1 and not (inter_cat.relationships[cat.ID].romance > 0 or inter_cat.relationships[cat.ID].romance > 0):
                 continue # balancing same-sex relationships - there are too many and I just want more kits in my clans, sorry >:(
             
             if cat_to_inter and inter_to_cat:
@@ -163,29 +133,10 @@ class Relation_Events:
                 if cat.all_cats[mate_id].status.alive_in_player_clan
             ]
 
-        if same_sex_balance_blocked and opposite_gender_fallback:
-            cat_to_choose_from = [
-                inter_cat
-                for inter_cat in cat_to_choose_from
-                if inter_cat.gender != cat.gender
-            ]
-            if not cat_to_choose_from:
-                cat_to_choose_from = opposite_gender_fallback
-
         if not cat_to_choose_from:
             return
 
-        if high_romance_options:
-            high_romance_choices = [
-                inter_cat for inter_cat in high_romance_options if inter_cat in cat_to_choose_from
-            ]
-            if high_romance_choices and random_module.random() < 0.75:
-                other_cat = choice(high_romance_choices)
-            else:
-                other_cat = choice(cat_to_choose_from)
-        else:
-            other_cat = choice(cat_to_choose_from)
-
+        other_cat = choice(cat_to_choose_from)
         if RomanticEvents.start_interaction(cat, other_cat):
             Relation_Events.trigger_event(cat)
             Relation_Events.trigger_event(other_cat)

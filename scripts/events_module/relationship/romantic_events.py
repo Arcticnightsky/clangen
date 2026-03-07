@@ -180,55 +180,7 @@ class RomanticEvents:
             return False
 
         if cat_from.gender == cat_to.gender and cat_to.ID not in cat_from.mate and random_module.randint(1, 10500) != 1:
-            opposite_gender_candidates = [
-                inter_cat
-                for inter_cat in cat_from.all_cats.values()
-                if inter_cat.status.alive_in_player_clan
-                and inter_cat.ID != cat_from.ID
-                and inter_cat.ID in cat_from.relationships
-                and inter_cat.gender != cat_from.gender
-                and inter_cat.is_potential_mate(cat_from, for_love_interest=True)
-                and (
-                    cat_from.relationships[inter_cat.ID].like > 10
-                    or cat_from.relationships[inter_cat.ID].comfort > 10
-                )
-                and (
-                    inter_cat.relationships[cat_from.ID].like > 10
-                    or inter_cat.relationships[cat_from.ID].comfort > 10
-                )
-            ]
-
-            if cat_from.mate:
-                opposite_gender_mates = [
-                    cat_from.all_cats[mate_id]
-                    for mate_id in cat_from.mate
-                    if mate_id in cat_from.all_cats
-                    and cat_from.all_cats[mate_id].status.alive_in_player_clan
-                    and cat_from.all_cats[mate_id].gender != cat_from.gender
-                    and mate_id in cat_from.relationships
-                    and cat_from.relationships[mate_id].romance > 25
-                ]
-                if opposite_gender_mates:
-                    opposite_gender_candidates = opposite_gender_mates
-
-            if opposite_gender_candidates:
-                cat_to = choice(opposite_gender_candidates)
-                if cat_to.ID in cat_from.mate and not cat_to.dead:
-                    relevant_dict = deepcopy(RomanticEvents.MATE_INTERACTIONS)
-                else:
-                    relevant_dict = deepcopy(RomanticEvents.ROMANTIC_INTERACTIONS)
-                relationship = cat_from.relationships[cat_to.ID]
-                positive = relationship.positive_interaction()
-                possible_interactions = (
-                    relevant_dict["positive"] if positive else relevant_dict["negative"]
-                )
-                filtered_interactions = relationship.get_relevant_interactions(
-                    possible_interactions
-                )
-                if not filtered_interactions:
-                    return False
-            else:
-                return False # balancing same-sex relationships - there are too many and I just want more kits in my clans, sorry >:(
+            return False # balancing same-sex relationships - there are too many and I just want more kits in my clans, sorry >:(
         
         # chose interaction
         chosen_interaction = choice(filtered_interactions)
