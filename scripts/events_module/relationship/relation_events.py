@@ -53,27 +53,23 @@ class Relation_Events:
 
         Relation_Events.same_age_events(cat)
 
-        trigger_romantic_event = not random.getrandbits(4)
-
-        # cats with strong romantic feelings have a much higher chance of having
-        # a romantic interaction in a moon
-        if not trigger_romantic_event:
-            romance_interests = [
-                relationship.cat_to
-                for relationship in cat.relationships.values()
-                if relationship.romance > 0 and relationship.cat_to.status.alive_in_player_clan
+        romance_interests = [
+            relationship.cat_to
+            and relationship.cat_to.status.alive_in_player_clan
+            for relationship in cat.relationships.values()
+            if relationship.romance > 0 and relationship.cat_to.status.alive_in_player_clan
             ]
-            if romance_interests and random_module.random() > 0.75:
-                inter_cat = random_module.choice(romance_interests)
-                if cat.gender == inter_cat.gender and random_module.randint(1, 25000) != 1:
-                    trigger_romantic_event = False
-                    return # balancing same-sex relationships - there are too many and I just want more kits in my clans, sorry >:(
-                else:
-                    trigger_romantic_event = True
+        if romance_interests:
+            inter_cat = random_module.choice(romance_interests)
+            if cat.gender == inter_cat.gender and random_module.randint(1, 25000) != 1:
+                return # balancing same-sex relationships - there are too many and I just want more kits in my clans, sorry >:(
+            else:
+                if not random.getrandbits(3):
+                   Relation_Events.romantic_events(cat) 
+        else:
+            if not random.getrandbits(4):
+                Relation_Events.romantic_events(cat)
 
-        if trigger_romantic_event:
-            Relation_Events.romantic_events(cat)
-            
         RomanticEvents.handle_mating_and_breakup(cat)
 
     # ---------------------------------------------------------------------------- #
