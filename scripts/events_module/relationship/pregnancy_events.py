@@ -1557,7 +1557,7 @@ class Pregnancy_Events:
 
         # In real life, cats are most likely to have kits during the spring and summer months - known as "Kitten Season"
         if game.clan.current_season in ["Newleaf", "Greenleaf"]:
-            inverse_chance = int(inverse_chance / 3)
+            inverse_chance = int(inverse_chance * 0.8)
         
         # 'INBREED' counter
         # - increase inverse chance if one of the current cats belongs in the biggest family
