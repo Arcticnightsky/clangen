@@ -65,7 +65,7 @@ class Relation_Events:
             inter_cat = random_module.choice(romance_interests)
             if cat.gender == inter_cat.gender and random_module.randint(1, 25000) != 1:
                 return # balancing same-sex relationships - there are too many and I just want more kits in my clans, sorry >:(
-            else:
+            elif cat.gender != inter_cat.gender:
                 if not random.getrandbits(3):
                    Relation_Events.romantic_events(cat) 
         else:
