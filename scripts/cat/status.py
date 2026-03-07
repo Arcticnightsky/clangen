@@ -573,8 +573,11 @@ class Status:
         go to the unknown residence.
         """
         # if we have an outsider who has never been a clancat, they go to the unknown residence
-        if self.is_outsider and (
-           not self.is_exiled(CatGroup.PLAYER_CLAN_ID) or not self.is_lost(CatGroup.PLAYER_CLAN_ID) or not self.is_former_clancat
+        if (
+            self.is_outsider
+            and not self.is_exiled(CatGroup.PLAYER_CLAN_ID)
+            and not self.is_lost(CatGroup.PLAYER_CLAN_ID)
+            and not self.is_former_clancat
         ):
             return CatGroup.UNKNOWN_RESIDENCE_ID
 

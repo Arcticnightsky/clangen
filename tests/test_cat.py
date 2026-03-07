@@ -712,6 +712,35 @@ class TestNameRepr(unittest.TestCase):
                 self.assertTrue(str(cat.name).endswith("test"))
 
 
+class TestAfterlifeAssignment(unittest.TestCase):
+    def test_default_afterlife_for_exiled_cat(self):
+        exiled_status = {
+            "group_history": [
+                {
+                    "group": CatGroup.PLAYER_CLAN_ID,
+                    "rank": CatRank.WARRIOR,
+                    "moons_as": 1,
+                },
+                {"group": None, "rank": CatRank.LONER, "moons_as": 1},
+            ],
+            "standing_history": [
+                {"group": CatGroup.PLAYER_CLAN_ID, "standing": ["member", "exiled"]}
+            ],
+        }
+
+        cat = Cat(status_dict=exiled_status, disable_random=True)
+
+        self.assertEqual(cat.status.get_default_afterlife_id(), CatGroup.DARK_FOREST_ID)
+
+    def test_default_afterlife_for_true_outsider(self):
+        outsider_cat = Cat(status_dict={"rank": CatRank.ROGUE}, disable_random=True)
+
+        self.assertEqual(
+            outsider_cat.status.get_default_afterlife_id(),
+            CatGroup.UNKNOWN_RESIDENCE_ID,
+        )
+
+
 class TestSocialAssignment(unittest.TestCase):
     def test_clancat_social(self):
         clancat_ranks = (
