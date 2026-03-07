@@ -61,7 +61,7 @@ class Relation_Events:
             romance_interests = [
                 relationship.cat_to
                 for relationship in cat.relationships.values()
-                if relationship.romance > 10 and relationship.cat_to.status.alive_in_player_clan
+                if relationship.romance > 0 and relationship.cat_to.status.alive_in_player_clan
             ]
             if romance_interests and random_module.random() < 0.75:
                 inter_cat = random_module.choice(romance_interests)
