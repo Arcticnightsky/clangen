@@ -53,12 +53,14 @@ class Relation_Events:
 
         Relation_Events.same_age_events(cat)
 
-        romance_interests = [
-            relationship.cat_to
-            if relationship.romance > 0
-            and relationship.cat_to
-            and relationship.cat_to.status.alive_in_player_clan
-            ]
+        romance_interests = []
+        for relationship in cat.relationships.values():
+            if (
+                relationship.romance > 0
+                and relationship.cat_to
+                and relationship.cat_to.status.alive_in_player_clan
+            ):
+                romance_interests.append(relationship.cat_to)
         if romance_interests:
             inter_cat = random_module.choice(romance_interests)
             if cat.gender == inter_cat.gender and random_module.randint(1, 25000) != 1:
