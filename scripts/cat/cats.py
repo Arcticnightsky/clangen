@@ -505,11 +505,11 @@ class Cat:
                         self.pelt.colour = father.pelt.colour
 
                     # assigning the base pelt pattern
-                    if mother.pelt.name not in Pelt.torties:
+                    if mother.pelt.name not in ["Tortie", "Calico"]:
                         self.pelt.tortie_base = choice([mother.pelt.name, father.pelt.name]).lower()
                         if mother.pelt.name in ["Singlecolour", "TwoColour"] or father.pelt.name in ["Singlecolour", "TwoColour"]:
                             self.pelt.tortie_base = "single"
-                    elif mother.pelt.name in Pelt.torties:
+                    elif mother.pelt.name in ["Tortie", "Calico"]:
                         self.pelt.tortie_base = choice([mother.pelt.tortie_base, father.pelt.name]).lower()
                         if father.pelt.name in ["Singlecolour", "TwoColour"]:
                             self.pelt.tortie_base = "single"
@@ -665,10 +665,15 @@ class Cat:
                     elif father_is_dark:
                         self.pelt.colour = father.pelt.colour
 
-                    # assigning the tortie base
-                    self.pelt.tortie_base = choice([mother.pelt.name, father.pelt.name]).lower()
-                    if mother.pelt.name in ["Singlecolour", "TwoColour"] or father.pelt.name in ["Singlecolour", "TwoColour"]:
-                        self.pelt.tortie_base = "single"
+                    # assigning the base pelt pattern
+                    if mother.pelt.name not in ["Tortie", "Calico"]:
+                        self.pelt.tortie_base = choice([mother.pelt.name, father.pelt.name]).lower()
+                        if mother.pelt.name in ["Singlecolour", "TwoColour"] or father.pelt.name in ["Singlecolour", "TwoColour"]:
+                            self.pelt.tortie_base = "single"
+                    elif mother.pelt.name in ["Tortie", "Calico"]:
+                        self.pelt.tortie_base = choice([mother.pelt.tortie_base, father.pelt.name]).lower()
+                        if father.pelt.name in ["Singlecolour", "TwoColour"]:
+                            self.pelt.tortie_base = "single"
 
                     # Ensuring that the tortie data is fully assigned
                     if not self.pelt.tortie_colour:
