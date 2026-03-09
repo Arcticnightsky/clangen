@@ -917,6 +917,9 @@
         "main_status_constraint": [
             "-kittypet"
         ],
+        "main_trait_constraint": [
+            "strange"
+        ],
         "main_status_history": [
             "-kittypet"
         ]
@@ -1019,6 +1022,9 @@
         ],
         "relationship_constraint": [
             "dislikes"
+        ],
+        "main_trait_constraint": [
+            "vengeful"
         ],
         "random_living_status": [
             "living"
