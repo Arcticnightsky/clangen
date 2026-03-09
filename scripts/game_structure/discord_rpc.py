@@ -28,6 +28,17 @@ status_dict = {
     GameScreen.MED_DEN: "In the medicine den",
 }
 
+camp_bg_aliases = {
+    "1": "camp1",
+    "2": "camp2",
+    "3": "camp3",
+    "4": "camp4",
+    "lake": "camp4",
+    "lakeside": "camp4",
+    "fjord": "camp4",
+    "ruins": "camp4",
+}
+
 
 class _DiscordRPC(threading.Thread):
     def __init__(self, client_id: str, daemon: bool):
@@ -99,19 +110,7 @@ class _DiscordRPC(threading.Thread):
             except KeyError:
                 state_text = "Leading the Clan"
 
-            try:
-                img_str = (
-                    f"{game.clan.biome}_{game.clan.current_season.replace('-', '')}_"
-                    f"{game.clan.camp_bg}_{'dark' if game_setting_get('dark mode') else 'light'}"
-                )
-                img_text = game.clan.biome
-            except AttributeError:
-                print(
-                    "Failed to get image string, game may not be fully loaded yet. "
-                    "Don't worry, it will fix itself. Hopefully."
-                )
-                img_str = "discord"  # fallback incase the game isn't loaded yet
-                img_text = "Clangen!!"
+            img_str, img_text = self._get_image_string()
 
             # Example: beach_greenleaf_camp1_dark
 
@@ -147,6 +146,29 @@ class _DiscordRPC(threading.Thread):
                 self._connected = False
                 self._rpc = None
         self.update_rpc.clear()
+
+    def _get_image_string(self):
+        clan = game.clan
+        if not clan:
+            return "discord", "Clangen!!"
+
+        biome = getattr(clan, "biome", None)
+        season = getattr(clan, "current_season", None)
+        camp_bg = getattr(clan, "camp_bg", None)
+
+        if not biome or not season or not camp_bg:
+            return "discord", "Clangen!!"
+
+        camp_str = str(camp_bg).casefold()
+        if not camp_str.startswith("camp"):
+            camp_str = camp_bg_aliases.get(camp_str, "camp1")
+
+        image_str = (
+            f"{biome}_{str(season).replace('-', '')}_{camp_str}_"
+            f"{'dark' if game_setting_get('dark mode') else 'light'}"
+        )
+
+        return image_str.casefold(), str(biome)
 
     def close(self):
         if self._rpc:
