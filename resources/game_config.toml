@@ -316,7 +316,7 @@ dev_tools = true
   # determines which list outsiders pull from: silly_names, human_names, loner_names, or normal_prefixes
   # number / total for each control
 
-  kittypet = [30, 50, 10, 10]
+  kittypet = [35, 50, 20, 5]
   loner = [5, 15, 50, 30]
   rogue = [3, 7, 35, 55]
 
