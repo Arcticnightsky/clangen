@@ -4,6 +4,7 @@ from typing import Optional, List, Union, Type
 
 import i18n
 
+import random as random_module
 from scripts.cat.cats import Cat
 from scripts.cat.enums import (
     CatRank,
@@ -93,6 +94,24 @@ def create_new_cat_block(
 
                 give_mates.append(in_event_cats[index])
 
+    # gather romance
+    give_romance = []
+    for tag in attribute_list:
+        match = re.match(r"romance:([_,0-9a-zA-Z]+)", tag)
+        if not match:
+            continue
+            
+        romance_indexes = match.group(1).split(",")
+            
+        # TODO: make this less ugly
+        for index in romance_indexes:
+            if index in in_event_cats:
+                if in_event_cats[index].status.rank.is_any_apprentice_rank():
+                    print("Can't romance apprentices")
+                    continue
+                    
+                give_romance.append(in_event_cats[index])
+                
     # determine gender
     if "male" in attribute_list:
         gender = "male"
@@ -150,8 +169,13 @@ def create_new_cat_block(
             age = randint(min_age, max_age)
             break
 
+        if match.group(1) == "romance" and give_romance:
+            min_age, max_age = Cat.age_moons[give_romance[0].age]
+            age = randint(min_age, max_age)
+            break
+        
         if match.group(1) == "has_kits":
-            age = randint(19, 120)
+            age = randint(20, 120)
             break
 
     if rank and not age:
@@ -277,7 +301,7 @@ def create_new_cat_block(
         new_name = False
         if age is not None and age <= 6 and not bs_override:
             chosen_backstory = "outsider1"
-
+        
     # IS THE CAT DEAD?
     alive = True
     if "dead" in attribute_list:
@@ -379,9 +403,11 @@ def create_new_cat_block(
             gender=gender,
             alive=alive,
             outside=outside,
+            is_meeting_cat="meeting" in attribute_list,
             parent1=parent1.ID if parent1 else None,
             parent2=parent2.ID if parent2 else None,
             adoptive_parents=adoptive_parents if adoptive_parents else None,
+            skip_female_rarity_roll="can_birth" in attribute_list,
         )
 
         # NEXT
@@ -486,9 +512,11 @@ def create_new_cat(
     gender: str = None,
     alive: bool = True,
     outside: bool = False,
+    is_meeting_cat: bool = False,
     parent1: str = None,
     parent2: str = None,
     adoptive_parents: list = None,
+    skip_female_rarity_roll: bool = False,
 ) -> list:
     """
     This function creates new cats and then returns a list of those cats
@@ -504,6 +532,7 @@ def create_new_cat(
     :param original_group: set as the cat's old group - default: None (cat will not be given any past group)
     :param str thought: if you need to give a custom thought, set it here
     :param bool outside: set this as True to generate the cat as an outsider instead of as part of the Clan - default: False (Clan cat)
+    :param bool is_meeting_cat: set this as True when generated from a meeting new-cat block
     :param int moons: set the age of the new cat(s) - default: None (will be random or if kit/litter is true, will be kitten.
     :param str gender: set the gender (BIRTH SEX) of the cat - default: None (will be random)
     :param bool alive: set this as False to generate the cat as already dead - default: True (alive)
@@ -595,6 +624,7 @@ def create_new_cat(
             parent1=parent1,
             parent2=parent2,
             adoptive_parents=adoptive_parents if adoptive_parents else [],
+            skip_female_rarity_roll=skip_female_rarity_roll,
         )
         # this simulates a "history" as whomever they used to be
         new_cat.status.change_current_moons_as(moons)
@@ -623,8 +653,18 @@ def create_new_cat(
         if (
             kit or litter or moons < 12
         ) and original_group not in game.clan.other_clan_IDs:
-            # babies change name, in case their initial name isn't clan-ish
-            new_cat.change_name()
+            if (
+                is_meeting_cat
+                and outside
+                and original_social in (CatSocial.LONER, CatSocial.KITTYPET, CatSocial.ROGUE)
+            ):
+                # meeting-event youngsters should keep loner-style outsider names
+                name = choice(names.names_dict["loner_names"])
+                new_cat.change_name(new_prefix=name, new_suffix="")
+            else:
+                # babies change name, in case their initial name isn't clan-ish
+                new_cat.change_name()
+
         elif original_group not in game.clan.other_clan_IDs:
             # give kittypets a kittypet name
             if original_social == CatSocial.KITTYPET:
@@ -677,6 +717,7 @@ def create_new_cat(
             "NOLEFTEAR",
             "NORIGHTEAR",
             "MANLEG",
+            "BLIND",
         ]
 
         new_cat.pelt.scars = tuple(
@@ -726,6 +767,42 @@ def create_new_cat(
                     new_cat.pelt.scars = (*new_cat.pelt.scars, "NOPAW")
                 elif chosen_condition in ("lost their tail", "born without a tail"):
                     new_cat.pelt.scars = (*new_cat.pelt.scars, "NOTAIL")
+                elif chosen_condition in ("blind"):
+                    new_cat.pelt.scars = (*new_cat.pelt.scars, "BLIND")
+
+            blue_eyes = [
+                "BLUE",
+                "DARKBLUE",
+                "CYAN",
+                "PALEBLUE",
+                "HEATHERBLUE",
+                "COBALT",
+                "SUNLITICE",
+                "GREY",
+            ]
+                
+            deaf_chance = None
+            partial_deaf_chance = None
+            if (new_cat.pelt.colour == "WHITE" or new_cat.pelt.white_patches == "FULLWHITE") and new_cat.pelt.eye_colour in blue_eyes:
+                deaf_chance = int(
+                    constants.CONFIG["cat_generation"]["base_permanent_condition"]
+                    * 0.4
+                )
+            elif (new_cat.pelt.colour == "WHITE" or new_cat.pelt.white_patches == "FULLWHITE") and new_cat.pelt.eye_colour2 and new_cat.pelt.eye_colour2 in blue_eyes:
+                partial_deaf_chance = int(
+                    constants.CONFIG["cat_generation"]["base_permanent_condition"]
+                    * 0.7
+                )
+
+            if deaf_chance:
+                if not random_module.randint(1, deaf_chance):
+                    chosen_condition = ("deaf")
+                    new_cat.get_permanent_condition(chosen_condition, born_with=True)
+            elif partial_deaf_chance:
+                if not random_module.randint(1, partial_deaf_chance):
+                    chosen_condition = ("partial hearing loss")
+                    new_cat.get_permanent_condition(chosen_condition, born_with=True)
+
 
         # KILL >:D only if we're sposed to tho
         if not alive:
@@ -1040,6 +1117,8 @@ def change_relationship_values(
                 single_cat_from.is_potential_mate(single_cat_to, for_love_interest=True)
                 or single_cat_to.ID in single_cat_from.mate
             ):
+                if single_cat_from.gender == single_cat_to.gender and single_cat_to.ID not in single_cat_from.mate and random_module.randint(1, 25000) != 1:
+                    continue # balancing same-sex relationships - there are too many and I just want more kits in my clans, sorry >:(
                 # now gain the romance
                 rel.romance += romance
 
