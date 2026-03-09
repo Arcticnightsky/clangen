@@ -15,7 +15,7 @@
         ],
         "patrol_art": "med_general_intro",
         "min_cats": 2,
-        "max_cats": 6,
+        "max_cats": 2,
         "min_max_status": {
             "medicine cat": [
                 1,
@@ -425,7 +425,7 @@
                 "history_text": {
                     "death": "m_c froze to death after getting stuck in a snowbank."
                 },
-                "frequency": 2
+                "frequency": 1
             },
             {
                 "text": "p_l carefully edges out onto a slippery, frozen rock, trying to get closer to a branch of blackberry leaves that are still green. {PRONOUN/p_l/subject/CAP} {VERB/p_l/overcompensate/overcompensates} {PRONOUN/p_l/poss} balance, falling into a deep snowbank that {PRONOUN/p_l/subject} {VERB/p_l/emerge/emerges} from with a deep shiver racking {PRONOUN/p_l/poss} body.",
@@ -616,7 +616,7 @@
                         "amount": -10
                     }
                 ],
-                "frequency": 2
+                "frequency": 1
             },
             {
                 "text": "Under {PRONOUN/app1/poss} mentor's orders, app1 carefully edges out onto a slippery, frozen rock, trying to get closer to a branch of blackberry leaves that are still green. {PRONOUN/app1/subject/CAP} {VERB/app1/overcompensate/overcompensates} {PRONOUN/app1/poss} balance, falling into a deep snowbank that {PRONOUN/app1/subject} {VERB/app1/emerge/emerges} from with a deep shiver racking {PRONOUN/app1/poss} body.",
@@ -731,7 +731,7 @@
                         "amount": -10
                     }
                 ],
-                "frequency": 2
+                "frequency": 1
             }
         ]
     },
@@ -881,7 +881,7 @@
                         "amount": -10
                     }
                 ],
-                "frequency": 2
+                "frequency": 1
             },
             {
                 "text": "r_c carefully edges out onto a slippery, frozen rock, trying to get closer to a branch of blackberry leaves that are still green. {PRONOUN/r_c/subject/CAP} {VERB/r_c/overcompensate/overcompensates} {PRONOUN/r_c/poss} balance, falling into a deep snowbank that {PRONOUN/r_c/subject} {VERB/r_c/emerge/emerges} from with a deep shiver racking {PRONOUN/r_c/poss} body.",
@@ -953,7 +953,7 @@
                         "amount": -10
                     }
                 ],
-                "frequency": 2
+                "frequency": 1
             },
             {
                 "text": "p_l carefully edges out onto a slippery, frozen rock, trying to get closer to a branch of blackberry leaves that are still green. {PRONOUN/p_l/subject/CAP} {VERB/p_l/overcompensate/overcompensates} {PRONOUN/p_l/poss} balance, falling into a deep snowbank that {PRONOUN/p_l/subject} {VERB/p_l/emerge/emerges} from with a deep shiver racking {PRONOUN/p_l/poss} body.",
@@ -1102,7 +1102,7 @@
                 "history_text": {
                     "death": "m_c froze to death searching for herbs in leaf-bare."
                 },
-                "frequency": 2
+                "frequency": 1
             }
         ]
     },
@@ -1327,7 +1327,7 @@
                         "amount": -10
                     }
                 ],
-                "frequency": 2
+                "frequency": 1
             },
             {
                 "text": "The patrol digs and digs and digs, but eventually has to admit failure and give up the search for burdock root. app1 in particular is shivering and chilled to the bone by the time {PRONOUN/app1/subject} and p_l return to camp, empty-pawed and miserable.",
@@ -1399,7 +1399,7 @@
                         "amount": -10
                     }
                 ],
-                "frequency": 2
+                "frequency": 1
             }
         ]
     },
@@ -1647,7 +1647,7 @@
                         "amount": -10
                     }
                 ],
-                "frequency": 2
+                "frequency": 1
             },
             {
                 "text": "The patrol digs and digs and digs, but eventually has to admit failure and give up the search for burdock root. The cold has leached all the heat from r_c's pelt, and even with the other cats' help, {PRONOUN/r_c/subject} just {VERB/r_c/don't/doesn't} have the energy to make it back to camp.",
@@ -1676,7 +1676,7 @@
                         "amount": -10
                     }
                 ],
-                "frequency": 2
+                "frequency": 1
             }
         ]
     },
@@ -1782,7 +1782,7 @@
                 "history_text": {
                     "death": "m_c froze to death searching for herbs in leaf-bare."
                 },
-                "frequency": 2
+                "frequency": 1
             }
         ]
     },
@@ -1996,7 +1996,7 @@
                         "amount": -10
                     }
                 ],
-                "frequency": 2
+                "frequency": 1
             },
             {
                 "text": "Not only do both cats end up soaked to the skin, they can't even find any daisies under the snow, and app1's left shivering violently by the time {PRONOUN/app1/subject} and p_l return to camp.",
@@ -2068,7 +2068,7 @@
                         "amount": -10
                     }
                 ],
-                "frequency": 2
+                "frequency": 1
             }
         ]
     },
@@ -2277,7 +2277,7 @@
                         "amount": -10
                     }
                 ],
-                "frequency": 2
+                "frequency": 1
             },
             {
                 "text": "Not only do the cats end up soaked to the skin, they can't even find any daisies under the snow, and r_c's left shivering violently by the time {PRONOUN/r_c/subject} and the others return to camp.",
@@ -2349,7 +2349,7 @@
                         "amount": -10
                     }
                 ],
-                "frequency": 2
+                "frequency": 1
             }
         ]
     },
@@ -2455,7 +2455,7 @@
                 "history_text": {
                     "death": "m_c froze to death searching for herbs in leaf-bare."
                 },
-                "frequency": 2
+                "frequency": 1
             }
         ]
     },
@@ -2637,7 +2637,7 @@
                         "amount": -10
                     }
                 ],
-                "frequency": 2
+                "frequency": 1
             },
             {
                 "text": "Not only does the duo end up soaked to the skin, they can't even find any dandelions under the snow. app1's left so exhausted that {PRONOUN/app1/subject} {VERB/app1/collapse/collapses} on the way back to camp, unable to go any further even with p_l's help.",
@@ -2666,7 +2666,7 @@
                         "amount": -10
                     }
                 ],
-                "frequency": 2
+                "frequency": 1
             },
             {
                 "text": "Not only does the duo end up soaked to the skin, they can't even find any dandelions under the snow, and p_l's left shivering violently by the time {PRONOUN/p_l/subject} and app1 return to camp.",
@@ -2969,7 +2969,7 @@
                         "amount": -10
                     }
                 ],
-                "frequency": 2
+                "frequency": 1
             },
             {
                 "text": "Not only do the cats end up soaked to the skin, they can't even find any dandelions under the snow. p_l's left so exhausted that {PRONOUN/p_l/subject} {VERB/p_l/collapse/collapses} on the way back to camp, unable to go any further even with the other cats' help.",
@@ -3122,7 +3122,7 @@
                 "history_text": {
                     "death": "m_c died after falling from a juniper tree, trying to harvest its leaves in the cold snow of leaf-bare."
                 },
-                "frequency": 2
+                "frequency": 1
             },
             {
                 "text": "p_l, edging out onto a skinny branch to try to get some juniper leaves, slips on the frosted wood and plummets off the tree, hitting the ground hard.",
@@ -3368,7 +3368,7 @@
                         "amount": -10
                     }
                 ],
-                "frequency": 2
+                "frequency": 1
             },
             {
                 "text": "app1, edging out onto a skinny branch to try to get some juniper leaves, slips on the frosted wood and plummets off the tree, hitting the ground hard.",
@@ -3438,7 +3438,7 @@
                         "amount": -10
                     }
                 ],
-                "frequency": 2
+                "frequency": 1
             }
         ]
     },
@@ -3653,7 +3653,7 @@
                         "amount": -10
                     }
                 ],
-                "frequency": 2
+                "frequency": 1
             },
             {
                 "text": "p_l, edging out onto a skinny branch to try to get some juniper leaves, slips on the frosted wood and plummets off the tree, hitting the ground hard.",
@@ -3723,7 +3723,7 @@
                         "amount": -10
                     }
                 ],
-                "frequency": 2
+                "frequency": 1
             }
         ]
     },
@@ -3811,7 +3811,7 @@
                 "history_text": {
                     "death": "m_c froze to death searching for herbs in leaf-bare."
                 },
-                "frequency": 2
+                "frequency": 1
             },
             {
                 "text": "When p_l arrives back at camp, {PRONOUN/p_l/subject}{VERB/p_l/'re/'s} shivering and cold. Digging into the leaf-bare ground in a search for bulbs that weren't there was both unproductive and senseless.",
@@ -4106,7 +4106,7 @@
                         "amount": -10
                     }
                 ],
-                "frequency": 2
+                "frequency": 1
             },
             {
                 "text": "When the failed patrol arrives back at camp, it's clear that one member didn't survive the cold. Digging into the leaf-bare ground in a search for bulbs that weren't there was unproductive, senseless, and had cost p_l {PRONOUN/p_l/poss} life.",
@@ -4135,7 +4135,7 @@
                         "amount": -10
                     }
                 ],
-                "frequency": 2
+                "frequency": 1
             },
             {
                 "text": "When the failed patrol arrives back at camp, app1 is shivering and cold. Digging into the leaf-bare ground in a search for bulbs that weren't there was both unproductive and senseless.",
@@ -4483,7 +4483,7 @@
                         "amount": -10
                     }
                 ],
-                "frequency": 2
+                "frequency": 1
             },
             {
                 "text": "When the failed patrol arrives back at camp, p_l is frozen stiff, beyond saving. Digging into the leaf-bare ground in a search for bulbs that weren't there was unproductive, senseless, and had cost p_l {PRONOUN/p_l/poss} life.",
@@ -4512,7 +4512,7 @@
                         "amount": -10
                     }
                 ],
-                "frequency": 2
+                "frequency": 1
             },
             {
                 "text": "When the failed patrol arrives back at camp, r_c is shivering and cold. Digging into the leaf-bare ground in a search for bulbs that weren't there was both unproductive and senseless.",
