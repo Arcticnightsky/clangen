@@ -649,7 +649,7 @@ def create_new_cat(
 
         # NAMES and accs
         # clancat adults should have already generated with a clan-ish name, thus they skip all of this re-naming
-        # little babies will take a clancat name, we love indoctrination
+        # little babies will take a clancat name IF they join the clan, we love indoctrination
         if (
             kit or litter or moons < 12
         ) and original_group not in game.clan.other_clan_IDs:
@@ -658,11 +658,30 @@ def create_new_cat(
                 and outside
                 and original_social in (CatSocial.LONER, CatSocial.KITTYPET, CatSocial.ROGUE)
             ):
-                # meeting-event youngsters should keep loner-style outsider names
-                name = choice(names.names_dict["loner_names"])
+                # young cats who are outsiders keep their outsider names
+                name_categories = [
+                    "silly_names",
+                    "human_names",
+                    "loner_names",
+                    "normal_prefixes",
+                ]
+                # defaults in case of error
+                weights = [1, 1, 1, 1]
+                # give kittypets a kittypet name
+                if original_social == CatSocial.KITTYPET:
+                    weights = constants.CONFIG["cat_name_controls"]["kittypet"]
+                    
+                if original_social == CatSocial.LONER:
+                    weights = constants.CONFIG["cat_name_controls"]["loner"]
+
+                if original_social == CatSocial.ROGUE:
+                    weights = constants.CONFIG["cat_name_controls"]["rogue"]                
+                    
+                selected_category = choices(name_categories, weights, k=1)[0]
+                name = choice(names.names_dict[selected_category])
                 new_cat.change_name(new_prefix=name, new_suffix="")
             else:
-                # babies change name, in case their initial name isn't clan-ish
+                # means that this young cat joins the clan and gets indoctrinated, muahaha
                 new_cat.change_name()
 
         elif original_group not in game.clan.other_clan_IDs:
