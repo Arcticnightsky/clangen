@@ -486,17 +486,22 @@ class Cat:
             if not allow_female_ginger:
                 if allow_tortie_instead:
                     # Tortie construction time!
-                    self.pelt.name = choice(Pelt.torties)
-                    if self.pelt.name == "Calico" and mother.pelt.white_patches not in (
+                    self.pelt.name = "Tortie"
+                    if self.pelt.name == "Calico" and mother.pelt.white_patches in (
                         list(Pelt.high_white)
                         + list(Pelt.mostly_white)
                         + ["FULLWHITE"]
-                    ) or father.pelt.white_patches not in (
+                    ) or father.pelt.white_patches in (
                         list(Pelt.high_white)
                         + list(Pelt.mostly_white)
                         + ["FULLWHITE"]
                     ):
-                        self.pelt.name = "Tortie"
+                        self.pelt.name = "Calico"
+                        self.pelt.white_patches = choice(
+                            list(Pelt.high_white)
+                            + list(Pelt.mostly_white)
+                            + ["FULLWHITE"]
+                        )
                             
                     #  assigning the base color
                     if mother_is_dark:
@@ -529,13 +534,6 @@ class Cat:
                     if not self.pelt.tortie_marking:
                         self.pelt.tortie_marking = choice(Pelt.tortie_patches)
 
-                    # Calicos MUST have white
-                    if self.pelt.name == "Calico" and not self.pelt.white_patches:
-                        self.pelt.white_patches = choice(
-                            list(Pelt.high_white)
-                            + list(Pelt.mostly_white)
-                            + ["FULLWHITE"]
-                        )
                     print("Tortie kit generated thanks to her genetics!!!")
             
             if not allow_female_ginger and not allow_tortie_instead:
@@ -647,18 +645,23 @@ class Cat:
             if not allow_female_dark:
                 if allow_tortie_instead:
                     # Tortie construction time!
-                    self.pelt.name = choice(Pelt.torties)
-                    if self.pelt.name == "Calico" and mother.pelt.white_patches not in (
+                    self.pelt.name = "Tortie"
+                    if self.pelt.name == "Calico" and mother.pelt.white_patches in (
                         list(Pelt.high_white)
                         + list(Pelt.mostly_white)
                         + ["FULLWHITE"]
-                    ) or father.pelt.white_patches not in (
+                    ) or father.pelt.white_patches in (
                         list(Pelt.high_white)
                         + list(Pelt.mostly_white)
                         + ["FULLWHITE"]
                     ):
-                        self.pelt.name = "Tortie"
-
+                        self.pelt.name = "Calico"
+                        self.pelt.white_patches = choice(
+                            list(Pelt.high_white)
+                            + list(Pelt.mostly_white)
+                            + ["FULLWHITE"]
+                        )
+                    
                     #  assigning the base color
                     if mother_is_dark:
                         self.pelt.colour = mother.pelt.colour
@@ -690,12 +693,6 @@ class Cat:
                     if not self.pelt.tortie_marking:
                         self.pelt.tortie_marking = choice(Pelt.tortie_patches)
 
-                    if self.pelt.name == "Calico" and not self.pelt.white_patches:
-                        self.pelt.white_patches = choice(
-                            list(Pelt.high_white)
-                            + list(Pelt.mostly_white)
-                            + ["FULLWHITE"]
-                        )
                     print("Tortie kit generated thanks to her genetics!!!")
 
             if not allow_female_dark and not allow_tortie_instead and self.pelt.colour in ("BLACK", "GHOST"):
