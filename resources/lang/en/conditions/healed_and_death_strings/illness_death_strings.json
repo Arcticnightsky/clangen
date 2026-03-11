@@ -10,12 +10,15 @@
     ],
     "greencough": [
         "m_c died of greencough.",
+        "Even though m_c's immune system fought hard to keep {PRONOUN/m_c/poss} alive, the greencough was just too strong and took m_c's life",
         "m_c was killed by greencough.",
         "Greencough killed m_c.",
         "Greencough has taken m_c's life."
     ],
     "kittencough": [
         "m_c died of kittencough.",
+        "Poor little m_c's body was too small and weak to fight against kittencough.",
+        "Unfortunatley, m_c's immune system wasn't developed enough to fight against kittencough.",
         "m_c was killed by kittencough.",
         "Kittencough has killed m_c.",
         "Kittencough has taken m_c's life."
@@ -32,17 +35,22 @@
     ],
     "redcough": [
         "m_c died of redcough.",
+        "After moons of battling redcough, m_c's body just couldn't take it anymore and {PRONOUN/m_c/subject} died.",
+        "m_c suffered from redcough for so long. Taking {PRONOUN/m_c/poss} last breath, knowing its the end, m_c is just glad to be finally put out of {PRONOUN/m_c/poss} misery as {PRONOUN/m_c/subject} slowly slips to Starclan.",
         "Redcough has finally taken m_c.",
         "Redcough has killed m_c."
     ],
     "whitecough": [
         "m_c died of whitecough.",
         "Whitecough has killed m_c.",
+        "Unfortunately, m_c's immune system was too weak to fight against whitecough.", 
+        "Whitecough is ususally the easiest of the 4 'coughs to recover from, but m_c unfortunately couldn't recover from it.",
         "m_c was killed by whitecough.",
         "The whitecough didn't have a chance to progress further: it was already strong enough to kill m_c."
     ],
     "yellowcough": [
         "m_c died of yellowcough.",
+        "Lungwort treatement or no lungwort treatment, m_c's case of yellowcough was just too great and {PRONOUN/m_c/subject} died.",
         "Yellowcough has killed m_c.",
         "m_c was killed by yellowcough.",
         "Yellowcough has taken m_c's life."
