@@ -153,7 +153,7 @@
         "affair_mated": [
             "m_c's mate is such a wonderful cat, deserving of being a parent... so why does m_c's {insert} look more like r_c instead?",
 			"Everyone in the Clan can see that m_c's {insert} clearly looks like r_c... m_c's mate has been glaring at {PRONOUN/m_c/object} and r_c ever since the {insert} have been born.",
-			"m_c's mate has been demanding answers from {PRONOUN/m_c/object} ever since the {insert} was born - The {insert} looks way too much like r_c! Why in the name of StarClan would m_c cheat on him with another tom!? Is he not worthy of fathering {PRONOUN/m_c/poss} kits!?",
+			"m_c's mate has been demanding answers from {PRONOUN/m_c/object} ever since the {insert} was born - The {insert} looks way too much like r_c! Why in the name of StarClan would m_c cheat on {PRONOUN/m_m/object} with another cat!? Is {PRONOUN/m_m/subject} not worthy of fathering {PRONOUN/m_c/poss} kits!?",
             "m_c can see it, m_c's mate can see it, r_c can see it, everyone in c_n can see how the new {insert} looks a bit too much like r_c for it to be coincidence..."
         ],
         "affair_mated_samesex": [
@@ -162,7 +162,7 @@
         ],
         "affair_mated_dead_mate": [
             "m_c's mate was such a wonderful cat, deserving of being a parent, even after death... so why does m_c's {insert} look more like r_c instead?",
-            "This was supposed to be a bittersweet moment - m_c birthing her new {insert}, a last gift from her mate. Except, this {insert} isn't m_c's mate's at all... they're r_c's."
+            "This was supposed to be a bittersweet moment - m_c birthing her new {insert}, a last gift from m_c's mate. Except, this {insert} isn't m_c's mate's at all... they're r_c's."
         ],
         "death": [
             "Later, as the medicine cat wails with m_c's blood streaked through their pelt and a warrior comes to move the body for the vigil, no one knows what to do with the {insert}.",
