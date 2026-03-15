@@ -1,75 +1,116 @@
 {
     "claw-wound": [
-        "m_c died from a claw-wound."
+        "m_c died from a claw-wound.",
+        "m_c died from a claw-wound. Some of m_c's more ferocious friends wish to hunt down the cat who did this to {PRONOUN/m_c/object}, but grief overwhelms them as they mourn the loss of m_c.",
+        "Whoever scratched m_c dug in their claws so deep inside {PRONOUN/m_c/object}, they did quite a bit of internal damage that not even the medicine cats can fix. m_c unfortunatley died from {PRONOUN/m_c/poss} wound.",
+        "m_c's claw-wound was so deep that it caused irreversible damage internally, m_c died as a result."
     ],
     "bite-wound": [
-        "m_c died from a bite-wound."
+        "m_c died from a bite-wound.",
+        "m_c died from a bite-wound. Some of m_c's more ferocious friends wish to hunt down the creature who did this to {PRONOUN/m_c/object}, but grief overwhelms them as they mourn the loss of m_c.",
+        "All bites are nasty - that's a fact. m_c died from whatever bacteria was infesting {PRONOUN/m_c/poss} bite-wound.",
+        "Whatever bit m_c bit {PRONOUN/m_c/object} so deep, they did quite a bit of internal damage that not even the medicine cats can fix. m_c unfortunatley died from {PRONOUN/m_c/poss} injuries.",
+        "m_c's bite-wound was so deep that it caused irreversible damage internally, m_c died as a result."
     ],
     "cat bite": [
+        "All bites are nasty, especially cat bites - that's a fact. m_c died from whatever bacteria was infesting {PRONOUN/m_c/poss} cat-bite.",
+        "m_c died from a cat bite. Some of m_c's more ferocious friends wish to hunt down the cat who did this to {PRONOUN/m_c/object}, but grief overwhelms them as they mourn the loss of m_c.",
+        "Whoever bit m_c bit {PRONOUN/m_c/object} so deep, they did quite a bit of internal damage that not even the medicine cats can fix. m_c unfortunatley died from {PRONOUN/m_c/poss} injuries.",
         "m_c died from a cat bite."
     ],
     "beak bite": [
+        "That star-damned bird pecked m_c so hard, that {PRONOUN/m_c/subject} died from {PRONOUN/m_c/poss} injuries.",
+        "m_c was pecked so hard that {PRONOUN/m_c/subject} has some internal damage where that animal pecked {PRONOUN/m_c/object}, sadly m_c couldn't be saved.",
         "m_c died from a beak bite."
     ],
     "snake bite": [
+        "All bites are nasty - that's a fact. m_c died from whatever bacteria was infesting {PRONOUN/m_c/poss} snake-bite.",
+        "The snake that bit m_c didn't need venom to kill {PRONOUN/m_c/object} - its bite was too powerful on its own.",
+        "<i>Damn snakes</i> m_c hisses as the damage of {PRONOUN/m_c/poss} wound was too great to be healed. m_c slowly slips to Starclan later on in the day.",
         "m_c died from a snake bite."
     ],
     "rat bite": [
+        "All bites are nasty, especially rat bites - that's a fact. m_c died from whatever bacteria was infesting {PRONOUN/m_c/poss} rat-bite.",
+        "As {PRONOUN/m_c/subject} slowly slips to Starclan, m_c still couldn't find it hard to believe that {PRONOUN/m_c/subject} just lost {PRONOUN/m_c/poss} life to a little rat... the damage was simply too great.",
+        "m_c, in {PRONOUN/m_c/poss} death-nest, wonders how such a small bite could turn out to be so deadly... As {PRONOUN/m_c/subject} slowly slips to Starclan, m_c still couldn't find it hard to believe that {PRONOUN/m_c/subject} just lost {PRONOUN/m_c/poss} life to a little rat...",        
         "m_c died from a rat bite."
     ],
     "blood loss": [
+        "As much as the medicine cat tried, they just couldn't stop m_c's bleeding. The medicine cat bows their head as m_c dies from blood loss.",
+        "m_c lost so much blood that there's no way in Starclan anyone could save {PRONOUN/m_c/object} now. m_c dies from the loss of blood.",
         "m_c died from blood loss."
     ],
     "broken jaw": [
+        "There's no way m_c could ever recover from this - {PRONOUN/m_c/poss} jaw was literally shattered and there's nothing anyone can do for {PRONOUN/m_c/object} anymore. Without being able to eat or speak for several days, m_c died from {PRONOUN/m_c/poss} broken jaw",
+        "m_c's jaw was so badly broken that it caused too much damage in that area and m_c dies as a result.",
         "m_c died from a broken jaw."
     ],
     "broken bone": [
+        "Unfortunatley, the bone that m_c broke caused too much internal damage that nobody could fix. m_c dies after dealing with the pain for so long with little improvement",
+        "The bone m_c broke punctured a vital organ, the medicine cat concludes, there's nothing they can do for m_c now as m_c slips to Starclan.",
         "m_c died from a broken bone."
     ],
     "mangled leg": [
+        "m_c's leg was so badly mangled that it caused too much internal damage and m_c died as a result.",
         "m_c died from a mangled leg."
     ],
     "mangled tail": [
+        "m_c's tail was so badly mangled that it caused too much internal damage and m_c died as a result.",
         "m_c died from a mangled tail."
     ],
     "frostbite": [
         "m_c died from frostbite."
     ],
     "water in their lungs": [
+        "m_c breathed in too much water - irreversible damage was done to {PRONOUN/m_c/poss} lungs. Being unable to breathe anymore, m_c died as a result.",
+        "There was too much water in m_c's lungs that couldn't be fleshed out, no cat can live on like this. m_c dies a few days later, drowned by the water within {PRONOUN/m_c/poss} own two lungs.",
         "m_c died from water in {PRONOUN/m_c/poss} lungs."
     ],
     "burn": [
         "m_c died from {PRONOUN/m_c/poss} burns."
     ],
     "severe burn": [
+        "m_c was so badly burned that {PRONOUN/m_c/subject} looked almost unrecognizable. m_c dies from {PRONOUN/m_c/poss} severe burns.",
         "m_c died from {PRONOUN/m_c/poss} severe burns."
     ],
     "shock": [
         "m_c died from shock."
     ],
     "shivering": [
-        "m_c got too cold and died."
+        "No matter how much m_c tried to warm up, {PRONOUN/m_c/subject} was just too chilled to the bone. {PRONOUN/m_c/subject/CAP} caught hypothermia and died.",
+        "m_c's body temperature was too low to get back up again and {PRONOUN/m_c/subject} died.",
+        "m_c, trying to warm back up again, went out in the territory to warm up. All of a sudden, the temperature dropped and m_c's body couldn't warm up again. Immobilized by hypothermia and unable to call for help, m_c waits for death to claim {PRONOUN/m_c/object} - becoming one with the cold.",
+        "As m_c tries to warm up, {PRONOUN/m_c/subject} wished {PRONOUN/m_c/subject} were a kittypet so {PRONOUN/m_c/subject} would never have to deal with the harsh cold. Unfortunaltey, {PRONOUN/m_c/poss} efforts were futile and m_c catches hypothermia and drifts to Starclan, feeling the cold no more.",
+        "m_c got too cold and died.",
+        "m_c caught hypothermia from shivering from the cold and died"
     ],
     "dehydrated": [
+        "m_c was too dehydrated and died",
         "m_c died from dehydration."
     ],
     "head damage": [
+        "m_c's head had too much interal damage within and {PRONOUN/m_c/subject} died.",
         "m_c died from head damage."
     ],
     "damaged eyes": [
+        "Not only m_c's eyes were damaged, the inside of {PRONOUN/m_c/poss} head was damaged badly from the damaged eyes, which caused too much damage and {PRONOUN/m_c/subject} died.",
         "m_c's eyes were too badly damaged and {PRONOUN/m_c/subject} died."
     ],
     "quilled by a porcupine": [
+        "m_c there was poision in those quills, m_c dies from {PRONOUN/m_c/poss} injuries.",
         "m_c died from {PRONOUN/m_c/poss} wounds after being quilled by a porcupine."
     ],
     "poisoned": [
+        "The poision in m_c's body was so lethal, no herbs could ever flush it out. The internal damage was too great and m_c succumbs to the poision in {PRONOUN/m_c/poss} body.",
         "m_c died from the poison in {PRONOUN/m_c/poss} body."
     ],
     "broken back": [
+        "m_c's spine was broken and snapped in many pieces and there was severe nerve damage in {PRONOUN/m_c/poss} back. There's no way for m_c to recover from this and {PRONOUN/m_c/subject} died.",
         "m_c couldn't survive {PRONOUN/m_c/poss} broken back."
     ],
     "bee sting": [
         "m_c died from a bee sting.",
+        "It turned out that the bee that stung m_c had some sort of infection that passed on to m_c. Unfortunatley, it was a deadly infection and m_c died because of it.",
         "m_c seemed to have a horrible reaction to {PRONOUN/m_c/poss} bee sting. Cats usually don't die from a sting, but it seems this time was different."
     ]
 }

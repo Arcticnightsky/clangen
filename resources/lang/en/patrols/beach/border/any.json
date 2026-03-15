@@ -11,7 +11,7 @@
             "border"
         ],
         "tags": [],
-        "patrol_art": "bord_general_intro",
+        "patrol_art": "gen_outsider_ambush",
         "min_cats": 4,
         "max_cats": 6,
         "min_max_status": {},
@@ -39,6 +39,7 @@
                         }
                     }
                 ],
+                "art": "gen_bord_roguerunaway",
                 "frequency": 4
             },
             {
@@ -59,6 +60,7 @@
                         }
                     }
                 ],
+                "art": "gen_bord_roguerunaway",
                 "frequency": 4
             },
             {
@@ -85,6 +87,7 @@
                         }
                     }
                 ],
+                "art": "gen_bord_roguerunaway",
                 "frequency": 4
             }
         ],
@@ -115,7 +118,8 @@
                         }
                     }
                 ],
-                "frequency": 4
+                "art": "gen_bord_otherclan_hostile",
+                "frequency": 2
             },
             {
                 "text": "Taken by surprise, the patrol scatters and loses cohesion. The rogues are quick to take advantage of the confusion and r_c is badly wounded, forcing the patrol to retreat.",
@@ -153,6 +157,7 @@
                         }
                     }
                 ],
+               "art": "gen_bord_otherclan_hostile",
                 "frequency": 4
             }
         ]
@@ -169,7 +174,7 @@
             "border"
         ],
         "tags": [],
-        "patrol_art": "bord_general_intro",
+        "patrol_art": "gen_outsider_ambush",
         "min_cats": 1,
         "max_cats": 1,
         "min_max_status": {},
@@ -193,6 +198,7 @@
                         }
                     }
                 ],
+                "art": "fst_hunt_fun1",
                 "frequency": 4
             },
             {
@@ -217,6 +223,7 @@
                         }
                     }
                 ],
+                "art": "gen_angry_cat_warrior",
                 "frequency": 4
             }
         ],
@@ -245,6 +252,7 @@
                         }
                     }
                 ],
+                "art": "gen_battle_warrior_danger",
                 "frequency": 4
             },
             {
@@ -268,6 +276,8 @@
                         }
                     }
                 ],
+                "art": "gen_dead_cat_EXPLICIT",
+                "art_clean": "gen_dead_cat",
                 "frequency": 3
             }
         ]
@@ -284,7 +294,7 @@
             "border"
         ],
         "tags": [],
-        "patrol_art": "bord_general_intro",
+        "patrol_art": "gen_angry_cat_danger",
         "min_cats": 4,
         "max_cats": 6,
         "min_max_status": {},
@@ -308,6 +318,7 @@
                         }
                     }
                 ],
+                "art": "gen_bord_roguerunaway",
                 "frequency": 4
             },
             {
@@ -329,6 +340,7 @@
                         }
                     }
                 ],
+                "art": "gen_bord_roguerunaway",
                 "frequency": 1
             },
             {
@@ -349,6 +361,7 @@
                         }
                     }
                 ],
+                "art": "gen_speaking_cat_w2",
                 "frequency": 4
             },
             {
@@ -370,6 +383,7 @@
                         }
                     }
                 ],
+                "art": "gen_speaking_cat_w2",
                 "frequency": 4
             }
         ],
@@ -397,7 +411,8 @@
                         }
                     }
                 ],
-                "frequency": 4
+                "art": "gen_bord_otherclan_hostile",
+                "frequency": 2
             },
             {
                 "text": "The rogues posture and jeer, eventually provoking a battle. They prove to be strong fighters, and r_c is badly injured, forcing the patrol to retreat.",
@@ -431,6 +446,7 @@
                         }
                     }
                 ],
+                "art": "gen_bord_otherclan_hostile",
                 "frequency": 4
             }
         ],
@@ -438,6 +454,7 @@
             {
                 "text": "The patrol descends into battle without a second thought, but the rogues are stronger than expected, and eventually the patrol is forced to retreat.",
                 "exp": 0,
+                "art": "gen_battle_warrior_danger",
                 "frequency": 4
             }
         ],
@@ -445,6 +462,7 @@
             {
                 "text": "The patrol descends into battle without a second thought, eventually driving the rogues away.",
                 "exp": 30,
+                "art": "gen_bord_roguerunaway",
                 "frequency": 4
             }
         ]
@@ -478,6 +496,7 @@
             {
                 "text": "The cats get wet in the rain, but the patrol is otherwise successful.",
                 "exp": 20,
+                "art": "gen_train_soggykitty_happy_warrior",
                 "frequency": 1
             },
             {
@@ -547,6 +566,7 @@
                 "history_text": {
                     "death": "This cat was drowned by floodwaters."
                 },
+                "art": "gen_drowning_warrior",
                 "frequency": 3
             },
             {
@@ -558,7 +578,8 @@
                 "history_text": {
                     "death": "m_c was drowned by floodwaters."
                 },
-                "frequency": 4
+                "art": "gen_drowning_warrior",
+                "frequency": 2
             }
         ]
     },
@@ -591,6 +612,7 @@
             {
                 "text": "r_c gets wet in the rain, but otherwise, the patrol is successful.",
                 "exp": 20,
+                "art": "gen_train_soggykitty_happy_warrior",
                 "frequency": 1
             },
             {
@@ -623,7 +645,8 @@
                     "scar": "m_c was injured in a flood.",
                     "death": "m_c was drowned by floodwaters."
                 },
-                "frequency": 4
+                "art": "gen_drowning_warrior",
+                "frequency": 3
             },
             {
                 "text": "There is a downpour, and a sudden flood from the overflowing river sweeps r_c away. Injured, gasping for air and paddling desperately, r_c remembers enough of {PRONOUN/r_c/poss} training to keep an eye out for driftwood. {PRONOUN/r_c/subject/CAP} {VERB/r_c/sink/sinks} {PRONOUN/r_c/poss} claws into the first piece that's swept past {PRONOUN/r_c/object}. It saves {PRONOUN/r_c/poss} life.",
@@ -644,6 +667,7 @@
                     "scar": "m_c was injured in a flood.",
                     "death": "m_c was drowned by floodwaters."
                 },
+                "art": "gen_drowning_warrior",
                 "frequency": 4
             },
             {
@@ -665,6 +689,7 @@
                 "history_text": {
                     "scar": "m_c was injured in a flood."
                 },
+                "art": "gen_drowning_warrior",
                 "frequency": 4
             }
         ]
@@ -836,7 +861,7 @@
                     "scar": "m_c was scarred by an invading rogue.",
                     "death": "m_c was killed by an invading rogue."
                 },
-                "frequency": 3
+                "frequency": 1
             },
             {
                 "text": "Following the trail with {PRONOUN/s_c/poss} nose to the ground, s_c doesn't see the blow coming. {PRONOUN/s_c/subject/CAP} {VERB/s_c/haul/hauls} {PRONOUN/s_c/self} to {PRONOUN/s_c/poss} feet, spitting with outrage, but the rogue that did it has already turned and run.",
@@ -982,7 +1007,7 @@
                     "scar": "m_c was scarred by an invading rogue.",
                     "death": "m_c was killed by an invading rogue."
                 },
-                "frequency": 3
+                "frequency": 1
             },
             {
                 "text": "Following the trail with {PRONOUN/app1/poss} nose to the ground, app1 doesn't see the blow coming. {PRONOUN/app1/subject/CAP} {VERB/app1/haul/hauls} {PRONOUN/app1/self} to {PRONOUN/app1/poss} feet, squealing with pain, and {VERB/app1/run/runs} for home.",
