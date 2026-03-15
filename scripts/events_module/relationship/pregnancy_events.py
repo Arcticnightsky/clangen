@@ -346,8 +346,8 @@ class Pregnancy_Events:
                 if Cat.fetch_cat(mate_id) and Cat.fetch_cat(mate_id).gender == "male"
             ]
 
-            has_female_mate = len(female_mates) > 0
-            has_male_mate = len(male_mates) > 0
+            has_female_mate = len(female_mate) > 0
+            has_male_mate = len(male_mate) > 0
 
             # if affairs aren't allowed, it's ok for the player to know who the daddy is, so his ID is appended to the event
             if allow_affair is False:
