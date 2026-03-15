@@ -333,13 +333,14 @@ class Pregnancy_Events:
             other_cat_id = second_parent.ID
             other_cat = Cat.all_cats.get(other_cat_id)
             allow_affair = get_clan_setting("affair")
-            female_mates = [
+            allow_coparenting = get_clan_setting("unmated parentage")
+            female_mate = [
                 Cat.fetch_cat(mate_id)
                 for mate_id in pregnant_cat.mate
                 if Cat.fetch_cat(mate_id) and Cat.fetch_cat(mate_id).gender == "female"
             ]
 
-            male_mates = [
+            male_mate = [
                 Cat.fetch_cat(mate_id)
                 for mate_id in pregnant_cat.mate
                 if Cat.fetch_cat(mate_id) and Cat.fetch_cat(mate_id).gender == "male"
@@ -347,7 +348,8 @@ class Pregnancy_Events:
 
             has_female_mate = len(female_mates) > 0
             has_male_mate = len(male_mates) > 0
-            
+
+            # if affairs aren't allowed, it's ok for the player to know who the daddy is, so his ID is appended to the event
             if allow_affair is False:
                 text = choice(Pregnancy_Events.PREGNANT_STRINGS["announcement"])
                 severity = random.choices(["minor", "major"], [3, 1], k=1)
@@ -356,6 +358,7 @@ class Pregnancy_Events:
                 text = event_text_adjust(Cat, text, main_cat=pregnant_cat, random_cat=other_cat, clan=game.clan)
                 involved_cats = [pregnant_cat.ID]
                 involved_cats.append(second_parent.ID)
+            # If affairs ARE allowed, take away the daddy's ID so the player can have some fun guessing wether it's an affair or not (if the father isn't mentioned in the event)
             elif allow_affair is True and second_parent.ID in pregnant_cat.mate: 
                 text = choice(Pregnancy_Events.PREGNANT_STRINGS["announcement"])
                 severity = random.choices(["minor", "major"], [3, 1], k=1)
@@ -363,26 +366,29 @@ class Pregnancy_Events:
                 text += choice(Pregnancy_Events.PREGNANT_STRINGS[f"{severity[0]}_severity"])
                 text = event_text_adjust(Cat, text, main_cat=pregnant_cat, random_cat=other_cat, clan=game.clan)
                 involved_cats = [pregnant_cat.ID]
-            elif allow_affair is True and second_parent.ID not in pregnant_cat.mate and len(pregnant_cat.mate) == 0:
+            # If the mom is single and had a fling with a random tom cat, let her announce her pregnancy and leave the Clan and the player pointing fingers on who the daddy is
+            elif allow_coparenting is True and second_parent.ID not in pregnant_cat.mate and len(pregnant_cat.mate) == 0:
                 text = choice(Pregnancy_Events.PREGNANT_STRINGS["surprising_announcement"])
                 severity = random.choices(["minor", "major"], [3, 1], k=1)
                 pregnant_cat.get_injured("pregnant", severity=severity[0])
                 text += choice(Pregnancy_Events.PREGNANT_STRINGS[f"{severity[0]}_severity"])
                 text = event_text_adjust(Cat, text, main_cat=pregnant_cat, clan=clan)
                 involved_cats = [pregnant_cat.ID]
+            # If the mother is in a relationship with another she-cat and she gets knocked-up by a tom, let there be some drama for that!
             elif allow_affair is True and second_parent.ID not in pregnant_cat.mate and len(pregnant_cat.mate) > 0 and has_female_mate:
                 text = choice(Pregnancy_Events.PREGNANT_STRINGS["announcement_affair_samesex"])
                 severity = random.choices(["minor", "major"], [3, 1], k=1)
                 pregnant_cat.get_injured("pregnant", severity=severity[0])
                 text += choice(Pregnancy_Events.PREGNANT_STRINGS[f"{severity[0]}_severity"])
-                text = event_text_adjust(Cat, text, main_cat=pregnant_cat, random_cat=female_mates[0] if female_mates else None, clan=clan)
+                text = event_text_adjust(Cat, text, main_cat=pregnant_cat, random_cat=female_mate[0] if female_mate else None, clan=clan)
                 involved_cats = [pregnant_cat.ID]
-            elif allow_affair is True and second_parent.ID not in pregnant_cat.mate and len(pregnant_cat.mate) > 0 and not has_female_mate:
+            # And lastly, if the mom got knocked up by another tom who ISN'T her mate, let the player guess wether it's an affair or not, sometimes the events will tell you, sometimes they won't...
+            elif allow_affair is True and second_parent.ID not in pregnant_cat.mate and len(pregnant_cat.mate) > 0 and has_male_mate:
                 text = choice(Pregnancy_Events.PREGNANT_STRINGS["announcement_affair"])
                 severity = random.choices(["minor", "major"], [3, 1], k=1)
                 pregnant_cat.get_injured("pregnant", severity=severity[0])
                 text += choice(Pregnancy_Events.PREGNANT_STRINGS[f"{severity[0]}_severity"])
-                text = event_text_adjust(Cat, text, main_cat=pregnant_cat, random_cat=male_mates[0] if male_mates else None, clan=clan)
+                text = event_text_adjust(Cat, text, main_cat=pregnant_cat, random_cat=male_mate[0] if male_mate else None, clan=clan)
                 involved_cats = [pregnant_cat.ID]
             game.cur_events_list.append(Single_Event(text, "birth_death", involved_cats))
 
