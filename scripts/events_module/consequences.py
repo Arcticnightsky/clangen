@@ -996,7 +996,15 @@ def unpack_rel_block(
     for block in relationship_effects:
         cats_from = block.get("cats_from", [])
         cats_to = block.get("cats_to", [])
-        amount = block.get("amount")
+        raw_amount = block.get("amount")
+        try:
+            amount = int(raw_amount)
+        except (TypeError, ValueError):
+            print(
+                "WARNING: relationship effect amount must be numeric, "
+                f"got {raw_amount!r} in block {block}"
+            )
+            continue
         values = [x for x in block.get("values", ()) if x in possible_values]
 
         # if this is a reaction from the entire clan, we need to know for later
