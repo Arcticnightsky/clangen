@@ -677,6 +677,10 @@
         "thoughts":[
             "Is sitting alone",
             "Wants to be alone...",
+            "Is feeling lonely...",
+			"Has only spoken to one cat today",
+			"Hasn't spoken to anyone today",
+			"Mews quietly to {PRONOUN/m_c/self} underneath {PRONOUN/m_c/poss} breath",
             "Wonders if {PRONOUN/m_c/subject}{VERB/m_c/'re/'s} alone in {PRONOUN/m_c/poss} thoughts and beliefs",
             "Just can't get away from others",
             "Was surprised that a cat wanted to speak to {PRONOUN/m_c/object}",
@@ -913,8 +917,9 @@
         "main_status_constraint": [
             "-kittypet"
         ],
-        "main_trait_constraint": ["strange"],
-
+        "main_trait_constraint": [
+            "strange"
+        ],
         "main_status_history": [
             "-kittypet"
         ]
@@ -1017,6 +1022,9 @@
         ],
         "relationship_constraint": [
             "dislikes"
+        ],
+        "main_trait_constraint": [
+            "vengeful"
         ],
         "random_living_status": [
             "living"
