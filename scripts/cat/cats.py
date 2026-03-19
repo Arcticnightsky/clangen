@@ -585,6 +585,7 @@ class Cat:
             and self.gender == "male"
         ):
             copy_mothers_pelt = False
+            copy_tortie_color = False
             
             mother = Cat.fetch_cat(self.parent1) if self.parent1 else None
             father = Cat.fetch_cat(self.parent2) if self.parent2 else None
@@ -595,15 +596,24 @@ class Cat:
             )
             mother_is_dark = mother and mother.pelt.colour in dark_colours
             father_is_dark = father and father.pelt.colour in dark_colours
+            mother_is_tortie = mother and mother.pelt.tortie_colour in Pelt.ginger_colours
 
             if self.age in (CatAge.NEWBORN, CatAge.KITTEN) and mother and father:
                 if not mother_is_dark and father_is_dark:
                     copy_mothers_pelt = True
                 elif mother_is_dark and not father_is_dark:
-                    copy_mothers_pelt = True
+                    if mother_is_tortie:
+                        if random_module.randint(0, 1) == 0:
+                            copy_tortie_color = True
+                        else:
+                            copy_mothers_pelt = True
+                    else:
+                        copy_mothers_pelt = True
 
                 if copy_mothers_pelt:
                     self.pelt.colour = mother.pelt.colour
+                elif copy_tortie_color:
+                    self.pelt.colour = mother.pelt.tortie_colour
 
         # --- Female dark cat rarity ---
         if (
