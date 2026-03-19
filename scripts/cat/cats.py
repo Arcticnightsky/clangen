@@ -570,7 +570,10 @@ class Cat:
                     copy_mothers_pelt = True
                     
                 if copy_mothers_pelt:
-                    self.pelt.colour = mother.pelt.colour
+                    if mother.pelt.tortie_colour in Pelt.ginger_colours:
+                        self.pelt.colour = mother.pelt.tortie_colour
+                    else:
+                        self.pelt.colour = mother.pelt.colour
 
         # Male dark cat genetic realism
         if (
