@@ -449,8 +449,19 @@ class Pregnancy_Events:
         )
 
     @staticmethod
+    def get_first_mate(subject_cat: Cat, include_dead: bool = False):
+        for mate_id in subject_cat.mate:
+            mate = Cat.fetch_cat(mate_id)
+            if not mate:
+                continue
+            if include_dead or not mate.dead:
+                return mate
+        return None
+
+    @staticmethod
     def handle_two_moon_pregnant(cat: Cat, clan=game.clan):
         """Handles if the cat is two moons pregnant."""
+
         if cat.ID not in clan.pregnancy_data.keys():
             return
 
@@ -558,31 +569,39 @@ class Pregnancy_Events:
         elif len(cat.mate) > 0 and has_female_mate and other_cat.ID not in cat.mate:        
             involved_cats.append(other_cat.ID)
             cat_dict["r_c"] = other_cat
+            chosen_mate = Pregnancy_Events.get_first_mate(cat)
+            if chosen_mate:
+                cat_dict["m_m"] = chosen_mate
+                involved_cats.append(chosen_mate.ID)
             event_list.append(choice(events["birth"]["affair_mated_samesex"]))
         elif len(cat.mate) > 0 and other_cat.ID not in cat.mate and not other_cat.dead:
-            for mate_id in cat.mate:
-                mate = Cat.fetch_cat(mate_id)
-                if not mate:
-                    continue
-                if len(cat.mate) > 0 and not mate.dead:
-                    involved_cats.append(other_cat.ID)
-                    cat_dict["r_c"] = other_cat
-                    event_list.append(choice(events["birth"]["affair_mated"]))
-                elif len(cat.mate) > 0 and mate.dead:
-                    involved_cats.append(other_cat.ID)
-                    cat_dict["r_c"] = other_cat
-                    event_list.append(choice(events["birth"]["affair_mated_dead_mate"]))
+            living_mate = Pregnancy_Events.get_first_mate(cat)
+            dead_mate = Pregnancy_Events.get_first_mate(cat, include_dead=True)
+            involved_cats.append(other_cat.ID)
+            cat_dict["r_c"] = other_cat
+            if living_mate:
+                cat_dict["m_m"] = living_mate
+                involved_cats.append(living_mate.ID)
+                event_list.append(choice(events["birth"]["affair_mated"]))
+            elif dead_mate:
+                cat_dict["m_m"] = dead_mate
+                involved_cats.append(dead_mate.ID)
+                event_list.append(choice(events["birth"]["affair_mated_dead_mate"]))
         elif len(other_cat.mate) > 0 and cat.ID not in other_cat.mate and not other_cat.dead:        
-            for mate_id in other_cat.mate:
-                other_mate = Cat.fetch_cat(mate_id)
-                if not other_mate:
-                    continue
-                if len(other_cat.mate) > 0 and not other_mate.dead:
-                    involved_cats.append(other_cat.ID)
-                    cat_dict["r_c"] = other_cat
-                    event_list.append(choice(events["birth"]["affair"]))
+            other_mate = Pregnancy_Events.get_first_mate(other_cat)
+            if other_mate:
+                involved_cats.append(other_cat.ID)
+                cat_dict["r_c"] = other_cat
+                cat_dict["r_m"] = other_mate
+                involved_cats.append(other_mate.ID)
+                event_list.append(choice(events["birth"]["affair"]))
         else:
             event_list.append(choice(events["birth"]["unmated_parent"]))
+
+        if "m_m" in cat_dict:
+            event_list = [event.replace("m_c's mate", "m_m") for event in event_list]
+        if "r_m" in cat_dict:
+            event_list = [event.replace("r_c's mate", "r_m") for event in event_list]
 
         # add naming choice text here
         if extra_naming_text:
@@ -667,6 +686,19 @@ class Pregnancy_Events:
         print_event = event_text_adjust(
             Cat, print_event, main_cat=cat, random_cat=other_cat, clan=game.clan
         )
+        extra_cat_dict = {}
+        if "m_m" in cat_dict:
+            extra_cat_dict["m_m"] = (
+                str(cat_dict["m_m"].name),
+                choice(cat_dict["m_m"].pronouns),
+            )
+        if "r_m" in cat_dict:
+            extra_cat_dict["r_m"] = (
+                str(cat_dict["r_m"].name),
+                choice(cat_dict["r_m"].pronouns),
+            )
+        if extra_cat_dict:
+            print_event = process_text(print_event, extra_cat_dict)
 
         # Relationship penalties for affair births
         # Only apply if cat had mates AND other_cat is not one of them
