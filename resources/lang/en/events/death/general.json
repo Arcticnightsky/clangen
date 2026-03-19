@@ -779,7 +779,7 @@
         "tags": [
             "all_lives"
         ],
-        "frequency": 3,
+        "frequency": 1,
         "event_text": "m_c went missing and was found dead out in the territory.",
         "m_c": {
             "dies": true
