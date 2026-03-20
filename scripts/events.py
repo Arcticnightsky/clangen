@@ -1391,6 +1391,12 @@ def perform_ceremonies(cat):
                     game.clan.deputy = None
                 ceremony(cat, CatRank.ELDER)
 
+        med_cat_list = [
+            i
+            for i in Cat.all_cats_list
+            if i.status.rank.is_any_medicine_rank() and i.status.alive_in_player_clan
+        ]
+        
         has_med_app = any(
             cat.status.rank == CatRank.MEDICINE_APPRENTICE
             for cat in med_cat_list
