@@ -940,6 +940,7 @@ def gather_cat_objects(
             continue
 
         # FACET CATS IN CLAN
+        supported_facet_abbr = True
         if abbr == "high_social":
             found_cat_list = {c for c in out_set if c.personality.sociability > 8}
         elif abbr == "low_social":
@@ -956,6 +957,8 @@ def gather_cat_objects(
             found_cat_list = {c for c in out_set if c.personality.aggression > 8}
         elif abbr == "low_aggress":
             found_cat_list = {c for c in out_set if c.personality.aggression <= 8}
+        else:
+            supported_facet_abbr = False
 
         # add/remove cats if found and then continue for loop
         if is_exclusionary and found_cat_list:
@@ -967,7 +970,7 @@ def gather_cat_objects(
             out_set = found_cat_list
             continue
 
-        else:
+        if not supported_facet_abbr:
             print(f"WARNING: Unsupported abbreviation {abbr}")
 
     return list(out_set)
