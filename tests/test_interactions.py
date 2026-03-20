@@ -17,6 +17,11 @@ from scripts.cat_relations.interaction import (
 
 
 class RelationshipConstraints(unittest.TestCase):
+    def test_single_interaction_normalizes_med_intensity(self):
+        interaction = SingleInteraction("test", intensity="med")
+
+        self.assertEqual(interaction.intensity, "medium")
+
     def test_siblings(self):
         # given
         parent = Cat()
