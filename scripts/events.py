@@ -1391,10 +1391,14 @@ def perform_ceremonies(cat):
                     game.clan.deputy = None
                 ceremony(cat, CatRank.ELDER)
 
+        has_med_app = any(
+            cat.status.rank == CatRank.MEDICINE_APPRENTICE
+            for cat in med_cat_list
+            )
         # apprentice a kitten to either med or warrior
         if cat.moons == cat_class.age_moons[CatAge.ADOLESCENT][0]:
             if cat.status.rank == CatRank.KITTEN:
-                if _is_suitable_medcat_app(cat):
+                if _is_suitable_medcat_app(cat) and not has_med_app:
                     ceremony(cat, CatRank.MEDICINE_APPRENTICE)
                     ceremony_accessory = True
                     gain_accessories(cat)
