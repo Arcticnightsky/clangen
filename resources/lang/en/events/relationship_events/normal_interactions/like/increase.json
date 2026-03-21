@@ -77,6 +77,27 @@
 			"dislikes_only"
 		]
 	},
+  {
+		"id": "like_app_mentor_low1",
+    "intensity": "low",
+		"interactions": [
+			"r_c taught m_c a new hunting technique.",
+			"r_c taught m_c a new fighting technique.",
+			"m_c has learned a lot of new information about warrior life from r_c.",
+			"r_c showed m_c a new spot in the territory {PRONOUN/m_c/subject} hadn't noticed before."
+		],
+		"relationship_constraint": [
+			"app/mentor"
+		],
+		"main_status_constraint": [
+			"apprentice"
+		],
+		"random_status_constraint": [
+			"warrior",
+			"leader",
+			"deputy"
+		]
+	},
 	{
 		"id": "like_inc_med1",
 		"intensity": "med",
@@ -519,6 +540,31 @@
 		"random_status_constraint": [
 			"medicine cat apprentice"
 		]
+	},
+  {
+		"id": "like_app_mentor_med1",
+    "intensity": "med",
+		"interactions": [
+			"m_c is happy to have r_c as {PRONOUN/m_c/poss} mentor.",
+			"m_c thinks that {PRONOUN/m_c/subject}'s learned a lot more information from r_c than the other apprentices have from their own mentors.",
+			"m_c and r_c relax together after r_c taught m_c a new technique.",
+			"m_c and r_c relax together after m_c completed {PRONOUN/m_c/poss} assesment.",
+			"r_c went easy on m_c during training today."
+		],
+		"relationship_constraint": [
+			"app/mentor"
+		],
+		"main_status_constraint": [
+			"apprentice"
+		],
+		"random_status_constraint": [
+			"warrior",
+			"leader",
+			"deputy"
+		],
+		"reaction_random_cat": {
+			"like": "increase"
+		}
 	},
 	{
 		"id": "like_warrior_inc_med1",
