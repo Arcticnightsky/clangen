@@ -15,7 +15,7 @@
         "min_cats": 4,
         "max_cats": 6,
         "min_max_status": {},
-        "frequency": 2,
+        "frequency": 1,
         "intro_text": "As the patrol is marking the border lines, a gang of rogues burst from the beach grass! An ambush!",
         "decline_text": "The patrol turns tail and races away! The borders are left open for the rogues to muddy.",
         "chance_of_success": 10,
@@ -119,7 +119,7 @@
                     }
                 ],
                 "art": "gen_bord_otherclan_hostile",
-                "frequency": 2
+                "frequency": 1
             },
             {
                 "text": "Taken by surprise, the patrol scatters and loses cohesion. The rogues are quick to take advantage of the confusion and r_c is badly wounded, forcing the patrol to retreat.",
@@ -412,7 +412,7 @@
                     }
                 ],
                 "art": "gen_bord_otherclan_hostile",
-                "frequency": 2
+                "frequency": 1
             },
             {
                 "text": "The rogues posture and jeer, eventually provoking a battle. They prove to be strong fighters, and r_c is badly injured, forcing the patrol to retreat.",
