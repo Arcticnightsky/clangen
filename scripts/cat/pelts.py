@@ -979,21 +979,17 @@ class Pelt:
                         possible_colors.remove("WHITE")
                         self.colour = choice(possible_colors)
 
-                    # Ginger is often duplicated to increase its chances
                     if (self.colour in Pelt.black_colours) or (
                         self.colour in Pelt.white_colours
                     ):
-                        self.tortie_colour = choice(
-                            (Pelt.ginger_colours * 4) + Pelt.brown_colours
-                        )
+                        self.tortie_colour = choice(Pelt.ginger_colours)
+                    # Black is often duplicated to increase its chances for better realism
                     elif self.colour in Pelt.ginger_colours:
                         self.tortie_colour = choice(
                             Pelt.brown_colours + (Pelt.black_colours * 2)
                         )
                     elif self.colour in Pelt.brown_colours:
-                        self.tortie_colour = choice(
-                            (Pelt.ginger_colours * 4) + Pelt.black_colours
-                        )
+                        self.tortie_colour = choice(Pelt.ginger_colours)
                     else:
                         self.tortie_colour = "GOLDEN"
 
