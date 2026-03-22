@@ -512,11 +512,11 @@ class Cat:
                     # assigning the base pelt pattern
                     if mother.pelt.name not in ["Tortie", "Calico"]:
                         self.pelt.tortie_base = choice([mother.pelt.name, father.pelt.name]).lower()
-                        if mother.pelt.name in ["Singlecolour", "TwoColour"] or father.pelt.name in ["Singlecolour", "TwoColour"]:
+                        if mother.pelt.name in ["SingleColour", "TwoColour"] or father.pelt.name in ["SingleColour", "TwoColour"]:
                             self.pelt.tortie_base = "single"
                     elif mother.pelt.name in ["Tortie", "Calico"]:
                         self.pelt.tortie_base = choice([mother.pelt.tortie_base, father.pelt.name]).lower()
-                        if father.pelt.name in ["Singlecolour", "TwoColour"]:
+                        if father.pelt.name in ["SingleColour", "TwoColour"]:
                             self.pelt.tortie_base = "single"
 
                     # --- ensure tortie data is fully assigned ---
@@ -684,11 +684,11 @@ class Cat:
                     # assigning the base pelt pattern
                     if mother.pelt.name not in ["Tortie", "Calico"]:
                         self.pelt.tortie_base = choice([mother.pelt.name, father.pelt.name]).lower()
-                        if mother.pelt.name in ["Singlecolour", "TwoColour"] or father.pelt.name in ["Singlecolour", "TwoColour"]:
+                        if mother.pelt.name in ["SingleColour", "TwoColour"] or father.pelt.name in ["SingleColour", "TwoColour"]:
                             self.pelt.tortie_base = "single"
                     elif mother.pelt.name in ["Tortie", "Calico"]:
                         self.pelt.tortie_base = choice([mother.pelt.tortie_base, father.pelt.name]).lower()
-                        if father.pelt.name in ["Singlecolour", "TwoColour"]:
+                        if father.pelt.name in ["SingleColour", "TwoColour"]:
                             self.pelt.tortie_base = "single"
 
                     # Ensuring that the tortie data is fully assigned
