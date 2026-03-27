@@ -837,6 +837,10 @@ def create_new_cat(
         ):
             was_sterilized = new_cat.apply_sterilization_condition()
             if was_sterilized:
+                if original_social == CatSocial.KITTYPET:
+                    new_cat.pelt.scars = tuple(
+                        scar for scar in new_cat.pelt.scars if scar != "RIGHTEAR"
+                    )
                 new_cat.backdate_sterilization_history(original_social)
 
 
