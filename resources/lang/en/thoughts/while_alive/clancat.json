@@ -6720,6 +6720,69 @@
         ]
     },
     {
+        "id": "gen_fixed_clancat",
+        "thoughts": [
+			"Cringes whenever {PRONOUN/m_c/subject} pee at the dirtplace",
+			"Shames {PRONOUN/m_c/self} for falling for that Twoleg trap...",
+			"Wonders if {PRONOUN/m_c/subject}'ll ever be as strong as {PRONOUN/m_c/poss} Clanmates again",
+			"Feels a bit of jealousy when {PRONOUN/m_c/subject} see how strong {PRONOUN/m_c/poss} intact Clanmates are"
+        ],
+        "perm_conditions": {
+            "m_c": [
+                "spayed",
+				"neutered"
+            ]
+        },
+        "main_backstory_constraint": [
+            "-kittypet_backstories",
+			"-loner_backstories"
+        ]
+    },
+    {
+        "id": "gen_fixed_clancat_to_alive_mate",
+        "thoughts": [
+            "Feels devastated of the fact that {PRONOUN/m_c/subject} and r_c will never have kits of their own"
+        ],
+        "perm_conditions": {
+            "m_c": [
+                "spayed",
+				"neutered"
+            ]
+        },
+        "random_living_status": [
+            "living"
+        ],
+        "relationship_constraint": [
+            "mates"
+        ]
+    },
+    {
+        "id": "gen_fixed_clancat_warrior",
+        "thoughts": [
+			"Is finding new ways to mark the border",
+			"Realizes that {PRONOUN/m_c/subject} has <i>slightly</i> lost the urge to defend the territory",
+			"Realizes that {PRONOUN/m_c/subject} has <i>slightly</i> lost the urge to fight",
+			"Realizes that {PRONOUN/m_c/subject} has <i>slightly</i> lost the urge to argue against outsiders",
+			"Wishes that {PRONOUN/m_c/subject} was able to spray the border"
+        ],
+        "perm_conditions": {
+            "m_c": [
+                "spayed",
+				"neutered"
+            ]
+        },
+        "main_status_constraint": [
+            "leader",
+            "deputy",
+            "warrior",
+            "apprentice"
+        ],
+        "main_backstory_constraint": [
+            "-kittypet_backstories",
+			"-loner_backstories"
+        ]
+    },
+    {
         "id": "nervous_to_alive",
         "thoughts": [
 			"Is stuttering while speaking to r_c",
