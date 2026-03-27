@@ -15,7 +15,7 @@
         ],
         "patrol_art": "med_general_intro",
         "min_cats": 2,
-        "max_cats": 6,
+        "max_cats": 2,
         "min_max_status": {
             "healer cats": [
                 1,
@@ -808,7 +808,7 @@
                 ],
                 "history_text": {
                     "scar": "m_c was scarred by frostbite after getting falling into a snowbank.",
-                    "death": "m_c died of frostbite after searching for berries in leaf-bare."
+                    "death": "m_c died of frostbite after falling into a snowbank searching for berries in leaf-bare."
                 },
                 "relationships": [
                     {
@@ -1099,7 +1099,7 @@
                 ],
                 "history_text": {
                     "scar": "m_c was scarred by frostbite after searching for berries in leaf-bare.",
-                    "death": "m_c died of frostbite after searching for berries in leaf-bare."
+                    "death": "m_c died of frostbite after falling into a snowbank searching for berries in leaf-bare."
                 },
                 "relationships": [
                     {
