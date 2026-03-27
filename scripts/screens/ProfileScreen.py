@@ -1900,19 +1900,24 @@ class ProfileScreen(Screens):
             if self.the_cat.permanent_condition[name]["born_with"] is True:
                 text_list.append(i18n.t("general.born_with"))
             else:
-                # moons with the condition if not born with condition
-                moons_with = (
-                    game.clan.age - self.the_cat.permanent_condition[name]["moon_start"]
-                )
                 if name == "spayed":
+                    moons_with = (
+                        game.clan.age - self.the_cat.permanent_condition[name]["moon_start"]
+                    )
                     text_list.append(
                         i18n.t("general.has_been_spayed_for", count=moons_with)
                     )
                 elif name == "neutered":
+                    moons_with = (
+                        game.clan.age - self.the_cat.permanent_condition[name]["moon_start"]
+                    )
                     text_list.append(
                         i18n.t("general.has_been_neutered_for", count=moons_with)
                     )
                 else:
+                    moons_with = (
+                        game.clan.age - self.the_cat.permanent_condition[name]["moon_start"]
+                    )
                     text_list.append(
                         i18n.t("general.had_perm_condition_for", count=moons_with)
                     )
