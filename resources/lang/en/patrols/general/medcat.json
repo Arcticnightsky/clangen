@@ -19413,7 +19413,7 @@
         ],
         "patrol_art": "med_general_intro",
         "min_cats": 2,
-        "max_cats": 6,
+        "max_cats": 2,
         "min_max_status": {
             "healer cats": [
                 1,
