@@ -1070,7 +1070,12 @@ class ProfileScreen(Screens):
                     and the_cat.permanent_condition[condition]["moons_until"] != -2
                 ):
                     continue
-                output += i18n.t("general.has_permanent_condition")
+                if "spayed" in the_cat.permanent_condition:
+                    output += i18n.t("utility.exclamation", text=i18n.t("general.is_spayed"))
+                elif "neutered" in the_cat.permanent_condition:
+                    output += i18n.t("utility.exclamation", text=i18n.t("general.is_neutered"))
+                else:
+                    output += i18n.t("general.has_permanent_condition")
 
                 # NEWLINE ----------
                 output += "\n"
@@ -1899,9 +1904,18 @@ class ProfileScreen(Screens):
                 moons_with = (
                     game.clan.age - self.the_cat.permanent_condition[name]["moon_start"]
                 )
-                text_list.append(
-                    i18n.t("general.had_perm_condition_for", count=moons_with)
-                )
+                if name == "spayed":
+                    text_list.append(
+                        i18n.t("general.has_been_spayed_for", count=moons_with)
+                    )
+                elif name == "neutered":
+                    text_list.append(
+                        i18n.t("general.has_been_neutered_for", count=moons_with)
+                    )
+                else:
+                    text_list.append(
+                        i18n.t("general.had_perm_condition_for", count=moons_with)
+                    )
 
             # is permanent
             text_list.append(
