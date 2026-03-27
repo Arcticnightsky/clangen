@@ -2504,7 +2504,7 @@ class Cat:
             self.pelt.scars = (*self.pelt.scars, "RIGHTEAR")
             if from_twolegs:
                 self.history.add_scar(
-                    "m_c got their ear clipped after {PRONOUN/m_c/subject} was abducted by twolegs and taken to the cutter"
+                    "m_c got {PRONOUN/m_c/poss} ear clipped after {PRONOUN/m_c/subject} was trapped by Twolegs, fixed, and released back into the wild."
                 )
 
         if adjust_personality:
