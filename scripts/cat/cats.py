@@ -2520,6 +2520,32 @@ class Cat:
         if random_module.getrandbits(1):
             self.apply_sterilization_condition(from_twolegs=True, adjust_personality=True)
 
+    def backdate_sterilization_history(self, social_group: CatSocial):
+        """
+        Backdates moon_start for a sterilized outsider cat so condition history reflects
+        that the procedure happened before joining the Clan.
+        """
+        sterilization_condition = self.get_sterilization_condition_name()
+        if sterilization_condition not in self.permanent_condition or not game.clan:
+            return
+
+        if self.moons <= 5:
+            return
+
+        # AVMA recommendation is by 5 months for non-breeding cats.
+        if social_group == CatSocial.KITTYPET:
+            fix_age = randint(5, self.moons - 1)
+        elif social_group == CatSocial.LONER:
+            min_age = min(self.moons - 1, max(10, int(self.moons * 0.5)))
+            fix_age = randint(min_age, self.moons - 1)
+        else:
+            fix_age = randint(5, self.moons - 1)
+
+        moons_with_condition = max(1, self.moons - fix_age)
+        self.permanent_condition[sterilization_condition]["moon_start"] = (
+            game.clan.age - moons_with_condition
+        )
+
     def not_working(self):
         """returns True if the cat cannot work, False if the cat can work"""
         for illness in self.illnesses:

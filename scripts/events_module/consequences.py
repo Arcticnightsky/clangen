@@ -835,7 +835,9 @@ def create_new_cat(
             and not new_cat.age.is_baby()
             and bool(getrandbits(1))
         ):
-            new_cat.apply_sterilization_condition()
+            was_sterilized = new_cat.apply_sterilization_condition()
+            if was_sterilized:
+                new_cat.backdate_sterilization_history(original_social)
 
 
         # KILL >:D only if we're sposed to tho
