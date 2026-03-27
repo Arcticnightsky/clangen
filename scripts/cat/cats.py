@@ -2502,6 +2502,10 @@ class Cat:
             and (self.status.alive_in_player_clan or self.status.social == CatSocial.LONER)
         ):
             self.pelt.scars = (*self.pelt.scars, "RIGHTEAR")
+            if from_twolegs:
+                self.history.add_scar(
+                    "m_c got their ear clipped after {PRONOUN/m_c/subject} was abducted by twolegs and taken to the cutter"
+                )
 
         if adjust_personality:
             self.personality.aggression = self.personality.aggression - 2
