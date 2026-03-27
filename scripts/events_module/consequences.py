@@ -970,8 +970,9 @@ def gather_cat_objects(
             out_set = found_cat_list
             continue
 
-        if not supported_facet_abbr:
-            print(f"WARNING: Unsupported abbreviation {abbr}")
+        else:
+            print(f"WARNING: No cats found for {abbr_list}")
+            return list(found_cat_list)
 
     return list(out_set)
 
