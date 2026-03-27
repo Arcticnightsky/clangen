@@ -214,8 +214,8 @@
         "mark_favorite": "Mark as favorite",
         "remove_favorite": "Remove favorite",
         "has_permanent_condition": "has a permanent condition",
-        "is_spayed": "spayed!",
-        "is_neutered": "neutered!",
+        "is_spayed": "spayed",
+        "is_neutered": "neutered",
         "born_with": "born with this condition",
         "had_perm_condition_for": {
             "one": "has had this condtion for %{count} moon",
