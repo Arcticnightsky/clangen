@@ -229,6 +229,8 @@ class Cat:
         self.no_kits = False
         self.no_mates = False
         self.no_retire = False
+        self.pending_neuter = False
+        self.tnr_victim = False
         self.skip_female_rarity_roll = kwargs.get("skip_female_rarity_roll", False)
 
         self.prevent_fading = False  # Prevents a cat from fading
@@ -1852,6 +1854,7 @@ class Cat:
         """Handles a moon skip for an alive cat."""
         old_age = self.age
         self.moons += 1
+        self.handle_pending_neuter()
         if self.moons == 1 and self.status.rank == CatRank.NEWBORN:
             self.status._change_rank(CatRank.KITTEN)
         self.in_camp = 1
@@ -2468,7 +2471,80 @@ class Cat:
                 "event_triggered": new_perm_condition.new,
             }
             new_condition = True
+            if new_perm_condition.name in ("neutered", "spayed"):
+                self.no_kits = True
         return new_condition
+
+    def get_sterilization_condition_name(self):
+        return "neutered" if self.gender == "male" else "spayed"
+
+    def apply_sterilization_condition(
+        self, from_twolegs: bool = False, adjust_personality: bool = False
+    ) -> bool:
+        """
+        Applies a permanent sterilization condition to this cat.
+        Returns True if a new condition was applied.
+        """
+        if self.age.is_baby():
+            return False
+
+        sterilization_condition = self.get_sterilization_condition_name()
+        was_added = self.get_permanent_condition(sterilization_condition)
+        if not was_added:
+            return False
+
+        self.no_kits = True
+        if "partial hearing loss" in self.permanent_condition:
+            self.permanent_condition.pop("partial hearing loss", None)
+
+        if (
+            ("RIGHTEAR" not in self.pelt.scars)
+            and (self.status.alive_in_player_clan or self.status.social == CatSocial.LONER)
+        ):
+            self.pelt.scars = (*self.pelt.scars, "RIGHTEAR")
+
+        if adjust_personality:
+            self.personality.aggression = self.personality.aggression - 2
+            self.personality.stability = self.personality.stability + 2
+
+        if from_twolegs:
+            self.tnr_victim = True
+
+        return True
+
+    def handle_pending_neuter(self):
+        if not self.pending_neuter:
+            return
+
+        self.pending_neuter = False
+        if random_module.getrandbits(1):
+            self.apply_sterilization_condition(from_twolegs=True, adjust_personality=True)
+
+    def backdate_sterilization_history(self, social_group: CatSocial):
+        """
+        Backdates moon_start for a sterilized outsider cat so condition history reflects
+        that the procedure happened before joining the Clan.
+        """
+        sterilization_condition = self.get_sterilization_condition_name()
+        if sterilization_condition not in self.permanent_condition or not game.clan:
+            return
+
+        if self.moons <= 5:
+            return
+
+        # AVMA recommendation is by 5 months for non-breeding cats.
+        if social_group == CatSocial.KITTYPET:
+            fix_age = randint(5, self.moons - 1)
+        elif social_group == CatSocial.LONER:
+            min_age = min(self.moons - 1, max(10, int(self.moons * 0.5)))
+            fix_age = randint(min_age, self.moons - 1)
+        else:
+            fix_age = randint(5, self.moons - 1)
+
+        moons_with_condition = max(1, self.moons - fix_age)
+        self.permanent_condition[sterilization_condition]["moon_start"] = (
+            game.clan.age - moons_with_condition
+        )
 
     def not_working(self):
         """returns True if the cat cannot work, False if the cat can work"""
@@ -3693,6 +3769,8 @@ class Cat:
                 "no_kits": self.no_kits,
                 "no_retire": self.no_retire,
                 "no_mates": self.no_mates,
+                "pending_neuter": self.pending_neuter,
+                "tnr_victim": self.tnr_victim,
                 "pelt_name": self.pelt.name,
                 "pelt_color": self.pelt.colour,
                 "pelt_length": self.pelt.length,

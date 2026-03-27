@@ -106,6 +106,9 @@
         },
         "event_returning_child_of_lost": "m_c approaches the Clan and asks to join, claiming to be %{parent_name}'s kitten.",
         "event_lost_mate": " To everyone's surprise, {PRONOUN/m_c/subject} {VERB/m_c/bring/brings} along a cat who m_c introduces as {PRONOUN/m_c/poss} mate.",
+        "event_tnr_return1": "m_c tells the tale of how {PRONOUN/m_c/subject} went to what kittypets called \"the cutter\" and how {PRONOUN/m_c/subject} just doesn't feel the same anymore.",
+        "event_tnr_return2": "Quietly, m_c explains that Twolegs brought {PRONOUN/m_c/object} to something kittypets call \"the cutter,\" and {PRONOUN/m_c/subject} still feels unsettled by it.",
+        "event_tnr_return3": "m_c admits that life among Twolegs changed {PRONOUN/m_c/object}; after a trip to \"the cutter,\" {PRONOUN/m_c/subject} says things have never felt quite the same.",
         "kittencough_spread": {
             "one": "Kittencough has spread around the nursery. %{kits} is affected.",
             "many": "Kittencough has spread around the nursery. %{kits} are affected."},

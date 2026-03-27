@@ -830,6 +830,15 @@ def create_new_cat(
                     chosen_condition = ("partial hearing loss")
                     new_cat.get_permanent_condition(chosen_condition, born_with=True)
 
+        if (
+            original_social in (CatSocial.KITTYPET, CatSocial.LONER)
+            and not new_cat.age.is_baby()
+            and bool(getrandbits(1))
+        ):
+            was_sterilized = new_cat.apply_sterilization_condition()
+            if was_sterilized:
+                new_cat.backdate_sterilization_history(original_social)
+
 
         # KILL >:D only if we're sposed to tho
         if not alive:
