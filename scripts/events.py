@@ -972,6 +972,32 @@ def handle_lost_cats_return(predetermined_cat_IDs: list = None):
                 # stop after first valid reunion
                 break
 
+    for cat_ID in cat_IDs:
+        returned_cat = Cat.fetch_cat(cat_ID)
+        if (
+            returned_cat
+            and returned_cat.status.alive_in_player_clan
+            and returned_cat.tnr_victim
+            and returned_cat.status.is_former_clancat
+        ):
+            sterilized_condition = returned_cat.get_sterilization_condition_name()
+            if (
+                sterilized_condition in returned_cat.permanent_condition
+                and "RIGHTEAR" not in returned_cat.pelt.scars
+            ):
+                returned_cat.pelt.scars = (*returned_cat.pelt.scars, "RIGHTEAR")
+                returned_cat.permanent_condition.pop("partial hearing loss", None)
+            returned_cat.tnr_victim = False
+            tale_text = event_text_adjust(
+                Cat,
+                i18n.t(f"hardcoded.event_tnr_return{random.choice(range(1,4))}"),
+                main_cat=returned_cat,
+                clan=game.clan,
+            )
+            game.cur_events_list.append(
+                Single_Event(tale_text, ["misc", "health"], [returned_cat.ID])
+            )
+
     # Perform a ceremony if needed
     for cat_ID in cat_IDs:
         x = Cat.fetch_cat(cat_ID)
