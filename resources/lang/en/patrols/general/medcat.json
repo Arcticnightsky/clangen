@@ -30463,16 +30463,10 @@
         ],
         "patrol_art": "med_general_intro",
         "min_cats": 2,
-        "max_cats": 6,
+        "max_cats": 2,
         "min_max_status": {
-            "healer cats": [
-                1,
-                6
-            ],
-            "normal adult": [
-                1,
-                6
-            ]
+            "medicine cat": [1, 1],
+            "normal adult": [1, 1]
         },
         "frequency": 4,
         "intro_text": "p_l goes out with a warrior escort, both for safety as {PRONOUN/p_l/subject} {VERB/p_l/try/tries} to stock up under the clear leaf-fall skies, and for carrying capacity should {PRONOUN/p_l/subject} find anything.",
