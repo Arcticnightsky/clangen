@@ -1905,14 +1905,20 @@ class ProfileScreen(Screens):
                         game.clan.age - self.the_cat.permanent_condition[name]["moon_start"]
                     )
                     text_list.append(
-                        i18n.t("general.has_been_spayed_for", count=moons_with)
+                        i18n.t(
+                            "general.has_been_spayed_for",
+                            moons=i18n.t("general.moons_age", count=moons_with),
+                        )
                     )
                 elif name == "neutered":
                     moons_with = (
                         game.clan.age - self.the_cat.permanent_condition[name]["moon_start"]
                     )
                     text_list.append(
-                        i18n.t("general.has_been_neutered_for", count=moons_with)
+                        i18n.t(
+                            "general.has_been_neutered_for",
+                            moons=i18n.t("general.moons_age", count=moons_with),
+                        )
                     )
                 else:
                     moons_with = (
