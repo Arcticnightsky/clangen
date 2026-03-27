@@ -1054,5 +1054,23 @@
         "random_living_status": [
             "living"
         ]
-    }
+    },
+    {
+        "id": "gen_fixed",
+        "thoughts": [
+            "Shudders when {PRONOUN/m_c/subject} remembers the time that {PRONOUN/m_c/subject} went to the cutter",
+			"Feels a small pang of sadness when {PRONOUN/m_c/subject} remembers that {PRONOUN/m_c/subject} can't have kits of {PRONOUN/m_c/poss} own if {PRONOUN/m_c/subject} wanted to",
+			"Curses the Twolegs that forcibly took away {PRONOUN/m_c/poss} cathood",
+			"Thinks about how the spot {PRONOUN/m_c/subject}'s grooming down there feels weird",
+			"Feels more laid-back today than usual",
+			"Wonders if {PRONOUN/m_c/subject}'ll ever be as strong as {PRONOUN/m_c/subject} once were again",
+			"Wonders why the Twolegs had take {PRONOUN/m_c/poss} to the cutter",
+			"Knows that {PRONOUN/m_c/subject}'ll never have kits of {PRONOUN/m_c/poss} own"
+        ],
+        "perm_conditions": {
+            "m_c": [
+                "spayed",
+				"neutered"
+            ]
+        }
 ]
