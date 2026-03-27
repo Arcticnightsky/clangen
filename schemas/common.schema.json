@@ -429,9 +429,7 @@
         "constantly dizzy",
         "recurring shock",
         "lasting grief",
-        "persistent headaches",
-        "neutered",
-        "spayed"
+        "persistent headaches"
       ],
       "title": "PermCondition",
       "type": "string"
