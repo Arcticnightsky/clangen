@@ -22,6 +22,21 @@ from scripts.cat.constants import BACKSTORIES, PERMANENT
 from scripts.events_module.text_adjust import process_text, adjust_list_text
 
 
+def ensure_parent_is_not_sterilized(cat: Optional["Cat"]) -> None:
+    """Remove sterilization conditions from a cat that has been assigned as a parent."""
+    if not cat:
+        return
+
+    removed_condition = False
+    for condition in ("spayed", "neutered"):
+        if condition in cat.permanent_condition:
+            cat.permanent_condition.pop(condition, None)
+            removed_condition = True
+
+    if removed_condition:
+        cat.no_kits = False
+
+
 def create_new_cat_block(
     Cat: Optional["Cat"],
     Relationship,
@@ -389,6 +404,10 @@ def create_new_cat_block(
 
     # Now we generate the new cat
     if not chosen_cat:
+        if litter or rank in (CatRank.KITTEN, CatRank.NEWBORN):
+            for par in (parent1, parent2):
+                ensure_parent_is_not_sterilized(par)
+
         new_cats = create_new_cat(
             Cat,
             new_name=new_name,
