@@ -779,6 +779,7 @@ class Pregnancy_Events:
                                 "r_c": (str(cat.name), choice(cat.pronouns)),
                             },
                         )
+                        + i18n.t("relationships.negative_postscript")
                         + i18n.t(
                             "relationships.age_postscript",
                             name=str(cat.name),
@@ -807,6 +808,7 @@ class Pregnancy_Events:
                                 "r_c": (str(other_cat.name), choice(other_cat.pronouns)),
                             },
                         )
+                        + i18n.t("relationships.negative_postscript")
                         + i18n.t(
                             "relationships.age_postscript",
                             name=str(other_cat.name),
