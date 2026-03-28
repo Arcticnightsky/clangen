@@ -849,11 +849,14 @@ def create_new_cat(
                     chosen_condition = ("partial hearing loss")
                     new_cat.get_permanent_condition(chosen_condition, born_with=True)
 
-        if (
-            original_social in (CatSocial.KITTYPET, CatSocial.LONER)
-            and not new_cat.age.is_baby()
-            and bool(getrandbits(1))
-        ):
+        should_apply_sterilization = False
+        if original_social in (CatSocial.KITTYPET, CatSocial.LONER) and not new_cat.age.is_baby():
+            if original_social == CatSocial.LONER:
+                should_apply_sterilization = randint(1, 5) == 1
+            else:
+                should_apply_sterilization = bool(getrandbits(1))
+
+        if should_apply_sterilization:
             was_sterilized = new_cat.apply_sterilization_condition()
             if was_sterilized:
                 if original_social == CatSocial.KITTYPET:
