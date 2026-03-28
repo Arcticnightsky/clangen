@@ -2543,12 +2543,8 @@ class Cat:
             latest_typical_fix = min(self.moons - 1, max(6, int(self.moons * 0.45)))
             fix_age = int(random_module.triangular(5, latest_typical_fix, 7))
         elif social_group == CatSocial.LONER:
-            earliest_fix = min(self.moons - 1, max(8, int(self.moons * 0.2)))
-            latest_typical_fix = min(self.moons - 1, max(earliest_fix, int(self.moons * 0.6)))
-            mode_fix = min(latest_typical_fix, max(earliest_fix, int(self.moons * 0.35)))
-            fix_age = int(
-                random_module.triangular(earliest_fix, latest_typical_fix, mode_fix)
-            )
+            min_age = min(self.moons - 1, max(10, int(self.moons * 0.5)))
+            fix_age = randint(min_age, self.moons - 1)
         else:
             fix_age = randint(5, self.moons - 1)
 
