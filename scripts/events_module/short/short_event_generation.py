@@ -396,23 +396,18 @@ def filter_events(
                     continue
 
         # check for old age
-        if (
-            "old_age" in event.sub_type
-            and main_cat.moons
-            < constants.CONFIG["death_related"]["old_age_death_start"]
-        ):
-            continue
-            
-        # check for old age for r_c when they die
-        if (
-            random_cat
-            and "old_age" in event.sub_type
-            and event.r_c.get("dies", False)
-            and random_cat.moons
-            < constants.CONFIG["death_related"]["old_age_death_start"]
-        ):
-            continue
-
+        if "old_age" in event.sub_type:
+            if (
+                main_cat.moons
+                < constants.CONFIG["death_related"]["old_age_death_start"]
+            ):
+                continue
+            if (
+                random_cat
+                and random_cat.moons
+                < constants.CONFIG["death_related"]["old_age_death_start"]
+            ):
+                continue
         # remove some non-old age events to encourage elders to die of old age more often
         if (
             "old_age" not in event.sub_type
@@ -612,7 +607,6 @@ def filter_events(
             chosen_event = None
         elif (
             "old_age" in chosen_event.sub_type
-            and chosen_event.r_c.get("dies", False)
             and chosen_cat.moons
             < constants.CONFIG["death_related"]["old_age_death_start"]
         ):
