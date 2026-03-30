@@ -212,13 +212,13 @@
                 "cats": [
                     "m_c"
                 ],
-                "lead_death": "were mauled by a pack of wolves while saving r_c and whole the Clan"
+                "death": "m_c was mauled by a pack of wolves while saving r_c and whole the Clan"
             }
         ],
         "relationships": [
             {
                 "cats_from": [
-                    "c_n"
+                    "clan"
                 ],
                 "cats_to": [
                     "m_c"
@@ -228,7 +228,10 @@
                     "respect",
                     "trust"
                 ],
-                "amount": 20
+                "amount": 20,
+                "log": {
+                    "cats_from": "cat_from heard about how cat_to lost most of {PRONOUN/cat_to/poss} lives while rescuing r_c and the rest of the Clan."
+                }
             }
         ]
     }
