@@ -436,6 +436,27 @@ class TestUpdateMentor(unittest.TestCase):
         self.assertIsNone(app.mentor)
 
 
+    def test_warrior_mentor_must_be_at_least_24_moons(self):
+        app = Cat(
+            moons=7, status_dict={"rank": CatRank.APPRENTICE}, disable_random=True
+        )
+        young_mentor = Cat(
+            moons=23, status_dict={"rank": CatRank.WARRIOR}, disable_random=True
+        )
+
+        self.assertFalse(app.is_valid_mentor(young_mentor))
+
+    def test_warrior_mentor_eligible_at_24_moons(self):
+        app = Cat(
+            moons=7, status_dict={"rank": CatRank.APPRENTICE}, disable_random=True
+        )
+        mentor = Cat(
+            moons=24, status_dict={"rank": CatRank.WARRIOR}, disable_random=True
+        )
+
+        self.assertTrue(app.is_valid_mentor(mentor))
+
+
 class TestNameRepr(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
@@ -689,6 +710,35 @@ class TestNameRepr(unittest.TestCase):
                 cat.status.become_lost()
                 cat.name.specsuffix_hidden = True
                 self.assertTrue(str(cat.name).endswith("test"))
+
+
+class TestAfterlifeAssignment(unittest.TestCase):
+    def test_default_afterlife_for_exiled_cat(self):
+        exiled_status = {
+            "group_history": [
+                {
+                    "group": CatGroup.PLAYER_CLAN_ID,
+                    "rank": CatRank.WARRIOR,
+                    "moons_as": 1,
+                },
+                {"group": None, "rank": CatRank.LONER, "moons_as": 1},
+            ],
+            "standing_history": [
+                {"group": CatGroup.PLAYER_CLAN_ID, "standing": ["member", "exiled"]}
+            ],
+        }
+
+        cat = Cat(status_dict=exiled_status, disable_random=True)
+
+        self.assertEqual(cat.status.get_default_afterlife_id(), CatGroup.DARK_FOREST_ID)
+
+    def test_default_afterlife_for_true_outsider(self):
+        outsider_cat = Cat(status_dict={"rank": CatRank.ROGUE}, disable_random=True)
+
+        self.assertEqual(
+            outsider_cat.status.get_default_afterlife_id(),
+            CatGroup.UNKNOWN_RESIDENCE_ID,
+        )
 
 
 class TestSocialAssignment(unittest.TestCase):

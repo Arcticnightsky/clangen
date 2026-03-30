@@ -87,6 +87,7 @@
                         }
                     }
                 ],
+                "art": "gen_cat_with_kits_loner",
                 "outsider_rep": 1,
                 "frequency": 1
             }
@@ -152,6 +153,7 @@
                         }
                     }
                 ],
+                "art": "gen_angry_cat_loner",
                 "frequency": 4
             }
         ],
@@ -184,6 +186,7 @@
                         }
                     }
                 ],
+                "art": "gen_angry_cat_warrior",
                 "frequency": 4
             }
         ]
@@ -276,6 +279,7 @@
                         }
                     }
                 ],
+                "art": "gen_cat_with_kits_loner",
                 "outsider_rep": 1,
                 "frequency": 1
             }
@@ -323,6 +327,7 @@
                         }
                     }
                 ],
+                "art": "gen_angry_cat_loner",
                 "frequency": 4
             }
         ],
@@ -355,6 +360,7 @@
                         }
                     }
                 ],
+                "art": "gen_angry_cat_warrior",
                 "frequency": 4
             }
         ]
@@ -373,7 +379,7 @@
         "tags": [
             "new_cat"
         ],
-        "patrol_art": "bord_general_intro",
+        "patrol_art": "gen_gen_newcat_hostile",
         "min_cats": 2,
         "max_cats": 6,
         "min_max_status": {},
@@ -447,6 +453,7 @@
                         }
                     }
                 ],
+                "art": "gen_cat_with_kits_loner",
                 "outsider_rep": 1,
                 "frequency": 1
             }
@@ -470,6 +477,7 @@
                 "text": "The patrol advances threateningly towards the kittypet, who retaliates with a quick swipe to p_l's muzzle. While p_l is stunned, they make their getaway.",
                 "exp": 0,
                 "outsider_rep": -1,
+                "art": "gen_angry_cat_loner",
                 "frequency": 4
             }
         ],
@@ -478,6 +486,7 @@
                 "text": "The patrol tells the cat to leave or feel their claws. The kittypet seems to choose life and quickly takes off.",
                 "exp": 10,
                 "outsider_rep": -2,
+                "art": "gen_angry_cat_warrior",
                 "frequency": 4
             }
         ]
@@ -496,7 +505,7 @@
         "tags": [
             "new_cat"
         ],
-        "patrol_art": "bord_general_intro",
+        "patrol_art": "gen_gen_newcat_hostile",
         "min_cats": 1,
         "max_cats": 1,
         "min_max_status": {},
@@ -569,6 +578,7 @@
                         }
                     }
                 ],
+                "art": "gen_cat_with_kits_loner",
                 "outsider_rep": 1,
                 "frequency": 1
             }
@@ -598,6 +608,7 @@
                         "loner"
                     ]
                 ],
+                "art": "gen_angry_cat_loner",
                 "frequency": 4
             }
         ],
@@ -606,6 +617,7 @@
                 "text": "p_l tells the cat to leave or feel {PRONOUN/p_l/poss} claws. The kittypet seems to choose life and quickly takes off.",
                 "exp": 10,
                 "outsider_rep": -2,
+                "art": "gen_angry_cat_warrior",
                 "frequency": 4
             }
         ]
@@ -828,7 +840,7 @@
         "tags": [
             "new_cat"
         ],
-        "patrol_art": "bord_general_intro",
+        "patrol_art": "gen_found_scent_outsider",
         "min_cats": 3,
         "max_cats": 6,
         "min_max_status": {
@@ -985,6 +997,7 @@
                         }
                     }
                 ],
+                "art": "gen_cat_with_kit_loner",
                 "outsider_rep": -2,
                 "frequency": 1
             }
@@ -1013,6 +1026,7 @@
                         }
                     }
                 ],
+                "art": "gen_cat_looking_up3",
                 "frequency": 4
             },
             {
@@ -1071,7 +1085,7 @@
         "tags": [
             "new_cat"
         ],
-        "patrol_art": "bord_general_intro",
+        "patrol_art": "gen_train_solo",
         "min_cats": 1,
         "max_cats": 1,
         "min_max_status": {
@@ -1393,6 +1407,7 @@
                         }
                     }
                 ],
+                "art": "gen_flower_date_warrior_loner",
                 "outsider_rep": 0,
                 "frequency": 4
             }
@@ -1456,6 +1471,7 @@
                         }
                     }
                 ],
+                "art": "gen_flower_date_warrior_loner",
                 "outsider_rep": -1,
                 "frequency": 4
             }
@@ -1519,6 +1535,7 @@
                         }
                     }
                 ],
+                "art": "gen_flower_date_warrior_loner",
                 "outsider_rep": -2,
                 "frequency": 4
             }
@@ -1785,6 +1802,7 @@
                         }
                     }
                 ],
+                "art": "gen_cat_with_kits_loner",
                 "outsider_rep": 1,
                 "frequency": 1
             }
@@ -1832,6 +1850,7 @@
                         }
                     }
                 ],
+                "art": "gen_angry_cat_loner",
                 "frequency": 4
             }
         ],
@@ -1864,6 +1883,7 @@
                         }
                     }
                 ],
+                "art": "gen_angry_cat_warrior",
                 "frequency": 4
             }
         ]
@@ -1957,6 +1977,7 @@
                         }
                     }
                 ],
+                "art": "gen_cat_with_kits_loner",
                 "outsider_rep": 1,
                 "frequency": 1
             }
@@ -2004,6 +2025,7 @@
                         }
                     }
                 ],
+                "art": "gen_angry_cat_loner",
                 "frequency": 4
             }
         ],
@@ -2036,6 +2058,7 @@
                         }
                     }
                 ],
+                "art": "gen_angry_cat_warrior",
                 "frequency": 4
             }
         ]
@@ -2298,6 +2321,7 @@
                         }
                     }
                 ],
+                "art": "gen_angry_cat_loner",
                 "frequency": 4
             }
         ],
@@ -2365,6 +2389,7 @@
                     "scar": "m_c gained a scar after tussling with a rogue.",
                     "death": "m_c died from injuries sustained in a fight with a rogue."
                 },
+                "art": "gen_battle_warrior_loner",
                 "frequency": 3
             },
             {
@@ -2418,6 +2443,7 @@
                     "scar": "m_c gained a scar after tussling with a rogue.",
                     "death": "m_c was died from injuries sustained in a fight with a rogue."
                 },
+                "art": "gen_battle_warrior_loner",
                 "frequency": 3
             }
         ],
@@ -2460,6 +2486,7 @@
                         }
                     }
                 ],
+                "art": "gen_bord_otherclan_hostile",
                 "frequency": 4
             }
         ],
@@ -2525,6 +2552,7 @@
                         }
                     }
                 ],
+                "art": "gen_two_kits",
                 "outsider_rep": 1,
                 "frequency": 4
             },
@@ -2556,6 +2584,7 @@
                         }
                     }
                 ],
+                "art": "gen_two_kits",
                 "outsider_rep": 1,
                 "frequency": 1
             },
@@ -2591,6 +2620,7 @@
                         }
                     }
                 ],
+                "art": "gen_two_kits",
                 "outsider_rep": 1,
                 "frequency": 4
             }
@@ -2688,6 +2718,7 @@
                         "amount": 10
                     }
                 ],
+                "art": "gen_cat_with_kits_loner",
                 "outsider_rep": 1,
                 "frequency": 4
             },
@@ -2722,6 +2753,7 @@
                         "amount": 10
                     }
                 ],
+                "art": "gen_cat_with_kits_loner",
                 "outsider_rep": 1,
                 "frequency": 1
             }
@@ -2815,6 +2847,7 @@
                         }
                     }
                 ],
+                "art": "gen_cat_with_kits_med",
                 "outsider_rep": 1,
                 "frequency": 4
             },
@@ -2846,6 +2879,7 @@
                         }
                     }
                 ],
+                "art": "gen_cat_with_kits_med",
                 "outsider_rep": 1,
                 "frequency": 1
             }
@@ -2947,6 +2981,7 @@
                         "amount": 10
                     }
                 ],
+                "art": "gen_cat_with_kits_loner",
                 "outsider_rep": 1,
                 "frequency": 4
             },
@@ -2981,6 +3016,7 @@
                         "amount": 10
                     }
                 ],
+                "art": "gen_cat_with_kits_loner",
                 "outsider_rep": 1,
                 "frequency": 1
             }
@@ -3079,6 +3115,7 @@
                         }
                     }
                 ],
+                "art": "gen_cat_with_kits_med",
                 "outsider_rep": 1,
                 "frequency": 4
             },
@@ -3110,6 +3147,7 @@
                         }
                     }
                 ],
+                "art": "gen_cat_with_kits_med",
                 "outsider_rep": 1,
                 "frequency": 1
             }
@@ -3210,6 +3248,7 @@
                         "amount": 10
                     }
                 ],
+                "art": "gen_cat_with_kits_loner",
                 "outsider_rep": 1,
                 "frequency": 4
             },
@@ -3244,6 +3283,7 @@
                         "amount": 10
                     }
                 ],
+                "art": "gen_cat_with_kits_loner",
                 "outsider_rep": 1,
                 "frequency": 1
             }
@@ -3341,6 +3381,7 @@
                         }
                     }
                 ],
+                "art": "gen_cat_with_kit_app",
                 "outsider_rep": 1,
                 "frequency": 4
             },
@@ -3372,6 +3413,7 @@
                         }
                     }
                 ],
+                "art": "gen_cat_with_kit_app",
                 "outsider_rep": 1,
                 "frequency": 1
             }
@@ -3415,7 +3457,7 @@
         "tags": [
             "new_cat"
         ],
-        "patrol_art": "hunt_general_intro",
+        "patrol_art": "mnt_hunt_newcat_leaf-barecatcryhostile1",
         "min_cats": 1,
         "max_cats": 1,
         "min_max_status": {
