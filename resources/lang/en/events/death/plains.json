@@ -47,7 +47,7 @@
         "relationships": [
             {
                 "cats_from": [
-                    "r_c"
+                    "clan"
                 ],
                 "cats_to": [
                     "m_c"
@@ -59,7 +59,24 @@
                 ],
                 "amount": 20,
                 "log": {
-                    "cats_from": "cat_from heard about how cat_to lost most of {PRONOUN/cat_to/poss} lives while rescuing r_c and the rest of the Clan."
+                    "cats_from": "cat_from heard about how cat_to lost most of {PRONOUN/cat_to/poss} lives while rescuing r_c and the rest of the Clan from coyotes."
+                }
+            },
+            {
+                "cats_from": [
+                    "r_c"
+                ],
+                "cats_to": [
+                    "m_c"
+                ],
+                "mutual": false,
+                "values": [
+                    "respect",
+                    "trust"
+                ],
+                "amount": 50,
+                "log": {
+                    "cats_from": "cat_from honors cat_to for rescuing {PRONOUN/cat_fron/object} and the rest of c_n from coyotes."
                 }
             }
         ]
