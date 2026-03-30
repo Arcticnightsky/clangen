@@ -442,6 +442,12 @@ class Relationship:
             while RelType.ROMANCE in value_weights:
                 value_weights.pop(RelType.ROMANCE)
 
+        if (
+            RelType.ROMANCE in value_weights
+            and self._is_sterilized_intact_pair()
+        ):
+            value_weights[RelType.ROMANCE] *= 0.35
+
         # if cats have no romance relationship already, don't allow romance decrease
         if (
             not positive
@@ -455,6 +461,15 @@ class Relationship:
             [weight for weight in value_weights.values()],
         )[0]
         return chosen_type
+
+    @staticmethod
+    def _is_sterilized(cat) -> bool:
+        return any(cond in cat.permanent_condition for cond in ("neutered", "spayed"))
+
+    def _is_sterilized_intact_pair(self) -> bool:
+        cat_from_sterilized = self._is_sterilized(self.cat_from)
+        cat_to_sterilized = self._is_sterilized(self.cat_to)
+        return cat_from_sterilized != cat_to_sterilized
 
     def get_relevant_interactions(
         self,

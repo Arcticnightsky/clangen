@@ -1307,7 +1307,7 @@
         "relationships": [
             {
                 "cats_from": [
-                    "r_c", "high_lawful"
+                    "r_c"
                 ],
                 "cats_to": [
                     "m_c"
@@ -1325,7 +1325,7 @@
                 }
             },
             {
-                "cats_from": ["r_c", "low_lawful"
+                "cats_from": ["clan", "low_lawful"
                 ],
                 "cats_to": [
                     "m_c"
@@ -1765,46 +1765,6 @@
         }
     },
     {
-        "event_id": "multi_misc_any_collar_accessory1",
-        "location": [
-            "forest",
-            "beach",
-            "plains"
-        ],
-        "season": [
-            "any"
-        ],
-        "sub_type": [
-            "accessory"
-        ],
-        "frequency": 1,
-        "event_text": "m_c disappears for a few days, then returns to camp with a acc_singular around {PRONOUN/m_c/poss} neck.",
-        "new_accessory": [
-            "COLLAR"
-        ],
-        "m_c": {
-            "age": [
-                "adolescent",
-                "young adult",
-                "adult",
-                "senior adult",
-                "senior"
-            ]
-        },
-        "relationships": [
-            {
-            "cats_from": ["clan", "high_lawful"],
-            "cats_to": ["m_c"],
-            "values": ["respect"],
-            "amount": -10,
-            "mutual": false,
-            "log": {
-                "cats_from": "cat_from disapproved of cat_to wearing a collar."
-            }
-        }
-    ]
-    },
-    {
         "event_id": "multi_misc_any_misc1",
         "location": [
             "forest",
@@ -1865,7 +1825,13 @@
             ],
             "skill": [
                 "LORE,1",
+                "KIT,1",
                 "STORY,1"
+            ],
+            "skill": [
+                "-KIT,2",
+                "-KIT,3",
+                "-KIT,4"
             ]
         },
         "relationships": [
@@ -2023,7 +1989,7 @@
         },
         "relationships": [
             {
-                "cats_from": ["r_c", "high_lawful", "high_stable"],
+                "cats_from": ["high_lawful", "high_stable", "r_c"],
                 "cats_to": ["m_c"],
                 "values": ["comfort", "respect"],
                 "amount": -15,
@@ -2033,7 +1999,7 @@
                 }
             },
             {
-                "cats_from": ["r_c", "high_lawful", "low_stable"],
+                "cats_from": ["high_lawful", "low_stable", "r_c"],
                 "cats_to": ["m_c"],
                 "values": ["comfort", "respect"],
                 "amount": -8,
@@ -2043,7 +2009,7 @@
                 }
             },
             {
-                "cats_from": ["r_c", "low_lawful", "high_stable"],
+                "cats_from": ["low_lawful", "high_stable", "r_c"],
                 "cats_to": ["m_c"],
                 "values": ["comfort", "trust"],
                 "amount": 8,
@@ -2053,7 +2019,7 @@
                 }
             },
             {
-                "cats_from": ["r_c", "low_lawful", "low_stable"],
+                "cats_from": ["low_lawful", "low_stable", "r_c"],
                 "cats_to": ["m_c"],
                 "values": ["comfort", "trust"],
                 "amount": 15,
@@ -2954,7 +2920,13 @@
                 "mates"
             ]
         },
-        "r_c": {},
+        "r_c": {
+            "age": [
+                "young adult",
+                "adult",
+                "senior adult"
+            ]
+        },
         "relationships": [
             {
                 "cats_to": [
@@ -4887,7 +4859,7 @@
         "current_rep": [
             "any"
         ],
-        "changed": -5
+        "changed": -1
     },
     {
         "event_id": "multi_misc_any_scandalous_kittypet2",
@@ -4953,9 +4925,9 @@
         ],
         "outsider": {},
         "current_rep": [
-            "any"
+            "hostile", "neutral"
         ],
-        "changed": 5
+        "changed": 1
     },
     {
         "event_id": "multi_misc_any_scandalous_kittypet3",
@@ -5022,9 +4994,9 @@
         ],
         "outsider": {},
         "current_rep": [
-            "any"
+            "hostile", "neutral"
         ],
-        "changed": 7
+        "changed": 1
     },
     {
         "event_id": "multi_misc_any_scandalous_kittypet4",
@@ -5090,9 +5062,9 @@
         ],
         "outsider": {
             "current_rep": [
-                "any"
+                "hostile", "neutral"
             ],
-            "changed": -5
+            "changed": -1
         }
     },
     {
@@ -5792,7 +5764,7 @@
             "current_rep": [
                 "any"
             ],
-            "changed": -5
+            "changed": -1
         }
     },
     {
@@ -5842,7 +5814,6 @@
             },
             {
                 "cats_from": [
-                    "clan",
                     "high_lawful"
                 ],
                 "cats_to": [
@@ -5863,7 +5834,7 @@
         "current_rep": [
             "any"
         ],
-        "changed": 5
+        "changed": 1
     },
     {
         "event_id": "multi_misc_any_scandalous_loner3",
@@ -5914,7 +5885,6 @@
             },
             {
                 "cats_from": [
-                    "clan",
                     "high_lawful"
                 ],
                 "cats_to": [
@@ -5957,7 +5927,6 @@
         "relationships": [
             {
                 "cats_from": [
-                    "clan",
                     "high_lawful"
                 ],
                 "cats_to": [
@@ -6023,7 +5992,6 @@
             },
             {
                 "cats_from": [
-                    "clan",
                     "high_lawful"
                 ],
                 "cats_to": [
@@ -6044,7 +6012,7 @@
         "current_rep": [
             "any"
         ],
-        "changed": 5
+        "changed": 1
     },
     {
         "event_id": "gen_misc_any_scandalous_rogue2",
@@ -6090,7 +6058,6 @@
             },
             {
                 "cats_from": [
-                    "clan",
                     "high_lawful"
                 ],
                 "cats_to": [
@@ -6111,7 +6078,7 @@
         "current_rep": [
             "any"
         ],
-        "changed": 5
+        "changed": 1
     },
     {
         "event_id": "multi_misc_any_scandalous_rogue3",
@@ -6146,7 +6113,7 @@
             "current_rep": [
                 "any"
             ],
-            "changed": -5
+            "changed": -1
         },
         "new_cat": [
             [
@@ -6174,7 +6141,6 @@
             },
             {
                 "cats_from": [
-                    "clan",
                     "high_lawful"
                 ],
                 "cats_to": [
@@ -6647,7 +6613,7 @@
             "current_rep": [
                 "any"
             ],
-            "changed": 3
+            "changed": 1
         }
     },
     {
@@ -6867,7 +6833,7 @@
                 "cats_from": ["r_c"],
                 "cats_to": ["m_c"],
                 "values": ["like", "respect"],
-                "amount": 20,
+                "amount": 30,
                 "mutual": false,
                 "log": {
                     "cats_from": "cat_to's clairvoyance saved cat_from from an ambush."
@@ -6936,7 +6902,7 @@
                 "cats_from": ["r_c"],
                 "cats_to": ["m_c"],
                 "values": ["like", "comfort"],
-                "amount": 10,
+                "amount": 20,
                 "mutual": false,
                 "log": {
                     "cats_from": "cat_from appreciated that cat_to took the time to sit with {PRONOUN/cat_from/object} and listen to {PRONOUN/cat_to/poss} experiences."
@@ -8464,7 +8430,7 @@
             "current_rep": [
                 "hostile"
             ],
-            "changed": -2
+            "changed": -3
         }
     },
     {
@@ -8499,7 +8465,7 @@
             "current_rep": [
                 "hostile"
             ],
-            "changed": -2
+            "changed": -5
         }
     },
     {
@@ -8554,7 +8520,7 @@
             "current_rep": [
                 "hostile"
             ],
-            "changed": -2
+            "changed": -3
         },
         "relationships": [
             {
@@ -9592,7 +9558,7 @@
                 "cats_from": ["m_c"],
                 "cats_to": ["r_c"],
                 "values": ["trust", "like", "comfort", "romance"],
-                "amount": 10,
+                "amount": 15,
                 "log": {
                     "cats_from": "m_c presented r_c with a flower, and r_c has worn it on {PRONOUN/r_c/poss} pelt ever since."
                 }
@@ -10477,7 +10443,7 @@
             "values": [
                 "respect", "like"
             ],
-            "amount": 10,
+            "amount": -10,
             "log": {
                 "cats_from": "cat_from was touched that cat_to kept {PRONOUN/cat_to/poss} friendship with a o_c_n apprentice during the war."
             }
@@ -11753,5 +11719,422 @@
             }
         }
     ]
+    },
+    {
+       "event_id": "gen_doubtful_med_mate",
+        "location": [
+            "any"
+        ],
+        "season": [
+            "any"
+        ],
+        "tags": [
+            "romance"
+        ],
+        "frequency": 2,
+        "event_text": "Though m_c is happy to have r_c as {PRONOUN/m_c/poss} mate, m_c can't help but feel as if StarClan is judging {PRONOUN/m_c/object} for loving r_c as {PRONOUN/m_c/poss} mate... After all, medicine cats technically aren't supposed to have mates, but m_c loves r_c too much to give {PRONOUN/r_c/object} up. m_c stays awake at night pondering about {PRONOUN/m_c/poss} love choices and the warrior code.",
+        "m_c": {
+            "age": [
+                "young adult",
+                "adult",
+                "senior adult",
+                "senior"
+            ],
+            "status": [
+                "medicine cat",
+                "medicine cat apprentice"
+            ],
+            "relationship_status": [
+                "mates"
+            ],
+            "trait": [
+                "righteous",
+                "loyal",
+                "faithful",
+                "strict",
+                "nervous",
+                "insecure"
+            ]
+        },
+        "r_c": {
+            "age": [
+                "senior",
+                "senior adult",
+                "adult",
+                "young adult"
+            ]
+        },
+        "relationships": [
+            {
+                "cats_from": [
+                    "m_c"
+                ],
+                "cats_to": [
+                    "r_c"
+                ],
+                "mutual": false,
+                "values": [
+                    "romance"
+                ],
+                "amount": "-25",
+                "log": {
+                    "cats_from": "from_cat was second-guessing {PRONOUN/from_cat/poss} relationship with to_cat as a medicine cat."
+                }
+            }
+        ]
+    },
+    {
+        "event_id": "gen_med_healer_herb_gather",
+        "location": [
+            "any"
+        ],
+        "season": [
+            "newleaf",
+            "greenleaf",
+            "leaf-fall"
+        ],
+        "frequency": 4,
+        "event_text": "m_c went out with r_c to help {PRONOUN/r_c/poss} gather herbs today and brought back a decent supply stock.",
+        "m_c": {
+            "age": [
+                "adolescent",
+                "young adult",
+                "adult",
+                "senior adult",
+                "senior"
+            ],
+            "skill": [
+                "HEALER,1"
+            ]
+        },
+        "r_c": {
+            "status": [
+                "medicine cat",
+                "medicine cat apprentice"
+            ]
+        },
+        "relationships": [
+            {
+                "cats_from": [
+                    "m_c"
+                ],
+                "cats_to": [
+                    "r_c"
+                ],
+                "mutual": true,
+                "values": [
+                    "like",
+                    "respect"
+                ],
+                "amount": 10,
+                "log": {
+                    "cats_from": "from_cat helped to_cat collect herbs."
+                }
+            }
+        ],
+        "supplies": [
+            {
+                "type": "any_herb",
+                "trigger": [
+                    "low"
+                ],
+                "adjust": "increase_20"
+            }
+        ]
+    },
+    {
+        "event_id": "gen_misc_hunter_freshkill_gather",
+        "location": [
+            "any"
+        ],
+        "season": [
+            "leaf-fall",
+            "leaf-bare"
+        ],
+        "frequency": 4,
+        "event_text": "As the weather gets colder and prey becomes more scarce, m_c and r_c went out to hunt today and brought back a decent amount of freshkill.",
+        "m_c": {
+            "age": [
+                "adolescent",
+                "young adult",
+                "adult",
+                "senior adult",
+                "senior"
+            ],
+            "status": [
+                "apprentice",
+                "warrior",
+                "deputy",
+                "leader"
+            ],
+            "skill": [
+                "HUNTER,1"
+            ]
+        },
+        "r_c": {
+            "age": [
+                "adolescent",
+                "young adult",
+                "adult",
+                "senior adult",
+                "senior"
+            ],
+            "status": [
+                "apprentice",
+                "warrior",
+                "deputy",
+                "leader"
+            ],
+            "skill": [
+                "HUNTER,1"
+            ]
+        },
+        "relationships": [
+            {
+                "cats_from": [
+                    "m_c"
+                ],
+                "cats_to": [
+                    "r_c"
+                ],
+                "mutual": true,
+                "values": [
+                    "like",
+                    "respect"
+                ],
+                "amount": 10,
+                "log": {
+                    "cats_from": "from_cat helped to_cat hunt for freshkill in the cold."
+                }
+            }
+        ],
+        "supplies": [
+            {
+                "type": "freshkill",
+                "trigger": [
+                    "low"
+                ],
+                "adjust": "increase_20"
+            }
+        ]
+    },
+    {
+        "event_id": "gen_misc_heroic_oc_cat_death1",
+        "location": [
+            "any"
+        ],
+        "season": [
+            "any"
+        ],
+        "tags": [],
+        "frequency": 1,
+        "event_text": "A cat from o_c_n died while saving m_c. c_n honors their bravery at the Gathering.",
+        "m_c": {
+            "age": [
+                "adolescent"
+            ]
+        },
+        "other_clan": {
+            "current_rep": [
+                "neutral",
+                "ally"
+            ],
+            "changed": 3
+        }
+    },
+    {
+        "event_id": "gen_misc_oc_cat_kill1",
+        "location": [
+            "any"
+        ],
+        "season": [
+            "any"
+        ],
+        "tags": [],
+        "frequency": 1,
+        "event_text": "m_c, only an apprentice, killed someone from o_c_n! Tensions are getting high between the two Clans now...",
+        "m_c": {
+            "age": [
+                "adolescent"
+            ],
+            "skill": [
+                "FIGHTER,1"
+            ],
+            "trait": [
+                "vengeful",
+                "ambitious",
+                "bloodthirsty",
+                "righteous",
+                "fierce",
+                "cold"
+            ]
+        },
+        "other_clan": {
+            "current_rep": [
+                "hostile",
+                "neutral"
+            ],
+            "changed": -3
+        }
+    },
+    {
+        "event_id": "gen_misc_heroic_oc_cat_death2",
+        "location": [
+            "any"
+        ],
+        "season": [
+            "any"
+        ],
+        "tags": [],
+        "frequency": 1,
+        "event_text": "A cat from o_c_n was killed while trying to save m_c. c_n honors their bravery at the Gathering for saving their medicine cat.",
+        "m_c": {
+            "status": [
+                "medicine cat apprentice",
+                "medicine cat"
+            ]
+        },
+        "other_clan": {
+            "current_rep": [
+                "hostile",
+                "neutral",
+                "ally"
+            ],
+            "changed": 3
+        }
+    },
+    {
+        "event_id": "gen_misc_oc_cat_kill2",
+        "location": [
+            "any"
+        ],
+        "season": [
+            "any"
+        ],
+        "tags": [],
+        "frequency": 1,
+        "event_text": "m_c killed the deputy of o_c_n. Tensions are getting high between the two Clans now...",
+        "m_c": {
+            "status": [
+                "warrior",
+                "deputy",
+                "leader"
+            ],
+            "skill": [
+                "FIGHTER,3"
+            ],
+            "trait": [
+                "vengeful",
+                "ambitious",
+                "bloodthirsty",
+                "righteous",
+                "fierce",
+                "cold"
+            ]
+        },
+        "other_clan": {
+            "current_rep": [
+                "hostile",
+                "neutral"
+            ],
+            "changed": -3
+        }
+    },
+    {
+        "event_id": "gen_misc_heroic_oc_cat_death3",
+        "location": [
+            "any"
+        ],
+        "season": [
+            "any"
+        ],
+        "tags": [],
+        "frequency": 1,
+        "event_text": "The deputy of o_c_n was killed while trying to save m_c. c_n honors their bravery at the Gathering.",
+        "m_c": {
+            "status": [
+                "apprentice",
+                "warrior",
+                "deputy",
+                "leader",
+                "medicine cat apprentice",
+                "medicine cat",
+                "mediator apprentice",
+                "mediator"
+            ]
+        },
+        "other_clan": {
+            "current_rep": [
+                "neutral",
+                "ally"
+            ],
+            "changed": 3
+        }
+    },
+    {
+        "event_id": "gen_misc_oc_cat_kill3",
+        "location": [
+            "any"
+        ],
+        "season": [
+            "any"
+        ],
+        "tags": [],
+        "frequency": 1,
+        "event_text": "m_c killed a cat from o_c_n. Tensions are getting high between the two Clans now and the other leaders feel uneasy around m_c at the next Gathering...",
+        "m_c": {
+            "status": [
+                "leader"
+            ],
+            "skill": [
+                "FIGHTER,3"
+            ],
+            "trait": [
+                "vengeful",
+                "ambitious",
+                "bloodthirsty",
+                "righteous",
+                "fierce",
+                "cold"
+            ]
+        },
+        "other_clan": {
+            "current_rep": [
+                "hostile",
+                "neutral"
+            ],
+            "changed": -3
+        }
+    },
+    {
+        "event_id": "gen_misc_heroic_oc_cat_death4",
+        "location": [
+            "any"
+        ],
+        "season": [
+            "any"
+        ],
+        "tags": [],
+        "frequency": 1,
+        "event_text": "The leader of o_c_n lost a life while trying to save m_c. c_n honors their bravery at the Gathering.",
+        "m_c": {
+            "status": [
+                "apprentice",
+                "warrior",
+                "deputy",
+                "leader",
+                "medicine cat apprentice",
+                "medicine cat",
+                "mediator apprentice",
+                "mediator"
+            ]
+        },
+        "other_clan": {
+            "current_rep": [
+                "neutral",
+                "ally"
+            ],
+            "changed": 5
+        }
     }
 ]

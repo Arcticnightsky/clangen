@@ -1,6 +1,47 @@
 {
     "announcement": [
-        "m_c announced that {PRONOUN/m_c/subject} {VERB/m_c/are/is} expecting kits."
+        "m_c announced that {PRONOUN/m_c/subject} {VERB/m_c/are/is} expecting kits.",
+		"m_c woke up with a few aches in {PRONOUN/m_c/poss} belly, but it was no surprise, {PRONOUN/m_c/subject} knew exactly what {PRONOUN/m_c/subject} did with r_c on that hot, steamy night this moon, hehe... {PRONOUN/m_c/subject/CAP} wakes up r_c and excitedly tells {PRONOUN/r_c/object} the news and then later announces to the Clan that {PRONOUN/m_c/subject} {VERB/m_c/are/is} expecting kits!",
+    	"m_c wasn't really sure if {PRONOUN/m_c/subject} was pregnant, so {PRONOUN/m_c/subject} waited a few days to make sure. Once {PRONOUN/m_c/subject} was showing signs, {PRONOUN/m_c/subject} happily announces that {PRONOUN/m_c/subject} {VERB/m_c/are/is} expecting kits!",
+    	"m_c and r_c left the camp one evening and came back the next morning, looking quite satisfied. Then m_c bashfully tells the Clan that {PRONOUN/m_c/subject} might be expecting kits soon...",
+    	"Okay, m_c was a little surprised to find this out, but hey, what do you expect when you and your mate go on a romantic date while in heat? Seeing this as a pleasant surprise, m_c excitedly announces {PRONOUN/m_c/poss} pregnancy!",
+    	"After moons of mental preparation and talks with r_c, m_c is happy to announce that {PRONOUN/m_c/subject} {VERB/m_c/are/is} expecting kits.",
+		"r_c took m_c to the medicine cat den after {PRONOUN/m_c/subject} had been throwing up in the dirtplace a lot recently. When m_c and r_c left the medicine cat den, r_c announces that m_c is pregnant!",
+    	"With {PRONOUN/m_c/poss} mate r_c excitedly smiling behind {PRONOUN/m_c/object}, m_c announces that {PRONOUN/m_c/subject} {VERB/m_c/are/is} expecting kits!",
+		"m_c had been secretive for a while now and nobody could even begin to guess what about... until today, that is, when m_c announced {PRONOUN/m_c/poss} pregnancy!",
+		"Just about everyone in c_n noticed how m_c's scent has changed and how there's a soft, new gentle glow in her eyes only an expecting queen would have. Everyone smiled warmly when m_c announced that she's expecting kits.",
+        "The entire Clan could see the signs way before m_c did. Everyone urged {PRONOUN/m_c/object} to get checked by a medicine cat, but to no avail. They just about gave up until, finally, m_c announced {PRONOUN/m_c/poss} pregnancy.",
+		"m_c's been worried sick over a recent illness {PRONOUN/m_c/subject} couldn't quite explain, until a thorough health check made everything clear. m_c's pregnant!" 
+    ],
+    "announcement_affair": [
+        "m_c announced that {PRONOUN/m_c/subject} {VERB/m_c/are/is} expecting kits.",
+		"r_c took m_c to the medicine cat den after {PRONOUN/m_c/subject} had been throwing up in the dirtplace a lot recently. When m_c and r_c left the medicine cat den, r_c announces that m_c is pregnant! Some cats could pick up a slight angry tone in his voice, why would he possibly be angry at this news?",
+		"Just about everyone in c_n noticed how m_c's scent has changed and how there's a soft, new gentle glow in her eyes only an expecting queen would have. Everyone smiled warmly when m_c announced that she's expecting kits.",
+		"m_c announced that {PRONOUN/m_c/subject} {VERB/m_c/are/is} expecting kits. Wait a minute - r_c doesn't remember mating with her at all this moon... something is <i>very, very</i> wrong here.",
+		"m_c wasn't really sure if {PRONOUN/m_c/subject} was pregnant, so {PRONOUN/m_c/subject} waited a few days to make sure. Once {PRONOUN/m_c/subject} was showing signs, {PRONOUN/m_c/subject} happily announces that {PRONOUN/m_c/subject} {VERB/m_c/are/is} expecting kits!",
+		"m_c had been secretive for a while now and nobody could even begin to guess what about... until today, that is, when m_c announced {PRONOUN/m_c/poss} pregnancy!",
+        "The entire Clan could see the signs way before m_c did. Everyone urged {PRONOUN/m_c/object} to get checked by a medicine cat, but to no avail. They just about gave up until, finally, m_c announced {PRONOUN/m_c/poss} pregnancy.",
+		"m_c's been worried sick over a recent illness {PRONOUN/m_c/subject} couldn't quite explain, until a thorough health check made everything clear. m_c's pregnant!",
+		"After m_c announced her pregnancy to the Clan, some cats noticed r_c looking at her with confusion. Then the pair went to the edge of the clearing, talking seriously in hushed voices. No one can guess what they're discussing, but they shrugged it off, excited for new life coming to the Clan!",
+		"m_c had been secretive for a while now and nobody could even begin to guess what about... until today, that is, when m_c announced {PRONOUN/m_c/poss} pregnancy! Though for some reason, it seems like r_c isn't too happy about it - nobody knows why."
+    ],
+    "surprising_announcement": [
+        "The Clan is surpised when m_c announced that {PRONOUN/m_c/subject} {VERB/m_c/are/is} expecting kits. Nobody recalls {PRONOUN/m_c/object} currently having a mate, and m_c refuses to disclose the name of the father, but everyone's excited for new life in the Clan regardless!",
+		"m_c <i>really, really</i> didn't want the whole Clan knowing, but as {PRONOUN/m_c/poss} belly grows and {PRONOUN/m_c/object} pregnancy symptoms become more and more apparent to the other cats, m_c has no choice but to announce that she is expecting kits - She refuses to give out the name of her impregnator.",
+		"m_c has tried for days to hide the fact that {PRONOUN/m_c/subject} {VERB/m_c/'re/'s} pregnant - She doesn't want the whole Clan to know that she had a one-night stand with a certain tom... but it seems like her Clanmates figured out something's up with her, so she announced her pregnancy to the Clan, feeling guilty about what she did.",
+        "m_c announced that {PRONOUN/m_c/subject} {VERB/m_c/are/is} expecting kits. When other cats questioned her about the father, m_c simply states that she has always wanted to be a mother, but was never able to find a mate who could give her kits, so she asked a Clanmate who could help her. He agreed and wished to remain anonymous once the pregnancy was announced.",
+		"m_c's been worried sick over a recent illness {PRONOUN/m_c/subject} couldn't quite explain, until a thorough health check made everything clear. m_c's pregnant! When other cats inquire about the father, m_c awkwardly dismisses the topic and refuses to reveal who the father is.",
+		"m_c announced her pregnancy and has been <i>very</i> shy about it since, especially when she doesn't currently have a mate. But what was done was done, and now she must refuse every cat who questions her about it." ,
+		"Though m_c never outright admitted that she's expecting kits, just about everyone in c_n noticed how her scent changed and how there's a soft, new gentle glow in her eyes only an expecting queen would have. They can tell m_c’s pregnant, and they’re now interested in who the father may be.",
+		"m_c had been secretive for a while now and nobody could even begin to guess what about... until today, that is, when m_c announced {PRONOUN/m_c/poss} pregnancy. Though now everyone is wondering who sired her kits, m_c doesn't say who...",
+		"m_c doesn't want to admit it, but heat had taken advatage of her and a handsome, fellow Clanmate, and now she has to suffer the consequences of her actions - m_c's pregnant and everyone's asking the same question: who is the father?",
+		"m_c found out that she's pregnant! She was just as shocked as her Clanmates when she announced it, but she knows what she did that night with one of the fine toms of this Clan, so she really shouldn't be. Her clanmates have been bombarding her with questions a lot this moon, and she refuses to answer all of them." 
+    ],
+    "announcement_affair_samesex": [
+		"m_c <i>really, really</i> didn't want the whole Clan knowing, especially r_c, but as {PRONOUN/m_c/poss} belly grows and {PRONOUN/m_c/object} pregnancy symptoms become more and more apparent to the other cats, m_c has no choice but to announce that she is expecting kits - She refuses to give out the name of her impregnator, even to her mate, who looks at her with frustration.",
+        "m_c announced that {PRONOUN/m_c/subject} {VERB/m_c/are/is} expecting kits. Wait a minute - m_c's mate can't possibly get {PRONOUN/m_c/object} pregnant... so then who's the father of m_c's kits?",
+		"m_c and r_c had a heated discussion over something, when other cats asked what they were arguing about, m_c has no choice but to admit that she mated with a tom - who she refuses to say who he is - and now she's pregnant and her mate is a bit upset over it.",
+		"m_c and r_c announced that m_c's pregnant and they are going to be mothers! When other cat bombard them with questions, m_c says that she and her mate wanted to be parents, but obviously couldn't have kits of their own, so they asked a Clanmate who could help her. He agreed and wished to remain anonymous once the pregnancy was announced."
     ],
     "litter_guess": [
         "m_c hopes the litter will be small - {PRONOUN/m_c/subject} {VERB/m_c/feel/feels} overwhelmed at the idea of a big litter.",
@@ -104,12 +145,24 @@
             "m_c hopes that {PRONOUN/m_c/poss} {insert} doesn't look too much like r_c, otherwise questions might follow.",
             "r_c goes to visit m_c in the nursery with {PRONOUN/m_c/poss} new {insert}, on a completely innocent mission to deliver food to the new parent.",
             "The newly arrived {insert} that m_c has just given birth to looks suspiciously like r_c. ",
+			"Everyone in the Clan can see that m_c's {insert} clearly looks like r_c... r_c's mate has been glaring at {PRONOUN/r_c/object} and m_c ever since the {insert} have been born.",
+			"r_c's mate has been demanding answers from {PRONOUN/r_c/object} ever since m_c's {insert} was born - The {insert} looks way too much like him! Why in the name of StarClan did r_c cheat on them with another cat!?",
             "No one wants to ruin such a happy occasion, but... it doesn't take a genius to notice how m_c's {insert} looks suspiciously like r_c...",
             "Ever since the birth, rumor's gone around that m_c's {insert} belongs to r_c and, while no one wants to confirm anything, no one really has to when the evidence is mewling right there..."
         ],
         "affair_mated": [
             "m_c's mate is such a wonderful cat, deserving of being a parent... so why does m_c's {insert} look more like r_c instead?",
+			"Everyone in the Clan can see that m_c's {insert} clearly looks like r_c... m_c's mate has been glaring at {PRONOUN/m_c/object} and r_c ever since the {insert} have been born.",
+			"m_c's mate has been demanding answers from {PRONOUN/m_c/object} ever since the {insert} was born - The {insert} looks way too much like r_c! Why in the name of StarClan would m_c cheat on {PRONOUN/m_m/object} with another cat!? Is {PRONOUN/m_m/subject} not worthy of fathering {PRONOUN/m_c/poss} kits!?",
             "m_c can see it, m_c's mate can see it, r_c can see it, everyone in c_n can see how the new {insert} looks a bit too much like r_c for it to be coincidence..."
+        ],
+        "affair_mated_samesex": [
+			"m_c gave birth to a {insert}, made from her and r_c. m_c's mate will help raise them as well - The perfect opportunity for the same-sex pair to become parents for once.",
+            "m_c's mate looks over m_c's new {insert} with mixed feelings - on one hand, m_c did cheat on her with r_c... but at the same time, she can help m_c raise this {insert} together since they could never have kits of their own! Seems like r_c did them a favor there."
+        ],
+        "affair_mated_dead_mate": [
+            "m_c's mate was such a wonderful cat, deserving of being a parent, even after death... so why does m_c's {insert} look more like r_c instead?",
+            "This was supposed to be a bittersweet moment - m_c birthing her new {insert}, a last gift from m_c's mate. Except, this {insert} isn't m_c's mate's at all... they're r_c's."
         ],
         "death": [
             "Later, as the medicine cat wails with m_c's blood streaked through their pelt and a warrior comes to move the body for the vigil, no one knows what to do with the {insert}.",
@@ -156,6 +209,10 @@
         "lead_death": [
             "m_c lost one of {PRONOUN/m_c/poss} nine lives, but gave birth to a {insert}.",
             "Although m_c gave birth to a {insert}, it came at the cost of one of {PRONOUN/m_c/poss} nine lives."
+        ],
+        "stillborn_kit_death": [
+            "Unfortunatley, one of m_c's kits didn't make it...",
+			"The medicine cat has tried their best to revive one of the kits in m_c's litter, but unfortunatley the kit seemed to have already passed before it even got a chance at life..."
         ]
     }
 }
