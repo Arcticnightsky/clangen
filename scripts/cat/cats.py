@@ -3629,6 +3629,11 @@ class Cat:
 
     @experience.setter
     def experience(self, exp: int):
+        # Old or externally edited saves may contain a null experience value.
+        # Treat that as 0 so loading doesn't crash.
+        if exp is None:
+            exp = 0
+
         exp = min(exp, self.experience_levels_range["master"][1])
         self._experience = int(exp)
 
