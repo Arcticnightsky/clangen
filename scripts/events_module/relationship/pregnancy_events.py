@@ -424,7 +424,7 @@ class Pregnancy_Events:
                 text += choice(Pregnancy_Events.PREGNANT_STRINGS[f"{severity[0]}_severity"])
                 text = event_text_adjust(Cat, text, main_cat=pregnant_cat, random_cat=other_cat, clan=game.clan)
                 involved_cats = [pregnant_cat.ID]
-            # If the mom is single and had a fling with a random tom cat, let her announce her pregnancy and leave the Clan and the player pointing fingers on who the daddy is
+            # If the mom is single and had a fling with a random tom cat, let her announce her pregnancy and leave the Clan and the player pointing fingers on who the daddy may be
             elif allow_coparenting is True and second_parent.ID not in pregnant_cat.mate and len(pregnant_cat.mate) == 0:
                 text = choice(Pregnancy_Events.PREGNANT_STRINGS["surprising_announcement"])
                 severity = random.choices(["minor", "major"], [3, 1], k=1)
@@ -440,7 +440,7 @@ class Pregnancy_Events:
                 text += choice(Pregnancy_Events.PREGNANT_STRINGS[f"{severity[0]}_severity"])
                 text = event_text_adjust(Cat, text, main_cat=pregnant_cat, random_cat=female_mate[0] if female_mate else None, clan=clan)
                 involved_cats = [pregnant_cat.ID]
-            # And lastly, if the mom got knocked up by another tom who ISN'T her mate, let the player guess wether it's an affair or not, sometimes the events will tell you, sometimes they won't...
+            # And lastly, if the mom got knocked up by another tom who ISN'T her mate, let the player guess whether it's an affair or not, sometimes the events will tell you, sometimes they won't...
             elif allow_affair is True and second_parent.ID not in pregnant_cat.mate and len(pregnant_cat.mate) > 0 and has_male_mate:
                 text = choice(Pregnancy_Events.PREGNANT_STRINGS["announcement_affair"])
                 severity = random.choices(["minor", "major"], [3, 1], k=1)
@@ -773,7 +773,7 @@ class Pregnancy_Events:
                     rel.like -= 40
                     rel.log.append(
                         process_text(
-                            "m_c found out that r_c cheated on {PRONOUN/m_c/object} and had kits with another cat.",
+                            i18n.t("pregnancy.affair_rel_log"),
                             {
                                 "m_c": (str(mate.name), choice(mate.pronouns)),
                                 "r_c": (str(cat.name), choice(cat.pronouns)),
@@ -802,7 +802,7 @@ class Pregnancy_Events:
                     rel.like -= 40
                     rel.log.append(
                         process_text(
-                            "m_c found out that r_c cheated on {PRONOUN/m_c/object} and had kits with another cat.",
+                            i18n.t("pregnancy.affair_rel_log"),
                             {
                                 "m_c": (str(mate.name), choice(mate.pronouns)),
                                 "r_c": (str(other_cat.name), choice(other_cat.pronouns)),
