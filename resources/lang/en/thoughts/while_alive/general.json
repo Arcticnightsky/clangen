@@ -677,6 +677,10 @@
         "thoughts":[
             "Is sitting alone",
             "Wants to be alone...",
+            "Is feeling lonely...",
+			"Has only spoken to one cat today",
+			"Hasn't spoken to anyone today",
+			"Mews quietly to {PRONOUN/m_c/self} underneath {PRONOUN/m_c/poss} breath",
             "Wonders if {PRONOUN/m_c/subject}{VERB/m_c/'re/'s} alone in {PRONOUN/m_c/poss} thoughts and beliefs",
             "Just can't get away from others",
             "Was surprised that a cat wanted to speak to {PRONOUN/m_c/object}",
@@ -913,8 +917,9 @@
         "main_status_constraint": [
             "-kittypet"
         ],
-        "main_trait_constraint": ["strange"],
-
+        "main_trait_constraint": [
+            "strange"
+        ],
         "main_status_history": [
             "-kittypet"
         ]
@@ -1021,6 +1026,9 @@
         "relationship_constraint": [
             "dislikes"
         ],
+        "main_trait_constraint": [
+            "vengeful"
+        ],
         "random_living_status": [
             "living"
         ]
@@ -1046,5 +1054,25 @@
         "random_living_status": [
             "living"
         ]
-    }
+    },
+    {
+        "id": "gen_fixed",
+        "thoughts": [
+            "Shudders when {PRONOUN/m_c/subject} remembers the time that {PRONOUN/m_c/subject} went to the cutter",
+			"Feels a small pang of sadness when {PRONOUN/m_c/subject} remembers that {PRONOUN/m_c/subject} can't have kits of {PRONOUN/m_c/poss} own if {PRONOUN/m_c/subject} wanted to",
+			"Curses the Twolegs that forcibly took away {PRONOUN/m_c/poss} cathood",
+			"Thinks about how the spot {PRONOUN/m_c/subject}'s grooming down there feels weird",
+			"Feels more laid-back today than usual",
+			"Feels a little insecure about {PRONOUN/m_c/poss} lack of cathood",
+			"Wonders if {PRONOUN/m_c/subject}'ll ever be as strong as {PRONOUN/m_c/subject} once were again",
+			"Wonders why the Twolegs had take {PRONOUN/m_c/poss} to the cutter",
+			"Knows that {PRONOUN/m_c/subject}'ll never have kits of {PRONOUN/m_c/poss} own"
+        ],
+        "perm_conditions": {
+            "m_c": [
+                "spayed",
+				"neutered"
+            ]
+        }
+	}
 ]
