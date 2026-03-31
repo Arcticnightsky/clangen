@@ -492,26 +492,21 @@ class Cat:
                     allow_tortie_instead = True
                 elif mother_has_orange and father_is_dark:
                     allow_tortie_instead = True
+                elif father_is_dark and mother_is_dark and mother.pelt.name not in ["Tortie", "Calico"]:
+                    # preventing ginger she-cats from being birthed by 2 non-ginger pelted parents, because yes, this has happened before...
+                    self.pelt.colour = mother.pelt.colour
+                    return
 
             if not allow_female_ginger:
                 if allow_tortie_instead:
                     # Tortie construction time!
                     self.pelt.name = "Tortie"
-                    if self.pelt.name == "Calico" and mother.pelt.white_patches in (
-                        list(Pelt.high_white)
-                        + list(Pelt.mostly_white)
-                        + ["FULLWHITE"]
-                    ) or father.pelt.white_patches in (
+                    if self.pelt.white_patches in (
                         list(Pelt.high_white)
                         + list(Pelt.mostly_white)
                         + ["FULLWHITE"]
                     ):
                         self.pelt.name = "Calico"
-                        self.pelt.white_patches = choice(
-                            list(Pelt.high_white)
-                            + list(Pelt.mostly_white)
-                            + ["FULLWHITE"]
-                        )
                             
                     #  assigning the base color
                     if mother_is_dark:
@@ -664,26 +659,21 @@ class Cat:
                     allow_tortie_instead = True
                 elif mother_has_orange and father_is_dark:
                     allow_tortie_instead = True
+                elif father_is_ginger and mother_has_orange and mother.pelt.name not in ["Tortie", "Calico"]:
+                    # preventing dark she-cats from being birthed by 2 ginger pelted parents, because yes, this has happened before...
+                    self.pelt.colour = mother.pelt.colour
+                    return
             
             if not allow_female_dark:
                 if allow_tortie_instead:
                     # Tortie construction time!
                     self.pelt.name = "Tortie"
-                    if self.pelt.name == "Calico" and mother.pelt.white_patches in (
-                        list(Pelt.high_white)
-                        + list(Pelt.mostly_white)
-                        + ["FULLWHITE"]
-                    ) or father.pelt.white_patches in (
+                    if self.pelt.white_patches in (
                         list(Pelt.high_white)
                         + list(Pelt.mostly_white)
                         + ["FULLWHITE"]
                     ):
                         self.pelt.name = "Calico"
-                        self.pelt.white_patches = choice(
-                            list(Pelt.high_white)
-                            + list(Pelt.mostly_white)
-                            + ["FULLWHITE"]
-                        )
                     
                     #  assigning the base color
                     if mother_is_dark:
