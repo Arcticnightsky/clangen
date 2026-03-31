@@ -1184,7 +1184,7 @@
   },
   {
     "interaction_type": "invite",
-    "event_text": "c_n finds m_c and invites {PRONOUN/m_c/object} to join the Clan. Hesitantly, m_c declines - {PRONOUN/m_c/subject} doesn't want to leave {PRONOUN/m_c/poss} Twolegs and make them upset by leaving them.",
+    "event_text": "c_n finds m_c and invites {PRONOUN/m_c/object} to join the Clan. Hesitantly, m_c declines — {PRONOUN/m_c/subject} doesn't want to leave {PRONOUN/m_c/poss} Twolegs and make them upset by leaving them.",
     "reputation": ["welcoming", "neutral"],
     "rep_change": 0,
     "m_c": {
