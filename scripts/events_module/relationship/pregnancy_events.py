@@ -558,16 +558,16 @@ class Pregnancy_Events:
             breakup_text = event_text_adjust(
                 Cat,
                 breakup_text,
-                main_cat=cheating_cat,
-                random_cat=mate_cat,
+                main_cat=mate_cat,
+                random_cat=cheating_cat,
                 clan=game.clan,
             )
             game.cur_events_list.append(
                 Single_Event(
                     breakup_text,
                     ["relation"],
-                    [cheating_cat.ID, mate_cat.ID],
-                    cat_dict={"m_c": cheating_cat, "r_c": mate_cat},
+                    [mate_cat.ID, cheating_cat.ID],
+                    cat_dict={"m_c": mate_cat, "r_c": cheating_cat},
                 )
             )
 
