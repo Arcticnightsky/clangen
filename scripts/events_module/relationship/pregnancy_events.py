@@ -511,67 +511,6 @@ class Pregnancy_Events:
         )
 
     @staticmethod
-    def get_first_mate(subject_cat: Cat, include_dead: bool = False):
-        for mate_id in subject_cat.mate:
-            mate = Cat.fetch_cat(mate_id)
-            if not mate:
-                continue
-            if include_dead or not mate.dead:
-                return mate
-        return None
-
-    @staticmethod
-    def should_claim_affair_kits(mate: Cat, pregnant_cat: Cat) -> bool:
-        """Determines if a mate chooses to claim kits after an affair birth."""
-        if not mate or mate.dead:
-            return False
-
-        rel = mate.relationships.get(pregnant_cat.ID)
-        romance = rel.romance if rel else 0
-
-        if romance >= 85:
-            claim_chance = 9
-        elif romance >= 65:
-            claim_chance = 6
-        elif romance >= 45:
-            claim_chance = 4
-        elif romance >= 25:
-            claim_chance = 2
-        else:
-            claim_chance = 1
-
-        return random.randint(1, 10) <= claim_chance
-
-    @staticmethod
-    def handle_affair_discovery_breakup(cheating_cat: Cat, mate_cat: Cat):
-        """Handles breakup event after an affair is discovered."""
-        if not cheating_cat or not mate_cat:
-            return
-        if cheating_cat.ID not in mate_cat.mate:
-            return
-
-        if random.random() <= 0.8:
-            mate_cat.unset_mate(cheating_cat, breakup=True, fight=True)
-            breakup_text = choice(
-                Pregnancy_Events.BREAKUP_STRINGS["affair_discovery"]
-            )
-            breakup_text = event_text_adjust(
-                Cat,
-                breakup_text,
-                main_cat=mate_cat,
-                random_cat=cheating_cat,
-                clan=game.clan,
-            )
-            game.cur_events_list.append(
-                Single_Event(
-                    breakup_text,
-                    ["relation"],
-                    [mate_cat.ID, cheating_cat.ID],
-                    cat_dict={"m_c": mate_cat, "r_c": cheating_cat},
-                )
-            )
-
-    @staticmethod
     def handle_two_moon_pregnant(cat: Cat, clan=game.clan):
         """Handles if the cat is two moons pregnant."""
 
@@ -599,16 +538,16 @@ class Pregnancy_Events:
             for mate_id in cat.mate
         )
         adoptive_parents = []
-        affair_mate = None
+        cheated_mate = None
         mate_claimed_kits = False
         if other_cat and cat.mate and other_cat.ID not in cat.mate:
-            affair_mate = Pregnancy_Events.get_first_mate(cat)
-            if affair_mate:
+            cheated_mate = Pregnancy_Events.get_first_mate(cat)
+            if cheated_mate:
                 mate_claimed_kits = Pregnancy_Events.should_claim_affair_kits(
-                    affair_mate, cat
+                    cheated_mate, cat
                 )
                 if mate_claimed_kits:
-                    adoptive_parents.append(affair_mate.ID)
+                    adoptive_parents.append(cheated_mate.ID)
 
         kits = Pregnancy_Events.get_kits(
             kits_amount, cat, other_cat, clan, adoptive_parents=adoptive_parents
@@ -689,10 +628,12 @@ class Pregnancy_Events:
             cat_dict["r_c"] = other_cat
             # TODO: this seems odd, outsider mates are also treated as dead?
             event_list.append(choice(events["birth"]["dead_mate"]))
+        # unmated birth event
         elif len(cat.mate) < 1 and len(other_cat.mate) < 1 and not other_cat.dead:
             involved_cats.append(other_cat.ID)
             cat_dict["r_c"] = other_cat
             event_list.append(choice(events["birth"]["both_unmated"]))
+        # affair birth event (same sex)
         elif len(cat.mate) > 0 and has_female_mate and other_cat.ID not in cat.mate:        
             involved_cats.append(other_cat.ID)
             cat_dict["r_c"] = other_cat
@@ -701,6 +642,7 @@ class Pregnancy_Events:
                 cat_dict["m_m"] = chosen_mate
                 involved_cats.append(chosen_mate.ID)
             event_list.append(choice(events["birth"]["affair_mated_samesex"]))
+        # affair birth event where the birthing cat had an affair
         elif len(cat.mate) > 0 and other_cat.ID not in cat.mate and not other_cat.dead:
             living_mate = Pregnancy_Events.get_first_mate(cat)
             dead_mate = Pregnancy_Events.get_first_mate(cat, include_dead=True)
@@ -714,6 +656,7 @@ class Pregnancy_Events:
                 cat_dict["m_m"] = dead_mate
                 involved_cats.append(dead_mate.ID)
                 event_list.append(choice(events["birth"]["affair_mated_dead_mate"]))
+        # affair birth event if the birthing cat had kits with a mated cat
         elif len(other_cat.mate) > 0 and cat.ID not in other_cat.mate and not other_cat.dead:        
             other_mate = Pregnancy_Events.get_first_mate(other_cat)
             if other_mate:
@@ -730,22 +673,22 @@ class Pregnancy_Events:
         if "r_m" in cat_dict:
             event_list = [event.replace("r_c's mate", "r_m") for event in event_list]
 
-        if affair_mate and other_cat and other_cat.ID not in cat.mate:
+        if cheated_mate and other_cat and other_cat.ID not in cat.mate:
             if mate_claimed_kits:
                 support_text = i18n.t(
-                    "conditions.pregnancy.affair_mate_claims_kits",
+                    "conditions.pregnancy.mate_claims_kits",
                     insert=insert,
                 )
             else:
                 support_text = i18n.t(
-                    "conditions.pregnancy.affair_mate_disowns_kits",
+                    "conditions.pregnancy.mate_disowns_kits",
                     insert=insert,
                 )
             support_text = event_text_adjust(
                 Cat,
                 support_text,
                 main_cat=cat,
-                random_cat=affair_mate,
+                random_cat=cheated_mate,
                 clan=game.clan,
             )
             event_list.append(support_text)
@@ -912,8 +855,8 @@ class Pregnancy_Events:
             )
         )
 
-        if affair_mate and not mate_claimed_kits:
-            Pregnancy_Events.handle_affair_discovery_breakup(cat, affair_mate)
+        if cheated_mate and not mate_claimed_kits:
+            Pregnancy_Events.handle_affair_discovery_breakup(cat, cheated_mate)
 
             if other_cat and other_cat.mate:
                 other_cat_mate = None
@@ -927,6 +870,68 @@ class Pregnancy_Events:
                     Pregnancy_Events.handle_affair_discovery_breakup(
                         other_cat, other_cat_mate
                     )
+
+    @staticmethod
+    def get_first_mate(subject_cat: Cat, include_dead: bool = False):
+        """ Gets the mate of the cheating cat for the events"""
+        for mate_id in subject_cat.mate:
+            mate = Cat.fetch_cat(mate_id)
+            if not mate:
+                continue
+            if include_dead or not mate.dead:
+                return mate
+        return None
+
+    @staticmethod
+    def should_claim_affair_kits(mate: Cat, pregnant_cat: Cat) -> bool:
+        """Determines if a mate chooses to claim kits after an affair birth."""
+        if not mate or mate.dead:
+            return False
+
+        rel = mate.relationships.get(pregnant_cat.ID)
+        romance = rel.romance if rel else 0
+
+        if romance >= 85:
+            claim_chance = 9
+        elif romance >= 65:
+            claim_chance = 6
+        elif romance >= 45:
+            claim_chance = 4
+        elif romance >= 25:
+            claim_chance = 2
+        else:
+            claim_chance = 1
+
+        return random.randint(1, 10) <= claim_chance
+
+    @staticmethod
+    def handle_affair_discovery_breakup(cheating_cat: Cat, mate_cat: Cat):
+        """Handles breakup event after an affair is discovered."""
+        if not cheating_cat or not mate_cat:
+            return
+        if cheating_cat.ID not in mate_cat.mate:
+            return
+
+        if random.random() <= 0.8:
+            mate_cat.unset_mate(cheating_cat, breakup=True, fight=True)
+            breakup_text = choice(
+                Pregnancy_Events.BREAKUP_STRINGS["affair_discovery_breakup"]
+            )
+            breakup_text = event_text_adjust(
+                Cat,
+                breakup_text,
+                main_cat=mate_cat,
+                random_cat=cheating_cat,
+                clan=game.clan,
+            )
+            game.cur_events_list.append(
+                Single_Event(
+                    breakup_text,
+                    ["relation"],
+                    [mate_cat.ID, cheating_cat.ID],
+                    cat_dict={"m_c": mate_cat, "r_c": cheating_cat},
+                )
+            )
     
     # ---------------------------------------------------------------------------- #
     #                          check if event is triggered                         #
