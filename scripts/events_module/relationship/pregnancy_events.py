@@ -1795,6 +1795,10 @@ class Pregnancy_Events:
             else: 
                 inverse_chance = int(inverse_chance * 2.3)
 
+        # CURRENT KIT COUNT
+        # increases inverse chance according to number of existing children (ex. 5 kids will multiply by 1.5)
+        inverse_chance += int(inverse_chance * len(first_parent.get_children()) * 0.1)
+
         # In real life, cats are most likely to have kits during the spring and summer months - known as "Kitten Season"
         if game.clan.current_season in ["Newleaf", "Greenleaf"]:
             inverse_chance = int(inverse_chance * 0.5)
