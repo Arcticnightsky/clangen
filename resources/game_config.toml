@@ -3,7 +3,7 @@
 lock_season = false
 
 # whether or not development tools are disabled
-dev_tools = false
+dev_tools = true
 
 # settings regarding relationship events, also called "interactions"
 [relationship]
@@ -11,7 +11,7 @@ dev_tools = false
   max_interaction = 4
 
   # sets the max amount of interactions a cat with a special role (leader, deputy, medicine cat, or mediator) can have each moon
-  max_interaction_special = 6
+  max_interaction_special = 8
 
   # sets the positive or negative effect that interactions will have on other cats based on personality compatibility
   compatibility_effect = 5
@@ -27,7 +27,7 @@ dev_tools = false
   chance_of_special_group = 9
 
   # base 1/chance of a romance interaction with another cat, when a cat has a mate
-  chance_romance_not_mate = 15
+  chance_romance_not_mate = 100
 
   # how much an event with a condition can influence the relationship
   # NOTE: doesn't currently do anything
@@ -44,22 +44,22 @@ dev_tools = false
     # For example, extreme_neg ends at -70, making its full range -100 to -70. mid_neg starts from -69 and continues till -25.
     # NOTE: increasing extreme_pos past 100 or decreasing extreme_neg below -100 will probably break things
       extreme_neg = -70
-      mid_neg = -25
-      low_neg = -6
+      mid_neg = -35
+      low_neg = -10
       neutral = 5
-      low_pos = 24
-      mid_pos = 69
-      extreme_pos = 100
+      low_pos = 10
+      mid_pos = 35
+      extreme_pos = 70
 
 [mates]
   # maximum age difference allowed for cats to be romantic with each other
-  age_range = 40
+  age_range = 24
 
   # if true, disables the same-age group check
-  override_same_age_group = false
+  override_same_age_group = true
 
   # 1/chance of becoming mates when the conditions are fulfilled
-  chance_fulfilled_condition = 5
+  chance_fulfilled_condition = 4
 
   # 1/chance of becoming mates, triggers with friends_to_lover (has to be a high number because many relationships are checked each moon)
   chance_friends_to_lovers = 170
@@ -125,7 +125,7 @@ dev_tools = false
 
   # these denote how relationships change upon a breakup
   [mates.breakup]
-    threshold = 120
+    threshold = 175
     variability = [-10, 10]
     [mates.breakup.default_weights]
       had_fight = 3
@@ -228,14 +228,17 @@ dev_tools = false
   primary_chance_mated = 80
 
   # 1/chance that kits, relationship and other factors will influence this chance
-  primary_chance_unmated = 130
+  primary_chance_unmated = 135
 
   # 1/chance that a mated cat has an affair
-  random_affair_chance = 50
+  random_affair_chance = 100
 
   # 1/chance for an unmated cat to have an affair (coparenting)
   # for this check, only other unmated cats can be the affair partner
-  unmated_random_affair_chance = 10
+  unmated_random_affair_chance = 200
+
+  # base chance for same-sex mates to adopt random kittens
+  primary_chance_same_sex_adoption = 500
 
   # The kit number is incremental. It is 1-6 as default so if you change these numbers, you should probably keep this in mind.
   # As in, your max kits number should probably be 5 more than the min kits number.
@@ -245,59 +248,59 @@ dev_tools = false
 
   # number / total for that age across all kit amounts = chance of having that many kits for that age
   [pregnancy.one_kit_possibility]
-    "young adult" = 8
-    adult = 9
-    "senior adult" = 10
-    senior = 4
+    "young adult" = 2
+    "adult" = 2
+    "senior adult" = 5
+    "senior" = 7
 
   [pregnancy.two_kit_possibility]
-    "young adult" = 10
-    adult = 13
-    "senior adult" = 15
-    senior = 3
+    "young adult" = 6
+    "adult" = 6
+    "senior adult" = 10
+    "senior" = 5
 
   [pregnancy.three_kit_possibility]
-    "young adult" = 17
-    adult = 15
-    "senior adult" = 5
-    senior = 1
+    "young adult" = 14
+    "adult" = 16
+    "senior adult" = 6
+    "senior" = 2
 
   [pregnancy.four_kit_possibility]
-    "young adult" = 12
-    adult = 8
-    "senior adult" = 2
-    senior = 0
+    "young adult" = 16
+    "adult" = 14
+    "senior adult" = 3
+    "senior" = 1
 
   [pregnancy.five_kit_possibility]
-    "young adult" = 6
-    adult = 2
-    "senior adult" = 0
-    senior = 0
+    "young adult" = 8
+    "adult" = 6
+    "senior adult" = 1
+    "senior" = 0
 
   [pregnancy.max_kit_possibility]
-    "young adult" = 2
-    adult = 0
+    "young adult" = 3
+    "adult" = 2
     "senior adult" = 0
-    senior = 0
+    "senior" = 0
 
 [cat_generation]
   # base 1/chance that a cat will generate with a permanent condition. gets modified further in code
   base_permanent_condition = 90
 
   # 1/2^(chance - 1) that a male cat will be a tortie
-  base_male_tortie = 13
+  base_male_tortie = 3000
 
   # 1/2^(chance/2) that a female cat will be a tortie
   base_female_tortie = 4
 
   # base 1/(chance + 1) that a cat will have heterochromia. gets modified further in code
-  base_heterochromia = 120
+  base_heterochromia = 170
 
   # 1/(chance + 1) for a cat to have same pelt as one of their parents
-  direct_inheritance = 15
+  direct_inheritance = 1
 
   # 1/2^(chance) that a cat will be a wildcard tortie
-  wildcard_tortie = 9
+  wildcard_tortie = 90000
 
   # base 1/2^(chance) that a cat will have vitiligo
   vit_chance = 8
@@ -311,12 +314,12 @@ dev_tools = false
   always_name_after_appearance = false
 
   # allows cats to be named after the color of their eyes
-  allow_eye_names = true
+  allow_eye_names = false
 
   # determines which list outsiders pull from: silly_names, human_names, loner_names, or normal_prefixes
   # number / total for each control
 
-  kittypet = [30, 50, 10, 10]
+  kittypet = [35, 50, 20, 5]
   loner = [5, 15, 50, 30]
   rogue = [3, 7, 35, 55]
 
@@ -351,17 +354,17 @@ dev_tools = false
 
 [transition_related]
   # base 1/chance that a cat will trans their gender
-  base_trans_chance = 256
+  base_trans_chance = 100000000000000000000000000000000000000000000000000000000000000000000000000
 
   # modifiers for transitioning add or subtract from chance IN THE DENOMINATOR 
   #   i.e. 1/(chance + adolescent_modifier + older_modifier)
   # so SUBTRACTING will INCREASE the chance a cat transitions
 
-  # modifies transition chance based on if cat is a kitten or adolescent
-  adolescent_modifier = -128
+  # modifies transition chance based on if cat is an adolescent
+  adolescent_modifier = 0
 
   # modifies transition chance based on if cat is an adult or older
-  older_modifier = 256
+  older_modifier = 0
 
 [fading]
   # age that a cat will complete fading
@@ -375,10 +378,10 @@ dev_tools = false
 
 [roles]
   # base 1/chance that a cat will be chosen as a mediator apprentice
-  mediator_app_chance = 50
+  mediator_app_chance = 5000
 
   # base 1/chance that a cat will be chosen as a med cat apprentice
-  base_medicine_app_chance = 41
+  base_medicine_app_chance = 125
 
 [roles."medicine cat apprentice"]
   # maximum number of medicine cat apprentices to full medicine cats (e.g. 4 adult medcats can have 2 apps total)
@@ -400,7 +403,7 @@ dev_tools = false
 
 [lost_cat]
   # 1/chance that a lost cat will return on their own
-  rejoin_chance = 20
+  rejoin_chance = 6
 
 [cat_ages]
   # represents ranges for cat ages
@@ -427,7 +430,7 @@ dev_tools = false
   # the Cruel Season difficulty modifier needs to have a space rather than an underscore 
   # due to how it's written in the save files. So don't try to 'fix' it.
   classic_difficulty_modifier = 1
-  expanded_difficulty_modifier = 2.5
+  expanded_difficulty_modifier = 2
   "cruel season_difficulty_modifier" = 3
 
   # amount to modify patrol success based on patrol stats
@@ -459,18 +462,18 @@ dev_tools = false
   debug_type_override = ""
 
   # forces specified event to occur regardless of if requirements are met
-  debug_override_requirements = false
+  debug_override_requirements = ""
 
   # forces the given frequency, frequency can be a number from 1-4
   debug_override_frequency = 0
 
 [death_related]
   # base 1/chance that leader will die
-  leader_death_chance = 50
+  leader_death_chance = 10
 
   # base 1/chance a cat will die
-  classic_death_chance = 500
-  expanded_death_chance = 350
+  classic_death_chance = 850
+  expanded_death_chance = 750
   "cruel season_death_chance" = 300
 
   # modifiers for death chance based on if a war is going badly
@@ -480,10 +483,10 @@ dev_tools = false
 
   # base 1/2^(chance) a completely random murder occurs
   # aggression and instability will make the denominator lower and increase chance of murder
-  base_random_murder_chance = 25
+  base_random_murder_chance = 550
 
   # base 1/chance a disliked cat will be murdered
-  base_murder_kill_chance = 80
+  base_murder_kill_chance = 180
 
   # age cats will start dying of old age based on old_age_death_curve
   old_age_death_start = 150
@@ -495,17 +498,17 @@ dev_tools = false
 
 [condition_related]
   # 10/chance an illness will occur
-  expanded_illness_chance = 250
+  expanded_illness_chance = 550
   "cruel season_illness_chance" = 200
-  classic_illness_chance = 500
+  classic_illness_chance = 700
 
   # 5/chance (for most personalities) or 15/chance (for some personalities) an injury will occur 
-  classic_injury_chance = 450
-  expanded_injury_chance = 250
+  classic_injury_chance = 600
+  expanded_injury_chance = 450
   "cruel season_injury_chance" = 150
 
   # 1/chance a cat will get a permanent condition from an event with that possibility 
-  permanent_condition_chance = 15
+  permanent_condition_chance = 20
 
   # modifiers for injury chance based on if a war is going badly
   # SUBTRACTS from the denominator so higher = more likely to get injured
@@ -513,7 +516,7 @@ dev_tools = false
 
 [clan_creation]
   # Set this to -1 for it to be infinite
-  rerolls = 3
+  rerolls = -1
 
 [graduation]
   # base possible experience gain for apprentices
@@ -549,8 +552,8 @@ dev_tools = false
 
   [focus.hunting]
     # Defines how much a working warrior(leader/deputy) or apprentice gathers additionally
-    warrior = 2
-    apprentice = 1
+    warrior = 4
+    apprentice = 3
 
   [focus.outsiders]
     # Defines how much increase or decrease the reputation is.
@@ -593,10 +596,10 @@ dev_tools = false
 
   [focus.hoarding]
     # how much prey each working warrior(leader/deputy) will gather
-    prey_warrior = 1
+    prey_warrior = 5
 
     # how much herb each working medicine cat will gather
-    herb_medicine = 2
+    herb_medicine = 5
 
     # injury chance of each warrior(leader/deputy) or medicine cat to get injured
     injury_chance_warrior = 25
@@ -706,13 +709,17 @@ dev_tools = false
     primary_clever = 3
     secondary_clever = 2
 
+    # quantity of herbs modifier for medcats with skill HUNTER
+    primary_hunter = 3
+    secondary_hunter = 2
+    
     # base effects for herbs that have specified effects
     base_mortality_effect = 3
     base_duration_effect = 1
     base_risk_effect = 3
 
     # herb bonus applied when cats should gather a boosted number of herbs
-    general_amount_bonus = 2
+    general_amount_bonus = 4
 
     # adjust weights for finding [1 herb type, 2 herb types, 3 herb types] for each season
     [clan_resources.herbs.forest]
