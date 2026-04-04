@@ -912,7 +912,7 @@ class PatrolOutcome:
                 if "unknown" in attribute_list:
                     continue
                 if cat.dead:
-                    outside.append(self._profile_link(cat))
+                    dead.append(self._profile_link(cat))
                 elif cat.status.is_outsider or cat.status.is_other_clancat:
                     outside.append(self._profile_link(cat))
                 else:
