@@ -972,6 +972,36 @@ def handle_lost_cats_return(predetermined_cat_IDs: list = None):
                 # stop after first valid reunion
                 break
 
+    for cat_ID in cat_IDs:
+        returned_cat = Cat.fetch_cat(cat_ID)
+        if not returned_cat:
+            continue
+
+        sterilized_condition = returned_cat.get_sterilization_condition_name()
+        had_lost_standing_with_clan = CatStanding.LOST in returned_cat.status.get_standing_with_group(
+            CatGroup.PLAYER_CLAN_ID
+        )
+        if (
+            returned_cat.status.alive_in_player_clan
+            and had_lost_standing_with_clan
+            and sterilized_condition in returned_cat.permanent_condition
+        ):
+            if (
+                "RIGHTEAR" not in returned_cat.pelt.scars
+            ):
+                returned_cat.pelt.scars = (*returned_cat.pelt.scars, "RIGHTEAR")
+                returned_cat.permanent_condition.pop("partial hearing loss", None)
+            returned_cat.tnr_victim = False
+            tale_text = event_text_adjust(
+                Cat,
+                i18n.t(f"hardcoded.event_tnr_return{random.choice(range(1,4))}"),
+                main_cat=returned_cat,
+                clan=game.clan,
+            )
+            game.cur_events_list.append(
+                Single_Event(tale_text, ["misc", "health"], [returned_cat.ID])
+            )
+
     # Perform a ceremony if needed
     for cat_ID in cat_IDs:
         x = Cat.fetch_cat(cat_ID)
@@ -2212,12 +2242,17 @@ def handle_injuries_or_general_death(cat):
 
         return True
 
+    sterilized = any(cond in cat.permanent_condition for cond in ("neutered", "spayed"))
+    max_old_age = 324 if sterilized else 300
+
     # chance to die of old age
     age_start = constants.CONFIG["death_related"]["old_age_death_start"]
     death_curve_setting = constants.CONFIG["death_related"]["old_age_death_curve"]
     death_curve_value = 0.001 * death_curve_setting
     # made old_age_death_chance into a separate value to make testing with print statements easier
     old_age_death_chance = ((1 + death_curve_value) ** (cat.moons - age_start)) - 1
+    if sterilized:
+        old_age_death_chance *= 0.7
     if random.random() <= old_age_death_chance:
         create_short_event(
             event_type="birth_death",
@@ -2225,8 +2260,8 @@ def handle_injuries_or_general_death(cat):
             sub_type=["old_age"],
         )
         return True
-    # max age has been indicated to be 300, so if a cat reaches that age, they die of old age
-    elif cat.moons >= 300:
+    # max age has been indicated to be 300, but sterilized cats can live a bit longer
+    elif cat.moons >= max_old_age:
         create_short_event(
             event_type="birth_death",
             main_cat=cat,
