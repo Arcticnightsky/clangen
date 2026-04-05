@@ -580,7 +580,9 @@ def handle_lead_den_event():
 
             # this handles ceremonies for cats coming into the clan
             if invited_cats:
-                handle_lost_cats_return(invited_cats)
+                tnr_return_text = handle_lost_cats_return(invited_cats)
+                if tnr_return_text:
+                    event_text += f" {tnr_return_text}"
 
         # give new thought to cats
         if "new_thought" in cat_dict:
@@ -866,6 +868,7 @@ def handle_lost_cats_return(predetermined_cat_IDs: list = None):
     TODO: DOCS
     """
     cat_IDs = []
+    tnr_return_texts = []
     if predetermined_cat_IDs:
         cat_IDs = predetermined_cat_IDs
 
@@ -877,11 +880,11 @@ def handle_lost_cats_return(predetermined_cat_IDs: list = None):
         ]
 
         if not eligible_cats:
-            return
+            return ""
 
         lost_cat = random.choice(eligible_cats)
         if lost_cat.age in (CatAge.NEWBORN, CatAge.KITTEN):
-            return
+            return ""
 
         cat_IDs.append(lost_cat.ID)
 
@@ -994,9 +997,12 @@ def handle_lost_cats_return(predetermined_cat_IDs: list = None):
                 main_cat=returned_cat,
                 clan=game.clan,
             )
-            game.cur_events_list.append(
-                Single_Event(tale_text, ["misc", "health"], [returned_cat.ID])
-            )
+            if predetermined_cat_IDs:
+                tnr_return_texts.append(tale_text)
+            else:
+                game.cur_events_list.append(
+                    Single_Event(tale_text, ["misc", "health"], [returned_cat.ID])
+                )
 
     # Perform a ceremony if needed
     for cat_ID in cat_IDs:
@@ -1017,6 +1023,8 @@ def handle_lost_cats_return(predetermined_cat_IDs: list = None):
                     ceremony(x, CatRank.WARRIOR)
             elif not x.status.rank.is_any_apprentice_rank() and x.moons >= 6:
                 ceremony(x, CatRank.APPRENTICE)
+
+    return " ".join(tnr_return_texts)
 
 
 def handle_fading(cat):
