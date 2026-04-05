@@ -173,8 +173,7 @@ class Cat:
 
         self._history = None
 
-        if disable_random is not None:
-            Cat.disable_random = disable_random
+        Cat.disable_random = bool(disable_random)
 
         if (
             faded
@@ -493,26 +492,21 @@ class Cat:
                     allow_tortie_instead = True
                 elif mother_has_orange and father_is_dark:
                     allow_tortie_instead = True
+                elif father_is_dark and mother_is_dark and mother.pelt.name not in ["Tortie", "Calico"]:
+                    # preventing ginger she-cats from being birthed by 2 non-ginger pelted parents, because yes, this has happened before...
+                    self.pelt.colour = mother.pelt.colour
+                    return
 
             if not allow_female_ginger:
                 if allow_tortie_instead:
                     # Tortie construction time!
                     self.pelt.name = "Tortie"
-                    if self.pelt.name == "Calico" and mother.pelt.white_patches in (
-                        list(Pelt.high_white)
-                        + list(Pelt.mostly_white)
-                        + ["FULLWHITE"]
-                    ) or father.pelt.white_patches in (
+                    if self.pelt.white_patches in (
                         list(Pelt.high_white)
                         + list(Pelt.mostly_white)
                         + ["FULLWHITE"]
                     ):
                         self.pelt.name = "Calico"
-                        self.pelt.white_patches = choice(
-                            list(Pelt.high_white)
-                            + list(Pelt.mostly_white)
-                            + ["FULLWHITE"]
-                        )
                             
                     #  assigning the base color
                     if mother_is_dark:
@@ -665,26 +659,21 @@ class Cat:
                     allow_tortie_instead = True
                 elif mother_has_orange and father_is_dark:
                     allow_tortie_instead = True
+                elif father_is_ginger and mother_has_orange and mother.pelt.name not in ["Tortie", "Calico"]:
+                    # preventing dark she-cats from being birthed by 2 ginger pelted parents, because yes, this has happened before...
+                    self.pelt.colour = mother.pelt.colour
+                    return
             
             if not allow_female_dark:
                 if allow_tortie_instead:
                     # Tortie construction time!
                     self.pelt.name = "Tortie"
-                    if self.pelt.name == "Calico" and mother.pelt.white_patches in (
-                        list(Pelt.high_white)
-                        + list(Pelt.mostly_white)
-                        + ["FULLWHITE"]
-                    ) or father.pelt.white_patches in (
+                    if self.pelt.white_patches in (
                         list(Pelt.high_white)
                         + list(Pelt.mostly_white)
                         + ["FULLWHITE"]
                     ):
                         self.pelt.name = "Calico"
-                        self.pelt.white_patches = choice(
-                            list(Pelt.high_white)
-                            + list(Pelt.mostly_white)
-                            + ["FULLWHITE"]
-                        )
                     
                     #  assigning the base color
                     if mother_is_dark:
@@ -1079,7 +1068,7 @@ class Cat:
                     high_types.extend(rel_type)
                 elif tier.is_extreme_neg:
                     very_low_types.extend(rel_type)
-                elif tier.is_mid_neg and randint(1, 4) == 1:
+                elif tier.is_mid_neg and randint(1, 6) == 1:
                     very_low_types.extend(rel_type)
                 continue
 
@@ -1088,7 +1077,12 @@ class Cat:
                 # major grief eligible cats.
 
                 major_chance = 3
+                # the less stable the cat, the more likely to grieve
                 if cat.personality.stability < 5:
+                    major_chance -= 1
+
+                # if considered family, grief more likely
+                if family_relation != "general":
                     major_chance -= 1
 
                 # decrease major grief chance if grave herbs are used
@@ -1129,7 +1123,7 @@ class Cat:
                 cat.get_ill("grief stricken", event_triggered=True, severity="major")
 
             # If major grief fails, but there are still very_high or high values,
-            # it can fail to minor grief. If they have a family relation, bypass the roll.
+            # it can fail to minor grief. If they have a family relation, bypass the roll and guarantee it
             elif (very_high_types or high_types) and (
                 family_relation != "general" or not int(random() * 5)
             ):
@@ -1184,6 +1178,8 @@ class Cat:
             return "parent"
         elif dead_cat.is_sibling(living_cat):
             return "sibling"
+        elif dead_cat.ID in living_cat.mate:
+            return "mate"
         else:
             return "general"
 
@@ -2537,11 +2533,18 @@ class Cat:
             return
 
         # AVMA recommendation is by 5 months for non-breeding cats.
+        # Use weighted ranges so older outsiders are more likely to have been
+        # sterilized for most of their life instead of only recently.
         if social_group == CatSocial.KITTYPET:
-            fix_age = randint(5, self.moons - 1)
+            latest_typical_fix = min(self.moons - 1, max(6, int(self.moons * 0.45)))
+            fix_age = int(random_module.triangular(5, latest_typical_fix, 7))
         elif social_group == CatSocial.LONER:
-            min_age = min(self.moons - 1, max(10, int(self.moons * 0.5)))
-            fix_age = randint(min_age, self.moons - 1)
+            earliest_fix = min(self.moons - 1, max(8, int(self.moons * 0.2)))
+            latest_typical_fix = min(self.moons - 1, max(earliest_fix, int(self.moons * 0.6)))
+            mode_fix = min(latest_typical_fix, max(earliest_fix, int(self.moons * 0.35)))
+            fix_age = int(
+                random_module.triangular(earliest_fix, latest_typical_fix, mode_fix)
+            )
         else:
             fix_age = randint(5, self.moons - 1)
 
@@ -3197,20 +3200,47 @@ class Cat:
 
                         # converting old saves
                         if "platonic_like" in rel:
+                            old_rel = rel.copy()
+                            rel = {}
+                            rel["log"] = old_rel["log"]
+                            rel["mates"] = old_rel["mates"]
+                            rel["family"] = old_rel["family"]
+                            rel["cat_to_id"] = old_rel["cat_to_id"]
+
                             # romance
-                            rel["romance"] = rel["romantic_love"]
-                            rel.pop("romantic_love")
-                            # like
-                            rel["like"] = rel["platonic_like"] - rel["dislike"]
-                            rel.pop("platonic_like")
-                            rel.pop("dislike")
-                            # respect
-                            rel["respect"] = rel["admiration"] - rel["jealousy"]
-                            rel.pop("admiration")
-                            rel.pop("jealousy")
-                            # comfort
-                            rel["comfort"] = rel["comfortable"]
-                            rel.pop("comfortable")
+                            rel["romance"] = old_rel["romantic_love"]
+
+                            # attempts to convert "complex" relationships by
+                            #   using the "negative" value for the lower of
+                            #   platonic_like/comfort and trust/admiration.
+                            # if the relationship isn't complex
+                            #   (<= 5 for negative values; this is an arbitrary value),
+                            #   then it just takes the value without considering the negative.
+                            if old_rel["platonic_like"] > old_rel["comfortable"]:
+                                rel["like"] = old_rel["platonic_like"]
+                                if old_rel["dislike"] <= 5:
+                                    rel["comfort"] = old_rel["comfortable"]
+                                else:
+                                    rel["comfort"] = -old_rel["dislike"]
+                            else:  # old_rel["platonic_like"] < old_rel["comfort"]
+                                rel["comfort"] = old_rel["comfortable"]
+                                if old_rel["dislike"] <= 5:
+                                    rel["like"] = old_rel["platonic_like"]
+                                else:
+                                    rel["like"] = -old_rel["dislike"]
+
+                            if old_rel["trust"] > old_rel["admiration"]:
+                                rel["trust"] = old_rel["trust"]
+                                if old_rel["jealousy"] <= 5:
+                                    rel["respect"] = old_rel["admiration"]
+                                else:
+                                    rel["respect"] = -old_rel["jealousy"]
+                            else:  # old_rel["trust"] < old_rel["admiration"]
+                                rel["respect"] = old_rel["admiration"]
+                                if old_rel["jealousy"] <= 5:
+                                    rel["trust"] = old_rel["trust"]
+                                else:
+                                    rel["trust"] = -old_rel["jealousy"]
 
                         # create relationship
                         new_rel = Relationship(
@@ -3606,6 +3636,11 @@ class Cat:
 
     @experience.setter
     def experience(self, exp: int):
+        # Old or externally edited saves may contain a null experience value.
+        # Treat that as 0 so loading doesn't crash.
+        if exp is None:
+            exp = 0
+
         exp = min(exp, self.experience_levels_range["master"][1])
         self._experience = int(exp)
 
@@ -3801,7 +3836,6 @@ class Cat:
                 "scars": self.pelt.scars or [],
                 "accessory": self.pelt.accessory,
                 "experience": self.experience,
-                "dead_moons": self.dead_for,
                 "current_apprentice": list(self.apprentice),
                 "former_apprentices": list(self.former_apprentices),
                 "faded_offspring": self.faded_offspring,

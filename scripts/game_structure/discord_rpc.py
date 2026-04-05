@@ -11,8 +11,6 @@ import asyncio
 import threading
 from time import time
 
-from scripts.cat.cats import Cat
-
 from scripts.game_structure.game.settings import game_setting_get
 from scripts.game_structure.game.switches import switch_get_value, Switch
 from scripts.game_structure import game
@@ -28,17 +26,6 @@ status_dict = {
     GameScreen.MED_DEN: "In the medicine den",
 }
 
-camp_bg_aliases = {
-    "1": "camp1",
-    "2": "camp2",
-    "3": "camp3",
-    "4": "camp4",
-    "lake": "camp4",
-    "lakeside": "camp4",
-    "fjord": "camp4",
-    "ruins": "camp4",
-}
-
 
 class _DiscordRPC(threading.Thread):
     def __init__(self, client_id: str, daemon: bool):
@@ -46,7 +33,7 @@ class _DiscordRPC(threading.Thread):
         self._rpc = None
         self._client_id = client_id
         self._connected = False
-        self._start_time = int(time())
+        self._start_time = round(time() * 1000)
         self._rpc_supported = False
         self._event_loop = asyncio.new_event_loop()
 
@@ -57,10 +44,9 @@ class _DiscordRPC(threading.Thread):
     def run(self):
         self.start_rpc.wait()
         self.get_rpc()
+        self.connect()
         while not self.close_rpc.is_set():
-            self.update_rpc.wait(1)
-            if self.close_rpc.is_set():
-                break
+            self.update_rpc.wait()
             self.update()
         self.close()
 
@@ -75,7 +61,7 @@ class _DiscordRPC(threading.Thread):
             print("Discord RPC is supported")
         except ImportError:
             print("Pypresence not installed, Discord RPC isn't supported.")
-            print("To enable rpc, run 'pip install pypresence' in your terminal.")
+            print("To enable rpc, run 'uv add pypresence' in your terminal.")
             return
         # Check if Discord is running.
         try:
@@ -110,15 +96,25 @@ class _DiscordRPC(threading.Thread):
             except KeyError:
                 state_text = "Leading the Clan"
 
-            img_str, img_text = self._get_image_string()
+            try:
+                img_str = (
+                    f"{game.clan.biome}_{game.clan.current_season.replace('-', '')}_"
+                    f"{game.clan.camp_bg}_{'dark' if game_setting_get('dark mode') else 'light'}"
+                )
+                img_text = game.clan.biome
+            except AttributeError:
+                print(
+                    "Failed to get image string, game may not be fully loaded yet. "
+                    "Don't worry, it will fix itself. Hopefully."
+                )
+                img_str = "discord"  # fallback incase the game isn't loaded yet
+                img_text = "Clangen!!"
 
             # Example: beach_greenleaf_camp1_dark
 
             if game.clan:
                 clan_name = f"{game.clan.displayname}Clan"
-                cats_amount = sum(
-                    1 for cat in Cat.all_cats.values() if cat.status.alive_in_player_clan
-                )
+                cats_amount = len(game.clan.clan_cats)
                 clan_age = game.clan.age
             else:
                 clan_name = "Loading..."
@@ -127,11 +123,11 @@ class _DiscordRPC(threading.Thread):
             try:
                 self._rpc.update(
                     state=state_text,
-                    details=f"Managing {clan_name} for {clan_age} moons",
+                    details=f"{clan_name} ({clan_age} moons)",
                     large_image=img_str.lower(),
                     large_text=img_text,
                     small_image="discord",
-                    small_text=f"Managing {cats_amount} cats",
+                    small_text=f"{cats_amount} cats",
                     start=self._start_time,
                     buttons=[
                         {
@@ -147,41 +143,8 @@ class _DiscordRPC(threading.Thread):
                 self._rpc = None
         self.update_rpc.clear()
 
-    def _get_image_string(self):
-        clan = game.clan
-        if not clan:
-            return "discord", "Clangen!!"
-
-        biome = getattr(clan, "biome", None)
-        season = getattr(clan, "current_season", None)
-        camp_bg = getattr(clan, "camp_bg", None)
-
-        if not biome or not season or not camp_bg:
-            return "discord", "Clangen!!"
-
-        camp_str = str(camp_bg).casefold()
-        if not camp_str.startswith("camp"):
-            camp_str = camp_bg_aliases.get(camp_str, "camp1")
-
-        image_str = (
-            f"{biome}_{str(season).replace('-', '')}_{camp_str}_"
-            f"{'dark' if game_setting_get('dark mode') else 'light'}"
-        )
-
-        return image_str.casefold(), str(biome)
-
     def close(self):
-        if self._rpc:
-            try:
-                self._rpc.clear()
-            except BaseException:  # pylint: disable=broad-except
-                pass
-
-            try:
-                self._rpc.close()
-            except BaseException:  # pylint: disable=broad-except
-                pass
-
-        self._connected = False
-        self._rpc_supported = False
-        self._rpc = None
+        if self._connected:
+            self._rpc.clear()
+            self._rpc.close()
+            self._connected = False

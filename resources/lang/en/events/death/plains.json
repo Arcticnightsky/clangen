@@ -41,10 +41,27 @@
                 "cats": [
                     "m_c"
                 ],
-                "lead_death": "were mauled by a pack of coyotes while saving r_c and whole the Clan"
+                "lead_death": "m_c was mauled by a pack of coyotes while saving r_c and whole the Clan"
             }
         ],
         "relationships": [
+            {
+                "cats_from": [
+                    "clan"
+                ],
+                "cats_to": [
+                    "m_c"
+                ],
+                "mutual": false,
+                "values": [
+                    "respect",
+                    "trust"
+                ],
+                "amount": 20,
+                "log": {
+                    "cats_from": "cat_from heard about how cat_to lost most of {PRONOUN/cat_to/poss} lives while rescuing r_c and the rest of the Clan from coyotes."
+                }
+            },
             {
                 "cats_from": [
                     "r_c"
@@ -57,7 +74,10 @@
                     "respect",
                     "trust"
                 ],
-                "amount": 20
+                "amount": 50,
+                "log": {
+                    "cats_from": "cat_from honors cat_to for rescuing {PRONOUN/cat_fron/object} and the rest of c_n from coyotes."
+                }
             }
         ]
     }

@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 # -*- coding: ascii -*-
+from html import escape
 import random
 from os.path import exists as path_exists
 from random import choice, choices
@@ -23,7 +24,7 @@ from scripts.events_module.consequences import (
     gather_cat_objects,
     unpack_rel_block,
 )
-from scripts.events_module.event_filters import filter_relationship_type
+from scripts.events_module.event_filters import filter_relationship_type, event_for_cat
 from scripts.clan_package.cotc import change_clan_reputation, change_clan_relations
 from scripts.game_structure import game
 from scripts.cat.skills import SkillPath
@@ -47,6 +48,11 @@ class PatrolOutcome:
         Personality.trait_ranges["kit_traits"].keys()
     )
     NUM_OF_SKILLS = len(SkillPath)
+
+    @staticmethod
+    def _profile_link(cat: Cat) -> str:
+        """Create a UI hyperlink to a cat profile."""
+        return f'<a href="cat://{cat.ID}">{escape(str(cat.name))}</a>'
 
     def __init__(
         self,
@@ -280,7 +286,7 @@ class PatrolOutcome:
                 Cat, self.relationship_effects, patrol, stat_cat=self.stat_cat
             )
         )
-        if self.relationship_effects:
+        if self.relationship_effects and rel_results:
             results.append(i18n.t(f"screens.patrol.relationship_changed"))
 
         results.append(self._handle_rep_changes())
@@ -425,10 +431,13 @@ class PatrolOutcome:
 
         actual_stat_cats = []
         for kitty in possible_stat_cats:
-            if kitty.personality.trait in self.stat_trait:
-                actual_stat_cats.append(kitty)
-
-            if kitty.skills.check_skill_requirement_list(self.stat_skill):
+            if event_for_cat(
+                {
+                    "skill": self.stat_skill,
+                    "trait": self.stat_trait,
+                },
+                kitty,
+            ):
                 actual_stat_cats.append(kitty)
 
         if actual_stat_cats:
@@ -555,7 +564,7 @@ class PatrolOutcome:
                         )
                     )
             else:
-                catnames.append(str(_cat.name))
+                catnames.append(self._profile_link(_cat))
             # Kill Cat
             self.__handle_death_history(_cat, patrol)
             _cat.die(body)
@@ -597,7 +606,7 @@ class PatrolOutcome:
         return i18n.t(
             "screens.patrol.lost_cats",
             count=len(cats_to_lose),
-            cats=adjust_list_text([str(cat.name) for cat in cats_to_lose]),
+            cats=adjust_list_text([self._profile_link(cat) for cat in cats_to_lose]),
         )
 
     @staticmethod
@@ -694,7 +703,7 @@ class PatrolOutcome:
                     for given_condition in given_conditions:
                         self.__handle_condition_history(_cat, given_condition, patrol)
                     combined_conditions = ", ".join(given_conditions)
-                    results.append(f"{_cat.name} got: {combined_conditions}.")
+                    results.append(f"{self._profile_link(_cat)} got: {combined_conditions}.")
                 else:
                     # If no results are shown, assume the cat didn't get the patrol history. Default override.
                     self.__handle_condition_history(
@@ -903,11 +912,11 @@ class PatrolOutcome:
                 if "unknown" in attribute_list:
                     continue
                 if cat.dead:
-                    dead.append(str(cat.name))
+                    dead.append(self._profile_link(cat))
                 elif cat.status.is_outsider or cat.status.is_other_clancat:
-                    outside.append(str(cat.name))
+                    outside.append(self._profile_link(cat))
                 else:
-                    new.append(str(cat.name))
+                    new.append(self._profile_link(cat))
             for type_list, string in [
                 (dead, "screens.patrol.dead_outsider"),
                 (outside, "screens.patrol.met_outsider"),

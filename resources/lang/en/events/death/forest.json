@@ -165,7 +165,7 @@
                 "values": ["comfort"],
                 "amount": -10,
                 "log": {
-                    "cats_from": "from_cat was too slow to save to_cat from an owl."
+                    "cats_from": "cat_from was too slow to save cat_to from an owl."
                 }
             }
         ]
@@ -212,13 +212,13 @@
                 "cats": [
                     "m_c"
                 ],
-                "lead_death": "were mauled by a pack of wolves while saving r_c and whole the Clan"
+                "death": "m_c was mauled by a pack of wolves while saving r_c and whole the Clan"
             }
         ],
         "relationships": [
             {
                 "cats_from": [
-                    "c_n"
+                    "clan"
                 ],
                 "cats_to": [
                     "m_c"
@@ -228,7 +228,27 @@
                     "respect",
                     "trust"
                 ],
-                "amount": 20
+                "amount": 20,
+                "log": {
+                    "cats_from": "cat_from heard about how cat_to lost most of {PRONOUN/cat_to/poss} lives while rescuing r_c and the rest of the Clan from wolves."
+                }
+            },
+            {
+                "cats_from": [
+                    "r_c"
+                ],
+                "cats_to": [
+                    "m_c"
+                ],
+                "mutual": false,
+                "values": [
+                    "respect",
+                    "trust"
+                ],
+                "amount": 50,
+                "log": {
+                    "cats_from": "cat_from honors cat_to for rescuing {PRONOUN/cat_fron/object} and the rest of c_n from wolves."
+                }
             }
         ]
     }
