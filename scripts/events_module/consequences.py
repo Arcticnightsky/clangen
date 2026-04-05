@@ -35,6 +35,8 @@ def ensure_parent_is_not_sterilized(cat: Optional["Cat"]) -> None:
 
     if removed_condition:
         cat.no_kits = False
+        if hasattr(cat, "pelt") and hasattr(cat.pelt, "scars"):
+            cat.pelt.scars = tuple(scar for scar in cat.pelt.scars if scar != "RIGHTEAR")
 
 
 def create_new_cat_block(

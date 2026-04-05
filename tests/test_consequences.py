@@ -47,6 +47,7 @@ class TestEnsureParentIsNotSterilized(unittest.TestCase):
         parent = SimpleNamespace(
             permanent_condition={"spayed": {"severity": "minor"}, "blind": {}},
             no_kits=True,
+            pelt=SimpleNamespace(scars=("RIGHTEAR", "NOTAIL")),
         )
 
         ensure_parent_is_not_sterilized(parent)
@@ -54,6 +55,8 @@ class TestEnsureParentIsNotSterilized(unittest.TestCase):
         self.assertNotIn("spayed", parent.permanent_condition)
         self.assertIn("blind", parent.permanent_condition)
         self.assertFalse(parent.no_kits)
+        self.assertNotIn("RIGHTEAR", parent.pelt.scars)
+        self.assertIn("NOTAIL", parent.pelt.scars)
 
     def test_no_changes_when_parent_not_sterilized(self):
         parent = SimpleNamespace(permanent_condition={"blind": {}}, no_kits=True)
