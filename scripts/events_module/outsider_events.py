@@ -4,7 +4,8 @@ from typing import TYPE_CHECKING
 
 import i18n
 
-from scripts.cat.enums import CatGroup
+from scripts.game_structure import constants
+from scripts.cat.enums import CatGroup, CatSocial
 from scripts.clan_package.settings import get_clan_setting
 from scripts.event_class import Single_Event
 from scripts.game_structure import game
@@ -71,6 +72,41 @@ class OutsiderEvents:
                 death_history = i18n.t(
                     f"events.death.outsider_deaths.history.{cat.status.social.value}"
                 )
+            elif cat.moons >= 150 and not cat.dead and not (
+                cat.status.is_exiled(CatGroup.PLAYER_CLAN) or cat.status.is_lost()
+            ) and cat.status.is_outsider:
+
+                age_start = constants.CONFIG["death_related"]["old_age_death_start"]
+                death_curve_setting = constants.CONFIG["death_related"]["old_age_death_curve"]
+                death_curve_value = 0.001 * death_curve_setting
+                old_age_death_chance = ((1 + death_curve_value) ** (cat.moons - age_start)) - 1
+                sterilized = any(cond in cat.permanent_condition for cond in ("neutered", "spayed"))
+                if sterilized:
+                    old_age_death_chance *= 0.7
+                max_old_age = 324 if sterilized else 300
+
+                social = i18n.t(f"general.{cat.status.social}", count=1)
+
+                if random.random() <= old_age_death_chance:
+                    text = (
+                        f"Rumors reach your Clan that the {social}, "
+                        f"{cat.name}, has died recently."
+                    )
+                    death_history = "m_c died of old age."
+
+                elif cat.moons >= max_old_age:
+                    text = (
+                        f"Rumors reach your Clan that the {social}, "
+                        f"{cat.name}, has died recently."
+                    )
+                    death_history = "m_c died of old age."
+
+                else:
+                    text = (
+                        f"Rumors reach your Clan that the {social}, "
+                        f"{cat.name}, has died recently."
+                    )
+                    death_history = "m_c died while roaming around."
             else:
                 text = random.choice(deaths["default"])
 
