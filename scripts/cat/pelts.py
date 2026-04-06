@@ -1315,7 +1315,7 @@ def _describe_pattern(cat, short=False):
         if cat.pelt.white_patches == "FULLWHITE":
             # If the cat is fullwhite, discard all other information. They are just white
             color_name = i18n.t("cat.pelts.FULLWHITE")
-            pelt_name = "white"
+            pelt_name = f"cat.pelts.SingleColour_long"
         elif cat.pelt.name != "Calico":
             white = i18n.t("cat.pelts.FULLWHITE")
             if i18n.t("cat.pelts.WHITE", count=1) in color_name:
@@ -1381,16 +1381,14 @@ def _describe_torties(cat, color_name, short=False) -> (str, str):
     ):
         color_text = f"{color_text} mottled"
     else:
-        base = cat.pelt.tortie_base.lower()
-        if base in [tabby.lower() for tabby in Pelt.tabbies] + ["bengal", "rosette", "speckled"]:
-            if cat.pelt.name.lower() == "tortie":
-                color_text = f"{color_text} torbie"
-            elif cat.pelt.name.lower() == "calico":
-                color_text = f"{color_text} tabico"
-            else:
-                color_text = f"{color_text} {cat.pelt.name.lower()} tabby"
+        if base in tuple(tabby.lower() for tabby in Pelt.tabbies) + (
+            "bengal",
+            "rosette",
+            "speckled",
+        ):
+            base = f"cat.pelts.{cat.pelt.name}_tabby"
         else:
-            base = "cat.pelts.TwoColour_long"
+            base = f"cat.pelts.{cat.pelt.name}"
         return base, color_name
 
     return color_text, ""
