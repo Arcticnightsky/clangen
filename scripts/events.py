@@ -977,11 +977,14 @@ def handle_lost_cats_return(predetermined_cat_IDs: list = None):
 
     for cat_ID in cat_IDs:
         returned_cat = Cat.fetch_cat(cat_ID)
+        if returned_cat and returned_cat.pending_neuter:
+            # Mirror the normal moon-skip flow so Twoleg-abducted cats resolve
+            # their pending sterilization state before we build return text.
+            returned_cat.handle_pending_neuter()
         if (
             returned_cat
             and returned_cat.status.alive_in_player_clan
             and returned_cat.tnr_victim
-            and returned_cat.status.is_former_clancat
         ):
             sterilized_condition = returned_cat.get_sterilization_condition_name()
             if (
