@@ -11803,6 +11803,12 @@
                 "senior adult",
                 "senior"
             ],
+            "status": [
+                "apprentice",
+                "warrior",
+                "deputy",
+                "leader"
+            ],
             "skill": [
                 "HEALER,1"
             ]
@@ -11912,7 +11918,8 @@
             {
                 "type": "freshkill",
                 "trigger": [
-                    "low"
+                    "low",
+                    "adequate"
                 ],
                 "adjust": "increase_20"
             }

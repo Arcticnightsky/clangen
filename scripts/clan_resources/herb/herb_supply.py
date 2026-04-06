@@ -384,26 +384,30 @@ class HerbSupply:
         """
 
         # get herbs found
-        herb_list = []
+        gathered_herbs = defaultdict(int)
         for med in med_cats:
             if assistants:
-                list_of_herb_strs, found_herbs = game.clan.herb_supply.get_found_herbs(
+                _, found_herbs = game.clan.herb_supply.get_found_herbs(
                     med,
                     general_amount_bonus=True,
                     specific_quantity_bonus=2,
                 )
             else:
-                list_of_herb_strs, found_herbs = game.clan.herb_supply.get_found_herbs(
-                    med
-                )
-            herb_list.extend(found_herbs)
+                _, found_herbs = game.clan.herb_supply.get_found_herbs(med)
+            for herb, amount in found_herbs.items():
+                gathered_herbs[herb] += amount
 
-        # remove dupes
-        herb_list = list(set(herb_list))
-        # get display strings for herbs
+        # get display strings for herbs with quantity
         herb_strs = []
-        for herb in herb_list:
-            herb_strs.append(game.clan.herb_supply.herb[herb].plural_display)
+        for herb, amount in gathered_herbs.items():
+            if amount == 1:
+                herb_strs.append(
+                    f"{amount} {game.clan.herb_supply.herb[herb].singular_display}"
+                )
+            else:
+                herb_strs.append(
+                    f"{amount} {game.clan.herb_supply.herb[herb].plural_display}"
+                )
 
         herb_list = adjust_list_text(herb_strs)
 
