@@ -804,7 +804,7 @@ class Pregnancy_Events:
                     rel.like -= 40
                     rel.log.append(
                         process_text(
-                            i18n.t("pregnancy.affair_rel_log"),
+                            i18n.t("conditions.pregnancy.affair_rel_log"),
                             {
                                 "m_c": (str(mate.name), choice(mate.pronouns)),
                                 "r_c": (str(cat.name), choice(cat.pronouns)),
@@ -833,7 +833,7 @@ class Pregnancy_Events:
                     rel.like -= 40
                     rel.log.append(
                         process_text(
-                            i18n.t("pregnancy.affair_rel_log"),
+                            i18n.t("conditions.pregnancy.affair_rel_log"),
                             {
                                 "m_c": (str(mate.name), choice(mate.pronouns)),
                                 "r_c": (str(other_cat.name), choice(other_cat.pronouns)),
