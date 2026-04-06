@@ -1135,6 +1135,9 @@
       "status": [
         "any"
       ],
+      "skill": [
+        "-SWIMMER,2"
+      ],
       "trait": [
         "bold",
         "ambitious",
