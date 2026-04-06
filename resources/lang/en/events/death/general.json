@@ -1112,7 +1112,7 @@
       "any"
     ],
     "tags": [],
-    "frequency": 3,
+    "frequency": 2,
     "event_text": "m_c fell into the river. r_c drowned alongside m_c while trying to rescue {PRONOUN/m_c/object}.",
     "m_c": {
       "age": [
@@ -1120,6 +1120,9 @@
       ],
       "status": [
         "any"
+      ],
+      "skill": [
+        "-SWIMMER,2"
       ],
       "dies": true
     },
@@ -1142,6 +1145,9 @@
         "loyal",
         "loving",
         "responsible"
+      ],
+      "skill": [
+        "-SWIMMER,2"
       ],
       "dies": true
     },
