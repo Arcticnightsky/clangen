@@ -1345,6 +1345,7 @@ def _describe_torties(cat, color_name, short=False) -> (str, str):
             base_color = ""
     else:
         base_color = str(color_name).replace("cat.pelts.", "").lower()
+    base = cat.pelt.tortie_base.lower()
 
     # Short description: just the pelt type
     if short:
@@ -1354,7 +1355,6 @@ def _describe_torties(cat, color_name, short=False) -> (str, str):
         ):
             color_name = "mottled"
         else:
-            base = cat.pelt.tortie_base.lower()
             if base in [tabby.lower() for tabby in Pelt.tabbies] + ["bengal", "rosette", "speckled"]:
                 # torbie/tabico for tabby bases
                 if cat.pelt.name.lower() == "tortie":
