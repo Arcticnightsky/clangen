@@ -308,6 +308,7 @@ class ClanSettingsScreen(Screens):
         female = 0
         avg_age = 0
         mated_pair_count = 0
+        oldest_generation_moons = 0
         for cat in Cat.all_cats_list:
             if cat.faded:
                 faded_cats += 1
@@ -372,6 +373,10 @@ class ClanSettingsScreen(Screens):
                     mated_pairs.add(pair)
 
             mated_pair_count = len(mated_pairs)
+
+            oldest_generation_moons = max(
+                oldest_generation_moons, self._get_lineage_depth_in_moons(cat)
+            )
         
         self.checkboxes_text["stat_box"] = pygame_gui.elements.UITextBox(
             "screens.clan_settings.stats_text",
@@ -396,8 +401,36 @@ class ClanSettingsScreen(Screens):
                 "catsoutside": str(cats_outside),
                 "avg_age": str(avg_age),
                 "mated_pairs": str(mated_pair_count),
+                "oldest_generation": str(oldest_generation_moons),
             },
         )
+
+    def _get_lineage_depth_in_moons(self, cat: Cat) -> int:
+        """Return how many moons this cat's oldest known bloodline stretches back."""
+        return self._get_oldest_ancestor_moons(cat, set())
+
+    def _get_oldest_ancestor_moons(self, cat: Cat, path_ids: set[str]) -> int:
+        """Recursively find the highest moon total across known blood ancestors."""
+        if not cat or cat.ID in path_ids:
+            return 0
+
+        next_path_ids = set(path_ids)
+        next_path_ids.add(cat.ID)
+
+        parent_ids = [cat.parent1, cat.parent2]
+        oldest_ancestor_moons = 0
+
+        for parent_id in parent_ids:
+            parent_cat = Cat.fetch_cat(parent_id)
+            if not parent_cat:
+                continue
+
+            oldest_ancestor_moons = max(
+                oldest_ancestor_moons,
+                self._get_oldest_ancestor_moons(parent_cat, next_path_ids),
+            )
+
+        return cat.moons + oldest_ancestor_moons
 
     def refresh_checkboxes(self):
         """
