@@ -394,11 +394,11 @@ class Cat:
         self.mate = []
         self.status = Status(**status) if status else Status()
         self._pronouns = {}  # Needs to be set as a dict
+        self.age: Optional[CatAge] = None
+        self.init_moons_age(moons)
         self.moons = moons
         self.inheritance = None  # This should never be used, but just for safety
         self.name = Name(prefix=prefix, suffix=suffix, cat=self)
-
-        self.init_moons_age(moons)
 
         self.set_faded()  # Sets the faded sprite and faded tag (self.faded = True)
         return True
