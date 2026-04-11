@@ -573,7 +573,7 @@ class Cat:
                     copy_mothers_pelt = True
                 elif mother_has_orange and not father_is_ginger:
                     copy_mothers_pelt = True
-                elif not mother_has_orange_ and not father_is_ginger:
+                elif not mother_has_orange and not father_is_ginger:
                     copy_mothers_pelt = True
                     
                 if copy_mothers_pelt:
