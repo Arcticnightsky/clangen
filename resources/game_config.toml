@@ -228,14 +228,14 @@ dev_tools = true
   primary_chance_mated = 60
 
   # 1/chance that kits, relationship and other factors will influence this chance
-  primary_chance_unmated = 10
+  primary_chance_unmated = 100
 
   # 1/chance that a mated cat has an affair
   random_affair_chance = 10
 
   # 1/chance for an unmated cat to have an affair (coparenting)
   # for this check, only other unmated cats can be the affair partner
-  unmated_random_affair_chance = 100
+  unmated_random_affair_chance = 150
 
   # base chance for same-sex mates to adopt random kittens
   primary_chance_same_sex_adoption = 500
