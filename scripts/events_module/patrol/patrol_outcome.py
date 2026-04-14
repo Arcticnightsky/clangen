@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 # -*- coding: ascii -*-
+from html import escape
 import random
 from os.path import exists as path_exists
 from random import choice, choices
@@ -47,6 +48,11 @@ class PatrolOutcome:
         Personality.trait_ranges["kit_traits"].keys()
     )
     NUM_OF_SKILLS = len(SkillPath)
+
+    @staticmethod
+    def _profile_link(cat: Cat) -> str:
+        """Create a UI hyperlink to a cat profile."""
+        return f'<a href="cat://{cat.ID}">{escape(str(cat.name))}</a>'
 
     def __init__(
         self,
@@ -566,7 +572,7 @@ class PatrolOutcome:
                         )
                     )
             else:
-                catnames.append(str(_cat.name))
+                catnames.append(self._profile_link(_cat))
             # Kill Cat
             self.__handle_death_history(_cat, patrol)
             _cat.die(body)
@@ -599,11 +605,25 @@ class PatrolOutcome:
 
         [_cat.become_lost() for _cat in cats_to_lose]
 
+        patrol_id = patrol.patrol_event.patrol_id if patrol.patrol_event else ""
+        twoleg_abduction_patrol = self._is_twoleg_abduction_loss_patrol(patrol_id)
+        if twoleg_abduction_patrol:
+            for _cat in cats_to_lose:
+                _cat.pending_neuter = True
+
         return i18n.t(
             "screens.patrol.lost_cats",
             count=len(cats_to_lose),
-            cats=adjust_list_text([str(cat.name) for cat in cats_to_lose]),
+            cats=adjust_list_text([self._profile_link(cat) for cat in cats_to_lose]),
         )
+
+    @staticmethod
+    def _is_twoleg_abduction_loss_patrol(patrol_id: str) -> bool:
+        if patrol_id in {"gen_hunt_gonetnr1", "gen_hunt_gonetnr2"}:
+            return True
+
+        patrol_id_lower = patrol_id.lower()
+        return "twoleg" in patrol_id_lower or "tnr" in patrol_id_lower
 
     def _handle_condition_and_scars(self, patrol: "Patrol") -> str:
         """Handle injuring cats, or giving scars"""
@@ -691,7 +711,7 @@ class PatrolOutcome:
                     for given_condition in given_conditions:
                         self.__handle_condition_history(_cat, given_condition, patrol)
                     combined_conditions = ", ".join(given_conditions)
-                    results.append(f"{_cat.name} got: {combined_conditions}.")
+                    results.append(f"{self._profile_link(_cat)} got: {combined_conditions}.")
                 else:
                     # If no results are shown, assume the cat didn't get the patrol history. Default override.
                     self.__handle_condition_history(
@@ -900,11 +920,11 @@ class PatrolOutcome:
                 if "unknown" in attribute_list:
                     continue
                 if cat.dead:
-                    dead.append(str(cat.name))
+                    dead.append(self._profile_link(cat))
                 elif cat.status.is_outsider or cat.status.is_other_clancat:
-                    outside.append(str(cat.name))
+                    outside.append(self._profile_link(cat))
                 else:
-                    new.append(str(cat.name))
+                    new.append(self._profile_link(cat))
             for type_list, string in [
                 (dead, "screens.patrol.dead_outsider"),
                 (outside, "screens.patrol.met_outsider"),
