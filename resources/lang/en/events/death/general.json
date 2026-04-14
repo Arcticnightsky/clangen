@@ -5835,35 +5835,36 @@
       ],
       "dies": true
     },
-    "history": [
-      {
-        "cats": [
-          "m_c"
+    {
+        "event_id": "gen_death_raccoon_anykit",
+        "location": [
+            "forest",
+            "plains",
+            "mountainous",
+            "wetlands"
         ],
-        "death": "m_c was killed by greencough."
-      }
-    ]
-  },
-  {
-    "event_id": "gen_death_whitecough_multilead2",
-    "location": [
-      "any"
-    ],
-    "season": [
-      "leaf-fall",
-      "leaf-bare"
-    ],
-    "tags": [
-      "classic",
-      "some_lives"
-    ],
-    "frequency": 4,
-    "event_text": "m_c caught whitecough and died more than once, despite the efforts of StarClan.",
-    "m_c": {
-      "status": [
-        "leader"
-      ],
-      "dies": true
+        "season": [
+            "any"
+        ],
+        "tags": [
+            "no_body"
+        ],
+        "frequency": 3,
+        "event_text": "m_c boasted about how ready {PRONOUN/m_c/subject} {VERB/m_c/were/was} for apprenticeship. {PRONOUN/m_c/subject/CAP} snuck away to prove it and the Clan finds only blood and raccoon-scent in the morning.",
+        "m_c": {
+            "status": [
+                "kitten"
+            ],
+            "dies": true
+        },
+        "history": [
+            {
+                "cats": [
+                    "m_c"
+                ],
+                "death": "m_c was eaten by a raccoon."
+            }
+        ]
     },
     "history": [
       {
@@ -7817,29 +7818,82 @@
       ],
       "changed": 0
     },
-    "future_event": [
       {
-        "event_type": "misc",
-        "pool": {
-          "sub_type": [
-            "murder_reveal"
-          ],
-          "excluded_event_id": [
-            "gen_misc_murderreveal_tattletail1",
-            "gen_misc_murderreveal_tattletail2",
-            "gen_misc_murderreveal_tattletail3"
-          ]
-        },
-        "moon_delay": [
-          1,
-          12
+    "event_id": "multi_death_massdeath_mistery1",
+    "location": [
+      "any"
+    ],
+    "season": [
+      "any"
+    ],
+    "sub_type": [
+      "mass_death"
+    ],
+    "tags": [],
+    "frequency": 1,
+    "event_text": "A thick fog covers c_n for days. When it finally lifts, multi_cat are found dead out in the territory.",
+    "history": [
+      {
+        "cats": [
+          "multi_cat"
         ],
-        "involved_cats": {
-          "m_c": "r_c",
-          "mur_c": "m_c",
-          "r_c": {
+        "death": "m_c died after being consumed by mysterious fog."
+      }
+    ]
+  },
+    {
+        "event_id": "gen_death_freshkill_anyfox1",
+        "location": [
+            "any"
+        ],
+        "season": [
+            "any"
+        ],
+        "frequency": 4,
+        "event_text": "m_c was killed when a fox followed fresh-kill scent into camp. Not even the fresh-kill pile was left untouched.",
+        "m_c": {
+            "status": [
+                "any"
+            ],
+            "dies": true
+        },
+        "history": [
+            {
+                "cats": [
+                    "m_c"
+                ],
+                "death": "m_c was killed by a fox that snuck into camp."
+            }
+        ],
+        "supplies": [
+            {
+                "type": "freshkill",
+                "trigger": [
+                    "excess"
+                ],
+                "adjust": "reduce_half"
+            }
+        ]
+    },
+    {
+        "event_id": "gen_death_freshkill_anyrat1",
+        "location": [
+            "any"
+        ],
+        "season": [
+            "any"
+        ],
+        "frequency": 4,
+        "event_text": "m_c found a horde of rats lured by the fresh-kill pile. r_c helped {PRONOUN/m_c/object} fight, but m_c did not survive.",
+        "m_c": {
             "age": [
-              "any"
+                "-kitten"
+            ],
+            "dies": true
+        },
+        "r_c": {
+            "age": [
+                "-kitten"
             ]
           }
         }
@@ -8604,48 +8658,57 @@
         "cats_to": [
           "m_c"
         ],
-        "values": [
-          "trust",
-          "comfort"
-        ],
-        "amount": -30,
-        "mutual": false,
-        "log": {
-          "cats_from": "cat_to accidentally overdosed and killed cat_from."
-        }
-      },
+        "frequency": 2,
+        "event_text": "m_c went missing this moon. Nothing could be found of {PRONOUN/m_c/object}, despite extensive searches, and c_n was left without answers or closure.",
+        "m_c": {
+            "age": [
+                "-senior"
+            ],
+            "dies": true
+        },
+        "history": [
+            {
+                "cats": [
+                    "m_c"
+                ],
+                "death": "m_c died after disappearing mysteriously."
+            }
+        ]
+    },
       {
-        "cats_from": [
-          "clan"
-        ],
-        "cats_to": [
-          "m_c"
-        ],
-        "mutual": false,
-        "values": [
-          "trust",
-          "respect"
-        ],
-        "amount": -15,
-        "log": {
-          "cats_from": "cat_from was shocked after cat_to accidentally overdosed r_c, confidence in {PRONOUN/cat_to/poss} abilities as a medicine cat deeply shaken."
-        }
-      }
-    ]
-  },
-  {
-    "event_id": "gen_death_mystery1",
+    "event_id": "gen_death_swiftpawreference_any1",
     "location": [
       "any"
     ],
     "season": [
       "any"
     ],
-    "frequency": 2,
-    "event_text": "m_c was found cold in {PRONOUN/m_c/poss} nest, dead without any apparent cause.",
+    "tags": [],
+    "frequency": 1,
+    "event_text": "There have been rumors around camp that dogs are roaming the Clan's territory. m_c goes out on {PRONOUN/m_c/poss} own to investigate. The c_n search party discovers m_c's mauled body the next day.",
     "m_c": {
       "age": [
-        "-senior"
+        "young adult"
+      ],
+      "status": [
+        "apprentice"
+      ],
+      "trait": [
+        "troublesome",
+        "fierce",
+        "bloodthirsty",
+        "bold",
+        "daring",
+        "righteous",
+        "ambitious",
+        "confident",
+        "adventurous",
+        "shameless",
+        "sneaky",
+        "arrogant",
+        "competitive",
+        "cunning",
+        "rebellious"
       ],
       "dies": true
     },
@@ -8654,12 +8717,78 @@
         "cats": [
           "m_c"
         ],
-        "death": "m_c died in {PRONOUN/m_c/poss} sleep of an unknown cause."
+        "death": "m_c was mauled by dogs after sneaking out of camp."
       }
     ]
   },
-  {
-    "event_id": "gen_death_mystery2",
+      {
+    "event_id": "gen_death_prankgonewrong_any1",
+    "location": [
+      "forest",
+      "mountainous",
+      "plains",
+      "wetlands"
+    ],
+    "season": [
+      "-leaf-bare"
+    ],
+    "tags": [
+      "all_lives",
+      "no_body"
+    ],
+    "frequency": 1,
+    "event_text": "While training with m_c near the river, r_c playfully shoves m_c. However, {PRONOUN/r_c/subject} {VERB/r_c/push/pushes} too hard and m_c loses {PRONOUN/m_c/poss} balance. Before r_c can save {PRONOUN/m_c/object}, the current sweeps m_c away.",
+    "m_c": {
+      "age": [
+        "-kitten"
+      ],
+      "status": [
+        "-elder"
+      ],
+      "dies": true
+    },
+    "r_c": {
+      "age": [
+        "adolescent",
+        "young adult",
+        "adult",
+        "senior adult"
+      ],
+      "status": [
+        "-elder"
+      ],
+      "trait": [
+        "childish",
+        "playful",
+        "charismatic",
+        "daring",
+        "fierce",
+        "troublesome",
+        "adventurous",
+        "shameless",
+        "sneaky",
+        "strange",
+        "competitive",
+        "cunning",
+        "flamboyant",
+        "rebellious"
+      ],
+      "skill": [
+        "FIGHTER,1"
+      ],
+      "dies": false
+    },
+    "history": [
+      {
+        "cats": [
+          "m_c"
+        ],
+        "death": "m_c was swept away by the river after a prank by r_c went horribly wrong."
+      }
+    ]
+  },
+ {
+    "event_id": "gen_death_doubledisappearance_any1",
     "location": [
       "any"
     ],
@@ -8671,19 +8800,44 @@
       "no_body"
     ],
     "frequency": 2,
-    "event_text": "m_c went missing this moon. Nothing could be found of {PRONOUN/m_c/object}, despite extensive searches, and c_n was left without answers or closure.",
+    "event_text": "m_c mysteriously disappeared one night. r_c noticed before anyone else and went looking for {PRONOUN/m_c/object} {PRONOUN/r_c/self}. c_n never saw either of them again.",
     "m_c": {
       "age": [
-        "-senior"
+        "any"
+      ],
+      "status": [
+        "any"
+      ],
+      "dies": true
+    },
+    "r_c": {
+      "age": [
+        "young adult",
+        "adult",
+        "senior adult"
+      ],
+      "status": [
+        "any"
+      ],
+      "trait": [
+        "bold",
+        "daring",
+        "sneaky",
+        "loyal",
+        "confident",
+        "thoughtful",
+        "adventurous",
+        "responsible"
       ],
       "dies": true
     },
     "history": [
       {
         "cats": [
-          "m_c"
+          "m_c",
+          "r_c"
         ],
-        "death": "m_c died after disappearing mysteriously."
+        "death": "m_c disappeared alongside a Clanmate, never to be seen again."
       }
     ]
   }
