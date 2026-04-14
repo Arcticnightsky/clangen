@@ -53,7 +53,7 @@ class Pregnancy_Events:
         involved_cats: List[str], text: str, mentioned_cat: Optional[Cat]
     ) -> List[str]:
         """Append the second parent/mate ID only if the event text references `r_c`."""
-        if mentioned_cat and "r_c" in text and mentioned_cat.ID not in involved_cats:
+        if mentioned_cat and "r_c" in event and mentioned_cat.ID not in involved_cats:
             involved_cats.append(mentioned_cat.ID)
         return involved_cats
 
@@ -360,7 +360,6 @@ class Pregnancy_Events:
             other_cat_id = second_parent.ID
             other_cat = Cat.all_cats.get(other_cat_id)
             allow_affair = get_clan_setting("affair")
-            allow_coparenting = get_clan_setting("unmated parentage")
             mate = [
                 Cat.fetch_cat(mate_id)
                 for mate_id in pregnant_cat.mate
