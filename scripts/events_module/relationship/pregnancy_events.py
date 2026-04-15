@@ -689,7 +689,7 @@ class Pregnancy_Events:
             cat_dict["r_c"] = other_cat
             chosen_mate = Pregnancy_Events.get_first_mate(cat)
             if chosen_mate:
-                cat_dict["m_m"] = chosen_mate
+                cat_dict["mc_mate"] = chosen_mate
                 involved_cats.append(chosen_mate.ID)
             event_list.append(choice(events["birth"]["affair_mated_samesex"]))
         # affair birth event where the birthing cat had an affair
@@ -699,12 +699,12 @@ class Pregnancy_Events:
             involved_cats.append(other_cat.ID)
             cat_dict["r_c"] = other_cat
             if living_mate:
-                cat_dict["m_m"] = living_mate
+                cat_dict["mc_mate"] = living_mate
                 involved_cats.append(living_mate.ID)
                 event_list.append(choice(events["birth"]["affair_mated"]))
             # including the dead mate version because of a bug where the game can't find any birthing events if the original mate is dead
             elif dead_mate:
-                cat_dict["m_m"] = dead_mate
+                cat_dict["mc_mate"] = dead_mate
                 involved_cats.append(dead_mate.ID)
                 event_list.append(choice(events["birth"]["affair_mated_dead_mate"]))
         # affair birth event if the birthing cat had kits with a mated cat
@@ -713,16 +713,11 @@ class Pregnancy_Events:
             if other_mate:
                 involved_cats.append(other_cat.ID)
                 cat_dict["r_c"] = other_cat
-                cat_dict["r_m"] = other_mate
+                cat_dict["rc_mate"] = other_mate
                 involved_cats.append(other_mate.ID)
                 event_list.append(choice(events["birth"]["affair"]))
         else:
             event_list.append(choice(events["birth"]["unmated_parent"]))
-
-        if "m_m" in cat_dict:
-            event_list = [event.replace("m_c's mate", "m_m") for event in event_list]
-        if "r_m" in cat_dict:
-            event_list = [event.replace("r_c's mate", "r_m") for event in event_list]
 
         if cheated_mate and other_cat and other_cat.ID not in cat.mate:
             if mate_claimed_kits:
@@ -823,20 +818,24 @@ class Pregnancy_Events:
                 )
         print_event = " ".join(event_list)
         print_event = print_event.replace("{insert}", insert)
+        if "mc_mate" in cat_dict:
+            print_event = print_event.replace("{mc_mate}", "mc_mate")
+        if "rc_mate" in cat_dict:
+            print_event = print_event.replace("{rc_mate}", "rc_mate")
 
         print_event = event_text_adjust(
             Cat, print_event, main_cat=cat, random_cat=other_cat, clan=game.clan
         )
         extra_cat_dict = {}
-        if "m_m" in cat_dict:
-            extra_cat_dict["m_m"] = (
-                str(cat_dict["m_m"].name),
-                choice(cat_dict["m_m"].pronouns),
+        if "mc_mate" in cat_dict:
+            extra_cat_dict["mc_mate"] = (
+                str(cat_dict["mc_mate"].name),
+                choice(cat_dict["mc_mate"].pronouns),
             )
-        if "r_m" in cat_dict:
-            extra_cat_dict["r_m"] = (
-                str(cat_dict["r_m"].name),
-                choice(cat_dict["r_m"].pronouns),
+        if "rc_mate" in cat_dict:
+            extra_cat_dict["rc_mate"] = (
+                str(cat_dict["rc_mate"].name),
+                choice(cat_dict["rc_mate"].pronouns),
             )
         if extra_cat_dict:
             print_event = process_text(print_event, extra_cat_dict)
