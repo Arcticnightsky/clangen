@@ -518,7 +518,11 @@ class Pregnancy_Events:
         kits_amount = len(kits)
         Pregnancy_Events.set_biggest_family()
         extra_naming_text = None
-
+        has_female_mate = any(
+            Cat.fetch_cat(mate_id)
+            and Cat.fetch_cat(mate_id).gender == "female"
+            for mate_id in cat.mate
+        )
         # delete the cat out of the pregnancy dictionary
         del clan.pregnancy_data[cat.ID]
 
