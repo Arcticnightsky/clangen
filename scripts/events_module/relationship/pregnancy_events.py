@@ -660,6 +660,7 @@ class Pregnancy_Events:
         event_list = []
         if not cat.status.is_outsider and other_cat is None:
             event_list.append(choice(events["birth"]["unmated_parent"]))
+        # birthing cat is outside the Clan
         elif cat.status.is_outsider:
             adding_text = choice(events["birth"]["outside_alone"])
             if cat.status.is_lost(CatGroup.PLAYER_CLAN):
@@ -667,24 +668,40 @@ class Pregnancy_Events:
             if other_cat and not other_cat.status.is_outsider:
                 adding_text = choice(events["birth"]["outside_in_clan"])
             event_list.append(adding_text)
+
+        # both parents are present for the birth
         elif other_cat.ID in cat.mate and other_cat.status.alive_in_player_clan:
             involved_cats.append(other_cat.ID)
             cat_dict["r_c"] = other_cat
             event_list.append(choice(events["birth"]["two_parents"]))
+            
+        # dead mate event
         elif (
-            other_cat.ID in cat.mate and other_cat.dead or other_cat.status.is_outsider
+            other_cat.ID in cat.mate and other_cat.dead
         ):
             involved_cats.append(other_cat.ID)
             cat_dict["r_c"] = other_cat
-            # TODO: this seems odd, outsider mates are also treated as dead?
             event_list.append(choice(events["birth"]["dead_mate"]))
+            
+        # the long awaited outsider mate event
+        elif (
+            other_cat.ID in cat.mate and other_cat.status.is_outsider
+        ):
+            involved_cats.append(other_cat.ID)
+            cat_dict["r_c"] = other_cat
+            event_list.append(choice(events["birth"]["outside_mate"]))
+            
         # unmated birth event
         elif len(cat.mate) < 1 and len(other_cat.mate) < 1 and not other_cat.dead:
             involved_cats.append(other_cat.ID)
             cat_dict["r_c"] = other_cat
-            event_list.append(choice(events["birth"]["both_unmated"]))
+            # 50% chance for the event to have a poor reaction from either parent
+            if random.randint(0, 1): 
+                event_list.append(choice(events["birth"]["both_unmated_pos"]))
+            event_list.append(choice(events["birth"]["both_unmated_neg"]))
+            
         # affair birth event (same sex)
-        elif has_female_mate and other_cat.ID not in cat.mate:        
+        elif not get_clan_setting("same sex birth") and has_female_mate and other_cat.ID not in cat.mate:        
             involved_cats.append(other_cat.ID)
             cat_dict["r_c"] = other_cat
             chosen_mate = Pregnancy_Events.get_first_mate(cat)
@@ -692,6 +709,7 @@ class Pregnancy_Events:
                 cat_dict["mc_mate"] = chosen_mate
                 involved_cats.append(chosen_mate.ID)
             event_list.append(choice(events["birth"]["affair_mated_samesex"]))
+            
         # affair birth event where the birthing cat had an affair
         elif len(cat.mate) > 0 and other_cat.ID not in cat.mate and not other_cat.dead:
             living_mate = Pregnancy_Events.get_first_mate(cat)
@@ -702,11 +720,14 @@ class Pregnancy_Events:
                 cat_dict["mc_mate"] = living_mate
                 involved_cats.append(living_mate.ID)
                 event_list.append(choice(events["birth"]["affair_mated"]))
-            # including the dead mate version because of a bug where the game can't find any birthing events if the original mate is dead
+            # including the dead mate version 
+            # because of a bug where the game can't find any birthing events 
+            # if the original mate is dead
             elif dead_mate:
                 cat_dict["mc_mate"] = dead_mate
                 involved_cats.append(dead_mate.ID)
                 event_list.append(choice(events["birth"]["affair_mated_dead_mate"]))
+                
         # affair birth event if the birthing cat had kits with a mated cat
         elif len(other_cat.mate) > 0 and cat.ID not in other_cat.mate and not other_cat.dead:        
             other_mate = Pregnancy_Events.get_first_mate(other_cat)
@@ -716,9 +737,12 @@ class Pregnancy_Events:
                 cat_dict["rc_mate"] = other_mate
                 involved_cats.append(other_mate.ID)
                 event_list.append(choice(events["birth"]["affair"]))
+                
         else:
             event_list.append(choice(events["birth"]["unmated_parent"]))
 
+        # the birthing cat's mate can choose to either help their cheating mate raise the new litter or 
+        # not be involved with their mate's kits at all 
         if cheated_mate and other_cat and other_cat.ID not in cat.mate:
             if mate_claimed_kits:
                 support_text = i18n.t(
@@ -905,6 +929,8 @@ class Pregnancy_Events:
             )
         )
 
+        # chance to break up the cat and their mate 
+        # if the mate doesn't want to anything to do with the affair litter
         if cheated_mate and not mate_claimed_kits:
             Pregnancy_Events.handle_affair_discovery_breakup(cat, cheated_mate)
 
@@ -916,6 +942,7 @@ class Pregnancy_Events:
                         if other_cat_mate and not other_cat_mate.dead:
                             break
                         other_cat_mate = None
+                # break up the other cat and their mate
                 if other_cat_mate:
                     Pregnancy_Events.handle_affair_discovery_breakup(
                         other_cat, other_cat_mate
@@ -977,7 +1004,7 @@ class Pregnancy_Events:
             game.cur_events_list.append(
                 Single_Event(
                     breakup_text,
-                    ["relation"],
+                    ["relation", "misc"],
                     [mate_cat.ID, cheating_cat.ID],
                     cat_dict={"m_c": mate_cat, "r_c": cheating_cat},
                 )
