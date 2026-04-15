@@ -598,7 +598,7 @@ class Pregnancy_Events:
                 )
                 if mate_claimed_kits:
                     adoptive_parents.append(cheated_mate.ID)
-
+        coparenting_outcome = None
         kits = Pregnancy_Events.get_kits(
             kits_amount, cat, other_cat, clan, adoptive_parents=adoptive_parents
         )
@@ -696,9 +696,12 @@ class Pregnancy_Events:
             involved_cats.append(other_cat.ID)
             cat_dict["r_c"] = other_cat
             # 50% chance for the event to have a poor reaction from either parent
-            if random.randint(0, 1): 
+            if random.randint(0, 1):
+                coparenting_outcome = "positive"
                 event_list.append(choice(events["birth"]["both_unmated_pos"]))
-            event_list.append(choice(events["birth"]["both_unmated_neg"]))
+            else:
+                coparenting_outcome = "negative"
+                event_list.append(choice(events["birth"]["both_unmated_neg"]))
             
         # affair birth event (same sex)
         elif not get_clan_setting("same sex birth") and has_female_mate and other_cat.ID not in cat.mate:        
@@ -864,8 +867,8 @@ class Pregnancy_Events:
         if extra_cat_dict:
             print_event = process_text(print_event, extra_cat_dict)
 
-        # Relationship penalties for affair births
-        # Only apply if cat had mates AND other_cat is not one of them
+        # relationship changes for affair births
+        # this outcome here happens if the birthing cat cheated on their mate
         if other_cat and len(cat.mate) > 0 and other_cat.ID not in cat.mate:
             for mate_id in cat.mate:
                 mate = Cat.fetch_cat(mate_id)
@@ -893,8 +896,7 @@ class Pregnancy_Events:
                         )
                     )
 
-        # If OTHER_CAT had mates and CAT is not one of them,
-        # they also get a penalty for the affair
+        # if the other cat had a mate, they get penalites too
         if other_cat and len(other_cat.mate) > 0 and cat.ID not in other_cat.mate:
             for mate_id in other_cat.mate:
                 mate = Cat.fetch_cat(mate_id)
@@ -919,6 +921,59 @@ class Pregnancy_Events:
                             "relationships.age_postscript",
                             name=str(other_cat.name),
                             count=other_cat.moons,
+                        )
+                    )
+
+        # relationship changes for unmated co-parenting births
+        if (
+            other_cat
+            and len(cat.mate) < 1
+            and len(other_cat.mate) < 1
+            and not other_cat.dead
+            and coparenting_outcome
+        ):
+            for first_cat, second_cat in ((cat, other_cat), (other_cat, cat)):
+                rel = first_cat.relationships.get(second_cat.ID)
+                if not rel:
+                    rel = Relationship(first_cat, second_cat)
+                    first_cat.relationships[second_cat.ID] = rel
+
+                if coparenting_outcome == "negative":
+                    rel.comfort -= 30
+                    rel.trust -= 25
+                    if rel.romance > 0:
+                        rel.romance -= 20
+                    rel.log.append(
+                        process_text(
+                            i18n.t("conditions.pregnancy.coparenting_rel_log_neg"),
+                            {
+                                "m_c": (str(first_cat.name), choice(first_cat.pronouns)),
+                                "r_c": (str(second_cat.name), choice(second_cat.pronouns)),
+                            },
+                        )
+                        + i18n.t("relationships.negative_postscript")
+                        + i18n.t(
+                            "relationships.age_postscript",
+                            name=str(second_cat.name),
+                            count=second_cat.moons,
+                        )
+                    )
+                elif coparenting_outcome == "positive":
+                    rel.comfort += 20
+                    rel.trust += 20
+                    rel.log.append(
+                        process_text(
+                            i18n.t("conditions.pregnancy.coparenting_rel_log_pos"),
+                            {
+                                "m_c": (str(first_cat.name), choice(first_cat.pronouns)),
+                                "r_c": (str(second_cat.name), choice(second_cat.pronouns)),
+                            },
+                        )
+                        + i18n.t("relationships.positive_postscript")
+                        + i18n.t(
+                            "relationships.age_postscript",
+                            name=str(second_cat.name),
+                            count=second_cat.moons,
                         )
                     )
 
@@ -950,7 +1005,7 @@ class Pregnancy_Events:
 
     @staticmethod
     def get_first_mate(subject_cat: Cat, include_dead: bool = False):
-        """ Gets the mate of the cheating cat for the events"""
+        """ Gets cheating cat's mate for the events"""
         for mate_id in subject_cat.mate:
             mate = Cat.fetch_cat(mate_id)
             if not mate:
@@ -961,7 +1016,7 @@ class Pregnancy_Events:
 
     @staticmethod
     def should_claim_affair_kits(mate: Cat, pregnant_cat: Cat) -> bool:
-        """Determines if a mate chooses to claim kits after an affair birth."""
+        """Determines if the mate chooses to claim kits after an affair birth."""
         if not mate or mate.dead:
             return False
 
