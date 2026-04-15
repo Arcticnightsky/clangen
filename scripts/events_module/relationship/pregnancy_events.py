@@ -658,6 +658,7 @@ class Pregnancy_Events:
         Pregnancy_Events.rebuild_strings()
         events = Pregnancy_Events.PREGNANT_STRINGS
         event_list = []
+        unmated_coparenting_outcome = None
         if not cat.status.is_outsider and other_cat is None:
             event_list.append(choice(events["birth"]["unmated_parent"]))
         # birthing cat is outside the Clan
@@ -696,9 +697,12 @@ class Pregnancy_Events:
             involved_cats.append(other_cat.ID)
             cat_dict["r_c"] = other_cat
             # 50% chance for the event to have a poor reaction from either parent
-            if random.randint(0, 1): 
+            if random.randint(0, 1):
+                unmated_coparenting_outcome = "both_unmated_pos"
                 event_list.append(choice(events["birth"]["both_unmated_pos"]))
-            event_list.append(choice(events["birth"]["both_unmated_neg"]))
+            else:
+                unmated_coparenting_outcome = "both_unmated_neg"
+                event_list.append(choice(events["birth"]["both_unmated_neg"]))
             
         # affair birth event (same sex)
         elif not get_clan_setting("same sex birth") and has_female_mate and other_cat.ID not in cat.mate:        
@@ -919,6 +923,59 @@ class Pregnancy_Events:
                             "relationships.age_postscript",
                             name=str(other_cat.name),
                             count=other_cat.moons,
+                        )
+                    )
+
+        # Relationship changes for unmated co-parenting births
+        if (
+            other_cat
+            and len(cat.mate) < 1
+            and len(other_cat.mate) < 1
+            and not other_cat.dead
+            and unmated_coparenting_outcome
+        ):
+            for first_cat, second_cat in ((cat, other_cat), (other_cat, cat)):
+                rel = first_cat.relationships.get(second_cat.ID)
+                if not rel:
+                    rel = Relationship(first_cat, second_cat)
+                    first_cat.relationships[second_cat.ID] = rel
+
+                if unmated_coparenting_outcome == "both_unmated_neg":
+                    rel.comfort -= 30
+                    rel.trust -= 25
+                    if rel.romance > 0:
+                        rel.romance -= 20
+                    rel.log.append(
+                        process_text(
+                            i18n.t("conditions.pregnancy.unmated_coparenting_rel_log_neg"),
+                            {
+                                "m_c": (str(first_cat.name), choice(first_cat.pronouns)),
+                                "r_c": (str(second_cat.name), choice(second_cat.pronouns)),
+                            },
+                        )
+                        + i18n.t("relationships.negative_postscript")
+                        + i18n.t(
+                            "relationships.age_postscript",
+                            name=str(second_cat.name),
+                            count=second_cat.moons,
+                        )
+                    )
+                elif unmated_coparenting_outcome == "both_unmated_pos":
+                    rel.comfort += 20
+                    rel.trust += 20
+                    rel.log.append(
+                        process_text(
+                            i18n.t("conditions.pregnancy.unmated_coparenting_rel_log_pos"),
+                            {
+                                "m_c": (str(first_cat.name), choice(first_cat.pronouns)),
+                                "r_c": (str(second_cat.name), choice(second_cat.pronouns)),
+                            },
+                        )
+                        + i18n.t("relationships.positive_postscript")
+                        + i18n.t(
+                            "relationships.age_postscript",
+                            name=str(second_cat.name),
+                            count=second_cat.moons,
                         )
                     )
 
