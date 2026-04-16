@@ -169,12 +169,12 @@
             "Ever since the birth, rumor's gone around that m_c's {insert} belongs to r_c and, while no one wants to confirm anything, no one really has to when the evidence is mewling right there...",
 			"r_c adamantly denies that m_c's newly born {insert} belongs to {PRONOUN/r_c/object} when questioned, but it's hard to believe {PRONOUN/r_c/object} when they're so similar...",
 			"Everyone in the Clan can see that m_c's {insert} clearly looks like r_c... {rc_mate} has been glaring at {PRONOUN/r_c/object} and m_c ever since the {insert} was born.",
-			"{rc_mate} has been demanding answers from r_c ever since m_c's {insert} was born — the {insert} looks way too much like {PRONOUN/r_c/object}! Why in the name of StarClan did r_c cheat on {PRONOUN/{rc_mate}/object} with another cat!?"
+			"{rc_mate} has been demanding answers from r_c ever since m_c's {insert} was born — the {insert} looks way too much like {PRONOUN/r_c/object}! {rc_mate} wonders why in the name of StarClan did r_c cheat on {PRONOUN/{rc_mate}/object} with another cat..."
         ],
         "affair_mated": [
 			"{mc_mate} is such a wonderful cat, deserving of being a parent... so why does m_c's {insert} look more like r_c instead?",
 			"Everyone in the Clan can see that m_c's {insert} clearly looks like r_c... {mc_mate} has been glaring at {PRONOUN/m_c/object} and r_c ever since the {insert} was born.",
-			"{mc_mate} has been demanding answers from m_c ever since the {insert} was born — the {insert} looks way too much like r_c! Why in the name of StarClan would m_c cheat on {PRONOUN/mc_mate/object} with another cat!?",
+			"{mc_mate} has been demanding answers from m_c ever since the {insert} was born — the {insert} looks way too much like r_c! {mc_mate} onders why in the name of StarClan did m_c cheat on {PRONOUN/mc_mate/object} with another cat...",
             "m_c can see it, {mc_mate} can see it, r_c can see it, everyone in c_n can see how the new {insert} looks a bit too much like r_c for it to be coincidence..."
         ],
         "affair_mated_samesex": [
