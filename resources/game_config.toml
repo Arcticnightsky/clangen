@@ -27,7 +27,7 @@ dev_tools = true
   chance_of_special_group = 9
 
   # base 1/chance of a romance interaction with another cat, when a cat has a mate
-  chance_romance_not_mate = 100
+  chance_romance_not_mate = 10
 
   # how much an event with a condition can influence the relationship
   # NOTE: doesn't currently do anything
