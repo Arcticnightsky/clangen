@@ -390,7 +390,7 @@ class Pregnancy_Events:
             # And lastly, if the pregnant cat got knocked up by another cat who ISN'T their mate, 
             # let the player guess whether it's an affair or not, sometimes the events will tell you, sometimes they won't...
             elif allow_affair is True and second_parent.ID not in pregnant_cat.mate and len(pregnant_cat.mate) > 0:
-                text = choice(Pregnancy_Events.PREGNANT_STRINGS["announcement_affair"])
+                text = choice([Pregnancy_Events.PREGNANT_STRINGS["announcement_affair"], Pregnancy_Events.PREGNANT_STRINGS["announcement"]])
                 event_text = text
                 severity = random.choices(["minor", "major"], [3, 1], k=1)
                 pregnant_cat.get_injured("pregnant", severity=severity[0])
@@ -491,7 +491,7 @@ class Pregnancy_Events:
                 )
             # And lastly, if the mom got knocked up by another tom who ISN'T her mate, let the player guess whether it's an affair or not, sometimes the events will tell you, sometimes they won't...
             elif allow_affair is True and second_parent.ID not in pregnant_cat.mate and has_male_mate:
-                text = choice(Pregnancy_Events.PREGNANT_STRINGS["announcement_affair"])
+                text = choice([Pregnancy_Events.PREGNANT_STRINGS["announcement_affair"], Pregnancy_Events.PREGNANT_STRINGS["announcement"]])
                 event_text = text
                 severity = random.choices(["minor", "major"], [3, 1], k=1)
                 pregnant_cat.get_injured("pregnant", severity=severity[0])
