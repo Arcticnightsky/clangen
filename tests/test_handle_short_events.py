@@ -136,6 +136,32 @@ class TestHandleTransition(unittest.TestCase):
         )
 
 
+class TestHandleRelationships(unittest.TestCase):
+    def setUp(self):
+        self.chosen_event = ShortEvent(
+            event_id="test",
+            r_c={"age": "any"},
+            relationships=[
+                {
+                    "cats_from": ["m_c"],
+                    "cats_to": ["r_c"],
+                    "amount": "10",
+                    "values": ["like"],
+                }
+            ],
+        )
+        self.chosen_event.main_cat = Cat(disable_random=True)
+        self.chosen_event.random_cat = Cat(disable_random=True)
+
+    def test_string_amount_is_coerced_for_relationship_changes(self):
+        self.chosen_event.execute_event()
+
+        relationship = self.chosen_event.main_cat.relationships[
+            self.chosen_event.random_cat.ID
+        ]
+        self.assertEqual(relationship.like, 10)
+
+
 class TestHandleDeath(unittest.TestCase):
     pass
 

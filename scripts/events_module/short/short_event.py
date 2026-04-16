@@ -647,9 +647,12 @@ class ShortEvent:
                 )  # got to include the cat that rolled for death in the first place
 
             taken_cats = []
+            twoleg_abduction_event = "twoleg" in self.event_id.lower() or "twoleg" in self.text.lower()
             for kitty in self.dead_cat_objects:
                 if "lost" in self.tags:
                     kitty.become_lost()
+                    if twoleg_abduction_event:
+                        kitty.pending_neuter = True
                     taken_cats.append(kitty)
                 self.multi_cat_objects.append(kitty)
                 if kitty.ID not in self.all_involved_cat_ids:
