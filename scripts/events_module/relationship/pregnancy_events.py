@@ -599,7 +599,7 @@ class Pregnancy_Events:
         cheated_mate = None
         mate_claimed_kits = False
         if other_cat and cat.mate and other_cat.ID not in cat.mate:
-            cheated_mate = Pregnancy_Events.get_first_mate(cat)
+            cheated_mate = Pregnancy_Events.get_cheated_mate(cat)
             if cheated_mate:
                 mate_claimed_kits = Pregnancy_Events.should_claim_affair_kits(
                     cheated_mate, cat
@@ -715,7 +715,7 @@ class Pregnancy_Events:
         elif not get_clan_setting("same sex birth") and has_female_mate and other_cat.ID not in cat.mate:        
             involved_cats.append(other_cat.ID)
             cat_dict["r_c"] = other_cat
-            chosen_mate = Pregnancy_Events.get_first_mate(cat)
+            chosen_mate = Pregnancy_Events.get_cheated_mate(cat)
             if chosen_mate:
                 cat_dict["mc_mate"] = chosen_mate
                 involved_cats.append(chosen_mate.ID)
@@ -723,8 +723,8 @@ class Pregnancy_Events:
             
         # affair birth event where the birthing cat had an affair
         elif len(cat.mate) > 0 and other_cat.ID not in cat.mate and not other_cat.dead:
-            living_mate = Pregnancy_Events.get_first_mate(cat)
-            dead_mate = Pregnancy_Events.get_first_mate(cat, include_dead=True)
+            living_mate = Pregnancy_Events.get_cheated_mate(cat)
+            dead_mate = Pregnancy_Events.get_cheated_mate(cat, include_dead=True)
             involved_cats.append(other_cat.ID)
             cat_dict["r_c"] = other_cat
             if living_mate:
@@ -741,7 +741,7 @@ class Pregnancy_Events:
                 
         # affair birth event if the birthing cat had kits with a mated cat
         elif len(other_cat.mate) > 0 and cat.ID not in other_cat.mate and not other_cat.dead:        
-            other_mate = Pregnancy_Events.get_first_mate(other_cat)
+            other_mate = Pregnancy_Events.get_cheated_mate(other_cat)
             if other_mate:
                 involved_cats.append(other_cat.ID)
                 cat_dict["r_c"] = other_cat
@@ -1012,7 +1012,7 @@ class Pregnancy_Events:
                     )
 
     @staticmethod
-    def get_first_mate(subject_cat: Cat, include_dead: bool = False):
+    def get_cheated_mate(subject_cat: Cat, include_dead: bool = False):
         """ Gets cheating cat's mate for the events"""
         for mate_id in subject_cat.mate:
             mate = Cat.fetch_cat(mate_id)
