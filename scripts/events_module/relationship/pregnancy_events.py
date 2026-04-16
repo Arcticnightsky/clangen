@@ -1556,8 +1556,14 @@ class Pregnancy_Events:
         # add them as adoptive parents if not
         final_adoptive_parents = []
         for adoptive_p in all_adoptive_parents:
-            Cat.fetch_cat(adoptive_p).get_new_thought(CatThought.ON_BIRTH)
-            if adoptive_p not in all_kitten[0].inheritance.all_involved:
+            adoptive_cat = Cat.fetch_cat(adoptive_p)
+            if not adoptive_cat:
+                continue
+
+            adoptive_cat.get_new_thought(CatThought.ON_BIRTH)
+            # Allow mates/relatives of blood parents to still be recorded as
+            # adoptive parents. We only skip true birth parents.
+            if adoptive_p not in all_kitten[0].get_parents():
                 final_adoptive_parents.append(adoptive_p)
         if not adoptive_parents:
             cat.get_new_thought(CatThought.ON_BIRTH)
