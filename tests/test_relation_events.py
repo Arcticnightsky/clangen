@@ -127,6 +127,28 @@ class Pregnancy(unittest.TestCase):
         self.assertEqual(clan.pregnancy_data[cat1.ID]["second_parent"], cat2.ID)
 
 
+class AffairKitsAdoption(unittest.TestCase):
+    def test_cheated_mate_can_be_added_as_adoptive_parent(self):
+        clan = Clan(name="clan")
+        birthing_cat = Cat(gender="female", age="adult", moons=40, disable_random=True)
+        affair_cat = Cat(gender="male", age="adult", moons=40, disable_random=True)
+        cheated_mate = Cat(gender="male", age="adult", moons=40, disable_random=True)
+
+        birthing_cat.mate.append(cheated_mate.ID)
+        cheated_mate.mate.append(birthing_cat.ID)
+
+        kits = Pregnancy_Events.get_kits(
+            2,
+            birthing_cat,
+            affair_cat,
+            clan,
+            adoptive_parents=[cheated_mate.ID],
+        )
+
+        for kit in kits:
+            self.assertIn(cheated_mate.ID, kit.adoptive_parents)
+
+
 class Mates(unittest.TestCase):
     def test_platonic_kitten_mating(self):
         # given
