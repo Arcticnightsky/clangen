@@ -1079,6 +1079,29 @@ class Pregnancy_Events:
                         )
                     )
 
+            if coparenting_outcome == "negative":
+                # If the non-birthing parent refuses to co-parent, they should not
+                # keep a parent-level relationship with the litter.
+                for kit in kits:
+                    other_to_kit = other_cat.relationships.get(kit.ID)
+                    if not other_to_kit:
+                        other_to_kit = Relationship(other_cat, kit)
+                        other_cat.relationships[kit.ID] = other_to_kit
+                    other_to_kit.like = min(other_to_kit.like, 5)
+                    other_to_kit.comfort = min(other_to_kit.comfort, 5)
+                    other_to_kit.respect = min(other_to_kit.respect, 5)
+                    other_to_kit.trust = min(other_to_kit.trust, 3)
+
+                    # The litter still knows their blood parent, but only weakly.
+                    kit_to_other = kit.relationships.get(other_cat.ID)
+                    if not kit_to_other:
+                        kit_to_other = Relationship(kit, other_cat)
+                        kit.relationships[other_cat.ID] = kit_to_other
+                    kit_to_other.like = min(kit_to_other.like, 5)
+                    kit_to_other.comfort = min(kit_to_other.comfort, 5)
+                    kit_to_other.respect = min(kit_to_other.respect, 5)
+                    kit_to_other.trust = min(kit_to_other.trust, 3)
+
         # display event
         game.cur_events_list.append(
             Single_Event(
