@@ -59,23 +59,29 @@ class Pregnancy_Events:
 
     @staticmethod
     def set_affair_visibility_on_pregnancy(
-        pregnant_cat: Cat, is_affair_known: Optional[bool]
+        cat: Optional[Cat] = None,
+        is_affair_known: Optional[bool] = None,
+        pregnant_cat: Optional[Cat] = None,
     ):
         """Store whether an affair was explicitly announced in the pregnant injury data."""
-        if not pregnant_cat:
+        target_cat = cat or pregnant_cat
+        if not target_cat:
             return
-        if "pregnant" not in pregnant_cat.injuries:
+        if "pregnant" not in target_cat.injuries:
             return
-        pregnant_cat.injuries["pregnant"]["affair_known"] = is_affair_known
+        target_cat.injuries["pregnant"]["affair_known"] = is_affair_known
 
     @staticmethod
-    def get_affair_visibility_from_pregnancy(pregnant_cat: Cat) -> Optional[bool]:
+    def get_affair_visibility_from_pregnancy(
+        cat: Optional[Cat] = None, pregnant_cat: Optional[Cat] = None
+    ) -> Optional[bool]:
         """Read whether an affair was explicitly announced from pregnant injury data."""
-        if not pregnant_cat:
+        target_cat = cat or pregnant_cat
+        if not target_cat:
             return None
-        if "pregnant" not in pregnant_cat.injuries:
+        if "pregnant" not in target_cat.injuries:
             return None
-        return pregnant_cat.injuries["pregnant"].get("affair_known")
+        return target_cat.injuries["pregnant"].get("affair_known")
 
     @staticmethod
     def rebuild_strings():
