@@ -58,6 +58,26 @@ class Pregnancy_Events:
         return involved_cats
 
     @staticmethod
+    def set_affair_visibility_on_pregnancy(
+        pregnant_cat: Cat, is_affair_known: Optional[bool]
+    ):
+        """Store whether an affair was explicitly announced in the pregnant injury data."""
+        if not pregnant_cat:
+            return
+        if "pregnant" not in pregnant_cat.injuries:
+            return
+        pregnant_cat.injuries["pregnant"]["affair_known"] = is_affair_known
+
+    @staticmethod
+    def get_affair_visibility_from_pregnancy(pregnant_cat: Cat) -> Optional[bool]:
+        """Read whether an affair was explicitly announced from pregnant injury data."""
+        if not pregnant_cat:
+            return None
+        if "pregnant" not in pregnant_cat.injuries:
+            return None
+        return pregnant_cat.injuries["pregnant"].get("affair_known")
+
+    @staticmethod
     def rebuild_strings():
         if Pregnancy_Events.currently_loaded_lang == i18n.config.get("locale"):
             return
@@ -390,8 +410,13 @@ class Pregnancy_Events:
             # And lastly, if the pregnant cat got knocked up by another cat who ISN'T their mate, 
             # let the player guess whether it's an affair or not, sometimes the events will tell you, sometimes they won't...
             elif allow_affair is True and second_parent.ID not in pregnant_cat.mate and len(pregnant_cat.mate) > 0:
-                text = choice([Pregnancy_Events.PREGNANT_STRINGS["announcement_affair"], Pregnancy_Events.PREGNANT_STRINGS["announcement"]])
+                announcement_key = choice(["announcement_affair", "announcement"])
+                text = choice(Pregnancy_Events.PREGNANT_STRINGS[announcement_key])
                 event_text = text
+                Pregnancy_Events.set_affair_visibility_on_pregnancy(
+                    pregnant_cat,
+                    announcement_key == "announcement_affair",
+                )
                 severity = random.choices(["minor", "major"], [3, 1], k=1)
                 pregnant_cat.get_injured("pregnant", severity=severity[0])
                 text += choice(Pregnancy_Events.PREGNANT_STRINGS[f"{severity[0]}_severity"])
@@ -491,8 +516,13 @@ class Pregnancy_Events:
                 )
             # And lastly, if the mom got knocked up by another tom who ISN'T her mate, let the player guess whether it's an affair or not, sometimes the events will tell you, sometimes they won't...
             elif allow_affair is True and second_parent.ID not in pregnant_cat.mate and has_male_mate:
-                text = choice([Pregnancy_Events.PREGNANT_STRINGS["announcement_affair"], Pregnancy_Events.PREGNANT_STRINGS["announcement"]])
+                announcement_key = choice(["announcement_affair", "announcement"])
+                text = choice(Pregnancy_Events.PREGNANT_STRINGS[announcement_key])
                 event_text = text
+                Pregnancy_Events.set_affair_visibility_on_pregnancy(
+                    pregnant_cat,
+                    announcement_key == "announcement_affair",
+                )
                 severity = random.choices(["minor", "major"], [3, 1], k=1)
                 pregnant_cat.get_injured("pregnant", severity=severity[0])
                 text += choice(Pregnancy_Events.PREGNANT_STRINGS[f"{severity[0]}_severity"])
@@ -598,14 +628,21 @@ class Pregnancy_Events:
         adoptive_parents = []
         cheated_mate = None
         mate_claimed_kits = False
+        secret_affair_birth = False
+        other_cat_affair_known = True
+        affair_known = Pregnancy_Events.get_affair_visibility_from_pregnancy(cat)
         if other_cat and cat.mate and other_cat.ID not in cat.mate:
             cheated_mate = Pregnancy_Events.get_cheated_mate(cat)
             if cheated_mate:
-                mate_claimed_kits = Pregnancy_Events.should_claim_affair_kits(
-                    cheated_mate, cat
-                )
-                if mate_claimed_kits:
+                if affair_known is False and random.randint(0, 1):
+                    secret_affair_birth = True
                     adoptive_parents.append(cheated_mate.ID)
+                else:
+                    mate_claimed_kits = Pregnancy_Events.should_claim_affair_kits(
+                        cheated_mate, cat
+                    )
+                    if mate_claimed_kits:
+                        adoptive_parents.append(cheated_mate.ID)
         coparenting_outcome = None
         kits = Pregnancy_Events.get_kits(
             kits_amount, cat, other_cat, clan, adoptive_parents=adoptive_parents
@@ -730,7 +767,10 @@ class Pregnancy_Events:
             if living_mate:
                 cat_dict["mc_mate"] = living_mate
                 involved_cats.append(living_mate.ID)
-                event_list.append(choice(events["birth"]["affair_mated"]))
+                if secret_affair_birth:
+                    event_list.append(choice(events["birth"]["affair_mated_secret"]))
+                else:
+                    event_list.append(choice(events["birth"]["affair_mated"]))
             # including the dead mate version 
             # because of a bug where the game can't find any birthing events 
             # if the original mate is dead
@@ -743,18 +783,27 @@ class Pregnancy_Events:
         elif len(other_cat.mate) > 0 and cat.ID not in other_cat.mate and not other_cat.dead:        
             other_mate = Pregnancy_Events.get_cheated_mate(other_cat)
             if other_mate:
+                other_cat_affair_known = bool(random.randint(0, 1))
                 involved_cats.append(other_cat.ID)
                 cat_dict["r_c"] = other_cat
                 cat_dict["rc_mate"] = other_mate
                 involved_cats.append(other_mate.ID)
-                event_list.append(choice(events["birth"]["affair"]))
+                if other_cat_affair_known:
+                    event_list.append(choice(events["birth"]["affair"]))
+                else:
+                    event_list.append(choice(events["birth"]["affair_secret"]))
                 
         else:
             event_list.append(choice(events["birth"]["unmated_parent"]))
 
         # the birthing cat's mate can choose to either help their cheating mate raise the new litter or 
         # not be involved with their mate's kits at all 
-        if cheated_mate and other_cat and other_cat.ID not in cat.mate:
+        if (
+            cheated_mate
+            and other_cat
+            and other_cat.ID not in cat.mate
+            and not secret_affair_birth
+        ):
             if mate_claimed_kits:
                 support_text = i18n.t(
                     "conditions.pregnancy.mate_claims_kits",
@@ -877,7 +926,12 @@ class Pregnancy_Events:
 
         # relationship changes for affair births
         # this outcome here happens if the birthing cat cheated on their mate
-        if other_cat and len(cat.mate) > 0 and other_cat.ID not in cat.mate:
+        if (
+            other_cat
+            and len(cat.mate) > 0
+            and other_cat.ID not in cat.mate
+            and not secret_affair_birth
+        ):
             for mate_id in cat.mate:
                 mate = Cat.fetch_cat(mate_id)
                 if not mate:
@@ -905,7 +959,12 @@ class Pregnancy_Events:
                     )
 
         # if the other cat had a mate, they get penalites too
-        if other_cat and len(other_cat.mate) > 0 and cat.ID not in other_cat.mate:
+        if (
+            other_cat
+            and len(other_cat.mate) > 0
+            and cat.ID not in other_cat.mate
+            and other_cat_affair_known
+        ):
             for mate_id in other_cat.mate:
                 mate = Cat.fetch_cat(mate_id)
                 if not mate:
@@ -994,7 +1053,7 @@ class Pregnancy_Events:
 
         # chance to break up the cat and their mate 
         # if the mate doesn't want to anything to do with the affair litter
-        if cheated_mate and not mate_claimed_kits:
+        if cheated_mate and not mate_claimed_kits and not secret_affair_birth:
             Pregnancy_Events.handle_affair_discovery_breakup(cat, cheated_mate)
 
             if other_cat and other_cat.mate:
@@ -1006,7 +1065,7 @@ class Pregnancy_Events:
                             break
                         other_cat_mate = None
                 # break up the other cat and their mate
-                if other_cat_mate:
+                if other_cat_mate and other_cat_affair_known:
                     Pregnancy_Events.handle_affair_discovery_breakup(
                         other_cat, other_cat_mate
                     )
