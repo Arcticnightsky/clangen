@@ -387,7 +387,7 @@ class Pregnancy_Events:
             ]
             # if both cats are faithful to each other and aren't cheaters, 
             # the pregnancy will be announced as normal
-            if second_parent.ID in pregnant_cat.mate: 
+            if other_cat.ID in pregnant_cat.mate: 
                 text = choice(Pregnancy_Events.PREGNANT_STRINGS["announcement"])
                 event_text = text
                 severity = random.choices(["minor", "major"], [3, 1], k=1)
@@ -409,7 +409,7 @@ class Pregnancy_Events:
                 involved_cats = [pregnant_cat.ID]
             # And lastly, if the pregnant cat got knocked up by another cat who ISN'T their mate, 
             # let the player guess whether it's an affair or not, sometimes the events will tell you, sometimes they won't...
-            elif allow_affair is True and second_parent.ID not in pregnant_cat.mate and len(pregnant_cat.mate) > 0:
+            elif allow_affair is True and other_cat.ID not in pregnant_cat.mate and len(pregnant_cat.mate) > 0:
                 announcement_key = choice(["announcement_affair", "announcement"])
                 text = choice(Pregnancy_Events.PREGNANT_STRINGS[announcement_key])
                 event_text = text
