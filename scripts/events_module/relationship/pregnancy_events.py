@@ -377,7 +377,7 @@ class Pregnancy_Events:
                 "amount": 0,
             }
             involved_cats = [cat.ID]
-            other_cat_id = second_parent.ID
+            other_cat_id = other_cat.ID
             other_cat = Cat.all_cats.get(other_cat_id)
             allow_affair = get_clan_setting("affair")
             allow_coparenting = get_clan_setting("unmated parentage")
