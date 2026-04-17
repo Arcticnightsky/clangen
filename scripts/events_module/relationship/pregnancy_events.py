@@ -1608,9 +1608,10 @@ class Pregnancy_Events:
                     if the_cat.dead:
                         continue
                     is_second_parent = other_cat and the_cat.ID == other_cat.ID
-
                     if the_cat.ID in kit.get_parents():
-                        # If negative co-parenting, weaken second parent bond
+                        # if both parents couldn't agree on co-parenting,
+                        # the second parent distances themself from the litter
+                        # while the litter will not feel much towards their estranged parent
                         if coparenting_outcome == "negative" and is_second_parent:
                             start_relation = Relationship(the_cat, kit, False, True)
                             start_relation.like = random.randint(-5, 5)
@@ -1627,7 +1628,7 @@ class Pregnancy_Events:
                             kit.relationships[the_cat.ID] = start_relation
 
                         else:
-                            # ORIGINAL strong parent bond
+                            # regular bonds as normal
                             parent_to_kit = constants.CONFIG["new_cat"]["parent_buff"]["parent_to_kit"]
                             y = random.randrange(0, 15)
                             start_relation = Relationship(the_cat, kit, False, True)
@@ -1645,6 +1646,9 @@ class Pregnancy_Events:
                             start_relation.respect = kit_to_parent[RelType.RESPECT] + y
                             start_relation.trust = kit_to_parent[RelType.TRUST] + y
                             kit.relationships[the_cat.ID] = start_relation
+                    else:
+                        the_cat.relationships[kit.ID] = Relationship(the_cat, kit)
+                        kit.relationships[the_cat.ID] = Relationship(kit, the_cat)
 
             #### REMOVE ACCESSORY ######
             kit.pelt.accessory = tuple()
