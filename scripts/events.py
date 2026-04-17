@@ -2103,6 +2103,11 @@ def handle_apprentice_EX(cat):
         if cat.not_working() and int(random.random() * 3):
             return
 
+        # Older/externally edited saves can leave experience unset (None) on loaded cats.
+        # Normalize before comparing to avoid None > int crashes during timeskip.
+        if cat.experience is None:
+            cat.experience = 0
+
         if cat.experience > cat.experience_levels_range["trainee"][1]:
             return
 
