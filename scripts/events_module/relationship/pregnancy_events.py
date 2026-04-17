@@ -1607,8 +1607,8 @@ class Pregnancy_Events:
                     the_cat = Cat.all_cats.get(cat_id)
                     if the_cat.dead:
                         continue
-                        
                     is_second_parent = other_cat and the_cat.ID == other_cat.ID
+
                     if the_cat.ID in kit.get_parents():
                         # If negative co-parenting, weaken second parent bond
                         if coparenting_outcome == "negative" and is_second_parent:
@@ -1627,6 +1627,7 @@ class Pregnancy_Events:
                             kit.relationships[the_cat.ID] = start_relation
 
                         else:
+                            # ORIGINAL strong parent bond
                             parent_to_kit = constants.CONFIG["new_cat"]["parent_buff"]["parent_to_kit"]
                             y = random.randrange(0, 15)
                             start_relation = Relationship(the_cat, kit, False, True)
@@ -1644,32 +1645,6 @@ class Pregnancy_Events:
                             start_relation.respect = kit_to_parent[RelType.RESPECT] + y
                             start_relation.trust = kit_to_parent[RelType.TRUST] + y
                             kit.relationships[the_cat.ID] = start_relation
-                    else:
-                        the_cat.relationships[kit.ID] = Relationship(the_cat, kit)
-                        kit.relationships[the_cat.ID] = Relationship(kit, the_cat)
-
-            if other_cat and coparenting_outcome == "negative":
-                # If both parents couldn't agree on co-parenting,
-                # the second parent distances themselves from the litter
-                # while the litter will not feel much towards their other parent
-                for kit in all_kitten:
-                    other_to_kit = other_cat.relationships.get(kit.ID)
-                    if not other_to_kit:
-                        other_to_kit = Relationship(other_cat, kit)
-                        other_cat.relationships[kit.ID] = other_to_kit
-                    other_to_kit.like = min(other_to_kit.like, 5)
-                    other_to_kit.comfort = min(other_to_kit.comfort, 5)
-                    other_to_kit.respect = min(other_to_kit.respect, 5)
-                    other_to_kit.trust = min(other_to_kit.trust, 3)
-
-                    kit_to_other = kit.relationships.get(other_cat.ID)
-                    if not kit_to_other:
-                        kit_to_other = Relationship(kit, other_cat)
-                        kit.relationships[other_cat.ID] = kit_to_other
-                    kit_to_other.like = min(kit_to_other.like, 5)
-                    kit_to_other.comfort = min(kit_to_other.comfort, 5)
-                    kit_to_other.respect = min(kit_to_other.respect, 5)
-                    kit_to_other.trust = min(kit_to_other.trust, 3)
 
             #### REMOVE ACCESSORY ######
             kit.pelt.accessory = tuple()
