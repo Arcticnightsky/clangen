@@ -963,7 +963,6 @@ class Pregnancy_Events:
             other_cat
             and len(other_cat.mate) > 0
             and cat.ID not in other_cat.mate
-            and not secret_affair_birth
             and other_cat_affair_known
         ):
             for mate_id in other_cat.mate:
