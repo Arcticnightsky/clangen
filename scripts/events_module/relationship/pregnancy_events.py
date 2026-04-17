@@ -629,6 +629,7 @@ class Pregnancy_Events:
         cheated_mate = None
         mate_claimed_kits = False
         secret_affair_birth = False
+        other_cat_affair_known = True
         affair_known = Pregnancy_Events.get_affair_visibility_from_pregnancy(cat)
         if other_cat and cat.mate and other_cat.ID not in cat.mate:
             cheated_mate = Pregnancy_Events.get_cheated_mate(cat)
@@ -782,11 +783,15 @@ class Pregnancy_Events:
         elif len(other_cat.mate) > 0 and cat.ID not in other_cat.mate and not other_cat.dead:        
             other_mate = Pregnancy_Events.get_cheated_mate(other_cat)
             if other_mate:
+                other_cat_affair_known = bool(random.randint(0, 1))
                 involved_cats.append(other_cat.ID)
                 cat_dict["r_c"] = other_cat
                 cat_dict["rc_mate"] = other_mate
                 involved_cats.append(other_mate.ID)
-                event_list.append(choice(events["birth"]["affair"]))
+                if other_cat_affair_known:
+                    event_list.append(choice(events["birth"]["affair"]))
+                else:
+                    event_list.append(choice(events["birth"]["affair_secret"]))
                 
         else:
             event_list.append(choice(events["birth"]["unmated_parent"]))
@@ -959,6 +964,7 @@ class Pregnancy_Events:
             and len(other_cat.mate) > 0
             and cat.ID not in other_cat.mate
             and not secret_affair_birth
+            and other_cat_affair_known
         ):
             for mate_id in other_cat.mate:
                 mate = Cat.fetch_cat(mate_id)
@@ -1060,7 +1066,7 @@ class Pregnancy_Events:
                             break
                         other_cat_mate = None
                 # break up the other cat and their mate
-                if other_cat_mate:
+                if other_cat_mate and other_cat_affair_known:
                     Pregnancy_Events.handle_affair_discovery_breakup(
                         other_cat, other_cat_mate
                     )
