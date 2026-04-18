@@ -783,12 +783,12 @@ class Pregnancy_Events:
             Cat.fetch_cat(mate_id) and Cat.fetch_cat(mate_id).gender == "female"
             for mate_id in cat.mate
         )
-        adoptive_parents = []
         cheated_mate = None
         mate_claimed_kits = False
         secret_affair_birth = False
         other_cat_affair_known = True
         affair_known = Pregnancy_Events.get_affair_visibility_from_pregnancy(cat)
+        adoptive_parents = []
         if other_cat and cat.mate and other_cat.ID not in cat.mate:
             cheated_mate = Pregnancy_Events.get_cheated_mate(cat)
             if cheated_mate:
