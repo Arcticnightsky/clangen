@@ -711,6 +711,8 @@ class Pregnancy_Events:
         other_cat_id = clan.pregnancy_data[cat.ID]["second_parent"]
         other_cat = Cat.all_cats.get(other_cat_id)
 
+        kits = Pregnancy_Events.get_kits(kits_amount, cat, other_cat, clan)
+        kits_amount = len(kits)
         Pregnancy_Events.set_biggest_family()
         extra_naming_text = None
         has_afab_mate = any(
@@ -740,7 +742,6 @@ class Pregnancy_Events:
                     if mate_claimed_kits:
                         adoptive_parents.append(cheated_mate.ID)
         coparenting_outcome = None
-
         # delete the cat out of the pregnancy dictionary
         del clan.pregnancy_data[cat.ID]
 
@@ -1158,8 +1159,6 @@ class Pregnancy_Events:
                             count=second_cat.moons,
                         )
                     )
-        kits = Pregnancy_Events.get_kits(kits_amount, cat, other_cat, clan)
-        kits_amount = len(kits)
         # display event
         game.cur_events_list.append(
             Single_Event(
