@@ -79,10 +79,10 @@ class Pregnancy_Events:
         return involved_cats
 
     @staticmethod
-    def prune_unmentioned_mate_ids(
+    def remove_unmentioned_mate_ids(
         involved_cats: List[str], event_text: str, cat_dict: Dict
     ) -> List[str]:
-        """Removes mate IDs if their placeholder is not present in the final event text."""
+        """Removes the cheated mate's TD if mc/rc_mate isn't present in the affair birth event text."""
         for placeholder in ("mc_mate", "rc_mate"):
             cat = cat_dict.get(placeholder)
             if cat and placeholder not in event_text and cat.ID in involved_cats:
@@ -1022,7 +1022,7 @@ class Pregnancy_Events:
         if "rc_mate" in cat_dict:
             print_event = print_event.replace("rc_mate", "rc_mate")
 
-        involved_cats = Pregnancy_Events.prune_unmentioned_mate_ids(
+        involved_cats = Pregnancy_Events.remove_unmentioned_mate_ids(
             involved_cats, print_event, cat_dict
         )
 
