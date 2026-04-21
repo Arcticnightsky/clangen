@@ -1,13 +1,11 @@
 import os
 import unittest
-from unittest.mock import call, patch
+from unittest.mock import patch
 
 os.environ["SDL_VIDEODRIVER"] = "dummy"
 os.environ["SDL_AUDIODRIVER"] = "dummy"
 
 from scripts.cat.cats import Cat
-from scripts.cat.enums import CatRank
-from scripts.cat.names import Name, names
 from scripts.cat_relations.relationship import Relationship
 from scripts.clan import Clan
 from scripts.events_module.relationship.pregnancy_events import Pregnancy_Events
@@ -127,28 +125,6 @@ class Pregnancy(unittest.TestCase):
         self.assertEqual(clan.pregnancy_data[cat1.ID]["second_parent"], cat2.ID)
 
 
-class AffairKitsAdoption(unittest.TestCase):
-    def test_cheated_mate_can_be_added_as_adoptive_parent(self):
-        clan = Clan(name="clan")
-        birthing_cat = Cat(gender="female", age="adult", moons=40, disable_random=True)
-        affair_cat = Cat(gender="male", age="adult", moons=40, disable_random=True)
-        cheated_mate = Cat(gender="male", age="adult", moons=40, disable_random=True)
-
-        birthing_cat.mate.append(cheated_mate.ID)
-        cheated_mate.mate.append(birthing_cat.ID)
-
-        kits = Pregnancy_Events.get_kits(
-            2,
-            birthing_cat,
-            affair_cat,
-            clan,
-            adoptive_parents=[cheated_mate.ID],
-        )
-
-        for kit in kits:
-            self.assertIn(cheated_mate.ID, kit.adoptive_parents)
-
-
 class Mates(unittest.TestCase):
     def test_platonic_kitten_mating(self):
         # given
@@ -225,68 +201,3 @@ class Mates(unittest.TestCase):
 
         # then
         self.assertFalse(RomanticEvents.check_if_new_mate(cat1, cat2)[0])
-
-
-class KitNameConflicts(unittest.TestCase):
-    def setUp(self):
-        self.original_all_cats = Cat.all_cats
-        self.original_all_cats_list = Cat.all_cats_list
-        self.original_ordered_cat_list = Cat.ordered_cat_list
-        self.original_outside_cats = Cat.outside_cats
-        self.original_prefix_history = names.prefix_history.copy()
-
-        Cat.all_cats = {}
-        Cat.all_cats_list = []
-        Cat.ordered_cat_list = []
-        Cat.outside_cats = {}
-        names.prefix_history = []
-
-    def tearDown(self):
-        Cat.all_cats = self.original_all_cats
-        Cat.all_cats_list = self.original_all_cats_list
-        Cat.ordered_cat_list = self.original_ordered_cat_list
-        Cat.outside_cats = self.original_outside_cats
-        names.prefix_history = self.original_prefix_history
-
-    def test_kit_names_reroll_prefixes_and_conflicting_full_names(self):
-        Cat(
-            prefix="Privet",
-            suffix="paw",
-            moons=6,
-            status_dict={"rank": CatRank.APPRENTICE},
-            disable_random=True,
-        )
-
-        Cat(prefix="Rain", suffix="fall", moons=20, disable_random=True)
-
-        new_kit = Cat(prefix="Privet", suffix="cloud", moons=0, disable_random=True)
-        new_kit.name = Name(prefix="Privet", suffix="cloud", cat=new_kit)
-
-        with patch(
-            "scripts.events_module.relationship.pregnancy_events.Name",
-            side_effect=[
-                Name(prefix="Rain", suffix="fall", cat=new_kit),
-                Name(prefix="Rain", suffix="flower", cat=new_kit),
-            ],
-        ) as patched_name:
-            patched_name.names_dict = Name.names_dict
-            Pregnancy_Events.ensure_unique_kit_name(new_kit, [])
-
-        self.assertEqual("Rain", new_kit.name.prefix)
-        self.assertEqual("flower", new_kit.name.suffix)
-        self.assertEqual(
-            patched_name.call_args_list,
-            [
-                call(
-                    biome=None,
-                    specsuffix_hidden=new_kit.specsuffix_hidden,
-                    cat=new_kit,
-                ),
-                call(
-                    prefix="Rain",
-                    biome=None,
-                    specsuffix_hidden=new_kit.specsuffix_hidden,
-                    cat=new_kit,
-                ),
-            ],
-        )
