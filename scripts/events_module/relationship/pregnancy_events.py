@@ -743,6 +743,35 @@ class Pregnancy_Events:
         kits = Pregnancy_Events.get_kits(
             kits_amount, cat, other_cat, clan, adoptive_parents=adoptive_parents
         )
+        if mate_claimed_kits and cheated_mate:
+            for kit in kits:
+                if cheated_mate.ID in kit.get_parents():
+                    continue
+                if cheated_mate.ID in kit.adoptive_parents:
+                    continue
+                if cheated_mate.ID in kit.inheritance.all_involved:
+                    continue
+
+                kit.adoptive_parents.append(cheated_mate.ID)
+                kit.inheritance.update_inheritance()
+                kit.inheritance.update_all_related_inheritance()
+
+                kit_to_parent = constants.CONFIG["new_cat"]["parent_buff"][
+                    "kit_to_parent"
+                ]
+                parent_to_kit = constants.CONFIG["new_cat"]["parent_buff"][
+                    "parent_to_kit"
+                ]
+                change_relationship_values(
+                    cats_from=[kit],
+                    cats_to=[cheated_mate],
+                    **kit_to_parent,
+                )
+                change_relationship_values(
+                    cats_from=[cheated_mate],
+                    cats_to=[kit],
+                    **parent_to_kit,
+                )
         kits_amount = len(kits)
         Pregnancy_Events.set_biggest_family()
 
