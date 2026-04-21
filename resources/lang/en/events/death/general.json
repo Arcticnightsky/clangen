@@ -38,29 +38,34 @@
                 "death": "m_c was secretly murdered by r_c."
             }
         ],
-        "future_event": [
-            {
-                "event_type": "misc",
-                "pool": {
-                    "sub_type": [
-                        "murder_reveal"
-                    ]
-                },
-                "moon_delay": [
-                    1,
-                    12
-                ],
-                "involved_cats": {
-                    "m_c": "r_c",
-                    "mur_c": "m_c",
-                    "r_c": {
-                        "age": [
-                            "any"
-                        ]
-                    }
-                }
-            }
-        ]
+    "future_event": [
+      {
+        "event_type": "misc",
+        "pool": {
+          "sub_type": [
+            "murder_reveal"
+          ],
+          "excluded_event_id": [
+            "gen_misc_murderreveal_tattletail1",
+            "gen_misc_murderreveal_tattletail2",
+            "gen_misc_murderreveal_tattletail3"
+          ]
+        },
+        "moon_delay": [
+          1,
+          12
+        ],
+        "involved_cats": {
+          "m_c": "r_c",
+          "mur_c": "m_c",
+          "r_c": {
+            "age": [
+              "any"
+            ]
+          }
+        }
+      }
+    ]
     },
     {
         "event_id": "gen_death_murder_any2",
@@ -101,29 +106,34 @@
                 "death": "m_c was murdered by r_c."
             }
         ],
-        "future_event": [
-            {
-                "event_type": "misc",
-                "pool": {
-                    "sub_type": [
-                        "murder_reveal"
-                    ]
-                },
-                "moon_delay": [
-                    1,
-                    12
-                ],
-                "involved_cats": {
-                    "m_c": "r_c",
-                    "mur_c": "m_c",
-                    "r_c": {
-                        "age": [
-                            "any"
-                        ]
-                    }
-                }
-            }
-        ]
+    "future_event": [
+      {
+        "event_type": "misc",
+        "pool": {
+          "sub_type": [
+            "murder_reveal"
+          ],
+          "excluded_event_id": [
+            "gen_misc_murderreveal_tattletail1",
+            "gen_misc_murderreveal_tattletail2",
+            "gen_misc_murderreveal_tattletail3"
+          ]
+        },
+        "moon_delay": [
+          1,
+          12
+        ],
+        "involved_cats": {
+          "m_c": "r_c",
+          "mur_c": "m_c",
+          "r_c": {
+            "age": [
+              "any"
+            ]
+          }
+        }
+      }
+    ]
     },
     {
         "event_id": "gen_death_murder_any2trait",
@@ -169,29 +179,34 @@
                 "death": "m_c was murdered by r_c."
             }
         ],
-        "future_event": [
-            {
-                "event_type": "misc",
-                "pool": {
-                    "sub_type": [
-                        "murder_reveal"
-                    ]
-                },
-                "moon_delay": [
-                    1,
-                    12
-                ],
-                "involved_cats": {
-                    "m_c": "r_c",
-                    "mur_c": "m_c",
-                    "r_c": {
-                        "age": [
-                            "any"
-                        ]
-                    }
-                }
-            }
-        ]
+    "future_event": [
+      {
+        "event_type": "misc",
+        "pool": {
+          "sub_type": [
+            "murder_reveal"
+          ],
+          "excluded_event_id": [
+            "gen_misc_murderreveal_tattletail1",
+            "gen_misc_murderreveal_tattletail2",
+            "gen_misc_murderreveal_tattletail3"
+          ]
+        },
+        "moon_delay": [
+          1,
+          12
+        ],
+        "involved_cats": {
+          "m_c": "r_c",
+          "mur_c": "m_c",
+          "r_c": {
+            "age": [
+              "any"
+            ]
+          }
+        }
+      }
+    ]
     },
     {
         "event_id": "gen_death_murder_any3",
@@ -235,29 +250,34 @@
                 "death": "m_c was murdered by r_c."
             }
         ],
-        "future_event": [
-            {
-                "event_type": "misc",
-                "pool": {
-                    "sub_type": [
-                        "murder_reveal"
-                    ]
-                },
-                "moon_delay": [
-                    1,
-                    12
-                ],
-                "involved_cats": {
-                    "m_c": "r_c",
-                    "mur_c": "m_c",
-                    "r_c": {
-                        "age": [
-                            "any"
-                        ]
-                    }
-                }
-            }
-        ]
+    "future_event": [
+      {
+        "event_type": "misc",
+        "pool": {
+          "sub_type": [
+            "murder_reveal"
+          ],
+          "excluded_event_id": [
+            "gen_misc_murderreveal_tattletail1",
+            "gen_misc_murderreveal_tattletail2",
+            "gen_misc_murderreveal_tattletail3"
+          ]
+        },
+        "moon_delay": [
+          1,
+          12
+        ],
+        "involved_cats": {
+          "m_c": "r_c",
+          "mur_c": "m_c",
+          "r_c": {
+            "age": [
+              "any"
+            ]
+          }
+        }
+      }
+    ]
     },
     {
         "event_id": "gen_death_murder_any4",
@@ -302,29 +322,34 @@
                 "death": "m_c was secretly murdered by r_c, who made the death look accidental."
             }
         ],
-        "future_event": [
-            {
-                "event_type": "misc",
-                "pool": {
-                    "sub_type": [
-                        "murder_reveal"
-                    ]
-                },
-                "moon_delay": [
-                    1,
-                    12
-                ],
-                "involved_cats": {
-                    "m_c": "r_c",
-                    "mur_c": "m_c",
-                    "r_c": {
-                        "age": [
-                            "any"
-                        ]
-                    }
-                }
-            }
-        ]
+    "future_event": [
+      {
+        "event_type": "misc",
+        "pool": {
+          "sub_type": [
+            "murder_reveal"
+          ],
+          "excluded_event_id": [
+            "gen_misc_murderreveal_tattletail1",
+            "gen_misc_murderreveal_tattletail2",
+            "gen_misc_murderreveal_tattletail3"
+          ]
+        },
+        "moon_delay": [
+          1,
+          12
+        ],
+        "involved_cats": {
+          "m_c": "r_c",
+          "mur_c": "m_c",
+          "r_c": {
+            "age": [
+              "any"
+            ]
+          }
+        }
+      }
+    ]
     },
     {
         "event_id": "gen_death_murder_anymed1",
@@ -366,29 +391,34 @@
                 "death": "m_c was murdered by r_c, who fed {PRONOUN/m_c/object} deathberries."
             }
         ],
-        "future_event": [
-            {
-                "event_type": "misc",
-                "pool": {
-                    "sub_type": [
-                        "murder_reveal"
-                    ]
-                },
-                "moon_delay": [
-                    1,
-                    12
-                ],
-                "involved_cats": {
-                    "m_c": "r_c",
-                    "mur_c": "m_c",
-                    "r_c": {
-                        "age": [
-                            "any"
-                        ]
-                    }
-                }
-            }
-        ]
+    "future_event": [
+      {
+        "event_type": "misc",
+        "pool": {
+          "sub_type": [
+            "murder_reveal"
+          ],
+          "excluded_event_id": [
+            "gen_misc_murderreveal_tattletail1",
+            "gen_misc_murderreveal_tattletail2",
+            "gen_misc_murderreveal_tattletail3"
+          ]
+        },
+        "moon_delay": [
+          1,
+          12
+        ],
+        "involved_cats": {
+          "m_c": "r_c",
+          "mur_c": "m_c",
+          "r_c": {
+            "age": [
+              "any"
+            ]
+          }
+        }
+      }
+    ]
     },
     {
         "event_id": "gen_death_murder_anymed2",
@@ -433,29 +463,34 @@
                 "death": "m_c was murdered by r_c, who fed {PRONOUN/m_c/object} foxglove seeds."
             }
         ],
-        "future_event": [
-            {
-                "event_type": "misc",
-                "pool": {
-                    "sub_type": [
-                        "murder_reveal"
-                    ]
-                },
-                "moon_delay": [
-                    1,
-                    12
-                ],
-                "involved_cats": {
-                    "m_c": "r_c",
-                    "mur_c": "m_c",
-                    "r_c": {
-                        "age": [
-                            "any"
-                        ]
-                    }
-                }
-            }
-        ]
+    "future_event": [
+      {
+        "event_type": "misc",
+        "pool": {
+          "sub_type": [
+            "murder_reveal"
+          ],
+          "excluded_event_id": [
+            "gen_misc_murderreveal_tattletail1",
+            "gen_misc_murderreveal_tattletail2",
+            "gen_misc_murderreveal_tattletail3"
+          ]
+        },
+        "moon_delay": [
+          1,
+          12
+        ],
+        "involved_cats": {
+          "m_c": "r_c",
+          "mur_c": "m_c",
+          "r_c": {
+            "age": [
+              "any"
+            ]
+          }
+        }
+      }
+    ]
     },
     {
         "event_id": "gen_death_murder_anymed3",
@@ -500,29 +535,34 @@
                 "death": "m_c was murdered by r_c, who fed {PRONOUN/m_c/object} nightshade berries."
             }
         ],
-        "future_event": [
-            {
-                "event_type": "misc",
-                "pool": {
-                    "sub_type": [
-                        "murder_reveal"
-                    ]
-                },
-                "moon_delay": [
-                    1,
-                    12
-                ],
-                "involved_cats": {
-                    "m_c": "r_c",
-                    "mur_c": "m_c",
-                    "r_c": {
-                        "age": [
-                            "any"
-                        ]
-                    }
-                }
-            }
-        ]
+    "future_event": [
+      {
+        "event_type": "misc",
+        "pool": {
+          "sub_type": [
+            "murder_reveal"
+          ],
+          "excluded_event_id": [
+            "gen_misc_murderreveal_tattletail1",
+            "gen_misc_murderreveal_tattletail2",
+            "gen_misc_murderreveal_tattletail3"
+          ]
+        },
+        "moon_delay": [
+          1,
+          12
+        ],
+        "involved_cats": {
+          "m_c": "r_c",
+          "mur_c": "m_c",
+          "r_c": {
+            "age": [
+              "any"
+            ]
+          }
+        }
+      }
+    ]
     },
     {
         "event_id": "gen_death_murder_anymed4",
@@ -571,29 +611,34 @@
                 "death": "m_c was murdered by r_c, who fed {PRONOUN/m_c/object} water hemlock."
             }
         ],
-        "future_event": [
-            {
-                "event_type": "misc",
-                "pool": {
-                    "sub_type": [
-                        "murder_reveal"
-                    ]
-                },
-                "moon_delay": [
-                    1,
-                    12
-                ],
-                "involved_cats": {
-                    "m_c": "r_c",
-                    "mur_c": "m_c",
-                    "r_c": {
-                        "age": [
-                            "any"
-                        ]
-                    }
-                }
-            }
-        ]
+    "future_event": [
+      {
+        "event_type": "misc",
+        "pool": {
+          "sub_type": [
+            "murder_reveal"
+          ],
+          "excluded_event_id": [
+            "gen_misc_murderreveal_tattletail1",
+            "gen_misc_murderreveal_tattletail2",
+            "gen_misc_murderreveal_tattletail3"
+          ]
+        },
+        "moon_delay": [
+          1,
+          12
+        ],
+        "involved_cats": {
+          "m_c": "r_c",
+          "mur_c": "m_c",
+          "r_c": {
+            "age": [
+              "any"
+            ]
+          }
+        }
+      }
+    ]
     },
     {
         "event_id": "gen_death_murder_anymed5",
@@ -638,29 +683,34 @@
                 "death": "m_c was murdered by r_c, who purposefully fed {PRONOUN/m_c/object} the wrong herbs."
             }
         ],
-        "future_event": [
-            {
-                "event_type": "misc",
-                "pool": {
-                    "sub_type": [
-                        "murder_reveal"
-                    ]
-                },
-                "moon_delay": [
-                    1,
-                    12
-                ],
-                "involved_cats": {
-                    "m_c": "r_c",
-                    "mur_c": "m_c",
-                    "r_c": {
-                        "age": [
-                            "any"
-                        ]
-                    }
-                }
-            }
-        ]
+    "future_event": [
+      {
+        "event_type": "misc",
+        "pool": {
+          "sub_type": [
+            "murder_reveal"
+          ],
+          "excluded_event_id": [
+            "gen_misc_murderreveal_tattletail1",
+            "gen_misc_murderreveal_tattletail2",
+            "gen_misc_murderreveal_tattletail3"
+          ]
+        },
+        "moon_delay": [
+          1,
+          12
+        ],
+        "involved_cats": {
+          "m_c": "r_c",
+          "mur_c": "m_c",
+          "r_c": {
+            "age": [
+              "any"
+            ]
+          }
+        }
+      }
+    ]
     },
     {
         "event_id": "gen_death_fox_any1",
@@ -2041,29 +2091,34 @@
                 "death": "m_c was murdered by r_c."
             }
         ],
-        "future_event": [
-            {
-                "event_type": "misc",
-                "pool": {
-                    "sub_type": [
-                        "murder_reveal"
-                    ]
-                },
-                "moon_delay": [
-                    1,
-                    12
-                ],
-                "involved_cats": {
-                    "m_c": "r_c",
-                    "mur_c": "m_c",
-                    "r_c": {
-                        "age": [
-                            "any"
-                        ]
-                    }
-                }
-            }
-        ]
+    "future_event": [
+      {
+        "event_type": "misc",
+        "pool": {
+          "sub_type": [
+            "murder_reveal"
+          ],
+          "excluded_event_id": [
+            "gen_misc_murderreveal_tattletail1",
+            "gen_misc_murderreveal_tattletail2",
+            "gen_misc_murderreveal_tattletail3"
+          ]
+        },
+        "moon_delay": [
+          1,
+          12
+        ],
+        "involved_cats": {
+          "m_c": "r_c",
+          "mur_c": "m_c",
+          "r_c": {
+            "age": [
+              "any"
+            ]
+          }
+        }
+      }
+    ]
     },
     {
         "event_id": "gen_death_murder_anydep2",
@@ -2116,29 +2171,34 @@
                 "death": "m_c was secretly murdered by r_c."
             }
         ],
-        "future_event": [
-            {
-                "event_type": "misc",
-                "pool": {
-                    "sub_type": [
-                        "murder_reveal"
-                    ]
-                },
-                "moon_delay": [
-                    1,
-                    12
-                ],
-                "involved_cats": {
-                    "m_c": "r_c",
-                    "mur_c": "m_c",
-                    "r_c": {
-                        "age": [
-                            "any"
-                        ]
-                    }
-                }
-            }
-        ]
+    "future_event": [
+      {
+        "event_type": "misc",
+        "pool": {
+          "sub_type": [
+            "murder_reveal"
+          ],
+          "excluded_event_id": [
+            "gen_misc_murderreveal_tattletail1",
+            "gen_misc_murderreveal_tattletail2",
+            "gen_misc_murderreveal_tattletail3"
+          ]
+        },
+        "moon_delay": [
+          1,
+          12
+        ],
+        "involved_cats": {
+          "m_c": "r_c",
+          "mur_c": "m_c",
+          "r_c": {
+            "age": [
+              "any"
+            ]
+          }
+        }
+      }
+    ]
     },
     {
         "event_id": "gen_death_murder_any5",
@@ -2180,29 +2240,34 @@
                 "death": "m_c {VERB/m_c/were/was} pushed into a ravine by r_c."
             }
         ],
-        "future_event": [
-            {
-                "event_type": "misc",
-                "pool": {
-                    "sub_type": [
-                        "murder_reveal"
-                    ]
-                },
-                "moon_delay": [
-                    1,
-                    12
-                ],
-                "involved_cats": {
-                    "m_c": "r_c",
-                    "mur_c": "m_c",
-                    "r_c": {
-                        "age": [
-                            "any"
-                        ]
-                    }
-                }
-            }
-        ]
+    "future_event": [
+      {
+        "event_type": "misc",
+        "pool": {
+          "sub_type": [
+            "murder_reveal"
+          ],
+          "excluded_event_id": [
+            "gen_misc_murderreveal_tattletail1",
+            "gen_misc_murderreveal_tattletail2",
+            "gen_misc_murderreveal_tattletail3"
+          ]
+        },
+        "moon_delay": [
+          1,
+          12
+        ],
+        "involved_cats": {
+          "m_c": "r_c",
+          "mur_c": "m_c",
+          "r_c": {
+            "age": [
+              "any"
+            ]
+          }
+        }
+      }
+    ]
     },
     {
         "event_id": "gen_death_murder_leafbareice1",
@@ -2251,29 +2316,34 @@
                 "death": "m_c was lured onto thin ice by r_c, resulting in {PRONOUN/m_c/poss} death."
             }
         ],
-        "future_event": [
-            {
-                "event_type": "misc",
-                "pool": {
-                    "sub_type": [
-                        "murder_reveal"
-                    ]
-                },
-                "moon_delay": [
-                    1,
-                    12
-                ],
-                "involved_cats": {
-                    "m_c": "r_c",
-                    "mur_c": "m_c",
-                    "r_c": {
-                        "age": [
-                            "any"
-                        ]
-                    }
-                }
-            }
-        ]
+    "future_event": [
+      {
+        "event_type": "misc",
+        "pool": {
+          "sub_type": [
+            "murder_reveal"
+          ],
+          "excluded_event_id": [
+            "gen_misc_murderreveal_tattletail1",
+            "gen_misc_murderreveal_tattletail2",
+            "gen_misc_murderreveal_tattletail3"
+          ]
+        },
+        "moon_delay": [
+          1,
+          12
+        ],
+        "involved_cats": {
+          "m_c": "r_c",
+          "mur_c": "m_c",
+          "r_c": {
+            "age": [
+              "any"
+            ]
+          }
+        }
+      }
+    ]
     },
     {
         "event_id": "gen_death_drown_multi1",
@@ -3195,29 +3265,34 @@
                 "death": "m_c was pushed off a cliff by r_c."
             }
         ],
-        "future_event": [
-            {
-                "event_type": "misc",
-                "pool": {
-                    "sub_type": [
-                        "murder_reveal"
-                    ]
-                },
-                "moon_delay": [
-                    1,
-                    12
-                ],
-                "involved_cats": {
-                    "m_c": "r_c",
-                    "mur_c": "m_c",
-                    "r_c": {
-                        "age": [
-                            "any"
-                        ]
-                    }
-                }
-            }
-        ]
+    "future_event": [
+      {
+        "event_type": "misc",
+        "pool": {
+          "sub_type": [
+            "murder_reveal"
+          ],
+          "excluded_event_id": [
+            "gen_misc_murderreveal_tattletail1",
+            "gen_misc_murderreveal_tattletail2",
+            "gen_misc_murderreveal_tattletail3"
+          ]
+        },
+        "moon_delay": [
+          1,
+          12
+        ],
+        "involved_cats": {
+          "m_c": "r_c",
+          "mur_c": "m_c",
+          "r_c": {
+            "age": [
+              "any"
+            ]
+          }
+        }
+      }
+    ]
     },
     {
         "event_id": "gen_death_war_any5",
@@ -3857,29 +3932,34 @@
                 "death": "m_c was killed in battle training with r_c."
             }
         ],
-        "future_event": [
-            {
-                "event_type": "misc",
-                "pool": {
-                    "sub_type": [
-                        "murder_reveal"
-                    ]
-                },
-                "moon_delay": [
-                    1,
-                    12
-                ],
-                "involved_cats": {
-                    "m_c": "r_c",
-                    "mur_c": "m_c",
-                    "r_c": {
-                        "age": [
-                            "any"
-                        ]
-                    }
-                }
-            }
-        ]
+    "future_event": [
+      {
+        "event_type": "misc",
+        "pool": {
+          "sub_type": [
+            "murder_reveal"
+          ],
+          "excluded_event_id": [
+            "gen_misc_murderreveal_tattletail1",
+            "gen_misc_murderreveal_tattletail2",
+            "gen_misc_murderreveal_tattletail3"
+          ]
+        },
+        "moon_delay": [
+          1,
+          12
+        ],
+        "involved_cats": {
+          "m_c": "r_c",
+          "mur_c": "m_c",
+          "r_c": {
+            "age": [
+              "any"
+            ]
+          }
+        }
+      }
+    ]
     },
     {
         "event_id": "gen_death_murder_anykit2",
@@ -3917,29 +3997,34 @@
                 "death": "m_c ate deathberries and succumbed to the poison."
             }
         ],
-        "future_event": [
-            {
-                "event_type": "misc",
-                "pool": {
-                    "sub_type": [
-                        "murder_reveal"
-                    ]
-                },
-                "moon_delay": [
-                    1,
-                    12
-                ],
-                "involved_cats": {
-                    "m_c": "r_c",
-                    "mur_c": "m_c",
-                    "r_c": {
-                        "age": [
-                            "any"
-                        ]
-                    }
-                }
-            }
-        ]
+    "future_event": [
+      {
+        "event_type": "misc",
+        "pool": {
+          "sub_type": [
+            "murder_reveal"
+          ],
+          "excluded_event_id": [
+            "gen_misc_murderreveal_tattletail1",
+            "gen_misc_murderreveal_tattletail2",
+            "gen_misc_murderreveal_tattletail3"
+          ]
+        },
+        "moon_delay": [
+          1,
+          12
+        ],
+        "involved_cats": {
+          "m_c": "r_c",
+          "mur_c": "m_c",
+          "r_c": {
+            "age": [
+              "any"
+            ]
+          }
+        }
+      }
+    ]
     },
     {
         "event_id": "gen_death_murder_multikit1",
@@ -3985,29 +4070,34 @@
                 "death": "m_c drowned in a stream while r_c watched."
             }
         ],
-        "future_event": [
-            {
-                "event_type": "misc",
-                "pool": {
-                    "sub_type": [
-                        "murder_reveal"
-                    ]
-                },
-                "moon_delay": [
-                    1,
-                    12
-                ],
-                "involved_cats": {
-                    "m_c": "r_c",
-                    "mur_c": "m_c",
-                    "r_c": {
-                        "age": [
-                            "any"
-                        ]
-                    }
-                }
-            }
-        ]
+    "future_event": [
+      {
+        "event_type": "misc",
+        "pool": {
+          "sub_type": [
+            "murder_reveal"
+          ],
+          "excluded_event_id": [
+            "gen_misc_murderreveal_tattletail1",
+            "gen_misc_murderreveal_tattletail2",
+            "gen_misc_murderreveal_tattletail3"
+          ]
+        },
+        "moon_delay": [
+          1,
+          12
+        ],
+        "involved_cats": {
+          "m_c": "r_c",
+          "mur_c": "m_c",
+          "r_c": {
+            "age": [
+              "any"
+            ]
+          }
+        }
+      }
+    ]
     },
     {
         "event_id": "gen_death_ockill_anymed1",
@@ -6010,29 +6100,34 @@
                 "death": "m_c was pushed under a monster by r_c."
             }
         ],
-        "future_event": [
-            {
-                "event_type": "misc",
-                "pool": {
-                    "sub_type": [
-                        "murder_reveal"
-                    ]
-                },
-                "moon_delay": [
-                    1,
-                    12
-                ],
-                "involved_cats": {
-                    "m_c": "r_c",
-                    "mur_c": "m_c",
-                    "r_c": {
-                        "age": [
-                            "any"
-                        ]
-                    }
-                }
-            }
-        ]
+    "future_event": [
+      {
+        "event_type": "misc",
+        "pool": {
+          "sub_type": [
+            "murder_reveal"
+          ],
+          "excluded_event_id": [
+            "gen_misc_murderreveal_tattletail1",
+            "gen_misc_murderreveal_tattletail2",
+            "gen_misc_murderreveal_tattletail3"
+          ]
+        },
+        "moon_delay": [
+          1,
+          12
+        ],
+        "involved_cats": {
+          "m_c": "r_c",
+          "mur_c": "m_c",
+          "r_c": {
+            "age": [
+              "any"
+            ]
+          }
+        }
+      }
+    ]
     },
     {
         "event_id": "gen_death_murder_anylead2",
@@ -6084,29 +6179,34 @@
                 "death": "m_c was murdered by r_c."
             }
         ],
-        "future_event": [
-            {
-                "event_type": "misc",
-                "pool": {
-                    "sub_type": [
-                        "murder_reveal"
-                    ]
-                },
-                "moon_delay": [
-                    1,
-                    12
-                ],
-                "involved_cats": {
-                    "m_c": "r_c",
-                    "mur_c": "m_c",
-                    "r_c": {
-                        "age": [
-                            "any"
-                        ]
-                    }
-                }
-            }
-        ]
+    "future_event": [
+      {
+        "event_type": "misc",
+        "pool": {
+          "sub_type": [
+            "murder_reveal"
+          ],
+          "excluded_event_id": [
+            "gen_misc_murderreveal_tattletail1",
+            "gen_misc_murderreveal_tattletail2",
+            "gen_misc_murderreveal_tattletail3"
+          ]
+        },
+        "moon_delay": [
+          1,
+          12
+        ],
+        "involved_cats": {
+          "m_c": "r_c",
+          "mur_c": "m_c",
+          "r_c": {
+            "age": [
+              "any"
+            ]
+          }
+        }
+      }
+    ]
     },
     {
         "event_id": "gen_death_murder_anylead3",
@@ -6186,29 +6286,34 @@
                 }
             }
         ],
-        "future_event": [
-            {
-                "event_type": "misc",
-                "pool": {
-                    "sub_type": [
-                        "murder_reveal"
-                    ]
-                },
-                "moon_delay": [
-                    1,
-                    12
-                ],
-                "involved_cats": {
-                    "m_c": "r_c",
-                    "mur_c": "m_c",
-                    "r_c": {
-                        "age": [
-                            "any"
-                        ]
-                    }
-                }
-            }
-        ]
+    "future_event": [
+      {
+        "event_type": "misc",
+        "pool": {
+          "sub_type": [
+            "murder_reveal"
+          ],
+          "excluded_event_id": [
+            "gen_misc_murderreveal_tattletail1",
+            "gen_misc_murderreveal_tattletail2",
+            "gen_misc_murderreveal_tattletail3"
+          ]
+        },
+        "moon_delay": [
+          1,
+          12
+        ],
+        "involved_cats": {
+          "m_c": "r_c",
+          "mur_c": "m_c",
+          "r_c": {
+            "age": [
+              "any"
+            ]
+          }
+        }
+      }
+    ]
     },
     {
         "event_id": "gen_death_murder_anylead4",
@@ -6255,29 +6360,34 @@
                 "death": "m_c was indirectly murdered by r_c in a fatal dog attack."
             }
         ],
-        "future_event": [
-            {
-                "event_type": "misc",
-                "pool": {
-                    "sub_type": [
-                        "murder_reveal"
-                    ]
-                },
-                "moon_delay": [
-                    1,
-                    12
-                ],
-                "involved_cats": {
-                    "m_c": "r_c",
-                    "mur_c": "m_c",
-                    "r_c": {
-                        "age": [
-                            "any"
-                        ]
-                    }
-                }
-            }
-        ]
+    "future_event": [
+      {
+        "event_type": "misc",
+        "pool": {
+          "sub_type": [
+            "murder_reveal"
+          ],
+          "excluded_event_id": [
+            "gen_misc_murderreveal_tattletail1",
+            "gen_misc_murderreveal_tattletail2",
+            "gen_misc_murderreveal_tattletail3"
+          ]
+        },
+        "moon_delay": [
+          1,
+          12
+        ],
+        "involved_cats": {
+          "m_c": "r_c",
+          "mur_c": "m_c",
+          "r_c": {
+            "age": [
+              "any"
+            ]
+          }
+        }
+      }
+    ]
     },
     {
         "event_id": "gen_death_murder_anyleader4",
@@ -6677,29 +6787,34 @@
                 "death": "m_c was killed in battle training with r_c."
             }
         ],
-        "future_event": [
-            {
-                "event_type": "misc",
-                "pool": {
-                    "sub_type": [
-                        "murder_reveal"
-                    ]
-                },
-                "moon_delay": [
-                    1,
-                    12
-                ],
-                "involved_cats": {
-                    "m_c": "r_c",
-                    "mur_c": "m_c",
-                    "r_c": {
-                        "age": [
-                            "any"
-                        ]
-                    }
-                }
-            }
-        ]
+    "future_event": [
+      {
+        "event_type": "misc",
+        "pool": {
+          "sub_type": [
+            "murder_reveal"
+          ],
+          "excluded_event_id": [
+            "gen_misc_murderreveal_tattletail1",
+            "gen_misc_murderreveal_tattletail2",
+            "gen_misc_murderreveal_tattletail3"
+          ]
+        },
+        "moon_delay": [
+          1,
+          12
+        ],
+        "involved_cats": {
+          "m_c": "r_c",
+          "mur_c": "m_c",
+          "r_c": {
+            "age": [
+              "any"
+            ]
+          }
+        }
+      }
+    ]
     },
     {
         "event_id": "gen_death_freeze_leafbarekit1",
@@ -7635,29 +7750,34 @@
             ],
             "changed": 0
         },
-        "future_event": [
-            {
-                "event_type": "misc",
-                "pool": {
-                    "sub_type": [
-                        "murder_reveal"
-                    ]
-                },
-                "moon_delay": [
-                    1,
-                    12
-                ],
-                "involved_cats": {
-                    "m_c": "r_c",
-                    "mur_c": "m_c",
-                    "r_c": {
-                        "age": [
-                            "any"
-                        ]
-                    }
-                }
-            }
-        ]
+    "future_event": [
+      {
+        "event_type": "misc",
+        "pool": {
+          "sub_type": [
+            "murder_reveal"
+          ],
+          "excluded_event_id": [
+            "gen_misc_murderreveal_tattletail1",
+            "gen_misc_murderreveal_tattletail2",
+            "gen_misc_murderreveal_tattletail3"
+          ]
+        },
+        "moon_delay": [
+          1,
+          12
+        ],
+        "involved_cats": {
+          "m_c": "r_c",
+          "mur_c": "m_c",
+          "r_c": {
+            "age": [
+              "any"
+            ]
+          }
+        }
+      }
+    ]
     },
     {
         "event_id": "gen_death_warmurder2",
@@ -7720,29 +7840,34 @@
                 }
             }
         ],
-        "future_event": [
-            {
-                "event_type": "misc",
-                "pool": {
-                    "sub_type": [
-                        "murder_reveal"
-                    ]
-                },
-                "moon_delay": [
-                    1,
-                    12
-                ],
-                "involved_cats": {
-                    "m_c": "r_c",
-                    "mur_c": "m_c",
-                    "r_c": {
-                        "age": [
-                            "any"
-                        ]
-                    }
-                }
-            }
-        ]
+    "future_event": [
+      {
+        "event_type": "misc",
+        "pool": {
+          "sub_type": [
+            "murder_reveal"
+          ],
+          "excluded_event_id": [
+            "gen_misc_murderreveal_tattletail1",
+            "gen_misc_murderreveal_tattletail2",
+            "gen_misc_murderreveal_tattletail3"
+          ]
+        },
+        "moon_delay": [
+          1,
+          12
+        ],
+        "involved_cats": {
+          "m_c": "r_c",
+          "mur_c": "m_c",
+          "r_c": {
+            "age": [
+              "any"
+            ]
+          }
+        }
+      }
+    ]
     },
     {
         "event_id": "gen_death_trapmurder1",
@@ -7792,29 +7917,34 @@
                 "death": "m_c died when r_c lured {PRONOUN/m_c/object} into a Twoleg trap."
             }
         ],
-        "future_event": [
-            {
-                "event_type": "misc",
-                "pool": {
-                    "sub_type": [
-                        "murder_reveal"
-                    ]
-                },
-                "moon_delay": [
-                    1,
-                    12
-                ],
-                "involved_cats": {
-                    "m_c": "r_c",
-                    "mur_c": "m_c",
-                    "r_c": {
-                        "age": [
-                            "any"
-                        ]
-                    }
-                }
-            }
-        ]
+    "future_event": [
+      {
+        "event_type": "misc",
+        "pool": {
+          "sub_type": [
+            "murder_reveal"
+          ],
+          "excluded_event_id": [
+            "gen_misc_murderreveal_tattletail1",
+            "gen_misc_murderreveal_tattletail2",
+            "gen_misc_murderreveal_tattletail3"
+          ]
+        },
+        "moon_delay": [
+          1,
+          12
+        ],
+        "involved_cats": {
+          "m_c": "r_c",
+          "mur_c": "m_c",
+          "r_c": {
+            "age": [
+              "any"
+            ]
+          }
+        }
+      }
+    ]
     },
     {
         "event_id": "gen_death_angrymurder1",
@@ -7859,29 +7989,34 @@
                 "death": "m_c was murdered by r_c."
             }
         ],
-        "future_event": [
-            {
-                "event_type": "misc",
-                "pool": {
-                    "sub_type": [
-                        "murder_reveal"
-                    ]
-                },
-                "moon_delay": [
-                    1,
-                    12
-                ],
-                "involved_cats": {
-                    "m_c": "r_c",
-                    "mur_c": "m_c",
-                    "r_c": {
-                        "age": [
-                            "any"
-                        ]
-                    }
-                }
-            }
-        ]
+    "future_event": [
+      {
+        "event_type": "misc",
+        "pool": {
+          "sub_type": [
+            "murder_reveal"
+          ],
+          "excluded_event_id": [
+            "gen_misc_murderreveal_tattletail1",
+            "gen_misc_murderreveal_tattletail2",
+            "gen_misc_murderreveal_tattletail3"
+          ]
+        },
+        "moon_delay": [
+          1,
+          12
+        ],
+        "involved_cats": {
+          "m_c": "r_c",
+          "mur_c": "m_c",
+          "r_c": {
+            "age": [
+              "any"
+            ]
+          }
+        }
+      }
+    ]
     },
     {
         "event_id": "gen_death_starclanmurder1",
@@ -7934,29 +8069,34 @@
                 "death": "r_c died after launching a failed assassination attempt."
             }
         ],
-        "future_event": [
-            {
-                "event_type": "misc",
-                "pool": {
-                    "sub_type": [
-                        "murder_reveal"
-                    ]
-                },
-                "moon_delay": [
-                    1,
-                    12
-                ],
-                "involved_cats": {
-                    "m_c": "r_c",
-                    "mur_c": "m_c",
-                    "r_c": {
-                        "age": [
-                            "any"
-                        ]
-                    }
-                }
-            }
+    "future_event": [
+      {
+        "event_type": "misc",
+        "pool": {
+          "sub_type": [
+            "murder_reveal"
+          ],
+          "excluded_event_id": [
+            "gen_misc_murderreveal_tattletail1",
+            "gen_misc_murderreveal_tattletail2",
+            "gen_misc_murderreveal_tattletail3"
+          ]
+        },
+        "moon_delay": [
+          1,
+          12
         ],
+        "involved_cats": {
+          "m_c": "r_c",
+          "mur_c": "m_c",
+          "r_c": {
+            "age": [
+              "any"
+            ]
+          }
+        }
+      }
+    ],
         "relationships": [
             {
                 "cats_from": ["m_c"],
@@ -8017,7 +8157,12 @@
                 "pool": {
                     "sub_type": [
                         "murder_reveal"
-                    ]
+                    ],
+          "excluded_event_id": [
+            "gen_misc_murderreveal_tattletail1",
+            "gen_misc_murderreveal_tattletail2",
+            "gen_misc_murderreveal_tattletail3"
+          ]
                 },
                 "moon_delay": [
                     1,
@@ -8135,7 +8280,12 @@
                 "pool": {
                     "sub_type": [
                         "murder_reveal"
-                    ]
+                    ],
+          "excluded_event_id": [
+            "gen_misc_murderreveal_tattletail1",
+            "gen_misc_murderreveal_tattletail2",
+            "gen_misc_murderreveal_tattletail3"
+          ]
                 },
                 "moon_delay": [
                     1,
@@ -8199,7 +8349,12 @@
                 "pool": {
                     "sub_type": [
                         "murder_reveal"
-                    ]
+                    ],
+          "excluded_event_id": [
+            "gen_misc_murderreveal_tattletail1",
+            "gen_misc_murderreveal_tattletail2",
+            "gen_misc_murderreveal_tattletail3"
+          ]
                 },
                 "moon_delay": [
                     1,
