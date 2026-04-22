@@ -736,14 +736,22 @@ class Pregnancy_Events:
         if other_cat and cat.mate and other_cat.ID not in cat.mate:
             cheated_mate = Pregnancy_Events.get_cheated_mate(cat)
             if cheated_mate:
-                # if the mate at first didn't know they were cheated on,
-                # there's a chance they will find out
-                if affair_known is False and random.randint(0, 1):
-                    secret_affair_birth = True
-                    adoptive_parents.append(cheated_mate.ID)
+                # If the pregnancy was announced as non-affair (affair_known is False),
+                # there is a chance the mate learns the truth at birth.
+                # If they do NOT learn it, this remains a secret affair birth and they
+                # raise the kits as their own.
+                if affair_known is False:
+                    mate_discovers_affair = bool(random.randint(0, 1))
+                    if not mate_discovers_affair:
+                        secret_affair_birth = True
+                        adoptive_parents.append(cheated_mate.ID)
+                    else:
+                        mate_claimed_kits = Pregnancy_Events.should_claim_affair_kits(
+                            cheated_mate, cat
+                        )
+                        if mate_claimed_kits:
+                            adoptive_parents.append(cheated_mate.ID)
                 else:
-                    # they will never find out that the litter isn't theirs and treats
-                    # the litter as their own
                     mate_claimed_kits = Pregnancy_Events.should_claim_affair_kits(
                         cheated_mate, cat
                     )
@@ -1673,12 +1681,19 @@ class Pregnancy_Events:
 
             kitten.create_inheritance_new_cat()  # Calculate inheritance.
 
-        # check if the possible adoptive cat is not already in the family tree and
-        # add them as adoptive parents if not
+        # check if the possible adoptive cat is not already a biological parent and
+        # add them as adoptive parents if not.
+        #
+        # NOTE:
+        # inheritance.all_involved includes mates, so filtering against it can
+        # accidentally drop valid adoptive parents (e.g. a cheated mate who decides
+        # to help raise an affair litter). We only need to prevent adding actual
+        # birth parents as adoptive parents.
         final_adoptive_parents = []
+        birth_parent_ids = set(all_kitten[0].get_parents())
         for adoptive_p in all_adoptive_parents:
             Cat.fetch_cat(adoptive_p).get_new_thought(CatThought.ON_BIRTH)
-            if adoptive_p not in all_kitten[0].inheritance.all_involved:
+            if adoptive_p not in birth_parent_ids:
                 final_adoptive_parents.append(adoptive_p)
         if not adoptive_parents:
             cat.get_new_thought(CatThought.ON_BIRTH)
