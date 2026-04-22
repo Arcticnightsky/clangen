@@ -82,7 +82,7 @@ class Pregnancy_Events:
     def remove_unmentioned_mate_ids(
         involved_cats: List[str], event_text: str, cat_dict: Dict
     ) -> List[str]:
-        """Removes the cheated mate's TD if mc/rc_mate isn't present in the affair birth event text."""
+        """Removes the cheated mate's ID if mc/rc_mate isn't present in the affair birth event text."""
         for placeholder in ("mc_mate", "rc_mate"):
             cat = cat_dict.get(placeholder)
             if cat and placeholder not in event_text and cat.ID in involved_cats:
@@ -419,8 +419,9 @@ class Pregnancy_Events:
                 involved_cats = Pregnancy_Events.append_second_parent_if_mentioned(
                     involved_cats, event_text, other_cat
                 )
-            # if the pregnant cat is single and had a fling with a random cat, let them announce their surprise pregnancy
-            # and leave the Clan and player pointing fingers on who the second parent may be
+            # if the pregnant cat is single and had a fling with a random cat, let them
+            # announce their surprise pregnancy and leave the Clan and player pointing
+            # fingers on who the second parent may be
             elif allow_coparenting is True and len(cat.mate) == 0:
                 text = choice(
                     Pregnancy_Events.PREGNANT_STRINGS["surprising_announcement"]
@@ -439,7 +440,8 @@ class Pregnancy_Events:
                 involved_cats = [cat.ID]
 
             # and lastly, if the pregnant cat got knocked up by another cat who ISN'T their mate,
-            # let the player guess whether it's an affair or not, sometimes the events will tell you, sometimes they won't...
+            # let the player guess whether it's an affair or not, sometimes the events will tell you,
+            # sometimes they won't...
             elif (
                 allow_affair is True
                 and other_cat.ID not in cat.mate
@@ -546,8 +548,9 @@ class Pregnancy_Events:
                 involved_cats = Pregnancy_Events.append_second_parent_if_mentioned(
                     involved_cats, event_text, other_cat
                 )
-            # if the pregnant cat is single and had a fling with a random cat, let them announce their surprise pregnancy
-            # and leave the Clan and player pointing fingers on who the second parent may be
+            # if the pregnant cat is single and had a fling with a random cat, let them
+            # announce their surprise pregnancy and leave the Clan and player pointing
+            # fingers on who the second parent may be
             elif allow_coparenting is True and len(pregnant_cat.mate) == 0:
                 text = choice(
                     Pregnancy_Events.PREGNANT_STRINGS["surprising_announcement"]
@@ -559,8 +562,8 @@ class Pregnancy_Events:
                 )
                 text = event_text_adjust(Cat, text, main_cat=pregnant_cat, clan=clan)
                 involved_cats = [pregnant_cat.ID]
-            # if the pregnant cat is in a same-sex relationship and they get knocked-up by another cat,
-            # let there be some drama for that!
+            # if the pregnant cat is in a same-sex relationship and they get knocked-up
+            # by another cat, let there be some drama for that!
             elif (
                 allow_affair is True
                 and second_parent
@@ -585,7 +588,8 @@ class Pregnancy_Events:
                     involved_cats, event_text, random_cat
                 )
             # and lastly, if the pregnant cat got knocked up by another cat who ISN'T their mate,
-            # let the player guess whether it's an affair or not, sometimes the events will tell you, sometimes they won't...
+            # let the player guess whether it's an affair or not, sometimes the events will tell you,
+            # sometimes they won't...
             elif (
                 allow_affair is True
                 and second_parent
@@ -722,6 +726,7 @@ class Pregnancy_Events:
         other_cat_id = clan.pregnancy_data[cat.ID]["second_parent"]
         other_cat = Cat.all_cats.get(other_cat_id)
 
+        Pregnancy_Events.set_biggest_family()
         extra_naming_text = None
         has_afab_mate = any(
             Cat.fetch_cat(mate_id) and Cat.fetch_cat(mate_id).gender == "female"
@@ -742,15 +747,13 @@ class Pregnancy_Events:
                     secret_affair_birth = True
                     adoptive_parents.append(cheated_mate.ID)
                 else:
-                    # they will never find out that the litter isn't theirs and treats
-                    # the litter as their own
+                    # if they knew, they can still choose to help raise the kits or not
                     mate_claimed_kits = Pregnancy_Events.should_claim_affair_kits(
                         cheated_mate, cat
                     )
                     if mate_claimed_kits:
                         adoptive_parents.append(cheated_mate.ID)
         coparenting_outcome = None
-
         kits = Pregnancy_Events.get_kits(
             kits_amount, cat, other_cat, clan, adoptive_parents=adoptive_parents
         )
@@ -1022,6 +1025,7 @@ class Pregnancy_Events:
         if "rc_mate" in cat_dict:
             print_event = print_event.replace("rc_mate", "rc_mate")
 
+        # if the event doesn't mention mc/rc_mate, remove the cheated mate's ID from the event
         involved_cats = Pregnancy_Events.remove_unmentioned_mate_ids(
             involved_cats, print_event, cat_dict
         )
@@ -1421,7 +1425,6 @@ class Pregnancy_Events:
         other_cat=None,
         clan=game.clan,
         adoptive_parents=None,
-        coparenting_outcome=None,
     ):
         """Create some amount of kits
         No parents are specified, it will create a blood parents for all the
