@@ -12215,8 +12215,7 @@
                 "adjust": "reduce_half"
             }
         ]
-    }
-},
+  },
   {
        "event_id": "gen_doubtful_med_mate",
         "location": [
