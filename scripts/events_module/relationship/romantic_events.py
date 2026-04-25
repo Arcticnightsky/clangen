@@ -210,9 +210,17 @@ class RomanticEvents:
         value_change = "increase" if positive else "decrease"
         rel_type = RelType.ROMANCE
         relationship.chosen_interaction = chosen_interaction
-        relationship.interaction_affect_relationships(
-            positive, chosen_interaction.intensity, rel_type
-        )
+        intensity = chosen_interaction.intensity
+        if (
+            positive
+            and (
+                cat_from.status.rank.is_any_medicine_rank()
+                or cat_to.status.rank.is_any_medicine_rank()
+            )
+            and random_module.randint(1, 12) != 1
+        ):
+            intensity = 0
+        relationship.interaction_affect_relationships(positive, intensity, rel_type)
 
         # give cats injuries
         if len(chosen_interaction.get_injuries) > 0:
