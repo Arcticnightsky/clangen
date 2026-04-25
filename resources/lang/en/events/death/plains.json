@@ -107,7 +107,8 @@
                 "adventurous",
                 "ambitious",
                 "loyal"
-            ]
+            ],
+            "dies": true
         },
         "r_c": {
             "status": [
@@ -157,7 +158,7 @@
                 ],
                 "amount": 50,
                 "log": {
-                    "cats_from": "cat_from honors cat_to for rescuing {PRONOUN/cat_fron/object} and the rest of c_n from coyotes."
+                    "cats_from": "cat_from honors cat_to for rescuing {PRONOUN/cat_from/object} and the rest of c_n from coyotes."
                 }
             }
         ]
