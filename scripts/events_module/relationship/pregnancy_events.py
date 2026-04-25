@@ -1307,7 +1307,7 @@ class Pregnancy_Events:
             cat.age in [CatAge.NEWBORN, CatAge.KITTEN, CatAge.ADOLESCENT]
             or cat.moons < 15
         )
-       if not_correct_age or cat.dead:
+        if not_correct_age or cat.dead:
             return False
         if cat.no_kits and not Pregnancy_Events.is_adoption_only_cat(cat):
             return False
