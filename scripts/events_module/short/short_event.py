@@ -324,6 +324,17 @@ class ShortEvent:
                 clan_reveal="clan_wide" in self.tags,
                 aware_individuals=[self.random_cat.ID],
             )
+            murderer_mates = []
+            for mate_id in self.main_cat.mate:
+                mate = Cat.fetch_cat(mate_id)
+                if mate and not mate.dead:
+                    murderer_mates.append(mate)
+            if murderer_mates:
+                change_relationship_values(
+                    [self.main_cat],
+                    murderer_mates,
+                    romance=-80,
+                )
 
         # change outsider rep
         if self.outsider:
