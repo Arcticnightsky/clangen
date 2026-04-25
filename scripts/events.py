@@ -1709,7 +1709,7 @@ def _is_suitable_medcat_app(cat) -> bool:
         logger.info("unbeneficial primary skill, chance updated to %d", round(chance))
 
     if cat.skills.secondary and cat.skills.secondary.path in unbeneficial_skills:
-        chance = chance 3.5
+        chance = chance * 3.5
         logger.info("unbeneficial secondary skill, chance updated to %d", round(chance))
     
     if cat.is_disabled():
