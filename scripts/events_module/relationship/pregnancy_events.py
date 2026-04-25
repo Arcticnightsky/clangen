@@ -418,6 +418,7 @@ class Pregnancy_Events:
 
         game.cur_events_list.append(
             Single_Event(print_event, "misc", cats_involved, cat_dict=cat_dict)
+        )
 
     @staticmethod
     def handle_zero_moon_pregnant(cat: Cat, other_cat=None, clan=game.clan):
