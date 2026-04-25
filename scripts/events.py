@@ -1696,7 +1696,7 @@ def _is_suitable_medcat_app(cat) -> bool:
         chance = chance / 2
         logger.info("beneficial secondary skill, chance updated to %d", round(chance))
 
-    if cat.skills.primary.path == SkillPath.HEALER or cat.skills.secondary and cat.skills.secondary.path == SkillPath.HEALER:
+    if cat.skills.primary.path == SkillPath.HEALER:
         chance = chance / 8
         logger.info("%s's a natural healer! Chance updated to %d", cat.name, round(chance))
         
@@ -1707,6 +1707,10 @@ def _is_suitable_medcat_app(cat) -> bool:
     if cat.skills.primary.path in unbeneficial_skills:
         chance = chance * 3.5
         logger.info("unbeneficial primary skill, chance updated to %d", round(chance))
+
+    if cat.skills.secondary and cat.skills.secondary.path in unbeneficial_skills:
+        chance = chance 3.5
+        logger.info("unbeneficial secondary skill, chance updated to %d", round(chance))
     
     if cat.is_disabled():
         chance = chance / 2
