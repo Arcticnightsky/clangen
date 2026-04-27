@@ -93,7 +93,49 @@
             ],
             "changed": 1
         }
+    },
+    {
+        "event_id": "pln_new_cat_lost_loner",
+        "location": [
+            "plains"
+        ],
+        "season": [
+            "any"
+        ],
+        "frequency": 1,
+        "event_text": "m_c found a loner wandering alone on the plains, tired and exhausted, c_n inquires as to why m_c brought {PRONOUN/n_c:0/object} here - they're not looking for outsiders. m_c says that {PRONOUN/m_c/subject} can't let another cat die, so n_c:0 just had to join.",
+        "m_c": {
+            "age": [
+                "young adult",
+                "adult",
+                "senior adult",
+                "senior"
+            ],
+            "status": [
+                "any"
+            ]
+        },
+        "new_cat": [
+            [
+                "loner",
+		"exists"
+            ]
+        ],
+		"relationships": [
+          {
+            "cats_from": ["m_c"],
+            "cats_to": ["n_c:0"],
+            "mutual": true,
+            "values": ["comfort", "like"],
+            "amount": 10
+          }
+        ],
+        "outsider": {
+            "current_rep": [
+                "neutral",
+				"hostile"
+            ],
+            "changed": 1
+        }
     }
-
-
 ]
