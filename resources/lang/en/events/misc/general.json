@@ -12283,6 +12283,7 @@
     "other_clan": {
         "current_rep": ["any"],
         "changed": -1
+	}
   },
   {
        "event_id": "gen_doubtful_med_mate",
