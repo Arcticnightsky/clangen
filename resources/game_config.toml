@@ -631,7 +631,7 @@ dev_tools = true
       "running nose" = 5
       whitecough = 1
 
-  [focus."rest_and_recover"]
+  [focus.rest_and_recover]
     # roughly 1/chance injuries will be prevented
     injury_prevent = 4
 

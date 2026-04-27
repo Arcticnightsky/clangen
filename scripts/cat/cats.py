@@ -1977,7 +1977,7 @@ class Cat:
         moons_with = game.clan.age - self.illnesses[illness]["moon_start"]
 
         # focus buff
-        moons_prior = constants.CONFIG["focus"]["rest_and_recover"][
+        recovery_buff = constants.CONFIG["focus"]["rest_and_recover"][
             "moons_earlier_healed"
         ]
 
@@ -1988,7 +1988,7 @@ class Cat:
         # CLAN FOCUS! - if the focus 'rest_and_recover' is selected
         elif (
             get_clan_setting("rest_and_recover")
-            and self.illnesses[illness]["duration"] + moons_prior - moons_with <= 0
+            and self.illnesses[illness]["duration"] - recovery_buff - moons_with <= 0
         ):
             self.healed_condition = True
             return False
@@ -2019,7 +2019,7 @@ class Cat:
         moons_with = game.clan.age - self.injuries[injury]["moon_start"]
 
         # focus buff
-        moons_prior = constants.CONFIG["focus"]["rest_and_recover"][
+        recovery_buff = constants.CONFIG["focus"]["rest_and_recover"][
             "moons_earlier_healed"
         ]
 
@@ -2035,7 +2035,7 @@ class Cat:
         elif (
             not self.injuries[injury]["complication"]
             and get_clan_setting("rest_and_recover")
-            and self.injuries[injury]["duration"] + moons_prior - moons_with <= 0
+            and self.injuries[injury]["duration"] - recovery_buff - moons_with <= 0
         ):
             self.healed_condition = True
             return False
