@@ -71,7 +71,7 @@
                         }
                     }
                 ],
-                "art": "gen_cat_with_kit_loner",
+                "art": "gen_cat_with_kits_loner",
                 "outsider_rep": 1,
                 "frequency": 1
             }
@@ -1333,6 +1333,7 @@
                         }
                     }
                 ],
+                "art": "gen_cat_with_kits_loner",
                 "outsider_rep": 1,
                 "frequency": 1
             }
@@ -1468,6 +1469,7 @@
                         }
                     }
                 ],
+                "art": "gen_cat_with_kits_loner",
                 "outsider_rep": 1,
                 "frequency": 1
             }
@@ -1517,7 +1519,7 @@
         "tags": [
             "new_cat"
         ],
-        "patrol_art": "bord_general_intro",
+        "patrol_art": "gen_bord_newcatkittypet1",
         "min_cats": 1,
         "max_cats": 1,
         "min_max_status": {},
@@ -1574,6 +1576,7 @@
                         }
                     }
                 ],
+                "art": "gen_cat_with_kits_loner",
                 "outsider_rep": 1,
                 "frequency": 1
             }
@@ -1857,7 +1860,7 @@
         "tags": [
             "new_cat"
         ],
-        "patrol_art": "bord_general_intro",
+        "patrol_art": "gen_found_scent_outsider",
         "min_cats": 3,
         "max_cats": 6,
         "min_max_status": {
@@ -1993,6 +1996,7 @@
                         }
                     }
                 ],
+                "art": "gen_cat_with_kit_loner",
                 "outsider_rep": -2,
                 "frequency": 1
             }
@@ -2021,6 +2025,7 @@
                         }
                     }
                 ],
+                "art": "gen_cat_looking_up3",
                 "frequency": 4
             },
             {
@@ -2079,7 +2084,7 @@
         "tags": [
             "new_cat"
         ],
-        "patrol_art": "bord_general_intro",
+        "patrol_art": "gen_train_solo",
         "min_cats": 1,
         "max_cats": 1,
         "min_max_status": {
@@ -2280,6 +2285,7 @@
                         }
                     }
                 ],
+                "art": "gen_outsiderwar_mates_headbump",
                 "outsider_rep": 1,
                 "frequency": 4
             }
@@ -2383,6 +2389,7 @@
                         }
                     }
                 ],
+                "art": "gen_found_scent_outsider",
                 "frequency": 4,
                 "outsider_rep": 0
             }
@@ -2446,6 +2453,7 @@
                         }
                     }
                 ],
+                "art": "gen_flower_date_warrior_loner",
                 "outsider_rep": -1,
                 "frequency": 4
             }
@@ -2509,6 +2517,7 @@
                         }
                     }
                 ],
+                "art": "gen_flower_date_warrior_loner",
                 "outsider_rep": -2,
                 "frequency": 4
             }
@@ -2735,6 +2744,7 @@
                         }
                     }
                 ],
+                "art": "gen_cat_with_kits_loner",
                 "outsider_rep": 1,
                 "frequency": 1
             }
@@ -2865,6 +2875,7 @@
                         }
                     }
                 ],
+                "art": "gen_cat_with_kits_loner",
                 "outsider_rep": 1,
                 "frequency": 1
             }
@@ -3130,10 +3141,11 @@
                         "values": ["like", "trust", "comfort"],
                         "amount": 10,
                         "log": {
-                            "cats_from": "cat_to was part of the patrol that invited cat_from to c_n."
+                            "cats_from": "to_cat was part of the patrol that invited from_cat and {PRONOUN/from_cat/poss} kits to c_n."
                         }
                     }
                 ],
+                "art": "gen_cat_with_kits_loner",
                 "outsider_rep": 1,
                 "frequency": 4
             },
@@ -3164,6 +3176,7 @@
                         }
                     }
                 ],
+                "art": "gen_cat_with_kits_loner",
                 "outsider_rep": 1,
                 "frequency": 1
             },
@@ -3199,6 +3212,7 @@
                         }
                     }
                 ],
+                "art": "gen_cat_with_kits_loner",
                 "outsider_rep": 1,
                 "frequency": 4
             }
@@ -3266,6 +3280,7 @@
                     "scar": "m_c gained a scar after tussling with a rogue.",
                     "death": "m_c died from injuries sustained in a fight with a rogue."
                 },
+                "art": "gen_angry_cat_loner",
                 "outsider_rep": -1,
                 "frequency": 3
             }
@@ -3304,6 +3319,7 @@
                         }
                     }
                 ],
+                "art": "gen_cat_with_kits_loner",
                 "frequency": 4
             }
         ],
@@ -3325,6 +3341,7 @@
                         "parent:0"
                     ]
                 ],
+                "art": "gen_cat_with_kits_loner",
                 "frequency": 4
             }
         ]
@@ -3391,6 +3408,7 @@
                         }
                     }
                 ],
+                "art": "gen_cat_with_kits_loner",
                 "outsider_rep": 1,
                 "frequency": 4
             },
@@ -3420,6 +3438,7 @@
                         }
                     }
                 ],
+                "art": "gen_cat_with_kits_loner",
                 "outsider_rep": 1,
                 "frequency": 1
             }
@@ -3513,6 +3532,7 @@
                         }
                     }
                 ],
+                "art": "gen_cat_with_kits_med",
                 "outsider_rep": 1,
                 "frequency": 4
             },
@@ -3544,6 +3564,7 @@
                         }
                     }
                 ],
+                "art": "gen_cat_with_kits_med",
                 "outsider_rep": 1,
                 "frequency": 1
             }
@@ -3640,6 +3661,7 @@
                         }
                     }
                 ],
+                "art": "gen_cat_with_kits_loner",
                 "outsider_rep": 1,
                 "frequency": 4
             },
@@ -3669,6 +3691,7 @@
                         }
                     }
                 ],
+                "art": "gen_cat_with_kits_loner",
                 "outsider_rep": 1,
                 "frequency": 1
             }
@@ -3767,6 +3790,7 @@
                         }
                     }
                 ],
+                "art": "gen_cat_with_kits_med",
                 "outsider_rep": 1,
                 "frequency": 4
             },
@@ -3798,6 +3822,7 @@
                         }
                     }
                 ],
+                "art": "gen_cat_with_kits_med",
                 "outsider_rep": 1,
                 "frequency": 1
             }
@@ -3893,6 +3918,7 @@
                         }
                     }
                 ],
+                "art": "gen_cat_with_kits_loner",
                 "outsider_rep": 1,
                 "frequency": 4
             },
@@ -3922,6 +3948,7 @@
                         }
                     }
                 ],
+                "art": "gen_cat_with_kits_loner",
                 "outsider_rep": 1,
                 "frequency": 1
             }
@@ -4029,6 +4056,7 @@
                         }
                     }
                 ],
+                "art": "gen_cat_with_kits_app",
                 "outsider_rep": 1,
                 "frequency": 4
             },
@@ -4060,6 +4088,7 @@
                         }
                     }
                 ],
+                "art": "gen_cat_with_kits_app",
                 "outsider_rep": 1,
                 "frequency": 1
             }
@@ -4153,6 +4182,7 @@
                         }
                     }
                 ],
+                "art": "gen_two_kits",
                 "outsider_rep": 1,
                 "frequency": 4
             },
@@ -4184,6 +4214,7 @@
                         }
                     }
                 ],
+                "art": "gen_two_kits",
                 "outsider_rep": 1,
                 "frequency": 1
             },
@@ -4219,6 +4250,7 @@
                         }
                     }
                 ],
+                "art": "gen_two_kits",
                 "outsider_rep": 1,
                 "frequency": 4
             }
@@ -4290,6 +4322,7 @@
                         }
                     }
                 ],
+                "art": "gen_bord_newcatkittypet1",
                 "outsider_rep": 1,
                 "frequency": 4
             },
@@ -4312,6 +4345,7 @@
                         }
                     }
                 ],
+                "art": "gen_bord_newcatkittypet1",
                 "outsider_rep": 1,
                 "frequency": 1
             },
@@ -4337,6 +4371,7 @@
                         }
                     }
                 ],
+                "art": "gen_bord_newcatkittypet1",
                 "outsider_rep": 1,
                 "frequency": 4
             }
@@ -4473,6 +4508,7 @@
                     "scar": "m_c was scarred from a fight in {PRONOUN/m_c/poss} past as a loner.",
                     "death": "m_c died of injuries from a fight in {PRONOUN/m_c/poss} past as a loner."
                 },
+                "art": "gen_gen_newcat_hostile",
                 "frequency": 4
             },
             {
@@ -4511,6 +4547,7 @@
                     "scar": "m_c was scarred from a fight in {PRONOUN/m_c/poss} past as a loner.",
                     "death": "m_c died of injuries from a fight in {PRONOUN/m_c/poss} past as a loner."
                 },
+                "art": "gen_gen_newcat_hostile",
                 "frequency": 1
             },
             {
@@ -4552,6 +4589,7 @@
                     "scar": "m_c was scarred from a fight in {PRONOUN/m_c/poss} past as a loner.",
                     "death": "m_c died of injuries from a fight in {PRONOUN/m_c/poss} past as a loner."
                 },
+                "art": "gen_gen_newcat_hostile",
                 "frequency": 4
             }
         ],
@@ -4652,6 +4690,7 @@
                     "scar": "m_c was scarred from a fight in {PRONOUN/m_c/poss} past as a loner.",
                     "death": "m_c died of injuries from a fight in {PRONOUN/m_c/poss} past as a loner."
                 },
+                "art": "gen_gen_newcat_hostile",
                 "frequency": 4
             },
             {
@@ -4689,6 +4728,7 @@
                     "scar": "m_c was scarred from a fight in {PRONOUN/m_c/poss} past as a loner.",
                     "death": "m_c died of injuries from a fight in {PRONOUN/m_c/poss} past as a loner."
                 },
+                "art": "gen_gen_newcat_hostile",
                 "frequency": 1
             },
             {
@@ -4713,6 +4753,7 @@
                         }
                     }
                 ],
+                "art": "gen_gen_newcat_hostile",
                 "outsider_rep": 1,
                 "injury": [
                     {
@@ -4785,7 +4826,7 @@
         "tags": [
             "new_cat"
         ],
-        "patrol_art": "hunt_general_intro",
+        "patrol_art": "mnt_hunt_newcat_leaf-barecatcryhostile1",
         "min_cats": 1,
         "max_cats": 1,
         "min_max_status": {
@@ -5007,6 +5048,7 @@
                     "scar": "m_c was scarred after a Twoleg attempted to drown {PRONOUN/m_c/object}.",
                     "death": "m_c died of injuries inflicted by a Twoleg attempting to drown {PRONOUN/m_c/object}."
                 },
+                "art": "fst_hunt_fun3",
                 "frequency": 4
             },
             {
@@ -5053,6 +5095,7 @@
                     "scar": "m_c was scarred after a Twoleg attempted to drown {PRONOUN/m_c/object}.",
                     "death": "m_c died of injuries inflicted by a Twoleg attempting to drown {PRONOUN/m_c/object}."
                 },
+                "art": "fst_hunt_fun3",
                 "frequency": 4
             }
         ],
@@ -5165,6 +5208,7 @@
                         }
                     }
                 ],
+                "art": "gen_train_talkingWOCA",
                 "other_clan_rep": -1,
                 "frequency": 4
             },
@@ -5188,6 +5232,7 @@
                         }
                     }
                 ],
+                "art": "gen_train_talkingWOCA",
                 "other_clan_rep": -1,
                 "frequency": 3
             },
@@ -5236,6 +5281,7 @@
                         }
                     }
                 ],
+                "art": "gen_train_otherclanapp_warrior",
                 "other_clan_rep": -1,
                 "frequency": 4
             }
@@ -5312,7 +5358,7 @@
         "tags": [
             "new_cat"
         ],
-        "patrol_art": "train_general_intro",
+        "patrol_art": "running_app",
         "min_cats": 1,
         "max_cats": 1,
         "min_max_status": {
@@ -5352,6 +5398,7 @@
                         }
                     }
                 ],
+                "art": "gen_train_talkingAL",
                 "outsider_rep": 1,
                 "frequency": 4
             },
@@ -5381,6 +5428,7 @@
                         }
                     }
                 ],
+                "art": "gen_train_talkingAL",
                 "outsider_rep": 1,
                 "frequency": 1
             },
@@ -5415,6 +5463,7 @@
                         }
                     }
                 ],
+                "art": "gen_train_talkingAL",
                 "outsider_rep": 1,
                 "frequency": 4
             },
@@ -5449,6 +5498,7 @@
                         }
                     }
                 ],
+                "art": "gen_train_talkingAL",
                 "outsider_rep": 1,
                 "frequency": 4
             }
@@ -5464,6 +5514,7 @@
                         "age:adolescent"
                     ]
                 ],
+                "art": "running_loner_app",
                 "outsider_rep": 0,
                 "frequency": 4
             },
@@ -5477,6 +5528,7 @@
                         "age:adolescent"
                     ]
                 ],
+                "art": "running_loner_app",
                 "outsider_rep": 0,
                 "frequency": 4
             },
@@ -5506,6 +5558,7 @@
                     "scar": "m_c was scarred after being attacked by a startled loner.",
                     "death": "m_c died from injuries {PRONOUN/p_l/subject} sustained after being attacked by a startled loner."
                 },
+                 "art": "gen_angry_cat_loner",
                 "outsider_rep": 0,
                 "frequency": 4
             },
@@ -5535,6 +5588,7 @@
                     "scar": "m_c was scarred after being attacked by a startled kittypet.",
                     "death": "m_c died from injuries {PRONOUN/p_l/subject} sustained after being attacked by a startled kittypet."
                 },
+                "art": "gen_angry_cat_loner",
                 "outsider_rep": 0,
                 "frequency": 4
             },
@@ -5568,6 +5622,7 @@
                         }
                     }
                 ],
+                "art": "gen_train_talkingAL",
                 "outsider_rep": 1,
                 "frequency": 4
             },
@@ -5601,6 +5656,7 @@
                         }
                     }
                 ],
+                "art": "gen_train_talkingAL",
                 "outsider_rep": 1,
                 "frequency": 1
             }
@@ -5616,6 +5672,7 @@
                         "age:adolescent"
                     ]
                 ],
+                "art": "gen_angry_cat_app",
                 "outsider_rep": -2,
                 "frequency": 4
             },
@@ -5629,6 +5686,7 @@
                         "age:adolescent"
                     ]
                 ],
+                "art": "gen_angry_cat_app",
                 "outsider_rep": -2,
                 "frequency": 4
             },
@@ -5687,6 +5745,7 @@
                     "scar": "m_c was scarred after fighting with another cat.",
                     "death": "m_c died from injuries sustained after fighting with another cat."
                 },
+                "art": "gen_battle_app_loner",
                 "outsider_rep": -2,
                 "frequency": 4
             },
@@ -5734,6 +5793,7 @@
                     "scar": "m_c was scarred after foolishly trying to take on a c_n apprentice.",
                     "death": "m_c died from injuries sustained after foolishly trying to take on a c_n apprentice."
                 },
+                "art": "gen_battle_app_loner",
                 "outsider_rep": -2,
                 "frequency": 2
             }
@@ -5765,6 +5825,7 @@
                         }
                     }
                 ],
+                "art": "gen_angry_cat_app",
                 "outsider_rep": -1,
                 "frequency": 4
             },
@@ -5808,6 +5869,7 @@
                         }
                     }
                 ],
+                "art": "gen_angry_cat_app",
                 "outsider_rep": -1,
                 "frequency": 4
             },
@@ -5854,6 +5916,7 @@
                     "scar": "m_c was scarred after losing a fight with a loner.",
                     "death": "m_c died from injuries sustained after losing a fight with a loner."
                 },
+                "art": "gen_battle_app_loner",
                 "outsider_rep": -1,
                 "frequency": 4
             },
@@ -5914,6 +5977,7 @@
                     "scar": "m_c was scarred after losing a fight with a kittypet.",
                     "death": "m_c died from injuries sustained after losing a fight with a kittypet."
                 },
+                "art": "gen_battle_app_loner",
                 "outsider_rep": -1,
                 "frequency": 2
             }
