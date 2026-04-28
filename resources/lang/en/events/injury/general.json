@@ -5639,8 +5639,8 @@
         "season": [
             "any"
         ],
-        "frequency": 3,
-        "event_text": "m_c fought a rogue and, while {PRONOUN/m_c/subject} drove the trespasser away, {PRONOUN/m_c/subject} needed to be rushed to the medicine cat den afterwards.",
+        "frequency": 4,
+        "event_text": "m_c fought a rogue and, while {PRONOUN/m_c/subject} drove the trespasser away, {PRONOUN/m_c/subject} needed to be rushed to the medicine cat den afterward.",
         "m_c": {
             "age": [
                 "-kitten"
@@ -6372,7 +6372,7 @@
             "newleaf"
         ],
         "frequency": 4,
-        "event_text": "The day is so nice out today that m_c decided to sneak out of camp and go play in the flowers without anyone noticing. {PRONOUN/m_c/subject/CAP} come back with a swollen paw after stepping on a bee.",
+        "event_text": "The day is so nice out today that m_c decided to sneak out of camp and go play in the flowers without anyone noticing. {PRONOUN/m_c/subject/CAP} {VERB/m_c/come/comes} back with a swollen paw after stepping on a bee.",
         "m_c": {
             "age": [
                 "kitten"
@@ -6944,19 +6944,11 @@
         "sub_type": [
             "war"
         ],
-        "frequency": 1,
-        "event_text": "m_c gazes fearfully up at the o_c_n warrior, whose teeth are bared and ready to deliver the killing blow. Something in {PRONOUN/m_c/poss} eyes must have shaken them, however, as they bound away without finishing the job.",
+        "frequency": 2,
+        "event_text": "In a brutal battle, a o_c_n warrior spares m_c's life.",
         "m_c": {
             "status": [
-                "any"
-            ],
-            "age": [
-                "kitten",
-                "adolescent",
-                "young adult",
-                "adult",
-                "senior adult",
-                "senior"
+                "warrior", "apprentice", "deputy", "leader"
             ]
         },
         "injury": [
@@ -6976,6 +6968,39 @@
                 ],
                 "scar": "m_c was scarred after a vicious attack from a warring Clan.",
                 "death": "m_c died from {PRONOUN/m_c/poss} wounds after a vicious attack from a warring Clan."
+            }
+        ],
+        "other_clan": {
+            "changed": 2
+        }
+    },
+    {
+        "event_id": "gen_injury_war_showmercy2",
+        "location": [
+            "any"
+        ],
+        "season": [
+            "any"
+        ],
+        "sub_type": [
+            "war"
+        ],
+        "frequency": 1,
+        "event_text": "o_c_n raids the camp, and an enemy warrior breaks into the nursery. At the sight of m_c's terror, the warrior's resolve breaks down, and they leave m_c with hardly a scratch on {PRONOUN/m_c/object}.",
+        "m_c": {
+            "age": [
+                "kitten"
+            ]
+        },
+        "injury": [
+            {
+                "cats": [
+                    "m_c"
+                ],
+                "injuries": [
+                    "scrapes",
+                    "small cut"
+                ]
             }
         ],
         "other_clan": {
@@ -8829,5 +8854,69 @@
             }
         }
     ]
-}
+},
+{
+        "event_id": "gen_injury_war_stumble",
+        "location": [
+            "any"
+        ],
+        "season": [
+            "any"
+        ],
+        "sub_type": ["war"],
+        "tags": [],
+        "frequency": 1,
+        "event_text": "After a victorious battle against an o_c_n cat, m_c returns to camp with pride… only to trip over at the entrance, spraining {PRONOUN/m_c/poss} paw.",
+        "new_accessory": [],
+        "m_c": {
+            "status": [
+                "warrior"
+            ],
+            "trait": [
+                "oblivious",
+                "childish",
+                "playful"
+            ]
+        },
+        "injury": [
+            {
+                "cats": [
+                    "m_c"
+                ],
+                "injuries": [
+                    "sprain"
+                ]
+            }
+        ]
+    },
+    {
+    "event_id": "gen_injury_war_ambushnoshow",
+        "location": [
+            "any"
+        ],
+        "season": [
+            "any"
+        ],
+        "sub_type": ["war"],
+        "tags": [],
+        "frequency": 2,
+        "event_text": "m_c hides in a cramped nook, planning to ambush the next o_c_n patrol. When no one shows, {PRONOUN/m_c/subject} {VERB/m_c/return/returns} to camp aching and stiff.",
+        "new_accessory": [],
+        "m_c": {
+            "status": [
+                "warrior"
+            ]
+        },
+        "injury": [
+            {
+                "cats": [
+                    "m_c"
+                ],
+                "injuries": [
+                    "sore"
+                ]
+            }
+        ]
+    }
 ]
+
