@@ -3222,5 +3222,25 @@
         "current_rep": ["any"],
         "changed": 1
     }
-}
+},
+    {
+        "event_id": "gen_kittypet_kit_rescue1",
+        "location": [
+            "any"
+        ],
+        "season": [
+            "any"
+        ],
+        "frequency": 1,
+        "event_text": "A border patrol ventured to the nearest thunderpath where they found a dead, obliterated monster that had crashed into a tree alongside the thunderpath! Before the patrol could go back to camp to report it, someone heard a tiny mewl coming from the wreckage. Upon closer discovery, there was a kit crying for {PRONOUN/n_c:0/object} Twolegs, who were nowhere to be found. The patrol quickly rescues the kit and promises {PRONOUN/n_c:0/object} a place in the Clan.",
+        "new_cat": [
+            [
+                "new_name",
+                "kittypet",
+                "backstory:orphaned3",
+                "status:kitten",
+                "age:kitten"
+            ]
+        ]
+    }
 ]
