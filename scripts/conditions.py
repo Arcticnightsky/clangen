@@ -63,6 +63,20 @@ def medicine_cats_can_cover_clan(all_cats, amount_per_med) -> bool:
     return amount_clanmembers_covered(all_cats, amount_per_med) >= len(relevant_cats)
 
 
+def medicine_cats_can_cover_condition_cases(all_cats, amount_per_med) -> bool:
+    """
+    whether the player has enough meds for the currently sick/injured cats,
+    including cats with permanent conditions
+    """
+    relevant_cats = [
+        c
+        for c in all_cats
+        if c.status.alive_in_player_clan
+        and (c.is_ill() or c.is_injured() or bool(c.permanent_condition))
+    ]
+    return amount_clanmembers_covered(all_cats, amount_per_med) >= len(relevant_cats)
+
+
 def get_amount_cat_for_one_medic(clan):
     """Returns the amount of cats one medicine cat can treat"""
     amount = 10
