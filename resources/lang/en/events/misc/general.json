@@ -1765,46 +1765,6 @@
         }
     },
     {
-        "event_id": "multi_misc_any_collar_accessory1",
-        "location": [
-            "forest",
-            "beach",
-            "plains"
-        ],
-        "season": [
-            "any"
-        ],
-        "sub_type": [
-            "accessory"
-        ],
-        "frequency": 1,
-        "event_text": "m_c disappears for a few days, then returns to camp with a acc_singular around {PRONOUN/m_c/poss} neck.",
-        "new_accessory": [
-            "COLLAR"
-        ],
-        "m_c": {
-            "age": [
-                "adolescent",
-                "young adult",
-                "adult",
-                "senior adult",
-                "senior"
-            ]
-        },
-        "relationships": [
-            {
-            "cats_from": ["clan", "high_lawful"],
-            "cats_to": ["m_c"],
-            "values": ["respect"],
-            "amount": -10,
-            "mutual": false,
-            "log": {
-                "cats_from": "cat_from disapproved of cat_to wearing a collar."
-            }
-        }
-    ]
-    },
-    {
         "event_id":  "gen_misc_any_misc1",
         "location": [
             "any"
