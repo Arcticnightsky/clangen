@@ -2142,7 +2142,7 @@ class Pregnancy_Events:
         ]
         if alive_clan_cats:
             youngest_cat_age = min(i.moons for i in alive_clan_cats)
-            if youngest_cat_age > 24:
+            if youngest_cat_age > 36:
                 inverse_chance = int(inverse_chance * 0.9)
 
         # If any of the mated cats have the 'KIT' skill, they're more likely to have kits because, well... they love kits no? TBD
