@@ -212,6 +212,20 @@
         ]
     },
     {
+    "event_id": "fst_death_extinction_bear",
+    "location": ["forest:camp3"],
+    "season": ["leaf-fall"],
+    "sub_type": ["mass_death"],
+    "frequency": 2,
+    "event_text": "multi_cat were killed after a shelter-seeking bear lumbered into the grotto and discovered it was occupied.",
+    "history": [
+      {
+        "cats": ["multi_cat"],
+        "death": "m_c was killed by a bear rampaging through camp."
+      }
+    ]
+},
+  {
         "event_id": "fst_courageous_leader_death",
         "location": [
             "forest"
