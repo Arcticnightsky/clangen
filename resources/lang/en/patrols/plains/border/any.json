@@ -119,7 +119,7 @@
                     }
                 ],
                 "art": "gen_bord_otherclan_hostile",
-                "frequency": 4
+                "frequency": 1
             },
             {
                 "text": "Taken by surprise, the patrol scatters and loses cohesion. The rogues are quick to take advantage of the confusion, and eventually the patrol retreats, r_c badly wounded.",
