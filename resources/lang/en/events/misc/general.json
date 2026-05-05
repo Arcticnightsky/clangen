@@ -1735,46 +1735,6 @@
         }
     },
     {
-        "event_id": "multi_misc_any_collar_accessory1",
-        "location": [
-            "forest",
-            "beach",
-            "plains"
-        ],
-        "season": [
-            "any"
-        ],
-        "sub_type": [
-            "accessory"
-        ],
-        "frequency": 1,
-        "event_text": "m_c disappears for a few days, then returns to camp with a acc_singular around {PRONOUN/m_c/poss} neck.",
-        "new_accessory": [
-            "COLLAR"
-        ],
-        "m_c": {
-            "age": [
-                "adolescent",
-                "young adult",
-                "adult",
-                "senior adult",
-                "senior"
-            ]
-        },
-        "relationships": [
-            {
-            "cats_from": ["clan", "high_lawful"],
-            "cats_to": ["m_c"],
-            "values": ["respect"],
-            "amount": -10,
-            "mutual": false,
-            "log": {
-                "cats_from": "cat_from disapproved of cat_to wearing a collar."
-            }
-        }
-    ]
-    },
-    {
         "event_id":  "gen_misc_any_misc1",
         "location": [
             "any"
@@ -13377,7 +13337,299 @@
     }
   ]
 },
-<<<<<<< HEAD
+	{
+    "event_id": "gen_misc_war_nightmare",
+    "location": [
+		"any"
+	],
+    "season": [
+		"any"
+	],
+    "sub_type": [
+		"war"
+	],
+    "tags": [],
+    "frequency": 1,
+    "event_text": "m_c wakes up from a nightmare, sobbing about a mysterious evil cat.",
+    "new_accessory": [],
+    "m_c": {
+        "age": [
+		"kitten"
+		]
+	}
+	},
+	{
+    "event_id": "gen_misc_war_apppractice",
+    "location": [
+		"any"
+	],
+    "season": [
+		"any"
+	],
+    "sub_type": [
+		"war"
+	],
+    "tags": [],
+    "frequency": 4,
+    "event_text": "m_c begs {PRONOUN/m_c/poss} mentor for more battle training, claiming {PRONOUN/m_c/subject} {VERB/m_c/need/needs} to be stronger to fight o_c_n.",
+    "new_accessory": [],
+    "m_c": {
+        "status": [
+			"apprentice"
+		],
+        "relationship_status": [
+			"app/mentor"
+		],
+        "trait": [
+			"-arrogant"
+		]
+    },
+    "r_c": {
+        "status": [
+			"any"
+		]
+    },
+    
+    	"relationships": [
+        {
+            "cats_from": [
+				"m_c"
+			],
+            "cats_to": [
+				"r_c"
+			],
+            "mutual": true,
+            "values": [
+				"like",
+				"trust"
+			],
+            "amount": 10,
+        "log": {
+        "cats_from": "cat_from believed that cat_to's guidance would make them strong enough to fight off any foe!",
+        "cats_to": "cat_to admired and cherished cat_from's eagerness to learn."
+      }
+        }
+    ]
+},
+	{
+    "event_id": "gen_misc_war_medstudy",
+    "location": [
+		"any"
+	],
+    "season": [
+		"any"
+	],
+    "sub_type": [
+		"war"
+	],
+    "tags": [],
+    "frequency": 3,
+    "event_text": "m_c studies herbs all night, wanting to help c_n as much as {PRONOUN/m_c/subject} can.",
+    "m_c": {
+        "status": [
+			"medicine cat apprentice"
+		]
+    },
+    "future_event": []
+},
+	{
+    "event_id": "gen_misc_war_medsort",
+    "location": [
+		"any"
+	],
+    "season": [
+		"any"
+	],
+    "sub_type": [
+		"war"
+	],
+    "tags": [],
+    "frequency": 4,
+    "event_text": "m_c spends all night sorting the herb stores, wanting to help as much as {PRONOUN/m_c/subject} can.",
+    "m_c": {
+        "status": [
+			"medicine cat apprentice",
+			"medicine cat"
+		]
+    },
+    "future_event": []
+},
+	{
+    "event_id": "gen_misc_war_appholdback",
+    "location": [
+		"any"
+	],
+    "season": [
+		"any"
+	],
+    "sub_type": [
+		"war"
+	],
+    "tags": [],
+    "frequency": 3,
+    "event_text": "m_c is caught holding back in a fight against a o_c_n apprentice. ",
+    "m_c": {
+        "status": [
+                "apprentice"
+            ],
+            "trait": [
+                "-bloodthirsty",
+				"-fierce",
+				"-arrogant",
+				"-vengeful"
+            ]
+    },
+    "future_event": []
+},
+    {
+        "event_id": "gen_misc_otherclannewleader1",
+        "location": [
+            "any"
+        ],
+        "season": [
+            "any"
+        ],
+        "tags": [],
+        "exclude_involved": [
+            "m_c"
+        ],
+        "frequency": 1,
+        "event_text": "At the Gathering, o_c_n's deputy announces they are its new leader. Declaring complete loyalty to o_c_n, they renounce all alliances.",
+        "m_c": {
+            "age": [
+                "adolescent",
+                "young adult",
+                "adult",
+                "senior adult",
+                "senior"
+            ]
+        },
+        "other_clan": {
+            "current_rep": [
+                "ally"
+            ],
+            "changed": -15
+        }
+    },
+       {
+        "event_id": "gen_misc_otherclannewleader2",
+        "location": [
+            "any"
+        ],
+        "season": [
+            "any"
+        ],
+        "tags": [],
+        "exclude_involved": [
+            "m_c"
+        ],
+        "frequency": 1,
+        "event_text": "At the Gathering, o_c_n's deputy announces the sudden passing of their former leader. With a steely glint in their gaze, they renounce all prior alliances o_c_n held.",
+        "m_c": {
+            "age": [
+                "adolescent",
+                "young adult",
+                "adult",
+                "senior adult",
+                "senior"
+            ]
+        },
+        "other_clan": {
+            "current_rep": [
+                "ally"
+            ],
+            "changed": -15
+        }
+    },
+       {
+        "event_id": "gen_misc_otherclannewleader3",
+        "location": [
+            "any"
+        ],
+        "season": [
+            "any"
+        ],
+        "tags": [],
+        "exclude_involved": [
+            "m_c"
+        ],
+        "frequency": 1,
+        "event_text": "A o_c_n patrol brings news to c_n that their old leader is dead... and that the new one does not consider c_n a friend.",
+        "m_c": {
+            "age": [
+                "adolescent",
+                "young adult",
+                "adult",
+                "senior adult",
+                "senior"
+            ]
+        },
+        "other_clan": {
+            "current_rep": [
+                "ally"
+            ],
+            "changed": -15
+        }
+    },
+           {
+        "event_id": "gen_misc_otherclannewleader4",
+        "location": [
+            "any"
+        ],
+        "season": [
+            "any"
+        ],
+        "tags": [],
+        "exclude_involved": [
+            "m_c"
+        ],
+        "frequency": 1,
+        "event_text": "A strong Clan stands on their own four paws, needing no support from others. o_c_n's new leader decides that the other Clans need reminding of this fact and withdraws their alliances at once.",
+        "m_c": {
+            "age": [
+                "adolescent",
+                "young adult",
+                "adult",
+                "senior adult",
+                "senior"
+            ]
+        },
+        "other_clan": {
+            "current_rep": [
+                "ally"
+            ],
+            "changed": -15
+        }
+    },
+           {
+        "event_id": "gen_misc_otherclannewleader5",
+        "location": [
+            "any"
+        ],
+        "season": [
+            "any"
+        ],
+        "tags": [],
+        "exclude_involved": [
+            "m_c"
+        ],
+        "frequency": 1,
+        "event_text": "A wild-eyed o_c_n apprentice intrudes on the camp one day. They warn c_n that o_c_n is under new management... and all existing alliances are void.",
+        "m_c": {
+            "age": [
+                "adolescent",
+                "young adult",
+                "adult",
+                "senior adult",
+                "senior"
+            ]
+        },
+        "other_clan": {
+            "current_rep": [
+                "ally"
+            ],
+            "changed": -15
+        }
   {
     "event_id": "gen_doubtful_med_mate",
     "location": [
@@ -14251,300 +14503,3 @@
     ]
   }
 ]
-=======
-	{
-    "event_id": "gen_misc_war_nightmare",
-    "location": [
-		"any"
-	],
-    "season": [
-		"any"
-	],
-    "sub_type": [
-		"war"
-	],
-    "tags": [],
-    "frequency": 1,
-    "event_text": "m_c wakes up from a nightmare, sobbing about a mysterious evil cat.",
-    "new_accessory": [],
-    "m_c": {
-        "age": [
-		"kitten"
-		]
-	}
-	},
-	{
-    "event_id": "gen_misc_war_apppractice",
-    "location": [
-		"any"
-	],
-    "season": [
-		"any"
-	],
-    "sub_type": [
-		"war"
-	],
-    "tags": [],
-    "frequency": 4,
-    "event_text": "m_c begs {PRONOUN/m_c/poss} mentor for more battle training, claiming {PRONOUN/m_c/subject} {VERB/m_c/need/needs} to be stronger to fight o_c_n.",
-    "new_accessory": [],
-    "m_c": {
-        "status": [
-			"apprentice"
-		],
-        "relationship_status": [
-			"app/mentor"
-		],
-        "trait": [
-			"-arrogant"
-		]
-    },
-    "r_c": {
-        "status": [
-			"any"
-		]
-    },
-    
-    	"relationships": [
-        {
-            "cats_from": [
-				"m_c"
-			],
-            "cats_to": [
-				"r_c"
-			],
-            "mutual": true,
-            "values": [
-				"like",
-				"trust"
-			],
-            "amount": 10,
-        "log": {
-        "cats_from": "cat_from believed that cat_to's guidance would make them strong enough to fight off any foe!",
-        "cats_to": "cat_to admired and cherished cat_from's eagerness to learn."
-      }
-        }
-    ]
-},
-	{
-    "event_id": "gen_misc_war_medstudy",
-    "location": [
-		"any"
-	],
-    "season": [
-		"any"
-	],
-    "sub_type": [
-		"war"
-	],
-    "tags": [],
-    "frequency": 3,
-    "event_text": "m_c studies herbs all night, wanting to help c_n as much as {PRONOUN/m_c/subject} can.",
-    "m_c": {
-        "status": [
-			"medicine cat apprentice"
-		]
-    },
-    "future_event": []
-},
-	{
-    "event_id": "gen_misc_war_medsort",
-    "location": [
-		"any"
-	],
-    "season": [
-		"any"
-	],
-    "sub_type": [
-		"war"
-	],
-    "tags": [],
-    "frequency": 4,
-    "event_text": "m_c spends all night sorting the herb stores, wanting to help as much as {PRONOUN/m_c/subject} can.",
-    "m_c": {
-        "status": [
-			"medicine cat apprentice",
-			"medicine cat"
-		]
-    },
-    "future_event": []
-},
-	{
-    "event_id": "gen_misc_war_appholdback",
-    "location": [
-		"any"
-	],
-    "season": [
-		"any"
-	],
-    "sub_type": [
-		"war"
-	],
-    "tags": [],
-    "frequency": 3,
-    "event_text": "m_c is caught holding back in a fight against a o_c_n apprentice. ",
-    "m_c": {
-        "status": [
-                "apprentice"
-            ],
-            "trait": [
-                "-bloodthirsty",
-				"-fierce",
-				"-arrogant",
-				"-vengeful"
-            ]
-    },
-    "future_event": []
-},
-    {
-        "event_id": "gen_misc_otherclannewleader1",
-        "location": [
-            "any"
-        ],
-        "season": [
-            "any"
-        ],
-        "tags": [],
-        "exclude_involved": [
-            "m_c"
-        ],
-        "frequency": 1,
-        "event_text": "At the Gathering, o_c_n's deputy announces they are its new leader. Declaring complete loyalty to o_c_n, they renounce all alliances.",
-        "m_c": {
-            "age": [
-                "adolescent",
-                "young adult",
-                "adult",
-                "senior adult",
-                "senior"
-            ]
-        },
-        "other_clan": {
-            "current_rep": [
-                "ally"
-            ],
-            "changed": -15
-        }
-    },
-       {
-        "event_id": "gen_misc_otherclannewleader2",
-        "location": [
-            "any"
-        ],
-        "season": [
-            "any"
-        ],
-        "tags": [],
-        "exclude_involved": [
-            "m_c"
-        ],
-        "frequency": 1,
-        "event_text": "At the Gathering, o_c_n's deputy announces the sudden passing of their former leader. With a steely glint in their gaze, they renounce all prior alliances o_c_n held.",
-        "m_c": {
-            "age": [
-                "adolescent",
-                "young adult",
-                "adult",
-                "senior adult",
-                "senior"
-            ]
-        },
-        "other_clan": {
-            "current_rep": [
-                "ally"
-            ],
-            "changed": -15
-        }
-    },
-       {
-        "event_id": "gen_misc_otherclannewleader3",
-        "location": [
-            "any"
-        ],
-        "season": [
-            "any"
-        ],
-        "tags": [],
-        "exclude_involved": [
-            "m_c"
-        ],
-        "frequency": 1,
-        "event_text": "A o_c_n patrol brings news to c_n that their old leader is dead... and that the new one does not consider c_n a friend.",
-        "m_c": {
-            "age": [
-                "adolescent",
-                "young adult",
-                "adult",
-                "senior adult",
-                "senior"
-            ]
-        },
-        "other_clan": {
-            "current_rep": [
-                "ally"
-            ],
-            "changed": -15
-        }
-    },
-           {
-        "event_id": "gen_misc_otherclannewleader4",
-        "location": [
-            "any"
-        ],
-        "season": [
-            "any"
-        ],
-        "tags": [],
-        "exclude_involved": [
-            "m_c"
-        ],
-        "frequency": 1,
-        "event_text": "A strong Clan stands on their own four paws, needing no support from others. o_c_n's new leader decides that the other Clans need reminding of this fact and withdraws their alliances at once.",
-        "m_c": {
-            "age": [
-                "adolescent",
-                "young adult",
-                "adult",
-                "senior adult",
-                "senior"
-            ]
-        },
-        "other_clan": {
-            "current_rep": [
-                "ally"
-            ],
-            "changed": -15
-        }
-    },
-           {
-        "event_id": "gen_misc_otherclannewleader5",
-        "location": [
-            "any"
-        ],
-        "season": [
-            "any"
-        ],
-        "tags": [],
-        "exclude_involved": [
-            "m_c"
-        ],
-        "frequency": 1,
-        "event_text": "A wild-eyed o_c_n apprentice intrudes on the camp one day. They warn c_n that o_c_n is under new management... and all existing alliances are void.",
-        "m_c": {
-            "age": [
-                "adolescent",
-                "young adult",
-                "adult",
-                "senior adult",
-                "senior"
-            ]
-        },
-        "other_clan": {
-            "current_rep": [
-                "ally"
-            ],
-            "changed": -15
-        }
-    }
-]
->>>>>>> a877598a236da871fd0c6176e44beea01db372b6

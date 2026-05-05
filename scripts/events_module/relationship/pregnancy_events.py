@@ -2136,6 +2136,15 @@ class Pregnancy_Events:
         if avg_age > 80:
             inverse_chance = int(inverse_chance * 0.8)
 
+        # - slightly decrease inverse chance if the clan has no very young cats yet
+        alive_clan_cats = [
+            i for i in Cat.all_cats.values() if i.status.alive_in_player_clan
+        ]
+        if alive_clan_cats:
+            youngest_cat_age = min(i.moons for i in alive_clan_cats)
+            if youngest_cat_age > 36:
+                inverse_chance = int(inverse_chance * 0.9)
+
         # If any of the mated cats have the 'KIT' skill, they're more likely to have kits because, well... they love kits no? TBD
         
         # If the parent(s) are young adults, the chance for kits is higher because the hormones are still raging lmao

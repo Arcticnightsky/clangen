@@ -1245,6 +1245,7 @@ class Cat:
             child = Cat.all_cats[child_id]
             if (
                 not child.dead
+                and not child.status.alive_in_player_clan
                 and not child.status.is_exiled(CatGroup.PLAYER_CLAN_ID)
                 and child.moons < 12
             ):
