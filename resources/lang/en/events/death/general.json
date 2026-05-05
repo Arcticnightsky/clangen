@@ -1447,7 +1447,7 @@
                 ],
                 "amount": 40,
                 "log": {
-                    "cats_from": "cat_to sacrificed {PRONOUN/cat_to/poss} life for cat_from in a battle against o_c_n."
+                    "cats_from": "cat_to sacrificed {PRONOUN/cat_to/poss} life for cat_from in a battle against an enemy Clan."
                 }
             }
         ],
@@ -1509,7 +1509,7 @@
                 ],
                 "amount": 40,
                 "log": {
-                    "cats_from": "cat_to sacrificed {PRONOUN/cat_to/poss} life for cat_from in a battle against o_c_n."
+                    "cats_from": "cat_to sacrificed {PRONOUN/cat_to/poss} life for cat_from in a battle against an enemy Clan."
                 }
             }
         ],
@@ -1571,7 +1571,7 @@
                 ],
                 "amount": 40,
                 "log": {
-                    "cats_from": "cat_to sacrificed {PRONOUN/cat_to/poss} life for cat_from in a battle against o_c_n."
+                    "cats_from": "cat_to sacrificed {PRONOUN/cat_to/poss} life for cat_from in a battle against an enemy Clan."
                 }
             }
         ],
@@ -1634,7 +1634,7 @@
                 ],
                 "amount": 40,
                 "log": {
-                    "cats_from": "cat_to sacrificed {PRONOUN/cat_to/poss} life for cat_from in a o_c_n ambush."
+                    "cats_from": "cat_to sacrificed {PRONOUN/cat_to/poss} life for cat_from in an ambush during war."
                 }
             }
         ],
@@ -3674,7 +3674,7 @@
                 "amount": 15,
                 "mutual": false,
                 "log": {
-                    "cats_from": "cat_from heard that cat_to died trying to save o_c_n's medicine cat."
+                    "cats_from": "cat_from heard that cat_to died trying to save an enemy Clan's medicine cat."
                 }
             }
         ]
@@ -5014,7 +5014,7 @@
                 "amount": 30,
                 "mutual": false,
                 "log": {
-                    "cats_from": "cat_to was killed by o_c_n while trying to drag cat_from out of battle, and cat_from will always remember {PRONOUN/cat_to/poss} sacrifice."
+                    "cats_from": "cat_to was killed by an enemy Clan while trying to drag cat_from out of battle, and cat_from will always remember {PRONOUN/cat_to/poss} sacrifice."
                 }
             }
         ],
@@ -5407,11 +5407,43 @@
         ],
         "tags": [],
         "frequency": 4,
-        "event_text": "m_c fell from the top branches of a tree.",
+        "event_text": "m_c fell from the top branches of a tree. {PRONOUN/m_c/subject/CAP} never {VERB/m_c/get/gets} up again.",
         "m_c": {
             "age": [
                 "-kitten"
             ],
+            "status": [
+            "-leader"
+          ],
+            "dies": true
+        },
+        "history": [
+            {
+                "cats": [
+                    "m_c"
+                ],
+                "death": "m_c fell from a tall tree."
+            }
+        ]
+    },
+       {
+        "event_id": "gen_death_tree_any2",
+        "location": [
+            "beach",
+            "forest",
+            "mountainous",
+            "wetlands"
+        ],
+        "season": [
+            "any"
+        ],
+        "tags": [],
+        "frequency": 4,
+        "event_text": "m_c fell from the top branches of a tree. The fall was too great, and {PRONOUN/m_c/subject} could not recover.",
+        "m_c": {
+            "status": [
+            "leader"
+          ],
             "dies": true
         },
         "history": [
@@ -6010,7 +6042,7 @@
             "any"
         ],
         "tags": [
-            "clan:kits"
+            "clan:kitten"
         ],
         "frequency": 4,
         "event_text": "m_c was killed defending the kits during a o_c_n raid.",
@@ -6059,7 +6091,7 @@
                 "amount": 20,
                 "mutual": false,
                 "log": {
-                    "cats_from": "cat_from will always remember that cat_to gave {PRONOUN/cat_to/poss} life to save kits from o_c_n warriors."
+                    "cats_from": "cat_from will always remember that cat_to gave {PRONOUN/cat_to/poss} life to save kits from warriors of an enemy Clan."
                 }
             }
         ]
@@ -6131,7 +6163,7 @@
                 ],
                 "amount": 30,
                 "log": {
-                    "cats_from": "cat_to died defending cat_from from o_c_n warriors, and cat_from will always remember {PRONOUN/cat_to/poss} sacrifice."
+                    "cats_from": "cat_to died defending cat_from from warriors of an enemy Clan, and cat_from will always remember {PRONOUN/cat_to/poss} sacrifice."
                 }
             }
         ],
@@ -8159,7 +8191,7 @@
         "location": ["any"],
         "season": ["any"],
         "sub_type": [],
-        "tags": ["clan: medicine cat"],
+        "tags": ["clan:medicine cat"],
         "frequency": 1,
         "event_text": "m_c seemed hale and healthy on patrol until {PRONOUN/m_c/subject} had trouble speaking and began to limp. By the time {PRONOUN/m_c/poss} Clanmates came back with the medicine cat, m_c was dead.",
         "m_c": {
@@ -8442,7 +8474,7 @@
                 "amount": -30,
                 "mutual": false,
                 "log": {
-                    "cats_from": "cat_to stood by and watched as o_c_n's deputy killed cat_from."
+                    "cats_from": "cat_to stood by and watched as an enemy Clan's deputy killed cat_from."
                 }
             }
         ],
@@ -9218,7 +9250,7 @@
             "all_lives",
             "no_body"
         ],
-        "frequency": 2,
+        "frequency": 1,
         "event_text": "m_c mysteriously disappeared one night. r_c noticed before anyone else and went looking for {PRONOUN/m_c/object} {PRONOUN/r_c/self}. c_n never saw either of them again.",
         "m_c": {
             "age": [
@@ -9265,7 +9297,7 @@
         "location": [
             "forest:camp1_camp2",
             "plains:camp1_camp3_camp4",
-            "mountain:camp1_camp2_camp4" ],
+            "mountainous:camp1_camp2_camp4" ],
         "season": [
             "any"
         ],
@@ -9292,7 +9324,7 @@
         "location": [
             "forest:camp1_camp2",
             "plains:camp1_camp3_camp4",
-            "mountain:camp1_camp2_camp4" ],
+            "mountainous:camp1_camp2_camp4" ],
         "season": [
             "any"
         ],
