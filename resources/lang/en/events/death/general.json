@@ -9567,7 +9567,7 @@
         "season": [
             "any"
         ],
-        "tags": ["clan: medicine cat"],
+        "tags": ["clan:medicine cat"],
         "frequency": 2,
         "event_text": "As the medicine cat looks over r_c's newborn litter one last time, they noticed something was very off... little m_c hasn't moved since {PRONOUN/m_c/subject} was birthed, nor did {PRONOUN/m_c/subject} have a pulse... After a few unsuccessful attempts of reviving the kit, a heartbreaking realization dawns over the medicine cat and r_c - m_c was stillborn.",
         "m_c": {
@@ -9577,7 +9577,7 @@
             "status": [
                 "newborn"
             ],
-		    "relationship_constraint": [
+		    "relationship_status": [
 			    "child/parent"
 		    ],
             "dies": true
@@ -9588,12 +9588,7 @@
                 "adult",
                 "senior adult",
                 "senior"
-            ],
-        "has_injuries": {
-            "r_c": [
-                "recovering from birth"
             ]
-		  }
         },
         "history": [
             {
@@ -9622,7 +9617,7 @@
             "status": [
                 "newborn"
             ],
-		    "relationship_constraint": [
+		    "relationship_status": [
 			    "child/parent"
 		    ],
             "dies": true
@@ -9633,12 +9628,7 @@
                 "adult",
                 "senior adult",
                 "senior"
-            ],
-        "has_injuries": {
-            "r_c": [
-                "recovering from birth"
             ]
-		  }
         },
         "history": [
             {
