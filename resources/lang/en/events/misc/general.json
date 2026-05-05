@@ -13630,6 +13630,7 @@
             ],
             "changed": -15
         }
+    },
   {
     "event_id": "gen_doubtful_med_mate",
     "location": [
@@ -14142,7 +14143,9 @@
       {
         "event_type": "misc",
         "pool": {
-          "event_id": "gen_misc_murderreveal_tattletail1"
+          "event_id": [
+            "gen_misc_murderreveal_tattletail1"
+          ]
         },
         "moon_delay": [
           1,
@@ -14223,7 +14226,9 @@
       {
         "event_type": "misc",
         "pool": {
-          "event_id": "gen_misc_murderreveal_tattletail2"
+          "event_id": [
+            "gen_misc_murderreveal_tattletail2"
+          ]
         },
         "moon_delay": [
           1,
@@ -14299,7 +14304,9 @@
       {
         "event_type": "misc",
         "pool": {
-          "event_id": "gen_misc_murderreveal_tattletail3"
+          "event_id": [
+            "gen_misc_murderreveal_tattletail3"
+          ]
         },
         "moon_delay": [
           1,
