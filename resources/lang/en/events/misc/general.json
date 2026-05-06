@@ -13728,12 +13728,6 @@
       "status": [
         "medicine cat",
         "medicine cat apprentice"
-      ],
-      "status": [
-        "apprentice",
-        "warrior",
-        "deputy",
-        "leader"
       ]
     },
     "relationships": [
