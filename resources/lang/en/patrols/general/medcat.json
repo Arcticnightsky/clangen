@@ -3592,8 +3592,8 @@
                         }
                     },
                     {
-                        "cats_to": ["app1"],
-                        "cats_from": ["p_l"],
+                        "cats_to": ["p_l"],
+                        "cats_from": ["app1"],
                         "mutual": false,
                         "values": [
                             "trust"
@@ -37660,9 +37660,6 @@
       ],
       "art": "gen_showing_herbs_med_one_app"
     }
-<<<<<<< HEAD
-]
-=======
   ],
   "fail_outcomes": [
     {
@@ -37705,4 +37702,3 @@
   ]
 }
 ]
->>>>>>> a877598a236da871fd0c6176e44beea01db372b6
