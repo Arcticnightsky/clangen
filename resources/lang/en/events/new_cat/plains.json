@@ -127,7 +127,10 @@
             "cats_to": ["n_c:0"],
             "mutual": true,
             "values": ["comfort", "like"],
-            "amount": 10
+            "amount": 10,
+            "log": {
+              "cats_from": "cat_from felt comforted after helping cat_to find a home in c_n."
+            }
           }
         ],
         "outsider": {
@@ -137,7 +140,7 @@
             ],
             "changed": 1
         }
-    }
+    },
   {
     "event_id": "gen_newcat_senior_barncat",
     "location": ["plains"],

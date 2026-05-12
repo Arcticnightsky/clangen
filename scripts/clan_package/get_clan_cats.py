@@ -1,5 +1,9 @@
 from typing import Union, Type, TYPE_CHECKING, Tuple, List
 
+from scripts.events_module.relationship.romance_chance import (
+    passes_same_sex_romance_chance,
+)
+
 if TYPE_CHECKING:
     from scripts.cat.cats import Cat
 
@@ -151,6 +155,8 @@ def get_possible_mates(cat) -> Tuple[List["Cat"], List["Cat"]]:
             continue
 
         if inter_cat.is_potential_mate(cat, for_love_interest=True):
+            if not passes_same_sex_romance_chance(cat, inter_cat):
+                continue
             if cat.relationships[inter_cat.ID].romance > 0:
                 existing_romance_mates.append(inter_cat)
             possible_mates.append(inter_cat)

@@ -2730,8 +2730,8 @@
                 "warrior",
                 "deputy"
             ],
-            "not_skill": [
-                "FIGHTER,2"
+            "skill": [
+                "-FIGHTER,2"
             ],
             "trait": [
                 "compassionate",
