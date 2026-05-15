@@ -1,4 +1,5 @@
 import os
+import random as random_module
 import random
 from random import choice, randint
 
@@ -14,6 +15,10 @@ from scripts.events_module.event_filters import filter_relationship_type
 from scripts.clan_package.get_clan_cats import (
     get_cats_same_age,
     get_possible_mates,
+)
+from scripts.events_module.relationship.romance_chance import (
+    cats_are_same_sex,
+    passes_same_sex_romance_chance,
 )
 
 
@@ -52,9 +57,25 @@ class Relation_Events:
 
         Relation_Events.same_age_events(cat)
 
-        # 1/16 for an additional event
-        if not random.getrandbits(4):
-            Relation_Events.romantic_events(cat)
+        romance_interests = []
+        for relationship in cat.relationships.values():
+            if (
+                relationship.romance > 0
+                and relationship.cat_to
+                and relationship.cat_to.status.alive_in_player_clan
+            ):
+                romance_interests.append(relationship.cat_to)
+        if romance_interests:
+            inter_cat = random_module.choice(romance_interests)
+            if cats_are_same_sex(cat, inter_cat):
+                if not passes_same_sex_romance_chance(cat, inter_cat):
+                    return
+                Relation_Events.romantic_events(cat)
+            elif not random.getrandbits(3):
+                Relation_Events.romantic_events(cat)
+        else:
+            if not random.getrandbits(4):
+                Relation_Events.romantic_events(cat)
 
         RomanticEvents.handle_mating_and_breakup(cat)
 
@@ -105,6 +126,12 @@ class Relation_Events:
                 inter_cat.relationships[cat.ID].like > 10
                 or inter_cat.relationships[cat.ID].comfort > 10
             )
+
+            if cats_are_same_sex(cat, inter_cat) and not passes_same_sex_romance_chance(
+                cat, inter_cat
+            ):
+                continue
+
             if cat_to_inter and inter_to_cat:
                 cat_to_choose_from.append(inter_cat)
 

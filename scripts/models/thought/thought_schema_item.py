@@ -44,6 +44,10 @@ class ThoughtSchemaItem(BaseModel):
     thoughts: List[str] = Field(
         ..., description="List of the text that will be displayed in-game as thoughts."
     )
+    not_working: Union[bool, MISSING] = Field(
+        MISSING,
+        description="Constrains the thought to whether m_c is unable to work.",
+    )
     has_injuries: Union[HasInjuries, MISSING] = Field(
         MISSING,
         description='Constrains the thought to only occur if m_c (the cat that is thinking the thought) or r_c (the cat that is being thought about) has a certain condition (either illness or injury). Can also use "any" to allow the thought to occur if the cat has any illness or injury.',

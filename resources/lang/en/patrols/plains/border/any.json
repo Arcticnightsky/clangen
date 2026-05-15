@@ -11,7 +11,7 @@
             "border"
         ],
         "tags": [],
-        "patrol_art": "bord_general_intro",
+        "patrol_art": "gen_outsider_ambush",
         "min_cats": 4,
         "max_cats": 6,
         "min_max_status": {},
@@ -39,6 +39,7 @@
                         }
                     }
                 ],
+                "art": "gen_bord_roguerunaway",
                 "frequency": 4
             },
             {
@@ -59,6 +60,7 @@
                         }
                     }
                 ],
+                "art": "gen_bord_roguerunaway",
                 "frequency": 4
             },
             {
@@ -85,6 +87,7 @@
                         }
                     }
                 ],
+                "art": "gen_bord_roguerunaway",
                 "frequency": 4
             }
         ],
@@ -115,7 +118,8 @@
                         }
                     }
                 ],
-                "frequency": 4
+                "art": "gen_bord_otherclan_hostile",
+                "frequency": 1
             },
             {
                 "text": "Taken by surprise, the patrol scatters and loses cohesion. The rogues are quick to take advantage of the confusion, and eventually the patrol retreats, r_c badly wounded.",
@@ -150,6 +154,7 @@
                         }
                     }
                 ],
+                "art": "gen_bord_otherclan_hostile",
                 "frequency": 4
             }
         ]
@@ -166,7 +171,7 @@
             "border"
         ],
         "tags": [],
-        "patrol_art": "bord_general_intro",
+        "patrol_art": "gen_outsider_ambush",
         "min_cats": 1,
         "max_cats": 1,
         "min_max_status": {},
@@ -190,7 +195,8 @@
                             "cats_from": "cat_from was impressed to hear cat_to escaped a rogue ambush."
                         }
                     }
-                ]
+                ],
+                "art": "fst_hunt_fun1"
             },
             {
                 "text": "s_c snarls at the rogues, outnumbered but not cowed. {PRONOUN/s_c/subject/CAP} {VERB/s_c/throw/throws} {PRONOUN/s_c/self} at the intruders with such ferocity that the rogues are taken aback. Alarmed by the Clan cat's lack of fear and self-preservation, the rogues freeze. s_c sees {PRONOUN/s_c/poss} opportunity to run and takes it, racing back to the camp to gather more warriors and return.",
@@ -214,6 +220,7 @@
                         }
                     }
                 ],
+                "art": "gen_angry_cat_warrior",
                 "frequency": 4
             }
         ],
@@ -242,6 +249,7 @@
                         }
                     }
                 ],
+                "art": "gen_battle_warrior_danger",
                 "frequency": 4
             },
             {
@@ -265,6 +273,8 @@
                         }
                     }
                 ],
+                "art": "gen_dead_cat_EXPLICIT",
+                "art_clean": "gen_dead_cat",
                 "frequency": 3
             }
         ]
@@ -281,7 +291,7 @@
             "border"
         ],
         "tags": [],
-        "patrol_art": "bord_general_intro",
+        "patrol_art": "gen_angry_cat_danger",
         "min_cats": 4,
         "max_cats": 6,
         "min_max_status": {},
@@ -305,6 +315,7 @@
                         }
                     }
                 ],
+                "art": "gen_bord_roguerunaway",
                 "frequency": 4
             },
             {
@@ -326,6 +337,7 @@
                         }
                     }
                 ],
+                "art": "gen_bord_roguerunaway",
                 "frequency": 1
             },
             {
@@ -346,6 +358,7 @@
                         }
                     }
                 ],
+                "art": "gen_speaking_cat_w2",
                 "frequency": 4
             },
             {
@@ -367,6 +380,7 @@
                         }
                     }
                 ],
+                "art": "gen_speaking_cat_w2",
                 "frequency": 4
             }
         ],
@@ -394,6 +408,7 @@
                         }
                     }
                 ],
+                "art": "gen_bord_otherclan_hostile",
                 "frequency": 4
             },
             {
@@ -425,6 +440,7 @@
                         }
                     }
                 ],
+                "art": "gen_bord_otherclan_hostile",
                 "frequency": 4
             }
         ],
@@ -432,6 +448,7 @@
             {
                 "text": "The patrol descends into battle without a second thought, but the rogues are stronger than expected, and eventually the patrol is forced to retreat.",
                 "exp": 0,
+                "art": "gen_battle_warrior_danger",
                 "frequency": 4
             }
         ],
@@ -439,6 +456,7 @@
             {
                 "text": "The patrol descends into battle without a second thought, eventually driving the rogues away.",
                 "exp": 30,
+                "art": "gen_bord_roguerunaway",
                 "frequency": 4
             }
         ]

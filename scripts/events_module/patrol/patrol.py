@@ -940,7 +940,8 @@ class Patrol:
         """Returns both the chosen event, and a boolean that's True if success, and False is fail."""
 
         patrol_size = len(self.patrol_cats)
-        total_exp = sum([x.experience for x in self.patrol_cats])
+        # Some cats can have an unset experience value (None), so treat that as 0.
+        total_exp = sum(x.experience or 0 for x in self.patrol_cats)
         gm_modifier = constants.CONFIG["patrol_generation"][
             f"{game.clan.game_mode}_difficulty_modifier"
         ]
