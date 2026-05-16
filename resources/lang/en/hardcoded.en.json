@@ -2,7 +2,7 @@
     "en": {
         "comment": "at some point, this file should become empty and unnecessary.",
         "event_deaths": {
-            "one": "This past moon, m_c has taken {PRONOUN/m_c/poss} place in StarClan. c_n mourns their loss, and {PRONOUN/m_c/poss} Clanmates will miss where {PRONOUN/m_c/subject} had been in their lives. Moments of {PRONOUN/m_c/poss} life are shared in stories around the circle of mourners as those that were closest to {PRONOUN/m_c/object} take {PRONOUN/m_c/object} to {PRONOUN/m_c/poss} final resting place.",
+            "one": "This past moon, m_c has taken {PRONOUN/m_c/poss} place in StarClan. c_n mourns the loss of their Clanmate, and {PRONOUN/m_c/poss} Clanmates will miss where {PRONOUN/m_c/subject} had been in their lives. Moments of {PRONOUN/m_c/poss} life are shared in stories around the circle of mourners as those that were closest to {PRONOUN/m_c/object} take {PRONOUN/m_c/object} to {PRONOUN/m_c/poss} final resting place.",
             "many": "The past moon, %{insert} have taken their place in StarClan. c_n mourns their loss, and their Clanmates will miss where they had been in their lives. Moments of their lives are shared in stories around the circle of mourners as those that were closest to them take them to their final resting place."
         },
         "event_shaken_grief": {
@@ -20,7 +20,7 @@
         "ceremony_leader_bloodthirsty": "%{oldname} has become the new leader. {PRONOUN\/lead_name\/subject\/CAP} {VERB\/lead_name\/stare\/stares} down at {PRONOUN\/lead_name\/poss} Clanmates with unsheathed claws, promising a new era for the Clans.",
         "ceremony_leader_1": "%{oldname} has been promoted to the new leader of the Clan. {PRONOUN\/lead_name\/subject/CAP} {VERB\/lead_name\/travel\/travels} to the Moonstone immediately to get {PRONOUN\/lead_name\/poss} nine lives and {VERB\/lead_name\/are\/is} hailed by {PRONOUN\/lead_name\/poss} new name, lead_name.",
         "ceremony_leader_2": "%{oldname} has become the new leader of the Clan. {PRONOUN\/lead_name\/subject\/CAP} {VERB\/lead_name\/vow\/vows} to protect the Clan, even at the cost of {PRONOUN\/lead_name\/poss} nine lives.",
-        "ceremony_leader_3": "%{oldname} has received {PRONOUN\/m_c\/poss} nine lives and has become the new leader of the Clan. {PRONOUN\/lead_name\/subject\/CAP} {VERB\/lead_name\/feel\/feels} like {PRONOUN\/lead_name\/subject} {VERB/m_c/are/is}n't ready for this new responsibility, but will try {PRONOUN\/lead_name\/poss} best to do what is right for the Clan.",
+        "ceremony_leader_3": "%{oldname} has received {PRONOUN\/lead_name\/poss} nine lives and has become the new leader of the Clan. {PRONOUN\/lead_name\/subject\/CAP} {VERB\/lead_name\/feel\/feels} like {PRONOUN\/lead_name\/subject} {VERB/lead_name/are/is}n't ready for this new responsibility, but will try {PRONOUN\/lead_name\/poss} best to do what is right for the Clan.",
         "ceremony_closer": "Visit lead_name's profile to see {PRONOUN\/lead_name\/poss} full leader ceremony.",
         "ceremony_deputy_bloodthirsty": "m_c has been chosen as the new deputy. {PRONOUN/m_c/subject/CAP} {VERB/m_c/look/looks} at the Clan leader with an odd glint in {PRONOUN/m_c/poss} eyes.",
         "ceremony_deputy": "lead_name chooses m_c to take over as deputy. %{previous}",
@@ -54,8 +54,8 @@
             "many": "%{names} were out on a date and found a %{insert} walking their direction, looking utterly distressed. When confronting the kits, the eldest kit cries and explains that their parent basically left them and never returned, it's been days since they've seen their parent. Feeling waves of sympathy for the kits, %{names} decide to adopt them into the Clan."
         },
         "adoption_kittens_pair4": {
-            "one": "%{names} wished they were able to have kits of their own, sometimes they wished that they were a <b>tom and she-cat</b> pair for it to happen. Just then, they find a %{insert}, lost and alone with no parent - they tell the kit to not worry, as they will be its parents from now on.",
-            "many": "%{names} wished they were able to have kits of their own, sometimes they wished that they were a <b>tom and she-cat</b> pair for it to happen. Just then, they find a %{insert}, lost with no parent - they tell the kits to not worry, as they will be their parents from now on."
+            "one": "%{names} wished they were able to have kits of their own, sometimes they wished that they were a <b>tom and she-cat</b> pair for it to happen. Just then, they find a %{insert}, lost and alone with no parent — they tell the kit to not worry, as they will be its parents from now on.",
+            "many": "%{names} wished they were able to have kits of their own, sometimes they wished that they were a <b>tom and she-cat</b> pair for it to happen. Just then, they find a %{insert}, lost with no parent — they tell the kits to not worry, as they will be their parents from now on."
         },
         "adoption_kittens_pair5": {
             "one": "%{names} came across a dying loner with their %{insert} while on a date. The two tried to bring back the loner and their kit back to camp for help, but the loner, using their last words, told them to leave them here to die and to take care of their kit. %{names} obeyed. They buried the loner and adopted the poor kit into their care.",
@@ -130,7 +130,7 @@
             "one": "One piece of prey was consumed.",
             "many": "%{count} pieces of prey were consumed."
         },
-        "mate_reunite_poly": "Finally, after waiting for so long - day and night - with restless nights and prayers to Starclan, m_c is home. r_c and {PRONOUN/r_c/poss} mate reunite with {PRONOUN/r_c/object}, sharing a bittersweet moment in the clearing.",
-        "mate_reunite": "Finally, after waiting for so long - day and night - with restless nights and prayers to Starclan, m_c is home. r_c reunites with {PRONOUN/r_c/poss} mate, sharing a bittersweet moment in the middle of the clearing." 
+        "mate_reunite_poly": "Finally, after waiting for so long — day and night — with restless nights and prayers to Starclan, m_c is home. r_c and {PRONOUN/r_c/poss} mate reunite with {PRONOUN/r_c/object}, sharing a bittersweet moment in the clearing.",
+        "mate_reunite": "Finally, after waiting for so long — day and night — with restless nights and prayers to Starclan, m_c is home. r_c reunites with {PRONOUN/r_c/poss} mate, sharing a bittersweet moment in the middle of the clearing." 
     }
 }

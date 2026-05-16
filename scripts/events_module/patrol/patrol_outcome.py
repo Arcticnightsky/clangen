@@ -24,7 +24,7 @@ from scripts.events_module.consequences import (
     gather_cat_objects,
     unpack_rel_block,
 )
-from scripts.events_module.event_filters import filter_relationship_type
+from scripts.events_module.event_filters import filter_relationship_type, event_for_cat
 from scripts.clan_package.cotc import change_clan_reputation, change_clan_relations
 from scripts.game_structure import game
 from scripts.cat.skills import SkillPath
@@ -234,6 +234,11 @@ class PatrolOutcome:
 
         return outcome_list
 
+    @staticmethod
+    def _profile_link(cat: Cat) -> str:
+        """Create a hyperlink to a cat profile from patrol results."""
+        return f'<a href="cat://{cat.ID}"><b>{escape(str(cat.name))}</b></a>'
+
     def execute_outcome(self, patrol: "Patrol") -> Tuple[str, str, list, Optional[str]]:
         """
         Executes the outcome. Returns a tuple with the final outcome text, the results text, and any outcome art
@@ -285,7 +290,7 @@ class PatrolOutcome:
                 Cat, self.relationship_effects, patrol, stat_cat=self.stat_cat
             )
         )
-        if self.relationship_effects:
+        if self.relationship_effects and rel_results:
             results.append(i18n.t(f"screens.patrol.relationship_changed"))
 
         results.append(self._handle_rep_changes())
@@ -434,10 +439,13 @@ class PatrolOutcome:
 
         actual_stat_cats = []
         for kitty in possible_stat_cats:
-            if kitty.personality.trait in self.stat_trait:
-                actual_stat_cats.append(kitty)
-
-            if kitty.skills.check_skill_requirement_list(self.stat_skill):
+            if event_for_cat(
+                {
+                    "skill": self.stat_skill,
+                    "trait": self.stat_trait,
+                },
+                kitty,
+            ):
                 actual_stat_cats.append(kitty)
 
         if actual_stat_cats:
@@ -514,11 +522,19 @@ class PatrolOutcome:
         if not self.dead_cats:
             return ""
 
-        # body_tags = ("body", "no_body")
-        # leader_lives = ("all_lives", "some_lives")
+        # tags that can be included in the cat list, but aren't cats
+        extra_tags: set = {"body", "no_body", "all_lives", "some_lives"}
+
+        # making this into a set so the next bit is easier
+        dead_cats = set(self.dead_cats)
+
+        # grabbing the extra tags out of the dead_cats
+        used_extra_tags = dead_cats.intersection(extra_tags)
+        # now clearing out the extra tags from the dead_cats so that we only have cat tags
+        dead_cats.difference_update(extra_tags)
 
         cats_to_kill = gather_cat_objects(
-            Cat, self.dead_cats, patrol, stat_cat=self.stat_cat
+            Cat, list(dead_cats), patrol, stat_cat=self.stat_cat
         )
 
         if not cats_to_kill:
@@ -528,21 +544,21 @@ class PatrolOutcome:
             return ""
 
         body = True
-        if "no_body" in self.dead_cats:
+        if "no_body" in used_extra_tags:
             body = False
 
         results = []
         catnames = []
         for _cat in cats_to_kill:
             if _cat.status.is_leader:
-                if "all_lives" in self.dead_cats:
+                if "all_lives" in used_extra_tags:
                     game.clan.leader_lives = 0
                     results.append(
                         event_text_adjust(
                             Cat, i18n.t("cat.history.n_leader_death_all"), main_cat=_cat
                         )
                     )
-                elif "some_lives" in self.dead_cats:
+                elif "some_lives" in used_extra_tags:
                     lives_lost = random.randint(2, max(1, game.clan.leader_lives - 1))
                     game.clan.leader_lives -= lives_lost
                     for i in range(lives_lost - 1):
@@ -647,7 +663,6 @@ class PatrolOutcome:
                 lethal = False
 
             # Injury or scar the cats
-            results = []
             for _cat in cats:
                 # give condition
                 if not possible_injuries:
@@ -755,7 +770,7 @@ class PatrolOutcome:
         if "many_herbs" in self.herbs:
             large_bonus = True
 
-        patrol_size_modifier = int(len(patrol.patrol_cats))
+        patrol_size_modifier = round(len(patrol.patrol_cats) * 0.80)
 
         if "random_herbs" in self.herbs:
             # get random herbs, add to storage, and get patrol outcome msg

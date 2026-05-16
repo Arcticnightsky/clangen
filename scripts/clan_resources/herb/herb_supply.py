@@ -1,10 +1,8 @@
-import statistics
-from random import choice, randint, choices
+from random import choice, randint, choices, random
 from typing import Optional
 
 import i18n
 
-from scripts.cat.enums import CatRank
 from scripts.cat.skills import SkillPath
 from scripts.clan_resources.herb.herb import Herb, HERBS
 from scripts.clan_resources.herb.herb_effects import HerbEffect
@@ -384,26 +382,30 @@ class HerbSupply:
         """
 
         # get herbs found
-        herb_list = []
+        gathered_herbs = defaultdict(int)
         for med in med_cats:
             if assistants:
-                list_of_herb_strs, found_herbs = game.clan.herb_supply.get_found_herbs(
+                _, found_herbs = game.clan.herb_supply.get_found_herbs(
                     med,
                     general_amount_bonus=True,
                     specific_quantity_bonus=2,
                 )
             else:
-                list_of_herb_strs, found_herbs = game.clan.herb_supply.get_found_herbs(
-                    med
-                )
-            herb_list.extend(found_herbs)
+                _, found_herbs = game.clan.herb_supply.get_found_herbs(med)
+            for herb, amount in found_herbs.items():
+                gathered_herbs[herb] += amount
 
-        # remove dupes
-        herb_list = list(set(herb_list))
-        # get display strings for herbs
+        # get display strings for herbs with quantity
         herb_strs = []
-        for herb in herb_list:
-            herb_strs.append(game.clan.herb_supply.herb[herb].plural_display)
+        for herb, amount in gathered_herbs.items():
+            if amount == 1:
+                herb_strs.append(
+                    f"{amount} {game.clan.herb_supply.herb[herb].singular_display}"
+                )
+            else:
+                herb_strs.append(
+                    f"{amount} {game.clan.herb_supply.herb[herb].plural_display}"
+                )
 
         herb_list = adjust_list_text(herb_strs)
 
@@ -664,21 +666,34 @@ class HerbSupply:
 
             chosen_effect = choice(possible_effects)
 
+            # check if perm condition gets treatment
             if (
                 treatment_cat.is_disabled()
                 and name in treatment_cat.permanent_condition
             ):
-                # if chance of death is already low, med cat doesn't treat
-                if condition.get("mortality") and condition.get("mortality", 0) > 20:
-                    self.__apply_lack_of_herb(treatment_cat, name, chosen_effect)
-                    return
-                # if chance of risk is already low, med cat doesn't treat
-                no_treatment = False
+                condition_default = source_dict[name]
+                will_not_treat = False
+                # only treat if mortality is worse than 20 or the condition's default mortality (whichever is higher)
+                if condition.get("mortality") and condition["mortality"] > max(
+                    condition_default["mortality"][treatment_cat.age], 20
+                ):
+                    will_not_treat = True
                 for risk in condition.get("risks", []):
-                    if risk["chance"] > 20:
-                        self.__apply_lack_of_herb(treatment_cat, name, chosen_effect)
-                        no_treatment = True
-                if no_treatment:
+                    # only treat if risk chance is worse than 20 or the risk's default chance (whichever is higher)
+                    default_chance = 20
+                    for default_risk in condition_default.get("risks", []):
+                        if default_risk["name"] == risk["name"]:
+                            default_chance = risk["chance"]
+                            break
+
+                    if risk["chance"] > default_chance:
+                        will_not_treat = True
+                    else:  # if any risk needs treatment, then we'll treat
+                        will_not_treat = False
+                        break
+
+                if will_not_treat:
+                    self.__apply_lack_of_herb(treatment_cat, name, chosen_effect)
                     return
 
             if game.clan.game_mode == "classic":
@@ -716,7 +731,7 @@ class HerbSupply:
                     treatment_cat, name, herb_used, chosen_effect, amount_used, strength
                 )
 
-            else:
+            elif random() > 0.30:  # 70% chance that lack of treatment is detrimental
                 self.__apply_lack_of_herb(treatment_cat, name, chosen_effect)
 
     def _gather_herbs(self, med_cat):

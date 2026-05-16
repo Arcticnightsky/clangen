@@ -7,7 +7,7 @@ import ujson
 
 from scripts.game_structure import constants
 from scripts.cat.cats import Cat
-from scripts.cat.enums import CatRank
+from scripts.cat.enums import CatRank, CatAge
 from scripts.events_module.relationship.group_events import GroupEvents
 from scripts.events_module.relationship.romantic_events import RomanticEvents
 from scripts.events_module.relationship.welcoming_events import Welcoming_Events
@@ -15,6 +15,10 @@ from scripts.events_module.event_filters import filter_relationship_type
 from scripts.clan_package.get_clan_cats import (
     get_cats_same_age,
     get_possible_mates,
+)
+from scripts.events_module.relationship.romance_chance import (
+    cats_are_same_sex,
+    passes_same_sex_romance_chance,
 )
 
 
@@ -43,7 +47,7 @@ class Relation_Events:
         Returns
         -------
         """
-        if not cat.relationships:
+        if not cat.relationships or cat.age == CatAge.NEWBORN:
             return
         Relation_Events.had_one_event = False
 
@@ -63,11 +67,12 @@ class Relation_Events:
                 romance_interests.append(relationship.cat_to)
         if romance_interests:
             inter_cat = random_module.choice(romance_interests)
-            if cat.gender == inter_cat.gender and random_module.randint(1, 25000) != 1:
-                return # balancing same-sex relationships - there are too many and I just want more kits in my clans, sorry >:(
-            elif cat.gender != inter_cat.gender:
-                if not random.getrandbits(3):
-                   Relation_Events.romantic_events(cat) 
+            if cats_are_same_sex(cat, inter_cat):
+                if not passes_same_sex_romance_chance(cat, inter_cat):
+                    return
+                Relation_Events.romantic_events(cat)
+            elif not random.getrandbits(3):
+                Relation_Events.romantic_events(cat)
         else:
             if not random.getrandbits(4):
                 Relation_Events.romantic_events(cat)
@@ -107,7 +112,7 @@ class Relation_Events:
             # toss out cats who are outside
             if inter_cat.status.is_outsider:
                 continue
-                
+
             if inter_cat.ID not in cat.relationships:
                 cat.create_one_relationship(inter_cat)
             if cat.ID not in inter_cat.relationships:
@@ -121,10 +126,12 @@ class Relation_Events:
                 inter_cat.relationships[cat.ID].like > 10
                 or inter_cat.relationships[cat.ID].comfort > 10
             )
-            
-            if cat.gender == inter_cat.gender and random_module.randint(1, 25000) != 1 and not (inter_cat.relationships[cat.ID].romance > 0 or inter_cat.relationships[cat.ID].romance > 0):
-                continue # balancing same-sex relationships - there are too many and I just want more kits in my clans, sorry >:(
-            
+
+            if cats_are_same_sex(cat, inter_cat) and not passes_same_sex_romance_chance(
+                cat, inter_cat
+            ):
+                continue
+
             if cat_to_inter and inter_to_cat:
                 cat_to_choose_from.append(inter_cat)
 
@@ -165,9 +172,12 @@ class Relation_Events:
         if not Relation_Events.can_trigger_events(cat):
             return
 
+        # gets cats who are within an age range. range is either 40% their current moon age OR 40 moons, whichever is smaller
         same_age_cats = get_cats_same_age(
-            Cat, cat, constants.CONFIG["mates"]["age_range"]
+            Cat, cat, min(constants.CONFIG["mates"]["age_range"], int(cat.moons * 0.4))
         )
+        if [c for c in same_age_cats if c.age == CatAge.NEWBORN]:
+            pass
         if len(same_age_cats) > 0:
             random_cat = choice(same_age_cats)
             if (
@@ -201,7 +211,9 @@ class Relation_Events:
             chosen_type = "all"
         possible_interaction_cats = list(
             filter(
-                lambda cat: (cat.status.alive_in_player_clan),
+                lambda cat: (
+                    cat.status.alive_in_player_clan and not cat.age == CatAge.NEWBORN
+                ),
                 Cat.all_cats.values(),
             )
         )
@@ -244,7 +256,11 @@ class Relation_Events:
             return
 
         for new_cat in new_cats:
-            same_age_cats = get_cats_same_age(Cat, new_cat)
+            same_age_cats = get_cats_same_age(
+                Cat,
+                new_cat,
+                min(constants.CONFIG["mates"]["age_range"], int(new_cat.moons * 0.4)),
+            )
             alive_cats = [
                 i for i in new_cat.all_cats.values() if i.status.alive_in_player_clan
             ]

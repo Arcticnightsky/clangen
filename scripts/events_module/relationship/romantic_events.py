@@ -1,4 +1,5 @@
 import random
+import random as random_module
 from copy import deepcopy
 from random import choice
 from typing import Dict, List
@@ -19,7 +20,10 @@ from scripts.events_module.event_filters import (
     get_highest_romantic_relation,
     get_personality_compatibility,
 )
-import random as random_module
+from scripts.events_module.relationship.romance_chance import (
+    passes_same_sex_romance_chance,
+)
+
 
 class RomanticEvents:
     """
@@ -152,7 +156,7 @@ class RomanticEvents:
         """
         if cat_from.ID == cat_to.ID:
             return False
-        
+
         if RomanticEvents.current_loaded_lang != i18n.config.get("locale"):
             RomanticEvents.rebuild_dicts()
             RomanticEvents.current_loaded_lang = i18n.config.get("locale")
@@ -160,7 +164,7 @@ class RomanticEvents:
         relevant_dict = deepcopy(RomanticEvents.ROMANTIC_INTERACTIONS)
         if cat_to.ID in cat_from.mate and not cat_to.dead:
             relevant_dict = deepcopy(RomanticEvents.MATE_INTERACTIONS)
-        
+
         # check if it should be a positive or negative interaction
         relationship = cat_from.relationships[cat_to.ID]
         positive = relationship.positive_interaction()
@@ -179,9 +183,10 @@ class RomanticEvents:
             )
             return False
 
-        if cat_from.gender == cat_to.gender and cat_to.ID not in cat_from.mate and random_module.randint(1, 25000) != 1:
-            return False # balancing same-sex relationships - there are too many and I just want more kits in my clans, sorry >:(
-        
+        if not passes_same_sex_romance_chance(cat_from, cat_to):
+            return False
+        relationship._same_sex_romance_chance_passed = True
+
         # chose interaction
         chosen_interaction = choice(filtered_interactions)
         # check if the current interaction id is already used and us another if so
@@ -210,9 +215,17 @@ class RomanticEvents:
         value_change = "increase" if positive else "decrease"
         rel_type = RelType.ROMANCE
         relationship.chosen_interaction = chosen_interaction
-        relationship.interaction_affect_relationships(
-            positive, chosen_interaction.intensity, rel_type
-        )
+        intensity = chosen_interaction.intensity
+        if (
+            positive
+            and (
+                cat_from.status.rank.is_any_medicine_rank()
+                or cat_to.status.rank.is_any_medicine_rank()
+            )
+            and random_module.randint(1, 12) != 1
+        ):
+            intensity = 0
+        relationship.interaction_affect_relationships(positive, intensity, rel_type)
 
         # give cats injuries
         if len(chosen_interaction.get_injuries) > 0:
@@ -384,7 +397,11 @@ class RomanticEvents:
                 )
             ):
                 # randint is a slow function, don't call it unless we have to.
-                if not cat_mate.no_mates and random.random() > 0.5:
+                if (
+                    not cat_mate.no_mates
+                    and random.random()
+                    <= constants.CONFIG["mates"]["chance_to_move_on"]
+                ):
                     text = i18n.t(
                         "hardcoded.move_on_dead_mate", mate=str(cat_mate.name)
                     )
@@ -544,6 +561,9 @@ class RomanticEvents:
         ):
             return False
 
+        if not passes_same_sex_romance_chance(cat_from, cat_to):
+            return False
+
         alive_inclan_from_mates = [
             mate for mate in cat_from.mate if cat_from.status.alive_in_player_clan
         ]
@@ -669,6 +689,9 @@ class RomanticEvents:
             return False, None
 
         if not cat_from.is_potential_mate(cat_to):
+            return False, None
+
+        if not passes_same_sex_romance_chance(cat_from, cat_to):
             return False, None
 
         if cat_from.ID in cat_to.mate:

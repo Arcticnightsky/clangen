@@ -95,7 +95,7 @@ def one_moon():
 
     game.cur_events_list = []
     game.herb_events_list = []
-    game.freshkill_events_list = []
+    game.freshkill_event_list = []
     game.mediated = []
     switch_set_value(Switch.saved_clan, False)
     new_cat_invited = False
@@ -112,14 +112,8 @@ def one_moon():
         switch_set_value(Switch.no_able_left, False)
 
     # age up the clan, set current season
-    old_season = game.clan.current_season
     game.clan.age += 1
-    if game.clan.current_season != old_season:
-        # update audio to use new season ambiance
-        try:
-            game.audio.check(should_fade_out=True)
-        except AttributeError:
-            pass
+
     update_afterlife_temper()
     Pregnancy_Events.handle_pregnancy_age(game.clan)
     check_war()
@@ -580,7 +574,9 @@ def handle_lead_den_event():
 
             # this handles ceremonies for cats coming into the clan
             if invited_cats:
-                handle_lost_cats_return(invited_cats)
+                tnr_return_text = handle_lost_cats_return(invited_cats)
+                if tnr_return_text:
+                    event_text += f" {tnr_return_text}"
 
         # give new thought to cats
         if "new_thought" in cat_dict:
@@ -679,7 +675,7 @@ def handle_focus():
         - raid other clans
         - hoarding
     Focus which are not able to be handled here:
-        rest and recover - handled in:
+        rest_and_recover - handled in:
             - 'handle_outbreaks'
             - 'condition_events.handle_injuries'
             - 'condition_events.handle_illnesses'
@@ -866,6 +862,7 @@ def handle_lost_cats_return(predetermined_cat_IDs: list = None):
     TODO: DOCS
     """
     cat_IDs = []
+    tnr_return_texts = []
     if predetermined_cat_IDs:
         cat_IDs = predetermined_cat_IDs
 
@@ -877,11 +874,11 @@ def handle_lost_cats_return(predetermined_cat_IDs: list = None):
         ]
 
         if not eligible_cats:
-            return
+            return ""
 
         lost_cat = random.choice(eligible_cats)
         if lost_cat.age in (CatAge.NEWBORN, CatAge.KITTEN):
-            return
+            return ""
 
         cat_IDs.append(lost_cat.ID)
 
@@ -974,11 +971,14 @@ def handle_lost_cats_return(predetermined_cat_IDs: list = None):
 
     for cat_ID in cat_IDs:
         returned_cat = Cat.fetch_cat(cat_ID)
+        if returned_cat and returned_cat.pending_neuter:
+            # Mirror the normal moon-skip flow so Twoleg-abducted cats resolve
+            # their pending sterilization state before we build return text.
+            returned_cat.handle_pending_neuter()
         if (
             returned_cat
             and returned_cat.status.alive_in_player_clan
             and returned_cat.tnr_victim
-            and returned_cat.status.is_former_clancat
         ):
             sterilized_condition = returned_cat.get_sterilization_condition_name()
             if (
@@ -994,9 +994,12 @@ def handle_lost_cats_return(predetermined_cat_IDs: list = None):
                 main_cat=returned_cat,
                 clan=game.clan,
             )
-            game.cur_events_list.append(
-                Single_Event(tale_text, ["misc", "health"], [returned_cat.ID])
-            )
+            if predetermined_cat_IDs:
+                tnr_return_texts.append(tale_text)
+            else:
+                game.cur_events_list.append(
+                    Single_Event(tale_text, ["misc", "health"], [returned_cat.ID])
+                )
 
     # Perform a ceremony if needed
     for cat_ID in cat_IDs:
@@ -1017,6 +1020,8 @@ def handle_lost_cats_return(predetermined_cat_IDs: list = None):
                     ceremony(x, CatRank.WARRIOR)
             elif not x.status.rank.is_any_apprentice_rank() and x.moons >= 6:
                 ceremony(x, CatRank.APPRENTICE)
+
+    return " ".join(tnr_return_texts)
 
 
 def handle_fading(cat):
@@ -1087,6 +1092,31 @@ def one_moon_outside_cat(cat, other_clan_cats: list = None):
 
     handle_outside_EX(cat)
 
+    # handling the rank changes for Other Clan cats
+    # this is SUPER rudimentary rn, really just a temp patch to handle our current little edge-cases
+    if cat.status.is_other_clancat:
+        # kitten to apprentice - for now it's going to be limited to warrior apprentices
+        if cat.moons == cat_class.age_moons[CatAge.ADOLESCENT][0]:
+            cat.status._change_rank(CatRank.APPRENTICE)
+            # we aren't going to worry about sourcing a mentor, we're gonna pretend it's "hidden" from the player
+        # apprentice to full
+        if cat.moons >= cat_class.age_moons[CatAge.YOUNG_ADULT][0]:
+            # warrior
+            if cat.status.rank == CatRank.APPRENTICE:
+                cat.status._change_rank(CatRank.WARRIOR)
+            # med cat
+            if cat.status.rank == CatRank.MEDICINE_APPRENTICE:
+                cat.status._change_rank(CatRank.MEDICINE_CAT)
+            # mediator (just in case)
+            if cat.status.rank == CatRank.MEDIATOR_APPRENTICE:
+                cat.status._change_rank(CatRank.MEDIATOR)
+        # cat to elder
+        if cat.moons >= cat_class.age_moons[CatAge.SENIOR][0]:
+            # exclude the roles that don't really retire
+            if cat.status.rank not in (CatRank.LEADER, CatRank.MEDICINE_CAT):
+                cat.status._change_rank(CatRank.ELDER)
+
+    # skill progression needs to be after rank progression
     cat.skills.progress_skill(cat)
     Pregnancy_Events.handle_having_kits(cat, clan=game.clan)
 
@@ -1171,7 +1201,6 @@ def one_moon_cat(cat):
 
     # newborns don't do much
     if cat.status.rank == CatRank.NEWBORN:
-        cat.relationship_interaction()
         return
 
     handle_apprentice_EX(cat)  # This must be before perform_ceremonies!
@@ -1191,10 +1220,9 @@ def one_moon_cat(cat):
     if cat.dead:
         return
 
-    cat.relationship_interaction()
-
     # relationships have to be handled separately, because of the ceremony name change
     if cat.status.alive_in_player_clan:
+        cat.relationship_interaction()
         Relation_Events.handle_relationships(cat)
 
     # now we make sure ill and injured cats don't get interactions they shouldn't
@@ -1269,9 +1297,9 @@ def check_war():
                 break
 
         threshold = 10
-        if enemy_clan.temperament == "bloodthirsty":
+        if "bloodthirsty" in enemy_clan.temperament:
             threshold = 12
-        if enemy_clan.temperament in ["mellow", "amiable", "gracious"]:
+        if set(enemy_clan.temperament).intersection({"mellow", "amiable", "gracious"}):
             threshold = 7
 
         threshold -= int(game.clan.war["duration"])
@@ -1300,9 +1328,11 @@ def check_war():
     else:  # try to start a war if no war in progress
         for other_clan in game.clan.all_other_clans:
             threshold = 5
-            if other_clan.temperament == "bloodthirsty":
+            if "bloodthirsty" in other_clan.temperament:
                 threshold = 10
-            if other_clan.temperament in ["mellow", "amiable", "gracious"]:
+            if set(other_clan.temperament).intersection(
+                {"mellow", "amiable", "gracious"}
+            ):
                 threshold = 3
 
             if int(other_clan.relations) <= threshold and not int(
@@ -1369,7 +1399,11 @@ def perform_ceremonies(cat):
             game.clan.leader_lives = 9
             text = ""
             if game.clan.deputy.personality.trait == "bloodthirsty":
-                text = i18n.t("hardcoded.ceremony_leader_bloodthirsty")
+                text = i18n.t(
+                    "hardcoded.ceremony_leader_bloodthirsty",
+                    oldname=game.clan.deputy.name,
+                    newname=cat.name,
+                )
             else:
                 c = random.randint(1, 3)
                 text = i18n.t(
@@ -1681,7 +1715,7 @@ def _is_suitable_medcat_app(cat) -> bool:
         chance = chance / 2
         logger.info("beneficial secondary skill, chance updated to %d", round(chance))
 
-    if cat.skills.primary.path == SkillPath.HEALER or cat.skills.secondary and cat.skills.secondary.path == SkillPath.HEALER:
+    if cat.skills.primary.path == SkillPath.HEALER:
         chance = chance / 8
         logger.info("%s's a natural healer! Chance updated to %d", cat.name, round(chance))
         
@@ -1692,6 +1726,10 @@ def _is_suitable_medcat_app(cat) -> bool:
     if cat.skills.primary.path in unbeneficial_skills:
         chance = chance * 3.5
         logger.info("unbeneficial primary skill, chance updated to %d", round(chance))
+
+    if cat.skills.secondary and cat.skills.secondary.path in unbeneficial_skills:
+        chance = chance * 3.5
+        logger.info("unbeneficial secondary skill, chance updated to %d", round(chance))
     
     if cat.is_disabled():
         chance = chance / 2
@@ -2092,6 +2130,11 @@ def handle_apprentice_EX(cat):
         if cat.not_working() and int(random.random() * 3):
             return
 
+        # Older/externally edited saves can leave experience unset (None) on loaded cats.
+        # Normalize before comparing to avoid None > int crashes during timeskip.
+        if cat.experience is None:
+            cat.experience = 0
+
         if cat.experience > cat.experience_levels_range["trainee"][1]:
             return
 
@@ -2490,8 +2533,8 @@ def handle_outbreaks(cat):
             ):
                 continue
 
-            if get_clan_setting("rest and recover"):
-                stopping_chance = constants.CONFIG["focus"]["rest and recover"][
+            if get_clan_setting("rest_and_recover"):
+                stopping_chance = constants.CONFIG["focus"]["rest_and_recover"][
                     "outbreak_prevention"
                 ]
                 if not int(random.random() * stopping_chance):
