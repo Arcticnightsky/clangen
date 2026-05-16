@@ -1,6 +1,5 @@
 #!/usr/bin/env python3
 # -*- coding: ascii -*-
-
 from html import escape
 import random
 from os.path import exists as path_exists
@@ -49,6 +48,12 @@ class PatrolOutcome:
         Personality.trait_ranges["kit_traits"].keys()
     )
     NUM_OF_SKILLS = len(SkillPath)
+    PROFILE_LINK_HINT = "<br>(Click a name to view profile)"
+
+    @staticmethod
+    def _profile_link(cat: Cat) -> str:
+        """Create a UI hyperlink to a cat profile."""
+        return f'<a href="cat://{cat.ID}"><b>{escape(str(cat.name))}</b></a>'
 
     @staticmethod
     def _profile_link(cat: Cat) -> str:
@@ -307,9 +312,13 @@ class PatrolOutcome:
 
         self._handle_future_event(patrol)
 
+        result_text = " ".join(results)
+        if "cat://" in result_text:
+            result_text += self.PROFILE_LINK_HINT
+
         print("PATROL END -----------------------------------------------------")
 
-        return processed_text, " ".join(results), rel_results, self.get_outcome_art()
+        return processed_text, result_text, rel_results, self.get_outcome_art()
 
     def _handle_future_event(self, patrol):
         """
