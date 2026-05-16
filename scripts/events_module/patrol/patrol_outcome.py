@@ -50,6 +50,11 @@ class PatrolOutcome:
     )
     NUM_OF_SKILLS = len(SkillPath)
 
+    @staticmethod
+    def _profile_link(cat: Cat) -> str:
+        """Create a UI hyperlink to a cat profile."""
+        return f'<a href="cat://{cat.ID}"><b>{escape(str(cat.name))}</b></a>'
+
     def __init__(
         self,
         success: bool = True,
@@ -606,11 +611,25 @@ class PatrolOutcome:
 
         [_cat.become_lost() for _cat in cats_to_lose]
 
+        patrol_id = patrol.patrol_event.patrol_id if patrol.patrol_event else ""
+        twoleg_abduction_patrol = self._is_twoleg_abduction_loss_patrol(patrol_id)
+        if twoleg_abduction_patrol:
+            for _cat in cats_to_lose:
+                _cat.pending_neuter = True
+
         return i18n.t(
             "screens.patrol.lost_cats",
             count=len(cats_to_lose),
             cats=adjust_list_text([self._profile_link(cat) for cat in cats_to_lose]),
         )
+
+    @staticmethod
+    def _is_twoleg_abduction_loss_patrol(patrol_id: str) -> bool:
+        if patrol_id in {"gen_hunt_gonetnr1", "gen_hunt_gonetnr2"}:
+            return True
+
+        patrol_id_lower = patrol_id.lower()
+        return "twoleg" in patrol_id_lower or "tnr" in patrol_id_lower
 
     def _handle_condition_and_scars(self, patrol: "Patrol") -> str:
         """Handle injuring cats, or giving scars"""

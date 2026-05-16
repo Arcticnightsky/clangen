@@ -17,6 +17,7 @@ from ..ui.scale import ui_scale, ui_scale_dimensions
 from .Screens import Screens
 from .enums import GameScreen
 from ..clan_package.settings import get_clan_setting
+from ..clan_package.get_clan_cats import get_queens_with_young_kits
 from ..game_structure import image_cache, constants
 from ..game_structure.game.switches import switch_set_value, Switch
 from ..game_structure.game.settings import game_setting_get
@@ -75,6 +76,14 @@ class PatrolScreen(Screens):
         if event.type == pygame_gui.UI_BUTTON_DOUBLE_CLICKED:
             if self.patrol_stage == "choose_cats":
                 self.handle_choose_cats_events(event)
+        elif event.type == pygame_gui.UI_TEXT_BOX_LINK_CLICKED:
+            if event.link_target.startswith("cat://"):
+                cat_id = event.link_target.split("cat://", maxsplit=1)[1]
+                cat = Cat.fetch_cat(cat_id)
+                if isinstance(cat, Cat):
+                    switch_set_value(Switch.cat, cat.ID)
+                    game.last_screen_forProfile = GameScreen.PATROL
+                    self.change_screen(GameScreen.PROFILE)
 
         elif event.type == pygame_gui.UI_TEXT_BOX_LINK_CLICKED:
             if event.link_target.startswith("cat://"):
@@ -1011,6 +1020,10 @@ class PatrolScreen(Screens):
 
         self.able_cats = []
 
+        queens_with_young_kits = get_queens_with_young_kits(
+            Cat.all_cats_list, max_kit_moons=5
+        )
+
         # ASSIGN TO ABLE CATS
         for the_cat in Cat.all_cats_list:
             if (
@@ -1020,6 +1033,7 @@ class PatrolScreen(Screens):
                 and the_cat.status.alive_in_player_clan
                 and the_cat not in self.current_patrol
                 and not the_cat.not_working()
+                and the_cat.ID not in queens_with_young_kits
             ):
                 if (
                     the_cat.status.rank == CatRank.NEWBORN
