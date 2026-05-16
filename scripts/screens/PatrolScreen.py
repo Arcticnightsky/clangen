@@ -85,6 +85,15 @@ class PatrolScreen(Screens):
                     game.last_screen_forProfile = GameScreen.PATROL
                     self.change_screen(GameScreen.PROFILE)
 
+        elif event.type == pygame_gui.UI_TEXT_BOX_LINK_CLICKED:
+            if event.link_target.startswith("cat://"):
+                cat_id = event.link_target.split("cat://", maxsplit=1)[1]
+                cat = Cat.fetch_cat(cat_id)
+                if isinstance(cat, Cat):
+                    switch_set_value(Switch.cat, cat.ID)
+                    game.last_screen_forProfile = GameScreen.PATROL
+                    self.change_screen(GameScreen.PROFILE)
+
         elif event.type == pygame_gui.UI_BUTTON_START_PRESS:
             if self.patrol_stage == "choose_cats":
                 self.handle_choose_cats_events(event)
