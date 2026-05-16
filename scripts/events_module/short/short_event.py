@@ -324,6 +324,17 @@ class ShortEvent:
                 clan_reveal="clan_wide" in self.tags,
                 aware_individuals=[self.random_cat.ID],
             )
+            murderer_mates = []
+            for mate_id in self.main_cat.mate:
+                mate = Cat.fetch_cat(mate_id)
+                if mate and not mate.dead:
+                    murderer_mates.append(mate)
+            if murderer_mates:
+                change_relationship_values(
+                    [self.main_cat],
+                    murderer_mates,
+                    romance=-80,
+                )
 
         # change outsider rep
         if self.outsider:
@@ -458,6 +469,7 @@ class ShortEvent:
 
             if extra_text:
                 self.text = self.text + " " + extra_text
+                extra_text = None
 
         # Check to see if any young litters joined with alive parents.
         # If so, see if recovering from birth condition is needed and give the condition
@@ -886,6 +898,8 @@ class ShortEvent:
             game.clan.freshkill_pile.remove_freshkill(reduce_amount, take_random=True)
         if increase_amount != 0:
             game.clan.freshkill_pile.add_freshkill(increase_amount)
+
+        game.freshkill_event_list.append(self.text)
 
     def handle_herb_supply(self, block):
         """

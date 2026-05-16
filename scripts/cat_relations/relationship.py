@@ -20,6 +20,10 @@ from scripts.events_module.event_filters import (
 from scripts.game_structure import game
 from scripts.events_module.text_adjust import process_text
 import scripts.cat_relations.interaction as interactions
+from scripts.events_module.relationship.romance_chance import (
+    cats_are_same_sex,
+    passes_same_sex_romance_chance,
+)
 
 
 # ---------------------------------------------------------------------------- #
@@ -59,6 +63,7 @@ class Relationship:
         else:
             self.log = []
 
+        self._same_sex_romance_chance_passed = False
         self.no_longer_neutral = []
         """
         List of rel types that made it out of the neutral tier (ROMANCE is not included). This list is used to indicate which types should not return to a neutral state.
@@ -255,6 +260,22 @@ class Relationship:
 
         return process_text(string, cat_dict)
 
+    def same_sex_romance_gain_allowed(self) -> bool:
+        """Return whether this same-sex romance gain may proceed.
+
+        Some callers already passed the shared 1-in-25,000 gate while deciding
+        whether to choose a romantic interaction.  In that case, consume the
+        stored pass instead of rolling again for the resulting romance gain.
+        """
+        if not cats_are_same_sex(self.cat_from, self.cat_to):
+            return True
+
+        if self._same_sex_romance_chance_passed:
+            self._same_sex_romance_chance_passed = False
+            return True
+
+        return passes_same_sex_romance_chance(self.cat_from, self.cat_to)
+
     def get_value_change_amount(self, is_positive: bool, intensity: str) -> int:
         """Finds and returns the int amount that the relationship type will change by according to given intensity and additional modifiers
 
@@ -317,6 +338,8 @@ class Relationship:
             # and a positive interaction will affect all values to a positive degree
 
             if rel_type == RelType.ROMANCE:
+                if is_positive and not self.same_sex_romance_gain_allowed():
+                    amount = 0
                 self.romance += amount
 
             for rel_out in (
@@ -332,6 +355,12 @@ class Relationship:
                     + (choice(buffs) if rel_type != rel_out else amount),
                 )
         else:
+            if (
+                rel_type == RelType.ROMANCE
+                and is_positive
+                and not self.same_sex_romance_gain_allowed()
+            ):
+                return
             setattr(self, rel_type, getattr(self, rel_type) + amount)
         # influence the opposite relationship
         if self.opposite_relationship is None:
@@ -358,6 +387,13 @@ class Relationship:
         """
         for key, value in dictionary.items():
             if value == "neutral":
+                continue
+
+            if (
+                key == RelType.ROMANCE
+                and value == "increase"
+                and not self.same_sex_romance_gain_allowed()
+            ):
                 continue
 
             amount = self.get_value_change_amount(
@@ -442,6 +478,15 @@ class Relationship:
             while RelType.ROMANCE in value_weights:
                 value_weights.pop(RelType.ROMANCE)
 
+        if RelType.ROMANCE in value_weights and positive:
+            if passes_same_sex_romance_chance(self.cat_from, self.cat_to):
+                self._same_sex_romance_chance_passed = True
+            else:
+                value_weights.pop(RelType.ROMANCE)
+
+        if RelType.ROMANCE in value_weights and self._is_sterilized_intact_pair():
+            value_weights[RelType.ROMANCE] *= 0.35
+
         # if cats have no romance relationship already, don't allow romance decrease
         if (
             not positive
@@ -455,6 +500,15 @@ class Relationship:
             [weight for weight in value_weights.values()],
         )[0]
         return chosen_type
+
+    @staticmethod
+    def _is_sterilized(cat) -> bool:
+        return any(cond in cat.permanent_condition for cond in ("neutered", "spayed"))
+
+    def _is_sterilized_intact_pair(self) -> bool:
+        cat_from_sterilized = self._is_sterilized(self.cat_from)
+        cat_to_sterilized = self._is_sterilized(self.cat_to)
+        return cat_from_sterilized != cat_to_sterilized
 
     def get_relevant_interactions(
         self,

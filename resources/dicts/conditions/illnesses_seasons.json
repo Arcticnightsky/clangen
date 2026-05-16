@@ -12,7 +12,8 @@
     "Leaf-fall":{
         "stomachache":1,
         "greencough": 1,
-        "kittencough": 4
+        "kittencough": 4,
+        "running nose": 3
     },
     "Leaf-bare":{
         "stomachache":1,

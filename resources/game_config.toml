@@ -64,6 +64,9 @@ dev_tools = true
   # 1/chance of becoming mates, triggers with friends_to_lover (has to be a high number because many relationships are checked each moon)
   chance_friends_to_lovers = 170
 
+  # chance to move on from a dead or absent mate, fraction represents a percentage. default is 30% chance.
+  chance_to_move_on = 0.3
+
 
   # NOTE FOR RELATIONSHIP CONSTRAINTS
   #  0: no condition
@@ -161,8 +164,9 @@ dev_tools = true
   # number of welcoming events to add when a new cat joins
   cat_amount_welcoming = 3
 
-  # this is the amount to divide a relative's relation toward the parent when deciding on a relative's initial relationship toward a kit
-  ext_relative_modifier = 4
+  # ext_relative_modifer * parents(len) is what will a relative's relation toward the parent 
+  # will by divided by when deciding on a relative's initial relationship toward a kit
+  ext_relative_modifier = 2
   # relationship buffs represent "default" relationship values that are then lightly randomized
   # in order to create initial relationship values for cats
 
@@ -225,14 +229,14 @@ dev_tools = true
   primary_chance_mated = 80
 
   # 1/chance that kits, relationship and other factors will influence this chance
-  primary_chance_unmated = 135
+  primary_chance_unmated = 130
 
   # 1/chance that a mated cat has an affair
-  random_affair_chance = 100
+  random_affair_chance = 110
 
   # 1/chance for an unmated cat to have an affair (coparenting)
   # for this check, only other unmated cats can be the affair partner
-  unmated_random_affair_chance = 200
+  unmated_random_affair_chance = 100
 
   # base chance for same-sex mates to adopt random kittens
   primary_chance_same_sex_adoption = 500
@@ -378,7 +382,7 @@ dev_tools = true
   mediator_app_chance = 5000
 
   # base 1/chance that a cat will be chosen as a med cat apprentice
-  base_medicine_app_chance = 125
+  base_medicine_app_chance = 180
 
 [roles."medicine cat apprentice"]
   # maximum number of medicine cat apprentices to full medicine cats (e.g. 4 adult medcats can have 2 apps total)
@@ -469,8 +473,8 @@ dev_tools = true
   leader_death_chance = 10
 
   # base 1/chance a cat will die
-  classic_death_chance = 850
-  expanded_death_chance = 750
+  classic_death_chance = 1000
+  expanded_death_chance = 950
   "cruel season_death_chance" = 300
 
   # modifiers for death chance based on if a war is going badly
@@ -495,17 +499,17 @@ dev_tools = true
 
 [condition_related]
   # 10/chance an illness will occur
-  expanded_illness_chance = 550
+  expanded_illness_chance = 650
   "cruel season_illness_chance" = 200
-  classic_illness_chance = 700
+  classic_illness_chance = 750
 
   # 5/chance (for most personalities) or 15/chance (for some personalities) an injury will occur 
-  classic_injury_chance = 600
-  expanded_injury_chance = 450
+  classic_injury_chance = 700
+  expanded_injury_chance = 600
   "cruel season_injury_chance" = 150
 
   # 1/chance a cat will get a permanent condition from an event with that possibility 
-  permanent_condition_chance = 20
+  permanent_condition_chance = 40
 
   # modifiers for injury chance based on if a war is going badly
   # SUBTRACTS from the denominator so higher = more likely to get injured
@@ -545,7 +549,7 @@ dev_tools = true
   requires_mediator = ["sabotage_other_clans", "aid_other_clans"]
   requires_medicine_cat = ["herb_gathering"]
 
-  classic_disallows = ["herb_gathering", "hunting", "hoarding_resources", "raid_other_clans","hoarding"]
+  classic_disallows = ["herb_gathering", "hunting", "hoarding_resources", "raid_other_clans", "hoarding"]
 
   [focus.hunting]
     # Defines how much a working warrior(leader/deputy) or apprentice gathers additionally
@@ -627,7 +631,7 @@ dev_tools = true
       "running nose" = 5
       whitecough = 1
 
-  [focus."rest_and_recover"]
+  [focus.rest_and_recover]
     # roughly 1/chance injuries will be prevented
     injury_prevent = 4
 
@@ -711,7 +715,7 @@ dev_tools = true
     secondary_hunter = 2
     
     # base effects for herbs that have specified effects
-    base_mortality_effect = 3
+    base_mortality_effect = 5
     base_duration_effect = 1
     base_risk_effect = 3
 

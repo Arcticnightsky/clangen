@@ -394,11 +394,11 @@ class Cat:
         self.mate = []
         self.status = Status(**status) if status else Status()
         self._pronouns = {}  # Needs to be set as a dict
+        self.age: Optional[CatAge] = None
+        self.init_moons_age(moons)
         self.moons = moons
         self.inheritance = None  # This should never be used, but just for safety
         self.name = Name(prefix=prefix, suffix=suffix, cat=self)
-
-        self.init_moons_age(moons)
 
         self.set_faded()  # Sets the faded sprite and faded tag (self.faded = True)
         return True
@@ -492,26 +492,21 @@ class Cat:
                     allow_tortie_instead = True
                 elif mother_has_orange and father_is_dark:
                     allow_tortie_instead = True
+                elif father_is_dark and mother_is_dark and mother.pelt.name not in ["Tortie", "Calico"]:
+                    # preventing ginger she-cats from being birthed by 2 non-ginger pelted parents, because yes, this has happened before...
+                    self.pelt.colour = mother.pelt.colour
+                    return
 
             if not allow_female_ginger:
                 if allow_tortie_instead:
                     # Tortie construction time!
                     self.pelt.name = "Tortie"
-                    if self.pelt.name == "Calico" and mother.pelt.white_patches in (
-                        list(Pelt.high_white)
-                        + list(Pelt.mostly_white)
-                        + ["FULLWHITE"]
-                    ) or father.pelt.white_patches in (
+                    if self.pelt.white_patches in (
                         list(Pelt.high_white)
                         + list(Pelt.mostly_white)
                         + ["FULLWHITE"]
                     ):
                         self.pelt.name = "Calico"
-                        self.pelt.white_patches = choice(
-                            list(Pelt.high_white)
-                            + list(Pelt.mostly_white)
-                            + ["FULLWHITE"]
-                        )
                             
                     #  assigning the base color
                     if mother_is_dark:
@@ -578,6 +573,8 @@ class Cat:
                     copy_mothers_pelt = True
                 elif mother_has_orange and not father_is_ginger:
                     copy_mothers_pelt = True
+                elif not mother_has_orange and not father_is_ginger:
+                    copy_mothers_pelt = True
                     
                 if copy_mothers_pelt:
                     if mother.pelt.tortie_colour in Pelt.ginger_colours:
@@ -623,8 +620,11 @@ class Cat:
                 if copy_mothers_pelt:
                     self.pelt.colour = mother.pelt.colour
                 elif copy_tortie_color:
-                    self.pelt.colour = mother.pelt.tortie_colour
-
+                    if father.pelt.colour in Pelt.ginger_colours:
+                        if random_module.randint(0, 1) == 0:
+                            self.pelt.colour = father.pelt.colour
+                        else:
+                            self.pelt.colour = mother.pelt.tortie_colour
         # --- Female dark cat rarity ---
         if (
             self.pelt.colour in (
@@ -664,26 +664,21 @@ class Cat:
                     allow_tortie_instead = True
                 elif mother_has_orange and father_is_dark:
                     allow_tortie_instead = True
+                elif father_is_ginger and mother_has_orange and mother.pelt.name not in ["Tortie", "Calico"]:
+                    # preventing dark she-cats from being birthed by 2 ginger pelted parents, because yes, this has happened before...
+                    self.pelt.colour = mother.pelt.colour
+                    return
             
             if not allow_female_dark:
                 if allow_tortie_instead:
                     # Tortie construction time!
                     self.pelt.name = "Tortie"
-                    if self.pelt.name == "Calico" and mother.pelt.white_patches in (
-                        list(Pelt.high_white)
-                        + list(Pelt.mostly_white)
-                        + ["FULLWHITE"]
-                    ) or father.pelt.white_patches in (
+                    if self.pelt.white_patches in (
                         list(Pelt.high_white)
                         + list(Pelt.mostly_white)
                         + ["FULLWHITE"]
                     ):
                         self.pelt.name = "Calico"
-                        self.pelt.white_patches = choice(
-                            list(Pelt.high_white)
-                            + list(Pelt.mostly_white)
-                            + ["FULLWHITE"]
-                        )
                     
                     #  assigning the base color
                     if mother_is_dark:
@@ -1078,7 +1073,7 @@ class Cat:
                     high_types.extend(rel_type)
                 elif tier.is_extreme_neg:
                     very_low_types.extend(rel_type)
-                elif tier.is_mid_neg and randint(1, 4) == 1:
+                elif tier.is_mid_neg and randint(1, 6) == 1:
                     very_low_types.extend(rel_type)
                 continue
 
@@ -1087,7 +1082,12 @@ class Cat:
                 # major grief eligible cats.
 
                 major_chance = 3
+                # the less stable the cat, the more likely to grieve
                 if cat.personality.stability < 5:
+                    major_chance -= 1
+
+                # if considered family, grief more likely
+                if family_relation != "general":
                     major_chance -= 1
 
                 # decrease major grief chance if grave herbs are used
@@ -1128,7 +1128,7 @@ class Cat:
                 cat.get_ill("grief stricken", event_triggered=True, severity="major")
 
             # If major grief fails, but there are still very_high or high values,
-            # it can fail to minor grief. If they have a family relation, bypass the roll.
+            # it can fail to minor grief. If they have a family relation, bypass the roll and guarantee it
             elif (very_high_types or high_types) and (
                 family_relation != "general" or not int(random() * 5)
             ):
@@ -1183,6 +1183,8 @@ class Cat:
             return "parent"
         elif dead_cat.is_sibling(living_cat):
             return "sibling"
+        elif dead_cat.ID in living_cat.mate:
+            return "mate"
         else:
             return "general"
 
@@ -1243,8 +1245,10 @@ class Cat:
             child = Cat.all_cats[child_id]
             if (
                 not child.dead
+                and not child.status.alive_in_player_clan
                 and not child.status.is_exiled(CatGroup.PLAYER_CLAN_ID)
                 and child.moons < 12
+                and not child.status.alive_in_player_clan
             ):
                 child.status.add_to_group(
                     new_group_ID=CatGroup.PLAYER_CLAN_ID, age=child.age
@@ -1929,7 +1933,9 @@ class Cat:
         cats_to_choose = [
             iter_cat
             for iter_cat in Cat.all_cats.values()
-            if iter_cat.ID != self.ID and iter_cat.status.alive_in_player_clan
+            if iter_cat.ID != self.ID
+            and iter_cat.status.alive_in_player_clan
+            and iter_cat.age != CatAge.NEWBORN
         ]
         # if there are no cats to interact, stop
         if not cats_to_choose:
@@ -1975,7 +1981,7 @@ class Cat:
         moons_with = game.clan.age - self.illnesses[illness]["moon_start"]
 
         # focus buff
-        moons_prior = constants.CONFIG["focus"]["rest_and_recover"][
+        recovery_buff = constants.CONFIG["focus"]["rest_and_recover"][
             "moons_earlier_healed"
         ]
 
@@ -1986,7 +1992,7 @@ class Cat:
         # CLAN FOCUS! - if the focus 'rest_and_recover' is selected
         elif (
             get_clan_setting("rest_and_recover")
-            and self.illnesses[illness]["duration"] + moons_prior - moons_with <= 0
+            and self.illnesses[illness]["duration"] - recovery_buff - moons_with <= 0
         ):
             self.healed_condition = True
             return False
@@ -2017,7 +2023,7 @@ class Cat:
         moons_with = game.clan.age - self.injuries[injury]["moon_start"]
 
         # focus buff
-        moons_prior = constants.CONFIG["focus"]["rest_and_recover"][
+        recovery_buff = constants.CONFIG["focus"]["rest_and_recover"][
             "moons_earlier_healed"
         ]
 
@@ -2033,7 +2039,7 @@ class Cat:
         elif (
             not self.injuries[injury]["complication"]
             and get_clan_setting("rest_and_recover")
-            and self.injuries[injury]["duration"] + moons_prior - moons_with <= 0
+            and self.injuries[injury]["duration"] - recovery_buff - moons_with <= 0
         ):
             self.healed_condition = True
             return False
@@ -2858,6 +2864,13 @@ class Cat:
         if not ignore_no_mates and (self.no_mates or other_cat.no_mates):
             return False
 
+        # Medicine cats and medicine cat apprentices cannot take new mates.
+        if (
+            self.status.rank.is_any_medicine_rank()
+            or other_cat.status.rank.is_any_medicine_rank()
+        ):
+            return False
+
         # Inheritance check
         if self.is_related(other_cat, first_cousin_mates):
             return False
@@ -3639,6 +3652,11 @@ class Cat:
 
     @experience.setter
     def experience(self, exp: int):
+        # Old or externally edited saves may contain a null experience value.
+        # Treat that as 0 so loading doesn't crash.
+        if exp is None:
+            exp = 0
+
         exp = min(exp, self.experience_levels_range["master"][1])
         self._experience = int(exp)
 
@@ -3834,7 +3852,6 @@ class Cat:
                 "scars": self.pelt.scars or [],
                 "accessory": self.pelt.accessory,
                 "experience": self.experience,
-                "dead_moons": self.dead_for,
                 "current_apprentice": list(self.apprentice),
                 "former_apprentices": list(self.former_apprentices),
                 "faded_offspring": self.faded_offspring,
