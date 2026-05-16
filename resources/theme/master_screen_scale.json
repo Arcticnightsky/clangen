@@ -14,7 +14,7 @@
             "selected_text": "#000000",
             "disabled_text": "#000000",
             "link_text": "#223A25",
-            "link_hover": "#223A25",
+            "link_hover": "#2F4C2F",
             "link_selected": "#223A25",
             "text_shadow": "#777777",
             "normal_border": "#776045",
@@ -272,7 +272,7 @@
             "selected_bg": "#776045",
             "selected_text": "#AC9D72",
             "link_text": "#223A25",
-            "link_hover": "#223A25",
+            "link_hover": "#2F4C2F",
             "link_selected": "#223A25"
         },
         "misc": {"border_width": "0", "shadow_width": "0"}
