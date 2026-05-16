@@ -52,7 +52,7 @@ class PatrolOutcome:
     @staticmethod
     def _profile_link(cat: Cat) -> str:
         """Create a UI hyperlink to a cat profile."""
-        return f'<a href="cat://{cat.ID}">{escape(str(cat.name))}</a>'
+        return f'<a href="cat://{cat.ID}"><b>{escape(str(cat.name))}</b></a>'
 
     def __init__(
         self,
