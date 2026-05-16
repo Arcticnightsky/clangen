@@ -48,13 +48,6 @@ class PatrolOutcome:
         Personality.trait_ranges["kit_traits"].keys()
     )
     NUM_OF_SKILLS = len(SkillPath)
-    PROFILE_LINK_HINT = "<br>(Click a name to view profile)"
-
-    @staticmethod
-    def _profile_link(cat: Cat) -> str:
-        """Create a UI hyperlink to a cat profile."""
-        return f'<a href="cat://{cat.ID}"><b>{escape(str(cat.name))}</b></a>'
-
     @staticmethod
     def _profile_link(cat: Cat) -> str:
         """Create a UI hyperlink to a cat profile."""
@@ -314,7 +307,7 @@ class PatrolOutcome:
 
         result_text = " ".join(results)
         if "cat://" in result_text:
-            result_text += self.PROFILE_LINK_HINT
+            result_text += i18n.t("screens.patrol.profile_link_hint")
 
         print("PATROL END -----------------------------------------------------")
 
