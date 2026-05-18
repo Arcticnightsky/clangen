@@ -234,11 +234,6 @@ class PatrolOutcome:
 
         return outcome_list
 
-    @staticmethod
-    def _profile_link(cat: Cat) -> str:
-        """Create a hyperlink to a cat profile from patrol results."""
-        return f'<a href="cat://{cat.ID}"><b>{escape(str(cat.name))}</b></a>'
-
     def execute_outcome(self, patrol: "Patrol") -> Tuple[str, str, list, Optional[str]]:
         """
         Executes the outcome. Returns a tuple with the final outcome text, the results text, and any outcome art
