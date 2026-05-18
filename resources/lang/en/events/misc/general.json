@@ -14579,62 +14579,63 @@
       }
     ]
   },
-  {
-    "event_id": "gen_misc_murderreveal_tattletail3",
-    "location": [
-      "any"
-    ],
-    "season": [
-      "any"
-    ],
-    "sub_type": [
-      "murder_reveal"
-    ],
-    "tags": [
-      "clan_wide"
-    ],
-    "frequency": 2,
-    "event_text": "m_c has hesitated to tell anyone about r_c's murderous deed long enough. This secret has swallowed {PRONOUN/m_c/object} whole and m_c can't keep it anymore. m_c goes to the lead_name and tells them about what r_c did to mur_c. Later, a Clan meeting is called and the leader brings to light about r_c's murder against mur_c and exiles r_c.",
-    "m_c": {
-      "age": [
-        "any"
-      ],
-      "status": [
-        "any"
-      ]
-    },
-    "r_c": {
-      "age": [
-        "any"
-      ],
-      "status": [
-        "any"
-      ],
-      "trait": [
-        "bloodthirsty",
-        "vengeful",
-        "fierce"
-      ]
-    },
-    "relationships": [
-      {
-        "cats_from": [
-          "clan"
+    {
+        "event_id": "gen_misc_murderreveal_tattletail3",
+        "location": [
+            "any"
         ],
-        "cats_to": [
-          "r_c"
+        "season": [
+            "any"
         ],
-        "mutual": true,
-        "values": [
-          "trust",
-          "respect",
-          "comfort",
-          "like"
+        "sub_type": [
+            "murder_reveal"
         ],
-        "amount": -50,
-        "log": {
-          "cats_from": "cat_from learned that cat_to murdered mur_c."
-        }
-    ]
-  }
+        "tags": [
+            "clan_wide"
+        ],
+        "frequency": 2,
+        "event_text": "m_c has hesitated to tell anyone about r_c's murderous deed long enough. This secret has swallowed {PRONOUN/m_c/object} whole and m_c can't keep it anymore. m_c goes to the lead_name and tells them about what r_c did to mur_c. Later, a Clan meeting is called and the leader brings to light about r_c's murder against mur_c and exiles r_c.",
+        "m_c": {
+            "age": [
+                "any"
+            ],
+            "status": [
+                "any"
+            ]
+        },
+        "r_c": {
+            "age": [
+                "any"
+            ],
+            "status": [
+                "any"
+            ],
+            "trait": [
+                "bloodthirsty",
+                "vengeful",
+                "fierce"
+            ]
+        },
+        "relationships": [
+            {
+                "cats_from": [
+                    "clan"
+                ],
+                "cats_to": [
+                    "r_c"
+                ],
+                "mutual": true,
+                "values": [
+                    "trust",
+                    "respect",
+                    "comfort",
+                    "like"
+                ],
+                "amount": -50,
+                "log": {
+                    "cats_from": "cat_from learned that cat_to murdered mur_c."
+                }
+            }
+        ]
+    }
 ]
