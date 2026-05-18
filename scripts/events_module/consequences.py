@@ -839,6 +839,7 @@ def create_new_cat(
                 "COBALT",
                 "SUNLITICE",
                 "GREY",
+                "AURORA",
                 "SEA",
                 "BLUEBELL",
             ]
