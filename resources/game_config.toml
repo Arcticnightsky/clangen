@@ -125,7 +125,7 @@ dev_tools = true
 
   # these denote how relationships change upon a breakup
   [mates.breakup]
-    threshold = 175
+    threshold = 150
     variability = [-10, 10]
     [mates.breakup.default_weights]
       had_fight = 3
@@ -379,7 +379,7 @@ dev_tools = true
 
 [roles]
   # base 1/chance that a cat will be chosen as a mediator apprentice
-  mediator_app_chance = 5000
+  mediator_app_chance = 1500
 
   # base 1/chance that a cat will be chosen as a med cat apprentice
   base_medicine_app_chance = 180
@@ -428,11 +428,8 @@ dev_tools = true
 
 [patrol_generation]
   # modifies success rate based on game mode. higher = more difficult.
-  # the Cruel Season difficulty modifier needs to have a space rather than an underscore 
-  # due to how it's written in the save files. So don't try to 'fix' it.
   classic_difficulty_modifier = 1
   expanded_difficulty_modifier = 2
-  "cruel season_difficulty_modifier" = 3
 
   # amount to modify patrol success based on patrol stats
   # increasing this value increases the NUMERATOR for success (denominator is fixed at 120)
@@ -475,7 +472,6 @@ dev_tools = true
   # base 1/chance a cat will die
   classic_death_chance = 1000
   expanded_death_chance = 950
-  "cruel season_death_chance" = 300
 
   # modifiers for death chance based on if a war is going badly
   # SUBTRACTS from the denominator so higher = more likely to die
@@ -500,13 +496,11 @@ dev_tools = true
 [condition_related]
   # 10/chance an illness will occur
   expanded_illness_chance = 650
-  "cruel season_illness_chance" = 200
   classic_illness_chance = 750
 
   # 5/chance (for most personalities) or 15/chance (for some personalities) an injury will occur 
   classic_injury_chance = 700
   expanded_injury_chance = 600
-  "cruel season_injury_chance" = 150
 
   # 1/chance a cat will get a permanent condition from an event with that possibility 
   permanent_condition_chance = 40
@@ -554,7 +548,7 @@ dev_tools = true
   [focus.hunting]
     # Defines how much a working warrior(leader/deputy) or apprentice gathers additionally
     warrior = 4
-    apprentice = 3
+    apprentice = 2
 
   [focus.outsiders]
     # Defines how much increase or decrease the reputation is.
