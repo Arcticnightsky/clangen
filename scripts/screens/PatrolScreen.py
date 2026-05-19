@@ -316,8 +316,10 @@ class PatrolScreen(Screens):
         if (
             self.in_progress_data is not None
             and self.in_progress_data["current_moon"] == game.clan.age
-            and self.in_progress_data["clan_name"]
-            == i18n.t("general.clan", clan=game.clan.displayname)
+            and self.in_progress_data.get(
+                "patrol_clan_name", self.in_progress_data.get("clan_name")
+            )
+            == game.clan.name
         ):
             self.display_change_load(self.in_progress_data)
         else:
@@ -352,12 +354,17 @@ class PatrolScreen(Screens):
         variable_dict["outcome_art"] = self.outcome_art
 
         variable_dict["current_moon"] = game.clan.age
-        variable_dict["clan_name"] = game.clan.name
+        variable_dict["patrol_clan_name"] = game.clan.name
 
         return variable_dict
 
     def display_change_load(self, variable_dict: Dict):
         super().display_change_load(variable_dict)
+        # Ensure the heading is rebuilt with kwargs after generic display-load restores
+        # the raw heading token text.
+        self.update_heading_text(
+            "general.clan", text_kwargs={"name": game.clan.displayname}
+        )
 
         for key, value in variable_dict.items():
             try:
@@ -935,6 +942,9 @@ class PatrolScreen(Screens):
 
     def run_patrol_proceed(self, user_input):
         """Proceeds the patrol - to be run in the separate thread."""
+        # Patrol resolution changes save data/state, so mark save as outdated.
+        switch_set_value(Switch.saved_clan, False)
+
         if user_input in ["nopro", "notproceed"]:
             (
                 self.display_text,
