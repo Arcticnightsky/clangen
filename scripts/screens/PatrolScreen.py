@@ -360,6 +360,11 @@ class PatrolScreen(Screens):
 
     def display_change_load(self, variable_dict: Dict):
         super().display_change_load(variable_dict)
+        # Ensure the heading is rebuilt with kwargs after generic display-load restores
+        # the raw heading token text.
+        self.update_heading_text(
+            "general.clan", text_kwargs={"name": game.clan.displayname}
+        )
 
         for key, value in variable_dict.items():
             try:
