@@ -456,6 +456,34 @@ class TestUpdateMentor(unittest.TestCase):
 
         self.assertTrue(app.is_valid_mentor(mentor))
 
+    def test_update_mentor_increases_relationship_and_adds_log(self):
+        app = Cat(
+            moons=7, status_dict={"rank": CatRank.APPRENTICE}, disable_random=True
+        )
+        mentor = Cat(
+            moons=30, status_dict={"rank": CatRank.WARRIOR}, disable_random=True
+        )
+
+        app.update_mentor(mentor.ID)
+
+        self.assertIn(mentor.ID, app.relationships)
+        self.assertIn(app.ID, mentor.relationships)
+        self.assertGreaterEqual(app.relationships[mentor.ID].like, 5)
+        self.assertGreaterEqual(app.relationships[mentor.ID].trust, 5)
+        self.assertGreaterEqual(mentor.relationships[app.ID].like, 5)
+        self.assertGreaterEqual(mentor.relationships[app.ID].respect, 5)
+
+        app_logs = " ".join(app.relationships[mentor.ID].log)
+        mentor_logs = " ".join(mentor.relationships[app.ID].log)
+        self.assertTrue(
+            ("became the apprentice of" in app_logs)
+            or ("was apprenticed to" in app_logs)
+        )
+        self.assertTrue(
+            ("became the apprentice of" in mentor_logs)
+            or ("was apprenticed to" in mentor_logs)
+        )
+
 
 class TestNameRepr(unittest.TestCase):
     @classmethod

@@ -2778,6 +2778,12 @@ class Cat:
         if self.ID not in mentor_cat.apprentice:
             mentor_cat.apprentice.append(self.ID)
 
+    def __build_mentor_rel_log(self, mentor_cat: Cat) -> str:
+        rel_log_options = i18n.t("relationships.mentor_rel_log_options")
+        if isinstance(rel_log_options, list) and rel_log_options:
+            return choice(rel_log_options)
+        return i18n.t("relationships.mentor_rel_log")
+
     def update_mentor(self, new_mentor: Any = None):
         """Takes mentor's ID as argument, mentor could just be set via this function."""
         # No !!
@@ -2798,6 +2804,44 @@ class Cat:
         if new_mentor:
             self.__remove_mentor()
             self.__add_mentor(new_mentor)
+            mentor_cat = Cat.fetch_cat(self.mentor)
+            if mentor_cat:
+                rel_log = event_text_adjust(
+                    Cat,
+                    self.__build_mentor_rel_log(mentor_cat),
+                    main_cat=self,
+                    random_cat=mentor_cat,
+                )
+
+                if mentor_cat.ID not in self.relationships:
+                    self.create_one_relationship(mentor_cat)
+                if self.ID not in mentor_cat.relationships:
+                    mentor_cat.create_one_relationship(self)
+
+                app_relationship = self.relationships[mentor_cat.ID]
+                mentor_relationship = mentor_cat.relationships[self.ID]
+
+                app_relationship.like += 5
+                app_relationship.trust += 5
+                app_relationship.log.append(
+                    i18n.t(
+                        "relationships.age_postscript",
+                        text=rel_log,
+                        name=mentor_cat.name,
+                        count=mentor_cat.moons,
+                    )
+                )
+
+                mentor_relationship.like += 5
+                mentor_relationship.respect += 5
+                mentor_relationship.log.append(
+                    i18n.t(
+                        "relationships.age_postscript",
+                        text=rel_log,
+                        name=self.name,
+                        count=self.moons,
+                    )
+                )
 
         # Check if current mentor is valid
         if self.mentor:
