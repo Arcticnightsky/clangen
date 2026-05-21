@@ -502,10 +502,11 @@ class PatrolOutcome:
 
         if gained_exp or app_exp:
             for cat in patrol.patrol_cats:
+                current_exp = cat.experience if cat.experience is not None else 0
                 if cat.status.rank.is_any_apprentice_rank():
-                    cat.experience = cat.experience + app_exp
+                    cat.experience = current_exp + app_exp
                 else:
-                    cat.experience = cat.experience + gained_exp
+                    cat.experience = current_exp + gained_exp
 
         return ""
 
