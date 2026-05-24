@@ -320,11 +320,14 @@ class ShortEvent:
 
         # handle murder reveals
         if "murder_reveal" in self.sub_type or "hidden_murder_reveal" in self.sub_type:
+            is_tattletail_reveal = "tattletail" in self.event_id
+            clan_reveal = "clan_wide" in self.tags or is_tattletail_reveal
+            aware_individuals = [] if clan_reveal else [self.random_cat.ID]
             self.main_cat.history.reveal_murder(
                 victim=self.victim_cat,
                 murderer_id=self.main_cat.ID,
-                clan_reveal="clan_wide" in self.tags,
-                aware_individuals=[self.random_cat.ID],
+                clan_reveal=clan_reveal,
+                aware_individuals=aware_individuals,
             )
             murderer_mates = []
             for mate_id in self.main_cat.mate:
