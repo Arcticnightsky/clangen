@@ -85,6 +85,56 @@ class Pregnancy_Events:
         return len(Pregnancy_Events.biggest_family) > (living_cats / 10)
 
     @staticmethod
+    def ensure_unique_kit_name(kit: Cat, litter_kittens, clan=None):
+        biome = None
+        if clan is not None:
+            biome = clan.biome if not clan.override_biome else clan.override_biome
+
+        excluded_ids = {kit.ID, *(kitty.ID for kitty in litter_kittens)}
+        used_prefixes = {kitty.name.prefix for kitty in litter_kittens}
+        used_prefixes.update(
+            cat.name.prefix
+            for cat in Cat.all_cats.values()
+            if cat.ID not in excluded_ids
+            and cat.status.alive_in_player_clan
+            and cat.age in (CatAge.NEWBORN, CatAge.KITTEN, CatAge.ADOLESCENT)
+        )
+
+        used_full_names = {
+            kitty.name.prefix + kitty.name.suffix for kitty in litter_kittens
+        }
+        used_full_names.update(
+            cat.name.prefix + cat.name.suffix
+            for cat in Cat.all_cats.values()
+            if cat.ID not in excluded_ids and cat.status.alive_in_player_clan
+        )
+
+        max_attempts = max(
+            1,
+            len(Name.names_dict["normal_prefixes"])
+            * len(Name.names_dict["normal_suffixes"]),
+        )
+        for _ in range(max_attempts):
+            if kit.name.prefix in used_prefixes:
+                kit.name = Name(
+                    biome=biome,
+                    specsuffix_hidden=kit.specsuffix_hidden,
+                    cat=kit,
+                )
+                continue
+
+            if kit.name.prefix + kit.name.suffix in used_full_names:
+                kit.name = Name(
+                    prefix=kit.name.prefix,
+                    biome=biome,
+                    specsuffix_hidden=kit.specsuffix_hidden,
+                    cat=kit,
+                )
+                continue
+
+            break
+
+    @staticmethod
     def handle_pregnancy_age(clan):
         """Increase the moon for each pregnancy in the pregnancy dictionary"""
         for pregnancy_key in clan.pregnancy_data.keys():
@@ -1115,9 +1165,7 @@ class Pregnancy_Events:
                     cat.status.social, specific_group=CatGroup.PLAYER_CLAN_ID
                 )
 
-            # Prevent duplicate prefixes in the same litter
-            while kit.name.prefix in [kitty.name.prefix for kitty in all_kitten]:
-                kit.name = Name("newborn")
+            Pregnancy_Events.ensure_unique_kit_name(kit, all_kitten, clan)
 
             all_kitten.append(kit)
             # adoptive parents are set at the end, when everything else is decided
