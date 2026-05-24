@@ -1,5 +1,9 @@
 from typing import Union, Type, TYPE_CHECKING, Tuple, List
 
+from scripts.events_module.relationship.romance_chance import (
+    passes_same_sex_romance_chance,
+)
+
 if TYPE_CHECKING:
     from scripts.cat.cats import Cat
 
@@ -45,6 +49,18 @@ def get_alive_clan_queens(living_cats):
     return queen_dict, living_kits
 
 
+def get_queens_with_young_kits(living_cats, max_kit_moons: int) -> set:
+    """
+    Returns a set of queen IDs that currently have at least one kit with moons <= max_kit_moons.
+    """
+    queen_dict, _ = get_alive_clan_queens(living_cats)
+    return {
+        queen_id
+        for queen_id, kits in queen_dict.items()
+        if any(kit.moons <= max_kit_moons for kit in kits)
+    }
+
+
 def find_alive_cats_with_rank(
     Cat: Union["Cat", Type["Cat"]],
     ranks: list,
@@ -87,29 +103,30 @@ def get_living_clan_cat_count(Cat):
     return count
 
 
-def get_cats_same_age(Cat, cat, age_range=10):
+def get_cats_same_age(Cat, cat_to_match, age_range=10):
     """
     Look for all cats in the Clan and returns a list of cats which are in the same age range as the given cat.
     :param Cat: Cat class
-    :param cat: the given cat
+    :param cat_to_match: the given cat
     :param int age_range: The allowed age difference between the two cats, default 10
     """
     cats = []
     for inter_cat in Cat.all_cats.values():
         if not inter_cat.status.alive_in_player_clan:
             continue
-        if inter_cat.ID == cat.ID:
+        if inter_cat.ID == cat_to_match.ID:
             continue
 
-        if inter_cat.ID not in cat.relationships:
-            cat.create_one_relationship(inter_cat)
-            if cat.ID not in inter_cat.relationships:
-                inter_cat.create_one_relationship(cat)
+        if inter_cat.ID not in cat_to_match.relationships:
+            cat_to_match.create_one_relationship(inter_cat)
+            if cat_to_match.ID not in inter_cat.relationships:
+                inter_cat.create_one_relationship(cat_to_match)
             continue
 
         if (
-            inter_cat.moons <= cat.moons + age_range
-            and inter_cat.moons <= cat.moons - age_range
+            cat_to_match.moons + age_range
+            >= inter_cat.moons
+            >= cat_to_match.moons - age_range
         ):
             cats.append(inter_cat)
 
@@ -138,6 +155,8 @@ def get_possible_mates(cat) -> Tuple[List["Cat"], List["Cat"]]:
             continue
 
         if inter_cat.is_potential_mate(cat, for_love_interest=True):
+            if not passes_same_sex_romance_chance(cat, inter_cat):
+                continue
             if cat.relationships[inter_cat.ID].romance > 0:
                 existing_romance_mates.append(inter_cat)
             possible_mates.append(inter_cat)

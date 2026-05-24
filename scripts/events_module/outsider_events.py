@@ -80,6 +80,10 @@ class OutsiderEvents:
                 death_curve_setting = constants.CONFIG["death_related"]["old_age_death_curve"]
                 death_curve_value = 0.001 * death_curve_setting
                 old_age_death_chance = ((1 + death_curve_value) ** (cat.moons - age_start)) - 1
+                sterilized = any(cond in cat.permanent_condition for cond in ("neutered", "spayed"))
+                if sterilized:
+                    old_age_death_chance *= 0.7
+                max_old_age = 324 if sterilized else 300
 
                 social = i18n.t(f"general.{cat.status.social}", count=1)
 
@@ -90,7 +94,7 @@ class OutsiderEvents:
                     )
                     death_history = "m_c died of old age."
 
-                elif cat.moons >= 300:
+                elif cat.moons >= max_old_age:
                     text = (
                         f"Rumors reach your Clan that the {social}, "
                         f"{cat.name}, has died recently."

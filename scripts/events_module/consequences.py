@@ -16,10 +16,33 @@ from scripts.cat.enums import (
 )
 from scripts.cat.names import names
 from scripts.cat_relations.enums import RelType
+from scripts.cat_relations.inheritance2 import inheritance_db
 from scripts.clan_package.settings import get_clan_setting
 from scripts.game_structure import game, constants
 from scripts.cat.constants import BACKSTORIES, PERMANENT
 from scripts.events_module.text_adjust import process_text, adjust_list_text
+from scripts.events_module.relationship.romance_chance import (
+    passes_same_sex_romance_chance,
+)
+
+
+def ensure_parent_is_not_sterilized(cat: Optional["Cat"]) -> None:
+    """Remove sterilization conditions from a cat that has been assigned as a parent."""
+    if not cat:
+        return
+
+    removed_condition = False
+    for condition in ("spayed", "neutered"):
+        if condition in cat.permanent_condition:
+            cat.permanent_condition.pop(condition, None)
+            removed_condition = True
+
+    if removed_condition:
+        cat.no_kits = False
+        if hasattr(cat, "pelt") and hasattr(cat.pelt, "scars"):
+            cat.pelt.scars = tuple(
+                scar for scar in cat.pelt.scars if scar != "RIGHTEAR"
+            )
 
 
 def create_new_cat_block(
@@ -72,6 +95,8 @@ def create_new_cat_block(
             int(index) if index.isdigit() else index for index in adoptive_indexes
         ]
         for index in adoptive_indexes:
+            if isinstance(index, int):
+                index = f"n_c:{index}"
             if in_event_cats[index].ID not in adoptive_parents:
                 adoptive_parents.append(in_event_cats[index].ID)
                 adoptive_parents.extend(in_event_cats[index].mate)
@@ -100,18 +125,18 @@ def create_new_cat_block(
         match = re.match(r"romance:([_,0-9a-zA-Z]+)", tag)
         if not match:
             continue
-            
+
         romance_indexes = match.group(1).split(",")
-            
+
         # TODO: make this less ugly
         for index in romance_indexes:
             if index in in_event_cats:
                 if in_event_cats[index].status.rank.is_any_apprentice_rank():
                     print("Can't romance apprentices")
                     continue
-                    
+
                 give_romance.append(in_event_cats[index])
-                
+
     # determine gender
     if "male" in attribute_list:
         gender = "male"
@@ -173,7 +198,7 @@ def create_new_cat_block(
             min_age, max_age = Cat.age_moons[give_romance[0].age]
             age = randint(min_age, max_age)
             break
-        
+
         if match.group(1) == "has_kits":
             age = randint(20, 120)
             break
@@ -234,7 +259,7 @@ def create_new_cat_block(
     elif rank == CatRank.MEDICINE_CAT:
         chosen_backstory = choice(["wandering_healer1", "wandering_healer2"])
     else:
-        if cat_social == CatSocial.CLANCAT:
+        if cat_social in (CatSocial.CLANCAT, "former clancat"):
             x = "former_clancat"
         else:
             x = cat_social
@@ -271,7 +296,11 @@ def create_new_cat_block(
             BACKSTORIES["backstory_categories"]["baby_clancat_backstories"]
             + BACKSTORIES["backstory_categories"]["former_clancat_backstories"]
         ):
-            cat_social = CatSocial.CLANCAT
+            cat_social = (
+                CatSocial.CLANCAT
+                if cat_social != "former clancat"
+                else "former clancat"
+            )
         elif chosen_backstory in (
             BACKSTORIES["backstory_categories"]["baby_loner_backstories"]
             + BACKSTORIES["backstory_categories"]["loner_backstories"]
@@ -301,7 +330,7 @@ def create_new_cat_block(
         new_name = False
         if age is not None and age <= 6 and not bs_override:
             chosen_backstory = "outsider1"
-        
+
     # IS THE CAT DEAD?
     alive = True
     if "dead" in attribute_list:
@@ -389,6 +418,10 @@ def create_new_cat_block(
 
     # Now we generate the new cat
     if not chosen_cat:
+        if litter or rank in (CatRank.KITTEN, CatRank.NEWBORN):
+            for par in (parent1, parent2):
+                ensure_parent_is_not_sterilized(par)
+
         new_cats = create_new_cat(
             Cat,
             new_name=new_name,
@@ -485,7 +518,7 @@ def create_new_cat_block(
                 n_c.relationships[par.ID] = start_relation
 
             # UPDATE INHERITANCE
-            n_c.create_inheritance_new_cat()
+        inheritance_db.load_inheritances(Cat)
 
     return new_cats
 
@@ -652,12 +685,13 @@ def create_new_cat(
         # clancat adults should have already generated with a clan-ish name, thus they skip all of this re-naming
         # little babies will take a clancat name IF they join the clan, we love indoctrination
         if (
-            kit or litter or moons < 12
+            (kit or litter or moons < 12) and not outside
         ) and original_group not in game.clan.other_clan_IDs:
             if (
                 is_meeting_cat
                 and outside
-                and original_social in (CatSocial.LONER, CatSocial.KITTYPET, CatSocial.ROGUE)
+                and original_social
+                in (CatSocial.LONER, CatSocial.KITTYPET, CatSocial.ROGUE)
             ):
                 # young cats who are outsiders keep their outsider names
                 name_categories = [
@@ -671,13 +705,13 @@ def create_new_cat(
                 # give kittypets a kittypet name
                 if original_social == CatSocial.KITTYPET:
                     weights = constants.CONFIG["cat_name_controls"]["kittypet"]
-                    
+
                 if original_social == CatSocial.LONER:
                     weights = constants.CONFIG["cat_name_controls"]["loner"]
 
                 if original_social == CatSocial.ROGUE:
-                    weights = constants.CONFIG["cat_name_controls"]["rogue"]                
-                    
+                    weights = constants.CONFIG["cat_name_controls"]["rogue"]
+
                 selected_category = choices(name_categories, weights, k=1)[0]
                 name = choice(names.names_dict[selected_category])
                 new_cat.change_name(new_prefix=name, new_suffix="")
@@ -806,30 +840,59 @@ def create_new_cat(
                 "COBALT",
                 "SUNLITICE",
                 "GREY",
+                "AURORA",
+                "SEA",
+                "BLUEBELL",
             ]
-                
+
             deaf_chance = None
             partial_deaf_chance = None
-            if (new_cat.pelt.colour == "WHITE" or new_cat.pelt.white_patches == "FULLWHITE") and new_cat.pelt.eye_colour in blue_eyes:
+            if (
+                new_cat.pelt.colour == "WHITE"
+                or new_cat.pelt.white_patches == "FULLWHITE"
+            ) and new_cat.pelt.eye_colour in blue_eyes:
                 deaf_chance = int(
-                    constants.CONFIG["cat_generation"]["base_permanent_condition"]
-                    * 0.4
+                    constants.CONFIG["cat_generation"]["base_permanent_condition"] * 0.4
                 )
-            elif (new_cat.pelt.colour == "WHITE" or new_cat.pelt.white_patches == "FULLWHITE") and new_cat.pelt.eye_colour2 and new_cat.pelt.eye_colour2 in blue_eyes:
+            elif (
+                (
+                    new_cat.pelt.colour == "WHITE"
+                    or new_cat.pelt.white_patches == "FULLWHITE"
+                )
+                and new_cat.pelt.eye_colour2
+                and new_cat.pelt.eye_colour2 in blue_eyes
+            ):
                 partial_deaf_chance = int(
-                    constants.CONFIG["cat_generation"]["base_permanent_condition"]
-                    * 0.7
+                    constants.CONFIG["cat_generation"]["base_permanent_condition"] * 0.7
                 )
 
             if deaf_chance:
                 if not random_module.randint(1, deaf_chance):
-                    chosen_condition = ("deaf")
+                    chosen_condition = "deaf"
                     new_cat.get_permanent_condition(chosen_condition, born_with=True)
             elif partial_deaf_chance:
                 if not random_module.randint(1, partial_deaf_chance):
-                    chosen_condition = ("partial hearing loss")
+                    chosen_condition = "partial hearing loss"
                     new_cat.get_permanent_condition(chosen_condition, born_with=True)
 
+        should_apply_sterilization = False
+        if (
+            original_social in (CatSocial.KITTYPET, CatSocial.LONER)
+            and not new_cat.age.is_baby()
+        ):
+            if original_social == CatSocial.LONER:
+                should_apply_sterilization = randint(1, 7) == 1
+            else:
+                should_apply_sterilization = bool(getrandbits(1))
+
+        if should_apply_sterilization:
+            was_sterilized = new_cat.apply_sterilization_condition()
+            if was_sterilized:
+                if original_social == CatSocial.KITTYPET:
+                    new_cat.pelt.scars = tuple(
+                        scar for scar in new_cat.pelt.scars if scar != "RIGHTEAR"
+                    )
+                new_cat.backdate_sterilization_history(original_social)
 
         # KILL >:D only if we're sposed to tho
         if not alive:
@@ -925,10 +988,23 @@ def gather_cat_objects(
         # OVERALL CLAN CATS
         elif abbr == "clan":
             found_cat_list.update(clan_cats)
+            # exclude cats involved in the event
+            found_cat_list.discard(getattr(event, "main_cat", None))
+            found_cat_list.discard(getattr(event, "random_cat", None))
+            if getattr(event, "patrol_cats", None):
+                found_cat_list.difference_update(set(event.patrol_cats))
         elif abbr == "some_clan":  # 1 / 8 of clan cats are affected
-            found_cat_list.update(
-                sample(clan_cats, randint(1, max(1, round(len(clan_cats) / 8))))
-            )
+            if len(
+                clan_cats
+            ):  # to prevent crash if every cat in the clan died just before this
+                found_cat_list.update(
+                    sample(clan_cats, randint(1, max(1, round(len(clan_cats) / 8))))
+                )
+                # exclude cats involved in the event
+                found_cat_list.discard(getattr(event, "main_cat", None))
+                found_cat_list.discard(getattr(event, "random_cat", None))
+                if getattr(event, "patrol_cats", None):
+                    found_cat_list.difference_update(set(event.patrol_cats))
 
         # add/remove cats if found and then continue for loop
         if is_exclusionary and found_cat_list:
@@ -940,6 +1016,7 @@ def gather_cat_objects(
             continue
 
         # FACET CATS IN CLAN
+        supported_facet_abbr = True
         if abbr == "high_social":
             found_cat_list = {c for c in out_set if c.personality.sociability > 8}
         elif abbr == "low_social":
@@ -956,6 +1033,8 @@ def gather_cat_objects(
             found_cat_list = {c for c in out_set if c.personality.aggression > 8}
         elif abbr == "low_aggress":
             found_cat_list = {c for c in out_set if c.personality.aggression <= 8}
+        else:
+            supported_facet_abbr = False
 
         # add/remove cats if found and then continue for loop
         if is_exclusionary and found_cat_list:
@@ -968,7 +1047,8 @@ def gather_cat_objects(
             continue
 
         else:
-            print(f"WARNING: Unsupported abbreviation {abbr}")
+            print(f"WARNING: No cats found for {abbr_list}")
+            return list(found_cat_list)
 
     return list(out_set)
 
@@ -1035,21 +1115,21 @@ def unpack_rel_block(
                     positive = True
 
         if positive:
-            effect = i18n.t("relationships.positive_postscript")
+            effect = "relationships.positive_postscript"
         else:
-            effect = i18n.t("relationships.negative_postscript")
+            effect = "relationships.negative_postscript"
 
         # Get log
         to_log = None
         from_log = None
         if "log" in block:
             to_log = (
-                block["log"].get("cats_to", "") + effect
+                i18n.t(effect, text=block["log"].get("cats_to", ""))
                 if "cats_to" in block["log"]
                 else None
             )
             from_log = (
-                block["log"].get("cats_from", "") + effect
+                i18n.t(effect, text=block["log"].get("cats_from", ""))
                 if "cats_from" in block["log"]
                 else None
             )
@@ -1094,6 +1174,7 @@ def unpack_rel_block(
                     cats_to_ob,
                     **value_changes,
                     log=to_log if to_log else from_log,
+                    flip_log=True,
                 )
             )
 
@@ -1109,6 +1190,7 @@ def change_relationship_values(
     comfort: int = 0,
     trust: int = 0,
     log: str = None,
+    flip_log: bool = False,
 ) -> dict:
     """
     changes relationship values according to the parameters.
@@ -1123,6 +1205,7 @@ def change_relationship_values(
     :param int comfort: amount to change comfort, default 0
     :param int trust: amount to change trust, default 0
     :param str log: the string to append to the relationship log of cats involved
+    :param bool flip_log: If True, this will "flip" the cats used for cat_to and cat_from abbreviation replacements. This should really only be used for mutual relationship changes from events.
     """
 
     # This is just for test prints - DON'T DELETE - you can use this to test if relationships are changing
@@ -1152,8 +1235,10 @@ def change_relationship_values(
                 single_cat_from.is_potential_mate(single_cat_to, for_love_interest=True)
                 or single_cat_to.ID in single_cat_from.mate
             ):
-                if single_cat_from.gender == single_cat_to.gender and single_cat_to.ID not in single_cat_from.mate and random_module.randint(1, 25000) != 1:
-                    continue # balancing same-sex relationships - there are too many and I just want more kits in my clans, sorry >:(
+                if romance > 0 and not passes_same_sex_romance_chance(
+                    single_cat_from, single_cat_to
+                ):
+                    continue
                 # now gain the romance
                 rel.romance += romance
 
@@ -1175,15 +1260,17 @@ def change_relationship_values(
                 log = i18n.t("relationships.relationship_log")
             if log and isinstance(log, str):
                 replace_dict = {}
-                if "from_cat" in log:
-                    replace_dict["from_cat"] = (
-                        str(single_cat_from.name),
-                        choice(single_cat_from.pronouns),
+                cat_from = single_cat_to if flip_log else single_cat_from
+                cat_to = single_cat_from if flip_log else single_cat_to
+                if "cat_from" in log:
+                    replace_dict["cat_from"] = (
+                        str(cat_from.name),
+                        choice(cat_from.pronouns),
                     )
-                if "to_cat" in log:
-                    replace_dict["to_cat"] = (
-                        str(single_cat_to.name),
-                        choice(single_cat_to.pronouns),
+                if "cat_to" in log:
+                    replace_dict["cat_to"] = (
+                        str(cat_to.name),
+                        choice(cat_to.pronouns),
                     )
                 if replace_dict:
                     processed_log = process_text(log, replace_dict)
@@ -1197,10 +1284,11 @@ def change_relationship_values(
                 else:
                     created_rel_logs.update({single_cat_from: processed_log})
 
-                log_text = processed_log + i18n.t(
+                log_text = i18n.t(
                     "relationships.age_postscript",
-                    name=str(single_cat_to.name),
-                    count=single_cat_to.moons,
+                    text=processed_log,
+                    name=str(single_cat_from.name),
+                    count=single_cat_from.moons,
                 )
                 if log_text not in rel.log:
                     rel.log.append(log_text)
