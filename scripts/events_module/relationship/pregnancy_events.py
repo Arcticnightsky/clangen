@@ -1575,24 +1575,10 @@ class Pregnancy_Events:
 
         # ----- OTHER CAT MATES -----
         if other_cat and other_cat.mate:
-            poly_parenting = bool(cat and cat.ID in other_cat.mate)
-
-            for mate_id in other_cat.mate:
-                if mate_id is None:
-                    continue
-
-                mate = Cat.fetch_cat(mate_id)
-                if not mate:
-                    continue
-
-                add_poly_mate = poly_parenting and mate.ID != cat.ID
-
-                if (
-                    add_poly_mate
-                    and mate.ID not in birth_parents
-                    and mate.ID not in all_adoptive_parents
-                ):
-                    all_adoptive_parents.append(mate_id)
+            # `other_cat` is always the male parent in this path.
+            # Per design, none of `other_cat`'s mates should be set as adoptive parents
+            # (regardless of mate gender), so we intentionally skip adding them here.
+            pass
         # Then, add any additional adoptive parents that were provided passed directly into the
         # function.
         for _m in adoptive_parents:
