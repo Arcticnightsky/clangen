@@ -151,7 +151,7 @@
                         }
                     }
                 ],
-                "frequency": 3
+                "frequency": 4
             },
             {
                 "text": "Before they reach the far border itself, p_l spots s_c limping. It's nothing, {PRONOUN/s_c/subject} {VERB/s_c/say/says}, and refuses to stop. But in these far reaches, in territory not commonly checked, other predators intrude. When a young, inexperienced cougar charges the patrol, s_c <i>should</i> have been able to run fast enough to escape. <i>Should.</i>",
@@ -174,7 +174,7 @@
                 "history_text": {
                     "death": "This cat was killed after continuing to patrol the far border while injured by a young, inexperienced cougar."
                 },
-                "frequency": 4
+                "frequency": 2
             }
         ]
     },
