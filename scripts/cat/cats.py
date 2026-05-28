@@ -3164,6 +3164,7 @@ class Cat:
                             and self.moons > 11
                             and the_cat.moons > 11
                             and self.age == the_cat.age
+                            and not related
                         ):
                             romance += randint(15, 30)
                             comfort = int(comfort * 1.3)

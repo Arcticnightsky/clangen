@@ -130,6 +130,28 @@ class TestPossibleMateFunction(unittest.TestCase):
         self.assertFalse(sibling1.is_potential_mate(kit, for_love_interest=True))
         self.assertFalse(sibling2.is_potential_mate(sibling1, for_love_interest=True))
 
+    def test_related_relationship_cannot_have_romance(self):
+        original_all_cats = Cat.all_cats.copy()
+        original_all_cats_list = Cat.all_cats_list.copy()
+        try:
+            Cat.all_cats = {}
+            Cat.all_cats_list = []
+
+            parent = Cat(disable_random=True)
+            sibling1 = Cat(moons=12, parent1=parent.ID, disable_random=True)
+            sibling2 = Cat(moons=12, parent1=parent.ID, disable_random=True)
+            inheritance_db.load_inheritances(Cat)
+
+            relationship = Relationship(sibling1, sibling2, romance=30)
+
+            self.assertEqual(relationship.romance, 0)
+            relationship.romance += 10
+            self.assertEqual(relationship.romance, 0)
+        finally:
+            Cat.all_cats = original_all_cats
+            Cat.all_cats_list = original_all_cats_list
+            inheritance_db.load_inheritances(Cat)
+
     # test is_potential_mate for age checks
     def test_age_mating(self):
         kitten_cat2 = Cat(moons=1, disable_random=True)
