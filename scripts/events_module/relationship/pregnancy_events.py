@@ -1802,7 +1802,6 @@ class Pregnancy_Events:
                 start_relation = Relationship(kitten, second_kitten, False, True)
                 start_relation.romance += (
                     constants.CONFIG["new_cat"]["sib_buff"]["cat1_to_cat2"]["romance"]
-                    + y
                 )
                 start_relation.like += (
                     constants.CONFIG["new_cat"]["sib_buff"]["cat1_to_cat2"]["like"] + y
