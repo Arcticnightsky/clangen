@@ -1,5 +1,4 @@
 import random
-import sys
 from random import choice
 from typing import Optional
 
@@ -7,7 +6,6 @@ import i18n
 
 from scripts.cat.enums import CatCompatibility
 from scripts.game_structure import constants
-from scripts.clan_package.settings import get_clan_setting
 from scripts.cat_relations.interaction import (
     cats_fulfill_single_interaction_constraints,
     rebuild_relationship_dicts,
@@ -72,8 +70,7 @@ class Relationship:
         """
 
         # romance operates on a 0-100 scale, 0 is no romantic interest and 100 is full romantic interest
-        self._romance = 0
-        self.romance = romance
+        self._romance = min(max(romance, 0), 100)
 
         # each stat can go from -100 to 100
         # negative numbers are the negative state while positive is the positive state
@@ -278,25 +275,6 @@ class Relationship:
             return True
 
         return passes_same_sex_romance_chance(self.cat_from, self.cat_to)
-
-    def romance_allowed(self) -> bool:
-        """Return whether these cats may have romantic interest."""
-        try:
-            first_cousin_mates = get_clan_setting("first cousin mates")
-        except Exception:
-            if "unittest" not in sys.modules:
-                raise
-            first_cousin_mates = False
-
-        if self.cat_from.is_related(self.cat_to, first_cousin_mates):
-            return False
-
-        if self.cat_to.ID in self.cat_from.mate:
-            return True
-
-        return self.cat_from.is_potential_mate(
-            self.cat_to, for_love_interest=True
-        ) and self.cat_to.is_potential_mate(self.cat_from, for_love_interest=True)
 
     def get_value_change_amount(self, is_positive: bool, intensity: str) -> int:
         """Finds and returns the int amount that the relationship type will change by according to given intensity and additional modifiers
@@ -674,8 +652,6 @@ class Relationship:
 
     @romance.setter
     def romance(self, value):
-        if value > 0 and not self.romance_allowed():
-            value = 0
         if value > 100:
             value = 100
         elif value < 0:
