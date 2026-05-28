@@ -114,18 +114,22 @@ def adjust_row(
     row: list[Optional[UIElement]], element: UIElement
 ) -> list[Optional[UIElement]]:
     if not row:  # if row is empty
+        cell_width = max(1, ui_scale_value(10))
         row = [
             None
             for x in range(
                 int(
-                    ui_scale_value(scripts.game_structure.screen_settings.screen_x)
-                    / ui_scale_value(10)
+                    scripts.game_structure.screen_settings.screen_x
+                    / cell_width
                 )
                 + 1
             )
         ]
 
-    index = int(element.get_abs_rect().x / ui_scale_value(10))
+    index = int(element.get_abs_rect().x / max(1, ui_scale_value(10)))
+    index = max(0, index)
+    if index >= len(row):
+        row.extend([None] * (index - len(row) + 1))
 
     row.insert(index, element)
     row.pop(index + 1)
