@@ -9103,7 +9103,7 @@
                 ],
                 "amount": 15,
                 "log": {
-                    "cats_from": "m_c surprised r_c with a gift to celebrate {PRONOUN/r_c/poss} warrior ceremony, and r_c has worn it on {PRONOUN/r_c/poss} pelt ever since."
+                    "cats_from": "r_c surprised m_c with a gift to celebrate {PRONOUN/m_c/poss} warrior ceremony, and m_c has worn it on {PRONOUN/m_c/poss} pelt ever since."
                 }
             }
         ]
@@ -9366,7 +9366,7 @@
                 "values": ["trust", "like", "comfort"],
                 "amount": 15,
                 "log": {
-                    "cats_from": "m_c presented r_c with a flower, and r_c has worn it on {PRONOUN/r_c/poss} pelt ever since."
+                    "cats_from": "r_c presented m_c with a flower, and m_c has worn it on {PRONOUN/m_c/poss} pelt ever since."
                 }
             }
         ]
@@ -9423,7 +9423,7 @@
                 "values": ["trust", "like", "comfort", "romance"],
                 "amount": 10,
                 "log": {
-                    "cats_from": "m_c presented r_c with a flower, and r_c has worn it on {PRONOUN/r_c/poss} pelt ever since."
+                    "cats_from": "r_c presented m_c with a flower, and m_c has worn it on {PRONOUN/m_c/poss} pelt ever since."
                 }
             }
         ]
