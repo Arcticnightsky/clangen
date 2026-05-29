@@ -27,7 +27,7 @@ class SingleInteraction:
         also_influences=None,
     ):
         self.id = interact_id
-        self.intensity = intensity
+        self.intensity = self._normalize_intensity(intensity)
         self.biome = biome if biome else ["any"]
         self.season = season if season else ["any"]
         self.interactions = (
@@ -61,6 +61,12 @@ class SingleInteraction:
         )
         self.reaction_random_cat = reaction_random_cat if reaction_random_cat else {}
         self.also_influences = also_influences if also_influences else {}
+
+    @staticmethod
+    def _normalize_intensity(intensity):
+        if intensity == "med":
+            return "medium"
+        return intensity
 
 
 class GroupInteraction:
