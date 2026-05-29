@@ -228,17 +228,6 @@ class Pregnancy_Events:
                 continue
 
             break
-
-    @staticmethod
-    def is_adoption_only_cat(cat: Cat) -> bool:
-        if not cat:
-            return False
-
-        sterilized = any(
-            cond in cat.permanent_condition for cond in ("neutered", "spayed")
-        )
-        male_tortie = cat.gender == "male" and cat.pelt.name in ("Tortie", "Calico")
-        return sterilized or male_tortie
     
     @staticmethod
     def set_biggest_family():
@@ -377,11 +366,6 @@ class Pregnancy_Events:
         else:
             if not get_clan_setting("single parentage"):
                 return
-            if cat.no_kits:
-                if Pregnancy_Events.is_adoption_only_cat(cat):
-                    kits_are_adopted = True
-                else:
-                    return
         
         chance = Pregnancy_Events.get_balanced_kit_chance(
     cat, second_parent, is_affair, clan, kits_are_adopted
@@ -1354,16 +1338,14 @@ class Pregnancy_Events:
             return False
 
         # decide chances of having kits, and if it's possible at all.
-        # Including - age, dead status, having kits turned off.
+        # Including - age, dead status, and having kits turned off.
         not_correct_age = (
             cat.age in [CatAge.NEWBORN, CatAge.KITTEN, CatAge.ADOLESCENT]
             or cat.moons < 15
         )
-        if not_correct_age or cat.dead:
+        if not_correct_age or cat.no_kits or cat.dead:
             return False
-        if cat.no_kits and not Pregnancy_Events.is_adoption_only_cat(cat):
-            return False
-
+            
         # check for mate
         if len(cat.mate) > 0:
             for mate_id in cat.mate:
@@ -1399,17 +1381,6 @@ class Pregnancy_Events:
         returns:
         parent can have kits, kits are adopted
         """
-
-        if cat and second_parent:
-            cat_adopt_only = cat.no_kits and Pregnancy_Events.is_adoption_only_cat(cat)
-            second_adopt_only = (
-                second_parent.no_kits
-                and Pregnancy_Events.is_adoption_only_cat(second_parent)
-            )
-            if cat_adopt_only or second_adopt_only:
-                return True, True
-            if cat.no_kits or second_parent.no_kits:
-                return False, False
         
         # Checks for second parent alone:
         if not Pregnancy_Events.check_if_can_have_kits(
