@@ -951,7 +951,7 @@ class Patrol:
         path = (
             "patrol_generation.classic_difficulty_modifier"
             if game.clan.game_mode == "classic"
-            else "patrol_generation.difficulty_modifier"
+            else "patrol_generation.expanded_difficulty_modifier"
         )
 
         gm_modifier = get_config(game.clan, path)
