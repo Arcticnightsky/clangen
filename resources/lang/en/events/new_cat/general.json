@@ -2108,6 +2108,7 @@
     },
     "new_cat": [
         ["can_birth",
+		"age:has_kits",
         "meeting",
         "exists",
         "old_name",
@@ -2384,6 +2385,7 @@
     "new_cat": [
         ["can_birth",
         "meeting",
+		"age:has_kits",
         "exists",
         "old_name",
         "loner"
@@ -2465,6 +2467,7 @@
         ["can_birth",
         "meeting",
         "exists",
+		"age:has_kits",
         "old_name",
         "loner",
         "dead"
@@ -2508,6 +2511,7 @@
         "meeting",
         "exists",
         "old_name",
+		"age:has_kits",
         "loner",
         "dead"
         ],
@@ -2551,6 +2555,7 @@
         ["can_birth",
         "meeting",
         "exists",
+		"age:has_kits",
         "old_name",
         "loner"
         ],
@@ -2617,6 +2622,7 @@
         ["can_birth",
         "meeting",
         "exists",
+		"age:has_kits",
         "old_name",
         "loner"
         ],
@@ -2701,6 +2707,7 @@
         ["can_birth",
         "meeting",
         "exists",
+		"age:has_kits",
         "old_name",
         "loner",
         "dead"
@@ -2802,6 +2809,7 @@
         ["can_birth",
         "meeting",
         "exists",
+		"age:has_kits",
         "old_name",
         "loner"
         ],
@@ -2897,6 +2905,7 @@
     "new_cat": [
         ["can_birth",
         "meeting",
+		"age:has_kits",
         "exists",
         "old_name",
         "loner"
@@ -3006,6 +3015,7 @@
         ["can_birth",
         "meeting",
         "exists",
+		"age:has_kits",
         "old_name",
         "loner"
         ],
@@ -3075,6 +3085,7 @@
     },
     "new_cat": [
         ["can_birth",
+		"age:has_kits",
         "meeting",
         "exists",
         "old_name",
@@ -3170,6 +3181,7 @@
     },
     "new_cat": [
         ["can_birth",
+		"age:has_kits",
         "meeting",
         "exists",
         "old_name",
