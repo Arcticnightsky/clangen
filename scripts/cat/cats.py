@@ -2762,10 +2762,13 @@ class Cat:
             mentor_cat.apprentice.append(self.ID)
 
     def __build_mentor_rel_log(self) -> str:
-        rel_log_options = i18n.t("relationships.mentor_rel_log_options")
-        if isinstance(rel_log_options, list) and rel_log_options:
-            return choice(rel_log_options)
-        return i18n.t("relationships.mentor_rel_log")
+        rel_log_key = choice(
+            [
+                "relationships.mentor_rel_log_1",
+                "relationships.mentor_rel_log_2",
+            ]
+        )
+        return i18n.t(rel_log_key)
 
     def __add_mentor_relationship_effects(self):
         """Adds small relationship gains and rel logs for newly paired apprentices and mentors."""
