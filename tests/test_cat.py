@@ -465,16 +465,18 @@ class TestUpdateMentor(unittest.TestCase):
 
         self.assertTrue(app.is_valid_mentor(mentor))
 
-    def test_update_mentor_increases_relationship_and_adds_log(self):
-        app = Cat(
-            moons=7, status_dict={"rank": CatRank.APPRENTICE}, disable_random=True
-        )
-        mentor = Cat(
-            moons=30, status_dict={"rank": CatRank.WARRIOR}, disable_random=True
-        )
+    def test_auto_update_mentor_increases_relationship_and_adds_log(self):
+        with patch.object(Cat, "all_cats", {}):
+            app = Cat(
+                moons=6, status_dict={"rank": CatRank.APPRENTICE}, disable_random=True
+            )
+            mentor = Cat(
+                moons=30, status_dict={"rank": CatRank.WARRIOR}, disable_random=True
+            )
 
-        app.update_mentor(mentor.ID)
+            app.update_mentor()
 
+        self.assertEqual(app.mentor, mentor.ID)
         self.assertIn(mentor.ID, app.relationships)
         self.assertIn(app.ID, mentor.relationships)
         self.assertGreaterEqual(app.relationships[mentor.ID].like, 5)
