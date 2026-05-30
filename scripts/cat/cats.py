@@ -2778,6 +2778,58 @@ class Cat:
         if self.ID not in mentor_cat.apprentice:
             mentor_cat.apprentice.append(self.ID)
 
+    def __build_mentor_rel_log(self) -> str:
+        rel_log_key = choice(
+            [
+                "relationships.mentor_rel_log_1",
+                "relationships.mentor_rel_log_2",
+            ]
+        )
+        return i18n.t(rel_log_key)
+
+    def __add_mentor_relationship_effects(self):
+        """Adds small relationship gains and rel logs for newly paired apprentices and mentors."""
+        mentor_cat = Cat.fetch_cat(self.mentor)
+        if not mentor_cat:
+            return
+
+        rel_log = event_text_adjust(
+            Cat,
+            self.__build_mentor_rel_log(),
+            main_cat=self,
+            random_cat=mentor_cat,
+        )
+
+        if mentor_cat.ID not in self.relationships:
+            self.create_one_relationship(mentor_cat)
+        if self.ID not in mentor_cat.relationships:
+            mentor_cat.create_one_relationship(self)
+
+        app_relationship = self.relationships[mentor_cat.ID]
+        mentor_relationship = mentor_cat.relationships[self.ID]
+
+        app_relationship.like += 5
+        app_relationship.trust += 5
+        app_relationship.log.append(
+            i18n.t(
+                "relationships.age_postscript",
+                text=rel_log,
+                name=mentor_cat.name,
+                count=mentor_cat.moons,
+            )
+        )
+
+        mentor_relationship.like += 5
+        mentor_relationship.respect += 5
+        mentor_relationship.log.append(
+            i18n.t(
+                "relationships.age_postscript",
+                text=rel_log,
+                name=self.name,
+                count=self.moons,
+            )
+        )
+
     def update_mentor(self, new_mentor: Any = None):
         """Takes mentor's ID as argument, mentor could just be set via this function."""
         # No !!
@@ -2794,10 +2846,14 @@ class Cat:
             self.__remove_mentor()
             return
 
+        previous_mentor = self.mentor
+        mentor_changed = False
+
         # If eligible, cat should get a mentor.
         if new_mentor:
             self.__remove_mentor()
             self.__add_mentor(new_mentor)
+            mentor_changed = self.mentor != previous_mentor
 
         # Check if current mentor is valid
         if self.mentor:
@@ -2809,6 +2865,7 @@ class Cat:
 
         # Need to pick a random mentor if not specified
         if not self.mentor:
+            selected_mentor = None
             potential_mentors = []
             priority_mentors = []
             for cat in self.all_cats.values():
@@ -2818,11 +2875,15 @@ class Cat:
                         priority_mentors.append(cat)
             # First try for a cat who currently has no apprentices and is working
             if priority_mentors:  # length of list > 0
-                new_mentor = choice(priority_mentors)
+                selected_mentor = choice(priority_mentors)
             elif potential_mentors:  # length of list > 0
-                new_mentor = choice(potential_mentors)
-            if new_mentor:
-                self.__add_mentor(new_mentor.ID)
+                selected_mentor = choice(potential_mentors)
+            if selected_mentor:
+                self.__add_mentor(selected_mentor.ID)
+                mentor_changed = self.mentor != previous_mentor
+
+        if mentor_changed and self.mentor:
+            self.__add_mentor_relationship_effects()
 
     # ---------------------------------------------------------------------------- #
     #                                 relationships                                #
