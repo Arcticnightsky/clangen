@@ -18,6 +18,7 @@ from scripts.cat.enums import (
 from scripts.cat.names import names, Name
 from scripts.cat.status import StatusDict
 from scripts.cat_relations.relationship import Relationship, RelType
+from scripts.cat_relations.inheritance2 import inheritance_db
 from scripts.clan_package.settings import get_clan_setting
 from scripts.event_class import Single_Event
 from scripts.events_module.short.condition_events import Condition_Events
@@ -227,24 +228,13 @@ class Pregnancy_Events:
                 continue
 
             break
-
-    @staticmethod
-    def is_adoption_only_cat(cat: Cat) -> bool:
-        if not cat:
-            return False
-
-        sterilized = any(
-            cond in cat.permanent_condition for cond in ("neutered", "spayed")
-        )
-        male_tortie = cat.gender == "male" and cat.pelt.name in ("Tortie", "Calico")
-        return sterilized or male_tortie
     
     @staticmethod
     def set_biggest_family():
         """Gets the biggest family of the clan."""
         biggest_family = None
         for cat in Cat.all_cats.values():
-            ancestors = cat.get_relatives()
+            ancestors = list(cat.get_relatives())
             if not biggest_family:
                 biggest_family = ancestors
                 biggest_family.append(cat.ID)
@@ -261,6 +251,56 @@ class Pregnancy_Events:
             [i for i in Cat.all_cats.values() if i.status.alive_in_player_clan]
         )
         return len(Pregnancy_Events.biggest_family) > (living_cats / 10)
+
+    @staticmethod
+    def ensure_unique_kit_name(kit: Cat, litter_kittens, clan=None):
+        biome = None
+        if clan is not None:
+            biome = clan.biome if not clan.override_biome else clan.override_biome
+
+        excluded_ids = {kit.ID, *(kitty.ID for kitty in litter_kittens)}
+        used_prefixes = {kitty.name.prefix for kitty in litter_kittens}
+        used_prefixes.update(
+            cat.name.prefix
+            for cat in Cat.all_cats.values()
+            if cat.ID not in excluded_ids
+            and cat.status.alive_in_player_clan
+            and cat.age in (CatAge.NEWBORN, CatAge.KITTEN, CatAge.ADOLESCENT)
+        )
+
+        used_full_names = {
+            kitty.name.prefix + kitty.name.suffix for kitty in litter_kittens
+        }
+        used_full_names.update(
+            cat.name.prefix + cat.name.suffix
+            for cat in Cat.all_cats.values()
+            if cat.ID not in excluded_ids and cat.status.alive_in_player_clan
+        )
+
+        max_attempts = max(
+            1,
+            len(Name.names_dict["normal_prefixes"])
+            * len(Name.names_dict["normal_suffixes"]),
+        )
+        for _ in range(max_attempts):
+            if kit.name.prefix in used_prefixes:
+                kit.name = Name(
+                    biome=biome,
+                    specsuffix_hidden=kit.specsuffix_hidden,
+                    cat=kit,
+                )
+                continue
+
+            if kit.name.prefix + kit.name.suffix in used_full_names:
+                kit.name = Name(
+                    prefix=kit.name.prefix,
+                    biome=biome,
+                    specsuffix_hidden=kit.specsuffix_hidden,
+                    cat=kit,
+                )
+                continue
+
+            break
 
     @staticmethod
     def handle_pregnancy_age(clan):
@@ -326,11 +366,6 @@ class Pregnancy_Events:
         else:
             if not get_clan_setting("single parentage"):
                 return
-            if cat.no_kits:
-                if Pregnancy_Events.is_adoption_only_cat(cat):
-                    kits_are_adopted = True
-                else:
-                    return
         
         chance = Pregnancy_Events.get_balanced_kit_chance(
     cat, second_parent, is_affair, clan, kits_are_adopted
@@ -1303,16 +1338,14 @@ class Pregnancy_Events:
             return False
 
         # decide chances of having kits, and if it's possible at all.
-        # Including - age, dead status, having kits turned off.
+        # Including - age, dead status, and having kits turned off.
         not_correct_age = (
             cat.age in [CatAge.NEWBORN, CatAge.KITTEN, CatAge.ADOLESCENT]
             or cat.moons < 15
         )
-        if not_correct_age or cat.dead:
+        if not_correct_age or cat.no_kits or cat.dead:
             return False
-        if cat.no_kits and not Pregnancy_Events.is_adoption_only_cat(cat):
-            return False
-
+            
         # check for mate
         if len(cat.mate) > 0:
             for mate_id in cat.mate:
@@ -1348,17 +1381,6 @@ class Pregnancy_Events:
         returns:
         parent can have kits, kits are adopted
         """
-
-        if cat and second_parent:
-            cat_adopt_only = cat.no_kits and Pregnancy_Events.is_adoption_only_cat(cat)
-            second_adopt_only = (
-                second_parent.no_kits
-                and Pregnancy_Events.is_adoption_only_cat(second_parent)
-            )
-            if cat_adopt_only or second_adopt_only:
-                return True, True
-            if cat.no_kits or second_parent.no_kits:
-                return False, False
         
         # Checks for second parent alone:
         if not Pregnancy_Events.check_if_can_have_kits(
@@ -1574,24 +1596,10 @@ class Pregnancy_Events:
 
         # ----- OTHER CAT MATES -----
         if other_cat and other_cat.mate:
-            poly_parenting = bool(cat and cat.ID in other_cat.mate)
-
-            for mate_id in other_cat.mate:
-                if mate_id is None:
-                    continue
-
-                mate = Cat.fetch_cat(mate_id)
-                if not mate:
-                    continue
-
-                add_poly_mate = poly_parenting and mate.ID != cat.ID
-
-                if (
-                    add_poly_mate
-                    and mate.ID not in birth_parents
-                    and mate.ID not in all_adoptive_parents
-                ):
-                    all_adoptive_parents.append(mate_id)
+            # `other_cat` is always the male parent in this path.
+            # Per design, none of `other_cat`'s mates should be set as adoptive parents
+            # (regardless of mate gender), so we intentionally skip adding them here.
+            pass
         # Then, add any additional adoptive parents that were provided passed directly into the
         # function.
         for _m in adoptive_parents:
@@ -1763,19 +1771,31 @@ class Pregnancy_Events:
                 if second_kitten.ID == kitten.ID:
                     continue
                 start_relation = Relationship(kitten, second_kitten, False, True)
-                start_relation.like += 20 + y
-                start_relation.comfort += 10 + y
-                start_relation.trust += 10 + y
+                start_relation.romance += (
+                    constants.CONFIG["new_cat"]["sib_buff"]["cat1_to_cat2"]["romance"]
+                )
+                start_relation.like += (
+                    constants.CONFIG["new_cat"]["sib_buff"]["cat1_to_cat2"]["like"] + y
+                )
+                start_relation.respect += (
+                    constants.CONFIG["new_cat"]["sib_buff"]["cat1_to_cat2"]["respect"]
+                    + y
+                )
+                start_relation.comfort += (
+                    constants.CONFIG["new_cat"]["sib_buff"]["cat1_to_cat2"]["comfort"]
+                    + y
+                )
+                start_relation.trust += (
+                    constants.CONFIG["new_cat"]["sib_buff"]["cat1_to_cat2"]["trust"] + y
+                )
                 kitten.relationships[second_kitten.ID] = start_relation
-
-            kitten.create_inheritance_new_cat()  # Calculate inheritance.
 
         # check if the possible adoptive cat is not already in the family tree and
         # add them as adoptive parents if not
         final_adoptive_parents = []
         for adoptive_p in all_adoptive_parents:
             Cat.fetch_cat(adoptive_p).get_new_thought(CatThought.ON_BIRTH)
-            if adoptive_p not in all_kitten[0].inheritance.all_involved:
+            if adoptive_p not in inheritance_db.get_relatives(all_kitten[0].ID, True):
                 final_adoptive_parents.append(adoptive_p)
         if not adoptive_parents:
             cat.get_new_thought(CatThought.ON_BIRTH)
@@ -1786,8 +1806,6 @@ class Pregnancy_Events:
         if final_adoptive_parents:
             for kit in all_kitten:
                 kit.adoptive_parents = final_adoptive_parents
-                kit.inheritance.update_inheritance()
-                kit.inheritance.update_all_related_inheritance()
 
                 # update relationship for adoptive parents
                 for parent_id in final_adoptive_parents:
@@ -1809,6 +1827,7 @@ class Pregnancy_Events:
                             cats_to=[kit],
                             **parent_to_kit,
                         )
+        inheritance_db.load_inheritances(Cat)
 
         # check for more extended family members to create relationships with
         all_relatives: list = all_kitten[
