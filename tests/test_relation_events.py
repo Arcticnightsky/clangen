@@ -1,19 +1,23 @@
 import os
 import unittest
 from unittest.mock import call, patch
-import random
-from random import choice, randint
-from typing import Dict, List, Union, Optional
 
 import i18n
 
 from scripts.cat.skills import SkillPath
 from scripts.cat.cats import Cat
-from scripts.cat.enums import CatAge, CatGroup, CatRank
+from scripts.cat.enums import CatAge, CatGroup, CatRank, CatSocial
 from scripts.cat.names import Name, names
 from scripts.cat_relations.relationship import Relationship
 from scripts.clan import Clan
+from scripts.events_module.consequences import create_new_cat
 from scripts.events_module.relationship.pregnancy_events import Pregnancy_Events
+from scripts.game_structure import game
+from scripts.game_structure.game.switches.game_switches import (
+    Switch,
+    switch_get_value,
+    switch_set_value,
+)
 from scripts.events_module.relationship.romantic_events import RomanticEvents
 
 
@@ -3119,6 +3123,9 @@ class KitNameConflicts(unittest.TestCase):
         self.original_ordered_cat_list = Cat.ordered_cat_list
         self.original_outside_cats = Cat.outside_cats
         self.original_prefix_history = names.prefix_history.copy()
+        self.original_game_clan = game.clan
+        self.original_clan_name = switch_get_value(Switch.clan_name)
+        self.original_clan_list = switch_get_value(Switch.clan_list)
 
         Cat.all_cats = {}
         Cat.all_cats_list = []
@@ -3132,6 +3139,9 @@ class KitNameConflicts(unittest.TestCase):
         Cat.ordered_cat_list = self.original_ordered_cat_list
         Cat.outside_cats = self.original_outside_cats
         names.prefix_history = self.original_prefix_history
+        game.clan = self.original_game_clan
+        switch_set_value(Switch.clan_name, self.original_clan_name)
+        switch_set_value(Switch.clan_list, self.original_clan_list)
 
     def test_kit_names_reroll_prefixes_and_conflicting_full_names(self):
         Cat(
@@ -3209,5 +3219,50 @@ class KitNameConflicts(unittest.TestCase):
                     specsuffix_hidden=new_kit.specsuffix_hidden,
                     cat=new_kit,
                 )
+            ],
+        )
+
+    def test_joining_outsider_kit_rerolls_existing_apprentice_prefix(self):
+        game.clan = Clan(name="clan")
+        switch_set_value(Switch.clan_name, "clan")
+        Cat(
+            prefix="Badger",
+            suffix="tail",
+            moons=6,
+            status_dict={"rank": CatRank.APPRENTICE},
+            disable_random=True,
+        )
+
+        generated_names = [("Badger", "stripe"), ("Otter", "stripe")]
+
+        def get_next_name(*args, **kwargs):
+            prefix, suffix = generated_names.pop(0)
+            return Name(prefix=prefix, suffix=suffix, cat=kwargs.get("cat"))
+
+        with patch(
+            "scripts.events_module.consequences.Name", side_effect=get_next_name
+        ) as patched_name:
+            patched_name.names_dict = Name.names_dict
+            new_kit = create_new_cat(
+                Cat,
+                moons=3,
+                original_social=CatSocial.LONER,
+            )[0]
+
+        self.assertEqual("Otter", new_kit.name.prefix)
+        self.assertEqual("stripe", new_kit.name.suffix)
+        self.assertEqual(
+            patched_name.call_args_list,
+            [
+                call(
+                    biome=game.clan.biome,
+                    specsuffix_hidden=new_kit.specsuffix_hidden,
+                    cat=new_kit,
+                ),
+                call(
+                    biome=game.clan.biome,
+                    specsuffix_hidden=new_kit.specsuffix_hidden,
+                    cat=new_kit,
+                ),
             ],
         )

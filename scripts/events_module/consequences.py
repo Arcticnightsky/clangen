@@ -14,7 +14,7 @@ from scripts.cat.enums import (
     CatStanding,
     CatThought,
 )
-from scripts.cat.names import names
+from scripts.cat.names import Name, names
 from scripts.cat_relations.enums import RelType
 from scripts.cat_relations.inheritance2 import inheritance_db
 from scripts.clan_package.settings import get_clan_setting
@@ -717,7 +717,50 @@ def create_new_cat(
                 new_cat.change_name(new_prefix=name, new_suffix="")
             else:
                 # means that this young cat joins the clan and gets indoctrinated, muahaha
-                new_cat.change_name()
+                new_cat.name = Name(
+                    biome=game.clan.biome,
+                    specsuffix_hidden=new_cat.specsuffix_hidden,
+                    cat=new_cat,
+                )
+
+                excluded_ids = {new_cat.ID}
+                used_prefixes = {
+                    cat.name.prefix
+                    for cat in Cat.all_cats.values()
+                    if cat.ID not in excluded_ids
+                    and cat.status.alive_in_player_clan
+                    and cat.age in (CatAge.NEWBORN, CatAge.KITTEN, CatAge.ADOLESCENT)
+                }
+                used_full_names = {
+                    cat.name.prefix + cat.name.suffix
+                    for cat in Cat.all_cats.values()
+                    if cat.ID not in excluded_ids and cat.status.alive_in_player_clan
+                }
+
+                max_attempts = max(
+                    1,
+                    len(Name.names_dict["normal_prefixes"])
+                    * len(Name.names_dict["normal_suffixes"]),
+                )
+                for _ in range(max_attempts):
+                    if new_cat.name.prefix in used_prefixes:
+                        new_cat.name = Name(
+                            biome=game.clan.biome,
+                            specsuffix_hidden=new_cat.specsuffix_hidden,
+                            cat=new_cat,
+                        )
+                        continue
+
+                    if new_cat.name.prefix + new_cat.name.suffix in used_full_names:
+                        new_cat.name = Name(
+                            prefix=new_cat.name.prefix,
+                            biome=game.clan.biome,
+                            specsuffix_hidden=new_cat.specsuffix_hidden,
+                            cat=new_cat,
+                        )
+                        continue
+
+                    break
 
         elif original_group not in game.clan.other_clan_IDs:
             name_categories = [
