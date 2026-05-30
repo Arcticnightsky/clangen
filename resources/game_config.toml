@@ -64,6 +64,9 @@ dev_tools = true
   # 1/chance of becoming mates, triggers with friends_to_lover (has to be a high number because many relationships are checked each moon)
   chance_friends_to_lovers = 170
 
+  # chance to move on from a dead or absent mate, fraction represents a percentage. default is 30% chance.
+  chance_to_move_on = 0.3
+
 
   # NOTE FOR RELATIONSHIP CONSTRAINTS
   #  0: no condition
@@ -122,7 +125,7 @@ dev_tools = true
 
   # these denote how relationships change upon a breakup
   [mates.breakup]
-    threshold = 175
+    threshold = 150
     variability = [-10, 10]
     [mates.breakup.default_weights]
       had_fight = 3
@@ -161,8 +164,9 @@ dev_tools = true
   # number of welcoming events to add when a new cat joins
   cat_amount_welcoming = 3
 
-  # this is the amount to divide a relative's relation toward the parent when deciding on a relative's initial relationship toward a kit
-  ext_relative_modifier = 4
+  # ext_relative_modifer * parents(len) is what will a relative's relation toward the parent 
+  # will be divided by when deciding on a relative's initial relationship toward a kit
+  ext_relative_modifier = 2
   # relationship buffs represent "default" relationship values that are then lightly randomized
   # in order to create initial relationship values for cats
 
@@ -225,14 +229,14 @@ dev_tools = true
   primary_chance_mated = 80
 
   # 1/chance that kits, relationship and other factors will influence this chance
-  primary_chance_unmated = 135
+  primary_chance_unmated = 130
 
   # 1/chance that a mated cat has an affair
-  random_affair_chance = 100
+  random_affair_chance = 110
 
   # 1/chance for an unmated cat to have an affair (coparenting)
   # for this check, only other unmated cats can be the affair partner
-  unmated_random_affair_chance = 200
+  unmated_random_affair_chance = 100
 
   # base chance for same-sex mates to adopt random kittens
   primary_chance_same_sex_adoption = 500
@@ -375,10 +379,23 @@ dev_tools = true
 
 [roles]
   # base 1/chance that a cat will be chosen as a mediator apprentice
-  mediator_app_chance = 5000
+  mediator_app_chance = 1500
 
   # base 1/chance that a cat will be chosen as a med cat apprentice
-  base_medicine_app_chance = 40
+  base_medicine_app_chance = 180
+
+[roles."medicine cat apprentice"]
+  # maximum number of medicine cat apprentices to full medicine cats (e.g. 4 adult medcats can have 2 apps total)
+  max_medcats_to_apps = 2
+
+  # minimum percentage of medcat population that are seniors for buff to app chance
+  threshold_percentage_seniors = 30
+
+  # how many moons is considered "very old"
+  threshold_moons_ancient = 150
+
+  # minimum percentage of medcat population that are ancient for buff to app chance
+  threshold_percentage_ancient = 30
 
 [roles.become_mediator_chances]
   # 1/chance that a cat will switch to mediator. rolls every moon, so keep it high.
@@ -411,11 +428,8 @@ dev_tools = true
 
 [patrol_generation]
   # modifies success rate based on game mode. higher = more difficult.
-  # the Cruel Season difficulty modifier needs to have a space rather than an underscore 
-  # due to how it's written in the save files. So don't try to 'fix' it.
   classic_difficulty_modifier = 1
   expanded_difficulty_modifier = 2
-  "cruel season_difficulty_modifier" = 3
 
   # amount to modify patrol success based on patrol stats
   # increasing this value increases the NUMERATOR for success (denominator is fixed at 120)
@@ -448,14 +462,16 @@ dev_tools = true
   # forces specified event to occur regardless of if requirements are met
   debug_override_requirements = ""
 
+  # forces the given frequency, frequency can be a number from 1-4
+  debug_override_frequency = 0
+
 [death_related]
   # base 1/chance that leader will die
   leader_death_chance = 10
 
   # base 1/chance a cat will die
-  classic_death_chance = 850
-  expanded_death_chance = 750
-  "cruel season_death_chance" = 300
+  classic_death_chance = 1000
+  expanded_death_chance = 950
 
   # modifiers for death chance based on if a war is going badly
   # SUBTRACTS from the denominator so higher = more likely to die
@@ -479,17 +495,15 @@ dev_tools = true
 
 [condition_related]
   # 10/chance an illness will occur
-  expanded_illness_chance = 550
-  "cruel season_illness_chance" = 200
-  classic_illness_chance = 700
+  expanded_illness_chance = 650
+  classic_illness_chance = 750
 
   # 5/chance (for most personalities) or 15/chance (for some personalities) an injury will occur 
-  classic_injury_chance = 600
-  expanded_injury_chance = 450
-  "cruel season_injury_chance" = 150
+  classic_injury_chance = 700
+  expanded_injury_chance = 600
 
   # 1/chance a cat will get a permanent condition from an event with that possibility 
-  permanent_condition_chance = 20
+  permanent_condition_chance = 40
 
   # modifiers for injury chance based on if a war is going badly
   # SUBTRACTS from the denominator so higher = more likely to get injured
@@ -529,12 +543,12 @@ dev_tools = true
   requires_mediator = ["sabotage_other_clans", "aid_other_clans"]
   requires_medicine_cat = ["herb_gathering"]
 
-  classic_disallows = ["herb_gathering", "hunting", "hoarding_resources", "raid_other_clans","hoarding"]
+  classic_disallows = ["herb_gathering", "hunting", "hoarding_resources", "raid_other_clans", "hoarding"]
 
   [focus.hunting]
     # Defines how much a working warrior(leader/deputy) or apprentice gathers additionally
     warrior = 4
-    apprentice = 3
+    apprentice = 2
 
   [focus.outsiders]
     # Defines how much increase or decrease the reputation is.
@@ -611,7 +625,7 @@ dev_tools = true
       "running nose" = 5
       whitecough = 1
 
-  [focus."rest_and_recover"]
+  [focus.rest_and_recover]
     # roughly 1/chance injuries will be prevented
     injury_prevent = 4
 
@@ -695,7 +709,7 @@ dev_tools = true
     secondary_hunter = 2
     
     # base effects for herbs that have specified effects
-    base_mortality_effect = 3
+    base_mortality_effect = 5
     base_duration_effect = 1
     base_risk_effect = 3
 
@@ -738,3 +752,134 @@ dev_tools = true
       greenleaf = [1, 2, 3]
       leaf-fall = [2, 3, 2]
       leaf-bare = [5, 2, 1]
+
+[prey]
+  # if false, a cat's nutritional status will have no effect
+  activate_death = true
+
+  # if false, freshkill pile events will not be triggered
+  activate_events = true
+  # determines when the freshkill pile amount is considered "full" or "excessive" for the purpose of events
+  # the higher this number, the more freshkill is required before the pile is "full/excessive"
+  base_event_trigger_factor = 4
+
+  # defines the amount of prey a Clan begins with
+  start_amount = 60
+
+  # the amount of prey a healthy warrior will catch automatically each timeskip
+  # amount will be chosen from the given range. default is 2-4 prey.
+  auto_warrior_prey = [2,4]
+  # the same, but for healthy apprentices
+  auto_apprentice_prey = [1,3]
+
+  # the baseline of prey amount caught on patrol will be a warrior's prey_requirement plus this value
+  additional_prey = 1
+
+  # the percentage of nutrition at which a cat is considered malnourished
+  nutrition_malnourished_percentage = 45
+  # the percentage of nutrition at which a cat is considered starving
+  nutrition_starving_percentage = 20
+
+  # the amount that a cat's prey requirement increases if the cat is sick/injured/pregnant
+  condition_increase = 1
+
+  # the rank order in which cats will be fed
+  feeding_order = [
+          "newborn",
+          "kitten",
+          "queen/pregnant",
+          "elder",
+          "medicine cat",
+          "medicine cat apprentice",
+          "apprentice",
+          "mediator apprentice",
+          "warrior",
+          "mediator",
+          "deputy",
+          "leader"
+      ]
+
+  [prey.text_nutrition]
+      # nutrition % ranges and their corresponding text displays
+      # for example: 0-21% nutrition is considered starving
+      lower_range = [0, 21, 41, 61, 81, 91]
+      text = ["starving", "very hungry", "hungry", "satiated", "full", "stuffed"]
+
+  # the prey each rank will consume on a timeskip
+  # kittens and newborns with birthing parent will not consume prey (as they will drink milk)
+  [prey.prey_requirement]
+      leader = 3
+      deputy = 3
+      "medicine cat" = 2
+      "medicine cat apprentice" = 1.5
+      "mediator apprentice" = 1.5
+      mediator = 2
+      warrior = 3
+      apprentice = 1.5
+      elder = 1.5
+      "queen/pregnant" = 4
+      kitten = 0.5
+      newborn = 0.25
+
+  # the bonus prey a hunter skill cat will catch according to exp rank
+  [prey.hunter_exp_bonus]
+      untrained = 0.1
+      trainee = 1
+      prepared = 2
+      competent = 3
+      proficient = 4
+      skilled = 5
+      expert = 6
+      master = 7
+
+  # hunter_exp_bonus number will be multiplied by the number matching their skill tier.
+  # for example, an expert tier 2 hunter will catch an extra 6 * 2 (12 total) prey
+  [prey.hunter_bonus]
+      # tier = multiplier
+      1 = 1
+      2 = 2
+      3 = 3
+
+  # used to dictate how often certain sizes of prey are found in each biome/season
+  [prey.patrol_balance]
+      # season = [very_small, small, medium, large, huge]
+      # numbers indicate the weight of each prey size, larger numbers make the prey size more likely to occur
+      [prey.patrol_balance.Forest]
+          Newleaf = [2,5,5,2,1]
+          Greenleaf = [1,3,6,4,2]
+          Leaf-fall = [2,4,5,3,1]
+          Leaf-bare = [3,6,4,2,0]
+      [prey.patrol_balance.Mountainous]
+          Newleaf = [2,5,5,2,1]
+          Greenleaf = [1,3,6,4,2]
+          Leaf-fall = [2,6,4,2,1]
+          Leaf-bare = [3,6,4,2,0]
+      [prey.patrol_balance.Plains]
+          Newleaf = [2,5,5,2,1]
+          Greenleaf = [1,3,6,4,2]
+          Leaf-fall = [2,4,5,3,1]
+          Leaf-bare = [3,6,4,2,0]
+      [prey.patrol_balance.Beach]
+          Newleaf = [2,5,5,2,1]
+          Greenleaf = [2,5,5,2,1]
+          Leaf-fall = [2,5,5,2,1]
+          Leaf-bare = [2,6,4,2,1]
+      [prey.patrol_balance.Wetlands]
+          Newleaf = [2,5,5,2,1]
+          Greenleaf = [2,5,5,2,1]
+          Leaf-fall = [2,5,5,2,1]
+          Leaf-bare = [2,6,4,2,1]
+      [prey.patrol_balance.Desert]
+          Newleaf = [2,6,4,2,1]
+          Greenleaf = [3,6,4,2,0]
+          Leaf-fall = [2,5,5,2,1]
+          Leaf-bare = [1,3,6,4,2]
+
+  # used in conjunction with patrol_balance to modify the chosen prey size by the patrol frequency
+  # the less frequent the patrol, the larger the prey it can find
+  [prey.patrol_weight_adaption]
+      # prey size increase = associated frequency
+      1_prey_class_increase = 4
+      2_prey_class_increase = 3
+      3_prey_class_increase = 2
+      4_prey_class_increase = 1

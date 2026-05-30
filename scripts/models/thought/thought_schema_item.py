@@ -2,7 +2,7 @@ from __future__ import annotations
 
 from typing import List, Union
 
-from pydantic import BaseModel, Field
+from pydantic import BaseModel, ConfigDict, Field
 from pydantic_core import MISSING
 
 from scripts.models.common.age import Age
@@ -24,6 +24,7 @@ from scripts.models.thought.status_any import StatusAny
 
 
 class ThoughtSchemaItem(BaseModel):
+    model_config = ConfigDict(extra="forbid")
     id: str = Field(
         ...,
         description="Separates the thoughts into their blocks. Generally, the ID includes the condition, personality, age, and status of the main_cat, as well as the condition, personality, age, and status of any other cat mentioned.",
@@ -43,6 +44,10 @@ class ThoughtSchemaItem(BaseModel):
     thoughts: List[str] = Field(
         ..., description="List of the text that will be displayed in-game as thoughts."
     )
+    not_working: Union[bool, MISSING] = Field(
+        MISSING,
+        description="Constrains the thought to whether m_c is unable to work.",
+    )
     has_injuries: Union[HasInjuries, MISSING] = Field(
         MISSING,
         description='Constrains the thought to only occur if m_c (the cat that is thinking the thought) or r_c (the cat that is being thought about) has a certain condition (either illness or injury). Can also use "any" to allow the thought to occur if the cat has any illness or injury.',
@@ -51,7 +56,7 @@ class ThoughtSchemaItem(BaseModel):
         MISSING,
         description='Constrains the thought to only occur if m_c (the cat that is thinking the thought) or r_c (the cat that is being thought about) has a certain permanent condition. Can also use "any" to allow the thought to occur if the cat has any permanent condition.',
     )
-    relationship_status: Union[List[RelationshipStatus], MISSING] = Field(
+    relationship_constraint: Union[List[RelationshipStatus], MISSING] = Field(
         MISSING,
         description="Constrains the thought to only occur if m_c and r_c fulfill the tag requirements.",
     )

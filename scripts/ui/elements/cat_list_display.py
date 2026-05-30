@@ -272,7 +272,9 @@ class UICatListDisplay(UIContainer):
         elif self.tool_tip_name:
             tooltip_text = str(kitty.name)
         elif self.tool_tip_text:
-            tooltip_text = self.tool_tip_text[i]
+            tooltip_text = self.tool_tip_text[
+                i + ((self.current_page - 1) * self.cats_displayed)
+            ]
         else:
             tooltip_text = None
 
@@ -293,7 +295,7 @@ class UICatListDisplay(UIContainer):
             cat_id=kitty.ID,
             mask=None,
             container=container,
-            object_id=f"#cat_sprite"
+            object_id=f"#sprite{str(i)}"
             if not self.custom_sprites_object_id
             else self.custom_sprites_object_id,
             tool_tip_text=tooltip_text,

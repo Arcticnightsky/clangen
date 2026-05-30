@@ -9,6 +9,7 @@ os.environ["SDL_AUDIODRIVER"] = "dummy"
 from scripts.game_structure import game
 
 from scripts.cat.cats import Cat
+from scripts.cat_relations.inheritance2 import inheritance_db
 from scripts.cat.enums import CatAge, CatRank, CatGroup, CatSocial
 from scripts.cat_relations.relationship import Relationship
 
@@ -50,6 +51,7 @@ class TestRelativesFunction(unittest.TestCase):
     def test_is_parent(self):
         parent = Cat(disable_random=True)
         kit = Cat(parent1=parent.ID, disable_random=True)
+        inheritance_db.load_inheritances(Cat)
         self.assertFalse(kit.is_parent(kit))
         self.assertFalse(kit.is_parent(parent))
         self.assertTrue(parent.is_parent(kit))
@@ -59,6 +61,7 @@ class TestRelativesFunction(unittest.TestCase):
         parent = Cat(disable_random=True)
         kit1 = Cat(parent1=parent.ID, disable_random=True)
         kit2 = Cat(parent1=parent.ID, disable_random=True)
+        inheritance_db.load_inheritances(Cat)
         self.assertFalse(parent.is_sibling(kit1))
         self.assertFalse(kit1.is_sibling(parent))
         self.assertTrue(kit2.is_sibling(kit1))
@@ -70,6 +73,7 @@ class TestRelativesFunction(unittest.TestCase):
         sibling1 = Cat(parent1=grand_parent.ID, disable_random=True)
         sibling2 = Cat(parent1=grand_parent.ID, disable_random=True)
         kit = Cat(parent1=sibling1.ID, disable_random=True)
+        inheritance_db.load_inheritances(Cat)
         self.assertFalse(sibling1.is_uncle_aunt(kit))
         self.assertFalse(sibling1.is_uncle_aunt(sibling2))
         self.assertFalse(kit.is_uncle_aunt(sibling2))
@@ -81,6 +85,7 @@ class TestRelativesFunction(unittest.TestCase):
         sibling1 = Cat(parent1=grand_parent.ID, disable_random=True)
         sibling2 = Cat(parent1=grand_parent.ID, disable_random=True)
         kit = Cat(parent1=sibling1.ID, disable_random=True)
+        inheritance_db.load_inheritances(Cat)
         self.assertFalse(sibling1.is_grandparent(kit))
         self.assertFalse(sibling1.is_grandparent(sibling2))
         self.assertFalse(kit.is_grandparent(sibling2))
@@ -96,6 +101,7 @@ class TestPossibleMateFunction(unittest.TestCase):
         sibling1 = Cat(parent1=grand_parent.ID, disable_random=True)
         sibling2 = Cat(parent1=grand_parent.ID, disable_random=True)
         kit = Cat(parent1=sibling1.ID, disable_random=True)
+        inheritance_db.load_inheritances(Cat)
         self.assertFalse(kit.is_potential_mate(grand_parent))
         self.assertFalse(kit.is_potential_mate(sibling1))
         self.assertFalse(kit.is_potential_mate(sibling2))
@@ -111,6 +117,7 @@ class TestPossibleMateFunction(unittest.TestCase):
         sibling1 = Cat(parent1=grand_parent.ID, disable_random=True)
         sibling2 = Cat(parent1=grand_parent.ID, disable_random=True)
         kit = Cat(parent1=sibling1.ID, disable_random=True)
+        inheritance_db.load_inheritances(Cat)
         self.assertFalse(kit.is_potential_mate(grand_parent, for_love_interest=True))
         self.assertFalse(kit.is_potential_mate(sibling1, for_love_interest=True))
         self.assertFalse(kit.is_potential_mate(sibling2, for_love_interest=True))
@@ -141,6 +148,7 @@ class TestPossibleMateFunction(unittest.TestCase):
         senior_adult_cat2 = Cat(moons=96, disable_random=True)
         elder_cat1 = Cat(moons=120, disable_random=True)
         elder_cat2 = Cat(moons=120, disable_random=True)
+        inheritance_db.load_inheritances(Cat)
 
         # check for cat mating with itself
         self.assertFalse(kitten_cat1.is_potential_mate(kitten_cat1))
@@ -220,6 +228,7 @@ class TestPossibleMateFunction(unittest.TestCase):
         senior_adult_cat2 = Cat(moons=96, disable_random=True)
         elder_cat1 = Cat(moons=120, disable_random=True)
         elder_cat2 = Cat(moons=120, disable_random=True)
+        inheritance_db.load_inheritances(Cat)
 
         # check for cat mating with itself
         self.assertFalse(kitten_cat1.is_potential_mate(kitten_cat1, True))
@@ -455,6 +464,36 @@ class TestUpdateMentor(unittest.TestCase):
         )
 
         self.assertTrue(app.is_valid_mentor(mentor))
+
+    def test_auto_update_mentor_increases_relationship_and_adds_log(self):
+        with patch.object(Cat, "all_cats", {}):
+            app = Cat(
+                moons=6, status_dict={"rank": CatRank.APPRENTICE}, disable_random=True
+            )
+            mentor = Cat(
+                moons=30, status_dict={"rank": CatRank.WARRIOR}, disable_random=True
+            )
+
+            app.update_mentor()
+
+        self.assertEqual(app.mentor, mentor.ID)
+        self.assertIn(mentor.ID, app.relationships)
+        self.assertIn(app.ID, mentor.relationships)
+        self.assertGreaterEqual(app.relationships[mentor.ID].like, 5)
+        self.assertGreaterEqual(app.relationships[mentor.ID].trust, 5)
+        self.assertGreaterEqual(mentor.relationships[app.ID].like, 5)
+        self.assertGreaterEqual(mentor.relationships[app.ID].respect, 5)
+
+        app_logs = " ".join(app.relationships[mentor.ID].log)
+        mentor_logs = " ".join(mentor.relationships[app.ID].log)
+        self.assertTrue(
+            ("became the apprentice of" in app_logs)
+            or ("was apprenticed to" in app_logs)
+        )
+        self.assertTrue(
+            ("became the apprentice of" in mentor_logs)
+            or ("was apprenticed to" in mentor_logs)
+        )
 
 
 class TestNameRepr(unittest.TestCase):

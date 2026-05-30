@@ -1,5 +1,5 @@
 from random import choice, randrange, choices, sample
-from typing import List, Optional
+from typing import List, Optional, Dict
 
 import i18n
 
@@ -54,6 +54,7 @@ class ShortEvent:
         season: List[str] = None,
         sub_type: List[str] = None,
         tags: List[str] = None,
+        poi: Optional[Dict[str, List]] = None,
         text: str = "",
         new_accessory: List[str] = None,
         m_c=None,
@@ -85,6 +86,7 @@ class ShortEvent:
             )  # this increases the weight inversely to the number of season constraints
         self.sub_type = sub_type if sub_type else []
         self.tags = tags if tags else []
+        self.poi = poi if poi else {}
         self.text = text
         self.text_template = text
         self.new_accessory = new_accessory if new_accessory else []
@@ -225,7 +227,7 @@ class ShortEvent:
         self.dead_cat_objects.clear()
 
         if other_clan:
-            self.other_clan_name = f"{other_clan.name}Clan"
+            self.other_clan_name = i18n.t("general.clan", name=other_clan.name)
 
         self.all_involved_cat_ids.append(self.main_cat.ID)
 
@@ -244,7 +246,7 @@ class ShortEvent:
                 return
 
         # create new cats (must happen here so that new cats can be included in further changes)
-        self.handle_new_cats()
+        self.handle_new_cats(other_clan)
 
         # remove cats from involved_cats if they're supposed to be
         if self.r_c and "r_c" in self.exclude_involved:
@@ -318,12 +320,26 @@ class ShortEvent:
 
         # handle murder reveals
         if "murder_reveal" in self.sub_type or "hidden_murder_reveal" in self.sub_type:
+            is_tattletail_reveal = "tattletail" in self.event_id
+            clan_reveal = "clan_wide" in self.tags or is_tattletail_reveal
+            aware_individuals = [] if clan_reveal else [self.random_cat.ID]
             self.main_cat.history.reveal_murder(
                 victim=self.victim_cat,
                 murderer_id=self.main_cat.ID,
-                clan_reveal="clan_wide" in self.tags,
-                aware_individuals=[self.random_cat.ID],
+                clan_reveal=clan_reveal,
+                aware_individuals=aware_individuals,
             )
+            murderer_mates = []
+            for mate_id in self.main_cat.mate:
+                mate = Cat.fetch_cat(mate_id)
+                if mate and not mate.dead:
+                    murderer_mates.append(mate)
+            if murderer_mates:
+                change_relationship_values(
+                    [self.main_cat],
+                    murderer_mates,
+                    romance=-80,
+                )
 
         # change outsider rep
         if self.outsider:
@@ -396,9 +412,10 @@ class ShortEvent:
             possible_cats=possible_cats,
         )
 
-    def handle_new_cats(self):
+    def handle_new_cats(self, other_clan=None):
         """
         handles adding new cats to the clan
+        :param other_clan: the object for the other clan involved in event
         """
 
         if not self.new_cat_attributes:
@@ -416,7 +433,13 @@ class ShortEvent:
         for i, attribute_list in enumerate(self.new_cat_attributes):
             self.new_cats.append(
                 create_new_cat_block(
-                    Cat, Relationship, self, in_event_cats, i, attribute_list
+                    Cat,
+                    Relationship,
+                    self,
+                    in_event_cats,
+                    i,
+                    attribute_list,
+                    other_clan,
                 )
             )
             in_event_cats[f"n_c:{i}"] = self.new_cats[i][0]
@@ -432,7 +455,7 @@ class ShortEvent:
                     i18n.t("defaults.event_dead_outsider"),
                     main_cat=first_cat,
                 )
-            elif first_cat.status.is_outsider:
+            elif not first_cat.status.alive_in_player_clan:
                 n_c_index = self.new_cats.index(cat_list)
                 if (
                     f"n_c:{n_c_index}" in self.exclude_involved
@@ -451,6 +474,7 @@ class ShortEvent:
 
             if extra_text:
                 self.text = self.text + " " + extra_text
+                extra_text = None
 
         # Check to see if any young litters joined with alive parents.
         # If so, see if recovering from birth condition is needed and give the condition
@@ -563,10 +587,10 @@ class ShortEvent:
             body = True
         pass
 
-        if self.m_c["dies"] and self.main_cat not in dead_list:
+        if self.m_c.get("dies") and self.main_cat not in dead_list:
             dead_list.append(self.main_cat)
         if self.r_c:
-            if self.r_c["dies"] and self.random_cat not in dead_list:
+            if self.r_c.get("dies") and self.random_cat not in dead_list:
                 dead_list.append(self.random_cat)
 
         if not dead_list:
@@ -639,9 +663,12 @@ class ShortEvent:
                 )  # got to include the cat that rolled for death in the first place
 
             taken_cats = []
+            twoleg_abduction_event = "twoleg" in self.event_id.lower() or "twoleg" in self.text.lower()
             for kitty in self.dead_cat_objects:
                 if "lost" in self.tags:
                     kitty.become_lost()
+                    if twoleg_abduction_event:
+                        kitty.pending_neuter = True
                     taken_cats.append(kitty)
                 self.multi_cat_objects.append(kitty)
                 if kitty.ID not in self.all_involved_cat_ids:
@@ -876,6 +903,8 @@ class ShortEvent:
             game.clan.freshkill_pile.remove_freshkill(reduce_amount, take_random=True)
         if increase_amount != 0:
             game.clan.freshkill_pile.add_freshkill(increase_amount)
+
+        game.freshkill_event_list.append(self.text)
 
     def handle_herb_supply(self, block):
         """

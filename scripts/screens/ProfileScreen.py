@@ -11,6 +11,7 @@ import pygame_gui
 import ujson
 from pygame_gui.core import ObjectID
 
+from scripts.game_input import INPUT_ACTION_PRESSED, Action
 from scripts.cat.cats import Cat, BACKSTORIES
 from scripts.clan_resources.freshkill import FRESHKILL_ACTIVE
 from scripts.game_structure import image_cache, game
@@ -210,8 +211,8 @@ class ProfileScreen(Screens):
                 )
             else:
                 self.handle_tab_events(event)
-        elif event.type == pygame.KEYDOWN and game_setting_get("keybinds"):
-            if event.key == pygame.K_LEFT:
+        elif event.type == INPUT_ACTION_PRESSED:
+            if event.action == Action.PREVIOUS:
                 if isinstance(Cat.fetch_cat(self.previous_cat), Cat):
                     self.clear_profile()
                     switch_set_value(Switch.cat, self.previous_cat)
@@ -219,7 +220,7 @@ class ProfileScreen(Screens):
                     self.update_disabled_buttons_and_text()
                 else:
                     print("invalid previous cat", self.previous_cat)
-            elif event.key == pygame.K_RIGHT:
+            elif event.action == Action.NEXT:
                 if isinstance(Cat.fetch_cat(self.next_cat), Cat):
                     self.clear_profile()
                     switch_set_value(Switch.cat, self.next_cat)
@@ -227,8 +228,7 @@ class ProfileScreen(Screens):
                     self.update_disabled_buttons_and_text()
                 else:
                     print("invalid next cat", self.previous_cat)
-
-            elif event.key == pygame.K_ESCAPE:
+            if event.action == Action.BACK:
                 self.close_current_tab()
                 self.change_screen(game.last_screen_forProfile)
 
@@ -555,6 +555,18 @@ class ProfileScreen(Screens):
         if self.the_cat is None:
             return
 
+        # initialize thoughts if they have none
+        if not self.the_cat.thought:
+            if self.the_cat.status.is_other_clancat:
+                # this isn't great, but it's only being run if someone checks an
+                # other clan cat when booting the game before doing a timeskip
+                other_clan_cats = [
+                    c for c in Cat.all_cats_list if c.status.is_other_clancat
+                ]
+                self.the_cat.get_new_thought(other_clan_cats=other_clan_cats)
+            else:
+                self.the_cat.get_new_thought()
+
         # Info in string
         cat_name = str(self.the_cat.name)
         cat_name = shorten_text_to_fit(cat_name, 500, 20)
@@ -725,9 +737,9 @@ class ProfileScreen(Screens):
         output = ""
         # SEX/GENDER
         if the_cat.genderalign is None or the_cat.genderalign == the_cat.gender:
-            output += the_cat.get_gender_string()
+            output += the_cat.gender_string
         else:
-            output += the_cat.get_genderalign_string()
+            output += the_cat.genderalign_string
         # NEWLINE ----------
         output += "\n"
 
@@ -1017,7 +1029,7 @@ class ProfileScreen(Screens):
 
         # EXPERIENCE
         output += i18n.t(
-            "screens.profile.experience_label", exp=the_cat.experience_level
+            "screens.profile.experience_label", exp=the_cat.experience_level_string
         )
         if get_clan_setting("showxp"):
             output += " (" + str(the_cat.experience) + ")"
@@ -1043,7 +1055,7 @@ class ProfileScreen(Screens):
 
         # NUTRITION INFO (if the game is in the correct mode)
         if (
-            game.clan.game_mode in ["expanded", "cruel season"]
+            game.clan.game_mode in ["expanded", "cruel_season"]
             and the_cat.is_alive()
             and FRESHKILL_ACTIVE
         ):
@@ -1070,7 +1082,12 @@ class ProfileScreen(Screens):
                     and the_cat.permanent_condition[condition]["moons_until"] != -2
                 ):
                     continue
-                output += i18n.t("general.has_permanent_condition")
+                if "spayed" in the_cat.permanent_condition:
+                    output += i18n.t("utility.exclamation", text=i18n.t("general.is_spayed"))
+                elif "neutered" in the_cat.permanent_condition:
+                    output += i18n.t("utility.exclamation", text=i18n.t("general.is_neutered"))
+                else:
+                    output += i18n.t("general.has_permanent_condition")
 
                 # NEWLINE ----------
                 output += "\n"
@@ -1895,13 +1912,33 @@ class ProfileScreen(Screens):
             if self.the_cat.permanent_condition[name]["born_with"] is True:
                 text_list.append(i18n.t("general.born_with"))
             else:
-                # moons with the condition if not born with condition
-                moons_with = (
-                    game.clan.age - self.the_cat.permanent_condition[name]["moon_start"]
-                )
-                text_list.append(
-                    i18n.t("general.had_perm_condition_for", count=moons_with)
-                )
+                if name == "spayed":
+                    moons_with = (
+                        game.clan.age - self.the_cat.permanent_condition[name]["moon_start"]
+                    )
+                    text_list.append(
+                        i18n.t(
+                            "general.has_been_spayed_for",
+                            moons=i18n.t("general.moons_age", count=moons_with),
+                        )
+                    )
+                elif name == "neutered":
+                    moons_with = (
+                        game.clan.age - self.the_cat.permanent_condition[name]["moon_start"]
+                    )
+                    text_list.append(
+                        i18n.t(
+                            "general.has_been_neutered_for",
+                            moons=i18n.t("general.moons_age", count=moons_with),
+                        )
+                    )
+                else:
+                    moons_with = (
+                        game.clan.age - self.the_cat.permanent_condition[name]["moon_start"]
+                    )
+                    text_list.append(
+                        i18n.t("general.had_perm_condition_for", count=moons_with)
+                    )
 
             # is permanent
             text_list.append(

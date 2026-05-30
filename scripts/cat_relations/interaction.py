@@ -27,7 +27,7 @@ class SingleInteraction:
         also_influences=None,
     ):
         self.id = interact_id
-        self.intensity = intensity
+        self.intensity = self._normalize_intensity(intensity)
         self.biome = biome if biome else ["any"]
         self.season = season if season else ["any"]
         self.interactions = (
@@ -62,6 +62,12 @@ class SingleInteraction:
         self.reaction_random_cat = reaction_random_cat if reaction_random_cat else {}
         self.also_influences = also_influences if also_influences else {}
 
+    @staticmethod
+    def _normalize_intensity(intensity):
+        if intensity == "med":
+            return "medium"
+        return intensity
+
 
 class GroupInteraction:
     def __init__(
@@ -75,6 +81,7 @@ class GroupInteraction:
         get_injuries=None,
         has_injuries=None,
         status_constraint=None,
+        age_constraint=None,
         trait_constraint=None,
         skill_constraint=None,
         relationship_constraint=None,
@@ -99,6 +106,7 @@ class GroupInteraction:
         )
         self.backstory_constraint = backstory_constraint if backstory_constraint else {}
         self.status_constraint = status_constraint if status_constraint else {}
+        self.age_constraint = age_constraint if age_constraint else {}
         self.trait_constraint = trait_constraint if trait_constraint else {}
         self.skill_constraint = skill_constraint if skill_constraint else {}
         self.specific_reaction = specific_reaction if specific_reaction else {}
@@ -212,6 +220,9 @@ def create_group_interaction(inter_list) -> list:
                 has_injuries=inter["has_injuries"] if "has_injuries" in inter else None,
                 status_constraint=(
                     inter["status_constraint"] if "status_constraint" in inter else {}
+                ),
+                age_constraint=(
+                    inter["age_constraint"] if "age_constraint" in inter else {}
                 ),
                 trait_constraint=(
                     inter["trait_constraint"] if "trait_constraint" in inter else {}
