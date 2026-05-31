@@ -1,12 +1,11 @@
 from typing import Optional
 
-from pygame_gui.core import UIElement
-
 import scripts.game_structure.screen_settings
+from pygame import display
+from pygame_gui.core import UIElement
 from scripts.game_input import Action
-from scripts.game_structure.game import switch_get_value, Switch
+from scripts.game_structure.game import Switch, switch_get_value
 from scripts.ui.scale import ui_scale_value
-
 
 Y_VARIANCE = 25
 
@@ -119,8 +118,8 @@ def adjust_row(
             None
             for x in range(
                 int(
-                    scripts.game_structure.screen_settings.screen_x
-                    / cell_width
+                    ui_scale_value(display.get_surface().get_width())
+                    / ui_scale_value(10)
                 )
                 + 1
             )
@@ -130,6 +129,9 @@ def adjust_row(
     index = max(0, index)
     if index >= len(row):
         row.extend([None] * (index - len(row) + 1))
+
+    # Clamping to suitable values to avoid going out of bounds
+    index = max(0, min(index, len(row) - 1))
 
     row.insert(index, element)
     row.pop(index + 1)
