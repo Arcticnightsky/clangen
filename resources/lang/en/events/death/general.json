@@ -2536,7 +2536,7 @@
         },
         "m_c": {
             "status": ["warrior", "deputy", "leader"],
-            "relationship_status": ["adores"],
+            "relationship_status": ["adores", "mates"],
             "dies": true
         },
         "injury": [
