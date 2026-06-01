@@ -276,7 +276,7 @@ class Condition_Events:
             path = (
                 "condition_related.classic_illness_chance"
                 if game.clan.game_mode == "classic"
-                else "condition_related.illness_chance"
+                else "condition_related.expanded_illness_chance"
             )
             random_number = int(random.random() * get_config(game.clan, path))
             if (
@@ -357,7 +357,7 @@ class Condition_Events:
         path = (
             "condition_related.classic_injury_chance"
             if game.clan.game_mode == "classic"
-            else "condition_related.injury_chance"
+            else "condition_related.expanded_injury_chance"
         )
 
         injury_chance = get_config(game.clan, path) - (
@@ -469,6 +469,7 @@ class Condition_Events:
             "LEFTBLIND": ["one bad eye", "failing eyesight"],
             "RIGHTBLIND": ["one bad eye", "failing eyesight"],
             "BOTHBLIND": ["failing eyesight", "blind"],
+            "BLIND": ["blind"],
             "MANLEG": ["weak leg", "twisted leg"],
             "RATBITE": ["weak leg"],
             "LEGBITE": ["weak leg"],
@@ -482,7 +483,6 @@ class Condition_Events:
             "paralyzed",
             "raspy lungs",
             "wasting disease",
-            "blind",
             "failing eyesight",
             "one bad eye",
             "partial hearing loss",
