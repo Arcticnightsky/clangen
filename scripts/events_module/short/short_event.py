@@ -320,14 +320,11 @@ class ShortEvent:
 
         # handle murder reveals
         if "murder_reveal" in self.sub_type or "hidden_murder_reveal" in self.sub_type:
-            is_tattletail_reveal = "tattletail" in self.event_id
-            clan_reveal = "clan_wide" in self.tags or is_tattletail_reveal
-            aware_individuals = [] if clan_reveal else [self.random_cat.ID]
             self.main_cat.history.reveal_murder(
                 victim=self.victim_cat,
                 murderer_id=self.main_cat.ID,
-                clan_reveal=clan_reveal,
-                aware_individuals=aware_individuals,
+                clan_reveal="clan_wide" in self.tags,
+                aware_individuals=[self.random_cat.ID],
             )
             murderer_mates = []
             for mate_id in self.main_cat.mate:
@@ -340,7 +337,7 @@ class ShortEvent:
                     murderer_mates,
                     romance=-80,
                 )
-
+        
         # change outsider rep
         if self.outsider:
             change_clan_reputation(self.outsider["changed"])
@@ -663,12 +660,9 @@ class ShortEvent:
                 )  # got to include the cat that rolled for death in the first place
 
             taken_cats = []
-            twoleg_abduction_event = "twoleg" in self.event_id.lower() or "twoleg" in self.text.lower()
             for kitty in self.dead_cat_objects:
                 if "lost" in self.tags:
                     kitty.become_lost()
-                    if twoleg_abduction_event:
-                        kitty.pending_neuter = True
                     taken_cats.append(kitty)
                 self.multi_cat_objects.append(kitty)
                 if kitty.ID not in self.all_involved_cat_ids:
