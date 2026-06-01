@@ -1,5 +1,6 @@
 import os
 import unittest
+from unittest.mock import patch
 
 from scripts.cat_relations.enums import rel_type_tiers, RelType
 
@@ -18,6 +19,11 @@ from scripts.cat_relations.interaction import (
 
 
 class RelationshipConstraints(unittest.TestCase):
+    def test_single_interaction_normalizes_med_intensity(self):
+        interaction = SingleInteraction("test", intensity="med")
+
+        self.assertEqual(interaction.intensity, "medium")
+
     def test_siblings(self):
         # given
         parent = Cat()
@@ -513,3 +519,30 @@ class SingleInteractionCatConstraints(unittest.TestCase):
         self.assertTrue(
             cats_fulfill_single_interaction_constraints(clan, clan, all_to_clan)
         )
+
+
+class RomanceInteractionWeighting(unittest.TestCase):
+    @patch("scripts.cat_relations.relationship.random.choices")
+    def test_mixed_sterilization_pair_reduces_romance_weight(self, mocked_choices):
+        cat_from = Cat(age="adult", moons=30, disable_random=True)
+        cat_to = Cat(age="adult", moons=30, disable_random=True)
+        cat_from.permanent_condition["neutered"] = {}
+        mixed_relationship = Relationship(cat_from, cat_to)
+
+        mocked_choices.return_value = [RelType.LIKE]
+        mixed_relationship.get_interaction_type(positive=True)
+        mixed_values = mocked_choices.call_args.args[0]
+        mixed_weights = mocked_choices.call_args.args[1]
+        mixed_romance_weight = mixed_weights[mixed_values.index(RelType.ROMANCE)]
+
+        intact_cat_from = Cat(age="adult", moons=30, disable_random=True)
+        intact_cat_to = Cat(age="adult", moons=30, disable_random=True)
+        intact_relationship = Relationship(intact_cat_from, intact_cat_to)
+
+        mocked_choices.return_value = [RelType.LIKE]
+        intact_relationship.get_interaction_type(positive=True)
+        intact_values = mocked_choices.call_args.args[0]
+        intact_weights = mocked_choices.call_args.args[1]
+        intact_romance_weight = intact_weights[intact_values.index(RelType.ROMANCE)]
+
+        self.assertLess(mixed_romance_weight, intact_romance_weight)
