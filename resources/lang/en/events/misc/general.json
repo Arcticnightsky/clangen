@@ -8698,7 +8698,7 @@
                 ],
                 "amount": 15,
                 "log": {
-                    "cats_from": "m_c presented r_c with a gift to celebrate {PRONOUN/r_c/poss} ceremony, and r_c has worn it on {PRONOUN/r_c/poss} pelt ever since."
+                    "cats_from": "r_c presented m_c with a gift to celebrate {PRONOUN/m_c/poss} ceremony, and m_c has worn it on {PRONOUN/m_c/poss} pelt ever since."
                 }
             }
         ]
@@ -8750,7 +8750,7 @@
                 ],
                 "amount": 15,
                 "log": {
-                    "cats_from": "m_c presented r_c with a gift to celebrate {PRONOUN/r_c/poss} apprentice ceremony, and r_c has worn it on {PRONOUN/r_c/poss} pelt ever since."
+                    "cats_from": "r_c presented m_c with a gift to celebrate {PRONOUN/m_c/poss} apprentice ceremony, and m_c has worn it on {PRONOUN/m_c/poss} pelt ever since."
                 }
             }
         ]
@@ -8802,7 +8802,7 @@
                 ],
                 "amount": 15,
                 "log": {
-                    "cats_from": "m_c presented r_c with a gift to celebrate {PRONOUN/r_c/poss} warrior ceremony, and r_c has worn it on {PRONOUN/r_c/poss} pelt ever since."
+                    "cats_from": "r_c presented m_c with a gift to celebrate {PRONOUN/m_c/poss} warrior ceremony, and m_c has worn it on {PRONOUN/m_c/poss} pelt ever since."
                 }
             }
         ]
@@ -8855,8 +8855,8 @@
                 ],
                 "amount": 15,
                 "log": {
-                    "cats_from": "m_c presented r_c with a gift to celebrate {PRONOUN/r_c/poss} ceremony, and r_c has worn it on {PRONOUN/r_c/poss} pelt ever since.",
-                    "cats_to": "r_c decided to give m_c another chance after {PRONOUN/m_c/subject} gave {PRONOUN/r_c/object} a gift for {PRONOUN/r_c/poss} ceremony."
+                    "cats_from": "r_c presented m_c with a gift to celebrate {PRONOUN/m_c/poss} ceremony, and m_c has worn it on {PRONOUN/m_c/poss} pelt ever since.",
+                    "cats_to": "m_c decided to give r_c another chance after {PRONOUN/r_c/subject} gave {PRONOUN/m_c/object} a gift for {PRONOUN/m_c/poss} ceremony."
                 }
             }
         ]
@@ -8906,7 +8906,7 @@
                 ],
                 "amount": 20,
                 "log": {
-                    "cats_from": "m_c presented r_c with forget-me-nots to celebrate {PRONOUN/r_c/poss} ceremony, and r_c has worn them on {PRONOUN/r_c/poss} pelt ever since."
+                    "cats_from": "r_c presented m_c with forget-me-nots to celebrate {PRONOUN/m_c/poss} ceremony, and m_c has worn them on {PRONOUN/m_c/poss} pelt ever since."
                 }
             }
         ]
@@ -8956,7 +8956,7 @@
                 ],
                 "amount": 20,
                 "log": {
-                    "cats_from": "m_c presented r_c with forget-me-nots to celebrate {PRONOUN/r_c/poss} ceremony, and r_c has worn them on {PRONOUN/r_c/poss} pelt ever since."
+                    "cats_from": "r_c presented m_c with forget-me-nots to celebrate {PRONOUN/m_c/poss} ceremony, and m_c has worn them on {PRONOUN/m_c/poss} pelt ever since."
                 }
             }
         ]
@@ -9012,7 +9012,7 @@
                 ],
                 "amount": 15,
                 "log": {
-                    "cats_from": "m_c presented r_c with a gift to celebrate {PRONOUN/r_c/poss} apprentice ceremony, and r_c has worn it on {PRONOUN/r_c/poss} pelt ever since."
+                    "cats_from": "r_c presented m_c with a gift to celebrate {PRONOUN/m_c/poss} apprentice ceremony, and m_c has worn it on {PRONOUN/m_c/poss} pelt ever since."
                 }
             }
         ]
