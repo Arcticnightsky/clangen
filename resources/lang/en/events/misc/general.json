@@ -864,7 +864,7 @@
                 ],
                 "amount": 20,
                 "log": {
-                    "cats_from": "cat_from gained respect for cat_from after hearing that {PRONOUN/cat_from/subject} killed mur_c to protect c_n."
+                    "cats_from": "cat_from gained respect for cat_to after hearing that {PRONOUN/cat_to/subject} killed mur_c to protect c_n."
                 }
             }
         ]
