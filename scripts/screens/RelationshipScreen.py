@@ -618,18 +618,7 @@ class RelationshipScreen(Screens):
                         relation = "general.child"
 
                 elif self.inspect_cat.is_sibling(self.the_cat) or self.the_cat.is_sibling(self.inspect_cat):
-                    if self.inspect_cat.genderalign in ("female", "trans female"):
-                        relation = "general.sister"
-                    elif self.inspect_cat.genderalign in ("male", "trans male"):
-                        relation = "general.brother"
-                    else:
-                        relation = "general.sibling"
-
-                    if self.inspect_cat.is_littermate(self.the_cat) or self.the_cat.is_littermate(self.inspect_cat):
-                        relation = i18n.t(
-                            "general.sibling_littermate", relation=i18n.t(relation)
-                        )
-                    elif self.inspect_cat.is_half_sibling(self.the_cat) or self.the_cat.is_half_sibling(self.inspect_cat):
+                    if self.inspect_cat.is_half_sibling(self.the_cat) or self.the_cat.is_half_sibling(self.inspect_cat):
                         if self.inspect_cat.genderalign in ["female", "trans female"]:
                             relation = "general.half_sister"
                         elif self.inspect_cat.genderalign in ["male", "trans male"]:
@@ -643,6 +632,19 @@ class RelationshipScreen(Screens):
                             relation = "general.adoptive_brother"
                         else:
                             relation = "general.adoptive_sibling"
+                    else:
+                        if self.inspect_cat.genderalign in ("female", "trans female"):
+                            relation = "general.sister"
+                        elif self.inspect_cat.genderalign in ("male", "trans male"):
+                            relation = "general.brother"
+                        else:
+                            relation = "general.sibling"
+                            
+                        if self.inspect_cat.is_littermate(self.the_cat) or self.the_cat.is_littermate(self.inspect_cat):
+                            relation = i18n.t(
+                                "general.sibling_littermate", relation=i18n.t(relation)
+                            )
+                            
                 elif not get_clan_setting(
                     "first cousin mates"
                 ) and self.inspect_cat.is_cousin(self.the_cat):
