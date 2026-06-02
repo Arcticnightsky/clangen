@@ -630,19 +630,19 @@ class RelationshipScreen(Screens):
                     )
                     if self.inspect_cat.genderalign in ("female", "trans female"):
                         relation = (
-                            "general.adopted_daughter"
+                            "general.adoptive_daughter"
                             if is_adoptive_child
                             else "general.daughter"
                         )
                     elif self.inspect_cat.genderalign in ("male", "trans male"):
                         relation = (
-                            "general.adopted_son"
+                            "general.adoptive_son"
                             if is_adoptive_child
                             else "general.son"
                         )
                     else:
                         relation = (
-                            "general.adopted_child"
+                            "general.adoptive_child"
                             if is_adoptive_child
                             else "general.child"
                         )
