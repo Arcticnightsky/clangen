@@ -4788,7 +4788,7 @@
         "poi": {
             "name": ["terrain_twolegplace"]
         },
-        "frequency": 4,
+        "frequency": 1,
         "event_text": "m_c goes missing in {POI/name/terrain_twolegplace} for a few days and comes back wearing a acc_singular.",
         "new_accessory": ["COLLAR"],
         "m_c": {
