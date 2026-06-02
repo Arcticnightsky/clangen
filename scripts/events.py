@@ -268,8 +268,6 @@ def one_moon():
             game.cur_events_list.insert(0, Single_Event(event_string))
             game.freshkill_event_list.append(event_string)
 
-    handle_focus()
-
     # handle the herb supply for the moon
     game.clan.herb_supply.handle_moon(
         clan_size=get_living_clan_cat_count(Cat),
@@ -280,6 +278,11 @@ def one_moon():
             working=True,
         ),
     )
+
+    # Handle Clan focus after the normal herb moonskip so herbs gathered by the
+    # herb-gathering focus are not immediately spent on this moon's treatments
+    # or expired before the player can see them in the med den stores.
+    handle_focus()
 
     if game.clan.game_mode in ("expanded", "cruel_season"):
         amount_per_med = get_amount_cat_for_one_medic(game.clan)
