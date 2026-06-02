@@ -603,19 +603,49 @@ class RelationshipScreen(Screens):
                     else:
                         relation = "general.grandchild"
                 elif self.inspect_cat.is_parent(self.the_cat):
+                    is_adoptive_parent = self.inspect_cat.is_adoptive_parent(
+                        self.the_cat
+                    )
                     if self.inspect_cat.genderalign in ("female", "trans female"):
-                        relation = "general.mother"
+                        relation = (
+                            "general.adoptive_mother"
+                            if is_adoptive_parent
+                            else "general.mother"
+                        )
                     elif self.inspect_cat.genderalign in ("male", "trans male"):
-                        relation = "general.father"
+                        relation = (
+                            "general.adoptive_father"
+                            if is_adoptive_parent
+                            else "general.father"
+                        )
                     else:
-                        relation = "general.parent"
+                        relation = (
+                            "general.adoptive_parent"
+                            if is_adoptive_parent
+                            else "general.parent"
+                        )
                 elif self.the_cat.is_parent(self.inspect_cat):
+                    is_adoptive_child = self.the_cat.is_adoptive_parent(
+                        self.inspect_cat
+                    )
                     if self.inspect_cat.genderalign in ("female", "trans female"):
-                        relation = "general.daughter"
+                        relation = (
+                            "general.adopted_daughter"
+                            if is_adoptive_child
+                            else "general.daughter"
+                        )
                     elif self.inspect_cat.genderalign in ("male", "trans male"):
-                        relation = "general.son"
+                        relation = (
+                            "general.adopted_son"
+                            if is_adoptive_child
+                            else "general.son"
+                        )
                     else:
-                        relation = "general.child"
+                        relation = (
+                            "general.adopted_child"
+                            if is_adoptive_child
+                            else "general.child"
+                        )
 
                 elif self.inspect_cat.is_sibling(self.the_cat) or self.the_cat.is_sibling(self.inspect_cat):
                     if self.inspect_cat.is_half_sibling(self.the_cat) or self.the_cat.is_half_sibling(self.inspect_cat):

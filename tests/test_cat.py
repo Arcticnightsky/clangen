@@ -56,6 +56,33 @@ class TestRelativesFunction(unittest.TestCase):
         self.assertFalse(kit.is_parent(parent))
         self.assertTrue(parent.is_parent(kit))
 
+    def test_is_adoptive_parent(self):
+        adoptive_parent = Cat(disable_random=True)
+        blood_parent = Cat(disable_random=True)
+        kit = Cat(
+            parent1=blood_parent.ID,
+            adoptive_parents=[adoptive_parent.ID],
+            disable_random=True,
+        )
+        inheritance_db.load_inheritances(Cat)
+
+        self.assertTrue(adoptive_parent.is_parent(kit))
+        self.assertTrue(adoptive_parent.is_adoptive_parent(kit))
+        self.assertTrue(blood_parent.is_parent(kit))
+        self.assertFalse(blood_parent.is_adoptive_parent(kit))
+        self.assertFalse(kit.is_adoptive_parent(adoptive_parent))
+
+    def test_is_adoptive_parent_identifies_adopted_child_direction(self):
+        adoptive_parent = Cat(disable_random=True)
+        adopted_child = Cat(
+            adoptive_parents=[adoptive_parent.ID], disable_random=True
+        )
+        inheritance_db.load_inheritances(Cat)
+
+        self.assertTrue(adoptive_parent.is_parent(adopted_child))
+        self.assertTrue(adoptive_parent.is_adoptive_parent(adopted_child))
+        self.assertFalse(adopted_child.is_adoptive_parent(adoptive_parent))
+
     # test that is_sibling returns True for cats with a shared parent1 and False otherwise
     def test_is_sibling(self):
         parent = Cat(disable_random=True)
@@ -66,6 +93,34 @@ class TestRelativesFunction(unittest.TestCase):
         self.assertFalse(kit1.is_sibling(parent))
         self.assertTrue(kit2.is_sibling(kit1))
         self.assertTrue(kit1.is_sibling(kit2))
+
+    def test_is_half_sibling_without_legacy_inheritance(self):
+        shared_parent = Cat(disable_random=True)
+        other_parent1 = Cat(disable_random=True)
+        other_parent2 = Cat(disable_random=True)
+        kit1 = Cat(
+            parent1=shared_parent.ID, parent2=other_parent1.ID, disable_random=True
+        )
+        kit2 = Cat(
+            parent1=shared_parent.ID, parent2=other_parent2.ID, disable_random=True
+        )
+        inheritance_db.load_inheritances(Cat)
+
+        self.assertIsNone(kit1.inheritance)
+        self.assertIsNone(kit2.inheritance)
+        self.assertTrue(kit1.is_sibling(kit2))
+        self.assertTrue(kit1.is_half_sibling(kit2))
+        self.assertTrue(kit2.is_half_sibling(kit1))
+
+    def test_shared_single_parent_siblings_are_not_half_siblings(self):
+        shared_parent = Cat(disable_random=True)
+        kit1 = Cat(parent1=shared_parent.ID, disable_random=True)
+        kit2 = Cat(parent1=shared_parent.ID, disable_random=True)
+        inheritance_db.load_inheritances(Cat)
+
+        self.assertTrue(kit1.is_sibling(kit2))
+        self.assertFalse(kit1.is_half_sibling(kit2))
+        self.assertFalse(kit2.is_half_sibling(kit1))
 
     # test that is_uncle_aunt returns True for a uncle/aunt-cat relationship and False otherwise
     def test_is_uncle_aunt(self):
