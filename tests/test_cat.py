@@ -67,6 +67,34 @@ class TestRelativesFunction(unittest.TestCase):
         self.assertTrue(kit2.is_sibling(kit1))
         self.assertTrue(kit1.is_sibling(kit2))
 
+    def test_is_half_sibling_without_legacy_inheritance(self):
+        shared_parent = Cat(disable_random=True)
+        other_parent1 = Cat(disable_random=True)
+        other_parent2 = Cat(disable_random=True)
+        kit1 = Cat(
+            parent1=shared_parent.ID, parent2=other_parent1.ID, disable_random=True
+        )
+        kit2 = Cat(
+            parent1=shared_parent.ID, parent2=other_parent2.ID, disable_random=True
+        )
+        inheritance_db.load_inheritances(Cat)
+
+        self.assertIsNone(kit1.inheritance)
+        self.assertIsNone(kit2.inheritance)
+        self.assertTrue(kit1.is_sibling(kit2))
+        self.assertTrue(kit1.is_half_sibling(kit2))
+        self.assertTrue(kit2.is_half_sibling(kit1))
+
+    def test_shared_single_parent_siblings_are_not_half_siblings(self):
+        shared_parent = Cat(disable_random=True)
+        kit1 = Cat(parent1=shared_parent.ID, disable_random=True)
+        kit2 = Cat(parent1=shared_parent.ID, disable_random=True)
+        inheritance_db.load_inheritances(Cat)
+
+        self.assertTrue(kit1.is_sibling(kit2))
+        self.assertFalse(kit1.is_half_sibling(kit2))
+        self.assertFalse(kit2.is_half_sibling(kit1))
+
     # test that is_uncle_aunt returns True for a uncle/aunt-cat relationship and False otherwise
     def test_is_uncle_aunt(self):
         grand_parent = Cat(disable_random=True)

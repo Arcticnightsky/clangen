@@ -2131,29 +2131,11 @@ class Cat:
 
     def is_half_sibling(self, other_cat: Cat):
         """Check if the cats are half siblings."""
-        if not self.inheritance or not self.inheritance.siblings:
-            return False
-        if other_cat.ID not in self.inheritance.siblings.keys():
-            return False
-        half_siblings = [
-            key
-            for key, value in self.inheritance.siblings.items()
-            if "half sibling" in value["additional"]
-        ]
-        return other_cat.ID in half_siblings
+        return inheritance_db.is_half_sibling(self.ID, other_cat.ID)
 
     def is_adoptive_sibling(self, other_cat: Cat):
         """Check if the cats are adoptive siblings."""
-        if not self.inheritance or not self.inheritance.siblings:
-            return False
-        if other_cat.ID not in self.inheritance.siblings.keys():
-            return False
-        adoptive_siblings = [
-            key
-            for key, value in self.inheritance.siblings.items()
-            if "adoptive" in value["additional"]
-        ]
-        return other_cat.ID in adoptive_siblings
+        return inheritance_db.is_adoptive_sibling(self.ID, other_cat.ID)
     
     def is_uncle_aunt(self, other_cat: Cat):
         """Check if the cats are related as uncle/aunt and niece/nephew."""

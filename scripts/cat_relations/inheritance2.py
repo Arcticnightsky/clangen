@@ -120,6 +120,15 @@ class InheritanceDb:
             for cat_id, saved_family_rel in self._saved_family_rels.items():
                 self._cat_to_rels[cat_id] = saved_family_rel
 
+    def _get_parents_by_relation_type(
+        self, cat_id: str, relation_type: RelationType
+    ) -> Set[str]:
+        return {
+            p["cat_id"]
+            for p in self._cat_to_rels[cat_id].parents
+            if p["relation_type"] == relation_type
+        }
+
     def get_parents(self, cat_id: str) -> Set[str]:
         return {p["cat_id"] for p in self._cat_to_rels[cat_id].parents}
 
@@ -215,6 +224,41 @@ class InheritanceDb:
 
     def is_sibling(self, cat_a: str, cat_b: str) -> bool:
         return cat_b in self.get_siblings(cat_a)
+
+    def is_half_sibling(self, cat_a: str, cat_b: str) -> bool:
+        """Check if cats share exactly one blood parent while at least one has two."""
+        cat_a_blood_parents = self._get_parents_by_relation_type(
+            cat_a, RelationType.BLOOD
+        )
+        cat_b_blood_parents = self._get_parents_by_relation_type(
+            cat_b, RelationType.BLOOD
+        )
+
+        return len(cat_a_blood_parents & cat_b_blood_parents) == 1 and (
+            len(cat_a_blood_parents) > 1 or len(cat_b_blood_parents) > 1
+        )
+
+    def is_adoptive_sibling(self, cat_a: str, cat_b: str) -> bool:
+        """Check if cats are siblings through at least one adoptive parent."""
+        cat_a_adoptive_parents = self._get_parents_by_relation_type(
+            cat_a, RelationType.ADOPTIVE
+        )
+        cat_b_adoptive_parents = self._get_parents_by_relation_type(
+            cat_b, RelationType.ADOPTIVE
+        )
+        cat_a_blood_parents = self._get_parents_by_relation_type(
+            cat_a, RelationType.BLOOD
+        )
+        cat_b_blood_parents = self._get_parents_by_relation_type(
+            cat_b, RelationType.BLOOD
+        )
+
+        blood_overlap = cat_a_blood_parents & cat_b_blood_parents
+        adoptive_overlap = cat_a_adoptive_parents & cat_b_adoptive_parents
+        adoptive_overlap |= cat_a_blood_parents & cat_b_adoptive_parents
+        adoptive_overlap |= cat_a_adoptive_parents & cat_b_blood_parents
+
+        return not blood_overlap and bool(adoptive_overlap)
 
     def is_uncle_aunt(self, maybe_uncle_aunt: str, cat_a: str) -> bool:
         return cat_a in self.get_siblings_children(maybe_uncle_aunt)
