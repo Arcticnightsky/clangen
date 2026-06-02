@@ -2218,6 +2218,10 @@ class Pregnancy_Events:
         if settings_allow and Pregnancy_Events.biggest_family_is_big():
             inverse_chance = int(inverse_chance * 0.9)
 
+        # increase inverse chance if the Clan is at war, because this is NOT the right time to have kits!!!
+        if game.clan.war.get("at_war", True):
+            inverse_chance = int(inverse_chance * 1.5)
+        
         # In real life, cats are most likely to have kits during the spring and summer months - known as "Kitten Season"
         if game.clan.current_season in ["Newleaf", "Greenleaf"]:
             inverse_chance = int(inverse_chance * 0.5)
