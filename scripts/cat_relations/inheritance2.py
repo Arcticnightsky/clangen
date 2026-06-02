@@ -222,6 +222,11 @@ class InheritanceDb:
     def is_parent(self, maybe_parent: str, cat_a: str) -> bool:
         return maybe_parent in self.get_parents(cat_a)
 
+    def is_adoptive_parent(self, maybe_parent: str, cat_a: str) -> bool:
+        return maybe_parent in self._get_parents_by_relation_type(
+            cat_a, RelationType.ADOPTIVE
+        )
+
     def is_sibling(self, cat_a: str, cat_b: str) -> bool:
         return cat_b in self.get_siblings(cat_a)
 

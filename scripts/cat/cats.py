@@ -2119,6 +2119,10 @@ class Cat:
         """Check if the cat is the parent of the other cat."""
         return inheritance_db.is_parent(self.ID, other_cat.ID)
 
+    def is_adoptive_parent(self, other_cat: Cat):
+        """Check if the cat is the adoptive parent of the other cat."""
+        return inheritance_db.is_adoptive_parent(self.ID, other_cat.ID)
+
     def is_sibling(self, other_cat: Cat):
         """Check if the cats are siblings."""
         return inheritance_db.is_sibling(self.ID, other_cat.ID)
@@ -2136,7 +2140,7 @@ class Cat:
     def is_adoptive_sibling(self, other_cat: Cat):
         """Check if the cats are adoptive siblings."""
         return inheritance_db.is_adoptive_sibling(self.ID, other_cat.ID)
-    
+
     def is_uncle_aunt(self, other_cat: Cat):
         """Check if the cats are related as uncle/aunt and niece/nephew."""
         return inheritance_db.is_uncle_aunt(self.ID, other_cat.ID)
