@@ -1,16 +1,22 @@
 [
     {
         "id": "newly_joined",
-        "thoughts": [
-            "Is looking around the camp with wonder",
-            "Is getting used to {PRONOUN/m_c/poss} new home"
+        "strings": [
+            "Is looking around the camp with wonder"
         ]
     },
     {
         "id": "newly_joined_kit",
-        "thoughts": [
+        "strings": [
             "Is snuggled safe in the nursery"
         ],
-        "main_status_constraint": ["kitten", "newborn"]
+        "involved_cats": {
+            "m_c": {
+                "status": [
+                    "kitten",
+                    "newborn"
+                ]
+            }
+        }
     }
 ]
