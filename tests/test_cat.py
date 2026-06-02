@@ -72,6 +72,17 @@ class TestRelativesFunction(unittest.TestCase):
         self.assertFalse(blood_parent.is_adoptive_parent(kit))
         self.assertFalse(kit.is_adoptive_parent(adoptive_parent))
 
+    def test_is_adoptive_parent_identifies_adopted_child_direction(self):
+        adoptive_parent = Cat(disable_random=True)
+        adopted_child = Cat(
+            adoptive_parents=[adoptive_parent.ID], disable_random=True
+        )
+        inheritance_db.load_inheritances(Cat)
+
+        self.assertTrue(adoptive_parent.is_parent(adopted_child))
+        self.assertTrue(adoptive_parent.is_adoptive_parent(adopted_child))
+        self.assertFalse(adopted_child.is_adoptive_parent(adoptive_parent))
+
     # test that is_sibling returns True for cats with a shared parent1 and False otherwise
     def test_is_sibling(self):
         parent = Cat(disable_random=True)
