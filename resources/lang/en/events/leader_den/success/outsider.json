@@ -28,17 +28,7 @@
     "m_c": {
       "status": ["loner", "rogue", "kittypet"],
       "new_thought": "Is curious about the Clan that sought {PRONOUN/m_c/object} out",
-      "kit_thought": "Is curious about the new place {PRONOUN/m_c/subject}{VERB/m_c/'re/'s} in",
-      "relationships": [
-        {
-          "cats_from": ["m_c"],
-          "cats_to": ["some_clan"],
-          "mutual": false,
-          "values": ["trust"],
-          "amount": 5
-        }
-      ]
-    }
+      "kit_thought": "Is curious about the new place {PRONOUN/m_c/subject}{VERB/m_c/'re/'s} in"
   },
   {
     "interaction_type": "invite",
@@ -75,7 +65,10 @@
           "cats_to": ["some_clan"],
           "mutual": false,
           "values": ["trust"],
-          "amount": 5
+          "amount": 5,
+          "log": {
+            "cats_from": "cat_from is lucky to be able to count on c_n for bringing {PRONOUN/cat_from/object} back home."
+          }
         }
       ]
     }
