@@ -32,13 +32,6 @@
       "relationships": [
         {
           "cats_from": ["m_c"],
-          "cats_to": ["clan"],
-          "mutual": false,
-          "values": ["like"],
-          "amount": 5
-        },
-        {
-          "cats_from": ["m_c"],
           "cats_to": ["some_clan"],
           "mutual": false,
           "values": ["trust"],
@@ -59,13 +52,6 @@
       "relationships": [
         {
           "cats_from": ["m_c"],
-          "cats_to": ["clan"],
-          "mutual": false,
-          "values": ["like"],
-          "amount": 5
-        },
-        {
-          "cats_from": ["m_c"],
           "cats_to": ["some_clan"],
           "mutual": false,
           "values": ["trust"],
@@ -84,13 +70,6 @@
       "new_thought": "Is glad to have returned",
       "kit_thought": "Is curious about the new place {PRONOUN/m_c/subject}{VERB/m_c/'re/'s} in",
       "relationships": [
-        {
-          "cats_from": ["m_c"],
-          "cats_to": ["clan"],
-          "mutual": false,
-          "values": ["like"],
-          "amount": 5
-        },
         {
           "cats_from": ["m_c"],
           "cats_to": ["some_clan"],

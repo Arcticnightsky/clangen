@@ -491,16 +491,7 @@
     "rep_change": 1,
     "m_c": {
       "status": ["former Clancat"],
-      "new_thought": "Wonders why c_n would be looking for {PRONOUN/m_c/object}",
-      "relationships": [
-        {
-          "cats_from": ["m_c"],
-          "cats_to": ["clan"],
-          "mutual": false,
-          "values": ["like"],
-          "amount": 5
-        }
-      ]
+      "new_thought": "Wonders why c_n would be looking for {PRONOUN/m_c/object}"
     }
   },
   {
