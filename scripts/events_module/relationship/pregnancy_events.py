@@ -1178,17 +1178,20 @@ class Pregnancy_Events:
                     rel.romance -= 50
                     rel.trust -= 30
                     rel.like -= 40
+                    log_text = process_text(
+                        i18n.t("conditions.pregnancy.affair_rel_log"),
+                        {
+                            "m_c": (str(mate.name), choice(mate.pronouns)),
+                            "r_c": (str(cat.name), choice(cat.pronouns)),
+                        },
+                    )
+                    log_text = i18n.t(
+                        "relationships.negative_postscript", text=log_text
+                    )
                     rel.log.append(
-                        process_text(
-                            i18n.t("conditions.pregnancy.affair_rel_log"),
-                            {
-                                "m_c": (str(mate.name), choice(mate.pronouns)),
-                                "r_c": (str(cat.name), choice(cat.pronouns)),
-                            },
-                        )
-                        + i18n.t("relationships.negative_postscript")
-                        + i18n.t(
+                        i18n.t(
                             "relationships.age_postscript",
+                            text=log_text,
                             name=str(cat.name),
                             count=cat.moons,
                         )
@@ -1211,20 +1214,23 @@ class Pregnancy_Events:
                     rel.romance -= 50
                     rel.trust -= 30
                     rel.like -= 40
+                    log_text = process_text(
+                        i18n.t("conditions.pregnancy.affair_rel_log"),
+                        {
+                            "m_c": (str(mate.name), choice(mate.pronouns)),
+                            "r_c": (
+                                str(other_cat.name),
+                                choice(other_cat.pronouns),
+                            ),
+                        },
+                    )
+                    log_text = i18n.t(
+                        "relationships.negative_postscript", text=log_text
+                    )
                     rel.log.append(
-                        process_text(
-                            i18n.t("conditions.pregnancy.affair_rel_log"),
-                            {
-                                "m_c": (str(mate.name), choice(mate.pronouns)),
-                                "r_c": (
-                                    str(other_cat.name),
-                                    choice(other_cat.pronouns),
-                                ),
-                            },
-                        )
-                        + i18n.t("relationships.negative_postscript")
-                        + i18n.t(
+                        i18n.t(
                             "relationships.age_postscript",
+                            text=log_text,
                             name=str(other_cat.name),
                             count=other_cat.moons,
                         )
@@ -1249,23 +1255,26 @@ class Pregnancy_Events:
                     rel.trust -= 25
                     if rel.romance > 0:
                         rel.romance -= 20
+                    log_text = process_text(
+                        i18n.t("conditions.pregnancy.coparenting_rel_log_neg"),
+                        {
+                            "m_c": (
+                                str(first_cat.name),
+                                choice(first_cat.pronouns),
+                            ),
+                            "r_c": (
+                                str(second_cat.name),
+                                choice(second_cat.pronouns),
+                            ),
+                        },
+                    )
+                    log_text = i18n.t(
+                        "relationships.negative_postscript", text=log_text
+                    )
                     rel.log.append(
-                        process_text(
-                            i18n.t("conditions.pregnancy.coparenting_rel_log_neg"),
-                            {
-                                "m_c": (
-                                    str(first_cat.name),
-                                    choice(first_cat.pronouns),
-                                ),
-                                "r_c": (
-                                    str(second_cat.name),
-                                    choice(second_cat.pronouns),
-                                ),
-                            },
-                        )
-                        + i18n.t("relationships.negative_postscript")
-                        + i18n.t(
+                        i18n.t(
                             "relationships.age_postscript",
+                            text=log_text,
                             name=str(second_cat.name),
                             count=second_cat.moons,
                         )
@@ -1273,23 +1282,26 @@ class Pregnancy_Events:
                 elif coparenting_outcome == "positive":
                     rel.comfort += 20
                     rel.trust += 20
+                    log_text = process_text(
+                        i18n.t("conditions.pregnancy.coparenting_rel_log_pos"),
+                        {
+                            "m_c": (
+                                str(first_cat.name),
+                                choice(first_cat.pronouns),
+                            ),
+                            "r_c": (
+                                str(second_cat.name),
+                                choice(second_cat.pronouns),
+                            ),
+                        },
+                    )
+                    log_text = i18n.t(
+                        "relationships.positive_postscript", text=log_text
+                    )
                     rel.log.append(
-                        process_text(
-                            i18n.t("conditions.pregnancy.coparenting_rel_log_pos"),
-                            {
-                                "m_c": (
-                                    str(first_cat.name),
-                                    choice(first_cat.pronouns),
-                                ),
-                                "r_c": (
-                                    str(second_cat.name),
-                                    choice(second_cat.pronouns),
-                                ),
-                            },
-                        )
-                        + i18n.t("relationships.positive_postscript")
-                        + i18n.t(
+                        i18n.t(
                             "relationships.age_postscript",
+                            text=log_text,
                             name=str(second_cat.name),
                             count=second_cat.moons,
                         )

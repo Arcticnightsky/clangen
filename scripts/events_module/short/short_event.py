@@ -361,24 +361,27 @@ class ShortEvent:
                     if not rel:
                         continue
 
+                    log_text = process_text(
+                        "m_c lost romantic feelings for r_c after "
+                        "{PRONOUN/m_c/subject} found out that r_c killed someone.",
+                        {
+                            "m_c": (
+                                str(cat.name),
+                                choice(cat.pronouns),
+                            ),
+                            "r_c": (
+                                str(self.main_cat.name),
+                                choice(self.main_cat.pronouns),
+                            ),
+                        },
+                    )
+                    log_text = i18n.t(
+                        "relationships.negative_postscript", text=log_text
+                    )
                     rel.log.append(
-                        process_text(
-                            "m_c lost romantic feelings for r_c after "
-                            "{PRONOUN/m_c/subject} found out that r_c killed someone.",
-                            {
-                                "m_c": (
-                                    str(cat.name),
-                                    choice(cat.pronouns),
-                                ),
-                                "r_c": (
-                                    str(self.main_cat.name),
-                                    choice(self.main_cat.pronouns),
-                                ),
-                            },
-                        )
-                        + i18n.t("relationships.negative_postscript")
-                        + i18n.t(
+                        i18n.t(
                             "relationships.age_postscript",
+                            text=log_text,
                             name=str(self.main_cat.name),
                             count=self.main_cat.moons,
                         )
