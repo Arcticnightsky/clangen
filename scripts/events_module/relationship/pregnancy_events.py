@@ -2178,7 +2178,7 @@ class Pregnancy_Events:
         ]
         if alive_clan_cats:
             youngest_cat_age = min(i.moons for i in alive_clan_cats)
-            if youngest_cat_age > 36:
+            if youngest_cat_age > 24:
                 inverse_chance = int(inverse_chance * 0.9)
 
         # If any of the mated cats have the 'KIT' skill, they're more likely to have kits because, well... they love kits no? TBD
@@ -2230,7 +2230,7 @@ class Pregnancy_Events:
         if settings_allow and Pregnancy_Events.biggest_family_is_big():
             inverse_chance = int(inverse_chance * 0.9)
 
-        # increase inverse chance if the Clan is at war, because this is NOT the right time to have kits!!!
+        # increase inverse chance if the Clan is at war, because it is NOT the right time to have kits!!!
         if game.clan.war.get("at_war", True):
             inverse_chance = int(inverse_chance * 1.5)
         
