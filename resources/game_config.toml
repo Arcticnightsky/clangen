@@ -24,7 +24,7 @@ dev_tools = true
 
   # 1/chance that a group event will be a "special group event"
   # special groups are defined in group_types.json
-  chance_of_special_group = 25
+  chance_of_special_group = 9
 
   # base 1/chance of a romance interaction with another cat, when a cat has a mate
   chance_romance_not_mate = 150
