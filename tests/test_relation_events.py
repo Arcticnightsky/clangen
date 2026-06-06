@@ -147,6 +147,20 @@ class CanHaveKits(unittest.TestCase):
                 Pregnancy_Events.handle_adoption(cat, second_parent, clan)
             else:
                 Pregnancy_Events.handle_zero_moon_pregnant(cat, second_parent, clan)
+    def test_no_kit_setting(self, check_if_can_have_kits):
+        # given
+        test_clan = Clan(save_id="clan")
+        test_clan.pregnancy_data = {}
+        cat1 = Cat(gender="female", disable_random=True)
+        cat1.no_kits = True
+        cat2 = Cat(gender="male", disable_random=True)
+
+        cat1.mate.append(cat2.ID)
+        cat2.mate.append(cat1.ID)
+        relation1 = Relationship(cat1, cat2, mates=True, family=False, romance=100)
+        relation2 = Relationship(cat2, cat1, mates=True, family=False, romance=100)
+        cat1.relationships[cat2.ID] = relation1
+        cat2.relationships[cat1.ID] = relation2
 
     # ---------------------------------------------------------------------------- #
     #                                 handle events                                #
@@ -1251,6 +1265,11 @@ class Pregnancy_Events:
                 Pregnancy_Events.handle_adoption(cat, second_parent, clan)
             else:
                 Pregnancy_Events.handle_zero_moon_pregnant(cat, second_parent, clan)
+    def test_single_cat_female(self, check_if_can_have_kits):
+        # given
+        clan = Clan(save_id="clan")
+        cat = Cat(gender="female", age="adult", moons=40, disable_random=True)
+        clan.pregnancy_data = {}
 
     # ---------------------------------------------------------------------------- #
     #                                 handle events                                #
@@ -3023,7 +3042,7 @@ class Pregnancy_Events:
     )
     def test_pair(self, check_if_can_have_kits):
         # given
-        clan = Clan(name="clan")
+        clan = Clan(save_id="clan")
         cat1 = Cat(gender="female", age="adult", moons=40, disable_random=True)
         cat2 = Cat(gender="male", age="adult", moons=40, disable_random=True)
 
