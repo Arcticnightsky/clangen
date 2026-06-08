@@ -108,6 +108,7 @@
 	},
 	{
 		"id": "platonic_de_app_mentor_med1",
+		"intensity": "medium",
 		"interactions": [
 			"m_c is starting to not like r_c as {PRONOUN/m_c/poss} mentor.",
 			"m_c thinks that {PRONOUN/m_c/subject} hasn't learned a lot of information from r_c than the other apprentices have from their own mentors.",
@@ -871,5 +872,76 @@
 		"random_trait_constraint": [
 			"daydreamer"
 		]
-    }
+    },
+	{
+		"id": "dislike_kittypet_de_high1",
+		"intensity": "high",
+		"interactions": [
+			"m_c mocked r_c's kittypet roots.",
+			"m_c made a snarky remark about r_c's kittypet past.",
+			"m_c loudly states that kittypets like r_c shouldn't be allowed in the Clan.",
+			"When r_c complained about something small, m_c rolled {PRONOUN/m_c/poss} eyes — <i>of course</i> a kittypet would complain about something like that...",
+			"m_c keeps pestering r_c about whether {PRONOUN/r_c/subject} misses {PRONOUN/r_c/poss} Twolegs or not.",
+			"m_c keeps trying to test r_c's loyalty to the Clan."
+		],
+        "main_backstory_constraint": [
+            "-kittypet_backstories"
+        ],
+        "random_backstory_constraint": [
+            "kittypet_backstories"
+        ],
+		"reaction_random_cat": {
+			"like": "decrease"
+		},
+		"also_influences": {
+			"respect": "decrease"
+		}
+	},
+	{
+		"id": "dislike_loner_de_high1",
+		"intensity": "high",
+		"interactions": [
+			"m_c mocked r_c's loner roots.",
+			"m_c made a snarky remark about r_c's loner past.",
+			"m_c loudly states that loners like r_c shouldn't be allowed in the Clan.",
+			"When r_c complained about something small, m_c rolled {PRONOUN/m_c/poss} eyes — <i>of course</i> a loner would complain about something like that...",
+			"m_c keeps trying to test r_c's loyalty to the Clan."
+		],
+        "main_backstory_constraint": [
+            "-loner_backstories"
+        ],
+        "random_backstory_constraint": [
+            "loner_backstories"
+        ],
+		"reaction_random_cat": {
+			"like": "decrease"
+		},
+		"also_influences": {
+			"respect": "decrease"
+		}
+	},
+	{
+		"id": "dislike_rogue_de_high1",
+		"intensity": "high",
+		"interactions": [
+			"m_c mocked r_c's rogue roots.",
+			"m_c made a snarky remark about r_c's rogue past.",
+			"m_c loudly states that rogues like r_c shouldn't be allowed in the Clan.",
+			"When r_c complained about something small, m_c rolled {PRONOUN/m_c/poss} eyes — <i>of course</i> a rogue would complain about something like that...",
+			"m_c doesn't understand why rogues like r_c can be welcomed into the Clan if all they ever do is attack and kill Clan cats and steal prey.",
+			"m_c keeps trying to test r_c's loyalty to the Clan."
+		],
+        "main_backstory_constraint": [
+            "-rogue_backstories"
+        ],
+        "random_backstory_constraint": [
+            "rogue_backstories"
+        ],
+		"reaction_random_cat": {
+			"like": "decrease"
+		},
+		"also_influences": {
+			"respect": "decrease"
+		}
+	}
 ]
