@@ -1047,6 +1047,8 @@ class Cat:
             if fetched_cat:
                 fetched_cat.update_mentor()
         self.update_mentor()
+        if self.status.rank == CatRank.LEADER:
+            self.specsuffix_hidden = True
     
     def grief(self, body: bool):
         """
