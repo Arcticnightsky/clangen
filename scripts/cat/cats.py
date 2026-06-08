@@ -850,6 +850,9 @@ class Cat:
                                 afterlife_group, tyrant_leader_bad=True
                             )
                             self.status.send_to_afterlife(rejected_ID)
+                        if self.is_exiled(CatGroup.PLAYER_CLAN_ID) and self.is_outsider:
+                            self.history.add_afterlife_acceptance(afterlife_group)
+                            self.status.send_to_afterlife()
                         return
                     # fine, they can go to afterlife, but some cats don't like it
                     self.history.add_afterlife_acceptance(
