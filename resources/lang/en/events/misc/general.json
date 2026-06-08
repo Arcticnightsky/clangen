@@ -4780,34 +4780,6 @@
         ]
     },
     {
-        "event_id": "gen_misc_any_accessoryTwolegplacePOI1",
-        "location": ["any"],
-        "season": ["any"],
-        "sub_type": ["accessory"],
-        "tags": [],
-        "poi": {
-            "name": ["terrain_twolegplace"]
-        },
-        "frequency": 1,
-        "event_text": "m_c goes missing in {POI/name/terrain_twolegplace} for a few days and comes back wearing a acc_singular.",
-        "new_accessory": ["COLLAR"],
-        "m_c": {
-            "status": ["-kitten"]
-        },
-        "relationships": [
-            {
-            "cats_from": ["clan", "high_lawful"],
-            "cats_to": ["m_c"],
-            "values": ["respect"],
-            "amount": -10,
-            "mutual": false,
-            "log": {
-                "cats_from": "cat_from disapproved of cat_to wearing a collar."
-            }
-        }
-    ]
-    },
-    {
         "event_id": "gen_misc_any_accessorywaterPOI1",
         "location": ["any"],
         "season": ["any"],
