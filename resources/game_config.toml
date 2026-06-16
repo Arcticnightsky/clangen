@@ -27,7 +27,7 @@ dev_tools = true
   chance_of_special_group = 9
 
   # base 1/chance of a romance interaction with another cat, when a cat has a mate
-  chance_romance_not_mate = 150
+  chance_romance_not_mate = 350
 
   [relationship.value_change_amount]
     # amount a relationship changes for "high", "medium", and "low" effects for interactions
@@ -222,7 +222,7 @@ dev_tools = true
   birth_cooldown = 6
 
   # 1/chance that kits, relationship and other factors will influence this chance
-  primary_chance_mated = 80
+  primary_chance_mated = 60
 
   # 1/chance that kits, relationship and other factors will influence this chance
   primary_chance_unmated = 130
