@@ -476,6 +476,7 @@
                     ],
                     [
                         "age:adult",
+                        "romance:0",
                         "male"
                     ],
                     [
@@ -564,6 +565,35 @@
                 ],
                 "outsider_rep": 1,
                 "frequency": 2
+            },
+            {
+                "text": "The two star-crossed lovers have traveled far and wide, looking for a place to settle down and start a new life. They promise to earn their keep, and the patrol brings them back to camp with little further convincing.",
+                "exp": 10,
+                "art": "fst_hunt_heat_loners",
+                "new_cat": [
+                    [
+                        "can_birth"
+                    ],
+                    [
+                        "mate:0",
+                        "male"
+                    ]
+                ],
+                "relationships": [
+                     {
+                        "cats_from": ["n_c:0"],
+                        "cats_to": ["n_c:1"],
+                        "values": ["like", "trust", "comfort", "romance"],
+                        "amount": 55,
+                        "mutual": true,
+                        "log": {
+                          "cats_from": "After a couple moons traveling together, cat_from considers {PRONOUN/cat_from/poss} beloved cat_to {PRONOUN/cat_from/poss} closest companion.",
+                          "cats_to": "After a couple moons of traveling together, cat_to considers {PRONOUN/cat_to/poss} beloved cat_from {PRONOUN/cat_to/poss} closest companion."
+                        }
+                     }
+                ],
+                "outsider_rep": 1,
+                "frequency": 3
             }
         ],
         "fail_outcomes": [
