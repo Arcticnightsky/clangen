@@ -43,9 +43,9 @@ dev_tools = true
       mid_neg = -25
       low_neg = -6
       neutral = 5
-      low_pos = 16
-      mid_pos = 35
-      extreme_pos = 70
+      low_pos = 24
+      mid_pos = 69
+      extreme_pos = 100
 
 [mates]
   # maximum age difference allowed for cats to be romantic with each other
