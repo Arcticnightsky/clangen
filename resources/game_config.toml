@@ -40,10 +40,10 @@ dev_tools = true
     # For example, extreme_neg ends at -70, making its full range -100 to -70. mid_neg starts from -69 and continues till -25.
     # NOTE: increasing extreme_pos past 100 or decreasing extreme_neg below -100 will probably break things
       extreme_neg = -70
-      mid_neg = -35
+      mid_neg = -25
       low_neg = -6
       neutral = 5
-      low_pos = 6
+      low_pos = 16
       mid_pos = 35
       extreme_pos = 70
 
