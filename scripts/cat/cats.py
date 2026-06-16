@@ -840,19 +840,20 @@ class Cat:
                 ):
                     # might send them to the opposite afterlife instead
                     if not random_module.randint(0, 1) == 0:
-                        self.history.add_afterlife_acceptance(
-                            afterlife_group, rejected=True
-                        )
-                        self.status.send_to_afterlife(rejected_ID)
                         if self.status.is_leader and self.personality.trait in ["bloodthirsty", "vengeful", "fierce"]:
                             afterlife_group = CatGroup.DARK_FOREST
                             self.history.add_afterlife_acceptance(
                                 afterlife_group, tyrant_leader_bad=True
                             )
                             self.status.send_to_afterlife(rejected_ID)
-                        if self.status.is_exiled(CatGroup.PLAYER_CLAN_ID) and self.status.is_outsider:
+                        elif self.status.is_exiled(CatGroup.PLAYER_CLAN_ID) and self.status.is_outsider:
                             self.history.add_afterlife_acceptance(afterlife_group)
                             self.status.send_to_afterlife()
+                        else:
+                            self.history.add_afterlife_acceptance(
+                                afterlife_group, rejected=True
+                            )
+                            self.status.send_to_afterlife(rejected_ID)
                         return
                     # fine, they can go to afterlife, but some cats don't like it
                     self.history.add_afterlife_acceptance(
