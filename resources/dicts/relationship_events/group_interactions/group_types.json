@@ -1,17 +1,17 @@
 {
 	"all":{
-		"frequency": 1,
+		"frequency": 4,
 		"constraints": []
 	},
 	"friends": {
-		"frequency": 1,
+		"frequency": 3,
 		"constraint": [
 			"likes",
 			"praises"
 		]
 	},
 	"best_friends": {
-		"frequency": 1,
+		"frequency": 2,
 		"constraint": [
 			"enjoys",
 			"praises",
