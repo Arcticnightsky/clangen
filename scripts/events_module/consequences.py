@@ -925,7 +925,7 @@ def create_new_cat(
             and not new_cat.age.is_baby()
         ):
             if original_social == CatSocial.LONER:
-                should_apply_sterilization = randint(1, 7) == 1
+                should_apply_sterilization = randint(1, 20) == 1
             else:
                 should_apply_sterilization = bool(getrandbits(1))
 
