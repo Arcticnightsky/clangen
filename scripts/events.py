@@ -2699,7 +2699,7 @@ def check_and_promote_deputy():
             filter(
                 lambda x: x.status.alive_in_player_clan
                 and x.status.rank == CatRank.WARRIOR
-                and x.experience_level not in ["untrained", "trainee", "prepared"]
+                and x.experience >= 100
                 and (x.apprentice or x.former_apprentices),
                 Cat.all_cats_list,
             )
@@ -2713,7 +2713,7 @@ def check_and_promote_deputy():
                 cat
                 for cat in possible_deputies
                 if leader.relationships.get(cat.ID)
-                and leader.relationships[cat.ID].respect >= 20
+                and leader.relationships[cat.ID].respect >= 30
                 or leader.relationships[cat.ID].trust >= 30
             ]
 
