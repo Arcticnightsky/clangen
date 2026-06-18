@@ -215,6 +215,7 @@
     "new_cat": [
       [
         "old_name",
+		"exists",
         "status:warrior",
         "backstory:kittypet3,kittypet4,rogue3,refugee1,refugee2,refugee3,refugee4"
       ]
