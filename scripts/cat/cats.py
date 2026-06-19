@@ -3554,6 +3554,14 @@ class Cat:
     # ---------------------------------------------------------------------------- #
 
     @staticmethod
+    def name_sort_key(cat: Cat):
+        return cat.name.prefix.lower()
+
+    @staticmethod
+    def reverse_name_sort_key(cat: Cat):
+        return tuple(-ord(char) for char in cat.name.prefix.lower()) + (0,)
+
+    @staticmethod
     def sort_cats(given_list=None):
         # disable unnecessary lambda in this function
         # pylint: disable=unnecessary-lambda
@@ -3579,9 +3587,9 @@ class Cat:
         elif sort_type == "death":
             given_list.sort(key=lambda x: -1 * int(x.dead_for))
         elif sort_type == "name":
-            given_list.sort(key=lambda x: x.name.prefix.lower())
+            given_list.sort(key=lambda x: Cat.name_sort_key(x))
         elif sort_type == "reverse_name":
-            given_list.sort(key=lambda x: x.name.prefix.lower(), reverse=True)
+            given_list.sort(key=lambda x: Cat.name_sort_key(x), reverse=True)
 
         return
 
@@ -3615,10 +3623,10 @@ class Cat:
             elif sort_type == "death":
                 bisect.insort(Cat.all_cats_list, c, key=lambda x: -1 * int(x.dead_for))
             elif sort_type == "name":
-                bisect.insort(Cat.all_cats_list, c, key=lambda x: int(x.name.prefix))
+                bisect.insort(Cat.all_cats_list, c, key=lambda x: Cat.name_sort_key(x))
             elif sort_type == "reverse_name":
                 bisect.insort(
-                    Cat.all_cats_list, c, key=lambda x: -1 * int(x.name.prefix)
+                    Cat.all_cats_list, c, key=lambda x: Cat.reverse_name_sort_key(x)
                 )
         except (TypeError, NameError):
             # If you are using python 3.8, key is not a supported parameter into insort. Therefore, we'll need to
