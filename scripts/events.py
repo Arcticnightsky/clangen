@@ -543,8 +543,7 @@ def handle_lead_den_event():
                         # if cat is a little baby, check name
                         elif invited_cat.age in (
                             CatAge.NEWBORN,
-                            CatAge.KITTEN,
-                            CatAge.ADOLESCENT,
+                            CatAge.KITTEN
                         ):
                             if not invited_cat.name.suffix:
                                 invited_cat.name = Name(
