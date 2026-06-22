@@ -5665,6 +5665,7 @@
                     "death": "m_c was killed in a border ambush by a hostile Clan."
                 },
                 "other_clan_rep": -1,
+                "art": "gen_otherclan_ambush",
                 "frequency": 4
             },
             {
@@ -5689,6 +5690,7 @@
                 "history_text": {
                     "death": "m_c was killed in a border ambush by a hostile Clan."
                 },
+                "art": "gen_otherclan_ambush",
                 "other_clan_rep": -1,
                 "frequency": 4
             }
@@ -5698,6 +5700,7 @@
                 "text": "Opportunity or trap — it's possible to succeed if it's either, or both. p_l charges across the border, straight into o_c_n territory and the claws of the waiting patrol. Alone, p_l is easily overcome and slaughtered.",
                 "exp": 0,
                 "dead_cats": ["p_l"],
+                "art": "gen_otherclan_ambush",
                 "other_clan_rep": -3,
                 "frequency": 4
             }
@@ -5770,6 +5773,7 @@
                     "death": "m_c was killed in a border ambush by a hostile Clan."
                 },
                 "other_clan_rep": -3,
+                "art": "gen_otherclan_ambush",
                 "frequency": 4
             },
             {
@@ -5783,6 +5787,7 @@
                     "death": "m_c was killed in a border ambush by a hostile Clan."
                 },
                 "other_clan_rep": -3,
+                "art": "gen_otherclan_ambush",
                 "frequency": 2
             },
             {
@@ -5806,6 +5811,7 @@
                     "scar": "m_c carries the scars o_c_n gave them, a permanent reminder of the Clan's hostilities.",
                     "death": "m_c died of injuries inflicted by an enemy warrior."
                 },
+                "art": "gen_otherclan_ambush",
                 "other_clan_rep": -2,
                 "frequency": 4
             },
@@ -5828,6 +5834,7 @@
                     "multi",
                     "some_lives"
                 ],
+                "art": "gen_otherclan_ambush",
                 "history_text": {
                     "death": "m_c was killed in a border ambush by a hostile Clan."
                 },
@@ -5847,6 +5854,7 @@
             {
                 "text": "Opportunity or trap — it's possible to succeed if it's either, or both. The patrol charges across the border, p_l at the fore, straight into o_c_n territory and the claws of the patrol waiting to ambush them. p_l leads the patrol to their doom.",
                 "exp": 0,
+                "art": "gen_otherclan_ambush",
                 "other_clan_rep": -3,
                 "dead_cats": ["patrol"],
                 "frequency": 4

@@ -156,7 +156,8 @@
 				"romance": "increase"
 			},
 			"m_c_to_r_c2": {
-				"respect": "decrease"
+				"respect": "decrease",
+        "like": "decrease"
 			}
 		}
 	},
@@ -183,7 +184,8 @@
 				"comfort": "decrease"
 			},
 			"m_c_to_r_c2": {
-				"respect": "decrease"
+				"respect": "decrease",
+        "like": "decrease"
 			}
 		}
 	},
@@ -240,13 +242,15 @@
 				"respect": "decrease"
 			},
 			"r_c1_to_m_c": {
-				"comfort": "decrease"
+				"comfort": "decrease",
+        "romance": "decrease"
 			},
 			"r_c1_to_r_c2": {
 				"romance": "increase"
 			},
 			"m_c_to_r_c2": {
-				"respect": "decrease"
+				"respect": "decrease",
+        "like": "decrease"
 			}
 		}
 	},
