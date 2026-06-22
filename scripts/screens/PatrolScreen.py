@@ -307,10 +307,18 @@ class PatrolScreen(Screens):
     def screen_switches(self):
         super().screen_switches()
 
+        saved_clan_name = None
+        saved_moon = None
+        if self.in_progress_data is not None:
+            saved_clan_name = self.in_progress_data.get(
+                "patrol_clan_name", self.in_progress_data.get("clan_name")
+            )
+            saved_moon = self.in_progress_data.get("current_moon")
+
         if (
             self.in_progress_data is not None
-            and self.in_progress_data["current_moon"] == game.clan.age
-            and self.in_progress_data["clan_name"] == game.clan.name
+            and saved_moon == game.clan.age
+            and saved_clan_name == game.clan.name
         ):
             self.display_change_load(self.in_progress_data)
         else:
