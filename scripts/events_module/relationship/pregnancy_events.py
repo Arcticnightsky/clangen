@@ -1072,6 +1072,25 @@ class Pregnancy_Events:
             and not other_cat.dead
             and coparenting_outcome
         ):
+            if coparenting_outcome == "negative":
+                dislike_value = constants.CONFIG["relationship"]["value_intervals"][
+                    "low_neg"
+                ]
+                for kit in kits:
+                    second_parent_to_kit = other_cat.relationships.get(kit.ID)
+                    if not second_parent_to_kit:
+                        second_parent_to_kit = Relationship(
+                            other_cat, kit, family=True
+                        )
+                        other_cat.relationships[kit.ID] = second_parent_to_kit
+                    second_parent_to_kit.like = min(
+                        second_parent_to_kit.like, dislike_value
+                    )
+                    second_parent_to_kit.comfort = 0
+                    second_parent_to_kit.respect = 0
+                    second_parent_to_kit.trust = 0
+                    kit.relationships.pop(other_cat.ID, None)
+
             for first_cat, second_cat in ((cat, other_cat), (other_cat, cat)):
                 rel = first_cat.relationships.get(second_cat.ID)
                 if not rel:
