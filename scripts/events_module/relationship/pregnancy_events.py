@@ -1072,6 +1072,11 @@ class Pregnancy_Events:
             and not other_cat.dead
             and coparenting_outcome
         ):
+            if coparenting_outcome == "negative":
+                for kit in kits:
+                    other_cat.relationships.pop(kit.ID, None)
+                    kit.relationships.pop(other_cat.ID, None)
+
             for first_cat, second_cat in ((cat, other_cat), (other_cat, cat)):
                 rel = first_cat.relationships.get(second_cat.ID)
                 if not rel:
