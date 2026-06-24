@@ -1083,10 +1083,8 @@ class Pregnancy_Events:
                             other_cat, kit, family=True
                         )
                         other_cat.relationships[kit.ID] = second_parent_to_kit
-                    second_parent_to_kit.like = min(
-                        second_parent_to_kit.like, dislike_value
-                    )
-                    second_parent_to_kit.comfort = 0
+                    second_parent_to_kit.like = 0
+                    second_parent_to_kit.comfort = -10
                     second_parent_to_kit.respect = 0
                     second_parent_to_kit.trust = 0
                     kit.relationships.pop(other_cat.ID, None)
