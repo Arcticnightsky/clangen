@@ -9764,6 +9764,7 @@
         "trait": [
             "bloodthirsty",
             "vengeful",
+            "arrogant",
             "fierce"
         ]
     },
@@ -9852,6 +9853,112 @@
             "amount": -5,
             "log": {
                 "cats_from": "cat_from grew worried that cat_to viewed {PRONOUN/cat_from/object} as something to be used after being ordered to punish a Clanmate."
+            }
+        }
+    ]
+},
+{
+    "event_id": "gen_injury_leaderpunish2",
+    "location": [
+        "any"
+    ],
+    "season": [
+        "any"
+    ],
+    "sub_type": [],
+    "tags": [],
+    "frequency": 2,
+    "event_text": "Tired of m_c's tyrannical leadership, r_c challenges {PRONOUN/m_c/object}. r_c goes to punish {PRONOUN/r_c/object} {PRONOUN/m_c/self} and they get in an intense fight in front of the Clan. Both cats end up severely hurt in the end.",
+    "new_accessory": [],
+    "m_c": {
+        "status": [
+            "leader"
+        ],
+        "trait": [
+            "bloodthirsty",
+            "vengeful",
+            "arrogant",
+            "fierce"
+        ]
+    },
+    "r_c": {
+        "status": [
+            "warrior"
+        ],
+        "trait": [
+            "rebellious"
+        ]
+    },
+    "injury": [
+        {
+            "cats": [
+                "m_c", "r_c"
+            ],
+            "injuries": [
+                "battle_injury"
+            ],
+            "scars": [
+                "ONE",
+                "TWO",
+                "HINDLEG",
+                "FACE",
+                "SNOUT",
+                "CHEEK",
+                "BACK",
+                "CATBITE"
+            ]
+        }
+    ],
+    "history": [
+        {
+            "cats": [
+                "m_c"
+            ],
+            "scar": "m_c was scarred after punishing r_c.",
+            "death": "m_c died from {PRONOUN/m_c/poss} injuries after punishing r_c."
+        },
+        {
+            "cats": [
+                "r_c"
+            ],
+            "scar": "r_c was scarred after being punished by m_c.",
+            "death": "r_c died from {PRONOUN/r_c/poss} injuries after m_c punished {PRONOUN/r_c/object}."
+        }
+        
+    ],
+    "relationships": [
+        {
+            "cats_from": [
+                "m_c"
+            ],
+            "cats_to": [
+                "r_c"
+            ],
+            "mutual": true,
+            "values": [
+                "comfort",
+                "trust",
+                "like"
+            ],
+            "amount": -30,
+            "log": {
+                "cats_from": "cat_from punished cat_to for speaking out against {PRONOUN/cat_to/object} and they got into a fight in front of the whole Clan."
+            }
+        },
+        {
+            "cats_from": [
+                "clan", "high_lawful"
+            ],
+            "cats_to": [
+                "r_c"
+            ],
+            "mutual": false,
+            "values": [
+                "respect"
+            ],
+            "amount": 15,
+            "log": {
+                "cats_from": "cat_from grew a deeper respect for cat_to after {PRONOUN/cat_to/subject} stood up against the leader."
             }
         }
     ]
