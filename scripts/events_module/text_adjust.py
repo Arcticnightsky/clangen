@@ -260,6 +260,7 @@ def get_special_snippet_list(
     else:
         return final_snippets
 
+
 def find_special_list_types(text):
     """
     purely to identify which senses are being called for by a snippet abbreviation
@@ -518,12 +519,22 @@ def event_text_adjust(
         text = text.replace("multi_cat", list_text)
 
     # other_clan_name
-    if "o_c_n" in text and other_clan:
-        text = _replace_clan_name(
-            text,
-            "o_c_n",
-            other_clan if isinstance(other_clan, str) else other_clan.name,
-        )
+    if "o_c_n" in text:
+        if other_clan:
+            other_clan_name = (
+                other_clan if isinstance(other_clan, str) else other_clan.name
+            )
+        else:
+            # War short events should always be called with the enemy clan, but
+            # older call paths or saves may not have that context. Fall back to
+            # the current war enemy instead of letting the later c_n replacement
+            # turn o_c_n into strings like o_BridgeClan.
+            other_clan_name = getattr(getattr(game, "clan", None), "war", {}).get(
+                "enemy"
+            )
+
+        if other_clan_name:
+            text = _replace_clan_name(text, "o_c_n", other_clan_name)
 
     # clan_name
     if "c_n" in text:
@@ -597,7 +608,11 @@ def _replace_clan_name(text, abbreviation, clan_name):
                     text = " ".join(modify)
                     break
 
-    return text.replace(abbreviation, clan_name)
+    return re.sub(
+        rf"(?<![A-Za-z0-9_]){re.escape(abbreviation)}(?![A-Za-z0-9_])",
+        str(clan_name),
+        text,
+    )
 
 
 def leader_ceremony_text_adjust(
