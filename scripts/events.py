@@ -1367,7 +1367,7 @@ def check_war():
     event = ongoing_event_text_adjust(
         Cat,
         event,
-        other_clan_name=f"{enemy_clan.prefix}Clan",
+        other_clan_name=enemy_clan.name,
         clan=game.clan,
     )
     game.cur_events_list.append(Single_Event(event, "other_clans"))
