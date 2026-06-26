@@ -919,7 +919,7 @@
                 "cats_to": [
                     "r_c"
                 ],
-                "mutual": true,
+                "mutual": false,
                 "values": [
                     "trust",
                     "comfort"
@@ -1037,7 +1037,7 @@
         "sub_type": [
             "murder_reveal"
         ],
-        "tags": ["clan:leader"],
+        "tags": ["clan:leader", "clan_wide"],
         "frequency": 2,
         "event_text": "m_c calls a Clan meeting and reveals that r_c was responsible for taking mur_c's life. With the Clan leader against {PRONOUN/r_c/object}, r_c's place in the Clan is thrown into jeopardy.",
         "m_c": {
@@ -1081,9 +1081,26 @@
                     "comfort",
                     "like"
                 ],
-                "amount": -20,
+                "amount": -60,
                 "log": {
                     "cats_from": "lead_name revealed cat_to's crimes to the Clan, and cat_from was disgusted and horrified."
+                }
+            },
+            {
+                "cats_from": ["clan", "low_lawful"
+                ],
+                "cats_to": [
+                    "m_c"
+                ],
+                "mutual": true,
+                "values": [
+                    "trust",
+                    "comfort",
+                    "like"
+                ],
+                "amount": -20,
+                "log": {
+                    "cats_from": "lead_name revealed cat_to's crimes to the Clan, and cat_from was in shock about what cat_to did."
                 }
             }
         ]
@@ -15212,5 +15229,68 @@
       ],
       "changed": 5
     }
-  }
+  },
+    {
+        "event_id": "gen_misc_murderreveal_leader2",
+        "location": [
+            "any"
+        ],
+        "season": [
+            "any"
+        ],
+        "sub_type": [
+            "murder_reveal"
+        ],
+        "tags": ["clan:leader", "clan_wide"],
+        "frequency": 1,
+        "event_text": "m_c calls a Clan meeting and confesses to the Clan that {PRONOUN/m_c/subject} was the one resposible for taking mur_c's life. {PRONOUN/m_c/subject/CAP} threatens if anyone tries to go against {PRONOUN/m_c/object}, they will be met with the same fate.",
+        "m_c": {
+            "status": [
+                "leader"
+            ],
+      		"trait": [
+        		"vengeful",
+        		"bloodthirsty",
+        		"cold"
+      		]
+        },
+		]
+        "relationships": [
+            {
+                "cats_from": [
+                    "clan"
+                ],
+                "cats_to": [
+                    "m_c"
+                ],
+                "mutual": false,
+                "values": [
+                    "trust",
+                    "comfort",
+                    "like"
+                ],
+                "amount": -70,
+                "log": {
+                    "cats_from": "cat_from was in utter disbelief that cat_to murdered mur_c and that cat_to's willing to murder anyone who speaks out against {PRONOUN/cat_to/object}."
+                }
+            },
+            {
+                "cats_from": ["m_c"
+                ],
+                "cats_to": [
+                    "clan"
+                ],
+                "mutual": false,
+                "values": [
+                    "trust",
+                    "comfort",
+                    "like"
+                ],
+                "amount": -30,
+                "log": {
+                    "cats_from": "cat_from is unsure of who to trust in the Clan anymore after {PRONOUN/cat_from/subject} revealed {PRONOUN/cat_from/poss} murder of mur_c, and is ready to kill anyone who speaks out against {PRONOUN/cat_from/object}."
+                }
+            }
+        ]
+    }
 ]
