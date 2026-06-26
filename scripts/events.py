@@ -2469,6 +2469,12 @@ def handle_murder(cat):
             if cat.status.rank == CatRank.DEPUTY:
                 kill_chance -= 15
 
+        if cat.skills.primary.path == SkillPath.DARK:
+            kill_chance -= 6
+
+        if cat.skills.secondary and cat.skills.secondary.path == SkillPath.DARK:
+            kill_chance -= 6
+        
         kill_chance -= cat.personality.aggression
         kill_chance -= 16 - cat.personality.stability
         kill_chance -= 16 - cat.personality.lawfulness
