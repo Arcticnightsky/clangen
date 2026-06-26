@@ -483,7 +483,7 @@ dev_tools = true
 
   # modifiers for death chance based on if a war is going badly
   # SUBTRACTS from the denominator so higher = more likely to die
-  war_death_modifier_leader = 8
+  war_death_modifier_leader = 5
   war_death_modifier = 430
 
   # base 1/2^(chance) a completely random murder occurs
