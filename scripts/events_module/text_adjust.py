@@ -344,7 +344,7 @@ def ongoing_event_text_adjust(Cat, text, clan=None, other_clan_name=None):
         text = process_text(text, cat_dict)
 
     if other_clan_name:
-        text = text.replace("o_c_n", other_clan.name)
+        text = text.replace("o_c_n", other_clan_name)
     if clan:
         clan_name = str(clan.name)
     else:
@@ -534,7 +534,7 @@ def event_text_adjust(
             )
 
         if other_clan_name:
-            text = _replace_clan_name(text, "o_c_n", other_clan.name)
+            text = _replace_clan_name(text, "o_c_n", other_clan_name)
 
     # clan_name
     if "c_n" in text:
