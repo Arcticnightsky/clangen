@@ -1,4 +1,5 @@
 import random
+import random as random_module
 from copy import deepcopy
 from random import choice
 from typing import Dict, List
@@ -18,6 +19,9 @@ from scripts.events_module.consequences import change_relationship_values
 from scripts.events_module.event_filters import (
     get_highest_romantic_relation,
     get_personality_compatibility,
+)
+from scripts.events_module.relationship.romance_chance import (
+    passes_same_sex_romance_chance,
 )
 
 
@@ -179,6 +183,10 @@ class RomanticEvents:
             )
             return False
 
+        if not passes_same_sex_romance_chance(cat_from, cat_to):
+            return False
+        relationship._same_sex_romance_chance_passed = True
+
         # chose interaction
         chosen_interaction = choice(filtered_interactions)
         # check if the current interaction id is already used and us another if so
@@ -207,9 +215,17 @@ class RomanticEvents:
         value_change = "increase" if positive else "decrease"
         rel_type = RelType.ROMANCE
         relationship.chosen_interaction = chosen_interaction
-        relationship.interaction_affect_relationships(
-            positive, chosen_interaction.intensity, rel_type
-        )
+        intensity = chosen_interaction.intensity
+        if (
+            positive
+            and (
+                cat_from.status.rank.is_any_medicine_rank()
+                or cat_to.status.rank.is_any_medicine_rank()
+            )
+            and random_module.randint(1, 12) != 1
+        ):
+            intensity = 0
+        relationship.interaction_affect_relationships(positive, intensity, rel_type)
 
         # give cats injuries
         if len(chosen_interaction.get_injuries) > 0:
@@ -547,6 +563,9 @@ class RomanticEvents:
         ):
             return False
 
+        if not passes_same_sex_romance_chance(cat_from, cat_to):
+            return False
+
         alive_inclan_from_mates = [
             mate for mate in cat_from.mate if cat_from.status.alive_in_player_clan
         ]
@@ -560,7 +579,7 @@ class RomanticEvents:
         if poly and not RomanticEvents.current_mates_allow_new_mate(cat_from, cat_to):
             return False
 
-        become_mates = False
+        become_mate = False
         condition = constants.CONFIG["mates"]["confession"]["accept_confession"]
         rel_to_check = highest_romantic_relation.opposite_relationship
         if not rel_to_check:
@@ -568,15 +587,17 @@ class RomanticEvents:
             rel_to_check = highest_romantic_relation.opposite_relationship
 
         if RomanticEvents.relationship_fulfill_condition(rel_to_check, condition):
-            become_mates = True
+            become_mate = True
             if (
                 cat_from.ID in cat_to.previous_mates
                 and cat_to.ID in cat_from.previous_mates
             ):
+                become_mate = True
                 mate_string = RomanticEvents.get_mate_string(
                     "high_romantic_makeup", poly, cat_from, cat_to
                 )
             else:
+                become_mate = True
                 mate_string = RomanticEvents.get_mate_string(
                     "high_romantic", poly, cat_from, cat_to
                 )
@@ -587,15 +608,17 @@ class RomanticEvents:
             and condition[RelType.ROMANCE] > 0
             and rel_to_check.romance >= condition[RelType.ROMANCE] * 1.5
         ):
-            become_mates = True
+            become_mate = True
             if (
                 cat_from.ID in cat_to.previous_mates
                 and cat_to.ID in cat_from.previous_mates
             ):
+                become_mate = True
                 mate_string = RomanticEvents.get_mate_string(
                     "high_romantic_makeup", poly, cat_from, cat_to
                 )
             else:
+                become_mate = True
                 mate_string = RomanticEvents.get_mate_string(
                     "high_romantic", poly, cat_from, cat_to
                 )
@@ -629,7 +652,7 @@ class RomanticEvents:
             )
         )
 
-        if become_mates:
+        if become_mate:
             cat_from.set_mate(cat_to)
 
         return True
@@ -668,6 +691,9 @@ class RomanticEvents:
             return False, None
 
         if not cat_from.is_potential_mate(cat_to):
+            return False, None
+
+        if not passes_same_sex_romance_chance(cat_from, cat_to):
             return False, None
 
         if cat_from.ID in cat_to.mate:
@@ -720,15 +746,16 @@ class RomanticEvents:
                 relationship_to, constants.CONFIG["mates"]["mate_condition"]
             )
         ):
-            become_mates = True
             if (
                 cat_from.ID in cat_to.previous_mates
                 and cat_to.ID in cat_from.previous_mates
             ):
+                become_mates = True
                 mate_string = RomanticEvents.get_mate_string(
                     "low_romantic_makeup", poly, cat_from, cat_to
                 )
             else:
+                become_mates = True
                 mate_string = RomanticEvents.get_mate_string(
                     "low_romantic", poly, cat_from, cat_to
                 )
@@ -741,15 +768,16 @@ class RomanticEvents:
                 relationship_to, constants.CONFIG["mates"]["like_to_romance"]
             )
         ):
-            become_mates = True
             if (
                 cat_from.ID in cat_to.previous_mates
                 and cat_to.ID in cat_from.previous_mates
             ):
+                become_mates = True
                 mate_string = RomanticEvents.get_mate_string(
                     "low_romantic_makeup", poly, cat_from, cat_to
                 )
             else:
+                become_mates = True
                 mate_string = RomanticEvents.get_mate_string(
                     "like_to_romance", poly, cat_from, cat_to
                 )

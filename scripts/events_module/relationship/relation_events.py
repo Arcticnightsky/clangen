@@ -1,4 +1,5 @@
 import os
+import random as random_module
 import random
 from random import choice
 
@@ -15,6 +16,10 @@ from scripts.events_module.event_filters import filter_relationship_type
 from scripts.clan_package.get_clan_cats import (
     get_cats_same_age,
     get_possible_mates,
+)
+from scripts.events_module.relationship.romance_chance import (
+    cats_are_same_sex,
+    passes_same_sex_romance_chance,
 )
 
 
@@ -45,9 +50,25 @@ class Relation_Events:
 
         Relation_Events.same_age_events(cat)
 
-        # 1/16 for an additional event
-        if not random.getrandbits(4):
-            Relation_Events.romantic_events(cat)
+        romance_interests = []
+        for relationship in cat.relationships.values():
+            if (
+                relationship.romance > 0
+                and relationship.cat_to
+                and relationship.cat_to.status.alive_in_player_clan
+            ):
+                romance_interests.append(relationship.cat_to)
+        if romance_interests:
+            inter_cat = random_module.choice(romance_interests)
+            if cats_are_same_sex(cat, inter_cat):
+                if not passes_same_sex_romance_chance(cat, inter_cat):
+                    return
+                Relation_Events.romantic_events(cat)
+            elif not random.getrandbits(3):
+                Relation_Events.romantic_events(cat)
+        else:
+            if not random.getrandbits(4):
+                Relation_Events.romantic_events(cat)
 
         RomanticEvents.handle_mating_and_breakup(cat)
 
@@ -98,6 +119,12 @@ class Relation_Events:
                 inter_cat.relationships[cat.ID].like > 10
                 or inter_cat.relationships[cat.ID].comfort > 10
             )
+
+            if cats_are_same_sex(cat, inter_cat) and not passes_same_sex_romance_chance(
+                cat, inter_cat
+            ):
+                continue
+
             if cat_to_inter and inter_to_cat:
                 cat_to_choose_from.append(inter_cat)
 
@@ -210,40 +237,33 @@ class Relation_Events:
                 min(constants.CONFIG["mates"]["age_range"], int(new_cat.moons * 0.4)),
             )
             alive_cats = [
-                i for i in new_cat.all_cats.values() if i.status.alive_in_player_clan
+                i
+                for i in new_cat.all_cats.values()
+                if i.status.alive_in_player_clan and i.ID != new_cat.ID
             ]
             number = constants.CONFIG["new_cat"]["cat_amount_welcoming"]
 
-            if len(alive_cats) == 0:
-                return
-            elif number > len(same_age_cats) > 0:
-                for age_cat in same_age_cats:
-                    Welcoming_Events.welcome_cat(age_cat, new_cat)
+            if not alive_cats or number <= 0:
+                continue
 
-                rest_number = number - len(same_age_cats)
-                same_age_ids = [c.ID for c in same_age_cats]
-                alive_cats = [
-                    alive_cat
-                    for alive_cat in alive_cats
-                    if alive_cat.ID not in same_age_ids
-                ]
+            # Prefer cats close to the new cat's age, but never welcome more cats
+            # than the configured amount. Use sample() so a cat can only be
+            # selected once; choices() allowed duplicates and could expand the
+            # welcome group to most of the Clan.
+            chosen_cats = random.sample(same_age_cats, min(number, len(same_age_cats)))
 
-                chosen_rest = random.choices(population=alive_cats, k=len(alive_cats))
-                if rest_number >= len(alive_cats):
-                    chosen_rest = random.choices(population=alive_cats, k=rest_number)
-                for inter_cat in chosen_rest:
-                    Welcoming_Events.welcome_cat(inter_cat, new_cat)
-            elif len(same_age_cats) >= number:
-                chosen = random.choices(population=same_age_cats, k=number)
-                for chosen_cat in chosen:
-                    Welcoming_Events.welcome_cat(chosen_cat, new_cat)
-            elif len(alive_cats) <= number:
-                for alive_cat in alive_cats:
-                    Welcoming_Events.welcome_cat(alive_cat, new_cat)
-            else:
-                chosen = random.choices(population=alive_cats, k=number)
-                for chosen_cat in chosen:
-                    Welcoming_Events.welcome_cat(chosen_cat, new_cat)
+            remaining_slots = number - len(chosen_cats)
+            if remaining_slots > 0:
+                chosen_ids = {cat.ID for cat in chosen_cats}
+                remaining_cats = [cat for cat in alive_cats if cat.ID not in chosen_ids]
+                chosen_cats.extend(
+                    random.sample(
+                        remaining_cats, min(remaining_slots, len(remaining_cats))
+                    )
+                )
+
+            for chosen_cat in chosen_cats:
+                Welcoming_Events.welcome_cat(chosen_cat, new_cat)
 
     # ---------------------------------------------------------------------------- #
     #                                helper function                               #

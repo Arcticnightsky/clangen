@@ -106,6 +106,30 @@
 		]
 	},
 	{
+		"id": "platonic_de_app_mentor_med1",
+		"interactions": [
+			"m_c is starting to not like r_c as {PRONOUN/m_c/poss} mentor.",
+			"m_c thinks that {PRONOUN/m_c/subject} hasn't learned a lot of information from r_c than the other apprentices have from their own mentors.",
+			"r_c scolded m_c over something stupid while training.",
+			"r_c was very disappointed in m_c for failing {PRONOUN/m_c/poss} assesment",
+			"r_c went a little rough on m_c during training today."
+		],
+		"relationship_constraint": [
+			"app/mentor"
+		],
+		"main_status_constraint": [
+			"apprentice"
+		],
+		"random_status_constraint": [
+			"warrior",
+			"leader",
+			"deputy"
+		],
+		"reaction_random_cat": {
+			"like": "decrease"
+		}
+	},
+	{
 		"id": "platonic_de_high1",
 		"intensity": "high",
 		"interactions": [

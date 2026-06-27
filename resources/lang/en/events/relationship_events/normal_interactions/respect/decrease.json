@@ -388,5 +388,58 @@
 		"random_status_constraint": [
 			"elder"
 		]
+	},
+	{
+		"id": "respect_todisabled_de_high4",
+		"intensity": "high",
+		"interactions": [
+			"m_c mocked r_c's condition in a <i>very</i> disrespectful way.",
+			"m_c doesn't get why r_c has to get all the attention because of {PRONOUN/r_c/poss} condition.",
+			"m_c doesn't doesn't think it's fair that r_c gets excused from things easily because of {PRONOUN/r_c/poss} condition.",
+			"m_c taunted r_c by doing things that r_c isn't able to do.",
+			"m_c pretended to have gained r_c condition just to make fun of it.",
+			"m_c purposefully gets in r_c's way just to mess with {PRONOUN/r_c/poss} senses.",
+			"m_c keeps calling r_c a derogatory nickname making fun of {PRONOUN/r_c/poss} condition."
+		],
+        "perm_conditions": {
+            "r_c": [
+            	"weak leg",
+            	"paralyzed",
+            	"raspy lungs",
+            	"wasting disease",
+            	"failing eyesight",
+            	"one bad eye",
+            	"partial hearing loss",
+            	"deaf",
+            	"constant joint pain",
+            	"constantly dizzy",
+            	"recurring shock",
+            	"lasting grief",
+            	"persistent headaches",
+            	"selective mutism",
+            	"absent",
+            	"crooked jaw",
+				"blind",
+				"lost a leg",
+				"born without a leg",
+				"lost their tail",
+				"born without a tail",
+				"twisted leg"
+            ]
+        },
+		"relationship_constraint": [
+			"envies",
+			"hates"
+		],
+		"reaction_main_cat": {
+			"like": "decrease",
+			"comfort": "decrease",
+			"respect": "decrease"
+		},
+		"reaction_random_cat": {
+			"like": "decrease",
+			"comfort": "decrease",
+			"respect": "decrease"
+		}
 	}
 ]
