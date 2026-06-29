@@ -1,7 +1,15 @@
+import random
+from random import choice
 from typing import Optional
 
+import i18n
 
+from scripts.cat.enums import CatCompatibility
 from scripts.game_structure import constants
+from scripts.cat_relations.interaction import (
+    cats_fulfill_single_interaction_constraints,
+    rebuild_relationship_dicts,
+)
 from scripts.cat_relations.enums import RelTier, RelType
 from scripts.event_class import Single_Event
 from scripts.events_module.event_filters import (
@@ -31,6 +39,7 @@ class Relationship:
         self,
         cat_from,
         cat_to,
+        mates: bool = False,
         family: bool = False,
         romance: int = 0,
         like: int = 0,
@@ -42,6 +51,7 @@ class Relationship:
         self.chosen_interaction = None
         self.cat_from = cat_from
         self.cat_to = cat_to
+        self.mates = mates
         self.family = family
         self.opposite_relationship = (
             None  # link to opposite relationship will be created later
@@ -73,6 +83,7 @@ class Relationship:
         return {
             "cat_from_id": self.cat_from.ID,
             "cat_to_id": self.cat_to.ID,
+            "mates": self.mates,
             "family": self.family,
             "romance": self.romance,
             "like": self.like,

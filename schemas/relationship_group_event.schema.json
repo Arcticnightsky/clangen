@@ -529,7 +529,7 @@
       "title": "Injury",
       "type": "string"
     },
-    "InvolvedCatsGroupEvent": {
+    "InvolvedCats": {
       "additionalProperties": false,
       "properties": {
         "m_c": {
@@ -569,7 +569,7 @@
           "title": "Multi Cat"
         }
       },
-      "title": "InvolvedCatsGroupEvent",
+      "title": "InvolvedCats",
       "type": "object"
     },
     "KitTrait": {
@@ -694,7 +694,7 @@
           "type": "array"
         },
         "involved_cats": {
-          "$ref": "#/$defs/InvolvedCatsGroupEvent",
+          "$ref": "#/$defs/InvolvedCats",
           "description": "Used to add constraints for the various involved cats.",
           "title": "Involved Cats"
         },
@@ -925,9 +925,7 @@
         "loner",
         "-loner",
         "rogue",
-        "-rogue",
-        "clancat",
-        "-clancat"
+        "-rogue"
       ],
       "title": "Status",
       "type": "string"
