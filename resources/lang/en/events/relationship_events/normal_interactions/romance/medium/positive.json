@@ -7,6 +7,20 @@
             "m_c goes for a nice long walk with r_c.",
             "m_c nuzzles against r_c and purrs."
         ],
+        "relationship_constraint": [
+            {
+                "cats_from": [
+                    "m_c"
+                ],
+                "cats_to": [
+                    "r_c"
+                ],
+                "mutual": false,
+                "constraints": [
+                    "likes"
+                ]
+            }
+        ],
         "relationship_changes": [
             {
                 "cats_from": [
@@ -255,12 +269,22 @@
                 "status": [
                     "-elder",
                     "-kitten"
+                ],
+                "trait": [
+                    "playful",
+                    "childish",
+                    "troublesome"
                 ]
             },
             "r_c": {
                 "status": [
                     "-elder",
                     "-kitten"
+                ],
+                "trait": [
+                    "playful",
+                    "childish",
+                    "troublesome"
                 ]
             }
         },
@@ -287,6 +311,107 @@
                     "r_c"
                 ],
                 "mutual": false,
+                "values": [
+                    "romance",
+                    "like"
+                ],
+                "amount": 10
+            }
+        ]
+    },
+    {
+        "id": "rom_inc_medium10",
+        "strings": [
+            "m_c's cold demeanor felt touched by r_c's warmth today...",
+            "m_c felt {PRONOUN/m_c/self} nearly boil over in anger today, but r_c managed to soothe {PRONOUN/m_c/object}, being the kind, sweet, empathetic cat {PRONOUN/r_c/subject} {VERB/r_c/are/is}.",
+            "m_c usually snorts at cats who {PRONOUN/m_c/subject} thinks are too 'soft' and 'kind', but r_c... r_c somehow made {PRONOUN/r_c/object} way into {PRONOUN/m_c/poss} heart.",
+            "It's rare for m_c to smile, but {PRONOUN/m_c/subject} can't help but smile when around r_c."
+        ],
+        "relationship_constraint": [
+            {
+                "cats_from": [
+                    "m_c"
+                ],
+                "cats_to": [
+                    "r_c"
+                ],
+                "mutual": false,
+                "constraints": [
+                    "fancies"
+                ]
+            }
+        ],
+        "involved_cats": {
+            "m_c": {
+                "stat": {
+                    "trait": [
+                        "cold",
+                        "strict",
+                        "grumpy"
+                    ]
+                }
+            },
+            "r_c": {
+                "stat": {
+                    "trait": [
+                        "loving",
+                        "compassionate",
+                        "sincere"
+                    ]
+                }
+            }
+        }
+    },
+    {
+        "id": "rom_inc_medium11",
+        "strings": [
+            "Though m_c and r_c were on a serious patrol, r_c couldn't help but play around and throw the whole patrol off. Even though m_c was angry that the patrol failed, {PRONOUN/m_c/subject} thought that r_c's playfullness was kinda cute.",
+            "m_c unexpectedly felt {PRONOUN/m_c/self} blush when r_c flirtatiously teased {PRONOUN/m_c/object} about {PRONOUN/m_c/poss} strictness while on patrol.",
+            "m_c was cold and dead-serious while on patrol until {PRONOUN/m_c/subject} felt {PRONOUN/m_c/poss} fur grow hot when r_c brushed against {PRONOUN/m_c/object} seemingly on purpose...",
+            "m_c doesn't know how r_c did it, but m_c feels like {PRONOUN/m_c/subject} can loosen up with r_c.",
+            "m_c typically doesn't find foolish, reckless, silly behavior attractive, but r_c's behavior somehow, someway, made {PRONOUN/r_c/object} so attractive to m_c.",
+            "While m_c and r_c were out training together, r_c gets carried away playing around. After m_c scolded {PRONOUN/r_c/poss}, r_c somehow encouraged m_c to loosen up. The two ended up having fun while training and afterward, felt a new, unexpected closeness toward eachother.",
+            "After m_c's strictness and r_c's frolicsomeness made a patrol successful, m_c and r_c realize how opposites can make excellent teamwork and also attract...",
+            "It's rare for m_c to smile, but {PRONOUN/m_c/subject} can't help but smile when around r_c."
+        ],
+        "involved_cats": {
+            "m_c": {
+                "stat": {
+                    "trait": [
+                        "cold",
+                        "strict"
+                    ],
+                    "status": [
+                        "-elder",
+                        "-mediator",
+                        "-mediator apprentice"
+                    ]
+                }
+            },
+            "r_c": {
+                "stat": {
+                    "trait": [
+                        "playful",
+                        "childish",
+                        "troublesome"
+                    ],
+                    "status": [
+                        "-elder",
+                        "-mediator",
+                        "-mediator apprentice"
+                    ]
+                }
+            }
+        },
+        "relationship_changes": [
+            {
+                "cats_from": [
+                    "r_c"
+                ],
+                "cats_to": [
+                    "m_c"
+                ],
+                "mutual": true,
                 "values": [
                     "romance",
                     "like"
