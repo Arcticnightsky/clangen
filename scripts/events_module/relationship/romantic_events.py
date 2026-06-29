@@ -68,7 +68,6 @@ class RomanticEvents:
             )
 
         RomanticEvents.current_loaded_lang = i18n.config.get("locale")
-        interaction.rebuild_relationship_dicts()
 
         # ---------------------------------------------------------------------------- #
         #            build up dictionaries which can be used for moon events           #
