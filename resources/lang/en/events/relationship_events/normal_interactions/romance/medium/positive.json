@@ -126,6 +126,20 @@
             "m_c picked out the best piece of prey to share with r_c.",
             "m_c overhears r_c tell another cat {PRONOUN/r_c/subject} kind of {VERB/r_c/like/likes} m_c."
         ],
+        "relationship_constraint": [
+            {
+                "cats_from": [
+                    "m_c"
+                ],
+                "cats_to": [
+                    "r_c"
+                ],
+                "mutual": true,
+                "constraints": [
+                    "likes"
+                ]
+            }
+        ],
         "relationship_changes": [
             {
                 "cats_from": [
