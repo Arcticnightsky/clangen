@@ -6,7 +6,6 @@ from typing import Dict, List
 
 import i18n
 
-import scripts.cat_relations.interaction as interactions
 from scripts.cat.cats import Cat
 from scripts.cat.enums import CatCompatibility
 from scripts.cat_relations.relationship import RelType, Relationship
@@ -14,7 +13,7 @@ from scripts.event_class import Single_Event
 from scripts.game_structure import constants
 from scripts.game_structure import game
 from scripts.game_structure.localization import load_lang_resource
-from scripts.events_module.text_adjust import process_text, event_text_adjust
+from scripts.events_module.text_adjust import event_text_adjust
 from scripts.events_module.consequences import change_relationship_values
 from scripts.events_module.event_filters import (
     get_highest_romantic_relation,
@@ -985,9 +984,9 @@ class RomanticEvents:
             ]
             if len(alive_inclan_from_mates) > 0 and len(alive_inclan_to_mates) > 0:
                 poly_key = "both_mates"
-            elif len(alive_inclan_from_mates) > 0 and len(alive_inclan_to_mates) <= 0:
+            elif len(alive_inclan_from_mates) > 0 >= len(alive_inclan_to_mates):
                 poly_key = "m_c_mates"
-            elif len(alive_inclan_from_mates) <= 0 and len(alive_inclan_to_mates) > 0:
+            elif len(alive_inclan_from_mates) <= 0 < len(alive_inclan_to_mates):
                 poly_key = "r_c_mates"
             if not poly_key:
                 # none of the other involved mates are alive
