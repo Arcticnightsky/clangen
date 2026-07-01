@@ -6,10 +6,7 @@ import i18n
 from scripts.cat.cats import Cat
 from scripts.cat.enums import CatCompatibility
 from scripts.cat_relations.enums import RelType
-from scripts.cat_relations.relationship import (
-    Relationship,
-    same_sex_romance_gain_allowed,
-)
+from scripts.cat_relations.relationship import Relationship
 from scripts.config import get_config
 from scripts.event_class import Single_Event
 from scripts.events_module.consequences import change_relationship_values
@@ -409,7 +406,7 @@ def _apply_base_influence(
         # and a positive interaction will affect all values to a positive degree
 
         if type_of_interaction == RelType.ROMANCE:
-            if is_positive and not self.same_sex_romance_gain_allowed():
+            if is_positive and not passes_same_sex_romance_chance:
                 amount = 0
             self.romance += amount
             relationship.romance += amount
@@ -430,7 +427,7 @@ def _apply_base_influence(
         if (
             rel_type == RelType.ROMANCE
             and is_positive
-            and not self.same_sex_romance_gain_allowed()
+            and not passes_same_sex_romance_chance
         ):
             return
         setattr(
