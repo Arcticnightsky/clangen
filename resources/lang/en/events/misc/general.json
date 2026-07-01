@@ -864,7 +864,7 @@
                 ],
                 "amount": 20,
                 "log": {
-                    "cats_from": "cat_from gained respect for cat_from after hearing that {PRONOUN/cat_from/subject} killed mur_c to protect c_n."
+                    "cats_from": "cat_from gained respect for cat_to after hearing that {PRONOUN/cat_to/subject} killed mur_c to protect c_n."
                 }
             }
         ]
@@ -919,7 +919,7 @@
                 "cats_to": [
                     "r_c"
                 ],
-                "mutual": true,
+                "mutual": false,
                 "values": [
                     "trust",
                     "comfort"
@@ -1037,7 +1037,7 @@
         "sub_type": [
             "murder_reveal"
         ],
-        "tags": ["clan:leader"],
+        "tags": ["clan:leader", "clan_wide"],
         "frequency": 2,
         "event_text": "m_c calls a Clan meeting and reveals that r_c was responsible for taking mur_c's life. With the Clan leader against {PRONOUN/r_c/object}, r_c's place in the Clan is thrown into jeopardy.",
         "m_c": {
@@ -1081,9 +1081,26 @@
                     "comfort",
                     "like"
                 ],
-                "amount": -20,
+                "amount": -60,
                 "log": {
                     "cats_from": "lead_name revealed cat_to's crimes to the Clan, and cat_from was disgusted and horrified."
+                }
+            },
+            {
+                "cats_from": ["clan", "low_lawful"
+                ],
+                "cats_to": [
+                    "m_c"
+                ],
+                "mutual": true,
+                "values": [
+                    "trust",
+                    "comfort",
+                    "like"
+                ],
+                "amount": -20,
+                "log": {
+                    "cats_from": "lead_name revealed cat_to's crimes to the Clan, and cat_from was in shock about what cat_to did."
                 }
             }
         ]
@@ -1733,46 +1750,6 @@
                 "any"
             ]
         }
-    },
-    {
-        "event_id": "multi_misc_any_collar_accessory1",
-        "location": [
-            "forest",
-            "beach",
-            "plains"
-        ],
-        "season": [
-            "any"
-        ],
-        "sub_type": [
-            "accessory"
-        ],
-        "frequency": 1,
-        "event_text": "m_c disappears for a few days, then returns to camp with a acc_singular around {PRONOUN/m_c/poss} neck.",
-        "new_accessory": [
-            "COLLAR"
-        ],
-        "m_c": {
-            "age": [
-                "adolescent",
-                "young adult",
-                "adult",
-                "senior adult",
-                "senior"
-            ]
-        },
-        "relationships": [
-            {
-            "cats_from": ["clan", "high_lawful"],
-            "cats_to": ["m_c"],
-            "values": ["respect"],
-            "amount": -10,
-            "mutual": false,
-            "log": {
-                "cats_from": "cat_from disapproved of cat_to wearing a collar."
-            }
-        }
-    ]
     },
     {
         "event_id":  "gen_misc_any_misc1",
@@ -4820,34 +4797,6 @@
         ]
     },
     {
-        "event_id": "gen_misc_any_accessoryTwolegplacePOI1",
-        "location": ["any"],
-        "season": ["any"],
-        "sub_type": ["accessory"],
-        "tags": [],
-        "poi": {
-            "name": ["terrain_twolegplace"]
-        },
-        "frequency": 4,
-        "event_text": "m_c goes missing in {POI/name/terrain_twolegplace} for a few days and comes back wearing a acc_singular.",
-        "new_accessory": ["COLLAR"],
-        "m_c": {
-            "status": ["-kitten"]
-        },
-        "relationships": [
-            {
-            "cats_from": ["clan", "high_lawful"],
-            "cats_to": ["m_c"],
-            "values": ["respect"],
-            "amount": -10,
-            "mutual": false,
-            "log": {
-                "cats_from": "cat_from disapproved of cat_to wearing a collar."
-            }
-        }
-    ]
-    },
-    {
         "event_id": "gen_misc_any_accessorywaterPOI1",
         "location": ["any"],
         "season": ["any"],
@@ -7484,6 +7433,9 @@
         "season": [
             "any"
         ],
+        "sub_type": [
+            "war"
+        ],
         "frequency": 2,
         "event_text": "m_c is conversing with r_c about ways to potentially end this war — though not without bloodshed.",
         "m_c": {
@@ -9556,7 +9508,7 @@
                 ],
                 "amount": 15,
                 "log": {
-                    "cats_from": "m_c presented r_c with a gift to celebrate {PRONOUN/r_c/poss} ceremony, and r_c has worn it on {PRONOUN/r_c/poss} pelt ever since."
+                    "cats_from": "r_c presented m_c with a gift to celebrate {PRONOUN/m_c/poss} ceremony, and m_c has worn it on {PRONOUN/m_c/poss} pelt ever since."
                 }
             }
         ]
@@ -9608,7 +9560,7 @@
                 ],
                 "amount": 15,
                 "log": {
-                    "cats_from": "m_c presented r_c with a gift to celebrate {PRONOUN/r_c/poss} apprentice ceremony, and r_c has worn it on {PRONOUN/r_c/poss} pelt ever since."
+                    "cats_from": "r_c presented m_c with a gift to celebrate {PRONOUN/m_c/poss} apprentice ceremony, and m_c has worn it on {PRONOUN/m_c/poss} pelt ever since."
                 }
             }
         ]
@@ -9660,7 +9612,7 @@
                 ],
                 "amount": 15,
                 "log": {
-                    "cats_from": "m_c presented r_c with a gift to celebrate {PRONOUN/r_c/poss} warrior ceremony, and r_c has worn it on {PRONOUN/r_c/poss} pelt ever since."
+                    "cats_from": "r_c presented m_c with a gift to celebrate {PRONOUN/m_c/poss} warrior ceremony, and m_c has worn it on {PRONOUN/m_c/poss} pelt ever since."
                 }
             }
         ]
@@ -9713,8 +9665,8 @@
                 ],
                 "amount": 15,
                 "log": {
-                    "cats_from": "m_c presented r_c with a gift to celebrate {PRONOUN/r_c/poss} ceremony, and r_c has worn it on {PRONOUN/r_c/poss} pelt ever since.",
-                    "cats_to": "r_c decided to give m_c another chance after {PRONOUN/m_c/subject} gave {PRONOUN/r_c/object} a gift for {PRONOUN/r_c/poss} ceremony."
+                    "cats_from": "r_c presented m_c with a gift to celebrate {PRONOUN/m_c/poss} ceremony, and m_c has worn it on {PRONOUN/m_c/poss} pelt ever since.",
+                    "cats_to": "m_c decided to give r_c another chance after {PRONOUN/r_c/subject} gave {PRONOUN/m_c/object} a gift for {PRONOUN/m_c/poss} ceremony."
                 }
             }
         ]
@@ -9764,7 +9716,7 @@
                 ],
                 "amount": 20,
                 "log": {
-                    "cats_from": "m_c presented r_c with forget-me-nots to celebrate {PRONOUN/r_c/poss} ceremony, and r_c has worn them on {PRONOUN/r_c/poss} pelt ever since."
+                    "cats_from": "r_c presented m_c with forget-me-nots to celebrate {PRONOUN/m_c/poss} ceremony, and m_c has worn them on {PRONOUN/m_c/poss} pelt ever since."
                 }
             }
         ]
@@ -9814,7 +9766,7 @@
                 ],
                 "amount": 20,
                 "log": {
-                    "cats_from": "m_c presented r_c with forget-me-nots to celebrate {PRONOUN/r_c/poss} ceremony, and r_c has worn them on {PRONOUN/r_c/poss} pelt ever since."
+                    "cats_from": "r_c presented m_c with forget-me-nots to celebrate {PRONOUN/m_c/poss} ceremony, and m_c has worn them on {PRONOUN/m_c/poss} pelt ever since."
                 }
             }
         ]
@@ -9870,7 +9822,7 @@
                 ],
                 "amount": 15,
                 "log": {
-                    "cats_from": "m_c presented r_c with a gift to celebrate {PRONOUN/r_c/poss} apprentice ceremony, and r_c has worn it on {PRONOUN/r_c/poss} pelt ever since."
+                    "cats_from": "r_c presented m_c with a gift to celebrate {PRONOUN/m_c/poss} apprentice ceremony, and m_c has worn it on {PRONOUN/m_c/poss} pelt ever since."
                 }
             }
         ]
@@ -9983,7 +9935,7 @@
                 ],
                 "amount": 15,
                 "log": {
-                    "cats_from": "m_c surprised r_c with a gift to celebrate {PRONOUN/r_c/poss} warrior ceremony, and r_c has worn it on {PRONOUN/r_c/poss} pelt ever since."
+                    "cats_from": "r_c surprised m_c with a gift to celebrate {PRONOUN/m_c/poss} warrior ceremony, and m_c has worn it on {PRONOUN/m_c/poss} pelt ever since."
                 }
             }
         ]
@@ -10246,7 +10198,7 @@
                 "values": ["trust", "like", "comfort"],
                 "amount": 15,
                 "log": {
-                    "cats_from": "m_c presented r_c with a flower, and r_c has worn it on {PRONOUN/r_c/poss} pelt ever since."
+                    "cats_from": "r_c presented m_c with a flower, and m_c has worn it on {PRONOUN/m_c/poss} pelt ever since."
                 }
             }
         ]
@@ -10303,7 +10255,7 @@
                 "values": ["trust", "like", "comfort", "romance"],
                 "amount": 10,
                 "log": {
-                    "cats_from": "m_c presented r_c with a flower, and r_c has worn it on {PRONOUN/r_c/poss} pelt ever since."
+                    "cats_from": "r_c presented m_c with a flower, and m_c has worn it on {PRONOUN/m_c/poss} pelt ever since."
                 }
             }
         ]
@@ -15545,5 +15497,490 @@
   "r_c": {
       "relationship_status": ["loves_only"]
   }
-}
+},
+  {
+    "event_id": "gen_doubtful_med_mate",
+    "location": [
+      "any"
+    ],
+    "season": [
+      "any"
+    ],
+    "tags": [
+      "romance"
+    ],
+    "frequency": 2,
+    "event_text": "Though m_c is happy to have r_c as {PRONOUN/m_c/poss} mate, m_c can't help but feel as if StarClan is judging {PRONOUN/m_c/object} for loving r_c as {PRONOUN/m_c/poss} mate... After all, medicine cats technically aren't supposed to have mates, but m_c loves r_c too much to give {PRONOUN/r_c/object} up. m_c stays awake at night pondering about {PRONOUN/m_c/poss} love choices and the warrior code.",
+    "m_c": {
+      "age": [
+        "young adult",
+        "adult",
+        "senior adult",
+        "senior"
+      ],
+      "status": [
+        "medicine cat",
+        "medicine cat apprentice"
+      ],
+      "relationship_status": [
+        "mates"
+      ],
+      "trait": [
+        "righteous",
+        "loyal",
+        "faithful",
+        "strict",
+        "nervous",
+        "insecure"
+      ]
+    },
+    "r_c": {
+      "age": [
+        "senior",
+        "senior adult",
+        "adult",
+        "young adult"
+      ]
+    },
+    "relationships": [
+      {
+        "cats_from": [
+          "m_c"
+        ],
+        "cats_to": [
+          "r_c"
+        ],
+        "mutual": false,
+        "values": [
+          "romance"
+        ],
+        "amount": "-25",
+        "log": {
+          "cats_from": "cat_from was second-guessing {PRONOUN/cat_from/poss} relationship with cat_to as a medicine cat."
+        }
+      }
+    ]
+  },
+  {
+    "event_id": "gen_med_healer_herb_gather",
+    "location": [
+      "any"
+    ],
+    "season": [
+      "newleaf",
+      "greenleaf",
+      "leaf-fall"
+    ],
+    "frequency": 4,
+    "event_text": "m_c went out with r_c to help {PRONOUN/r_c/poss} gather herbs today and brought back a decent supply stock.",
+    "m_c": {
+      "age": [
+        "adolescent",
+        "young adult",
+        "adult",
+        "senior adult",
+        "senior"
+      ],
+      "status": [
+        "apprentice",
+        "warrior",
+        "deputy",
+        "leader"
+      ],
+      "skill": [
+        "HEALER,1"
+      ]
+    },
+    "r_c": {
+      "status": [
+        "medicine cat",
+        "medicine cat apprentice"
+      ]
+    },
+    "relationships": [
+      {
+        "cats_from": [
+          "m_c"
+        ],
+        "cats_to": [
+          "r_c"
+        ],
+        "mutual": true,
+        "values": [
+          "like",
+          "respect"
+        ],
+        "amount": 10,
+        "log": {
+          "cats_from": "cat_from helped cat_to collect herbs."
+        }
+      }
+    ],
+    "supplies": [
+      {
+        "type": "any_herb",
+        "trigger": [
+          "low"
+        ],
+        "adjust": "increase_40"
+      }
+    ]
+  },
+  {
+    "event_id": "gen_misc_hunter_freshkill_gather",
+    "location": [
+      "any"
+    ],
+    "season": [
+      "leaf-fall",
+      "leaf-bare"
+    ],
+    "frequency": 4,
+    "event_text": "As the weather gets colder and prey becomes more scarce, m_c and r_c went out to hunt today and brought back a decent amount of freshkill.",
+    "m_c": {
+      "age": [
+        "adolescent",
+        "young adult",
+        "adult",
+        "senior adult",
+        "senior"
+      ],
+      "status": [
+        "apprentice",
+        "warrior",
+        "deputy",
+        "leader"
+      ],
+      "skill": [
+        "HUNTER,1"
+      ]
+    },
+    "r_c": {
+      "age": [
+        "adolescent",
+        "young adult",
+        "adult",
+        "senior adult",
+        "senior"
+      ],
+      "status": [
+        "apprentice",
+        "warrior",
+        "deputy",
+        "leader"
+      ],
+      "skill": [
+        "HUNTER,1"
+      ]
+    },
+    "relationships": [
+      {
+        "cats_from": [
+          "m_c"
+        ],
+        "cats_to": [
+          "r_c"
+        ],
+        "mutual": true,
+        "values": [
+          "like",
+          "respect"
+        ],
+        "amount": 10,
+        "log": {
+          "cats_from": "cat_from helped cat_to hunt for freshkill in the cold."
+        }
+      }
+    ],
+    "supplies": [
+      {
+        "type": "freshkill",
+        "trigger": [
+          "low"
+        ],
+        "adjust": "increase_40"
+      }
+    ]
+  },
+  {
+    "event_id": "gen_misc_heroic_oc_cat_death1",
+    "location": [
+      "any"
+    ],
+    "season": [
+      "any"
+    ],
+    "tags": [],
+    "frequency": 1,
+    "event_text": "A cat from o_c_n died while saving m_c. c_n honors their bravery at the Gathering.",
+    "m_c": {
+      "age": [
+        "adolescent"
+      ]
+    },
+    "other_clan": {
+      "current_rep": [
+        "neutral",
+        "ally"
+      ],
+      "changed": 3
+    }
+  },
+  {
+    "event_id": "gen_misc_oc_cat_kill1",
+    "location": [
+      "any"
+    ],
+    "season": [
+      "any"
+    ],
+    "tags": [],
+    "frequency": 1,
+    "event_text": "m_c, only an apprentice, killed someone from o_c_n! Tensions are getting high between the two Clans now...",
+    "m_c": {
+      "age": [
+        "adolescent"
+      ],
+      "skill": [
+        "FIGHTER,1"
+      ],
+      "trait": [
+        "vengeful",
+        "ambitious",
+        "bloodthirsty",
+        "righteous",
+        "fierce",
+        "cold"
+      ]
+    },
+    "other_clan": {
+      "current_rep": [
+        "hostile",
+        "neutral"
+      ],
+      "changed": -3
+    }
+  },
+  {
+    "event_id": "gen_misc_heroic_oc_cat_death2",
+    "location": [
+      "any"
+    ],
+    "season": [
+      "any"
+    ],
+    "tags": [],
+    "frequency": 1,
+    "event_text": "A cat from o_c_n was killed while trying to save m_c. c_n honors their bravery at the Gathering for saving their medicine cat.",
+    "m_c": {
+      "status": [
+        "medicine cat apprentice",
+        "medicine cat"
+      ]
+    },
+    "other_clan": {
+      "current_rep": [
+        "hostile",
+        "neutral",
+        "ally"
+      ],
+      "changed": 3
+    }
+  },
+  {
+    "event_id": "gen_misc_oc_cat_kill2",
+    "location": [
+      "any"
+    ],
+    "season": [
+      "any"
+    ],
+    "tags": [],
+    "frequency": 1,
+    "event_text": "m_c killed the deputy of o_c_n. Tensions are getting high between the two Clans now...",
+    "m_c": {
+      "status": [
+        "warrior",
+        "deputy",
+        "leader"
+      ],
+      "skill": [
+        "FIGHTER,3"
+      ],
+      "trait": [
+        "vengeful",
+        "ambitious",
+        "bloodthirsty",
+        "righteous",
+        "fierce",
+        "cold"
+      ]
+    },
+    "other_clan": {
+      "current_rep": [
+        "hostile",
+        "neutral"
+      ],
+      "changed": -3
+    }
+  },
+  {
+    "event_id": "gen_misc_heroic_oc_cat_death3",
+    "location": [
+      "any"
+    ],
+    "season": [
+      "any"
+    ],
+    "tags": [],
+    "frequency": 1,
+    "event_text": "The deputy of o_c_n was killed while trying to save m_c. c_n honors their bravery at the Gathering.",
+    "m_c": {
+      "status": [
+        "apprentice",
+        "warrior",
+        "deputy",
+        "leader",
+        "medicine cat apprentice",
+        "medicine cat",
+        "mediator apprentice",
+        "mediator"
+      ]
+    },
+    "other_clan": {
+      "current_rep": [
+        "neutral",
+        "ally"
+      ],
+      "changed": 3
+    }
+  },
+  {
+    "event_id": "gen_misc_oc_cat_kill3",
+    "location": [
+      "any"
+    ],
+    "season": [
+      "any"
+    ],
+    "tags": [],
+    "frequency": 1,
+    "event_text": "m_c killed a cat from o_c_n. Tensions are getting high between the two Clans now and the other leaders feel uneasy around m_c at the next Gathering...",
+    "m_c": {
+      "status": [
+        "leader"
+      ],
+      "skill": [
+        "FIGHTER,3"
+      ],
+      "trait": [
+        "vengeful",
+        "ambitious",
+        "bloodthirsty",
+        "righteous",
+        "fierce",
+        "cold"
+      ]
+    },
+    "other_clan": {
+      "current_rep": [
+        "hostile",
+        "neutral"
+      ],
+      "changed": -3
+    }
+  },
+  {
+    "event_id": "gen_misc_heroic_oc_cat_death4",
+    "location": [
+      "any"
+    ],
+    "season": [
+      "any"
+    ],
+    "tags": [],
+    "frequency": 1,
+    "event_text": "The leader of o_c_n lost a life while trying to save m_c. c_n honors their bravery at the Gathering.",
+    "m_c": {
+      "status": [
+        "apprentice",
+        "warrior",
+        "deputy",
+        "leader",
+        "medicine cat apprentice",
+        "medicine cat",
+        "mediator apprentice",
+        "mediator"
+      ]
+    },
+    "other_clan": {
+      "current_rep": [
+        "neutral",
+        "ally"
+      ],
+      "changed": 5
+    }
+  },
+    {
+        "event_id": "gen_misc_murderreveal_leader2",
+        "location": [
+            "any"
+        ],
+        "season": [
+            "any"
+        ],
+        "sub_type": [
+            "murder_reveal"
+        ],
+        "tags": ["clan:leader", "clan_wide"],
+        "frequency": 1,
+        "event_text": "m_c calls a Clan meeting and confesses to the Clan that {PRONOUN/m_c/subject} was the one resposible for taking mur_c's life. {PRONOUN/m_c/subject/CAP} threatens if anyone tries to go against {PRONOUN/m_c/object}, they will be met with the same fate.",
+        "m_c": {
+            "status": [
+                "leader"
+            ],
+      		"trait": [
+        		"vengeful",
+        		"bloodthirsty",
+        		"cold"
+      		]
+        },
+        "relationships": [
+            {
+                "cats_from": [
+                    "clan"
+                ],
+                "cats_to": [
+                    "m_c"
+                ],
+                "mutual": false,
+                "values": [
+                    "trust",
+                    "comfort",
+                    "like"
+                ],
+                "amount": -70,
+                "log": {
+                    "cats_from": "cat_from was in utter disbelief that cat_to murdered mur_c and that cat_to's willing to murder anyone who speaks out against {PRONOUN/cat_to/object}."
+                }
+            },
+            {
+                "cats_from": ["m_c"
+                ],
+                "cats_to": [
+                    "clan"
+                ],
+                "mutual": false,
+                "values": [
+                    "trust",
+                    "comfort",
+                    "like"
+                ],
+                "amount": -30,
+                "log": {
+                    "cats_from": "cat_from is unsure of who to trust in the Clan anymore after {PRONOUN/cat_from/subject} revealed {PRONOUN/cat_from/poss} murder of mur_c, and is ready to kill anyone who speaks out against {PRONOUN/cat_from/object}."
+                }
+            }
+        ]
+    }
 ]

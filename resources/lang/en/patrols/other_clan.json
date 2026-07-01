@@ -781,8 +781,8 @@
                     "scar": "m_c followed the scent of a trespassing cat and {VERB/m_c/were/was} scarred by a dog.",
                     "death": "m_c followed the scent of a trespassing cat and {VERB/m_c/were/was} killed by a dog."
                 },
-                "other_clan_rep": -1,
-                "frequency": 3
+                "other_clan_rep": -5,
+                "frequency": 2
             },
             {
                 "text": "The patrol follows the scent to a o_c_n cat taking refuge up a tree. The cat yowls a warning and the patrol scatters when they hear the cry. Just in time, too, as a large dog jumps at the patrol, catching r_c but thankfully only injuring {PRONOUN/r_c/object} before r_c tears {PRONOUN/r_c/self} free and sprints away.",
@@ -931,8 +931,8 @@
                     "scar": "m_c followed the scent of a trespassing cat and was scarred by a dog.",
                     "death": "m_c followed the scent of a trespassing cat and was killed by a dog."
                 },
-                "other_clan_rep": -1,
-                "frequency": 3
+                "other_clan_rep": -5,
+                "frequency": 2
             },
             {
                 "text": "r_c follows the scent to a o_c_n cat taking refuge up a tree. The cat yowls a warning and r_c sprints for the same tree when they hear the cry. Just in time, too, as a large dog jumps at them, catching r_c but thankfully only injuring {PRONOUN/r_c/object} before r_c tears {PRONOUN/r_c/self} free and scales the tree.",
@@ -4049,7 +4049,7 @@
                         ],
                         "amount": -10,
                         "log": {
-                            "cats_from": "cat_to felt humiliated when cat_from harshly reprimanded {PRONOUN/cat_to/poss} actions in front of a o_c_n patrol."
+                            "cats_from": "cat_from felt humiliated when cat_to harshly reprimanded {PRONOUN/cat_from/poss} actions in front of a o_c_n patrol."
                         }
                     }
                 ],
@@ -4578,8 +4578,8 @@
                 "history_text": {
                     "death": "m_c was slain by o_c_n warriors"
                 },
-                "other_clan_rep": -3,
-                "frequency": 3
+                "other_clan_rep": -10,
+                "frequency": 1
             }
         ],
         "antag_fail_outcomes": [
