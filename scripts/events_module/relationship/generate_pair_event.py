@@ -6,7 +6,10 @@ import i18n
 from scripts.cat.cats import Cat
 from scripts.cat.enums import CatCompatibility
 from scripts.cat_relations.enums import RelType
-from scripts.cat_relations.relationship import Relationship
+from scripts.cat_relations.relationship import (
+    Relationship,
+    same_sex_romance_gain_allowed,
+)
 from scripts.config import get_config
 from scripts.event_class import Single_Event
 from scripts.events_module.consequences import change_relationship_values
@@ -22,6 +25,11 @@ from scripts.events_module.text_adjust import process_text
 from scripts.events_module.text_pool_event import TextPoolEvent
 from scripts.game_structure import game
 from scripts.game_structure.localization import load_lang_resource
+from scripts.events_module.relationship.romance_chance import (
+    cats_are_same_sex,
+    passes_same_sex_romance_chance,
+)
+
 
 loaded_events = {}
 
@@ -401,6 +409,9 @@ def _apply_base_influence(
         # and a positive interaction will affect all values to a positive degree
 
         if type_of_interaction == RelType.ROMANCE:
+            if is_positive and not self.same_sex_romance_gain_allowed():
+                amount = 0
+            self.romance += amount
             relationship.romance += amount
 
         for rel_out in (
@@ -416,6 +427,12 @@ def _apply_base_influence(
                 + (choice(buffs) if type_of_interaction != rel_out else amount),
             )
     else:
+        if (
+            rel_type == RelType.ROMANCE
+            and is_positive
+            and not self.same_sex_romance_gain_allowed()
+        ):
+            return
         setattr(
             relationship,
             type_of_interaction,
