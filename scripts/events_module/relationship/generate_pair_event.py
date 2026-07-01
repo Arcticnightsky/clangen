@@ -426,7 +426,6 @@ def _apply_base_influence(
     else:
         if (
             type_of_interaction == RelType.ROMANCE
-            and is_positive
             and not passes_same_sex_romance_chance
         ):
             return
