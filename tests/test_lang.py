@@ -13,7 +13,7 @@ from scripts.game_structure.localization import (
     set_lang_config_directory,
 )
 from scripts.cat.pronouns import get_new_pronouns, determine_plural_pronouns
-from scripts.events_module.text_adjust import event_text_adjust
+from scripts.events_module.text_adjust import event_text_adjust, _replace_clan_name
 
 
 class TestLocalisation(unittest.TestCase):
@@ -50,6 +50,26 @@ class TestLocalisation(unittest.TestCase):
     def tearDown(self):
         i18n.config.set("locale", "en")
         set_lang_config_directory("resources/lang/en/config.json")
+
+    def test_clan_name_replacement_does_not_replace_embedded_placeholder(self):
+        text = "m_c is eager to sink his claws into o_c_n during the next skirmish."
+
+        self.assertEqual(
+            _replace_clan_name(text, "c_n", "BridgeClan"),
+            text,
+        )
+
+    def test_clan_name_replacement_preserves_full_placeholder(self):
+        text = "A o_c_n patrol fought c_n's patrol."
+
+        self.assertEqual(
+            _replace_clan_name(text, "o_c_n", "ShadowClan"),
+            "A ShadowClan patrol fought c_n's patrol.",
+        )
+        self.assertEqual(
+            _replace_clan_name(text, "c_n", "BridgeClan"),
+            "A o_c_n patrol fought BridgeClan's patrol.",
+        )
 
     def test_get_singular_pronouns(self):
         for i, gender in enumerate(["nonbinary", "male", "female"]):

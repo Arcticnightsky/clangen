@@ -22,6 +22,10 @@ from scripts.events_module.text_adjust import process_text
 from scripts.events_module.text_pool_event import TextPoolEvent
 from scripts.game_structure import game
 from scripts.game_structure.localization import load_lang_resource
+from scripts.events_module.relationship.romance_chance import (
+    passes_same_sex_romance_chance,
+)
+
 
 loaded_events = {}
 
@@ -182,8 +186,9 @@ def _get_type_of_interaction(
         # if a romance relationship is not possible, remove this type, but only if there are no mates
         # if there already mates (set up by the user for example), don't remove this type
         mate_from_to = main_cat.is_potential_mate(other_cat, for_love_interest=True)
-        mate_to_from = main_cat.is_potential_mate(other_cat, for_love_interest=True)
-        if not mate_from_to or not mate_to_from:
+        mate_to_from = other_cat.is_potential_mate(main_cat, for_love_interest=True)
+        same_sex_romance_allowed = passes_same_sex_romance_chance(main_cat, other_cat)
+        if not mate_from_to or not mate_to_from or not same_sex_romance_allowed:
             while RelType.ROMANCE in value_weights:
                 value_weights.pop(RelType.ROMANCE)
 
@@ -205,7 +210,7 @@ def _get_type_of_interaction(
 
 def _get_event(
     events: list[TextPoolEvent], main_cat: Cat, other_cat: Cat
-) -> TextPoolEvent:
+) -> Optional[TextPoolEvent]:
     """
     Returns a valid event for all involved cats
     :param events: The list of events to filter
@@ -243,13 +248,14 @@ def _get_event(
     ]
 
     for e in possible_events:
-        for constraint in e.relationship_constraint:
-            if not check_rel_constraint_groups(
-                constraint, {"m_c": main_cat, "r_c": other_cat}
-            ):
-                continue
+        if all(
+            check_rel_constraint_groups(constraint, {"m_c": main_cat, "r_c": other_cat})
+            for constraint in e.relationship_constraint
+        ):
+            final_events.append(e)
 
-        final_events.append(e)
+    if not final_events:
+        return None
 
     return choice(final_events)
 
@@ -359,7 +365,14 @@ def _apply_extra_influence(
         # find the values and their amounts for the kwargs
         value_changes = {}
         for value in change["values"]:
+            if value == RelType.ROMANCE and not _passes_romance_change_chance(
+                cats_from, cats_to
+            ):
+                continue
             value_changes[value] = change["amount"]
+
+        if not value_changes:
+            continue
 
         # change the relationship!
         # only apply log if this is a change to r_c's feelings, cus m_c will already have the event in their log, and we don't want to double it
@@ -369,6 +382,15 @@ def _apply_extra_influence(
             **value_changes,
             log=chosen_string if involved_cats["r_c"] in cats_from else None,
         )
+
+
+def _passes_romance_change_chance(cats_from: list[Cat], cats_to: list[Cat]) -> bool:
+    """Return True if generated romance changes are allowed for every pair."""
+    return all(
+        passes_same_sex_romance_chance(cat_from, cat_to)
+        for cat_from in cats_from
+        for cat_to in cats_to
+    )
 
 
 def _apply_base_influence(
@@ -401,6 +423,10 @@ def _apply_base_influence(
         # and a positive interaction will affect all values to a positive degree
 
         if type_of_interaction == RelType.ROMANCE:
+            if not passes_same_sex_romance_chance(
+                relationship.cat_from, relationship.cat_to
+            ):
+                amount = 0
             relationship.romance += amount
 
         for rel_out in (
@@ -416,6 +442,13 @@ def _apply_base_influence(
                 + (choice(buffs) if type_of_interaction != rel_out else amount),
             )
     else:
+        if (
+            type_of_interaction == RelType.ROMANCE
+            and not passes_same_sex_romance_chance(
+                relationship.cat_from, relationship.cat_to
+            )
+        ):
+            return
         setattr(
             relationship,
             type_of_interaction,
