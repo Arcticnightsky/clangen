@@ -408,7 +408,6 @@ def _apply_base_influence(
         if type_of_interaction == RelType.ROMANCE:
             if not passes_same_sex_romance_chance:
                 amount = 0
-            self.romance += amount
             relationship.romance += amount
 
         for rel_out in (
