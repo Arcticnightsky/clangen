@@ -406,7 +406,7 @@ def _apply_base_influence(
         # and a positive interaction will affect all values to a positive degree
 
         if type_of_interaction == RelType.ROMANCE:
-            if is_positive and not passes_same_sex_romance_chance:
+            if not passes_same_sex_romance_chance:
                 amount = 0
             self.romance += amount
             relationship.romance += amount
