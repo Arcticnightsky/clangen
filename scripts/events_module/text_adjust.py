@@ -531,10 +531,10 @@ def event_text_adjust(
             # turn o_c_n into strings like o_BridgeClan.
             other_clan_name = getattr(getattr(game, "clan", None), "war", {}).get(
                 "enemy"
-            )
+            ) + "Clan"
 
         if other_clan_name:
-            text = _replace_clan_name(text, "o_c_n", other_clan_name + "Clan")
+            text = _replace_clan_name(text, "o_c_n", other_clan_name)
 
     # clan_name
     if "c_n" in text:
