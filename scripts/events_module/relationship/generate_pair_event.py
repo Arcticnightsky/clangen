@@ -248,14 +248,13 @@ def _get_event(
     ]
 
     for e in possible_events:
-        if all(
-            check_rel_constraint_groups(constraint, {"m_c": main_cat, "r_c": other_cat})
-            for constraint in e.relationship_constraint
-        ):
-            final_events.append(e)
+        for constraint in e.relationship_constraint:
+            if not check_rel_constraint_groups(
+                constraint, {"m_c": main_cat, "r_c": other_cat}
+            ):
+                continue
 
-    if not final_events:
-        return None
+        final_events.append(e)
 
     return choice(final_events)
 
@@ -413,47 +412,11 @@ def _apply_base_influence(
         intensity=intensity,
         relationship=relationship,
     )
-    # only high intensity gives passive buffs
-    if intensity == "high":
-        passive_buff = int(amount / get_config("relationship.passive_influence_div"))
-        # just adding a teeny bit of variety
-        buffs = [passive_buff - 1, passive_buff, passive_buff + 1]
-        # the passive buff creates a cascade effect
-        # so a negative interaction will affect all values to a negative degree
-        # and a positive interaction will affect all values to a positive degree
-
-        if type_of_interaction == RelType.ROMANCE:
-            if not passes_same_sex_romance_chance(
-                relationship.cat_from, relationship.cat_to
-            ):
-                amount = 0
-            relationship.romance += amount
-
-        for rel_out in (
-            RelType.LIKE,
-            RelType.RESPECT,
-            RelType.TRUST,
-            RelType.COMFORT,
-        ):
-            setattr(
-                relationship,
-                rel_out,
-                getattr(relationship, rel_out)
-                + (choice(buffs) if type_of_interaction != rel_out else amount),
-            )
-    else:
-        if (
-            type_of_interaction == RelType.ROMANCE
-            and not passes_same_sex_romance_chance(
-                relationship.cat_from, relationship.cat_to
-            )
-        ):
-            return
-        setattr(
-            relationship,
-            type_of_interaction,
-            getattr(relationship, type_of_interaction) + amount,
-        )
+    setattr(
+        relationship,
+        type_of_interaction,
+        getattr(relationship, type_of_interaction) + amount,
+    )
 
     relationship.log.append(
         i18n.t(
