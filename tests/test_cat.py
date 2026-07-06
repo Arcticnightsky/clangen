@@ -11,6 +11,7 @@ os.environ["SDL_AUDIODRIVER"] = "dummy"
 from scripts.game_structure import game, constants
 
 from scripts.cat.cats import Cat
+from scripts.cat.names import Name
 from scripts.cat_relations.inheritance2 import inheritance_db
 from scripts.cat.enums import CatAge, CatRank, CatGroup, CatSocial
 from scripts.cat_relations.relationship import Relationship
@@ -46,6 +47,30 @@ class TestCreationAge(unittest.TestCase):
     def test_elder(self):
         test_cat = Cat(moons=120, disable_random=True)
         self.assertEqual(test_cat.age, CatAge.SENIOR)
+
+
+class TestNameLoading(unittest.TestCase):
+    def test_existing_name_loads_name_rules_before_validation(self):
+        # Faded cats are created with existing prefixes and suffixes before any
+        # generated-name path has necessarily loaded the localized name data.
+        original_names_dict = Name.names_dict
+        original_save_dir = Name.current_save_dir
+        original_lang = Name.currently_loaded_lang
+
+        try:
+            Name.names_dict = {}
+            Name.current_save_dir = None
+            Name.currently_loaded_lang = None
+
+            name = Name(prefix="Rain", suffix="fall")
+
+            self.assertEqual(name.prefix, "Rain")
+            self.assertEqual(name.suffix, "fall")
+            self.assertIn("animal_prefixes", name.names_dict)
+        finally:
+            Name.names_dict = original_names_dict
+            Name.current_save_dir = original_save_dir
+            Name.currently_loaded_lang = original_lang
 
 
 class TestRelativesFunction(unittest.TestCase):
