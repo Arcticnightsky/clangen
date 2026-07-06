@@ -14,7 +14,7 @@ from scripts.cat.enums import (
     CatStanding,
     CatThought,
 )
-from scripts.cat.names import Name, names
+from scripts.cat.names import Name
 from scripts.cat_relations.enums import RelType
 from scripts.cat_relations.inheritance2 import inheritance_db
 from scripts.clan_package.settings import get_clan_setting
@@ -714,7 +714,7 @@ def create_new_cat(
                     weights = constants.CONFIG["cat_name_controls"]["rogue"]
 
                 selected_category = choices(name_categories, weights, k=1)[0]
-                name = choice(names.names_dict[selected_category])
+                name = choice(Name.get_category(selected_category))
                 new_cat.change_name(new_prefix=name, new_suffix="")
             else:
                 # means that this young cat joins the clan and gets indoctrinated, muahaha
@@ -738,11 +738,7 @@ def create_new_cat(
                     if cat.ID not in excluded_ids and cat.status.alive_in_player_clan
                 }
 
-                max_attempts = max(
-                    1,
-                    len(Name.names_dict["normal_prefixes"])
-                    * len(Name.names_dict["normal_suffixes"]),
-                )
+                max_attempts = Name.normal_name_combinations()
                 for _ in range(max_attempts):
                     if new_cat.name.prefix in used_prefixes:
                         new_cat.name = Name(
@@ -788,7 +784,7 @@ def create_new_cat(
                 weights = constants.CONFIG["cat_name_controls"]["rogue"]
 
             selected_category = choices(name_categories, weights, k=1)[0]
-            name = choice(names.names_dict[selected_category])
+            name = choice(Name.get_category(selected_category))
 
             # now, if this cat should take a new clan name, we give them such
             if new_name:
