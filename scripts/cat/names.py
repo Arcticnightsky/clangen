@@ -65,6 +65,11 @@ class Name:
                 name_fixpref = False
 
         if self.suffix and not load_existing_name:
+            # Existing names can be constructed before any generated-name path has
+            # loaded the localized name data, such as while loading faded cats for
+            # inheritance. Ensure validation has the name rule categories it needs.
+            self.load_localized_names()
+
             # Prevent triple letter names from joining prefix and suffix from occurring (ex. Beeeye)
             possible_three_letter = (
                 self.prefix[-2:] + self.suffix[0],
