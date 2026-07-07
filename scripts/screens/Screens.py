@@ -654,6 +654,10 @@ class Screens:
         scripts.game_structure.screen_settings.screen.blit(bg, ui_scale_blit((0, 0)))
 
     def set_cat_location_bg(self, cat, bg: str = "default"):
+        if cat is None:
+        # No cat given, just set the default background
+            self.set_bg(bg=bg)
+            return
         if cat.dead and not cat.faded:
             if cat.status.group == CatGroup.STARCLAN:
                 blur_bg = "starclan"

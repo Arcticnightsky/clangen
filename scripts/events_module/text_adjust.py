@@ -204,34 +204,33 @@ def get_special_snippet_list(
     (i.e. ["hate", "fear", "dread"] becomes "hate, fear, and dread") - Default is True
     :return: a list of the chosen items from chosen_list or a formatted string if format is True
     """
-    if not game.clan:
+    clan = game.clan
+    snippets = []
+
+    if clan is None:
         biome = None
     else:
-        biome = (
-            game.clan.biome
-            if not game.clan.override_biome
-            else game.clan.override_biome
-        ).casefold()
+        biome = (clan.override_biome or clan.biome).casefold()
+
     global SNIPPETS
     if langs["snippet"] != i18n.config.get("locale"):
         langs["snippet"] = i18n.config.get("locale")
         SNIPPETS = load_lang_resource("snippet_collections.json")
 
     # these lists don't get sense specific snippets, so is handled first
-    if chosen_list in ["dream_list", "story_list"]:
-        if (
-            chosen_list == "story_list"
-        ):  # story list has some biome specific things to collect
-            snippets = SNIPPETS[chosen_list]["general"]
+    if chosen_list in ["dream_list", "story_list", "clair_list"]:
+        if chosen_list == "story_list":
+            snippet_group = SNIPPETS[chosen_list]
+            snippets.extend(snippet_group.get("general", []))
             if biome:
-                snippets.extend(SNIPPETS[chosen_list][biome])
-        elif (
-            chosen_list == "clair_list"
-        ):  # the clair list also pulls from the dream list
-            snippets = SNIPPETS[chosen_list]
-            snippets.extend(SNIPPETS["dream_list"])
-        else:  # the dream list just gets the one
-            snippets = SNIPPETS[chosen_list]
+                snippets.extend(snippet_group.get(biome, []))
+
+        elif chosen_list == "clair_list":
+            snippets.extend(SNIPPETS.get("clair_list", []))
+            snippets.extend(SNIPPETS.get("dream_list", []))
+
+        else:  # dream_list
+            snippets.extend(SNIPPETS.get(chosen_list, []))
 
     else:
         # if no sense groups were specified, use all of them
@@ -241,13 +240,11 @@ def get_special_snippet_list(
             else:
                 sense_groups = ["sight", "sound", "smell", "emotional", "touch"]
 
-        # find the correct lists and compile them
-        snippets = []
         for sense in sense_groups:
             snippet_group = SNIPPETS[chosen_list][sense]
-            snippets.extend(snippet_group["general"])
+            snippets.extend(snippet_group.get("general", []))
             if biome:
-                snippets.extend(snippet_group[biome])
+                snippets.extend(snippet_group.get(biome, []))
 
     # now choose a unique snippet from each snip list
     unique_snippets = []
@@ -522,12 +519,22 @@ def event_text_adjust(
         text = text.replace("multi_cat", list_text)
 
     # other_clan_name
-    if "o_c_n" in text and other_clan:
-        text = _replace_clan_name(
-            text,
-            "o_c_n",
-            other_clan if isinstance(other_clan, str) else other_clan.name,
-        )
+    if "o_c_n" in text:
+        if other_clan:
+            other_clan_name = (
+                other_clan if isinstance(other_clan, str) else other_clan.name
+            )
+        else:
+            # War short events should always be called with the enemy clan, but
+            # older call paths or saves may not have that context. Fall back to
+            # the current war enemy instead of letting the later c_n replacement
+            # turn o_c_n into strings like o_BridgeClan.
+            other_clan_name = getattr(getattr(game, "clan", None), "war", {}).get(
+                "enemy"
+            ) + "Clan"
+
+        if other_clan_name:
+            text = _replace_clan_name(text, "o_c_n", other_clan_name)
 
     # clan_name
     if "c_n" in text:
@@ -601,7 +608,11 @@ def _replace_clan_name(text, abbreviation, clan_name):
                     text = " ".join(modify)
                     break
 
-    return text.replace(abbreviation, clan_name)
+    return re.sub(
+        rf"(?<![A-Za-z0-9_]){re.escape(abbreviation)}(?![A-Za-z0-9_])",
+        str(clan_name),
+        text,
+    )
 
 
 def leader_ceremony_text_adjust(
