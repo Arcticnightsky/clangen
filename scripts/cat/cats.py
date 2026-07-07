@@ -34,6 +34,7 @@ from scripts.cat.personality import Personality
 from scripts.cat.skills import CatSkills
 from scripts.cat.skills import SkillPath
 from scripts.cat.status import Status, StatusDict
+from scripts.config import get_config
 from scripts.events_module.thoughts.generate_thoughts import (
     new_death_thought,
     new_thought,
@@ -1602,6 +1603,7 @@ class Cat:
         life_givers = []
         dead_relations = []
         life_giving_leader = None
+        num_of_lives_to_give = get_config("death_related.max_leader_lives")
 
         # grab life givers that the cat actually knew in life and sort by amount of relationship!
         relationships = self.relationships.values()
@@ -1635,7 +1637,7 @@ class Cat:
         # if we have relations, then make sure we only take the top 8
         if dead_relations:
             for i, rel in enumerate(dead_relations):
-                if i == 8:
+                if i <= num_of_lives_to_give - 1:
                     break
                 if rel.cat_to.status.is_leader:
                     life_giving_leader = rel.cat_to
@@ -1652,8 +1654,8 @@ class Cat:
         ]
 
         # check amount of life givers, if we need more, then grab from the other dead cats
-        if len(life_givers) < 8:
-            amount = 8 - len(life_givers)
+        if len(life_givers) < num_of_lives_to_give - 1:
+            extra_amount_needed = (num_of_lives_to_give - 1) - len(life_givers)
 
             possible_dead_cats = [
                 i
@@ -1663,10 +1665,10 @@ class Cat:
             # this part just checks how many cats are available, if there aren't enough to fill all the slots,
             # then we just take however many are available
 
-            if len(possible_dead_cats) - 1 < amount:
+            if len(possible_dead_cats) - 1 < extra_amount_needed:
                 extra_givers = possible_dead_cats
             else:
-                extra_givers = sample(possible_dead_cats, k=amount)
+                extra_givers = sample(possible_dead_cats, k=extra_amount_needed)
 
             life_givers.extend(extra_givers)
 
@@ -1690,11 +1692,12 @@ class Cat:
             life_givers.append(life_giving_leader)
 
         # check amount again, if more are needed then we'll add the ghost-y cats at the end
-        if len(life_givers) < 9:
+        if len(life_givers) < num_of_lives_to_give:
             unknown_blessing = True
         else:
             unknown_blessing = False
-        extra_lives = str(9 - len(life_givers))
+
+        extra_lives = num_of_lives_to_give - len(life_givers)
         possible_lives = ceremony_dict["lives"]
         lives = []
         used_lives = []
