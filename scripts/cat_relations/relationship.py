@@ -476,7 +476,7 @@ class Relationship:
                 value_weights.pop(RelType.ROMANCE)
 
         if RelType.ROMANCE in value_weights and self._is_sterilized_intact_pair():
-            value_weights[RelType.ROMANCE] *= 0.35
+            value_weights[RelType.ROMANCE] *= 0.15
 
         # if cats have no romance relationship already, don't allow romance decrease
         if (
