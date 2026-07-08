@@ -234,6 +234,16 @@ def json_load():
             new_cat.no_kits = cat["no_kits"]
             new_cat.no_mates = cat["no_mates"] if "no_mates" in cat else False
             new_cat.no_retire = cat["no_retire"] if "no_retire" in cat else False
+            new_cat.pending_neuter = (
+                cat["pending_neuter"]
+                if "pending_neuter" in cat
+                else cat.get("pending_twoleg_sterilization", False)
+            )
+            new_cat.tnr_victim = (
+                cat["tnr_victim"]
+                if "tnr_victim" in cat
+                else cat.get("twoleg_sterilization_story_pending", False)
+            )
 
             if "skill_dict" in cat:
                 new_cat.skills = CatSkills(cat["skill_dict"])
