@@ -536,8 +536,9 @@ def handle_lead_den_event():
                             invited_cat.backstory = "outsider1"
                         # if the cat is a healer, give healer rank
                         elif (
-                            invited_cat.backstory
-                            in BACKSTORIES["backstory_categories"]["healer_backstories"]
+                            (invited_cat.backstory in BACKSTORIES["backstory_categories"]["healer_backstories"])
+                            or invited_cat.skills.primary.path == SkillPath.HEALER
+                            or (invited_cat.skills.secondary and invited_cat.skills.secondary.path == SkillPath.HEALER)
                         ):
                             invited_cat.status._change_rank(CatRank.MEDICINE_CAT)
                         # if cat is a little baby, check name
