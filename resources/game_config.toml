@@ -28,7 +28,7 @@ dev_tools = true
   # set to True if deputies should be more likely to have negative rel events with the leader
   deputy_to_leader_neg_buff = false
   # the higher the number, the more likely the deputy will have a negative respect event with the leader
-  deputy_envy_leader_influence = 0
+  deputy_envy_leader_influence = 5
 
   [relationship.value_change_amount]
     # amount a relationship changes for "high", "medium", and "low" effects for interactions
@@ -522,7 +522,7 @@ dev_tools = true
     # The higher this number, the more likely a deputy will murder their leader.
     # note that this doesn't make the deputy more likely to murder in general
     # so they still need to be "capable" of it and have negative relationship with their leader.
-    deputy_murder_modifier = 20
+    deputy_murder_modifier = 8
 
     # set to true to have the deputy prefer to murder the leader over other negative relationships
     deputy_prefer_leader = false
