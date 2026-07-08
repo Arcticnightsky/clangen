@@ -404,7 +404,7 @@ dev_tools = true
   mediator_app_chance = 1500
 
   # base 1/chance that a cat will be chosen as a med cat apprentice
-  base_medicine_app_chance = 305
+  base_medicine_app_chance = 250
 
 [roles."medicine cat apprentice"]
   # maximum number of medicine cat apprentices to full medicine cats (e.g. 4 adult medcats can have 2 apps total)
