@@ -522,7 +522,7 @@ dev_tools = true
     # The higher this number, the more likely a deputy will murder their leader.
     # note that this doesn't make the deputy more likely to murder in general
     # so they still need to be "capable" of it and have negative relationship with their leader.
-    deputy_murder_modifier = 8
+    deputy_murder_modifier = 20
 
     # set to true to have the deputy prefer to murder the leader over other negative relationships
     deputy_prefer_leader = false
