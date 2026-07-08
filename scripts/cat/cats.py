@@ -2863,13 +2863,6 @@ class Cat:
         if not ignore_no_mates and (self.no_mates or other_cat.no_mates):
             return False
 
-        # Medicine cats and medicine cat apprentices cannot take new mates.
-        if (
-            self.status.rank.is_any_medicine_rank()
-            or other_cat.status.rank.is_any_medicine_rank()
-        ):
-            return False
-
         # Inheritance check
         if self.is_related(other_cat, first_cousin_mates):
             return False
