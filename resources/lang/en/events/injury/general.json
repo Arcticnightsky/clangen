@@ -773,7 +773,7 @@
             "clan:apprentice"
         ],
         "frequency": 4,
-        "event_text": "Clearly, the apprentices haven't been doing their job for the elders yet - m_c has ticks all over {PRONOUN/m_c/poss} pelt.",
+        "event_text": "Clearly, the apprentices haven't been doing their job for the elders; m_c has ticks all over {PRONOUN/m_c/poss} pelt.",
         "m_c": {
             "age": [
                 "senior adult",
@@ -899,7 +899,7 @@
         "season": [
             "any"
         ],
-        "frequency": 1,
+        "frequency": 2,
         "event_text": "m_c was on a walk when {PRONOUN/m_c/subject} saw r_c being attacked by a rogue! {PRONOUN/m_c/subject/CAP} helped r_c escape, but not before gaining a few wounds.",
         "m_c": {
             "age": [
@@ -1002,7 +1002,7 @@
         "season": [
             "any"
         ],
-        "frequency": 3,
+        "frequency": 2,
         "event_text": "m_c was on a walk when {PRONOUN/m_c/subject} saw r_c being attacked by a dog! {PRONOUN/m_c/subject/CAP} helped r_c escape, but not before gaining a few wounds.",
         "m_c": {
             "age": [
@@ -1549,7 +1549,7 @@
         "season": [
             "any"
         ],
-        "frequency": 1,
+        "frequency": 3,
         "event_text": "m_c couldn't help but try to show off by climbing the tallest tree {PRONOUN/m_c/subject} could find. {PRONOUN/m_c/poss/CAP} plan backfired when {PRONOUN/m_c/subject} fell out of the tree.",
         "m_c": {
             "age": [
@@ -1628,7 +1628,7 @@
         "season": [
             "any"
         ],
-        "frequency": 1,
+        "frequency": 2,
         "event_text": "m_c fell from a cliff and somehow survived, though not without breaking {PRONOUN/m_c/poss} leg.",
         "m_c": {
             "age": [
@@ -3206,6 +3206,7 @@
                 "bloodthirsty",
                 "daring",
                 "strict",
+                "fierce",
                 "vengeful"
             ]
         },
