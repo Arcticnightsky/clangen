@@ -293,7 +293,6 @@
             "senior adult": 0,
             "senior": 0
         },
-        "illness_infectiousness": ,
         "illness_infectiousness": [
             {
                 "name": "tick fever",
