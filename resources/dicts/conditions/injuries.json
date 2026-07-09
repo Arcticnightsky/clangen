@@ -301,7 +301,7 @@
             },
             {
                 "name": "tick fever",
-                "chance": 50
+                "chance": 35
             }
         ],
         "also_got": [],
