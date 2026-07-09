@@ -2862,7 +2862,7 @@
         },
         "m_c": {
             "status": ["warrior", "deputy", "leader"],
-            "relationship_status": ["adores"],
+            "relationship_status": ["adores", "mates"],
             "dies": true
         },
         "injury": [
@@ -3210,7 +3210,7 @@
         "tags": [
             "all_lives"
         ],
-        "frequency": 4,
+        "frequency": 3,
         "event_text": "m_c and r_c loved each other so much they could not be parted, even by death. c_n found their bodies still wrapped around each other in the morning.",
         "m_c": {
             "age": [
@@ -9655,7 +9655,7 @@
                 "hostile",
                 "neutral"
             ],
-            "changed": -2
+            "changed": -6
         }
     },
     {
@@ -9845,5 +9845,126 @@
         }
 
     ]
+},
+    {
+        "event_id": "gen_death_newborn_death1",
+        "location": [
+            "any"
+        ],
+        "season": [
+            "any"
+        ],
+        "tags": ["clan: medicine cat"],
+        "frequency": 2,
+        "event_text": "As the medicine cat looks over r_c's newborn litter one last time, they noticed something was very off... little m_c hasn't moved since {PRONOUN/m_c/subject} was birthed, nor did {PRONOUN/m_c/subject} have a pulse... After a few unsuccessful attempts of reviving the kit, a heartbreaking realization dawns over the medicine cat and r_c: m_c was stillborn.",
+        "m_c": {
+            "age": [
+                "newborn"
+            ],
+            "status": [
+                "newborn"
+            ],
+		    "relationship_constraint": [
+			    "child/parent"
+		    ],
+            "dies": true
+        },
+        "r_c": {
+            "age": [
+                "young adult",
+                "adult",
+                "senior adult",
+                "senior"
+            ],
+        "has_injuries": {
+            "r_c": [
+                "recovering from birth"
+            ]
+		  }
+        },
+        "history": [
+            {
+                "cats": [
+                    "m_c"
+                ],
+                "death": "m_c was stillborn."
+            }
+        ]
+    },
+    {
+        "event_id": "gen_death_newborn_death2",
+        "location": [
+            "any"
+        ],
+        "season": [
+            "any"
+        ],
+        "tags": [],
+        "frequency": 1,
+        "event_text": "r_c knew that m_c was smaller than a typical newborn kit, but she didn't expect m_c to have been so weak that {PRONOUN/m_c/subject}'d be sent to Starclan not even an hour after birth... r_c wails in agony as m_c's tiny body is moved for {PRONOUN/m_c/poss} vigil.",
+        "m_c": {
+            "age": [
+                "newborn"
+            ],
+            "status": [
+                "newborn"
+            ],
+		    "relationship_constraint": [
+			    "child/parent"
+		    ],
+            "dies": true
+        },
+        "r_c": {
+            "age": [
+                "young adult",
+                "adult",
+                "senior adult",
+                "senior"
+            ],
+        "has_injuries": {
+            "r_c": [
+                "recovering from birth"
+            ]
+		  }
+        },
+        "history": [
+            {
+                "cats": [
+                    "m_c"
+                ],
+                "death": "m_c died shortly after birth."
+            }
+        ]
+    },
+    {
+        "event_id": "gen_death_age_any6",
+        "location": [
+            "any"
+        ],
+        "season": [
+            "any"
+        ],
+        "sub_type": [
+            "old_age"
+        ],
+        "tags": [
+            "all_lives"
+        ],
+        "frequency": 4,
+        "event_text": "m_c has lived a long life filled with many memories, good and bad. {PRONOUN/m_c/subject/CAP} is grateful to have been a part of such a wonderful Clan, but {PRONOUN/m_c/subject} knows {PRONOUN/m_c/poss} time here is up. m_c closes {PRONOUN/m_c/poss} eyes one final time with no regrets, letting death claim {PRONOUN/m_c/object} for the first and last time.",
+        "m_c": {
+            "age": [
+                "senior"
+            ],
+            "dies": true
+        },
+        "history": [
+            {
+                "cats": [
+                    "m_c"
+                ],
+                "death": "m_c died of old age."
+            }
+        ]
 }
 ]

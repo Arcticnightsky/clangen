@@ -17,7 +17,9 @@ from scripts.events_module.event_filters import (
     get_highest_romantic_relation,
     get_personality_compatibility,
 )
-
+from scripts.events_module.relationship.romance_chance import (
+    passes_same_sex_romance_chance,
+)
 
 class RomanticEvents:
     """
@@ -304,6 +306,9 @@ class RomanticEvents:
         ):
             return False
 
+        if not passes_same_sex_romance_chance(cat_from, cat_to):
+            return False
+        
         alive_inclan_from_mates = [
             mate for mate in cat_from.mate if cat_from.status.alive_in_player_clan
         ]
@@ -430,6 +435,9 @@ class RomanticEvents:
         if cat_from.ID in cat_to.mate:
             return False, None
 
+        if not passes_same_sex_romance_chance(cat_from, cat_to):
+            return False, None
+        
         # Gather relationships
         if cat_to.ID in cat_from.relationships:
             relationship_from = cat_from.relationships[cat_to.ID]

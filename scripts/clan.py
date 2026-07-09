@@ -1450,7 +1450,7 @@ class OtherClan:
 
     def __repr__(self):
         # has indicators that this is unlocalized, just in case
-        return f"!!{self.name}Clan!!"
+        return f"{self.name}Clan"
 
     def get_standing(self) -> Literal["ally", "neutral", "hostile"]:
         """

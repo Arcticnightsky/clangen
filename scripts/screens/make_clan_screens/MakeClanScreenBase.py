@@ -10,7 +10,7 @@ import pygame_gui
 from scripts.cat import save_load
 from scripts.cat.cats import Cat, create_cat
 from scripts.cat.enums import CatAge, CatRank, CatSocial, CatGroup
-from scripts.cat.names import names
+from scripts.cat.names import Name
 from scripts.cat.status import Status
 from scripts.clan import Clan
 from scripts.clan_package.clan_names import get_possible_clan_names
@@ -308,7 +308,7 @@ class MakeClanScreenBase(Screens):
                     weights = constants.CONFIG["cat_name_controls"]["rogue"]
 
                 selected_category = choices(name_categories, weights, k=1)[0]
-                name = choice(names.names_dict[selected_category])
+                name = choice(Name.get_category(selected_category))
                 c.change_name(new_prefix=name, new_suffix="")
 
                 # add back to all_cats, cus they get removed during `create_clan()`
