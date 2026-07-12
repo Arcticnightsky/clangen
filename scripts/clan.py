@@ -25,7 +25,10 @@ from scripts.cat.save_load import (
 )
 from scripts.clan_package.clan_names import get_possible_clan_names
 from scripts.clan_package.settings import save_clan_settings, load_clan_settings
-from scripts.clan_package.settings.clan_settings import reset_loaded_clan_settings
+from scripts.clan_package.settings.clan_settings import (
+    reset_loaded_clan_settings,
+    set_clan_setting,
+)
 from scripts.clan_resources.freshkill import FreshkillPile, Nutrition
 from scripts.clan_resources.herb.herb_supply import HerbSupply
 from scripts.clan_resources.point_of_interest import (
@@ -136,7 +139,11 @@ class Clan:
         # Reputation is for loners/kittypets/outsiders in general that wish to join the clan.
         # it's a range from 1-100, with 30-70 being neutral, 71-100 being "welcoming",
         # and 1-29 being "hostile". if you're hostile to outsiders, they will VERY RARELY show up.
-        self._reputation = 80
+        self._reputation = get_config(
+            "outsiders.starting_reputation",
+            creating_clan=True,
+            card_list_override=self.cruel_cards,
+        )
 
         self.all_other_clans: list[OtherClan] = []
         self.other_clan_IDs = []
@@ -165,10 +172,14 @@ class Clan:
 
     @property
     def current_season(self):
-        modifiers = {"Newleaf": 0, "Greenleaf": 3, "Leaf-fall": 6, "Leaf-bare": 9}
+        season_length = get_config("seasons.length")
+        modifiers = {
+            season: i * season_length
+            for i, season in enumerate(get_config("seasons.calendar"))
+        }
         return (
             self.starting_season
-            if constants.CONFIG["lock_season"]
+            if get_config("seasons.lock_season")
             else constants.SEASON_CALENDAR[
                 (self.age + modifiers[self.starting_season]) % 12
             ]
@@ -320,6 +331,36 @@ class Clan:
         if switch_get_value(Switch.game_mode) == "":
             switch_set_value(Switch.game_mode, "classic")
             self.game_mode = "classic"
+
+        # makes sure all the settings are at their starting positions
+        self._adjust_settings()
+
+    @staticmethod
+    def _adjust_settings():
+        """
+        Make sure settings are at their starting positions as dictated in the game_config
+        """
+        # deputy
+        if get_config("settings.force_enable.deputy"):
+            set_clan_setting("deputy", True)
+            save_clan_settings()
+
+        # feeding order
+        starting_order = get_config("prey.feeding.starting_order")
+        for setting in [
+            "low_rank",
+            "high_rank",
+            "youngest_first",
+            "oldest_first",
+            "hungriest_first",
+            "experience_first",
+        ]:
+            set_clan_setting(setting, True if starting_order == setting else False)
+
+        # feeding priority
+        starting_priority = get_config("prey.feeding.starting_priority")
+        for setting in ["hunter_first", "sick_injured_first"]:
+            set_clan_setting(setting, True if starting_priority == setting else False)
 
     def add_cat(self, cat):  # cat is a 'Cat' object
         """Adds cat into the list of clan cats"""
@@ -820,7 +861,7 @@ class Clan:
             for ID in game.used_group_IDs:
                 game.used_group_IDs[ID] = CatGroup(game.used_group_IDs[ID])
 
-        game.clan.reputation = max(0, min(100, int(clan_data["reputation"])))
+        game.clan.reputation = clan_data["reputation"]
 
         game.clan.age = clan_data["clanage"]
         game.clan.starting_season = (
@@ -1258,11 +1299,8 @@ class Clan:
 
     @reputation.setter
     def reputation(self, a: int):
-        self._reputation = int(a)
-        if self._reputation > 100:
-            self._reputation = 100
-        elif self._reputation < 0:
-            self._reputation = 0
+        rep = min(int(a), get_config("outsiders.max_reputation"))
+        self._reputation = max(rep, get_config("outsiders.min_reputation"))
 
     @property
     def temperament(self) -> tuple[str, str]:
