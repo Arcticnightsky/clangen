@@ -754,8 +754,13 @@ def handle_focus():
         if get_clan_setting("sabotage_other_clans"):
             amount = amount * -1
         for name in game.clan.clans_in_focus:
-            clan = [clan for clan in game.clan.all_other_clans if clan.name == name][0]
-            change_clan_relations(clan, amount)
+            clan = next(
+                (clan for clan in game.clan.all_other_clans if clan.name == name),
+                None
+            )
+
+            if clan is not None:
+                change_clan_relations(clan, amount)
         focus_text = None
 
     elif get_clan_setting("hoarding") or get_clan_setting("raid_other_clans"):
@@ -832,11 +837,14 @@ def handle_focus():
         # if it is raiding, lower the relation to other clans
         if get_clan_setting("raid_other_clans"):
             for name in game.clan.clans_in_focus:
-                clan = [
-                    clan for clan in game.clan.all_other_clans if clan.name == name
-                ][0]
-                amount = -constants.CONFIG["focus"]["raid_other_clans"]["relation"]
-                change_clan_relations(clan, amount)
+                clan = next(
+                    (clan for clan in game.clan.all_other_clans if clan.name == name),
+                    None
+                )
+
+                if clan is not None:
+                    amount = -constants.CONFIG["focus"]["raid_other_clans"]["relation"]
+                    change_clan_relations(clan, amount)
 
         # finish
         text_snippet = "hardcoded.focus_injury_hoarding"

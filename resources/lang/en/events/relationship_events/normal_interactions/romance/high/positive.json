@@ -365,7 +365,7 @@
                 ],
                 "mutual": false,
                 "constraints": [
-                    "mate"
+                    "mates"
                 ]
             }
         ],

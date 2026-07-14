@@ -84,6 +84,9 @@ dev_tools = true
 [mates]
   # permit player to change cat mates
   allow_manual = true
+  
+  # allow mates to happen
+  allow_mating = true
 
   # allow mates to happen
   allow_mating = true
@@ -558,7 +561,7 @@ dev_tools = true
   classic_illness_chance = 750
 
   # how much each medicine cat reduces the chance of infection, higher number is better
-  med_infection_reduction = 10
+  med_infection_reduction = 40
   # the seasons in which illnesses can spread. Fleas will always be able to spread in all seasons.
   illness_outbreak_season = ["Leaf-bare", "Leaf-fall"]
   # if there are more sick cats than this percentage of healthy cats then further outbreaks are prevented
@@ -623,7 +626,7 @@ dev_tools = true
 [outsiders]
   max_reputation = 100
   min_reputation = 0
-  starting_reputation = 80
+  starting_reputation = 50
 
   [outsiders.outside_ex]
     # base possible experience gain for cats outside the clan
@@ -787,7 +790,7 @@ dev_tools = true
 [clan_resources]
   [clan_resources.herbs]
     # set to True if the Clan should begin with no herbs
-    empty_starting_storage = false
+    empty_starting_storage = true
 
     # Clan size * required_herbs_per_cat / adequate number will determine adequate supply qualifier.
     # Clan size * required_herbs_per_cat * excess number will determine excess supply qualifier
@@ -863,7 +866,7 @@ dev_tools = true
   base_event_trigger_factor = 4
 
   # defines the amount of prey a Clan begins with
-  start_amount = 60
+  start_amount = 0
 
   # the amount of prey a healthy warrior will catch automatically each timeskip
   # amount will be chosen from the given range. default is 2-4 prey.
