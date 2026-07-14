@@ -85,6 +85,9 @@ dev_tools = true
   # permit player to change cat mates
   allow_manual = true
 
+  # allow mates to happen
+  allow_mating = true
+
   # maximum age difference allowed for cats to be romantic with each other
   age_range = 24
 
@@ -462,6 +465,14 @@ dev_tools = true
   lineart_color_sc = [47, 51, 64]
   lineart_color_df = [30, 8, 11]
 
+[thought_generation]
+  # the ID of the thoughts to ensure
+  debug_ensure_thought_id = ""
+  # if you want to ensure a specific string from the thought's options, include its index here.
+  # by default the first string will be used (index 0)
+  debug_ensure_thought_index = 0
+
+
 [patrol_generation]
   # modifies success rate based on game mode. higher = more difficult.
   classic_difficulty_modifier = 1
@@ -496,7 +507,7 @@ dev_tools = true
   debug_type_override = ""
 
   # forces specified event to occur regardless of if requirements are met
-  debug_override_requirements = ""
+  debug_override_requirements = false
 
   # forces the given frequency, frequency can be a number from 1-4
   debug_override_frequency = 0
@@ -506,11 +517,11 @@ dev_tools = true
   max_leader_lives = 9
 
   # base 1/chance that leader will die
-  leader_death_chance = 10
+  leader_death_chance = 50
 
   # base 1/chance a cat will die
-  classic_death_chance = 1000
-  expanded_death_chance = 950
+  classic_death_chance = 500
+  death_chance = 350
 
   # modifiers for death chance based on if a war is going badly
   # SUBTRACTS from the denominator so higher = more likely to die
@@ -795,7 +806,7 @@ dev_tools = true
     # quantity of herbs modifier for medcats with skill HUNTER
     primary_hunter = 3
     secondary_hunter = 2
-    
+
     # base effects for herbs that have specified effects
     base_mortality_effect = 5
     base_duration_effect = 1
@@ -991,3 +1002,12 @@ dev_tools = true
   # force a game setting to be true, stopping players from changing it
   [settings.force_enable]
     "deputy" = true
+
+[reputation]
+  # manages reputation quotas
+  [reputation.other_clans]
+  # caps for other clan reputation levels
+    relation_cap = 30
+    ally = 30
+    neutral = 17
+    hostile = 7

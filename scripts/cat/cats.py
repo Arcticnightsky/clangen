@@ -36,7 +36,6 @@ from scripts.cat.skills import SkillPath
 from scripts.cat.status import Status, StatusDict
 from scripts.config import get_config
 from scripts.events_module.thoughts.generate_thoughts import (
-    new_death_thought,
     new_thought,
     get_other_cat_for_thought,
 )
@@ -2857,6 +2856,10 @@ class Cat:
 
         # just to be sure, check if it is not the same cat
         if self.ID == other_cat.ID:
+            return False
+
+        # Config check
+        if not get_config("mates.allow_mating"):
             return False
 
         # No Mates Check
