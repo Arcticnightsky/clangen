@@ -554,7 +554,7 @@ dev_tools = true
 
 [condition_related]
   # 10/chance an illness will occur
-  expanded_illness_chance = 650
+  illness_chance = 650
   classic_illness_chance = 750
 
   # how much each medicine cat reduces the chance of infection, higher number is better
@@ -567,7 +567,7 @@ dev_tools = true
 
   # 5/chance (for most personalities) or 15/chance (for some personalities) an injury will occur 
   classic_injury_chance = 700
-  expanded_injury_chance = 600
+  injury_chance = 600
 
   # 1/chance a cat will get a permanent condition from an event with that possibility 
   permanent_condition_chance = 40
