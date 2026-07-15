@@ -1644,7 +1644,6 @@ def _is_suitable_medcat_app(cat) -> bool:
         "fierce",
         "rebellious",
         "troublesome",
-        "sneaky",
         "vengeful",
     ]:
         chance = chance * 2
