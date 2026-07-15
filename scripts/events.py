@@ -2301,7 +2301,7 @@ def handle_injuries_or_general_death(cat):
     path = (
         "death_related.classic_death_chance"
         if game.clan.game_mode == "classic"
-        else "death_related.expanded_death_chance"
+        else "death_related.death_chance"
     )
     death_chance = get_config(path) - (
         get_config("death_related.war_death_modifier") if use_war_modifier else 0
