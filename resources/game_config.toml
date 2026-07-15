@@ -478,8 +478,8 @@ dev_tools = true
 
 [patrol_generation]
   # modifies success rate based on game mode. higher = more difficult.
+  difficulty_modifier = 2.5
   classic_difficulty_modifier = 1
-  expanded_difficulty_modifier = 2
 
   # amount to modify patrol success based on patrol stats
   # increasing this value increases the NUMERATOR for success (denominator is fixed at 120)
