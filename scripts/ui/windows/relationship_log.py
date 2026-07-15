@@ -339,11 +339,101 @@ class RelationshipLogWindow(GameWindow):
             if other_cat.ID in cat.mate:
                 relation = f"{i18n.t('general.mate', count=1)}<br>"
             elif cat.is_parent(other_cat):
-                relation = f"{i18n.t('general.parent')}<br>"
+                is_adoptive_parent = cat.is_adoptive_parent(other_cat)
+                if cat.genderalign in ["female", "trans female"]:
+                    relation = (
+                        f"{i18n.t('general.adoptive_mother')}<br>"
+                        if is_adoptive_parent
+                        else f"{i18n.t('general.mother')}<br>"
+                    )
+                elif cat.genderalign in ["male", "trans male"]:
+                    relation = (
+                        f"{i18n.t('general.adoptive_father')}<br>"
+                        if is_adoptive_parent
+                        else f"{i18n.t('general.father')}<br>"
+                    )
+                else:
+                    relation = (
+                        f"{i18n.t('general.adoptive_parent')}<br>"
+                        if is_adoptive_parent
+                        else f"{i18n.t('general.parent')}<br>"
+                    )
             elif other_cat.is_parent(cat):
-                relation = f"{i18n.t('general.child')}<br>"
-            elif cat.is_sibling(other_cat):
-                relation = f"{i18n.t('general.sibling')}<br>"
+                is_adoptive_child = other_cat.is_adoptive_parent(cat)
+                if cat.genderalign in ["female", "trans female"]:
+                    relation = (
+                        f"{i18n.t('general.adoptive_daughter')}<br>"
+                        if is_adoptive_child
+                        else f"{i18n.t('general.daughter')}<br>"
+                    )
+                elif cat.genderalign in ["male", "trans male"]:
+                    relation = (
+                        f"{i18n.t('general.adoptive_son')}<br>"
+                        if is_adoptive_child
+                        else f"{i18n.t('general.son')}<br>"
+                    )
+                else:
+                    relation = (
+                        f"{i18n.t('general.adoptive_child')}<br>"
+                        if is_adoptive_child
+                        else f"{i18n.t('general.child')}<br>"
+                    )
+            elif cat.is_sibling(other_cat) or other_cat.is_sibling(cat):
+                if cat.is_half_sibling(other_cat) or other_cat.is_half_sibling(cat):
+                    if cat.genderalign in ["female", "trans female"]:
+                        relation = f"{i18n.t('general.half_sister')}<br>"
+                    elif cat.genderalign in ["male", "trans male"]:
+                        relation = f"{i18n.t('general.half_brother')}<br>"
+                    else:
+                        relation = f"{i18n.t('general.relation_HALF_BLOOD')}<br>"
+                elif cat.is_adoptive_sibling(other_cat) or other_cat.is_adoptive_sibling(cat):
+                    if cat.genderalign in ["female", "trans female"]:
+                        relation = f"{i18n.t("general.adoptive_sister")}<br>"
+                    elif cat.genderalign in ["male", "trans male"]:
+                         relation = f"{i18n.t("general.adoptive_brother")}<br>"
+                    else:
+                        relation = f"{i18n.t("general.adoptive_sibling")}<br>"
+                else:
+                    if cat.genderalign in ["female", "trans female"]:
+                        relation = f"{i18n.t('general.sister')}<br>"
+                    elif cat.genderalign in ["male", "trans male"]:
+                        relation = f"{i18n.t('general.brother')}<br>"
+                    else:
+                        relation = f"{i18n.t('general.sibling')}<br>"
+                        
+                if cat.is_littermate(other_cat) or cat.is_littermate(cat):
+                    relation = i18n.t(
+                        "general.sibling_littermate", relation=i18n.t(relation)
+                    )
+
+            elif cat.is_uncle_aunt(other_cat):
+                if cat.genderalign in ("female", "trans female"):
+                    relation = f"{i18n.t('general.aunt')}<br>"
+                elif cat.genderalign in ("male", "trans male"):
+                    relation = f"{i18n.t('general.uncle')}<br>"
+                else:
+                    relation = f"{i18n.t('general.parents_sibling')}<br>"
+            elif other_cat.is_uncle_aunt(cat):
+                if cat.genderalign in ("female", "trans female"):
+                    relation = f"{i18n.t('general.niece')}<br>"
+                elif cat.genderalign in ("male", "trans male"):
+                    relation = f"{i18n.t('general.nephew')}<br>"
+                else:
+                    relation = f"{i18n.t('general.siblings_child')}<br>"
+            elif cat.is_grandparent(other_cat):
+                if cat.genderalign in ("female", "trans female"):
+                    relation = f"{i18n.t("general.grandmother")}<br>"
+                elif self.inspect_cat.genderalign in ("male", "trans male"):
+                    relation = f"{i18n.t("general.grandfather")}<br>"
+                else:
+                    relation = relation = f"{i18n.t("general.grandparent")}<br>"
+            elif other_cat.is_grandparent(cat):
+                if cat.genderalign in ("female", "trans female"):
+                    relation = f"{i18n.t("general.granddaughter")}<br>"
+                elif cat.genderalign in ("male", "trans male"):
+                    relation = f"{i18n.t("general.grandson")}<br>"
+                else:
+                    relation = f"{i18n.t("general.grandchild")}<br>"
             # any relations more complex just get "related" text for my sanity
             elif cat.is_related(other_cat, False):
                 relation = f"{i18n.t('general.related_text')}<br>"

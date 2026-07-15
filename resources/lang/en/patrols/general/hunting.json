@@ -6658,7 +6658,7 @@
                 "frequency": 4
             },
             {
-                "text": "A Twoleg spots s_c and crouches down, clicking softly. s_c pauses — are they hurt? Do they want to make friends? Before {PRONOUN/s_c/subject} can decide whether to step closer, there's a swoosh, and a net falls around {PRONOUN/r_c/object}. s_c fights desperately, but the Twolegs take {PRONOUN/r_c/object} away in the monster.",
+                "text": "A Twoleg spots s_c and crouches down, clicking softly. s_c pauses — are they hurt? Do they want to make friends? Before {PRONOUN/s_c/subject} can decide whether to step closer, there's a swoosh, and a net falls around {PRONOUN/s_c/object}. s_c fights desperately, but the Twolegs take {PRONOUN/s_c/object} away in the monster.",
                 "exp": 0,
                 "stat_trait": [
                     "compassionate",
