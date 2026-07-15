@@ -363,19 +363,19 @@ class RelationshipLogWindow(GameWindow):
                 if cat.genderalign in ["female", "trans female"]:
                     relation = (
                         f"{i18n.t('general.adoptive_daughter')}<br>"
-                        if is_adoptive_parent
+                        if is_adoptive_child
                         else f"{i18n.t('general.daughter')}<br>"
                     )
                 elif cat.genderalign in ["male", "trans male"]:
                     relation = (
                         f"{i18n.t('general.adoptive_son')}<br>"
-                        if is_adoptive_parent
+                        if is_adoptive_child
                         else f"{i18n.t('general.son')}<br>"
                     )
                 else:
                     relation = (
                         f"{i18n.t('general.adoptive_child')}<br>"
-                        if is_adoptive_parent
+                        if is_adoptive_child
                         else f"{i18n.t('general.child')}<br>"
                     )
             elif cat.is_sibling(other_cat) or other_cat.is_sibling(cat):
