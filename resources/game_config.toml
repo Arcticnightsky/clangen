@@ -84,9 +84,6 @@ dev_tools = true
 [mates]
   # permit player to change cat mates
   allow_manual = true
-  
-  # allow mates to happen
-  allow_mating = true
 
   # allow mates to happen
   allow_mating = true
