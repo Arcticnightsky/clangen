@@ -19381,7 +19381,7 @@
         ],
         "patrol_art": "med_general_intro",
         "min_cats": 2,
-        "max_cats": 6,
+        "max_cats": 2,
         "min_max_status": {
             "healer cats": [
                 1,
@@ -19780,7 +19780,7 @@
                 "history_text": {
                     "death": "m_c froze to death after getting stuck in a snowbank."
                 },
-                "frequency": 2
+                "frequency": 1
             }
         ]
     },
@@ -20082,7 +20082,7 @@
                 "history_text": {
                     "death": "m_c froze to death after getting stuck in a snowbank."
                 },
-                "frequency": 2
+                "frequency": 1
             },
             {
                 "text": "Under {PRONOUN/app1/poss} mentor's orders, app1 carefully edges out onto a slippery, frozen rock, trying to get closer to a branch of blackberry leaves that are still green. {PRONOUN/app1/subject/CAP} {VERB/app1/overbalance/overbalances}, falling into a deep snowbank that {PRONOUN/app1/subject} just can't seem to claw {PRONOUN/app1/poss} way out of, even with p_l's help.",
@@ -20133,7 +20133,7 @@
                         }
                     }
                 ],
-                "frequency": 2
+                "frequency": 1
             },
             {
                 "text": "The duo carefully edges out onto a slippery, frozen rock, trying to get closer to a branch of blackberry leaves that are still green. However, p_l loses {PRONOUN/p_l/poss} footing and crashes into app1, causing both cats to fall into a deep snowbank that they emerge from with deep shivers racking their bodies.",
@@ -20460,7 +20460,7 @@
                 "history_text": {
                     "death": "m_c froze to death after getting stuck in a snowbank."
                 },
-                "frequency": 2
+                "frequency": 1
             },
             {
                 "text": "r_c carefully edges out onto a slippery, frozen rock, trying to get closer to a branch of blackberry leaves that are still green. {PRONOUN/r_c/subject/CAP} {VERB/r_c/overbalance/overbalances}, falling into a deep snowbank that {PRONOUN/r_c/subject} just can't seem to claw {PRONOUN/r_c/poss} way out of, even with the other cats' help.",
@@ -20471,7 +20471,7 @@
                 "history_text": {
                     "death": "m_c froze to death after getting stuck in a snowbank."
                 },
-                "frequency": 2
+                "frequency": 1
             }
         ]
     },
@@ -20564,7 +20564,7 @@
                 "history_text": {
                     "death": "m_c froze to death searching for burdock in leaf-bare."
                 },
-                "frequency": 2
+                "frequency": 1
             }
         ]
     },
@@ -20787,7 +20787,7 @@
                 "history_text": {
                     "death": "m_c froze to death searching for burdock in leaf-bare."
                 },
-                "frequency": 2
+                "frequency": 1
             },
             {
                 "text": "The patrol digs and digs and digs, but eventually has to admit failure and give up the search for burdock root. The cold has leached all the heat from app1's pelt, and even with p_l's help, {PRONOUN/app1/subject} just {VERB/app1/don't/doesn't} have the energy to make it back to camp.",
@@ -20838,7 +20838,7 @@
                         }
                     }
                 ],
-                "frequency": 2
+                "frequency": 1
             },
             {
                 "text": "The patrol digs and digs and digs, but eventually has to admit failure and give up the search for burdock root. Both cats are shivering and chilled to the bone by the time they return to camp, empty-pawed and miserable.",
@@ -21062,7 +21062,7 @@
                     "scar": "m_c was scarred by frostbite after searching for burdock in leaf-bare.",
                     "death": "m_c died of frostbite after searching for burdock in leaf-bare."
                 },
-                "frequency": 3
+                "frequency": 1
             },
             {
                 "text": "The patrol digs and digs and digs, but eventually has to admit failure and give up the search for burdock root. p_l in particular is shivering and chilled to the bone by the time {PRONOUN/p_l/subject} {VERB/p_l/return/returns}, empty-pawed and miserable.",
@@ -21081,7 +21081,7 @@
                     "scar": "m_c was scarred by frostbite after searching for burdock in leaf-bare.",
                     "death": "m_c died of frostbite after searching for burdock in leaf-bare."
                 },
-                "frequency": 3
+                "frequency": 1
             },
             {
                 "text": "The patrol digs and digs and digs, but eventually has to admit failure and give up the search for burdock root. The cold has leached all the heat from r_c's pelt, and even with the other cats' help, {PRONOUN/r_c/subject} just {VERB/r_c/don't/doesn't} have the energy to make it back to camp.",
@@ -21092,7 +21092,7 @@
                 "history_text": {
                     "death": "m_c died of frostbite after searching for burdock in leaf-bare."
                 },
-                "frequency": 2
+                "frequency": 1
             },
             {
                 "text": "The patrol digs and digs and digs, but eventually has to admit failure and give up the search for burdock root. The cold has leached all the heat from p_l's pelt, and even with the other cats' help, {PRONOUN/p_l/subject} just {VERB/p_l/don't/doesn't} have the energy to make it back to camp.",
@@ -21103,7 +21103,7 @@
                 "history_text": {
                     "death": "m_c died of frostbite after searching for burdock in leaf-bare."
                 },
-                "frequency": 2
+                "frequency": 1
             }
         ]
     },
@@ -21185,7 +21185,7 @@
                     "scar": "m_c was scarred by frostbite after searching for daisies in leaf-bare.",
                     "death": "m_c died of frostbite after searching for daisies in leaf-bare."
                 },
-                "frequency": 3
+                "frequency": 1
             },
             {
                 "text": "Not only does p_l end up soaked to the skin, {PRONOUN/p_l/subject} can't even find any daisies under the snow. Left exhausted after the fruitless search, p_l collapses on {PRONOUN/p_l/poss} way back to camp, and is unable to get up no matter how hard {PRONOUN/p_l/subject} {VERB/p_l/try/tries}.",
@@ -21196,7 +21196,7 @@
                 "history_text": {
                     "death": "m_c froze to death searching for daisies in leaf-bare."
                 },
-                "frequency": 2
+                "frequency": 1
             }
         ]
     },
@@ -21372,7 +21372,7 @@
                     "scar": "m_c was scarred by frostbite after searching for daisies in leaf-bare.",
                     "death": "m_c died of frostbite after searching for daisies in leaf-bare."
                 },
-                "frequency": 3
+                "frequency": 1
             },
             {
                 "text": "Not only do p_l and app1 end up soaked to the skin, but they also don't end up finding any daisies under the snow either! p_l in particular is shivering and chilled to the bone by the time {PRONOUN/p_l/subject} and app1 return to camp. What a terrible, horrible, no good, very bad day.",
@@ -21391,7 +21391,7 @@
                     "scar": "m_c was scarred by frostbite after searching for daisies in leaf-bare.",
                     "death": "m_c died of frostbite after searching for daisies in leaf-bare."
                 },
-                "frequency": 3
+                "frequency": 1
             },
             {
                 "text": "Not only do p_l and app1 end up soaked to the skin, but they also don't end up finding any daisies under the snow either! The cold has leached all the heat from app1's pelt, and even with p_l's help, {PRONOUN/app1/subject} just {VERB/app1/don't/doesn't} have the energy to make it back to camp.",
@@ -21442,7 +21442,7 @@
                         }
                     }
                 ],
-                "frequency": 2
+                "frequency": 1
             },
             {
                 "text": "Not only do p_l and app1 end up soaked to the skin, but they also don't end up finding any daisies under the snow either! The cold has leached all the heat from p_l's pelt, and even with app1's help, {PRONOUN/p_l/subject} just {VERB/p_l/don't/doesn't} have the energy to make it back to camp.",
@@ -21453,7 +21453,7 @@
                 "history_text": {
                     "death": "m_c froze to death searching for daisies in leaf-bare."
                 },
-                "frequency": 2
+                "frequency": 1
             },
             {
                 "text": "Not only do p_l and app1 end up soaked to the skin, but they also don't end up finding any daisies under the snow either! By the time they return to camp, both cats are shivering and chilled to the bone. What a terrible, horrible, no good, very bad day.",
@@ -21472,7 +21472,7 @@
                     "scar": "m_c was scarred by frostbite after searching for daisies in leaf-bare.",
                     "death": "m_c died of frostbite after searching for daisies in leaf-bare."
                 },
-                "frequency": 2
+                "frequency": 1
             },
             {
                 "text": "Not only do p_l and app1 end up soaked to the skin, but they also don't end up finding any daisies under the snow either! The cold has leached all the heat from their pelts, and neither cat has the energy to make it back to camp.",
@@ -21646,7 +21646,7 @@
                     "scar": "m_c was scarred by frostbite after searching for daisies in leaf-bare.",
                     "death": "m_c died of frostbite after searching for daisies in leaf-bare."
                 },
-                "frequency": 3
+                "frequency": 1
             },
             {
                 "text": "Not only does the patrol end up soaked to the skin, but they also don't end up finding any daisies under the snow either! p_l in particular is shivering and chilled to the bone by the time {PRONOUN/p_l/subject} and the others return to camp. What a terrible, horrible, no good, very bad day.",
@@ -21665,7 +21665,7 @@
                     "scar": "m_c was scarred by frostbite after searching for daisies in leaf-bare.",
                     "death": "m_c died of frostbite after searching for daisies in leaf-bare."
                 },
-                "frequency": 3
+                "frequency": 1
             },
             {
                 "text": "Not only does the patrol end up soaked to the skin, but they also don't end up finding any daisies under the snow either! The cold has leached all the heat from r_c's pelt, and even with the other cats' help, {PRONOUN/r_c/subject} just {VERB/r_c/don't/doesn't} have the energy to make it back to camp.",
@@ -21676,7 +21676,7 @@
                 "history_text": {
                     "death": "m_c died of frostbite after searching for daisies in leaf-bare."
                 },
-                "frequency": 2
+                "frequency": 1
             },
             {
                 "text": "Not only does the patrol end up soaked to the skin, but they also don't end up finding any daisies under the snow either! The cold has leached all the heat from p_l's pelt, and even with the other cats' help, {PRONOUN/p_l/subject} just {VERB/p_l/don't/doesn't} have the energy to make it back to camp.",
@@ -21687,7 +21687,7 @@
                 "history_text": {
                     "death": "m_c died of frostbite after searching for daisies in leaf-bare."
                 },
-                "frequency": 2
+                "frequency": 1
             }
         ]
     },
@@ -21783,7 +21783,7 @@
                 "history_text": {
                     "death": "m_c froze to death searching for dandelions in leaf-bare."
                 },
-                "frequency": 2
+                "frequency": 1
             }
         ]
     },
@@ -22048,7 +22048,7 @@
                         }
                     }
                 ],
-                "frequency": 2
+                "frequency": 1
             },
             {
                 "text": "Not only do p_l and app1 end up soaked to the skin, but they also don't end up finding any dandelions under the snow either! The cold has leached all the heat from p_l's pelt, and even with app1's help, {PRONOUN/p_l/subject} just {VERB/p_l/don't/doesn't} have the energy to make it back to camp.",
@@ -22322,7 +22322,7 @@
                 "history_text": {
                     "death": "m_c died of frostbite after searching for dandelions in leaf-bare."
                 },
-                "frequency": 2
+                "frequency": 1
             },
             {
                 "text": "Not only does the patrol end up soaked to the skin, but they also don't end up finding any dandelions under the snow either! The cold has leached all the heat from p_l's pelt, and even with the other cats' help, {PRONOUN/p_l/subject} just {VERB/p_l/don't/doesn't} have the energy to make it back to camp.",
@@ -22333,7 +22333,7 @@
                 "history_text": {
                     "death": "m_c died of frostbite after searching for dandelions in leaf-bare."
                 },
-                "frequency": 2
+                "frequency": 1
             }
         ]
     },
@@ -22427,7 +22427,7 @@
                 "history_text": {
                     "death": "m_c died after falling from a juniper tree, trying to harvest its leaves in the cold snow of leaf-bare."
                 },
-                "frequency": 2
+                "frequency": 1
             }
         ]
     },
@@ -22694,7 +22694,7 @@
                 "history_text": {
                     "death": "m_c died after falling from a juniper tree, trying to harvest its leaves in the cold snow of leaf-bare."
                 },
-                "frequency": 2
+                "frequency": 1
             },
             {
                 "text": "p_l, edging out onto a skinny branch to try to get some juniper leaves, slips on the frosted wood and plummets off the tree, hitting the ground hard and dying on impact.",
@@ -22705,7 +22705,7 @@
                 "history_text": {
                     "death": "m_c died after falling from a juniper tree, trying to harvest its leaves in the cold snow of leaf-bare."
                 },
-                "frequency": 2
+                "frequency": 1
             },
             {
                 "text": "The duo carefully edges out onto a skinny branch to try to get some juniper leaves. However, the branch is not strong enough to hold their combined weight and snaps, sending them both plummeting to the ground and causing them to die on impact.",
@@ -22931,7 +22931,7 @@
                 "history_text": {
                     "death": "m_c died after falling from a juniper tree, trying to harvest its leaves in the cold snow of leaf-bare."
                 },
-                "frequency": 2
+                "frequency": 1
             },
             {
                 "text": "p_l, edging out onto a skinny branch to try to get some juniper leaves, slips on the frosted wood and plummets off the tree, hitting the ground hard and dying on impact.",
@@ -22942,7 +22942,7 @@
                 "history_text": {
                     "death": "m_c died after falling from a juniper tree, trying to harvest its leaves in the cold snow of leaf-bare."
                 },
-                "frequency": 2
+                "frequency": 1
             }
         ]
     },
@@ -30287,16 +30287,10 @@
         ],
         "patrol_art": "med_general_intro",
         "min_cats": 2,
-        "max_cats": 6,
+        "max_cats": 2,
         "min_max_status": {
-            "healer cats": [
-                1,
-                6
-            ],
-            "normal adult": [
-                1,
-                6
-            ]
+            "medicine cat": [1, 1],
+            "normal adult": [1, 1]
         },
         "frequency": 4,
         "intro_text": "p_l goes out with a warrior escort, both for safety as {PRONOUN/p_l/subject} {VERB/p_l/try/tries} to stock up under the clear leaf-fall skies, and for carrying capacity should {PRONOUN/p_l/subject} find anything.",
