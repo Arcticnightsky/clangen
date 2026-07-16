@@ -194,7 +194,20 @@ dev_tools = false
       romance = -20
       comfort = -10
       respect = 10
+    [mates.breakup.reactions.affair_discovery_mate_reaction]
+      romance = -50
+      trust = -30
+      like = -40
+    [mates.breakup.reactions.affair_discovery_other_mate_reaction]
+      romance = -50
+      trust = -30
+      like = -40
 
+    # the chance for a break up to happen after an affair has been discovered
+    # any number lower than this increases the likelyhood of a break up
+    affair_breakup_chance = 0.8
+
+    
 
 [new_cat]
   # number of welcoming events to add when a new cat joins
@@ -240,6 +253,12 @@ dev_tools = false
       comfort = 40
       trust = 30
 
+    # default relationships buff for a newborn's relationship towards one of their littermates
+    [new_cat.sib_buff.littermates_to_eachother]
+      like = 20
+      comfort = 10
+      trust = 10
+
   [new_cat.rel_buff]
     # default relationships buff for new cats relationships to other cats in the clan
     [new_cat.rel_buff.new_to_clan_cat]
@@ -262,13 +281,13 @@ dev_tools = false
   birth_cooldown = 6
 
   # 1/chance that kits, relationship and other factors will influence this chance
-  primary_chance_mated = 10
+  primary_chance_mated = 80
 
   # 1/chance that kits, relationship and other factors will influence this chance
-  primary_chance_unmated = 10
+  primary_chance_unmated = 130
 
   # 1/chance that a mated cat has an affair
-  random_affair_chance = 10
+  random_affair_chance = 50
 
   # 1/chance for an unmated cat to have an affair (coparenting)
   # for this check, only other unmated cats can be the affair partner
@@ -316,6 +335,10 @@ dev_tools = false
     adult = 0
     "senior adult" = 0
     senior = 0
+
+  # the base chance a cat who's been cheated on will help raise their mate's kits after an affair
+  # by default, the chance is 40% and the range is from 0-100%, any value higher or lower will be capped
+  base_kit_claim_chance = 40
 
 [cat_generation]
   # base 1/chance that a cat will generate with a permanent condition. gets modified further in code
