@@ -236,6 +236,14 @@ dev_tools = false
       comfort = 70
       trust = 60
 
+    # default relationship buff for an absent parent towards their kits
+    [new_cat.parent_buff.absent_parent_to_kit]
+      romance = 0
+      like = 0
+      respect = 0
+      comfort = -10
+      trust = 0
+
   [new_cat.sib_buff]
     # default relationships buff for siblings' relationships in one direction
     [new_cat.sib_buff.cat1_to_cat2]
@@ -281,13 +289,13 @@ dev_tools = false
   birth_cooldown = 6
 
   # 1/chance that kits, relationship and other factors will influence this chance
-  primary_chance_mated = 80
+  primary_chance_mated = 10
 
   # 1/chance that kits, relationship and other factors will influence this chance
-  primary_chance_unmated = 130
+  primary_chance_unmated = 10
 
   # 1/chance that a mated cat has an affair
-  random_affair_chance = 50
+  random_affair_chance = 10
 
   # 1/chance for an unmated cat to have an affair (coparenting)
   # for this check, only other unmated cats can be the affair partner
