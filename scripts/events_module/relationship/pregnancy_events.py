@@ -104,9 +104,10 @@ class Pregnancy_Events:
             mate = Cat.fetch_cat(mate_id)
             if not mate:
                 continue
-            if include_dead:
-                if mate.dead:
-                    return mate
+            if include_dead and mate.dead:
+                return mate
+            if not include_dead and not mate.dead:
+                return mate
         return None
 
     @staticmethod
@@ -832,7 +833,7 @@ class Pregnancy_Events:
             # including the dead mate version
             # because of a bug where the game can't find any birthing events
             # if the cheated mate is dead
-            elif dead_mate:
+            else:
                 cat_dict["mc_mate"] = dead_mate
                 involved_cats.append(dead_mate.ID)
                 event_list.append(choice(events["birth"]["affair_mated_dead_mate"]))
@@ -856,6 +857,11 @@ class Pregnancy_Events:
                     event_list.append(choice(events["birth"]["affair"]))
                 else:
                     event_list.append(choice(events["birth"]["affair_secret"]))
+            # just in case if the other cat's mate is dead
+            else:
+                involved_cats.append(other_cat.ID)
+                cat_dict["r_c"] = other_cat
+                event_list.append(choice(events["birth"]["both_unmated_pos"]))
 
         else:
             event_list.append(choice(events["birth"]["unmated_parent"]))
