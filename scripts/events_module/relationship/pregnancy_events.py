@@ -174,7 +174,7 @@ class Pregnancy_Events:
     ):
         """Store whether an affair was explicitly announced in pregnancy data."""
         target_cat = cat or pregnant_cat
-        if not target_cat or not clan:
+        if not target_cat or not game.clan:
             return
         pregnancy = game.clan.pregnancy_data.get(target_cat.ID)
         if pregnancy is None:
@@ -365,7 +365,7 @@ class Pregnancy_Events:
 
         amount = Pregnancy_Events.get_amount_of_kits(cat)
         kits = Pregnancy_Events.get_kits(
-            amount, None, None, clan, adoptive_parents=adoptive_parents
+            amount, None, None, game.clan, adoptive_parents=adoptive_parents
         )
 
         event = "hardcoded.adoption_kittens_single"
@@ -455,7 +455,7 @@ class Pregnancy_Events:
             # the pregnancy will be announced as normal
             if other_cat and other_cat.ID in cat.mate:
                 text, involved_cats = Pregnancy_Events.create_pregnancy_announcement(
-                    cat, "announcement", clan, random_cat=other_cat
+                    cat, "announcement", game.clan, random_cat=other_cat
                 )
             # if the pregnant cat is single and had a fling with a random cat, let them
             # announce their surprise pregnancy and leave the Clan and player pointing
@@ -482,12 +482,12 @@ class Pregnancy_Events:
                 )
                 random_cat = mate[0]
                 text, involved_cats = Pregnancy_Events.create_pregnancy_announcement(
-                    cat, announcement_key, clan, random_cat=random_cat
+                    cat, announcement_key, game.clan, random_cat=random_cat
                 )
             # if all else fails, just a regular announcement happens
             else:
                 text, involved_cats = Pregnancy_Events.create_pregnancy_announcement(
-                    cat, "announcement", clan, random_cat=other_cat
+                    cat, "announcement", game.clan, random_cat=other_cat
                 )
             game.cur_events_list.append(
                 Single_Event(text, "birth_death", involved_cats)
@@ -536,7 +536,7 @@ class Pregnancy_Events:
             # the pregnancy will be announced as normal
             if second_parent and second_parent.ID in pregnant_cat.mate:
                 text, involved_cats = Pregnancy_Events.create_pregnancy_announcement(
-                    pregnant_cat, "announcement", clan, random_cat=second_parent
+                    pregnant_cat, "announcement", game.clan, random_cat=second_parent
                 )
             # if the pregnant cat is single and had a fling with a random cat, let them
             # announce their surprise pregnancy and leave the Clan and player pointing
@@ -577,12 +577,12 @@ class Pregnancy_Events:
                 )
                 random_cat = amab_mate[0] if amab_mate else None
                 text, involved_cats = Pregnancy_Events.create_pregnancy_announcement(
-                    pregnant_cat, announcement_key, clan, random_cat=random_cat
+                    pregnant_cat, announcement_key, game.clan, random_cat=random_cat
                 )
             # if all else fails, just a regular announcement happens
             else:
                 text, involved_cats = Pregnancy_Events.create_pregnancy_announcement(
-                    pregnant_cat, "announcement", clan, random_cat=second_parent
+                    pregnant_cat, "announcement", game.clan, random_cat=second_parent
                 )
             game.cur_events_list.append(
                 Single_Event(text, "birth_death", involved_cats)
@@ -705,7 +705,7 @@ class Pregnancy_Events:
                         adoptive_parents.append(cheated_mate.ID)
         coparenting_outcome = None
         kits = Pregnancy_Events.get_kits(
-            kits_amount, cat, other_cat, clan, adoptive_parents=adoptive_parents
+            kits_amount, cat, other_cat, game.clan, adoptive_parents=adoptive_parents
         )
         kits_amount = len(kits)
         Pregnancy_Events.set_biggest_family()
