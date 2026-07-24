@@ -289,16 +289,16 @@ dev_tools = false
   birth_cooldown = 6
 
   # 1/chance that kits, relationship and other factors will influence this chance
-  primary_chance_mated = 10
+  primary_chance_mated = 1
 
   # 1/chance that kits, relationship and other factors will influence this chance
-  primary_chance_unmated = 10
+  primary_chance_unmated = 1
   # 1/chance that a mated cat has an affair
-  random_affair_chance = 10
+  random_affair_chance = 1
 
   # 1/chance for an unmated cat to have an affair (coparenting)
   # for this check, only other unmated cats can be the affair partner
-  unmated_random_affair_chance = 10
+  unmated_random_affair_chance = 1
 
   # The kit number is incremental. It is 1-6 as default so if you change these numbers, you should probably keep this in mind.
   # As in, your max kits number should probably be 5 more than the min kits number.
