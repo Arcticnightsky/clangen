@@ -477,8 +477,7 @@ class Pregnancy_Events:
                 announcement_key = choice(["announcement_affair", "announcement"])
                 Pregnancy_Events.set_affair_visibility_on_pregnancy(
                     cat,
-                    announcement_key == "announcement_affair",
-                    clan=game.clan,
+                    announcement_key == "announcement_affair"
                 )
                 random_cat = mate[0]
                 text, involved_cats = Pregnancy_Events.create_pregnancy_announcement(
@@ -571,8 +570,7 @@ class Pregnancy_Events:
                 announcement_key = choice(["announcement_affair", "announcement"])
                 Pregnancy_Events.set_affair_visibility_on_pregnancy(
                     pregnant_cat,
-                    announcement_key == "announcement_affair",
-                    clan=game.clan,
+                    announcement_key == "announcement_affair"
                 )
                 random_cat = amab_mate[0] if amab_mate else None
                 text, involved_cats = Pregnancy_Events.create_pregnancy_announcement(
