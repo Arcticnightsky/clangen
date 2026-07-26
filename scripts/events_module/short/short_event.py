@@ -333,7 +333,6 @@ class ShortEvent:
             romantic_cats = []
 
             for cat in Cat.all_cats.values():
-
                 if cat.dead:
                     continue
 
@@ -358,7 +357,6 @@ class ShortEvent:
                 )
 
                 for cat in romantic_cats:
-
                     rel = cat.relationships.get(self.main_cat.ID)
 
                     if not rel:
@@ -389,7 +387,7 @@ class ShortEvent:
                             count=self.main_cat.moons,
                         )
                     )
-        
+
         # change outsider rep
         if self.outsider:
             change_clan_reputation(self.outsider["changed"])

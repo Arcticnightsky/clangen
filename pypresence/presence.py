@@ -11,7 +11,6 @@ import typing
 
 
 class Presence(BaseClient):
-
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
 
@@ -98,7 +97,6 @@ class Presence(BaseClient):
 
 
 class AioPresence(BaseClient):
-
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs, isasync=True)
 
@@ -124,7 +122,6 @@ class AioPresence(BaseClient):
         buttons: list | None = None,
         instance: bool = True,
     ):
-
         if start:
             if isinstance(start, int) or isinstance(start, float):
                 start = int(start) * 1000  # Convert to milliseconds

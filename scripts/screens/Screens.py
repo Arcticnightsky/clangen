@@ -655,7 +655,7 @@ class Screens:
 
     def set_cat_location_bg(self, cat, bg: str = "default"):
         if cat is None:
-        # No cat given, just set the default background
+            # No cat given, just set the default background
             self.set_bg(bg=bg)
             return
         if cat.dead and not cat.faded:

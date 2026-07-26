@@ -438,7 +438,6 @@ class Pelt:
 
     @staticmethod
     def generate_new_pelt(gender: str, parents: tuple = (), age: str = "adult"):
-
         # Ensure parents is always a tuple or list of valid Cat objects
         if isinstance(parents, str) or parents is None:
             parents = []
@@ -550,10 +549,18 @@ class Pelt:
         :return: None
         """
         if not parents:
-            if self.white_patches == "FULLWHITE" or self.colour == "WHITE" or self.points:
-                self.eye_colour = choice((Pelt.blue_eyes * 3) + Pelt.yellow_eyes + Pelt.green_eyes)
+            if (
+                self.white_patches == "FULLWHITE"
+                or self.colour == "WHITE"
+                or self.points
+            ):
+                self.eye_colour = choice(
+                    (Pelt.blue_eyes * 3) + Pelt.yellow_eyes + Pelt.green_eyes
+                )
             else:
-                self.eye_colour = choice((Pelt.yellow_eyes + Pelt.green_eyes) * 2 + Pelt.blue_eyes)
+                self.eye_colour = choice(
+                    (Pelt.yellow_eyes + Pelt.green_eyes) * 2 + Pelt.blue_eyes
+                )
         else:
             self.eye_colour = choice(
                 [i.pelt.eye_colour for i in parents] + [choice(Pelt.all_eye_colours)]
@@ -633,8 +640,10 @@ class Pelt:
             print("Warning - no parents: pelt randomized")
             return self.randomize_pattern_color()
 
-        if not random.randint(0, constants.CONFIG["cat_generation"]["direct_inheritance"]):  # 1/10 chance
-            selected = choice(par_pelts)            
+        if not random.randint(
+            0, constants.CONFIG["cat_generation"]["direct_inheritance"]
+        ):  # 1/10 chance
+            selected = choice(par_pelts)
             self.name = selected.name
             self.length = selected.length
             self.tortie_base = selected.tortie_base
@@ -683,7 +692,9 @@ class Pelt:
         chosen_pelt = choice(random.choices(possible_pelts, weights=weights, k=1)[0])
 
         # Tortie chance
-        tortie_chance_f = constants.CONFIG["cat_generation"]["base_female_tortie"]  # There is a default chance for female tortie
+        tortie_chance_f = constants.CONFIG["cat_generation"][
+            "base_female_tortie"
+        ]  # There is a default chance for female tortie
         tortie_chance_m = constants.CONFIG["cat_generation"]["base_male_tortie"]
         for p_ in par_pelts:
             if p_.name in Pelt.torties:
@@ -745,7 +756,7 @@ class Pelt:
         # A quick check to make sure all the weights aren't 0
         if all([x == 0 for x in weights]):
             weights = [1, 1, 1, 1]
-        
+
         chosen_pelt_color = choice(
             random.choices(Pelt.colour_categories, weights=weights, k=1)[0]
         )
@@ -1190,7 +1201,7 @@ class Pelt:
             Pelt.mid_white,
         ):
             self.name = "Tortie"
-            
+
     def init_white_patches(self, pelt_white, parents: tuple):
         # Vit can roll for anyone, not just cats who rolled to have white in their pelt.
         par_vit = []
@@ -1381,12 +1392,18 @@ def _describe_torties(cat, color_name, short=False) -> (str, str):
     # Short description: just the pelt type
     if short:
         if (
-            cat.pelt.colour in Pelt.black_colours + Pelt.brown_colours + Pelt.white_colours
-            and cat.pelt.tortie_colour in Pelt.black_colours + Pelt.brown_colours + Pelt.white_colours
+            cat.pelt.colour
+            in Pelt.black_colours + Pelt.brown_colours + Pelt.white_colours
+            and cat.pelt.tortie_colour
+            in Pelt.black_colours + Pelt.brown_colours + Pelt.white_colours
         ):
             color_name = "mottled"
         else:
-            if base in [tabby.lower() for tabby in Pelt.tabbies] + ["bengal", "rosette", "speckled"]:
+            if base in [tabby.lower() for tabby in Pelt.tabbies] + [
+                "bengal",
+                "rosette",
+                "speckled",
+            ]:
                 # torbie/tabico for tabby bases
                 if cat.pelt.name.lower() == "tortie":
                     color_name = "torbie"
@@ -1408,7 +1425,8 @@ def _describe_torties(cat, color_name, short=False) -> (str, str):
     # If both are neutral tones
     if (
         cat.pelt.colour in Pelt.black_colours + Pelt.brown_colours + Pelt.white_colours
-        and cat.pelt.tortie_colour in Pelt.black_colours + Pelt.brown_colours + Pelt.white_colours
+        and cat.pelt.tortie_colour
+        in Pelt.black_colours + Pelt.brown_colours + Pelt.white_colours
     ):
         color_text = f"{color_text} mottled"
     else:
@@ -1423,6 +1441,7 @@ def _describe_torties(cat, color_name, short=False) -> (str, str):
         return base, color_name
 
     return color_text, ""
+
 
 _scar_details = [
     "NOTAIL",
@@ -1469,6 +1488,7 @@ def unpack_appearance_ruleset(cat, rule, short, pelt, color):
         raise Exception(f"Unmatched ruleset item {rule} in describe_appearance!")
     return ""
 
+
 def test_male_tortie_generation(trials=10000):
     male_torties = 0
     female_torties = 0
@@ -1505,5 +1525,7 @@ def test_male_tortie_generation(trials=10000):
         print(f"Male tortie rate: 1 / {trials // male_torties}")
     else:
         print("Male torties: 0 (expected if trials < rarity)")
+
+
 if __name__ == "__main__":
     test_male_tortie_generation(20000)

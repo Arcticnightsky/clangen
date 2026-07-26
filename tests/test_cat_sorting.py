@@ -1,7 +1,11 @@
 from types import SimpleNamespace
 
 from scripts.cat.cats import Cat
-from scripts.game_structure.game.switches import Switch, switch_get_value, switch_set_value
+from scripts.game_structure.game.switches import (
+    Switch,
+    switch_get_value,
+    switch_set_value,
+)
 
 
 def make_cat(prefix):

@@ -50,6 +50,7 @@ class PatrolOutcome:
         Personality.trait_ranges["kit_traits"].keys()
     )
     NUM_OF_SKILLS = len(SkillPath)
+
     @staticmethod
     def _profile_link(cat: Cat) -> str:
         """Create a UI hyperlink to a cat profile."""

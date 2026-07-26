@@ -536,16 +536,22 @@ def handle_lead_den_event():
                             invited_cat.backstory = "outsider1"
                         # if the cat is a healer, give healer rank
                         elif (
-                            (invited_cat.backstory in BACKSTORIES["backstory_categories"]["healer_backstories"])
+                            (
+                                invited_cat.backstory
+                                in BACKSTORIES["backstory_categories"][
+                                    "healer_backstories"
+                                ]
+                            )
                             or invited_cat.skills.primary.path == SkillPath.HEALER
-                            or (invited_cat.skills.secondary and invited_cat.skills.secondary.path == SkillPath.HEALER)
+                            or (
+                                invited_cat.skills.secondary
+                                and invited_cat.skills.secondary.path
+                                == SkillPath.HEALER
+                            )
                         ):
                             invited_cat.status._change_rank(CatRank.MEDICINE_CAT)
                         # if cat is a little baby, check name
-                        elif invited_cat.age in (
-                            CatAge.NEWBORN,
-                            CatAge.KITTEN
-                        ):
+                        elif invited_cat.age in (CatAge.NEWBORN, CatAge.KITTEN):
                             if not invited_cat.name.suffix:
                                 invited_cat.name = Name(
                                     invited_cat.name.prefix,
@@ -755,8 +761,7 @@ def handle_focus():
             amount = amount * -1
         for name in game.clan.clans_in_focus:
             clan = next(
-                (clan for clan in game.clan.all_other_clans if clan.name == name),
-                None
+                (clan for clan in game.clan.all_other_clans if clan.name == name), None
             )
 
             if clan is not None:
@@ -839,7 +844,7 @@ def handle_focus():
             for name in game.clan.clans_in_focus:
                 clan = next(
                     (clan for clan in game.clan.all_other_clans if clan.name == name),
-                    None
+                    None,
                 )
 
                 if clan is not None:
@@ -1661,8 +1666,8 @@ def _is_suitable_medcat_app(cat) -> bool:
     ]
 
     unbeneficial_skills = [
-        SkillPath.FIGHTER, 
-        SkillPath.HUNTER, 
+        SkillPath.FIGHTER,
+        SkillPath.HUNTER,
         SkillPath.DARK,
     ]
 
@@ -1676,11 +1681,15 @@ def _is_suitable_medcat_app(cat) -> bool:
 
     if cat.skills.primary.path == SkillPath.HEALER:
         chance = chance / 8
-        logger.info("%s's a natural healer! Chance updated to %d", cat.name, round(chance))
-        
+        logger.info(
+            "%s's a natural healer! Chance updated to %d", cat.name, round(chance)
+        )
+
     if cat.skills.secondary and cat.skills.secondary.path == SkillPath.HEALER:
         chance = chance / 8
-        logger.info("%s's a natural healer! Chance updated to %d", cat.name, round(chance))
+        logger.info(
+            "%s's a natural healer! Chance updated to %d", cat.name, round(chance)
+        )
 
     if cat.skills.primary.path in unbeneficial_skills:
         chance = chance * 3.5
@@ -1689,11 +1698,11 @@ def _is_suitable_medcat_app(cat) -> bool:
     if cat.skills.secondary and cat.skills.secondary.path in unbeneficial_skills:
         chance = chance * 3.5
         logger.info("unbeneficial secondary skill, chance updated to %d", round(chance))
-    
+
     if cat.is_disabled():
         chance = chance / 2
         logger.info("%s is disabled, chance updated to %d", cat.name, round(chance))
-      
+
     chance = max(1, int(chance))
 
     success = not int(random.random() * chance)
@@ -2445,7 +2454,7 @@ def handle_murder(cat):
 
         if cat.skills.secondary and cat.skills.secondary.path == SkillPath.DARK:
             kill_chance -= 6
-        
+
         kill_chance -= cat.personality.aggression
         kill_chance -= 16 - cat.personality.stability
         kill_chance -= 16 - cat.personality.lawfulness

@@ -225,7 +225,7 @@ class Pregnancy_Events:
                 continue
 
             break
-    
+
     @staticmethod
     def set_biggest_family():
         """Gets the biggest family of the clan."""
@@ -359,10 +359,10 @@ class Pregnancy_Events:
         else:
             if not get_clan_setting("single parentage"):
                 return
-        
+
         chance = Pregnancy_Events.get_balanced_kit_chance(
-    cat, second_parent, is_affair, clan, kits_are_adopted
-    )
+            cat, second_parent, is_affair, clan, kits_are_adopted
+        )
 
         if not int(random.random() * chance):
             # If you've reached here - congrats, kits!
@@ -412,7 +412,7 @@ class Pregnancy_Events:
         event = "hardcoded.adoption_kittens_single"
         cats_names = str(cat.name)
         if other_cat:
-            event = (f"hardcoded.adoption_kittens_pair{random.choice(range(1,5))}")
+            event = f"hardcoded.adoption_kittens_pair{random.choice(range(1,5))}"
             cats_names = adjust_list_text([str(cat.name), str(other_cat.name)])
 
         print_event = i18n.t(
@@ -1352,7 +1352,7 @@ class Pregnancy_Events:
         )
         if not_correct_age or cat.no_kits or cat.dead:
             return False
-            
+
         # check for mate
         if len(cat.mate) > 0:
             for mate_id in cat.mate:
@@ -1385,7 +1385,7 @@ class Pregnancy_Events:
         returns:
         parent can have kits, kits are adopted
         """
-        
+
         # Checks for second parent alone:
         if not Pregnancy_Events.check_if_can_have_kits(
             second_parent, single_parentage, allow_unmated, allow_affair
@@ -1648,7 +1648,7 @@ class Pregnancy_Events:
                     )
                     blood_parent.thought = thought
                     kit_age = random.randint(1, 5)  # 1–5 moons old
-                
+
                 kitten_status: StatusDict = {
                     "social": blood_parent.status.social,
                     "age": CatAge.NEWBORN,
@@ -2171,27 +2171,31 @@ class Pregnancy_Events:
                 inverse_chance = int(inverse_chance * 0.9)
 
         # If any of the mated cats have the 'KIT' skill, they're more likely to have kits because, well... they love kits no? TBD
-        
+
         # If the parent(s) are young adults, the chance for kits is higher because the hormones are still raging lmao
         if first_parent.age == CatAge.YOUNG_ADULT:
             if second_parent:
                 if second_parent.age == CatAge.YOUNG_ADULT:
-                    inverse_chance = int(inverse_chance / 1.4) # young tom cats can be stupid and horny - such as male human youth today, smh
+                    inverse_chance = int(
+                        inverse_chance / 1.4
+                    )  # young tom cats can be stupid and horny - such as male human youth today, smh
                 else:
-                    inverse_chance = int(inverse_chance / 1.2) # chance is kinda low for adult toms because... perhaps their young adult wife is just sexy????
-            else: 
+                    inverse_chance = int(
+                        inverse_chance / 1.2
+                    )  # chance is kinda low for adult toms because... perhaps their young adult wife is just sexy????
+            else:
                 inverse_chance = int(inverse_chance / 1.3)
 
         # If the parent(s) are seniors, the chance for kits is lower because... they're old - a little too old to have kits
         if first_parent.age == CatAge.SENIOR:
             if second_parent:
                 if second_parent.age == CatAge.SENIOR:
-                    inverse_chance = int(inverse_chance * 2.2) 
+                    inverse_chance = int(inverse_chance * 2.2)
                 else:
                     inverse_chance = int(inverse_chance * 2.4)
-            else: 
+            else:
                 inverse_chance = int(inverse_chance * 2.3)
-        
+
         # CURRENT KIT COUNT
         # increases inverse chance according to number of existing children (ex. 5 kids will multiply by 1.5)
         inverse_chance += int(inverse_chance * len(first_parent.get_children()) * 0.1)
@@ -2222,9 +2226,9 @@ class Pregnancy_Events:
         # increase inverse chance if the Clan is at war, because it is NOT the right time to have kits!!!
         if game.clan.war.get("at_war", True):
             inverse_chance = int(inverse_chance * 2.8)
-        
+
         # In real life, cats are most likely to have kits during the spring and summer months - known as "Kitten Season"
         if game.clan.current_season in ["Newleaf", "Greenleaf"]:
             inverse_chance = int(inverse_chance * 0.5)
-        
+
         return inverse_chance

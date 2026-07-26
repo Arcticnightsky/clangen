@@ -503,7 +503,8 @@ class Status:
         """
 
         self._modify_group(
-            new_rank=choice([CatRank.LONER, CatRank.ROGUE]), standing_with_past_group=CatStanding.EXILED
+            new_rank=choice([CatRank.LONER, CatRank.ROGUE]),
+            standing_with_past_group=CatStanding.EXILED,
         )
 
     def leave_group(self, new_social_status: CatSocial):
