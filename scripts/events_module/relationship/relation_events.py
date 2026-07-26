@@ -301,39 +301,6 @@ class Relation_Events:
                             new_cat, already_interacted_cats, True
                         )
                     )
-            same_age_cats = get_cats_same_age(
-                Cat,
-                new_cat,
-                min(constants.CONFIG["mates"]["age_range"], int(new_cat.moons * 0.4)),
-            )
-            alive_cats = [
-                i
-                for i in new_cat.all_cats.values()
-                if i.status.alive_in_player_clan and i.ID != new_cat.ID
-            ]
-            number = constants.CONFIG["new_cat"]["cat_amount_welcoming"]
-
-            if not alive_cats or number <= 0:
-                continue
-
-            # Prefer cats close to the new cat's age, but never welcome more cats
-            # than the configured amount. Use sample() so a cat can only be
-            # selected once; choices() allowed duplicates and could expand the
-            # welcome group to most of the Clan.
-            chosen_cats = random.sample(same_age_cats, min(number, len(same_age_cats)))
-
-            remaining_slots = number - len(chosen_cats)
-            if remaining_slots > 0:
-                chosen_ids = {cat.ID for cat in chosen_cats}
-                remaining_cats = [cat for cat in alive_cats if cat.ID not in chosen_ids]
-                chosen_cats.extend(
-                    random.sample(
-                        remaining_cats, min(remaining_slots, len(remaining_cats))
-                    )
-                )
-
-            for chosen_cat in chosen_cats:
-                Welcoming_Events.welcome_cat(chosen_cat, new_cat)
 
     # ---------------------------------------------------------------------------- #
     #                                helper function                               #
