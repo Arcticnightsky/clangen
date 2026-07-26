@@ -152,6 +152,12 @@ class Relation_Events:
                 inter_cat.relationships[cat.ID].like > 10
                 or inter_cat.relationships[cat.ID].comfort > 10
             )
+
+            if cats_are_same_sex(cat, inter_cat) and not passes_same_sex_romance_chance(
+                cat, inter_cat
+            ):
+                continue
+            
             if cat_to_inter and inter_to_cat:
                 cat_to_choose_from.append(inter_cat)
 
