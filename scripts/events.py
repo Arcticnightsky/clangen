@@ -1406,6 +1406,7 @@ def perform_ceremonies(cat):
         if not game.clan.leader or not game.clan.leader.status.alive_in_player_clan:
             game.clan.leader_lives = 9
             ceremony(cat, CatRank.LEADER)
+            cat.generate_lead_ceremony()
             game.clan.deputy = None
             game.clan.leader = cat
 
