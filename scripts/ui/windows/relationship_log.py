@@ -30,9 +30,10 @@ class RelationshipLogWindow(GameWindow):
         self.cat_to: Cat = relationship.cat_to
 
         self.relationship: Relationship = relationship
-        self.opposite_relationship: Relationship = self.cat_to.relationships[
-            self.cat_from.ID
-        ]
+        self.opposite_relationship = self.cat_to.relationships.get(self.cat_from.ID)
+
+        if self.opposite_relationship is None:
+            self.opposite_relationship = self.relationship
 
         self.elements: dict = {}
         self.selected_cat_elements: dict = {}
