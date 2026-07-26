@@ -13,6 +13,7 @@ from scripts.cat.personality import Personality
 from scripts.config import get_config
 from scripts.events_module.future.prep_and_trigger import prep_future_event
 from scripts.clan_package.settings import get_clan_setting
+from scripts.events_module.relationship.relation_events import Relation_Events
 from scripts.game_structure import constants
 from scripts.game_structure.game.settings import game_setting_get
 
@@ -49,6 +50,7 @@ class PatrolOutcome:
         Personality.trait_ranges["kit_traits"].keys()
     )
     NUM_OF_SKILLS = len(SkillPath)
+
     @staticmethod
     def _profile_link(cat: Cat) -> str:
         """Create a UI hyperlink to a cat profile."""
@@ -961,6 +963,7 @@ class PatrolOutcome:
                     outside.append(self._profile_link(cat))
                 else:
                     new.append(self._profile_link(cat))
+                    Relation_Events.welcome_new_cats([cat])
             for type_list, string in [
                 (dead, "screens.patrol.dead_outsider"),
                 (outside, "screens.patrol.met_outsider"),

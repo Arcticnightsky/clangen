@@ -9,7 +9,6 @@ from .types import ActivityType, StatusDisplayType
 
 
 class Payload:
-
     def __init__(self, data, clear_none=True):
         if clear_none:
             data = remove_none(data)
@@ -47,7 +46,6 @@ class Payload:
         activity: bool | None = True,
         _rn: bool = True,
     ):
-
         # They should already be an int because we give typehints, but some people are fucking stupid and use
         # IDLE or some other stupid shit.
         if start:

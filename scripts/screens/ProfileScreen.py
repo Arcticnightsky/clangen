@@ -779,9 +779,7 @@ class ProfileScreen(Screens):
 
         # PELT TYPE
         if the_cat.pelt.white_patches == "FULLWHITE":
-            output +=  i18n.t(
-                "screens.profile.pelt_label",
-                pelt="fullwhite") 
+            output += i18n.t("screens.profile.pelt_label", pelt="fullwhite")
         else:
             output += i18n.t(
                 "screens.profile.pelt_label",
@@ -1081,9 +1079,13 @@ class ProfileScreen(Screens):
                 ):
                     continue
                 if "spayed" in the_cat.permanent_condition:
-                    output += i18n.t("utility.exclamation", text=i18n.t("general.is_spayed"))
+                    output += i18n.t(
+                        "utility.exclamation", text=i18n.t("general.is_spayed")
+                    )
                 elif "neutered" in the_cat.permanent_condition:
-                    output += i18n.t("utility.exclamation", text=i18n.t("general.is_neutered"))
+                    output += i18n.t(
+                        "utility.exclamation", text=i18n.t("general.is_neutered")
+                    )
                 else:
                     output += i18n.t("general.has_permanent_condition")
 
@@ -1940,7 +1942,8 @@ class ProfileScreen(Screens):
             else:
                 if name == "spayed":
                     moons_with = (
-                        game.clan.age - self.the_cat.permanent_condition[name]["moon_start"]
+                        game.clan.age
+                        - self.the_cat.permanent_condition[name]["moon_start"]
                     )
                     text_list.append(
                         i18n.t(
@@ -1950,7 +1953,8 @@ class ProfileScreen(Screens):
                     )
                 elif name == "neutered":
                     moons_with = (
-                        game.clan.age - self.the_cat.permanent_condition[name]["moon_start"]
+                        game.clan.age
+                        - self.the_cat.permanent_condition[name]["moon_start"]
                     )
                     text_list.append(
                         i18n.t(
@@ -1960,7 +1964,8 @@ class ProfileScreen(Screens):
                     )
                 else:
                     moons_with = (
-                        game.clan.age - self.the_cat.permanent_condition[name]["moon_start"]
+                        game.clan.age
+                        - self.the_cat.permanent_condition[name]["moon_start"]
                     )
                     text_list.append(
                         i18n.t("general.had_perm_condition_for", count=moons_with)

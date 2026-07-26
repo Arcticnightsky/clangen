@@ -195,7 +195,12 @@ class TestEvents(unittest.TestCase):
         old_age_event = ShortEvent(
             event_id="test_old_age_double_death",
             sub_type=["old_age"],
-            m_c={"age": ["senior"], "status": ["any"], "relationship_status": ["mates"], "dies": True},
+            m_c={
+                "age": ["senior"],
+                "status": ["any"],
+                "relationship_status": ["mates"],
+                "dies": True,
+            },
             r_c={"age": ["senior"], "status": ["any"], "dies": True},
         )
 

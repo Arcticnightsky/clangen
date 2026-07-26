@@ -950,8 +950,7 @@ class Patrol:
 
         patrol_size = len(self.patrol_cats)
         total_exp = sum(
-            x.experience if x.experience is not None else 0
-            for x in self.patrol_cats
+            x.experience if x.experience is not None else 0 for x in self.patrol_cats
         )
         path = (
             "patrol_generation.classic_difficulty_modifier"

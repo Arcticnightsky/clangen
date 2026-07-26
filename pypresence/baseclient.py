@@ -24,7 +24,6 @@ from .utils import get_ipc_path, get_event_loop
 
 
 class BaseClient:
-
     def __init__(self, client_id: str, **kwargs):
         loop = kwargs.get("loop", None)
         handler = kwargs.get("handler", None)

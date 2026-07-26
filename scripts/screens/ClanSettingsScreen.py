@@ -339,10 +339,10 @@ class ClanSettingsScreen(Screens):
             if cat.status.is_outsider:
                 cats_outside += 1
                 continue
-                
+
             if not cat.status.is_outsider and not cat.dead:
                 living_cats += 1
-                
+
             if cat.status.rank == CatRank.MEDICINE_CAT:
                 med_cats += 1
             elif cat.status.rank == CatRank.MEDICINE_APPRENTICE:
@@ -364,8 +364,17 @@ class ClanSettingsScreen(Screens):
                 male += 1
             elif cat.gender == "female":
                 female += 1
-                
-            avg_age = int(sum((cat.moons for cat in Cat.all_cats_list if not cat.dead and not cat.status.is_outsider)) / living_cats)
+
+            avg_age = int(
+                sum(
+                    (
+                        cat.moons
+                        for cat in Cat.all_cats_list
+                        if not cat.dead and not cat.status.is_outsider
+                    )
+                )
+                / living_cats
+            )
 
             mated_pairs = set()
 
@@ -386,7 +395,7 @@ class ClanSettingsScreen(Screens):
                     mated_pairs.add(pair)
 
             mated_pair_count = len(mated_pairs)
-        
+
         self.checkboxes_text["stat_box"] = pygame_gui.elements.UITextBox(
             "screens.clan_settings.stats_text",
             ui_scale(pygame.Rect((150, 200), (530, 345))),

@@ -101,9 +101,7 @@ class TestRelativesFunction(unittest.TestCase):
 
     def test_is_adoptive_parent_identifies_adopted_child_direction(self):
         adoptive_parent = Cat(disable_random=True)
-        adopted_child = Cat(
-            adoptive_parents=[adoptive_parent.ID], disable_random=True
-        )
+        adopted_child = Cat(adoptive_parents=[adoptive_parent.ID], disable_random=True)
         inheritance_db.load_inheritances(Cat)
 
         self.assertTrue(adoptive_parent.is_parent(adopted_child))
@@ -523,7 +521,6 @@ class TestUpdateMentor(unittest.TestCase):
         self.assertFalse(app.ID in mentor.apprentice)
         self.assertTrue(app.ID in mentor.former_apprentices)
         self.assertIsNone(app.mentor)
-
 
     def test_warrior_mentor_must_be_at_least_24_moons(self):
         app = Cat(

@@ -533,9 +533,9 @@ def event_text_adjust(
             # older call paths or saves may not have that context. Fall back to
             # the current war enemy instead of letting the later c_n replacement
             # turn o_c_n into strings like o_BridgeClan.
-            other_clan_name = getattr(getattr(game, "clan", None), "war", {}).get(
-                "enemy"
-            ) + "Clan"
+            other_clan_name = (
+                getattr(getattr(game, "clan", None), "war", {}).get("enemy") + "Clan"
+            )
 
         if other_clan_name:
             text = _replace_clan_name(text, "o_c_n", other_clan_name)

@@ -461,7 +461,9 @@ class HerbSupply:
                 "primary_clever"
             ]
         elif primary == SkillPath.HUNTER:
-            quantity_modifier = constants.CONFIG["clan_resources"]["herbs"]["primary_hunter"]
+            quantity_modifier = constants.CONFIG["clan_resources"]["herbs"][
+                "primary_hunter"
+            ]
 
         if secondary == SkillPath.SENSE:
             amount_modifier = constants.CONFIG["clan_resources"]["herbs"][
@@ -472,7 +474,9 @@ class HerbSupply:
                 "secondary_clever"
             ]
         elif secondary == SkillPath.HUNTER:
-            quantity_modifier = constants.CONFIG["clan_resources"]["herbs"]["secondary_hunter"]
+            quantity_modifier = constants.CONFIG["clan_resources"]["herbs"][
+                "secondary_hunter"
+            ]
 
         # list of the herbs, sorted by most need
         herb_list = self.sorted_by_need

@@ -20,6 +20,8 @@ from scripts.events_module.event_filters import (
 from scripts.events_module.relationship.romance_chance import (
     passes_same_sex_romance_chance,
 )
+from scripts.config import get_config
+
 
 class RomanticEvents:
     """
@@ -290,6 +292,10 @@ class RomanticEvents:
         if not highest_romantic_relation:
             return False
 
+        # Config check
+        if not get_config("mates.allow_mating"):
+            return False
+
         condition = constants.CONFIG["mates"]["confession"]["make_confession"]
         if not RomanticEvents.relationship_fulfill_condition(
             highest_romantic_relation, condition
@@ -308,7 +314,7 @@ class RomanticEvents:
 
         if not passes_same_sex_romance_chance(cat_from, cat_to):
             return False
-        
+
         alive_inclan_from_mates = [
             mate for mate in cat_from.mate if cat_from.status.alive_in_player_clan
         ]
@@ -437,7 +443,7 @@ class RomanticEvents:
 
         if not passes_same_sex_romance_chance(cat_from, cat_to):
             return False, None
-        
+
         # Gather relationships
         if cat_to.ID in cat_from.relationships:
             relationship_from = cat_from.relationships[cat_to.ID]
