@@ -267,13 +267,18 @@ def _get_event(
     ]
 
     for e in possible_events:
-        for constraint in e.relationship_constraint:
-            if not check_rel_constraint_groups(
+        if not all(
+            check_rel_constraint_groups(
                 constraint, {"m_c": main_cat, "r_c": other_cat}
-            ):
-                continue
+            )
+            for constraint in e.relationship_constraint
+        ):
+            continue
 
         final_events.append(e)
+
+    if not final_events:
+        return None
 
     return choice(final_events)
 
