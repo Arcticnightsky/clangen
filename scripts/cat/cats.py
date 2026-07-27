@@ -513,7 +513,7 @@ class Cat:
                 if allow_tortie_instead:
                     # Tortie construction time!
                     if self.pelt.white_patches in (
-                        list(Pelt.high_white) + list(Pelt.mostly_white) + ["FULLWHITE"]
+                        Pelt.high_white + Pelt.mostly_white + ["FULLWHITE"]
                     ):
                         self.pelt.name = "Calico"
                     else:
@@ -693,7 +693,7 @@ class Cat:
                 if allow_tortie_instead:
                     # Tortie construction time!
                     if self.pelt.white_patches in (
-                        list(Pelt.high_white) + list(Pelt.mostly_white) + ["FULLWHITE"]
+                        Pelt.high_white + Pelt.mostly_white + ["FULLWHITE"]
                     ):
                         self.pelt.name = "Calico"
                     else:
