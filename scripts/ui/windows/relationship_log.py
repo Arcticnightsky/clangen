@@ -447,7 +447,7 @@ class RelationshipLogWindow(GameWindow):
             if relation:
                 output += f"{i18n.t('windows.relation_connection', relation=relation)}"
                 if relation == f"{i18n.t('general.has_a_mate')}<br>":
-                    output = f"{i18n.t(relation=relation)}"
+                    output = f"{i18n.t(relation)}"
 
         return output
 
