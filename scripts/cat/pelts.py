@@ -1140,17 +1140,22 @@ class Pelt:
             if not any(weights):
                 weights = [2, 1, 0, 0, 0]
         elif self.name == "Calico":
-            weights = [0, 0, 0] + weights[3:]
+            weights = [0, 0] + weights[2:]
             # Another check to make sure not all the values are zero. This should never happen, but better
             # safe than sorry.
             if not any(weights):
-                weights = [2, 1, 0, 0, 0]
+                weights = [0, 0, 2, 1, 0]
 
         chosen_white_patches = choice(
             random.choices(white_list, weights=weights, k=1)[0]
         )
 
         self.white_patches = chosen_white_patches
+        if self.name == "Calico" and self.white_patches in (
+            Pelt.little_white + Pelt.mid_white
+        ):
+            self.name = "Tortie"
+
         if self.points and self.white_patches in (
             Pelt.high_white,
             Pelt.mostly_white,
@@ -1197,8 +1202,7 @@ class Pelt:
 
         # tryna stop a bug that I have where a "calico" has a little/mid white patch for some reason
         if self.name == "Calico" and self.white_patches in (
-            Pelt.little_white,
-            Pelt.mid_white,
+            Pelt.little_white + Pelt.mid_white
         ):
             self.name = "Tortie"
 
