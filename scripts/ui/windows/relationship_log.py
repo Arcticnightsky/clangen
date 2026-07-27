@@ -340,10 +340,10 @@ class RelationshipLogWindow(GameWindow):
             if other_cat.ID in cat.mate:
                 relation = f"{i18n.t('general.mate', count=1)}<br>"
             elif (
-                len(other_cat.mate) > 0
-                and other_cat.ID not in cat.mate
+                len(cat.mate) > 0
+                and cat.ID not in other_cat.mate
             ):
-                relation = f"{i18n.t('has_a_mate')}<br>"
+                relation = f"{i18n.t('general.has_a_mate')}<br>"
             elif cat.is_parent(other_cat):
                 is_adoptive_parent = cat.is_adoptive_parent(other_cat)
                 if cat.genderalign in ["female", "trans female"]:
