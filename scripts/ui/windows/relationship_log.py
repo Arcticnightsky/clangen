@@ -446,11 +446,15 @@ class RelationshipLogWindow(GameWindow):
 
             if relation:
                 if relation == f"{i18n.t('general.has_a_mate')}<br>":
-                    if relation != f"{i18n.t('general.has_a_mate')}<br>":
-                        output += f"{i18n.t(relation)}"
-                   output += f"{i18n.t(relation)}"
+                    output += relation
                 else:
                     output += f"{i18n.t('windows.relation_connection', relation=relation)}"
+
+                    if (
+                        len(cat.mate) > 0
+                        and other_cat.ID not in cat.mate
+                    ):
+                        output += f"<br>{i18n.t('general.has_a_mate')}"
 
         return output
 
