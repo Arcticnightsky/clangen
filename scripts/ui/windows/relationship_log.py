@@ -446,7 +446,7 @@ class RelationshipLogWindow(GameWindow):
 
             if relation:
                 if relation == f"{i18n.t('general.has_a_mate')}<br>":
-                    if relation =! f"{i18n.t('general.has_a_mate')}<br>":
+                    if relation != f"{i18n.t('general.has_a_mate')}<br>":
                         output += f"{i18n.t(relation)}"
                    output += f"{i18n.t(relation)}"
                 else:
