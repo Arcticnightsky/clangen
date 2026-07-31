@@ -444,6 +444,17 @@ class RelationshipLogWindow(GameWindow):
                     relation = f"{i18n.t("general.grandson")}<br>"
                 else:
                     relation = f"{i18n.t("general.grandchild")}<br>"
+
+            elif not get_clan_setting(
+                "first cousin mates"
+            ) and other_cat.is_cousin(cat):
+                if cat.genderalign in ("female", "trans female"):
+                    relation = f"{i18n.t("general.cousin_female")}<br>"
+                elif cat.genderalign in ("male", "trans male"):
+                    relation = f"{i18n.t("general.cousin_male")}<br>"
+                else:
+                    relation = f"{i18n.t("general.cousin_nb")}<br>"
+            
             # any relations more complex just get "related" text for my sanity
             elif cat.is_related(other_cat, False):
                 relation = f"{i18n.t('general.related_text')}<br>"
