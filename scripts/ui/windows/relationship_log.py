@@ -325,6 +325,7 @@ class RelationshipLogWindow(GameWindow):
         Returns a string with the cat's details: gender, relation to other cat, age, and trait
         """
         output = ""
+        mate_text = ""
         # gender
         output += f"{cat.genderalign}<br>"
 
@@ -337,13 +338,16 @@ class RelationshipLogWindow(GameWindow):
         # show relation
         if other_cat:
             relation = ""
-            if other_cat.ID in cat.mate:
-                relation = f"{i18n.t('general.mate', count=1)}<br>"
-            elif (
+            mate_text = ""
+
+            if (
                 len(cat.mate) > 0
                 and cat.ID not in other_cat.mate
             ):
-                relation = f"{i18n.t('general.has_a_mate')}<br>"
+                mate_text = f"{i18n.t('general.has_a_mate')}<br>"
+            
+            if other_cat.ID in cat.mate:
+                relation = f"{i18n.t('general.mate', count=1)}<br>"
             elif cat.is_parent(other_cat):
                 is_adoptive_parent = cat.is_adoptive_parent(other_cat)
                 if cat.genderalign in ["female", "trans female"]:
@@ -445,16 +449,10 @@ class RelationshipLogWindow(GameWindow):
                 relation = f"{i18n.t('general.related_text')}<br>"
 
             if relation:
-                if relation == f"{i18n.t('general.has_a_mate')}<br>":
-                    output += relation
-                else:
-                    output += f"{i18n.t('windows.relation_connection', relation=relation)}"
+                output += f"{i18n.t('windows.relation_connection', relation=relation)}"
 
-                    if (
-                        len(cat.mate) > 0
-                        and other_cat.ID not in cat.mate
-                    ):
-                        output += f"<br>{i18n.t('general.has_a_mate')}"
+            if mate_text:
+                output += mate_text
 
         return output
 
