@@ -71,7 +71,7 @@ from scripts.clan_package.get_clan_cats import (
     get_living_clan_cat_count,
 )
 from scripts.cat_relations.relationship import RelType
-from scripts.events_module.relationship.romantic_events import RomanticEvents
+
 
 logger = logging.getLogger(__name__)
 
