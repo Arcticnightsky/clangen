@@ -240,6 +240,8 @@ class Cat:
         self.experience = experience
         self.birth_cooldown = birth_cooldown
         self.specsuffix_hidden = specsuffix_hidden  # kill this ASAP
+        self.pending_neuter = kwargs.get("pending_neuter", False)
+        self.tnr_victim = kwargs.get("tnr_victim", False)
 
         # other misc
         self.name: Optional[Name] = None
