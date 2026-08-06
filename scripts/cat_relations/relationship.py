@@ -3,15 +3,6 @@ from typing import Optional
 
 from scripts.game_structure import constants
 from scripts.cat_relations.enums import RelTier, RelType
-from scripts.event_class import Single_Event
-from scripts.events_module.event_filters import (
-    event_for_location,
-    event_for_season,
-    get_personality_compatibility,
-)
-from scripts.game_structure import game
-from scripts.events_module.text_adjust import process_text
-import scripts.cat_relations.interaction as interactions
 
 # ---------------------------------------------------------------------------- #
 #                           START Relationship class                           #
