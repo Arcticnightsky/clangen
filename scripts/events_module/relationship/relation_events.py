@@ -61,12 +61,6 @@ def handle_relationships(cat: Cat):
             if cats_are_same_sex(cat, inter_cat):
                 if not passes_same_sex_romance_chance(cat, inter_cat):
                     return
-                Relation_Events.romantic_events(cat)
-            elif not random.getrandbits(3):
-                Relation_Events.romantic_events(cat)
-        else:
-            if not random.getrandbits(4):
-                Relation_Events.romantic_events(cat)
 
 # ---------------------------------------------------------------------------- #
 #                                new event types                               #
