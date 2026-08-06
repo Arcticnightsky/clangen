@@ -1,7 +1,9 @@
 import os
 import unittest
+from random import Random
 
 from scripts.cat.enums import CatRank, CatCompatibility
+from scripts.cat.factories.test_cat_factory import TestCatFactory
 from scripts.cat_relations.enums import RelType
 
 os.environ["SDL_VIDEODRIVER"] = "dummy"
@@ -18,6 +20,8 @@ from scripts.clan_package.get_clan_cats import (
     get_alive_clan_queens,
     get_queens_with_young_kits,
 )
+
+cat_factory = TestCatFactory()
 
 
 class TestPersonalityCompatibility(unittest.TestCase):
@@ -60,8 +64,8 @@ class TestPersonalityCompatibility(unittest.TestCase):
     def test_some_neutral_combinations(self):
         # TODO: the one who updated the personality should update the tests!!
         pass
-        # cat1 = Cat()
-        # cat2 = Cat()
+        # cat1 = cat_factory.create_cat()
+        # cat2 = cat_factory.create_cat()
 
     #
     # cat1.personality.trait = self.current_traits[0]
@@ -88,8 +92,8 @@ class TestPersonalityCompatibility(unittest.TestCase):
         pass
 
     def test_false_trait(self):
-        cat1 = Cat(disable_random=True)
-        cat2 = Cat(disable_random=True)
+        cat1 = cat_factory.create_cat(disable_random=True)
+        cat2 = cat_factory.create_cat(disable_random=True)
         cat1.personality.trait = None
         cat2.personality.trait = None
         self.assertEqual(
@@ -103,10 +107,10 @@ class TestPersonalityCompatibility(unittest.TestCase):
 class TestCountRelation(unittest.TestCase):
     def test_2_cats_jealousy(self):
         # given
-        cat1 = Cat(disable_random=True)
-        cat2 = Cat(disable_random=True)
-        cat3 = Cat(disable_random=True)
-        cat4 = Cat(disable_random=True)
+        cat1 = cat_factory.create_cat(disable_random=True)
+        cat2 = cat_factory.create_cat(disable_random=True)
+        cat3 = cat_factory.create_cat(disable_random=True)
+        cat4 = cat_factory.create_cat(disable_random=True)
 
         relation_1_2 = Relationship(cat_from=cat1, cat_to=cat2)
         relation_3_2 = Relationship(cat_from=cat3, cat_to=cat2)
@@ -147,10 +151,10 @@ class TestCountRelation(unittest.TestCase):
 class TestHighestRomance(unittest.TestCase):
     def test_exclude_mate(self):
         # given
-        cat1 = Cat(disable_random=True)
-        cat2 = Cat(disable_random=True)
-        cat3 = Cat(disable_random=True)
-        cat4 = Cat(disable_random=True)
+        cat1 = cat_factory.create_cat(disable_random=True)
+        cat2 = cat_factory.create_cat(disable_random=True)
+        cat3 = cat_factory.create_cat(disable_random=True)
+        cat4 = cat_factory.create_cat(disable_random=True)
 
         # when
         cat1.mate.append(cat2.ID)
@@ -177,10 +181,10 @@ class TestHighestRomance(unittest.TestCase):
 
     def test_include_mate(self):
         # given
-        cat1 = Cat(disable_random=True)
-        cat2 = Cat(disable_random=True)
-        cat3 = Cat(disable_random=True)
-        cat4 = Cat(disable_random=True)
+        cat1 = cat_factory.create_cat(disable_random=True)
+        cat2 = cat_factory.create_cat(disable_random=True)
+        cat3 = cat_factory.create_cat(disable_random=True)
+        cat4 = cat_factory.create_cat(disable_random=True)
 
         # when
         cat1.mate.append(cat2.ID)
@@ -208,12 +212,24 @@ class TestHighestRomance(unittest.TestCase):
 
 class TestGetQueens(unittest.TestCase):
     def setUp(self) -> None:
-        self.test_cat1 = Cat(status_dict={"rank": CatRank.WARRIOR}, disable_random=True)
-        self.test_cat2 = Cat(status_dict={"rank": CatRank.WARRIOR}, disable_random=True)
-        self.test_cat3 = Cat(status_dict={"rank": CatRank.WARRIOR}, disable_random=True)
-        self.test_cat4 = Cat(status_dict={"rank": CatRank.WARRIOR}, disable_random=True)
-        self.test_cat5 = Cat(status_dict={"rank": CatRank.WARRIOR}, disable_random=True)
-        self.test_cat6 = Cat(status_dict={"rank": CatRank.WARRIOR}, disable_random=True)
+        self.test_cat1 = cat_factory.create_cat(
+            status_dict={"rank": CatRank.WARRIOR}, disable_random=True
+        )
+        self.test_cat2 = cat_factory.create_cat(
+            status_dict={"rank": CatRank.WARRIOR}, disable_random=True
+        )
+        self.test_cat3 = cat_factory.create_cat(
+            status_dict={"rank": CatRank.WARRIOR}, disable_random=True
+        )
+        self.test_cat4 = cat_factory.create_cat(
+            status_dict={"rank": CatRank.WARRIOR}, disable_random=True
+        )
+        self.test_cat5 = cat_factory.create_cat(
+            status_dict={"rank": CatRank.WARRIOR}, disable_random=True
+        )
+        self.test_cat6 = cat_factory.create_cat(
+            status_dict={"rank": CatRank.WARRIOR}, disable_random=True
+        )
 
     def tearDown(self) -> None:
         del self.test_cat1

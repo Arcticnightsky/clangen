@@ -15,8 +15,10 @@ from scripts.cat.enums import (
     CatCompatibility,
     CatThought,
 )
-from scripts.cat.names import Name
-from scripts.cat.status import StatusDict
+from scripts.cat.factories.enums import CatType
+from scripts.cat.factories.new_cat_factory import NewCatFactory
+from scripts.cat.names import names, Name
+from scripts.cat.factories.typed_dicts import StatusDict
 from scripts.cat_relations.relationship import Relationship, RelType
 from scripts.cat_relations.inheritance2 import inheritance_db
 from scripts.clan_package.settings import get_clan_setting
@@ -1652,10 +1654,10 @@ class Pregnancy_Events:
                 kitten_status: StatusDict = {
                     "social": blood_parent.status.social,
                     "age": CatAge.NEWBORN,
-                    "group_ID": blood_parent.status.group_ID,
+                    "group_ID": blood_parent.status.get_last_living_group(),
                 }
 
-                kit = Cat(
+                kit = NewCatFactory.create_cat(
                     parent1=blood_parent.ID,
                     moons=kit_age,
                     backstory=backstory,
@@ -1665,7 +1667,7 @@ class Pregnancy_Events:
             elif cat and other_cat:
                 # Two parents provided
                 # The cat that gave birth is always parent1 so there is no need to check gender
-                kit = Cat(
+                kit = NewCatFactory.create_cat(
                     parent1=cat.ID,
                     parent2=other_cat.ID,
                     moons=0,
@@ -1675,7 +1677,7 @@ class Pregnancy_Events:
                 kit.thought = event_text_adjust(Cat, kit.thought, random_cat=cat)
             else:
                 # A one blood parent litter is the only option left.
-                kit = Cat(
+                kit = NewCatFactory.create_cat(
                     parent1=cat.ID,
                     moons=0,
                     backstory=backstory,
