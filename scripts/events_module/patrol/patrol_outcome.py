@@ -13,7 +13,7 @@ from scripts.cat.personality import Personality
 from scripts.config import get_config
 from scripts.events_module.future.prep_and_trigger import prep_future_event
 from scripts.clan_package.settings import get_clan_setting
-from scripts.events_module.relationship.relation_events import Relation_Events
+from scripts.events_module.relationship import relation_events
 from scripts.game_structure import constants
 from scripts.game_structure.game.settings import game_setting_get
 
@@ -32,7 +32,7 @@ from scripts.clan_package.cotc import change_clan_reputation, change_clan_relati
 from scripts.game_structure import game
 from scripts.cat.skills import SkillPath
 from scripts.cat.cats import Cat, ILLNESSES, INJURIES, PERMANENT
-from scripts.cat.enums import CatRank, CatAge
+from scripts.cat.enums import CatRank
 from scripts.cat.pelts import Pelt
 from scripts.cat_relations.relationship import Relationship
 from scripts.clan_resources.freshkill import (
@@ -507,9 +507,9 @@ class PatrolOutcome:
             for cat in patrol.patrol_cats:
                 current_exp = cat.experience if cat.experience is not None else 0
                 if cat.status.rank.is_any_apprentice_rank():
-                    cat.experience = current_exp + app_exp
+                    cat.add_experience(app_exp)
                 else:
-                    cat.experience = current_exp + gained_exp
+                    cat.add_experience(gained_exp)
 
         return ""
 
@@ -963,7 +963,8 @@ class PatrolOutcome:
                     outside.append(self._profile_link(cat))
                 else:
                     new.append(self._profile_link(cat))
-                    Relation_Events.welcome_new_cats([cat])
+                    relation_events.trigger_joining_relationship_events([cat])
+
             for type_list, string in [
                 (dead, "screens.patrol.dead_outsider"),
                 (outside, "screens.patrol.met_outsider"),
