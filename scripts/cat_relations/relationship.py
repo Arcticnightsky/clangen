@@ -3,6 +3,19 @@ from typing import Optional
 
 from scripts.game_structure import constants
 from scripts.cat_relations.enums import RelTier, RelType
+from scripts.event_class import Single_Event
+from scripts.events_module.event_filters import (
+    event_for_location,
+    event_for_season,
+    get_personality_compatibility,
+)
+from scripts.game_structure import game
+from scripts.events_module.text_adjust import process_text
+import scripts.cat_relations.interaction as interactions
+from scripts.events_module.relationship.romance_chance import (
+    cats_are_same_sex,
+    passes_same_sex_romance_chance,
+)
 
 
 # ---------------------------------------------------------------------------- #
@@ -40,6 +53,7 @@ class Relationship:
         else:
             self.log = []
 
+        self._same_sex_romance_chance_passed = False
         self.no_longer_neutral = []
         """
         List of rel types that made it out of the neutral tier (ROMANCE is not included). This list is used to indicate which types should not return to a neutral state.

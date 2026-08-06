@@ -22019,7 +22019,7 @@
     "season": ["newleaf"],
     "types": ["training"],
     "tags": [],
-    "patrol_art": "train_general_intro",
+    "patrol_art": "gen_hunt_fish",
     "min_cats": 2,
     "max_cats": 6,
     "min_max_status": {

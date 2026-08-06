@@ -10,7 +10,7 @@ import random
 
 from scripts.cat import save_load
 from scripts.cat.cats import create_cat, Cat
-from scripts.cat.enums import CatRank
+from scripts.cat.enums import CatAge, CatRank
 from scripts.cat.sprites.load_sprites import sprites
 from scripts.clan import Clan, Afterlife
 from scripts.clan_package.settings import set_clan_setting
@@ -19,6 +19,7 @@ from scripts.events_module.patrol.patrol import Patrol
 from scripts.events_module.short.short_event_generation import (
     filter_events,
 )
+from scripts.events_module.short.short_event import ShortEvent
 from scripts.game_structure import game
 from scripts.clan_package.get_clan_cats import (
     get_living_clan_cat_count,
@@ -175,3 +176,45 @@ class TestEvents(unittest.TestCase):
 
                 if not _ % 100:
                     print(f"CLANCATS ALIVE: {get_living_clan_cat_count(Cat)}")
+
+    def test_old_age_events_require_old_enough_random_cat(self):
+        """
+        Old-age events that kill r_c should not select r_c cats below the old-age threshold.
+        """
+        main_cat = create_cat(CatRank.ELDER)
+        random_cat = create_cat(CatRank.ELDER)
+        game.clan.add_cat(main_cat)
+        game.clan.add_cat(random_cat)
+
+        main_cat.moons = 160
+        random_cat.moons = 132
+        main_cat.age = CatAge.SENIOR
+        random_cat.age = CatAge.SENIOR
+        main_cat.set_mate(random_cat)
+
+        old_age_event = ShortEvent(
+            event_id="test_old_age_double_death",
+            sub_type=["old_age"],
+            m_c={
+                "age": ["senior"],
+                "status": ["any"],
+                "relationship_status": ["mates"],
+                "dies": True,
+            },
+            r_c={"age": ["senior"], "status": ["any"], "dies": True},
+        )
+
+        chosen_event, chosen_random_cat = filter_events(
+            possible_events=[old_age_event],
+            main_cat=main_cat,
+            random_cat=None,
+            other_clan=game.clan.all_other_clans[0],
+            sub_types=["old_age"],
+            allowed_events=None,
+            excluded_events=None,
+            ignore_subtyping=False,
+            reduction_avoidance_chance=1,
+        )
+
+        self.assertIsNone(chosen_event)
+        self.assertIsNone(chosen_random_cat)

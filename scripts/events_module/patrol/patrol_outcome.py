@@ -1,6 +1,5 @@
 #!/usr/bin/env python3
 # -*- coding: ascii -*-
-
 from html import escape
 import random
 from os.path import exists as path_exists
@@ -51,6 +50,11 @@ class PatrolOutcome:
         Personality.trait_ranges["kit_traits"].keys()
     )
     NUM_OF_SKILLS = len(SkillPath)
+
+    @staticmethod
+    def _profile_link(cat: Cat) -> str:
+        """Create a UI hyperlink to a cat profile."""
+        return f'<a href="cat://{cat.ID}">{escape(str(cat.name))}</a>'
 
     def __init__(
         self,
@@ -233,11 +237,6 @@ class PatrolOutcome:
 
         return outcome_list
 
-    @staticmethod
-    def _profile_link(cat: Cat) -> str:
-        """Create a hyperlink to a cat profile from patrol results."""
-        return f'<a href="cat://{cat.ID}"><b>{escape(str(cat.name))}</b></a>'
-
     def execute_outcome(self, patrol: "Patrol") -> Tuple[str, str, list, Optional[str]]:
         """
         Executes the outcome. Returns a tuple with the final outcome text, the results text, and any outcome art
@@ -304,9 +303,13 @@ class PatrolOutcome:
 
         self._handle_future_event(patrol)
 
+        result_text = " ".join(results)
+        if "cat://" in result_text:
+            result_text += i18n.t("screens.patrol.profile_link_hint")
+
         print("PATROL END -----------------------------------------------------")
 
-        return processed_text, " ".join(results), rel_results, self.get_outcome_art()
+        return processed_text, result_text, rel_results, self.get_outcome_art()
 
     def _handle_future_event(self, patrol):
         """
@@ -502,6 +505,7 @@ class PatrolOutcome:
 
         if gained_exp or app_exp:
             for cat in patrol.patrol_cats:
+                current_exp = cat.experience if cat.experience is not None else 0
                 if cat.status.rank.is_any_apprentice_rank():
                     cat.add_experience(app_exp)
                 else:
@@ -612,11 +616,25 @@ class PatrolOutcome:
 
         [_cat.become_lost() for _cat in cats_to_lose]
 
+        patrol_id = patrol.patrol_event.patrol_id if patrol.patrol_event else ""
+        twoleg_abduction_patrol = self._is_twoleg_abduction_loss_patrol(patrol_id)
+        if twoleg_abduction_patrol:
+            for _cat in cats_to_lose:
+                _cat.pending_neuter = True
+
         return i18n.t(
             "screens.patrol.lost_cats",
             count=len(cats_to_lose),
             cats=adjust_list_text([self._profile_link(cat) for cat in cats_to_lose]),
         )
+
+    @staticmethod
+    def _is_twoleg_abduction_loss_patrol(patrol_id: str) -> bool:
+        if patrol_id in {"gen_hunt_gonetnr1", "gen_hunt_gonetnr2"}:
+            return True
+
+        patrol_id_lower = patrol_id.lower()
+        return "twoleg" in patrol_id_lower or "tnr" in patrol_id_lower
 
     def _handle_condition_and_scars(self, patrol: "Patrol") -> str:
         """Handle injuring cats, or giving scars"""
