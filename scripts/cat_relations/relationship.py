@@ -12,11 +12,6 @@ from scripts.events_module.event_filters import (
 from scripts.game_structure import game
 from scripts.events_module.text_adjust import process_text
 import scripts.cat_relations.interaction as interactions
-from scripts.events_module.relationship.romance_chance import (
-    cats_are_same_sex,
-    passes_same_sex_romance_chance,
-)
-
 
 # ---------------------------------------------------------------------------- #
 #                           START Relationship class                           #

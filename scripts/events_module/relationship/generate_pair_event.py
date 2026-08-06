@@ -23,9 +23,9 @@ from scripts.events_module.text_pool_event import TextPoolEvent
 from scripts.game_structure import game
 from scripts.game_structure.localization import load_lang_resource
 from scripts.events_module.relationship.romance_chance import (
+    cats_are_mixed_sterilization,
     passes_same_sex_romance_chance,
 )
-
 
 loaded_events = {}
 
@@ -197,6 +197,12 @@ def _get_type_of_interaction(
                 continue
             if attr > 0:
                 value_weights[rel_type] += int(abs(attr / 10))
+
+    # reduce romance interaction chance for mixed spayed/neutered-intact pairs.
+    if RelType.ROMANCE in value_weights and cats_are_mixed_sterilization(
+        main_cat, other_cat
+    ):
+        value_weights[RelType.ROMANCE] *= 0.15
 
     # increase the chance of a romance interaction if they are already mates
     if other_cat.ID in main_cat.mate:
