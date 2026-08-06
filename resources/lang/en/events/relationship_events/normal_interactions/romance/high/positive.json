@@ -381,6 +381,7 @@
         "id": "rom_inc_high_matetraitfierce",
         "strings": [
             "r_c's passion for everything excites m_c.",
+			"As weird as it may sound, m_c finds r_c's ferociousness kinda hot... in a way.",
             "m_c thinks r_c would defend {PRONOUN/m_c/object} with {PRONOUN/r_c/poss} life.",
             "m_c feels energized and fired up by r_c's presence."
         ],
@@ -414,6 +415,7 @@
         "strings": [
             "m_c is flustered by r_c's cool and unflappable attitude.",
             "m_c admires how nothing seems to faze r_c.",
+			"As weird as it may sound, m_c finds r_c's coldness kinda hot... in a way.",
             "m_c dreams about awakening passion in r_c's cold heart."
         ],
         "involved_cats": {
