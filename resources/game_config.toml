@@ -95,7 +95,7 @@ dev_tools = true
   override_same_age_group = true
 
   # 1/chance of becoming mates when the conditions are fulfilled
-  chance_fulfilled_condition = 4
+  chance_fulfilled_condition = 3
 
   # 1/chance of becoming mates, triggers with friends_to_lover (has to be a high number because many relationships are checked each moon)
   chance_friends_to_lovers = 130
