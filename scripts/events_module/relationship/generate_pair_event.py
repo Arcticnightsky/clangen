@@ -432,6 +432,15 @@ def _apply_base_influence(
         intensity=intensity,
         relationship=relationship,
     )
+    if (
+        amount > 0
+        and type_of_interaction == RelType.ROMANCE
+        and not passes_same_sex_romance_chance(
+            relationship.cat_from, relationship.cat_to
+        )
+    ):
+        return
+
     setattr(
         relationship,
         type_of_interaction,
