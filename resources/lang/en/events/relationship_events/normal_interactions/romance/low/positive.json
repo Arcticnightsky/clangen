@@ -99,40 +99,6 @@
     {
         "id": "rom_inc_low6",
         "strings": [
-            "As weird as it may sound, m_c finds r_c's toughness kinda hot... in a way."
-        ],
-        "involved_cats": {
-            "r_c": {
-                "stat": {
-                    "trait": [
-                        "cold",
-                        "strict",
-                        "grumpy"
-                    ]
-                }
-            }
-        }
-    },
-    {
-        "id": "rom_inc_low7",
-        "strings": [
-            "As weird as it may sound, m_c finds r_c's ferociousness kinda hot... in a way."
-        ],
-        "involved_cats": {
-            "r_c": {
-                "stat": {
-                    "trait": [
-                        "fierce",
-                        "vengeful",
-                        "bloodthirsty"
-                    ]
-                }
-            }
-        }
-    },
-    {
-        "id": "rom_inc_low8",
-        "strings": [
             "m_c can't help but admire just how brave r_c is..."
         ],
         "involved_cats": {
