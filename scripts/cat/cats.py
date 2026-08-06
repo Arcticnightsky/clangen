@@ -296,15 +296,12 @@ class Cat:
         self.mate = inheritance["mate"]
         self.status = status
         self._pronouns = {}  # Needs to be set as a dict
-        self.age: Optional[CatAge] = None
-        self.init_moons_age(moons)
         self.moons = moons
         self.inheritance = None  # This should never be used, but just for safety
         # name is assigned by FadedCatFactory
 
         self.faded = True
         return True
-
     def __repr__(self):
         return "CAT OBJECT:" + self.ID
 
