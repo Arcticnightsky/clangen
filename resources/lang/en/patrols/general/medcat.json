@@ -8715,9 +8715,9 @@
                         "values": [
                             "trust"
                         ],
-                        "amount": 5,
+                        "amount": -5,
                         "log": {
-                            "cats_from": "cat_from watched cat_to misjudge {PRONOUN/cat_to/poss} step while gathering oak leaves and nearly get stuck in a tree."
+                            "cats_from": "cat_from watched cat_to misjudge {PRONOUN/cat_to/poss} step while gathering oak leaves and nearly fell out a tree."
                         }
                     }
                 ],
