@@ -13,7 +13,10 @@
 		"Just about everyone in c_n noticed how m_c's scent has changed and how there's a soft, new gentle glow in {PRONOUN/m_c/poss} eyes only an expecting queen would have. Everyone congratulated m_c when {PRONOUN/m_c/subject} announced that {PRONOUN/m_c/subject}{VERB/m_c/'re/'s} expecting kits.",
 		"m_c woke up with a few aches in {PRONOUN/m_c/poss} belly, but it was no surprise, {PRONOUN/m_c/subject} knew exactly what {PRONOUN/m_c/subject} did with r_c on that hot, steamy night this moon, hehe... {PRONOUN/m_c/subject/CAP} wakes up r_c and excitedly tells {PRONOUN/r_c/object} the news and then later announces to the Clan that {PRONOUN/m_c/subject} {VERB/m_c/are/is} expecting kits!",
 		"m_c and r_c left the camp one evening and came back the next morning, looking quite satisfied. Then m_c bashfully tells the Clan that {PRONOUN/m_c/subject} might be expecting kits soon...",
-		"Okay, m_c was a little surprised to find this out, but hey, what do you expect when you and your mate go on a romantic date while in heat? Seeing this as a pleasant surprise, m_c excitedly announces {PRONOUN/m_c/poss} pregnancy!"
+		"Okay, m_c was a little surprised to find this out, but hey, what do you expect when you and your mate go on a romantic date while in heat? Seeing this as a pleasant surprise, m_c excitedly announces {PRONOUN/m_c/poss} pregnancy!",
+        "m_c freezes at learning {PRONOUN/m_c/subject} {VERB/m_c/are/is} pregnant. Stumbling out of the medicine den, {PRONOUN/m_c/subject} {VERB/m_c/wonder/wonders} how {PRONOUN/m_c/subject} will care for these kits.",
+        "m_c dashes out of the medicine den after learning {PRONOUN/m_c/subject} {VERB/m_c/are/is} pregnant. By sun-high, half the Clan is bugged about parenting advice.",
+        "m_c purrs with delight when {PRONOUN/m_c/subject} {VERB/m_c/are/is} told the news. New kits bring more warriors."
     ],
     "announcement_affair": [
         "m_c has suspicions of being pregnant and is overjoyed by confirmation! Though now r_c's suspicions have seemed to have risen...",
@@ -54,7 +57,9 @@
             "m_c hopes the litter will be small. {PRONOUN/m_c/subject/CAP} {VERB/m_c/feel/feels} overwhelmed at the idea of a big litter.",
             "m_c thinks {PRONOUN/m_c/subject}'ll have a small litter.",
             "m_c hopes {PRONOUN/m_c/subject}'ll have a small litter. No way could {PRONOUN/m_c/subject} handle too many kits.",
-            "m_c, citing queens' intuition, claims {PRONOUN/m_c/subject} {VERB/m_c/know/knows} {PRONOUN/m_c/subject}'ll have a small litter."
+            "m_c, citing queens' intuition, claims {PRONOUN/m_c/subject} {VERB/m_c/know/knows} {PRONOUN/m_c/subject}'ll have a small litter.",
+            "m_c feels a lack of kicking from {PRONOUN/m_c/poss} new litter. {PRONOUN/m_c/subject/CAP} decides it must be a small litter.",
+            "m_c's barely gained any weight from {PRONOUN/m_c/poss} litter. {PRONOUN/m_c/poss/CAP} friends say {PRONOUN/m_c/subject} must be having a small litter."
         ],
         "large": [
             "m_c is hoping for a big litter!",

@@ -444,39 +444,12 @@ class HerbSupply:
         # meds with relevant skills will get a boost to the herbs they find
         # SENSE finds wider types of herbs (3 moss, 1 lungwort, 2 catmint)
         # CLEVER finds greater quantity of herbs (5 moss, 6 lungwort)
-        # and HUNTER find a significant amount of herbs because, well, they hunt for herbs pretty well, no?
-        primary = med_cat.skills.primary.path
-        secondary = None
-        if med_cat.skills.secondary:
-            secondary = med_cat.skills.secondary.path
         amount_modifier = 1
         quantity_modifier = 1
 
-        if primary == SkillPath.SENSE:
-            amount_modifier = constants.CONFIG["clan_resources"]["herbs"][
-                "primary_sense"
-            ]
-        elif primary == SkillPath.CLEVER:
-            quantity_modifier = constants.CONFIG["clan_resources"]["herbs"][
-                "primary_clever"
-            ]
-        elif primary == SkillPath.HUNTER:
-            quantity_modifier = constants.CONFIG["clan_resources"]["herbs"][
-                "primary_hunter"
-            ]
-
-        if secondary == SkillPath.SENSE:
-            amount_modifier = constants.CONFIG["clan_resources"]["herbs"][
-                "secondary_sense"
-            ]
-        elif secondary == SkillPath.CLEVER:
-            quantity_modifier = constants.CONFIG["clan_resources"]["herbs"][
-                "secondary_clever"
-            ]
-        elif secondary == SkillPath.HUNTER:
-            quantity_modifier = constants.CONFIG["clan_resources"]["herbs"][
-                "secondary_hunter"
-            ]
+        med_skills = med_cat.skills.get_all()
+        amount_modifier += med_skills.get(SkillPath.SENSE, 0)
+        quantity_modifier += med_skills.get(SkillPath.CLEVER, 0)
 
         # list of the herbs, sorted by most need
         herb_list = self.sorted_by_need
