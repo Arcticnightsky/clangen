@@ -5,6 +5,7 @@ Module that handles the name generation for all cats.
 import contextlib
 import os
 import random
+from copy import deepcopy
 
 import i18n
 import ujson
@@ -23,6 +24,27 @@ class Name:
     current_save_dir = None
     currently_loaded_lang = None
     names_dict = {}
+    _fallback_names_dict = None
+    _list_categories = (
+        "animal_prefixes",
+        "animal_suffixes",
+        "clan_prefixes",
+        "human_names",
+        "inappropriate_names",
+        "loner_names",
+        "normal_prefixes",
+        "normal_suffixes",
+        "silly_names",
+    )
+    _dict_categories = (
+        "biome_prefixes",
+        "biome_suffixes",
+        "colour_prefixes",
+        "eye_prefixes",
+        "pelt_suffixes",
+        "special_suffixes",
+        "tortie_pelt_suffixes",
+    )
 
     def __init__(
         self,
@@ -73,6 +95,11 @@ class Name:
                 name_fixpref = False
 
         if self.suffix and not load_existing_name:
+            # Existing names can be constructed before any generated-name path has
+            # loaded the localized name data, such as while loading faded cats for
+            # inheritance. Ensure validation has the name rule categories it needs.
+            self.load_localized_names()
+
             # Prevent triple letter names from joining prefix and suffix from occurring (ex. Beeeye)
             possible_three_letter = (
                 self.prefix[-2:] + self.suffix[0],
@@ -132,6 +159,54 @@ class Name:
                     double_animal = False
                 i += 1
 
+    @classmethod
+    def _load_fallback_names(cls):
+        """Load English name data used to fill missing localization keys."""
+        if cls._fallback_names_dict is None:
+            with open("resources/lang/en/names.json", encoding="utf-8") as read_file:
+                cls._fallback_names_dict = ujson.loads(read_file.read())
+        return deepcopy(cls._fallback_names_dict)
+
+    @classmethod
+    def _normalize_names_dict(cls, names_dict):
+        """Ensure every expected name category exists to avoid KeyErrors."""
+        fallback_names = cls._load_fallback_names()
+        normalized_names = deepcopy(names_dict) if names_dict else {}
+
+        for category in cls._list_categories:
+            fallback_value = fallback_names.get(category, [])
+            value = normalized_names.get(category)
+            if not isinstance(value, list) or not value:
+                normalized_names[category] = deepcopy(fallback_value)
+
+        for category in cls._dict_categories:
+            fallback_value = fallback_names.get(category, {})
+            value = normalized_names.get(category)
+            if not isinstance(value, dict):
+                normalized_names[category] = deepcopy(fallback_value)
+            else:
+                merged_value = deepcopy(fallback_value)
+                merged_value.update(value)
+                normalized_names[category] = merged_value
+
+        return normalized_names
+
+    @classmethod
+    def get_category(cls, category):
+        """Return a safe name category, loading names if needed."""
+        names.load_localized_names()
+        return cls.names_dict[category]
+
+    @classmethod
+    def normal_name_combinations(cls):
+        """Return the number of normal prefix/suffix combinations available."""
+        names.load_localized_names()
+        return max(
+            1,
+            len(cls.names_dict["normal_prefixes"])
+            * len(cls.names_dict["normal_suffixes"]),
+        )
+
     def load_localized_names(self):
         """
         Loads the correct names for the given language. Includes override for always using English names, in case localization wants to be ignored
@@ -149,6 +224,8 @@ class Name:
         if (
             self.current_save_dir == get_save_dir()
             and self.currently_loaded_lang == lang
+            and self.names_dict
+            and type(self).names_dict
         ):
             # nothing to do here, all good
             return
@@ -158,6 +235,8 @@ class Name:
                 names_dict = ujson.loads(read_file.read())
         else:
             names_dict = load_lang_resource("names.json")
+
+        names_dict = self._normalize_names_dict(names_dict)
 
         save_dir = get_save_dir()
 
@@ -197,7 +276,7 @@ class Name:
 
         if os.path.exists(save_dir + "/specialsuffixes.txt"):
             with open(
-                str(save_dir + "/specialsuffixes.txt", "r"), encoding="utf-8"
+                str(save_dir + "/specialsuffixes.txt"), "r", encoding="utf-8"
             ) as read_file:
                 name_list = read_file.read()
                 if_names = len(name_list)
@@ -206,14 +285,15 @@ class Name:
                 for new_name in new_names:
                     if new_name != "":
                         if new_name.startswith("-"):
-                            del names_dict["special_suffixes"][new_name[1:]]
+                            names_dict["special_suffixes"].pop(new_name[1:], None)
                         elif ":" in new_name:
                             _tmp = new_name.split(":")
                             names_dict["special_suffixes"][_tmp[0]] = _tmp[1]
 
         self.names_dict = names_dict
-        self.current_save_dir = save_dir
-        self.currently_loaded_lang = lang
+        type(self).names_dict = names_dict
+        type(self).current_save_dir = save_dir
+        type(self).currently_loaded_lang = lang
 
     def __str__(self):
         return self.__repr__()

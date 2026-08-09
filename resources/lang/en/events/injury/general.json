@@ -605,7 +605,9 @@
             "any"
         ],
         "season": [
-            "any"
+            "greenleaf",
+            "leaf-fall",
+            "newleaf"
         ],
         "frequency": 4,
         "event_text": "m_c has collected quite a lot of ticks in {PRONOUN/m_c/poss} pelt, and grumbles about the itchy bites dotted throughout.",
@@ -635,7 +637,9 @@
             "any"
         ],
         "season": [
-            "any"
+            "greenleaf",
+            "leaf-fall",
+            "newleaf"
         ],
         "frequency": 4,
         "event_text": "m_c has been yowling about {PRONOUN/m_c/poss} ticks for the better part of the day, the itchy bites maddening to {PRONOUN/m_c/object}.",
@@ -674,7 +678,9 @@
             "any"
         ],
         "season": [
-            "any"
+            "greenleaf",
+            "leaf-fall",
+            "newleaf"
         ],
         "tags": [
             "clan:apprentice"
@@ -687,7 +693,7 @@
                 "senior"
             ],
             "status": [
-                "any"
+                "elder"
             ],
             "trait": [
                 "cold",
@@ -716,7 +722,9 @@
             "any"
         ],
         "season": [
-            "any"
+            "greenleaf",
+            "leaf-fall",
+            "newleaf"
         ],
         "tags": [
             "clan:warrior"
@@ -738,6 +746,41 @@
                 "lonesome",
                 "nervous",
                 "thoughtful"
+            ]
+        },
+        "injury": [
+            {
+                "cats": [
+                    "m_c"
+                ],
+                "injuries": [
+                    "tick bites"
+                ]
+            }
+        ]
+    },
+    {
+        "event_id": "gen_injury_tickbites_anysenioradultsenior5",
+        "location": [
+            "any"
+        ],
+        "season": [
+            "greenleaf",
+            "leaf-fall",
+            "newleaf"
+        ],
+        "tags": [
+            "clan:apprentice"
+        ],
+        "frequency": 4,
+        "event_text": "Clearly, the apprentices haven't been doing their job for the elders; m_c has ticks all over {PRONOUN/m_c/poss} pelt.",
+        "m_c": {
+            "age": [
+                "senior adult",
+                "senior"
+            ],
+            "status": [
+                "elder"
             ]
         },
         "injury": [
@@ -856,7 +899,7 @@
         "season": [
             "any"
         ],
-        "frequency": 1,
+        "frequency": 2,
         "event_text": "m_c was on a walk when {PRONOUN/m_c/subject} saw r_c being attacked by a rogue! {PRONOUN/m_c/subject/CAP} helped r_c escape, but not before gaining a few wounds.",
         "m_c": {
             "age": [
@@ -959,7 +1002,7 @@
         "season": [
             "any"
         ],
-        "frequency": 3,
+        "frequency": 2,
         "event_text": "m_c was on a walk when {PRONOUN/m_c/subject} saw r_c being attacked by a dog! {PRONOUN/m_c/subject/CAP} helped r_c escape, but not before gaining a few wounds.",
         "m_c": {
             "age": [
@@ -1506,7 +1549,7 @@
         "season": [
             "any"
         ],
-        "frequency": 1,
+        "frequency": 3,
         "event_text": "m_c couldn't help but try to show off by climbing the tallest tree {PRONOUN/m_c/subject} could find. {PRONOUN/m_c/poss/CAP} plan backfired when {PRONOUN/m_c/subject} fell out of the tree.",
         "m_c": {
             "age": [
@@ -1585,7 +1628,7 @@
         "season": [
             "any"
         ],
-        "frequency": 1,
+        "frequency": 2,
         "event_text": "m_c fell from a cliff and somehow survived, though not without breaking {PRONOUN/m_c/poss} leg.",
         "m_c": {
             "age": [
@@ -2673,6 +2716,120 @@
         ]
     },
     {
+        "event_id": "gen_injury_clawwound_anymultiagemultistatusnotfightermultitraitothercatleader1",
+        "location": [
+            "any"
+        ],
+        "season": [
+            "any"
+        ],
+        "frequency": 4,
+        "event_text": "m_c was hurt while protecting the leader, r_c, from a rogue.",
+        "m_c": {
+            "status": [
+                "warrior",
+                "deputy"
+            ],
+            "skill": [
+                "-FIGHTER,2"
+            ],
+            "trait": [
+                "compassionate",
+                "loving",
+                "responsible",
+                "loyal",
+                "adventurous",
+                "ambitious",
+                "bloodthirsty",
+                "bold",
+                "daring",
+                "fierce",
+                "vengeful"
+            ]
+        },
+        "r_c": {
+            "status": [
+                "leader"
+            ]
+        },
+        "injury": [
+            {
+                "cats": [
+                    "m_c"
+                ],
+                "injuries": [
+                    "claw-wound"
+                ],
+                "scars": [
+                    "SNOUT"
+                ]
+            }
+        ],
+        "history": [
+            {
+                "cats": [
+                    "m_c"
+                ],
+                "scar": "m_c was scarred by a rogue while protecting r_c.",
+                "death": "m_c died from {PRONOUN/m_c/poss} wounds after protecting r_c from a rogue."
+            }
+        ],
+        "relationships": [
+            {
+                "cats_from": [
+                    "r_c"
+                ],
+                "cats_to": [
+                    "m_c"
+                ],
+                "values": [
+                    "trust",
+                    "respect"
+                ],
+                "amount": 10,
+                "log": {
+                    "cats_from": "to_cat protected from_cat from a rogue."
+                }
+            },
+            {
+                "cats_from": [
+                    "high_lawful"
+                ],
+                "cats_to": [
+                    "m_c"
+                ],
+                "values": [
+                    "trust",
+                    "respect"
+                ],
+                "amount": 10,
+                "log": {
+                    "cats_from": "from_cat gained a greater respect for to_cat's loyalty when {PRONOUN/to_cat/subject} protected r_c from a rogue."
+                }
+            },
+            {
+                "cats_from": [
+                    "n_c:0"
+                ],
+                "cats_to": [
+                    "m_c", "r_c"
+                ],
+                "values": [ "like" ],
+                "amount": 10,
+                "mutual": true,
+                "log": {
+                    "cats_from": "n_c:0 attacked r_c, but m_c fought {PRONOUN/n_c:0/object} off."
+                }
+            }
+        ],
+        "new_cat": [
+            [
+                "meeting",
+                "rogue"
+            ]
+        ]
+    },
+    {
         "event_id": "gen_injury_catbite_anymultiagestatustraitnotfighter1",
         "location": [
             "any"
@@ -2892,7 +3049,7 @@
         "season": [
             "any"
         ],
-        "frequency": 4,
+        "frequency": 3,
         "event_text": "m_c fought a hawk and got hurt.",
         "m_c": {
             "status": [
@@ -2945,7 +3102,7 @@
         "season": [
             "any"
         ],
-        "frequency": 4,
+        "frequency": 2,
         "event_text": "m_c saved r_c from a hawk but was hurt.",
         "m_c": {
             "status": [
@@ -3049,6 +3206,7 @@
                 "bloodthirsty",
                 "daring",
                 "strict",
+                "fierce",
                 "vengeful"
             ]
         },
@@ -3448,7 +3606,7 @@
                     "damaged eyes"
                 ],
                 "scars": [
-                    "LEFTBLIND", "FACE", "RIGHTBLIND"
+                    "LEFTBLIND", "FACE", "RIGHTBLIND", "BOTHBLIND", "THREE"
                 ]
             }
         ],
@@ -5523,7 +5681,7 @@
                     "claw-wound"
                 ],
                 "scars": [
-                    "FACE", "LEFTBLIND", "RIGHTBLIND", "SIDE", "THREE", "THROAT"
+                    "FACE", "LEFTBLIND", "RIGHTBLIND", "SIDE", "THREE", "THROAT", "ONE", "BELLY"
                 ]
             }
         ],
@@ -5665,7 +5823,7 @@
         "season": [
             "any"
         ],
-        "frequency": 4,
+        "frequency": 3,
         "event_text": "m_c's tail was badly injured by a dog.",
         "m_c": {
             "age": [
@@ -5709,7 +5867,7 @@
         "season": [
             "any"
         ],
-        "frequency": 4,
+        "frequency": 3,
         "event_text": "m_c's tail was badly injured by a fox.",
         "m_c": {
             "age": [
@@ -9603,6 +9761,7 @@
         "trait": [
             "bloodthirsty",
             "vengeful",
+            "arrogant",
             "fierce"
         ]
     },
@@ -9691,6 +9850,112 @@
             "amount": -5,
             "log": {
                 "cats_from": "cat_from grew worried that cat_to viewed {PRONOUN/cat_from/object} as something to be used after being ordered to punish a Clanmate."
+            }
+        }
+    ]
+},
+{
+    "event_id": "gen_injury_leaderpunish2",
+    "location": [
+        "any"
+    ],
+    "season": [
+        "any"
+    ],
+    "sub_type": [],
+    "tags": [],
+    "frequency": 2,
+    "event_text": "Tired of m_c's tyrannical leadership, r_c challenges {PRONOUN/m_c/object}. r_c goes to punish {PRONOUN/r_c/object} {PRONOUN/m_c/self} and they get in an intense fight in front of the Clan. Both cats end up severely hurt in the end.",
+    "new_accessory": [],
+    "m_c": {
+        "status": [
+            "leader"
+        ],
+        "trait": [
+            "bloodthirsty",
+            "vengeful",
+            "arrogant",
+            "fierce"
+        ]
+    },
+    "r_c": {
+        "status": [
+            "warrior"
+        ],
+        "trait": [
+            "rebellious"
+        ]
+    },
+    "injury": [
+        {
+            "cats": [
+                "m_c", "r_c"
+            ],
+            "injuries": [
+                "battle_injury"
+            ],
+            "scars": [
+                "ONE",
+                "TWO",
+                "HINDLEG",
+                "FACE",
+                "SNOUT",
+                "CHEEK",
+                "BACK",
+                "CATBITE"
+            ]
+        }
+    ],
+    "history": [
+        {
+            "cats": [
+                "m_c"
+            ],
+            "scar": "m_c was scarred after punishing r_c.",
+            "death": "m_c died from {PRONOUN/m_c/poss} injuries after punishing r_c."
+        },
+        {
+            "cats": [
+                "r_c"
+            ],
+            "scar": "r_c was scarred after being punished by m_c.",
+            "death": "r_c died from {PRONOUN/r_c/poss} injuries after m_c punished {PRONOUN/r_c/object}."
+        }
+        
+    ],
+    "relationships": [
+        {
+            "cats_from": [
+                "m_c"
+            ],
+            "cats_to": [
+                "r_c"
+            ],
+            "mutual": true,
+            "values": [
+                "comfort",
+                "trust",
+                "like"
+            ],
+            "amount": -30,
+            "log": {
+                "cats_from": "cat_from punished cat_to for speaking out against {PRONOUN/cat_to/object} and they got into a fight in front of the whole Clan."
+            }
+        },
+        {
+            "cats_from": [
+                "clan", "high_lawful"
+            ],
+            "cats_to": [
+                "r_c"
+            ],
+            "mutual": false,
+            "values": [
+                "respect"
+            ],
+            "amount": 15,
+            "log": {
+                "cats_from": "cat_from grew a deeper respect for cat_to after {PRONOUN/cat_to/subject} stood up against the leader."
             }
         }
     ]
