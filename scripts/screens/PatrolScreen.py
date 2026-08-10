@@ -17,6 +17,7 @@ from ..ui.scale import ui_scale, ui_scale_dimensions
 from .Screens import Screens
 from .enums import GameScreen
 from ..clan_package.settings import get_clan_setting
+from ..clan_package.get_clan_cats import get_queens_with_young_kits
 from ..game_structure import image_cache, constants
 from ..game_structure.game.switches import switch_set_value, Switch
 from ..game_structure.game.settings import game_setting_get
@@ -75,7 +76,6 @@ class PatrolScreen(Screens):
         if event.type == pygame_gui.UI_BUTTON_DOUBLE_CLICKED:
             if self.patrol_stage == "choose_cats":
                 self.handle_choose_cats_events(event)
-
         elif event.type == pygame_gui.UI_TEXT_BOX_LINK_CLICKED:
             if event.link_target.startswith("cat://"):
                 cat_id = event.link_target.split("cat://", maxsplit=1)[1]
@@ -307,10 +307,18 @@ class PatrolScreen(Screens):
     def screen_switches(self):
         super().screen_switches()
 
+        saved_clan_name = None
+        saved_moon = None
+        if self.in_progress_data is not None:
+            saved_clan_name = self.in_progress_data.get(
+                "patrol_clan_name", self.in_progress_data.get("clan_name")
+            )
+            saved_moon = self.in_progress_data.get("current_moon")
+
         if (
             self.in_progress_data is not None
-            and self.in_progress_data["current_moon"] == game.clan.age
-            and self.in_progress_data["clan_name"] == game.clan.name
+            and saved_moon == game.clan.age
+            and saved_clan_name == game.clan.name
         ):
             self.display_change_load(self.in_progress_data)
         else:
@@ -350,12 +358,15 @@ class PatrolScreen(Screens):
         variable_dict["outcome_art"] = self.outcome_art
 
         variable_dict["current_moon"] = game.clan.age
-        variable_dict["clan_name"] = game.clan.name
+        variable_dict["patrol_clan_name"] = game.clan.name
 
         return variable_dict
 
     def display_change_load(self, variable_dict: Dict):
         super().display_change_load(variable_dict)
+        # Ensure the heading is rebuilt after generic display-load restores
+        # the raw heading token text.
+        self.update_heading_text(game.clan.name)
 
         for key, value in variable_dict.items():
             try:
@@ -935,6 +946,9 @@ class PatrolScreen(Screens):
 
     def run_patrol_proceed(self, user_input):
         """Proceeds the patrol - to be run in the separate thread."""
+        # Patrol resolution changes save data/state, so mark save as outdated.
+        switch_set_value(Switch.saved_clan, False)
+
         if user_input in ["nopro", "notproceed"]:
             (
                 self.display_text,
@@ -1017,6 +1031,10 @@ class PatrolScreen(Screens):
 
         self.able_cats = []
 
+        queens_with_young_kits = get_queens_with_young_kits(
+            Cat.all_cats_list, max_kit_moons=5
+        )
+
         # ASSIGN TO ABLE CATS
         for the_cat in Cat.all_cats_list:
             if (
@@ -1025,6 +1043,7 @@ class PatrolScreen(Screens):
                 and the_cat.status.alive_in_player_clan
                 and the_cat not in self.current_patrol
                 and not the_cat.not_working()
+                and the_cat.ID not in queens_with_young_kits
             ):
                 if (
                     the_cat.status.rank == CatRank.NEWBORN
