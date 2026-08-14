@@ -20,6 +20,9 @@ from scripts.events_module.event_filters import (
     get_highest_romantic_relation,
     get_personality_compatibility,
 )
+from scripts.events_module.relationship.romance_chance import (
+    passes_same_sex_romance_chance,
+)
 from scripts.config import get_config
 
 
