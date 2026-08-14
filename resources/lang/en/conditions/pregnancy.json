@@ -153,7 +153,7 @@
         ],
         "outside_mate": [
             "m_c wishes that r_c was here in the Clan to see their new {insert}. m_c hopes that {PRONOUN/r_c/subject} will return soon.",
-			"As m_c looks over {PRONOUN/m_c/poss} new {insert}, {PRONOUN/m_c/subject} {VERB/m_c/hope/hopes} r_c won't miss out on too much of their kithood — if {PRONOUN/r_c/subject} ever {VERB/r_c/return/returns} that is...",
+			"As m_c looks over {PRONOUN/m_c/poss} new {insert}, {PRONOUN/m_c/subject} {VERB/m_c/hope/hopes} r_c won't miss out on too much of their kithood, if {PRONOUN/r_c/subject} ever {VERB/r_c/return/returns}...",
             "m_c hoped that r_c would return to c_n before {PRONOUN/m_c/subject} gave birth to their {insert}, but sadly that didn't happen..."
         ],
         "both_unmated_pos": [
@@ -164,7 +164,7 @@
             "Nobody can judge what two cats do in private. Some ask whether m_c and r_c will become mates for the sake of their {insert}, but most turn a blind eye to it, opting to allow the pair their privacy as new parents."
     ],
         "both_unmated_neg": [
-			"After a bit of fumbling, r_c finally just blurts that {PRONOUN/r_c/subject} {VERB/r_c/don't/doesn't} want to be a father. m_c and {PRONOUN/m_c/poss} new {insert} are left alone in the nursery.",
+			"After a bit of fumbling, r_c finally just blurts that {PRONOUN/r_c/subject} {VERB/r_c/don't/doesn't} want to be a parent. m_c and {PRONOUN/m_c/poss} new {insert} are left alone in the nursery.",
 			"m_c isn't cruel about it, but after r_c's done meeting {PRONOUN/r_c/poss} new {insert}, {PRONOUN/m_c/subject} {VERB/m_c/make/makes} {PRONOUN/m_c/poss} intention to be the <i>primary parent</i> clear.",
 			"r_c bluntly tells m_c that {PRONOUN/r_c/subject} {VERB/r_c/don't/doesn't} intend to help raise the {insert} that {PRONOUN/m_c/subject} just gave birth to. {PRONOUN/r_c/subject/CAP} {VERB/r_c/walk/walks} out of the nursery, leaving m_c alone and heartbroken.",
 			"m_c waits with bated breath for r_c to visit the nursery and finally meet {PRONOUN/r_c/poss} new {insert}, but {PRONOUN/r_c/subject} never {VERB/r_c/do/does}. m_c is left wondering what {PRONOUN/m_c/subject} did wrong."
@@ -175,35 +175,34 @@
             "Ever since the birth, rumor's gone around that m_c's {insert} belongs to r_c and, while no one wants to confirm anything, no one really has to when the evidence is mewling right there...",
 			"r_c adamantly denies that m_c's newly born {insert} belongs to {PRONOUN/r_c/object} when questioned, but it's hard to believe {PRONOUN/r_c/object} when they're so similar...",
 			"Everyone in the Clan can see that m_c's {insert} clearly looks like r_c... rc_mate has been glaring at {PRONOUN/r_c/object} and m_c ever since the {insert} was born.",
-			"rc_mate has been demanding answers from r_c ever since m_c's {insert} was born — the {insert} looks way too much like {PRONOUN/r_c/object}!"
+			"rc_mate has been demanding answers from r_c ever since m_c's {insert} was born. The {insert} looks far too much like r_c!"
         ],
         "affair_secret": [
             "m_c secretly had a {insert} with r_c.",
             "m_c hopes that {PRONOUN/m_c/poss} {insert} doesn't look too much like r_c, otherwise questions might follow.",
-			"rc_mate refuses believe any the rumors about m_c's new {insert} belonging to {PRONOUN/rc_mate/poss} mate, r_c, even if there are strong resemblances.",
+			"rc_mate refuses to believe any of the rumors about m_c's new {insert} belonging to {PRONOUN/rc_mate/poss} mate, r_c, even if there is a strong resemblance.",
             "r_c goes to visit m_c in the nursery with {PRONOUN/m_c/poss} new {insert}, on a completely innocent mission to deliver food to the new parent."
         ],
         "affair_mated": [
 			"mc_mate is such a wonderful cat, deserving of being a parent... so why does m_c's {insert} look more like r_c instead?",
 			"Everyone in the Clan can see that m_c's {insert} clearly looks like r_c... mc_mate has been glaring at {PRONOUN/m_c/object} and r_c ever since the {insert} was born.",
-			"mc_mate has been demanding answers from m_c ever since the {insert} was born — the {insert} looks way too much like r_c!",
+			"mc_mate has been demanding answers from m_c ever since the {insert} was born. The {insert} looks way too much like r_c!",
             "m_c can see it, mc_mate can see it, r_c can see it, everyone in c_n can see how the new {insert} looks a bit too much like r_c for it to be coincidence..."
         ],
         "affair_mated_secret": [
-			"m_c secretly had a {insert} with r_c instead of mc_mate. m_c doesn't plan on telling mc_mate about this — ever.",
-			"mc_mate refuses believe any the rumors about m_c's new {insert} belonging to r_c, even if there are strong resemblances.",
-			"m_c stresses over how much the new {insert} looks so much like mc_mate to avoid raising suspicion of them having r_c's features.",
-			"mc_mate happily crawls into the nursery to see m_c and the new {insert}, completely unaware that this {insert} was made from m_c and r_c.",
+			"m_c secretly had a {insert} with r_c instead of mc_mate.",
+			"mc_mate refuses believe any of the rumors about m_c's new {insert} belonging to r_c, even if there is a strong resemblance.",
+			"m_c stresses the fact that the new {insert} looks so much like mc_mate to avoid raising suspicion of them having r_c's features.",
+			"mc_mate happily crawls into the nursery to see m_c and the new {insert}, completely unaware that this {insert} is m_c's and r_c's.",
 			"Watching mc_mate look over {PRONOUN/m_c/poss} new {insert}, m_c silently vows to make sure that {PRONOUN/mc_mate/subject} never {VERB/mc_mate/find/finds} out that this {insert} is actually r_c's.",
-            "m_c feels a bit guilty about hiding the fact that {PRONOUN/m_c/poss} new {insert} is r_c's, but mc_mate was looking forward to this birth as much as {PRONOUN/m_c/subject} {VERB/m_c/were/was}, so why come clean and spoil it?"
+            "m_c feels guilty about hiding that {PRONOUN/m_c/poss} new {insert} is r_c's, but mc_mate was looking forward to this birth as much as {PRONOUN/m_c/subject} {VERB/m_c/were/was}, so why come clean and spoil it?"
         ],
         "affair_mated_samesex": [
-			"m_c gave birth to a {insert}, made from her and r_c. {mc_mate} will help raise them as well — The perfect opportunity for the same-sex pair to become parents for once.",
-            "mc_mate looks over m_c's new {insert} with mixed feelings. On one hand, m_c did cheat on {PRONOUN/mc_mate/object} with r_c, but at the same time, {PRONOUN/mc_mate/subject} can help m_c raise this {insert} together."
+            "mc_mate looks over m_c's new {insert} with mixed feelings. On one paw, m_c did cheat on {PRONOUN/mc_mate/object} with r_c, but at the same time, {PRONOUN/mc_mate/subject} can help m_c raise this {insert} together."
         ],
         "affair_mated_dead_mate": [
             "mc_mate was such a wonderful cat, deserving of being a parent, even after death... so why does m_c's {insert} look more like r_c instead?",
-            "This was supposed to be a bittersweet moment — m_c birthing {PRONOUN/m_c/poss} new {insert}, a last gift from mc_mate. Except, this {insert} isn't mc_mate's at all... they're r_c's."
+            "This was supposed to be a bittersweet moment, m_c birthing {PRONOUN/m_c/poss} new {insert}, a last gift from mc_mate. Except, this {insert} isn't mc_mate's at all... they're r_c's."
         ],
         "death": [
             "Later, as the medicine cat wails with m_c's blood streaked through their pelt and a warrior comes to move the body for the vigil, no one knows what to do with the {insert}.",
