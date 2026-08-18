@@ -51,7 +51,10 @@ class NewCatFactory(BaseCatFactory, ABC):
 
         generated_no_kits = False
         if pelt := overrides.get("pelt"):
-            pelt = Pelt(pelt)
+            if not isinstance(pelt, Pelt):
+                pelt = Pelt(pelt)
+            else:
+                pelt = pelt
         else:
             pelt, generated_gender, generated_no_kits = cls._get_random_pelt(
                 gender_dict["sex"],
