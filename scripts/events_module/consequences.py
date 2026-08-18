@@ -790,7 +790,7 @@ def create_new_cat(
                 weights = constants.CONFIG["cat_name_controls"]["rogue"]
 
             selected_category = choices(name_categories, weights, k=1)[0]
-            name = choice(Name.get_category(selected_category))
+            name = choice(Name.names_dict[selected_category])
 
             # now, if this cat should take a new clan name, we give them such
             if new_name:
