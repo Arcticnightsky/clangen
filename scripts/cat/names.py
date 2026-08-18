@@ -5,6 +5,7 @@ Module that handles the name generation for all cats.
 import contextlib
 import os
 import random
+from copy import deepcopy
 
 import i18n
 import ujson
@@ -138,6 +139,8 @@ class Name:
         else:
             names_dict = load_lang_resource("names.json")
 
+        names_dict = self._normalize_names_dict(names_dict)
+
         save_dir = get_save_dir()
 
         # here onwards is copied wholesale from the original Name class
@@ -176,7 +179,7 @@ class Name:
 
         if os.path.exists(save_dir + "/specialsuffixes.txt"):
             with open(
-                str(save_dir + "/specialsuffixes.txt", "r"), encoding="utf-8"
+                str(save_dir + "/specialsuffixes.txt"), "r", encoding="utf-8"
             ) as read_file:
                 name_list = read_file.read()
                 if_names = len(name_list)
@@ -185,7 +188,7 @@ class Name:
                 for new_name in new_names:
                     if new_name != "":
                         if new_name.startswith("-"):
-                            del names_dict["special_suffixes"][new_name[1:]]
+                            names_dict["special_suffixes"].pop(new_name[1:], None)
                         elif ":" in new_name:
                             _tmp = new_name.split(":")
                             names_dict["special_suffixes"][_tmp[0]] = _tmp[1]
