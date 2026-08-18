@@ -38,7 +38,7 @@ from scripts.game_structure import game
 
 
 @staticmethod
-def ensure_unique_kit_name(kit: Cat, litter_kittens, clan=game.clan):
+def ensure_unique_kit_name(kit: Cat, litter_kittens, clan=None):
     biome = None
     if clan is not None:
         biome = clan.biome if not clan.override_biome else clan.override_biome
@@ -91,6 +91,7 @@ def get_kits(
     kits_amount: int,
     cat: Optional[Cat] = None,
     other_cat: Optional[Cat] = None,
+    clan=game.clan,
     adoptive_parents: Optional[list] = None,
 ):
     """
