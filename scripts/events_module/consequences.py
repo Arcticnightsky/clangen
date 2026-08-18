@@ -15,6 +15,7 @@ from scripts.cat.enums import (
     CatThought,
 )
 from scripts.cat.factories.new_cat_factory import NewCatFactory
+from scripts.cat.pelts import Pelt
 from scripts.cat.factories.enums import CatType
 from scripts.cat.names import names, Name
 from scripts.cat_relations.enums import RelType
@@ -876,49 +877,35 @@ def create_new_cat(
                 elif chosen_condition in ("blind"):
                     new_cat.pelt.scars = (*new_cat.pelt.scars, "BLIND")
 
-            blue_eyes = [
-                "BLUE",
-                "DARKBLUE",
-                "CYAN",
-                "PALEBLUE",
-                "HEATHERBLUE",
-                "COBALT",
-                "SUNLITICE",
-                "GREY",
-                "AURORA",
-                "SEA",
-                "BLUEBELL",
-            ]
+        if new_cat.pelt.colour == "WHITE" or new_cat.pelt.white_patches == "FULLWHITE":
+            blue_eye_count = int(Pelt.is_blue_eye(new_cat.pelt.eye_colour)) + int(
+                Pelt.is_blue_eye(new_cat.pelt.eye_colour2)
+            )
 
-            deaf_chance = None
-            partial_deaf_chance = None
-            if (
-                new_cat.pelt.colour == "WHITE"
-                or new_cat.pelt.white_patches == "FULLWHITE"
-            ) and new_cat.pelt.eye_colour in blue_eyes:
-                deaf_chance = int(
-                    constants.CONFIG["cat_generation"]["base_permanent_condition"] * 0.4
+            if blue_eye_count == 2:
+                # Two blue eyes in white cats carry the highest real-world risk.
+                deaf_chance = max(
+                    1,
+                    int(
+                        constants.CONFIG["cat_generation"]["base_permanent_condition"]
+                        * 0.4
+                    ),
                 )
-            elif (
-                (
-                    new_cat.pelt.colour == "WHITE"
-                    or new_cat.pelt.white_patches == "FULLWHITE"
-                )
-                and new_cat.pelt.eye_colour2
-                and new_cat.pelt.eye_colour2 in blue_eyes
-            ):
-                partial_deaf_chance = int(
-                    constants.CONFIG["cat_generation"]["base_permanent_condition"] * 0.7
-                )
-
-            if deaf_chance:
                 if not random_module.randint(1, deaf_chance):
-                    chosen_condition = "deaf"
-                    new_cat.get_permanent_condition(chosen_condition, born_with=True)
-            elif partial_deaf_chance:
+                    new_cat.get_permanent_condition("deaf", born_with=True)
+            elif blue_eye_count == 1:
+                # One blue eye most often maps to unilateral/partial deafness.
+                partial_deaf_chance = max(
+                    1,
+                    int(
+                        constants.CONFIG["cat_generation"]["base_permanent_condition"]
+                        * 0.7
+                    ),
+                )
                 if not random_module.randint(1, partial_deaf_chance):
-                    chosen_condition = "partial hearing loss"
-                    new_cat.get_permanent_condition(chosen_condition, born_with=True)
+                    new_cat.get_permanent_condition(
+                        "partial hearing loss", born_with=True
+                    )
 
         should_apply_sterilization = False
         if (
