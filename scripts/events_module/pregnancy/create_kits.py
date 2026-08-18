@@ -482,33 +482,33 @@ def handle_adoption(cat: Cat, other_cat: Optional[Cat] = None):
     amount = get_amount_of_kits(cat)
     kits = get_kits(amount, None, None, adoptive_parents=adoptive_parents)
 
-        event = "hardcoded.adoption_kittens_single"
-        cats_names = str(cat.name)
-        if other_cat:
-            event = f"hardcoded.adoption_kittens_pair{random.choice(range(1,5))}"
-            cats_names = adjust_list_text([str(cat.name), str(other_cat.name)])
+    event = "hardcoded.adoption_kittens_single"
+    cats_names = str(cat.name)
+    if other_cat:
+        event = f"hardcoded.adoption_kittens_pair{random.choice(range(1,5))}"
+        cats_names = adjust_list_text([str(cat.name), str(other_cat.name)])
 
-        print_event = i18n.t(
-            event,
-            names=cats_names,
-            insert=i18n.t("conditions.pregnancy.kit_amount", count=amount),
-            count=amount,
-        )
+    print_event = i18n.t(
+        event,
+        names=cats_names,
+        insert=i18n.t("conditions.pregnancy.kit_amount", count=amount),
+        count=amount,
+    )
 
-        cat_dict = {"m_c": cat}
-        cats_involved = [cat.ID]
+    cat_dict = {"m_c": cat}
+    cats_involved = [cat.ID]
 
-        cat.get_new_thought(CatThought.ON_BIRTH)
+    cat.get_new_thought(CatThought.ON_BIRTH)
 
-        if other_cat:
-            cat_dict["r_c"] = other_cat
-            cats_involved.append(other_cat.ID)
-            other_cat.get_new_thought(CatThought.ON_BIRTH)
+    if other_cat:
+        cat_dict["r_c"] = other_cat
+        cats_involved.append(other_cat.ID)
+        other_cat.get_new_thought(CatThought.ON_BIRTH)
 
-        for kit in kits:
-            kit.thought = "Snuggles close to r_c"
-            kit.thought = event_text_adjust(Cat, kit.thought, random_cat=cat)
-            cats_involved.append(kit.ID)
+    for kit in kits:
+        kit.thought = "Snuggles close to r_c"
+        kit.thought = event_text_adjust(Cat, kit.thought, random_cat=cat)
+        cats_involved.append(kit.ID)
 
     # Normally, birth cooldown is only applied to cat who gave birth. However, if we don't apply birth cooldown to
     # adoption, we get too much adoption, since adoptive couples are using the increased two-parent kits chance.
