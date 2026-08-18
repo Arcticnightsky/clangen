@@ -5,7 +5,14 @@ from typing import Optional
 import i18n
 
 from scripts.cat.cats import Cat
-from scripts.cat.enums import CatAge, CatSocial, CatGroup, CatThought, CatCompatibility
+from scripts.cat.enums import (
+    CatAge,
+    CatSocial,
+    CatGroup,
+    CatThought,
+    CatCompatibility,
+    CatRank,
+)
 from scripts.cat.factories.new_cat_factory import NewCatFactory
 from scripts.cat.factories.typed_dicts import StatusDict
 from scripts.cat.names import Name
@@ -28,7 +35,6 @@ from scripts.events_module.pregnancy.check_family_size import (
 from scripts.events_module.short.condition_events import Condition_Events
 from scripts.events_module.text_adjust import event_text_adjust, adjust_list_text
 from scripts.game_structure import game
-
 
 
 @staticmethod
@@ -79,6 +85,7 @@ def ensure_unique_kit_name(kit: Cat, litter_kittens, clan=None):
             continue
 
         break
+
 
 def get_kits(
     kits_amount: int,
@@ -544,18 +551,21 @@ def get_amount_of_kits(cat: Cat):
     return amount
 
 
-def get_balanced_kit_chance(first_parent: Cat, second_parent: Cat, is_affair) -> int:
+def get_balanced_kit_chance(
+    first_parent: Cat,
+    second_parent: Optional[Cat],
+    is_affair: bool,
+    kits_are_adopted: bool = False,
+) -> int:
     """Returns the chance for these cats to have kittens together"""
     # Now that the second parent is determined, we can calculate the balanced chance for kits
     # get the chance for pregnancy
     if kits_are_adopted:
-        inverse_chance = constants.CONFIG["pregnancy"][
-                "primary_chance_same_sex_adoption"
-        ]
+        inverse_chance = get_config("pregnancy.primary_chance_same_sex_adoption")
     else:
-        inverse_chance = constants.CONFIG["pregnancy"]["primary_chance_unmated"]
-        if len(first_parent.mate) > 0 and not affair:
-            inverse_chance = constants.CONFIG["pregnancy"]["primary_chance_mated"]
+        inverse_chance = get_config("pregnancy.primary_chance_unmated")
+        if len(first_parent.mate) > 0 and not is_affair:
+            inverse_chance = get_config("pregnancy.primary_chance_mated")
 
         # SETTINGS
         # - decrease inverse chance if only mated pairs can have kits
@@ -646,9 +656,10 @@ def get_balanced_kit_chance(first_parent: Cat, second_parent: Cat, is_affair) ->
         # - 33+33+25+25+21+21+21+21+21+18+18+18+18+18+16+15+7+7+7+6+6+6+179+163+
         # - 163+163+163+162+153+153+153+153+152+140+137+137+133+129+129+127+124+
         # - 124+109+2+2+2+2+2 = 10,123 / 131 (amount of cats I had at the time) = 77.275 = avg age of my clan's cats
-        avg_age = int(sum((cat.moons for cat in Cat.all_cats.values())) / living_cats)
-        if avg_age > 80:
-            inverse_chance = int(inverse_chance * 0.8)
+        if living_cats:
+            avg_age = int(sum(cat.moons for cat in Cat.all_cats.values()) / living_cats)
+            if avg_age > 80:
+                inverse_chance = int(inverse_chance * 0.8)
 
         # - slightly decrease inverse chance if the clan has no very young cats yet
         alive_clan_cats = [
@@ -691,13 +702,12 @@ def get_balanced_kit_chance(first_parent: Cat, second_parent: Cat, is_affair) ->
 
         # 'INBREED' counter
         # - increase inverse chance if one of the current cats belongs in the biggest family
-        if not Pregnancy_Events.biggest_family:  # set the family if not already
-            Pregnancy_Events.set_biggest_family()
+        biggest_family = get_biggest_family()
 
         if (
-            first_parent.ID in Pregnancy_Events.biggest_family
+            first_parent.ID in biggest_family
             or second_parent
-            and second_parent.ID in Pregnancy_Events.biggest_family
+            and second_parent.ID in biggest_family
         ):
             inverse_chance = int(inverse_chance * 1.7)
 
@@ -709,7 +719,7 @@ def get_balanced_kit_chance(first_parent: Cat, second_parent: Cat, is_affair) ->
 
         # - decrease inverse chance single parents if settings allow an biggest family is huge
         settings_allow = not second_parent and not get_clan_setting("single parentage")
-        if settings_allow and Pregnancy_Events.biggest_family_is_big():
+        if settings_allow and biggest_family_is_big():
             inverse_chance = int(inverse_chance * 0.9)
 
         # increase inverse chance if the Clan is at war, because it is NOT the right time to have kits!!!
@@ -720,4 +730,4 @@ def get_balanced_kit_chance(first_parent: Cat, second_parent: Cat, is_affair) ->
         if game.clan.current_season in ["Newleaf", "Greenleaf"]:
             inverse_chance = int(inverse_chance * 0.5)
 
-    return inverse_chance
+    return max(1, inverse_chance)
