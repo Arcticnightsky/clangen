@@ -73,6 +73,17 @@ class Name:
             else:
                 self.give_suffix(pelt, biome, tortie_pattern)
 
+
+    @classmethod
+    def normal_name_combinations(cls):
+        """Return the number of normal prefix/suffix combinations available."""
+        names.load_localized_names()
+        return max(
+            1,
+            len(cls.names_dict["normal_prefixes"])
+            * len(cls.names_dict["normal_suffixes"]),
+        )
+    
     @classmethod
     def _usable_name(cls, prefix, suffix):
         if prefix is None or suffix is None:
