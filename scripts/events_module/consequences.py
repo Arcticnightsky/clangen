@@ -17,7 +17,7 @@ from scripts.cat.enums import (
 from scripts.cat.factories.new_cat_factory import NewCatFactory
 from scripts.cat.pelts import Pelt
 from scripts.cat.factories.enums import CatType
-from scripts.cat.names import names, Name
+from scripts.cat.names import Name
 from scripts.cat_relations.enums import RelType
 from scripts.cat_relations.inheritance2 import inheritance_db
 from scripts.clan_package.get_clan_cats import get_random_player_clan_cat
