@@ -145,6 +145,18 @@ class Pelt:
             elif sprite_list[colour] == "blue":
                 blue_eyes.append(colour)
 
+    @classmethod
+    def high_or_mostly_white_patch(cls, white_patches: str | None) -> bool:
+        return (
+            white_patches in cls.high_white
+            or white_patches in cls.mostly_white
+            or white_patches == "FULLWHITE"
+        )
+
+    @classmethod
+    def is_blue_eye(cls, eye_colour: str | None) -> bool:
+        return eye_colour in cls.blue_eyes
+
     # SKIN
     skin_sprites: list = []
     for sprite_list in sprites.SKIN_DATA["sprite_list"]:
@@ -271,9 +283,7 @@ class Pelt:
         self._scars = (
             tuple(scars)
             if isinstance(scars, list)
-            else scars
-            if isinstance(scars, tuple)
-            else tuple()
+            else scars if isinstance(scars, tuple) else tuple()
         )
         self.tint = tint
         self.white_patches_tint = white_patches_tint
@@ -397,28 +407,39 @@ class Pelt:
                     adol_sprite = f"adolescent_short{adol_sprite[-1]}"
 
             self.cat_sprites = {
-                "newborn": newborn_sprite
-                if newborn_sprite is not None and newborn_sprite in self.newborn_poses
-                else "newborn0",
-                "kitten": kitten_sprite
-                if kitten_sprite is not None and kitten_sprite in self.kitten_poses
-                else "kitten0",
-                "adolescent": adol_sprite
-                if adol_sprite is not None
-                and (
-                    adol_sprite in self.adolescent_short_poses
-                    or adol_sprite in self.adolescent_long_poses
-                )
-                else "adolescent_short0",
+                "newborn": (
+                    newborn_sprite
+                    if newborn_sprite is not None
+                    and newborn_sprite in self.newborn_poses
+                    else "newborn0"
+                ),
+                "kitten": (
+                    kitten_sprite
+                    if kitten_sprite is not None and kitten_sprite in self.kitten_poses
+                    else "kitten0"
+                ),
+                "adolescent": (
+                    adol_sprite
+                    if adol_sprite is not None
+                    and (
+                        adol_sprite in self.adolescent_short_poses
+                        or adol_sprite in self.adolescent_long_poses
+                    )
+                    else "adolescent_short0"
+                ),
                 "young adult": adult_sprite,
                 "adult": adult_sprite,
                 "senior adult": adult_sprite,
-                "senior": senior_sprite
-                if senior_sprite is not None and senior_sprite in self.senior_poses
-                else "senior0",
-                "para_adult": para_adult_sprite
-                if para_adult_sprite is not None
-                else "para_adult_short0",
+                "senior": (
+                    senior_sprite
+                    if senior_sprite is not None and senior_sprite in self.senior_poses
+                    else "senior0"
+                ),
+                "para_adult": (
+                    para_adult_sprite
+                    if para_adult_sprite is not None
+                    else "para_adult_short0"
+                ),
                 "para_young": "para_young0",
             }
 
@@ -1172,11 +1193,7 @@ class Pelt:
         ):
             self.name = "Tortie"
 
-        if self.points and self.white_patches in (
-            Pelt.high_white,
-            Pelt.mostly_white,
-            "FULLWHITE",
-        ):
+        if self.points and Pelt.high_or_mostly_white_patch(self.white_patches):
             self.points = None
 
     def randomize_white_patches(self):
@@ -1209,11 +1226,7 @@ class Pelt:
         )
 
         self.white_patches = chosen_white_patches
-        if self.points and self.white_patches in (
-            Pelt.high_white,
-            Pelt.mostly_white,
-            "FULLWHITE",
-        ):
+        if self.points and Pelt.high_or_mostly_white_patch(self.white_patches):
             self.points = None
 
         # tryna stop a bug that I have where a "calico" has a little/mid white patch for some reason

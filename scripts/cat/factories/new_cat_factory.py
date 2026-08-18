@@ -339,9 +339,7 @@ class NewCatFactory(BaseCatFactory, ABC):
             if not allow_female_ginger:
                 if allow_tortie_instead:
                     # Tortie construction time!
-                    if pelt.white_patches in (
-                        Pelt.high_white + Pelt.mostly_white + ["FULLWHITE"]
-                    ):
+                    if Pelt.high_or_mostly_white_patch(pelt.white_patches):
                         pelt.name = "Calico"
                     else:
                         pelt.name = "Tortie"
@@ -518,9 +516,7 @@ class NewCatFactory(BaseCatFactory, ABC):
             if not allow_female_dark:
                 if allow_tortie_instead:
                     # Tortie construction time!
-                    if pelt.white_patches in (
-                        Pelt.high_white + Pelt.mostly_white + ["FULLWHITE"]
-                    ):
+                    if Pelt.high_or_mostly_white_patch(pelt.white_patches):
                         pelt.name = "Calico"
                     else:
                         pelt.name = "Tortie"
