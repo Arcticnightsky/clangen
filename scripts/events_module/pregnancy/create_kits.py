@@ -548,14 +548,14 @@ def get_balanced_kit_chance(first_parent: Cat, second_parent: Cat, is_affair) ->
     """Returns the chance for these cats to have kittens together"""
     # Now that the second parent is determined, we can calculate the balanced chance for kits
     # get the chance for pregnancy
-        if kits_are_adopted:
-            inverse_chance = constants.CONFIG["pregnancy"][
+    if kits_are_adopted:
+        inverse_chance = constants.CONFIG["pregnancy"][
                 "primary_chance_same_sex_adoption"
-            ]
-        else:
-            inverse_chance = constants.CONFIG["pregnancy"]["primary_chance_unmated"]
-            if len(first_parent.mate) > 0 and not affair:
-                inverse_chance = constants.CONFIG["pregnancy"]["primary_chance_mated"]
+        ]
+    else:
+        inverse_chance = constants.CONFIG["pregnancy"]["primary_chance_unmated"]
+        if len(first_parent.mate) > 0 and not affair:
+            inverse_chance = constants.CONFIG["pregnancy"]["primary_chance_mated"]
 
         # SETTINGS
         # - decrease inverse chance if only mated pairs can have kits
