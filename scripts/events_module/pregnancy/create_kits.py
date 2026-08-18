@@ -38,7 +38,7 @@ from scripts.game_structure import game
 
 
 @staticmethod
-def ensure_unique_kit_name(kit: Cat, litter_kittens, clan=None):
+def ensure_unique_kit_name(kit: Cat, litter_kittens, clan=game.clan):
     biome = None
     if clan is not None:
         biome = clan.biome if not clan.override_biome else clan.override_biome
