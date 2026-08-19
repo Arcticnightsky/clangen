@@ -5,7 +5,6 @@ Module that handles the name generation for all cats.
 import contextlib
 import os
 import random
-from copy import deepcopy
 
 import i18n
 import ujson
@@ -115,6 +114,27 @@ class Name:
         )
 
     @classmethod
+    def get_category(cls, category: str):
+        """Return a localized name category, loading names first if needed."""
+        cls.load_localized_names()
+        return cls.names_dict.get(category, [])
+
+    @classmethod
+    def normal_name_combinations(cls) -> int:
+        """Return the number of regular prefix/suffix combinations available."""
+        cls.load_localized_names()
+        return max(
+            1,
+            len(cls.get_category("normal_prefixes"))
+            * len(cls.get_category("normal_suffixes")),
+        )
+
+    @staticmethod
+    def full_name(prefix, suffix) -> str:
+        """Safely combine a prefix and suffix into one comparable name string."""
+        return f"{prefix or ''}{suffix or ''}"
+
+    @classmethod
     def load_localized_names(cls):
         """
         Loads the correct names for the given language. Includes override for always using English names, in case localization wants to be ignored
@@ -138,8 +158,6 @@ class Name:
                 names_dict = ujson.loads(read_file.read())
         else:
             names_dict = load_lang_resource("names.json")
-
-        names_dict = self._normalize_names_dict(names_dict)
 
         save_dir = get_save_dir()
 
@@ -179,7 +197,7 @@ class Name:
 
         if os.path.exists(save_dir + "/specialsuffixes.txt"):
             with open(
-                str(save_dir + "/specialsuffixes.txt"), "r", encoding="utf-8"
+                str(save_dir + "/specialsuffixes.txt", "r"), encoding="utf-8"
             ) as read_file:
                 name_list = read_file.read()
                 if_names = len(name_list)
@@ -188,7 +206,7 @@ class Name:
                 for new_name in new_names:
                     if new_name != "":
                         if new_name.startswith("-"):
-                            names_dict["special_suffixes"].pop(new_name[1:], None)
+                            del names_dict["special_suffixes"][new_name[1:]]
                         elif ":" in new_name:
                             _tmp = new_name.split(":")
                             names_dict["special_suffixes"][_tmp[0]] = _tmp[1]
