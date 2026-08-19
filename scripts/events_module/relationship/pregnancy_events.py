@@ -274,10 +274,11 @@ class Pregnancy_Events:
         )
 
         used_full_names = {
-            kitty.name.prefix + kitty.name.suffix for kitty in litter_kittens
+            Name.full_name(kitty.name.prefix, kitty.name.suffix)
+            for kitty in litter_kittens
         }
         used_full_names.update(
-            cat.name.prefix + cat.name.suffix
+            Name.full_name(cat.name.prefix, cat.name.suffix)
             for cat in Cat.all_cats.values()
             if cat.ID not in excluded_ids and cat.status.alive_in_player_clan
         )
@@ -292,7 +293,7 @@ class Pregnancy_Events:
                 )
                 continue
 
-            if kit.name.prefix + kit.name.suffix in used_full_names:
+            if Name.full_name(kit.name.prefix, kit.name.suffix) in used_full_names:
                 kit.name = Name(
                     prefix=kit.name.prefix,
                     biome=biome,
