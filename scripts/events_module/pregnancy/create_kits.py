@@ -326,13 +326,13 @@ def get_kits(
     # add them as adoptive parents if not
     final_adoptive_parents = []
     for adoptive_p in all_adoptive_parents:
-        Cat.fetch_cat(adoptive_p).get_new_thought(CatThought.ON_BIRTH)
+        Cat.fetch_cat(adoptive_p).assign_thought(CatThought.ON_BIRTH)
         if adoptive_p not in inheritance_db.get_relatives(all_kitten[0].ID, True):
             final_adoptive_parents.append(adoptive_p)
     if not adoptive_parents:
-        cat.get_new_thought(CatThought.ON_BIRTH)
+        cat.assign_thought(CatThought.ON_BIRTH)
         if other_cat:
-            cat.get_new_thought(CatThought.ON_BIRTH)
+            cat.assign_thought(CatThought.ON_BIRTH)
 
     # Add the adoptive parents.
     if final_adoptive_parents:
@@ -502,15 +502,11 @@ def handle_adoption(cat: Cat, other_cat: Optional[Cat] = None):
         count=amount,
     )
 
-    cat_dict = {"m_c": cat}
-    cats_involved = [cat.ID]
-
-    cat.get_new_thought(CatThought.ON_BIRTH)
-
+    cats_involved = {"m_c": cat}
+    cat.assign_thought(CatThought.ON_BIRTH)
     if other_cat:
-        cat_dict["r_c"] = other_cat
-        cats_involved.append(other_cat.ID)
-        other_cat.get_new_thought(CatThought.ON_BIRTH)
+        cats_involved["r_c"] = other_cat
+        other_cat.assign_thought(CatThought.ON_BIRTH)
 
     for kit in kits:
         kit.thought = "Snuggles close to r_c"
