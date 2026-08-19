@@ -739,7 +739,7 @@ def create_new_cat(
                     and cat.age in (CatAge.NEWBORN, CatAge.KITTEN, CatAge.ADOLESCENT)
                 }
                 used_full_names = {
-                    cat.name.prefix + cat.name.suffix
+                    Name.full_name(cat.name.prefix, cat.name.suffix)
                     for cat in Cat.all_cats.values()
                     if cat.ID not in excluded_ids and cat.status.alive_in_player_clan
                 }
@@ -754,7 +754,10 @@ def create_new_cat(
                         )
                         continue
 
-                    if new_cat.name.prefix + new_cat.name.suffix in used_full_names:
+                    if (
+                        Name.full_name(new_cat.name.prefix, new_cat.name.suffix)
+                        in used_full_names
+                    ):
                         new_cat.name = Name(
                             prefix=new_cat.name.prefix,
                             biome=game.clan.biome,

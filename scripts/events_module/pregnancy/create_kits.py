@@ -37,7 +37,6 @@ from scripts.events_module.text_adjust import event_text_adjust, adjust_list_tex
 from scripts.game_structure import game
 
 
-@staticmethod
 def ensure_unique_kit_name(kit: Cat, litter_kittens, clan=None):
     biome = None
     if clan is not None:
@@ -57,10 +56,10 @@ def ensure_unique_kit_name(kit: Cat, litter_kittens, clan=None):
     )
 
     used_full_names = {
-        kitty.name.prefix + kitty.name.suffix for kitty in litter_kittens
+        Name.full_name(kitty.name.prefix, kitty.name.suffix) for kitty in litter_kittens
     }
     used_full_names.update(
-        cat.name.prefix + cat.name.suffix
+        Name.full_name(cat.name.prefix, cat.name.suffix)
         for cat in Cat.all_cats.values()
         if cat.ID not in excluded_ids and cat.status.alive_in_player_clan
     )
@@ -75,7 +74,7 @@ def ensure_unique_kit_name(kit: Cat, litter_kittens, clan=None):
             )
             continue
 
-        if kit.name.prefix + kit.name.suffix in used_full_names:
+        if Name.full_name(kit.name.prefix, kit.name.suffix) in used_full_names:
             kit.name = Name(
                 prefix=kit.name.prefix,
                 biome=biome,
@@ -194,7 +193,7 @@ def get_kits(
                 )[0]
                 thought = event_text_adjust(Cat, text=thought, main_cat=blood_parent)
                 blood_parent.thought = thought
-                kit_age = random.randint(1, 5)  # 1–5 moons old
+                kit_age = randint(1, 5)  # 1–5 moons old
 
             kitten_status: StatusDict = {
                 "social": blood_parent.status.social,
