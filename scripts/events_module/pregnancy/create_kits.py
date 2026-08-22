@@ -577,13 +577,13 @@ def get_balanced_kit_chance(
 
     # CURRENT CAT AMOUNT
     # - increase the inverse chance if the clan is bigger
-    living_cats = len(
+    clan_size = len(
         [i for i in Cat.all_cats.values() if i.status.alive_in_player_clan]
     )
-    if living_cats < 10:
+    if clan_size < 10:
         inverse_chance = int(inverse_chance * 0.5)
-    elif living_cats > 30:
-        inverse_chance = int(inverse_chance * (living_cats / 30))
+    elif clan_size > 30:
+        inverse_chance = int(inverse_chance * (clan_size / 30))
 
     # COMPATIBILITY
     # - decrease / increase depending on the compatibility
@@ -596,30 +596,30 @@ def get_balanced_kit_chance(
             inverse_chance = int(inverse_chance * buff)
 
     # RELATIONSHIP
-    # - decrease the inverse chance if the cats are going along well
+    # - decrease the inverse chance if the cats are getting along well
     if second_parent:
         # get the needed relationships
         if second_parent.ID in first_parent.relationships:
-            second_parent_relation = first_parent.relationships[second_parent.ID]
-            if not second_parent_relation.opposite_relationship:
-                second_parent_relation.link_relationship()
+            first_to_second_relationship = first_parent.relationships[second_parent.ID]
         else:
-            second_parent_relation = first_parent.create_one_relationship(
-                second_parent
+            first_to_second_relationship = create_one_relationship(
+                first_parent, second_parent
             )
-            if not second_parent_relation.opposite_relationship:
-                second_parent_relation.link_relationship()
+        if first_parent.ID in second_parent.relationships:
+            second_to_first_relationship = second_parent.relationships[first_parent.ID]
+        else:
+            second_to_first_relationship = create_one_relationship(
+                second_parent, first_parent
+            )
+
         average_romantic_love = (
-            second_parent_relation.romance
-            + second_parent_relation.opposite_relationship.romance
+            first_to_second_relationship.romance + second_to_first_relationship.romance
         ) / 2
         average_comfort = (
-            second_parent_relation.comfort
-            + second_parent_relation.opposite_relationship.comfort
+            first_to_second_relationship.comfort + second_to_first_relationship.comfort
         ) / 2
         average_trust = (
-            second_parent_relation.trust
-            + second_parent_relation.opposite_relationship.trust
+            first_to_second_relationship.trust + second_to_first_relationship.trust
         ) / 2
 
         if average_romantic_love >= 85:
@@ -654,8 +654,8 @@ def get_balanced_kit_chance(
     # - 163+163+163+162+153+153+153+153+152+140+137+137+133+129+129+127+124+
     # - 124+109+2+2+2+2+2 = 10,123 / 131 (amount of cats I had at the time) = 77.275 = avg age of my clan's cats
     
-    if living_cats:
-        avg_age = int(sum(cat.moons for cat in Cat.all_cats.values()) / living_cats)
+    if clan_size:
+        avg_age = int(sum(cat.moons for cat in Cat.all_cats.values()) / clan_size)
         if avg_age > 80:
             inverse_chance = int(inverse_chance * 0.8)
 
@@ -711,7 +711,7 @@ def get_balanced_kit_chance(
 
     # - decrease inverse chance if the current family is small
     if len(first_parent.get_relatives(get_clan_setting("first cousin mates"))) < (
-        living_cats / 15
+        clan_size / 15
     ):
         inverse_chance = int(inverse_chance * 0.7)
 
