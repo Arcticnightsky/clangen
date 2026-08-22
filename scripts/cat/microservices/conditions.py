@@ -328,4 +328,93 @@ def get_permanent_condition(cat, name, born_with=False, event_triggered=False):
             "event_triggered": new_perm_condition.new,
         }
         new_condition = True
+        if new_perm_condition.name in ("neutered", "spayed"):
+            self.no_kits = True
     return new_condition
+
+def get_sterilization_condition_name(self):
+    return "neutered" if self.gender == "male" else "spayed"
+
+def apply_sterilization_condition(
+    self, from_twolegs: bool = False, adjust_personality: bool = False
+) -> bool:
+     """
+    Applies a permanent sterilization condition to this cat.
+    Returns True if a new condition was applied.
+    """
+    if self.age.is_baby():
+        return False
+
+    sterilization_condition = self.get_sterilization_condition_name()
+    was_added = self.get_permanent_condition(sterilization_condition)
+    if not was_added:
+        return False
+
+    self.no_kits = True
+    if "partial hearing loss" in self.permanent_condition:
+        self.permanent_condition.pop("partial hearing loss", None)
+
+    if ("RIGHTEAR" not in self.pelt.scars) and (
+        self.status.alive_in_player_clan or self.status.social == CatSocial.LONER
+    ):
+        self.pelt.scars = (*self.pelt.scars, "RIGHTEAR")
+        if from_twolegs:
+            self.history.add_scar(
+                "m_c got {PRONOUN/m_c/poss} ear clipped after {PRONOUN/m_c/subject} was trapped by Twolegs, fixed, and released back into the wild."
+            )
+
+    if adjust_personality:
+        self.personality.aggression = self.personality.aggression - 2
+        self.personality.stability = self.personality.stability + 2
+
+    if from_twolegs:
+        self.tnr_victim = True
+
+    return True
+
+def handle_pending_neuter(self):
+    if not self.pending_neuter:
+        return
+
+    self.pending_neuter = False
+    if random_module.getrandbits(1):
+        self.apply_sterilization_condition(
+            from_twolegs=True, adjust_personality=True
+        )
+
+def backdate_sterilization_history(self, social_group: CatSocial):
+    """
+    Backdates moon_start for a sterilized outsider cat so condition history reflects
+    that the procedure happened before joining the Clan.
+    """
+    sterilization_condition = self.get_sterilization_condition_name()
+    if sterilization_condition not in self.permanent_condition or not game.clan:
+        return
+
+    if self.moons <= 5:
+        return
+
+    # AVMA recommendation is by 5 months for non-breeding cats.
+    # Use weighted ranges so older outsiders are more likely to have been
+    # sterilized for most of their life instead of only recently.
+    if social_group == CatSocial.KITTYPET:
+        latest_typical_fix = min(self.moons - 1, max(6, int(self.moons * 0.45)))
+        fix_age = int(random_module.triangular(5, latest_typical_fix, 7))
+    elif social_group == CatSocial.LONER:
+        earliest_fix = min(self.moons - 1, max(8, int(self.moons * 0.2)))
+        latest_typical_fix = min(
+            self.moons - 1, max(earliest_fix, int(self.moons * 0.6))
+        )
+        mode_fix = min(
+            latest_typical_fix, max(earliest_fix, int(self.moons * 0.35))
+        )
+        fix_age = int(
+            random_module.triangular(earliest_fix, latest_typical_fix, mode_fix)
+        )
+    else:
+        fix_age = randint(5, self.moons - 1)
+
+    moons_with_condition = max(1, self.moons - fix_age)
+    self.permanent_condition[sterilization_condition]["moon_start"] = (
+        game.clan.age - moons_with_condition
+    )
