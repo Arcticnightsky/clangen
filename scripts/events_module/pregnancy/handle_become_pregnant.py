@@ -77,6 +77,8 @@ def _handle_pregnancy_notice(pregnant_cat, second_parent):
     else:
         for mate_id in pregnant_cat.mate:
             mate_cat = Cat.fetch_cat(mate_id)
+            if not mate_cat:
+                continue
             mate.append(mate_cat)
 
             if mate_cat.gender == "female":
@@ -99,7 +101,7 @@ def _handle_pregnancy_notice(pregnant_cat, second_parent):
         )
     # if the pregnant cat is in a same-sex relationship (and we aren't allowing samesex pregnancy)
     # and they get knocked-up by another cat, let there be some drama for that!
-    elif get_clan_setting("same sex birth") and (
+    elif not get_clan_setting("same sex birth") and (
         allow_affair is True
         and second_parent
         and second_parent.ID not in pregnant_cat.mate
@@ -169,7 +171,12 @@ def _create_pregnancy_announcement(
     mentioned_cat: Optional[Cat] = None,
 ):
     """Creates announcement text, applies pregnancy injury, and returns involved cats."""
-    text = choice(get_pregnancy_strings()[announcement_key])
+    pregnancy_strings = get_pregnancy_strings()
+    key_aliases = {"announcement_surprise": "surprising_announcement"}
+    announcement_key = key_aliases.get(announcement_key, announcement_key)
+    if announcement_key not in pregnancy_strings:
+        announcement_key = "announcement"
+    text = choice(pregnancy_strings[announcement_key])
     event_text = text
     severity = choices(["minor", "major"], [3, 1], k=1)[0]
     get_injured(pregnant_cat, "pregnant", severity=severity)

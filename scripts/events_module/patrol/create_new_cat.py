@@ -128,6 +128,7 @@ def updated_create_new_cat(
 
     # GENDER
     gender = option_dict.get("gender", None)
+    skip_female_rarity_roll = gender == "can_birth"
     if gender == "can_birth":
         if not get_clan_setting("same sex birth"):
             gender = "female"
@@ -145,9 +146,10 @@ def updated_create_new_cat(
             gender=gender,
             parent1=blood_parents[0].ID if blood_parents else None,
             parent2=blood_parents[1].ID if len(blood_parents) > 1 else None,
-            adoptive_parents=[p.ID for p in adoptive_parents]
-            if adoptive_parents
-            else None,
+            adoptive_parents=(
+                [p.ID for p in adoptive_parents] if adoptive_parents else None
+            ),
+            skip_female_rarity_roll=skip_female_rarity_roll,
         )
         # check if kittypets get collar
         if created_cat.status.social == CatSocial.KITTYPET and bool(getrandbits(1)):
@@ -504,9 +506,11 @@ def _assign_past_status_and_standing(
 
             created_cat.status.add_to_group(
                 new_group_ID=group,
-                become_rank=CatRank(choice(option_dict["status"]))
-                if option_dict.get("status")
-                else None,
+                become_rank=(
+                    CatRank(choice(option_dict["status"]))
+                    if option_dict.get("status")
+                    else None
+                ),
             )
         if option_dict.get("status") and created_cat.status.rank == status["rank"]:
             created_cat.status._change_rank(CatRank(choice(option_dict["status"])))

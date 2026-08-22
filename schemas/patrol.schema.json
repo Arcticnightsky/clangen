@@ -352,7 +352,8 @@
     "CatEnum": {
       "enum": [
         "m_c",
-        "r_c"
+        "r_c",
+        "mur_c"
       ],
       "title": "CatEnum",
       "type": "string"
@@ -1656,7 +1657,9 @@
         "constantly dizzy",
         "recurring shock",
         "lasting grief",
-        "persistent headaches"
+        "persistent headaches",
+        "neutered",
+        "spayed"
       ],
       "title": "PermCondition",
       "type": "string"

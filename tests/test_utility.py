@@ -16,7 +16,10 @@ from scripts.events_module.event_filters import (
     get_highest_romantic_relation,
     get_personality_compatibility,
 )
-from scripts.clan_package.get_clan_cats import get_alive_clan_queens
+from scripts.clan_package.get_clan_cats import (
+    get_alive_clan_queens,
+    get_queens_with_young_kits,
+)
 
 cat_factory = TestCatFactory()
 
@@ -414,4 +417,21 @@ class TestGetQueens(unittest.TestCase):
         ]
         self.assertEqual(
             [self.test_cat2.ID], list(get_alive_clan_queens(living_cats)[0].keys())
+        )
+
+    def test_get_queens_with_young_kits_filters_by_age(self):
+        self.test_cat1.gender = "female"
+        self.test_cat2.status._change_rank(CatRank.KITTEN)
+        self.test_cat2.parent1 = self.test_cat1.ID
+        self.test_cat2.moons = 5
+
+        self.test_cat3.gender = "female"
+        self.test_cat4.status._change_rank(CatRank.KITTEN)
+        self.test_cat4.parent1 = self.test_cat3.ID
+        self.test_cat4.moons = 6
+
+        living_cats = [self.test_cat1, self.test_cat2, self.test_cat3, self.test_cat4]
+
+        self.assertEqual(
+            {self.test_cat1.ID}, get_queens_with_young_kits(living_cats, 5)
         )

@@ -14,6 +14,7 @@ os.environ["SDL_AUDIODRIVER"] = "dummy"
 from scripts.game_structure import game, constants
 
 from scripts.cat.cats import Cat
+from scripts.cat.names import Name
 from scripts.cat_relations.inheritance2 import inheritance_db
 from scripts.cat.enums import CatAge, CatRank, CatGroup, CatSocial
 from scripts.cat_relations.relationship import Relationship
@@ -53,6 +54,30 @@ class TestCreationAge(unittest.TestCase):
         self.assertEqual(test_cat.age, CatAge.SENIOR)
 
 
+class TestNameLoading(unittest.TestCase):
+    def test_existing_name_loads_name_rules_before_validation(self):
+        # Faded cats are created with existing prefixes and suffixes before any
+        # generated-name path has necessarily loaded the localized name data.
+        original_names_dict = Name.names_dict
+        original_save_dir = Name.current_save_dir
+        original_lang = Name.currently_loaded_lang
+
+        try:
+            Name.names_dict = {}
+            Name.current_save_dir = None
+            Name.currently_loaded_lang = None
+
+            name = Name(prefix="Rain", suffix="fall")
+
+            self.assertEqual(name.prefix, "Rain")
+            self.assertEqual(name.suffix, "fall")
+            self.assertIn("animal_prefixes", name.names_dict)
+        finally:
+            Name.names_dict = original_names_dict
+            Name.current_save_dir = original_save_dir
+            Name.currently_loaded_lang = original_lang
+
+
 class TestRelativesFunction(unittest.TestCase):
     # test that is_parent returns True for a parent1-cat relationship and False otherwise
     def test_is_parent(self):
@@ -62,6 +87,31 @@ class TestRelativesFunction(unittest.TestCase):
         self.assertFalse(kit.is_parent(kit))
         self.assertFalse(kit.is_parent(parent))
         self.assertTrue(parent.is_parent(kit))
+
+    def test_is_adoptive_parent(self):
+        adoptive_parent = Cat(disable_random=True)
+        blood_parent = Cat(disable_random=True)
+        kit = Cat(
+            parent1=blood_parent.ID,
+            adoptive_parents=[adoptive_parent.ID],
+            disable_random=True,
+        )
+        inheritance_db.load_inheritances(Cat)
+
+        self.assertTrue(adoptive_parent.is_parent(kit))
+        self.assertTrue(adoptive_parent.is_adoptive_parent(kit))
+        self.assertTrue(blood_parent.is_parent(kit))
+        self.assertFalse(blood_parent.is_adoptive_parent(kit))
+        self.assertFalse(kit.is_adoptive_parent(adoptive_parent))
+
+    def test_is_adoptive_parent_identifies_adopted_child_direction(self):
+        adoptive_parent = Cat(disable_random=True)
+        adopted_child = Cat(adoptive_parents=[adoptive_parent.ID], disable_random=True)
+        inheritance_db.load_inheritances(Cat)
+
+        self.assertTrue(adoptive_parent.is_parent(adopted_child))
+        self.assertTrue(adoptive_parent.is_adoptive_parent(adopted_child))
+        self.assertFalse(adopted_child.is_adoptive_parent(adoptive_parent))
 
     # test that is_sibling returns True for cats with a shared parent1 and False otherwise
     def test_is_sibling(self):
@@ -73,6 +123,34 @@ class TestRelativesFunction(unittest.TestCase):
         self.assertFalse(kit1.is_sibling(parent))
         self.assertTrue(kit2.is_sibling(kit1))
         self.assertTrue(kit1.is_sibling(kit2))
+
+    def test_is_half_sibling_without_legacy_inheritance(self):
+        shared_parent = Cat(disable_random=True)
+        other_parent1 = Cat(disable_random=True)
+        other_parent2 = Cat(disable_random=True)
+        kit1 = Cat(
+            parent1=shared_parent.ID, parent2=other_parent1.ID, disable_random=True
+        )
+        kit2 = Cat(
+            parent1=shared_parent.ID, parent2=other_parent2.ID, disable_random=True
+        )
+        inheritance_db.load_inheritances(Cat)
+
+        self.assertIsNone(kit1.inheritance)
+        self.assertIsNone(kit2.inheritance)
+        self.assertTrue(kit1.is_sibling(kit2))
+        self.assertTrue(kit1.is_half_sibling(kit2))
+        self.assertTrue(kit2.is_half_sibling(kit1))
+
+    def test_shared_single_parent_siblings_are_not_half_siblings(self):
+        shared_parent = Cat(disable_random=True)
+        kit1 = Cat(parent1=shared_parent.ID, disable_random=True)
+        kit2 = Cat(parent1=shared_parent.ID, disable_random=True)
+        inheritance_db.load_inheritances(Cat)
+
+        self.assertTrue(kit1.is_sibling(kit2))
+        self.assertFalse(kit1.is_half_sibling(kit2))
+        self.assertFalse(kit2.is_half_sibling(kit1))
 
     # test that is_uncle_aunt returns True for a uncle/aunt-cat relationship and False otherwise
     def test_is_uncle_aunt(self):
@@ -451,6 +529,56 @@ class TestUpdateMentor(unittest.TestCase):
         self.assertTrue(app.ID in mentor.former_apprentices)
         self.assertIsNone(app.mentor)
 
+    def test_warrior_mentor_must_be_at_least_24_moons(self):
+        app = Cat(
+            moons=7, status_dict={"rank": CatRank.APPRENTICE}, disable_random=True
+        )
+        young_mentor = Cat(
+            moons=23, status_dict={"rank": CatRank.WARRIOR}, disable_random=True
+        )
+
+        self.assertFalse(app.is_valid_mentor(young_mentor))
+
+    def test_warrior_mentor_eligible_at_24_moons(self):
+        app = Cat(
+            moons=7, status_dict={"rank": CatRank.APPRENTICE}, disable_random=True
+        )
+        mentor = Cat(
+            moons=24, status_dict={"rank": CatRank.WARRIOR}, disable_random=True
+        )
+
+        self.assertTrue(app.is_valid_mentor(mentor))
+
+    def test_auto_update_mentor_increases_relationship_and_adds_log(self):
+        with patch.object(Cat, "all_cats", {}):
+            app = Cat(
+                moons=6, status_dict={"rank": CatRank.APPRENTICE}, disable_random=True
+            )
+            mentor = Cat(
+                moons=30, status_dict={"rank": CatRank.WARRIOR}, disable_random=True
+            )
+
+            app.update_mentor()
+
+        self.assertEqual(app.mentor, mentor.ID)
+        self.assertIn(mentor.ID, app.relationships)
+        self.assertIn(app.ID, mentor.relationships)
+        self.assertGreaterEqual(app.relationships[mentor.ID].like, 5)
+        self.assertGreaterEqual(app.relationships[mentor.ID].trust, 5)
+        self.assertGreaterEqual(mentor.relationships[app.ID].like, 5)
+        self.assertGreaterEqual(mentor.relationships[app.ID].respect, 5)
+
+        app_logs = " ".join(app.relationships[mentor.ID].log)
+        mentor_logs = " ".join(mentor.relationships[app.ID].log)
+        self.assertTrue(
+            ("became the apprentice of" in app_logs)
+            or ("was apprenticed to" in app_logs)
+        )
+        self.assertTrue(
+            ("became the apprentice of" in mentor_logs)
+            or ("was apprenticed to" in mentor_logs)
+        )
+
 
 class TestNameRepr(unittest.TestCase):
     @classmethod
@@ -713,6 +841,35 @@ class TestNameRepr(unittest.TestCase):
                 cat.status.become_lost()
                 cat.name.specsuffix_hidden = True
                 self.assertTrue(str(cat.name).endswith("test"))
+
+
+class TestAfterlifeAssignment(unittest.TestCase):
+    def test_default_afterlife_for_exiled_cat(self):
+        exiled_status = {
+            "group_history": [
+                {
+                    "group": CatGroup.PLAYER_CLAN_ID,
+                    "rank": CatRank.WARRIOR,
+                    "moons_as": 1,
+                },
+                {"group": None, "rank": CatRank.LONER, "moons_as": 1},
+            ],
+            "standing_history": [
+                {"group": CatGroup.PLAYER_CLAN_ID, "standing": ["member", "exiled"]}
+            ],
+        }
+
+        cat = Cat(status_dict=exiled_status, disable_random=True)
+
+        self.assertEqual(cat.status.get_default_afterlife_id(), CatGroup.DARK_FOREST_ID)
+
+    def test_default_afterlife_for_true_outsider(self):
+        outsider_cat = Cat(status_dict={"rank": CatRank.ROGUE}, disable_random=True)
+
+        self.assertEqual(
+            outsider_cat.status.get_default_afterlife_id(),
+            CatGroup.UNKNOWN_RESIDENCE_ID,
+        )
 
 
 class TestSocialAssignment(unittest.TestCase):
