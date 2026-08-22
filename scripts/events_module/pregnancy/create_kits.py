@@ -564,7 +564,7 @@ def get_balanced_kit_chance(
         if len(first_parent.mate) > 0 and not is_affair:
             inverse_chance = get_config("pregnancy.primary_chance_mated")
 
-    # SETTINGS
+     # SETTINGS
     # - decrease inverse chance if only mated pairs can have kits
     if not get_clan_setting("single parentage") or not get_clan_setting(
         "unmated parentage"
@@ -577,11 +577,13 @@ def get_balanced_kit_chance(
 
     # CURRENT CAT AMOUNT
     # - increase the inverse chance if the clan is bigger
-    clan_size = len([i for i in Cat.all_cats.values() if i.status.alive_in_player_clan])
-    if clan_size < 10:
+    living_cats = len(
+        [i for i in Cat.all_cats.values() if i.status.alive_in_player_clan]
+    )
+    if living_cats < 10:
         inverse_chance = int(inverse_chance * 0.5)
-    elif clan_size > 30:
-        inverse_chance = int(inverse_chance * (clan_size / 30))
+    elif living_cats > 30:
+        inverse_chance = int(inverse_chance * (living_cats / 30))
 
     # COMPATIBILITY
     # - decrease / increase depending on the compatibility
@@ -594,64 +596,137 @@ def get_balanced_kit_chance(
             inverse_chance = int(inverse_chance * buff)
 
     # RELATIONSHIP
-    # - decrease the inverse chance if the cats are getting along well
+    # - decrease the inverse chance if the cats are going along well
     if second_parent:
         # get the needed relationships
         if second_parent.ID in first_parent.relationships:
-            first_to_second_relationship = first_parent.relationships[second_parent.ID]
+            second_parent_relation = first_parent.relationships[second_parent.ID]
+            if not second_parent_relation.opposite_relationship:
+                second_parent_relation.link_relationship()
         else:
-            first_to_second_relationship = create_one_relationship(
-                first_parent, second_parent
+            second_parent_relation = first_parent.create_one_relationship(
+                second_parent
             )
-        if first_parent.ID in second_parent.relationships:
-            second_to_first_relationship = second_parent.relationships[first_parent.ID]
-        else:
-            second_to_first_relationship = create_one_relationship(
-                second_parent, first_parent
-            )
+            if not second_parent_relation.opposite_relationship:
+                second_parent_relation.link_relationship()
+        average_romantic_love = (
+            second_parent_relation.romance
+            + second_parent_relation.opposite_relationship.romance
+        ) / 2
+        average_comfort = (
+            second_parent_relation.comfort
+            + second_parent_relation.opposite_relationship.comfort
+        ) / 2
+        average_trust = (
+            second_parent_relation.trust
+            + second_parent_relation.opposite_relationship.trust
+        ) / 2
 
-       # If the parent(s) are seniors, the chance for kits is lower because... they're old - a little too old to have kits
-        if first_parent.age == CatAge.SENIOR:
-            if second_parent:
-                if second_parent.age == CatAge.SENIOR:
-                    inverse_chance = int(inverse_chance * 2.2)
-                else:
-                    inverse_chance = int(inverse_chance * 2.4)
-            else:
-                inverse_chance = int(inverse_chance * 2.3)
+        if average_romantic_love >= 85:
+            inverse_chance -= int(inverse_chance * 0.3)
+        elif average_romantic_love >= 55:
+            inverse_chance -= int(inverse_chance * 0.2)
+        elif average_romantic_love >= 35:
+            inverse_chance -= int(inverse_chance * 0.1)
 
-        # CURRENT KIT COUNT
-        # increases inverse chance according to number of existing children (ex. 5 kids will multiply by 1.5)
-        inverse_chance += int(inverse_chance * len(first_parent.get_children()) * 0.1)
+        if average_comfort >= 85:
+            inverse_chance -= int(inverse_chance * 0.3)
+        elif average_comfort >= 55:
+            inverse_chance -= int(inverse_chance * 0.2)
+        elif average_comfort >= 35:
+            inverse_chance -= int(inverse_chance * 0.1)
 
-        # 'INBREED' counter
-        # - increase inverse chance if one of the current cats belongs in the biggest family
-        biggest_family = get_biggest_family()
+        if average_trust >= 85:
+            inverse_chance -= int(inverse_chance * 0.3)
+        elif average_trust >= 55:
+            inverse_chance -= int(inverse_chance * 0.2)
+        elif average_trust >= 35:
+            inverse_chance -= int(inverse_chance * 0.1)
 
-        if (
-            first_parent.ID in biggest_family
-            or second_parent
-            and second_parent.ID in biggest_family
-        ):
-            inverse_chance = int(inverse_chance * 1.7)
+    # AGE
+    #  decrease the inverse chance if the whole clan is really old
+    # - ex of what this does (from what I calculated manually at the time):
+    # - 122+79+162+153+146+114+61+48+10+172+165+156+136+105+76+55+133+124+
+    # - 119+118+117+116+116+116+115+109+109+108+108+107+102+100+94+92+92+
+    # - 92+92+84+84+84+81+81+81+81+81+81+79+79+79+77+77+76+73+73+64+61+60+
+    # - 59+59+59+56+55+55+55+55+55+54+52+52+51+49+49+49+49+49+46+35+35+33+
+    # - 33+33+25+25+21+21+21+21+21+18+18+18+18+18+16+15+7+7+7+6+6+6+179+163+
+    # - 163+163+163+162+153+153+153+153+152+140+137+137+133+129+129+127+124+
+    # - 124+109+2+2+2+2+2 = 10,123 / 131 (amount of cats I had at the time) = 77.275 = avg age of my clan's cats
+    
+    if living_cats:
+        avg_age = int(sum(cat.moons for cat in Cat.all_cats.values()) / living_cats)
+        if avg_age > 80:
+            inverse_chance = int(inverse_chance * 0.8)
 
-        # - decrease inverse chance if the current family is small
-        if len(first_parent.get_relatives(get_clan_setting("first cousin mates"))) < (
-            living_cats / 15
-        ):
-            inverse_chance = int(inverse_chance * 0.7)
-
-        # - decrease inverse chance single parents if settings allow an biggest family is huge
-        settings_allow = not second_parent and not get_clan_setting("single parentage")
-        if settings_allow and biggest_family_is_big():
+    # - slightly decrease inverse chance if the clan has no very young cats yet
+    alive_clan_cats = [
+        i for i in Cat.all_cats.values() if i.status.alive_in_player_clan
+    ]
+    if alive_clan_cats:
+        youngest_cat_age = min(i.moons for i in alive_clan_cats)
+        if youngest_cat_age > 24:
             inverse_chance = int(inverse_chance * 0.9)
 
-        # increase inverse chance if the Clan is at war, because it is NOT the right time to have kits!!!
-        if game.clan.war.get("at_war", True):
-            inverse_chance = int(inverse_chance * 2.8)
+    # If any of the mated cats have the 'KIT' skill, they're more likely to have kits because, well... they love kits no? TBD
 
-        # In real life, cats are most likely to have kits during the spring and summer months - known as "Kitten Season"
-        if game.clan.current_season in ["Newleaf", "Greenleaf"]:
-            inverse_chance = int(inverse_chance * 0.5)
+    # If the parent(s) are young adults, the chance for kits is higher because the hormones are still raging lmao
+    if first_parent.age == CatAge.YOUNG_ADULT:
+        if second_parent:
+            if second_parent.age == CatAge.YOUNG_ADULT:
+                inverse_chance = int(
+                    inverse_chance / 1.4
+                )  # young tom cats can be stupid and horny - such as male human youth today, smh
+            else:
+                inverse_chance = int(
+                    inverse_chance / 1.2
+                )  # chance is kinda low for adult toms because... perhaps their young adult wife is just sexy????
+        else:
+            inverse_chance = int(inverse_chance / 1.3)
+
+    # If the parent(s) are seniors, the chance for kits is lower because... they're old - a little too old to have kits
+    if first_parent.age == CatAge.SENIOR:
+        if second_parent:
+            if second_parent.age == CatAge.SENIOR:
+                inverse_chance = int(inverse_chance * 2.2)
+            else:
+                inverse_chance = int(inverse_chance * 2.4)
+        else:
+            inverse_chance = int(inverse_chance * 2.3)
+
+    # CURRENT KIT COUNT
+    # increases inverse chance according to number of existing children (ex. 5 kids will multiply by 1.5)
+    inverse_chance += int(inverse_chance * len(first_parent.get_children()) * 0.1)
+
+    # 'INBREED' counter
+    # - increase inverse chance if one of the current cats belongs in the biggest family
+    biggest_family = get_biggest_family()
+
+    if (
+        first_parent.ID in biggest_family
+        or second_parent
+        and second_parent.ID in biggest_family
+    ):
+        inverse_chance = int(inverse_chance * 1.7)
+
+    # - decrease inverse chance if the current family is small
+    if len(first_parent.get_relatives(get_clan_setting("first cousin mates"))) < (
+        living_cats / 15
+    ):
+        inverse_chance = int(inverse_chance * 0.7)
+
+    # - decrease inverse chance single parents if settings allow an biggest family is huge
+    settings_allow = not second_parent and not get_clan_setting("single parentage")
+    if settings_allow and biggest_family_is_big():
+        inverse_chance = int(inverse_chance * 0.9)
+
+    # increase inverse chance if the Clan is at war, because it is NOT the right time to have kits!!!
+    if game.clan.war.get("at_war", True):
+        inverse_chance = int(inverse_chance * 2.8)
+
+    # In real life, cats are most likely to have kits during the spring and summer months - known as "Kitten Season"
+    if game.clan.current_season in ["Newleaf", "Greenleaf"]:
+        inverse_chance = int(inverse_chance * 0.5)
+
 
     return max(1, inverse_chance)
