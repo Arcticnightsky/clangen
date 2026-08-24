@@ -598,7 +598,7 @@
         }
     },
     {
-        "id": "fixed_warrior",
+        "event_id": "fixed_warrior",
         "strings": [
 			"Is annoyed about not being able to scent-mark the border",
             "Can't seem to feel as aggressive as {PRONOUN/m_c/poss} intact Clanmates"

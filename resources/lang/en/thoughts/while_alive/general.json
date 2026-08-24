@@ -1467,7 +1467,7 @@
         ]
 },
   {
-        "id": "fixed_gen",
+        "event_id": "fixed_gen",
         "strings": [
             "Shudders when {PRONOUN/m_c/subject} remembers the time {PRONOUN/m_c/subject} went to the cutter",
 			"Feels a small pang of sadness when {PRONOUN/m_c/subject} remembers that {PRONOUN/m_c/subject} can't have kits of {PRONOUN/m_c/poss} own if {PRONOUN/m_c/subject} wanted to",
