@@ -97,7 +97,7 @@
         }
     },
     {
-        "id": "rom_inc_low6",
+        "event_id": "rom_inc_low6",
         "strings": [
             "m_c can't help but admire just how brave r_c is..."
         ],
