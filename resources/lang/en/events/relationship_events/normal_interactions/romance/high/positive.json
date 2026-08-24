@@ -83,7 +83,7 @@
     },
     {
         "event_id": "rom_inc_high3",
-        "id": "rom_inc_high3",
+        "event_id": "rom_inc_high3",
         "season": [
             "leaf-fall",
             "leaf-bare"
@@ -131,7 +131,7 @@
         ]
     },
     {
-        "id": "rom_inc_high4",
+        "event_id": "rom_inc_high4",
         "strings": [
             "m_c is rolling around a little too playfully with r_c...",
             "m_c could spend hours listening to r_c's voice.",
@@ -525,7 +525,7 @@
         }
     },
     {
-        "id": "rom_inc_high9",
+        "event_id": "rom_inc_high9",
         "strings": [
          	"m_c felt {PRONOUN/m_c/self} hot with rage today, but r_c managed to soothe {PRONOUN/m_c/object} back to calmness.",
          	"m_c would <b>never</b> let any of {PRONOUN/m_c/poss} enemies hurt {PRONOUN/m_c/poss} sweet, gentle, beloved r_c. <b>Never ever.</b>",
