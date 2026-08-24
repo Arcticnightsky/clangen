@@ -1,8 +1,9 @@
+import random as random_module
 from random import randrange, random, choice, randint
 
 import i18n
 from scripts.cat.constants import ILLNESSES, INJURIES, PERMANENT
-from scripts.cat.enums import CatRank
+from scripts.cat.enums import CatRank, CatSocial
 from scripts.cat.pelts import Pelt
 from scripts.clan_package.get_clan_cats import find_alive_cats_with_rank
 from scripts.conditions import (
@@ -329,16 +330,18 @@ def get_permanent_condition(cat, name, born_with=False, event_triggered=False):
         }
         new_condition = True
         if new_perm_condition.name in ("neutered", "spayed"):
-            self.no_kits = True
+            cat.no_kits = True
     return new_condition
+
 
 def get_sterilization_condition_name(self):
     return "neutered" if self.gender == "male" else "spayed"
 
+
 def apply_sterilization_condition(
     self, from_twolegs: bool = False, adjust_personality: bool = False
 ) -> bool:
-     """
+    """
     Applies a permanent sterilization condition to this cat.
     Returns True if a new condition was applied.
     """
@@ -372,6 +375,7 @@ def apply_sterilization_condition(
 
     return True
 
+
 def handle_pending_neuter(self):
     if not self.pending_neuter:
         return
@@ -381,6 +385,7 @@ def handle_pending_neuter(self):
         self.apply_sterilization_condition(
             from_twolegs=True, adjust_personality=True
         )
+
 
 def backdate_sterilization_history(self, social_group: CatSocial):
     """
