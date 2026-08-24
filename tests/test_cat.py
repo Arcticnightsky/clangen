@@ -54,6 +54,23 @@ class TestCreationAge(unittest.TestCase):
         self.assertEqual(test_cat.age, CatAge.SENIOR)
 
 
+class TestConditionServiceMethods(unittest.TestCase):
+    def test_one_moon_resolves_pending_neuter(self):
+        cat = cat_factory.create_cat(moons=20)
+        cat.status.become_lost()
+        cat.pending_neuter = True
+
+        with patch(
+            "scripts.cat.microservices.conditions.random_module.getrandbits",
+            return_value=1,
+        ):
+            cat.one_moon()
+
+        self.assertFalse(cat.pending_neuter)
+        self.assertIn(cat.get_sterilization_condition_name(), cat.permanent_condition)
+        self.assertTrue(cat.no_kits)
+
+
 class TestNameLoading(unittest.TestCase):
     def test_existing_name_loads_name_rules_before_validation(self):
         # Faded cats are created with existing prefixes and suffixes before any
