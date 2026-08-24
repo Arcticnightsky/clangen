@@ -334,7 +334,7 @@
         ]
     },
     {
-        "id": "rom_inc_medium10",
+        "event_id": "rom_inc_medium10",
         "strings": [
             "m_c's cold demeanor felt touched by r_c's warmth today...",
             "m_c felt {PRONOUN/m_c/self} nearly boil over in anger today, but r_c managed to soothe {PRONOUN/m_c/object}, being the kind, sweet, empathetic cat {PRONOUN/r_c/subject} {VERB/r_c/are/is}.",
@@ -377,7 +377,7 @@
         }
     },
     {
-        "id": "rom_inc_medium11",
+        "event_id": "rom_inc_medium11",
         "strings": [
             "Though m_c and r_c were on a serious patrol, r_c couldn't help but play around and throw the whole patrol off. Even though m_c was angry that the patrol failed, {PRONOUN/m_c/subject} thought that r_c's playfullness was kinda cute.",
             "m_c unexpectedly felt {PRONOUN/m_c/self} blush when r_c flirtatiously teased {PRONOUN/m_c/object} about {PRONOUN/m_c/poss} strictness while on patrol.",
