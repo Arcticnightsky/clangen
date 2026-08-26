@@ -362,7 +362,8 @@ class Cat:
 
                     afterlife_group = CatGroup.DARK_FOREST
                     rejected_ID = CatGroup.STARCLAN_ID
-
+                else:
+                    return
                 # scales with skill tier
                 affinity += get_config("affinity.skill_favor.match") * cat_skills.get(
                     skill_match, 0
