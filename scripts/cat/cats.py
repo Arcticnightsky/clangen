@@ -1831,11 +1831,13 @@ class Cat:
 
         if get_clan_setting("assign_mentors"):
             self.assign_random_mentor()
-
+            
     def assign_random_mentor(self):
         # Need to pick a random mentor if not specified
 
-        new_mentor = None
+        previous_mentor = self.mentor
+        mentor_changed = False
+
         if not self.mentor:
             selected_mentor = None
             potential_mentors = []
