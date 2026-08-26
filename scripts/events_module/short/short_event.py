@@ -18,6 +18,7 @@ from scripts.events_module.text_adjust import (
     event_text_adjust,
     get_leader_life_notice,
     adjust_list_text,
+    process_text,
     history_text_adjust,
 )
 from scripts.events_module.consequences import (
@@ -331,6 +332,64 @@ class ShortEvent:
                 clan_reveal="clan_wide" in self.tags,
                 aware_individuals=[self.random_cat.ID],
             )
+
+            romantic_cats = []
+
+            for cat in Cat.all_cats.values():
+                if cat.dead:
+                    continue
+
+                if cat.ID == self.main_cat.ID:
+                    continue
+
+                rel = cat.relationships.get(self.main_cat.ID)
+
+                if not rel:
+                    continue
+
+                if rel.romance <= 0:
+                    continue
+
+                romantic_cats.append(cat)
+
+            if romantic_cats:
+                change_relationship_values(
+                    [self.main_cat],
+                    romantic_cats,
+                    romance=-80,
+                )
+
+                for cat in romantic_cats:
+                    rel = cat.relationships.get(self.main_cat.ID)
+
+                    if not rel:
+                        continue
+
+                    log_text = process_text(
+                        "m_c lost romantic feelings for r_c after "
+                        "{PRONOUN/m_c/subject} found out that r_c killed someone.",
+                        {
+                            "m_c": (
+                                str(cat.name),
+                                choice(cat.pronouns),
+                            ),
+                            "r_c": (
+                                str(self.main_cat.name),
+                                choice(self.main_cat.pronouns),
+                            ),
+                        },
+                    )
+                    log_text = i18n.t(
+                        "relationships.negative_postscript", text=log_text
+                    )
+                    rel.log.append(
+                        i18n.t(
+                            "relationships.age_postscript",
+                            text=log_text,
+                            name=str(self.main_cat.name),
+                            count=self.main_cat.moons,
+                        )
+                    )
 
         # change outsider rep
         if self.outsider:
