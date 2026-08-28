@@ -104,6 +104,11 @@
         "The poision in m_c's body was so lethal, no herbs could ever flush it out. The internal damage was too great and m_c succumbs to the poision in {PRONOUN/m_c/poss} body.",
         "m_c died from the poison in {PRONOUN/m_c/poss} body."
     ],
+     "venom sickness": [
+        "m_c succumbed to the deadly venom in {PRONOUN/m_c/poss} body.",
+        "The venom claimed m_c's life.",
+        "m_c couldn't outlast the venom."
+    ],
     "broken back": [
         "m_c's spine was broken and snapped in many pieces and there was severe nerve damage in {PRONOUN/m_c/poss} back. There's no way for m_c to recover from this and {PRONOUN/m_c/subject} died.",
         "m_c couldn't survive {PRONOUN/m_c/poss} broken back."
