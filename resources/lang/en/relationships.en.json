@@ -56,6 +56,8 @@
             "one": "%{text} - %{name} was %{count} moon old",
             "many": "%{text} - %{name} was %{count} moons old"
         },
-        "relationship_log": "These cats recently interacted."
+        "relationship_log": "These cats recently interacted.",
+        "mentor_rel_log_1": "m_c became the apprentice of r_c.",
+        "mentor_rel_log_2": "m_c was apprenticed to r_c."
     }
 }

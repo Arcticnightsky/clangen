@@ -293,7 +293,12 @@
             "senior adult": 0,
             "senior": 0
         },
-        "illness_infectiousness": [],
+        "illness_infectiousness": [
+            {
+                "name": "tick fever",
+                "lower_by": 5
+            }
+        ],
         "risks": [
             {
                 "name": "an infected wound",
@@ -301,7 +306,7 @@
             },
             {
                 "name": "tick fever",
-                "chance": 50
+                "chance": 35
             }
         ],
         "also_got": [],
