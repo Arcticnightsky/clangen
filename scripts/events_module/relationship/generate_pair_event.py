@@ -376,13 +376,12 @@ def _apply_extra_influence(
         if not value_changes:
             continue
 
-        # change the relationship!
-        # only apply log if this is a change to r_c's feelings, cus m_c will already have the event in their log, and we don't want to double it
+        # Record the event for every cat whose relationship is changed.
         change_relationship_values(
             cats_from=cats_from,
             cats_to=cats_to,
             **value_changes,
-            log=chosen_string if involved_cats["r_c"] in cats_from else None,
+            log=chosen_string,
         )
 
 

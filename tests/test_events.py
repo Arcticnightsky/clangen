@@ -5,6 +5,7 @@ import unittest
 from pathlib import Path
 from random import choice, shuffle, randint, Random
 from uuid import uuid4
+from unittest.mock import patch
 
 from scripts import events
 from scripts.cat import save_load
@@ -22,6 +23,7 @@ from scripts.events_module.short.short_event_generation import (
     filter_events,
 )
 from scripts.events_module.short.short_event import ShortEvent
+from scripts.events_module.ceremony.perform_ceremony import check_and_promote_deputy
 from scripts.game_structure import game
 from scripts.game_structure.game.save_load import read_clans
 from scripts.housekeeping.datadir import get_save_dir
@@ -94,6 +96,23 @@ class TestEvents(unittest.TestCase):
         if cls.previously_loaded_clan:
             with open(Path(get_save_dir()) / "currentclan.txt", "w") as currentclanfile:
                 currentclanfile.write(str(cls.previously_loaded_clan))
+
+    def test_auto_select_deputy_promotes_a_warrior(self):
+        previous_deputy = game.clan.deputy
+        game.clan.deputy = None
+        set_clan_setting("deputy", True)
+
+        try:
+            with patch(
+                "scripts.events_module.ceremony.perform_ceremony.trigger_ceremony"
+            ) as trigger_ceremony:
+                check_and_promote_deputy()
+
+            self.assertIsNotNone(game.clan.deputy)
+            self.assertEqual(game.clan.deputy.status.rank, CatRank.WARRIOR)
+            trigger_ceremony.assert_called_once()
+        finally:
+            game.clan.deputy = previous_deputy
 
     def test_random_cat_assignment(self):
         """

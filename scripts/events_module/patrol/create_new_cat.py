@@ -1,6 +1,8 @@
 from itertools import combinations
 from random import choice, randint, getrandbits, choices, random
 
+import i18n
+
 from scripts.cat.cats import Cat
 from scripts.cat.constants import INJURIES, ILLNESSES, PERMANENT, BACKSTORIES
 from scripts.cat.enums import CatRank, CatAge, CatGroup, CatStanding, CatSocial
@@ -128,6 +130,9 @@ def updated_create_new_cat(
 
     # GENDER
     gender = choice(option_dict.get("gender")) if option_dict.get("gender") else None
+    skip_female_rarity_roll = bool(
+        option_dict.get("gender") and "can_birth" in option_dict["gender"]
+    )
     if gender and "can_birth" in gender:
         if not get_clan_setting("same sex birth"):
             gender = "female"
@@ -201,11 +206,13 @@ def updated_create_new_cat(
         change_relationship_values(
             cats_to=new_cats,
             cats_from=blood_parents + adoptive_parents,
+            log=False,
             **get_config("new_cat.parent_buff.parent_to_kit"),
         )
         change_relationship_values(
             cats_to=blood_parents + adoptive_parents,
             cats_from=new_cats,
+            log=False,
             **get_config("new_cat.parent_buff.kit_to_parent"),
         )
 
@@ -224,6 +231,7 @@ def updated_create_new_cat(
         change_relationship_values(
             cats_to=new_cats,
             cats_from=new_cats,
+            log=False,
             **get_config("new_cat.sib_buff.cat1_to_cat2"),
         )
 

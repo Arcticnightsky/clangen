@@ -354,7 +354,9 @@ def create_new_cat_block(
 
     # check if we can use an existing cat here
     chosen_cat: Optional["Cat"] = None
-    if "exists" in attribute_list:
+    # Existing outsiders keep patrols feeling connected, but should be the
+    # exception: generate a fresh cat two thirds of the time.
+    if "exists" in attribute_list and randrange(3) == 0:
         existing_outsiders = [
             i
             for i in Cat.all_cats.values()
@@ -1260,7 +1262,8 @@ def change_relationship_values(
     :param respect: amount to change admiration (respect), default 0
     :param comfort: amount to change comfort, default 0
     :param trust: amount to change trust, default 0
-    :param log: the string to append to the relationship log of cats involved
+    :param log: the string to append to the relationship log of cats involved.
+        Pass False to intentionally skip logging relationship setup changes.
     :param bool flip_log: If True, this will "flip" the cats used for cat_to and cat_from abbreviation replacements. This should really only be used for mutual relationship changes from events.
     """
 
@@ -1312,9 +1315,13 @@ def change_relationship_values(
                   " /Respect: " + str(respect) +
                   " /Comfort: " + str(comfort) +
                   " /Trust: " + str(trust)) if changed else print("No relationship change")"""
-            if not log:
-                log = i18n.t("relationships.relationship_log")
-            if log and isinstance(log, str):
+            # Every relationship change needs an explanatory log unless the
+            # caller intentionally suppresses one for relationship setup.
+            # This prevents malformed event data from falling back to the
+            # unhelpful generic interaction message.
+            if log is None:
+                log = i18n.t("relationships.relationship_change_log")
+            if isinstance(log, str):
                 replace_dict = {}
                 cat_from = single_cat_to if flip_log else single_cat_from
                 cat_to = single_cat_from if flip_log else single_cat_to
