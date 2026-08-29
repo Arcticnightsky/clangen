@@ -927,10 +927,7 @@
                         "prior_abbreviation": [
                             "any"
                         ],
-                        "past_status": [
-                            "rogue",
-                            "loner"
-                        ]
+                        "past_status": ["rogue", "loner"]
                     }
                 },
                 "exp_gained": 10,

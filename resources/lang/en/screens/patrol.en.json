@@ -57,6 +57,6 @@
         "prey_large": "A large amount of prey is brought to camp.",
         "prey_huge": "A huge amount of prey is brought to camp.",
         "relationship_changed": "Relationships between cats in the Clan have changed.",
-        "accessory_gained": "%{cats} gained an accessory"
+        "profile_link_hint": "<br>(Click a name to view profile)"
     }
 }
