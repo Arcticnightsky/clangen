@@ -23972,9 +23972,7 @@
         },
         "involved_cats": {
             "p_l": {
-                "past_status": [
-                    "kittypet"
-                ]
+                "past_status": ["kittypet"]
             },
             "r_c0": {}
         },
@@ -24099,10 +24097,7 @@
         },
         "involved_cats": {
             "p_l": {
-                "past_status": [
-                    "rogue",
-                    "loner"
-                ]
+                "past_status": ["rogue", "loner"]
             }
         },
         "chance_of_success": 60,
@@ -24906,10 +24901,7 @@
                         "prior_abbreviation": [
                             "any"
                         ],
-                        "past_status": [
-                            "kittypet",
-                            "loner"
-                        ]
+                        "past_status": ["kittypet", "loner"]
                     }
                 },
                 "exp_gained": 15
@@ -27011,9 +27003,7 @@
                 ],
                 "involved_cats": {
                     "s_c0": {
-                        "past_status": [
-                            "kittypet"
-                        ],
+                        "past_status": ["kittypet"],
                         "prior_abbreviation": [
                             "p_l"
                         ]
@@ -32201,9 +32191,7 @@
             "newleaf"
         ],
         "poi": {
-            "tags": [
-                "water:flowing"
-            ]
+            "tags": ["water:flowing"]
         },
         "required_cat_types": {
             "patrol_cats": [
@@ -32683,12 +32671,6 @@
                     }
                 },
                 "exp_gained": 0,
-                "supply": [
-                    {
-                        "type": "yew_berries",
-                        "adjust": "increase_tiny"
-                    }
-                ],
                 "condition": [
                     {
                         "cats": [

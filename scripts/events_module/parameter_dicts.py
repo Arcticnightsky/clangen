@@ -42,7 +42,7 @@ class InvolvedCatDict(TypedDict, total=False):
     status: list[str]
     past_status: list[str]
     age: list[str]
-    gender: list[Literal["male", "female", "can_birth"]]
+    gender: Literal["male", "female", "can_birth"]
     group: list[str]
     standing: StandingDict
     stat: StatDict
@@ -109,10 +109,6 @@ class JoinDict(TypedDict):
     new_status: NotRequired[list[str]]
 
 
-class MeetDict(TypedDict):
-    cats: list[str]
-
-
 class SupplyDict(TypedDict):
     type: str
     trigger: NotRequired[Literal["always", "excess", "full", "adequate", "low"]]
@@ -123,11 +119,6 @@ class SupplyDict(TypedDict):
         "increase_large",
         "increase_huge",
     ]
-
-
-class AccessoryDict(TypedDict):
-    cats: list
-    accessory: list
 
 
 class FutureEventDict(TypedDict):

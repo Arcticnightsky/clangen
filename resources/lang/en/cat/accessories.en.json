@@ -272,7 +272,7 @@
         "GORSE": {
             "zero": "gorse flowers",
             "many": "gorse flowers",
-            "one": "gorse flower"
+            "one": "gorse flowers"
         },
         "BULB WHITE": {
             "zero": "white flower bulb",
