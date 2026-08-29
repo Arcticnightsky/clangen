@@ -150,67 +150,70 @@ def check_and_promote_deputy():
         game.cur_events_list.insert(0, EventInformation("defaults.warn_no_deputy"))
         return
 
-        # This determines all the cats who are eligible to be deputy.
-        possible_deputies = list(
+    # This determines all the cats who are eligible to be deputy.
+    possible_deputies = list(
+        filter(
+            lambda x: x.status.alive_in_player_clan
+            and x.status.rank == CatRank.WARRIOR
+            and (x.apprentice or x.former_apprentices),
+            Cat.all_cats_list,
+        )
+    )
+
+    # If the leader is present, prioritize warriors they highly respect.
+    leader = game.clan.leader
+    use_mentor_weighting = False
+    if leader and leader.status.alive_in_player_clan:
+        respected_deputies = [
+            cat
+            for cat in possible_deputies
+            if leader.relationships.get(cat.ID)
+            and (
+                leader.relationships[cat.ID].respect >= 30
+                or leader.relationships[cat.ID].trust >= 30
+            )
+        ]
+
+        if respected_deputies:
+            possible_deputies = respected_deputies
+        else:
+            # If no one is respected enough, give a slight edge to experienced mentors.
+            use_mentor_weighting = True
+
+    # If there are possible deputies, choose from that list.
+    if possible_deputies:
+        if use_mentor_weighting:
+            deputy_weights = [
+                2 if len(cat.former_apprentices) >= 2 else 1
+                for cat in possible_deputies
+            ]
+            main_cat = random.choices(
+                possible_deputies,
+                weights=deputy_weights,
+                k=1,
+            )[0]
+        else:
+            main_cat = random.choice(possible_deputies)
+    else:
+        # If there are no eligible deputies, choose a warrior with special text.
+        all_warriors = list(
             filter(
                 lambda x: x.status.alive_in_player_clan
-                and x.status.rank == CatRank.WARRIOR
-                and (x.apprentice or x.former_apprentices),
+                and x.status.rank == CatRank.WARRIOR,
                 Cat.all_cats_list,
             )
         )
+        if all_warriors:
+            main_cat = random.choice(all_warriors)
+        else:
+            # If there are no warriors at all, no one is named deputy.
+            game.cur_events_list.append(
+                EventInformation(i18n.t("hardcoded.ceremony_deputy_none"), "ceremony")
+            )
+            return
 
-        # If the leader is present, prioritize warriors they highly respect.
-        leader = game.clan.leader
-        use_mentor_weighting = False
-        if leader and leader.status.alive_in_player_clan:
-            respected_deputies = [
-                cat
-                for cat in possible_deputies
-                if leader.relationships.get(cat.ID)
-                and leader.relationships[cat.ID].respect >= 30
-                or leader.relationships[cat.ID].trust >= 30
-            ]
-
-            if respected_deputies:
-                possible_deputies = respected_deputies
-            else:
-                # If no one is respected enough, give a slight edge to experienced mentors.
-                use_mentor_weighting = True
-
-        # If there are possible deputies, choose from that list.
-        if possible_deputies:
-            if use_mentor_weighting:
-                deputy_weights = [
-                    2 if len(cat.former_apprentices) >= 2 else 1
-                    for cat in possible_deputies
-                ]
-                random_cat = random.choices(
-                    possible_deputies,
-                    weights=deputy_weights,
-                    k=1,
-                )[0]
-            else:
-                # If there are no possible deputies, choose someone else, with special text.
-                all_warriors = list(
-                    filter(
-                        lambda x: x.status.alive_in_player_clan
-                        and x.status.rank == CatRank.WARRIOR,
-                        Cat.all_cats_list,
-                    )
-                )
-                if all_warriors:
-                    main_cat = random.choice(all_warriors)
-
-                else:
-                    # If there are no warriors at all, no one is named deputy.
-                    game.cur_events_list.append(
-                        EventInformation(i18n.t("hardcoded.ceremony_deputy_none"), "ceremony")
-                    )
-                    return
-
-            trigger_ceremony(main_cat, CatRank.DEPUTY, {"past_deputy": game.clan.deputy})
-            game.clan.deputy = main_cat
+    trigger_ceremony(main_cat, CatRank.DEPUTY, {"past_deputy": game.clan.deputy})
+    game.clan.deputy = main_cat
 
 
 def _adult_becomes_mediator(cat) -> bool:

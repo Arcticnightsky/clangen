@@ -306,6 +306,7 @@ class ShortEvent:
                 respect=-30,
                 comfort=-30,
                 trust=-30,
+                log=i18n.t("relationships.kit_manipulated_rel_log"),
             )
 
         # kill cats
@@ -345,18 +346,7 @@ class ShortEvent:
                 romantic_cats.append(cat)
 
             if romantic_cats:
-                change_relationship_values(
-                    [self.main_cat],
-                    romantic_cats,
-                    romance=-80,
-                )
-
                 for cat in romantic_cats:
-                    rel = cat.relationships.get(self.main_cat.ID)
-
-                    if not rel:
-                        continue
-
                     log_text = process_text(
                         "m_c lost romantic feelings for r_c after "
                         "{PRONOUN/m_c/subject} found out that r_c killed someone.",
@@ -374,13 +364,8 @@ class ShortEvent:
                     log_text = i18n.t(
                         "relationships.negative_postscript", text=log_text
                     )
-                    rel.log.append(
-                        i18n.t(
-                            "relationships.age_postscript",
-                            text=log_text,
-                            name=str(self.main_cat.name),
-                            count=self.main_cat.moons,
-                        )
+                    change_relationship_values(
+                        [self.main_cat], [cat], romance=-80, log=log_text
                     )
         # change outsider rep
         if self.outsider:

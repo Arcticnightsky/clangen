@@ -1755,11 +1755,13 @@ class Pregnancy_Events:
                         change_relationship_values(
                             cats_from=[kit],
                             cats_to=[parent],
+                            log=False,
                             **kit_to_parent,
                         )
                         change_relationship_values(
                             cats_from=[parent],
                             cats_to=[kit],
+                            log=False,
                             **parent_to_kit,
                         )
         inheritance_db.load_inheritances(Cat)
