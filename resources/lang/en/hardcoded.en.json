@@ -23,10 +23,29 @@
             "one": "%{names} found a %{insert} and decides to adopt it.",
             "many": "%{names} found a %{insert} and decides to adopt them."
         },
-        "adoption_kittens_pair": {
+        "adoption_kittens_pair1": {
             "one": "%{names} found a %{insert} and decide to adopt it.",
             "many": "%{names} found a %{insert} and decide to adopt them."
         },
+        "adoption_kittens_pair2": {
+            "one": "While they were out on a casual stroll through the territory, %{names} heard the cries of a %{insert}, looking for its parent! They stayed with the kit till its parent came for it. After hours of waiting and no sign of its parent, %{names} decide to adopt the kit as their own.",
+            "many": "While they were out on a casual stroll through the territory, %{names} heard the cries of a %{insert}, looking for their parent! They stayed with the kits till their parent came for them. After hours of waiting and no sign of their parent, %{names} decide to adopt them as their own."
+        },
+        "adoption_kittens_pair3": {
+            "one": "%{names} were out on a date and found a %{insert} walking their direction, looking utterly distressed. When confronting the kit, the kit cries and explains that its parent basically left it and never returned, it's been days since it's seen its parent. Feeling waves of sympathy for the kit, %{names} decide to adopt the kit into the Clan.",
+            "many": "%{names} were out on a date and found a %{insert} walking their direction, looking utterly distressed. When confronting the kits, the eldest kit cries and explains that their parent basically left them and never returned, it's been days since they've seen their parent. Feeling waves of sympathy for the kits, %{names} decide to adopt them into the Clan."
+        },
+        "adoption_kittens_pair4": {
+            "one": "%{names} wished they were able to have kits of their own, sometimes they wished that they were a <b>tom and she-cat</b> pair for it to happen. Just then, they find a %{insert}, lost and alone with no parent — they tell the kit to not worry, as they will be its parents from now on.",
+            "many": "%{names} wished they were able to have kits of their own, sometimes they wished that they were a <b>tom and she-cat</b> pair for it to happen. Just then, they find a %{insert}, lost with no parent — they tell the kits to not worry, as they will be their parents from now on."
+        },
+        "adoption_kittens_pair5": {
+            "one": "%{names} came across a dying loner with their %{insert} while on a date. The two tried to bring back the loner and their kit back to camp for help, but the loner, using their last words, told them to leave them here to die and to take care of their kit. %{names} obeyed. They buried the loner and adopted the poor kit into their care.",
+            "many": "%{names} came across a dying loner with their %{insert} while on a date. The two tried to bring back the loner and their kits back to camp for help, but the loner, using their last words, told them to leave them here to die and to take care of their kits. %{names} obeyed. They buried the loner and adopted the poor kits into their care."
+        },
+        "new_kit_thought": "Snuggles up to the belly of r_c",
+        "new_adopted_kit_thought": "Snuggles close to r_c",
+        "event_mediator_app": "m_c has chosen to use {PRONOUN/m_c/poss} skills and experience to help solve the Clan's disagreements. A meeting is called, and {PRONOUN/m_c/subject} {VERB/m_c/become/becomes} the Clan's newest mediator.",
         "herbs_found": {
             "zero": "med_name could not find any herbs this moon.",
             "many": "med_name gathered %{insert} this moon."
@@ -68,6 +87,10 @@
             "many": " {PRONOUN/m_c/subject/CAP} {VERB/m_c/bring/brings} along {PRONOUN/m_c/poss} kittens."
         },
         "event_returning_child_of_lost": "m_c approaches the Clan and asks to join, claiming to be %{parent_name}'s kitten.",
+        "event_lost_mate": " To everyone's surprise, {PRONOUN/m_c/subject} {VERB/m_c/bring/brings} along a cat who m_c introduces as {PRONOUN/m_c/poss} mate.",
+        "event_tnr_return1": "m_c tells the tale of how {PRONOUN/m_c/subject} went to what kittypets called \"the cutter\" and how {PRONOUN/m_c/subject} just doesn't feel the same anymore.",
+        "event_tnr_return2": "Quietly, m_c explains that Twolegs brought {PRONOUN/m_c/object} to something kittypets call \"the cutter,\" and {PRONOUN/m_c/subject} still feels unsettled by it.",
+        "event_tnr_return3": "m_c admits that life among Twolegs changed {PRONOUN/m_c/object}; after a trip to \"the cutter,\" {PRONOUN/m_c/subject} says things have never felt quite the same.",
         "kittencough_spread": {
             "one": "Kittencough has spread around the nursery. %{kits} is affected.",
             "many": "Kittencough has spread around the nursery. %{kits} are affected."},
@@ -88,6 +111,8 @@
         "consumed_prey": {
             "one": "One piece of prey was consumed.",
             "many": "%{count} pieces of prey were consumed."
-        }
+        },
+        "mate_reunite_poly": "Finally, after waiting for so long — day and night — with restless nights and prayers to Starclan, m_c is home. r_c and {PRONOUN/r_c/poss} mate reunite with {PRONOUN/r_c/object}, sharing a bittersweet moment in the clearing.",
+        "mate_reunite": "Finally, after waiting for so long — day and night — with restless nights and prayers to Starclan, m_c is home. r_c reunites with {PRONOUN/r_c/poss} mate, sharing a bittersweet moment in the middle of the clearing."
     }
 }

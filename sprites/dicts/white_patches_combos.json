@@ -295,6 +295,19 @@
             "midTAIL_HIGH_LOW",
             "midTAIL_HIGH",
             "midMITAINE"
+	],
+        "EMO": [
+            "littleROSINA_REDUCED",
+            "littleDAMIEN_REDUCED",
+            "littleBLAZE_SMALL",
+            "littleTEARS_R",
+            "littleTAILTIP",
+            "littleBEARD_SMALL",
+            "littleBIB_SMALL",
+            "littleLEG_BACK_LEFT_MIN",
+            "littleLEG_BACK_RIGHT_MIN",
+            "littleLEG_FRONT_RIGHT_MIN",
+            "littleLEG_FRONT_LEFT_MIN"
         ]
     },
     "high": {

@@ -56,6 +56,9 @@
             "one": "%{text} - %{name} was %{count} moon old",
             "many": "%{text} - %{name} was %{count} moons old"
         },
-        "relationship_log": "These cats recently interacted."
+        "kit_manipulated_rel_log": "cat_from was manipulated into distrusting cat_to.",
+        "relationship_change_log": "cat_from's feelings toward cat_to changed.",
+        "mentor_rel_log_1": "m_c became the apprentice of r_c.",
+        "mentor_rel_log_2": "m_c was apprenticed to r_c."
     }
 }
