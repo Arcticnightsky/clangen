@@ -3,37 +3,34 @@ from typing import List, Optional, Dict
 
 import i18n
 
-from scripts.cat import pronouns
 from scripts.cat.cats import Cat
-from scripts.cat.pelts import Pelt
-from scripts.cat_relations.relationship import Relationship
-from scripts.clan_package.settings import get_clan_setting
+from scripts.cat.enums import CatAge, CatRank
 from scripts.cat.microservices.conditions import get_injured
+from scripts.cat.pelts import Pelt
+from scripts.cat.personality import Personality
+from scripts.cat.skills import SkillPath
+from scripts.cat_relations.relationship import Relationship
+from scripts.clan_package.cotc import change_clan_reputation, change_clan_relations
+from scripts.clan_package.get_clan_cats import find_alive_cats_with_rank
+from scripts.clan_package.settings import get_clan_setting
 from scripts.config import get_config
 from scripts.events_module.event_information import EventInformation
-from scripts.events_module.future.prep_and_trigger import prep_future_event
-from scripts.events_module.relationship import relation_events
-from scripts.game_structure import game
-from scripts.events_module.text_adjust import (
-    event_text_adjust,
-    get_leader_life_notice,
-    adjust_list_text,
-    process_text,
-    history_text_adjust,
-)
 from scripts.events_module.consequences import (
     create_new_cat_block,
     unpack_rel_block,
     change_relationship_values,
     check_stolen_vitality,
 )
-from scripts.clan_package.cotc import change_clan_reputation, change_clan_relations
-from scripts.clan_package.get_clan_cats import find_alive_cats_with_rank
-
-from scripts.cat.enums import CatAge, CatRank
-from scripts.cat.personality import Personality
-from scripts.cat.skills import SkillPath
+from scripts.events_module.future.prep_and_trigger import prep_future_event
+from scripts.events_module.relationship import relation_events
+from scripts.events_module.text_adjust import (
+    event_text_adjust,
+    get_leader_life_notice,
+    adjust_list_text,
+    history_text_adjust,
+)
 from scripts.game_structure import constants
+from scripts.game_structure import game
 
 
 class ShortEvent:
@@ -269,10 +266,6 @@ class ShortEvent:
             if self.handle_accessories() is False:
                 return
 
-        # update gender before relationships
-        if self.new_gender:
-            self.handle_transition()
-
         # change relationships before killing anyone
         if self.relationships:
             # we're doing this here to make sure rel logs get adjusted text
@@ -332,64 +325,6 @@ class ShortEvent:
                 clan_reveal="clan_wide" in self.tags,
                 aware_individuals=[self.random_cat.ID],
             )
-
-            romantic_cats = []
-
-            for cat in Cat.all_cats.values():
-                if cat.dead:
-                    continue
-
-                if cat.ID == self.main_cat.ID:
-                    continue
-
-                rel = cat.relationships.get(self.main_cat.ID)
-
-                if not rel:
-                    continue
-
-                if rel.romance <= 0:
-                    continue
-
-                romantic_cats.append(cat)
-
-            if romantic_cats:
-                change_relationship_values(
-                    [self.main_cat],
-                    romantic_cats,
-                    romance=-80,
-                )
-
-                for cat in romantic_cats:
-                    rel = cat.relationships.get(self.main_cat.ID)
-
-                    if not rel:
-                        continue
-
-                    log_text = process_text(
-                        "m_c lost romantic feelings for r_c after "
-                        "{PRONOUN/m_c/subject} found out that r_c killed someone.",
-                        {
-                            "m_c": (
-                                str(cat.name),
-                                choice(cat.pronouns),
-                            ),
-                            "r_c": (
-                                str(self.main_cat.name),
-                                choice(self.main_cat.pronouns),
-                            ),
-                        },
-                    )
-                    log_text = i18n.t(
-                        "relationships.negative_postscript", text=log_text
-                    )
-                    rel.log.append(
-                        i18n.t(
-                            "relationships.age_postscript",
-                            text=log_text,
-                            name=str(self.main_cat.name),
-                            count=self.main_cat.moons,
-                        )
-                    )
 
         # change outsider rep
         if self.outsider:
@@ -616,20 +551,6 @@ class ShortEvent:
         else:
             self.main_cat.pelt.accessory = (choice(acc_list),)
             return None
-
-    def handle_transition(self):
-        """
-        handles updating gender_align and pronouns
-        """
-        possible_genders = getattr(self, "new_gender", [])
-
-        if possible_genders:
-            new_gender = choice(possible_genders)
-            self.main_cat.genderalign = new_gender
-
-            self.main_cat.pronouns = pronouns.get_new_pronouns(
-                self.main_cat.genderalign
-            )
 
     def handle_death(self):
         """
