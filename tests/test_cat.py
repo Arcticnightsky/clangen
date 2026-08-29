@@ -2,6 +2,7 @@ import os
 import unittest
 from copy import deepcopy
 from random import Random
+from types import SimpleNamespace
 from unittest.mock import patch
 
 from scripts.cat.factories.test_cat_factory import TestCatFactory
@@ -876,17 +877,39 @@ class TestAfterlifeAssignment(unittest.TestCase):
             ],
         }
 
-        cat = Cat(status_dict=exiled_status, disable_random=True)
+        cat = cat_factory.create_cat(status_dict=exiled_status)
 
         self.assertEqual(cat.status.get_default_afterlife_id(), CatGroup.DARK_FOREST_ID)
 
     def test_default_afterlife_for_true_outsider(self):
-        outsider_cat = Cat(status_dict={"rank": CatRank.ROGUE}, disable_random=True)
+        outsider_cat = cat_factory.create_cat(status_dict={"rank": CatRank.ROGUE})
 
         self.assertEqual(
             outsider_cat.status.get_default_afterlife_id(),
             CatGroup.UNKNOWN_RESIDENCE_ID,
         )
+
+    def test_exiled_cat_dies_in_dark_forest(self):
+        exiled_cat = cat_factory.create_cat()
+        exiled_cat.status.exile_from_group()
+        exiled_cat.history = SimpleNamespace(
+            murder=None, add_afterlife_acceptance=lambda *args, **kwargs: None
+        )
+        original_clan = game.clan
+        game.clan = SimpleNamespace(
+            instructor=SimpleNamespace(
+                status=SimpleNamespace(group=CatGroup.STARCLAN)
+            )
+        )
+
+        try:
+            exiled_cat.dead = True
+        finally:
+            game.clan = original_clan
+            game.updated_afterlife_cats.discard(exiled_cat)
+
+        self.assertTrue(exiled_cat.dead)
+        self.assertEqual(exiled_cat.status.group, CatGroup.DARK_FOREST)
 
 
 class TestSocialAssignment(unittest.TestCase):

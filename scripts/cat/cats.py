@@ -355,7 +355,7 @@ class Cat:
 
                     afterlife_group = CatGroup.STARCLAN
                     rejected_ID = CatGroup.DARK_FOREST_ID
-                elif game.clan.instructor.status.group == CatGroup.DARK_FOREST:
+                elif cat_default_afterlife_id == CatGroup.DARK_FOREST_ID:
                     affinity = self.dark_forest_affinity
                     skill_match = SkillPath.DARK
                     skill_conflict = SkillPath.STAR
