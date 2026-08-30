@@ -27,6 +27,7 @@ from scripts.events_module.text_adjust import (
     event_text_adjust,
     get_leader_life_notice,
     adjust_list_text,
+    process_text,
     history_text_adjust,
 )
 from scripts.game_structure import constants
