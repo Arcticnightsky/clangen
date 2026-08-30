@@ -396,7 +396,7 @@ def _try_confession(cat_from, cat_to) -> tuple[bool, dict, dict, str]:
     elif (
         "romance" in condition
         and condition["romance"] != 0
-        and condition["romance"] > 30
+        and condition["romance"] > 0
         and cat_to.relationships[cat_from.ID].romance >= condition["romance"] * 1.5
     ):
         become_mates = True
