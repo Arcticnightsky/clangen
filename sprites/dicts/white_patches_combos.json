@@ -555,22 +555,6 @@
             "midTWO_SPOT_REVERSE",
             "midCHEST_FULL"
         ],
-        "FULLWHITE": [
-            "littleLEFTEAR",
-            "littleMASK_FACE",
-            "littleRIGHTEAR",
-            "littleUNDER_HEART",
-            "littleSTRIPE_SMALL",
-            "midFLANK_FULL",
-            "midLEG_BACK_LEFT_FULL",
-            "midLEG_BACK_RIGHT_FULL",
-            "midLEG_FRONT_LEFT_FULL",
-            "midLEG_FRONT_RIGHT_FULL",
-            "midTAIL_FULL",
-            "midBELLY_FULL",
-            "midBIB_FULL",
-            "midUNDERS"
-        ],
         "TAILTWO": [
             "littleLEFTEAR",
             "littleMASK_REVERSE_BROWS",
