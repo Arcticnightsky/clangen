@@ -194,6 +194,14 @@ def check_and_promote_deputy():
             )[0]
         else:
             main_cat = random.choice(possible_deputies)
+
+        # A qualified deputy was found, so use the normal deputy ceremony.
+        trigger_ceremony(
+            main_cat,
+            CatRank.DEPUTY,
+            {"past_deputy": game.clan.deputy},
+        )
+
     else:
         # If there are no eligible deputies, choose a warrior with special text.
         all_warriors = list(
@@ -203,8 +211,17 @@ def check_and_promote_deputy():
                 Cat.all_cats_list,
             )
         )
+
         if all_warriors:
             main_cat = random.choice(all_warriors)
+
+            # No qualified deputy was found, so use the fallback ceremony.
+            trigger_ceremony(
+                main_cat,
+                CatRank.DEPUTY,
+                {"past_deputy": game.clan.deputy, "no_eligible_deputy": True},
+            )
+
         else:
             # If there are no warriors at all, no one is named deputy.
             game.cur_events_list.append(
@@ -212,7 +229,6 @@ def check_and_promote_deputy():
             )
             return
 
-    trigger_ceremony(main_cat, CatRank.DEPUTY, {"past_deputy": game.clan.deputy})
     game.clan.deputy = main_cat
 
 
