@@ -392,6 +392,36 @@ def _try_confession(cat_from, cat_to) -> tuple[bool, dict, dict, str]:
             cat_from_change, cat_to_change = _get_relationship_change_dict(
                 confession_changes, variability
             )
+    # second acceptance chance if the romantic is high enough
+    elif (
+        "romance" in condition
+        and condition["romance"] != 0
+        and condition["romance"] > 30
+        and cat_to.relationships[cat_from.ID].romance >= condition["romance"] * 1.5
+    ):
+        become_mates = True
+        if cat_from.ID in cat_to.previous_mates:
+            mate_string = _get_mate_string(
+                "high_romantic_makeup",
+                poly,
+                existing_from_cat_mates,
+                existing_to_cat_mates,
+            )
+            confession_changes = get_config("mates.confession.reactions.makeup")
+            cat_from_change, cat_to_change = _get_relationship_change_dict(
+                confession_changes, variability
+            )
+        else:
+            mate_string = _get_mate_string(
+                "high_romantic",
+                poly,
+                existing_from_cat_mates,
+                existing_to_cat_mates,
+            )
+            confession_changes = get_config("mates.confession.reactions.accepted")
+            cat_from_change, cat_to_change = _get_relationship_change_dict(
+                confession_changes, variability
+            )
     else:
         if cat_from.ID in cat_to.previous_mates:
             mate_string = _get_mate_string(
