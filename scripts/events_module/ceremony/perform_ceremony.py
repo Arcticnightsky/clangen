@@ -177,7 +177,6 @@ def check_and_promote_deputy():
         if respected_deputies:
             possible_deputies = respected_deputies
         else:
-            # If no one is respected enough, give a slight edge to experienced mentors.
             use_mentor_weighting = True
 
     # If there are possible deputies, choose from that list.
