@@ -1012,7 +1012,7 @@ def gather_cat_objects(
         if abbr == "m_c":
             found_cat = extra_cat if extra_cat else event.main_cat
         elif abbr == "r_c":
-            found_cat = event.random_cat
+            found_cat = event.random_cat if event.random_cat else None
 
         # add/remove cat if found and then continue for loop
         if is_exclusionary and found_cat:
