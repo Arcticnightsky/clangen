@@ -53,6 +53,9 @@ def execute_outcome(
     """
 
     rel_results = {}
+    if event is None:
+        print("ERROR: execute_outcome received None as event")
+        return "", "", {}
     chosen_string = choice(event.strings)
     # process text
     processed_text = event_text_adjust(
