@@ -29,6 +29,15 @@ def create_ceremony(
     new_rank = main_cat.status.rank.replace(" ", "_")
     possible_events = load_text_pool_events(f"events/ceremonies/{new_rank}.json")
 
+    # If this is a normal deputy appointment, don't allow the
+    # "no suitable deputy" ceremony to be selected.
+    if new_rank == "deputy" and "no_eligible_deputy" not in involved_cats:
+        possible_events = [
+            event
+            for event in possible_events
+            if event.event_id != "deputy_clan_unsure0"
+        ]
+
     chosen_ceremony, involved_cats = get_valid_event(
         primary_cat=main_cat,
         involved_cats=involved_cats,
@@ -40,7 +49,7 @@ def create_ceremony(
         frequency_active=False,
         ensured_id=get_config("event_generation.debug_ensure_ceremony_id"),
     )
-
+    
     # we won't actually use results or rel results for ceremonies
     processed_string, results, rel_results = execute_outcome(
         chosen_ceremony, involved_cats

@@ -162,7 +162,12 @@ def _create_pregnancy_announcement(
     mentioned_cat: Optional[Cat] = None,
 ):
     """Creates announcement text, applies pregnancy injury, and returns involved cats."""
-    text = choice(get_pregnancy_strings()[announcement_key])
+    pregnancy_strings = get_pregnancy_strings()
+    key_aliases = {"announcement_surprise": "surprising_announcement"}
+    announcement_key = key_aliases.get(announcement_key, announcement_key)
+    if announcement_key not in pregnancy_strings:
+        announcement_key = "announcement"
+    text = choice(pregnancy_strings[announcement_key])
     event_text = text
     severity = choices(["minor", "major"], [3, 1], k=1)[0]
     get_injured(pregnant_cat, "pregnant", severity=severity)

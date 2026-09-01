@@ -1,6 +1,8 @@
 from itertools import combinations
 from random import choice, randint, getrandbits, choices, random
 
+import i18n
+
 from scripts.cat.cats import Cat
 from scripts.cat.constants import INJURIES, ILLNESSES, PERMANENT, BACKSTORIES
 from scripts.cat.enums import CatRank, CatAge, CatGroup, CatStanding, CatSocial
@@ -138,6 +140,9 @@ def updated_create_new_cat(
 
     # GENDER
     gender = choice(option_dict.get("gender")) if option_dict.get("gender") else None
+    skip_female_rarity_roll = bool(
+        option_dict.get("gender") and "can_birth" in option_dict["gender"]
+    )
     if gender and "can_birth" in gender:
         if not get_clan_setting("same sex birth"):
             gender = "female"
@@ -155,9 +160,10 @@ def updated_create_new_cat(
             gender=gender,
             parent1=blood_parents[0].ID if blood_parents else None,
             parent2=blood_parents[1].ID if len(blood_parents) > 1 else None,
-            adoptive_parents=[p.ID for p in adoptive_parents]
-            if adoptive_parents
-            else None,
+            adoptive_parents=(
+                [p.ID for p in adoptive_parents] if adoptive_parents else None
+            ),
+            skip_female_rarity_roll=skip_female_rarity_roll,
         )
         # check if kittypets get collar
         if created_cat.status.social == CatSocial.KITTYPET and bool(getrandbits(1)):
@@ -210,11 +216,13 @@ def updated_create_new_cat(
         change_relationship_values(
             cats_to=new_cats,
             cats_from=blood_parents + adoptive_parents,
+            log=False,
             **get_config("new_cat.parent_buff.parent_to_kit"),
         )
         change_relationship_values(
             cats_to=blood_parents + adoptive_parents,
             cats_from=new_cats,
+            log=False,
             **get_config("new_cat.parent_buff.kit_to_parent"),
         )
 
@@ -233,6 +241,7 @@ def updated_create_new_cat(
         change_relationship_values(
             cats_to=new_cats,
             cats_from=new_cats,
+            log=False,
             **get_config("new_cat.sib_buff.cat1_to_cat2"),
         )
 
@@ -514,9 +523,11 @@ def _assign_past_status_and_standing(
 
             created_cat.status.add_to_group(
                 new_group_ID=group,
-                become_rank=CatRank(choice(option_dict["status"]))
-                if option_dict.get("status")
-                else None,
+                become_rank=(
+                    CatRank(choice(option_dict["status"]))
+                    if option_dict.get("status")
+                    else None
+                ),
             )
         if option_dict.get("status") and created_cat.status.rank == status["rank"]:
             created_cat.status._change_rank(CatRank(choice(option_dict["status"])))

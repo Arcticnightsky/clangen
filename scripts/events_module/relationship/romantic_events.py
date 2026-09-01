@@ -19,6 +19,9 @@ from scripts.events_module.event_filters import (
     get_highest_romantic_relation,
     get_personality_compatibility,
 )
+from scripts.events_module.relationship.romance_chance import (
+    passes_same_sex_romance_chance,
+)
 from scripts.config import get_config
 
 
@@ -366,6 +369,36 @@ def _try_confession(cat_from, cat_to) -> tuple[bool, dict, dict, str]:
     condition = get_config("mates.confession.accept_confession")
     variability = get_config("mates.confession.reactions.variability")
     if cat_to.relationships[cat_from.ID].relationship_qualifies(condition):
+        become_mates = True
+        if cat_from.ID in cat_to.previous_mates:
+            mate_string = _get_mate_string(
+                "high_romantic_makeup",
+                poly,
+                existing_from_cat_mates,
+                existing_to_cat_mates,
+            )
+            confession_changes = get_config("mates.confession.reactions.makeup")
+            cat_from_change, cat_to_change = _get_relationship_change_dict(
+                confession_changes, variability
+            )
+        else:
+            mate_string = _get_mate_string(
+                "high_romantic",
+                poly,
+                existing_from_cat_mates,
+                existing_to_cat_mates,
+            )
+            confession_changes = get_config("mates.confession.reactions.accepted")
+            cat_from_change, cat_to_change = _get_relationship_change_dict(
+                confession_changes, variability
+            )
+    # second acceptance chance if the romantic is high enough
+    elif (
+        "romance" in condition
+        and condition["romance"] != 0
+        and condition["romance"] > 0
+        and cat_to.relationships[cat_from.ID].romance >= condition["romance"] * 1.5
+    ):
         become_mates = True
         if cat_from.ID in cat_to.previous_mates:
             mate_string = _get_mate_string(
