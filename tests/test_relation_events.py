@@ -1,4 +1,3 @@
-import os
 import unittest
 from random import Random
 from unittest.mock import patch
