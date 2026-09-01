@@ -72,7 +72,7 @@ def updated_create_new_cat(
                         r
                         for r in [*CatRank]
                         if r.is_any_clancat_rank()
-                        and r not in (CatRank.LEADER, CatRank.DEPUTY)
+                        and r not in (CatRank.LEADER, CatRank.DEPUTY, CatRank.MEDICINE_CAT)
                     ]
                 )
         else:
