@@ -54,13 +54,14 @@ def execute_outcome(
     :returns: Outcome text, results text, list of created rel logs (might be empty)
     """
 
+    if event is None:
+        print("ERROR: execute_outcome received None as event")
+        return "", "", {}
+    
     # Must start with cat creation.
     create_needed_cats(event, event_involved_cats, other_clan)
 
     rel_results = {}
-    if event is None:
-        print("ERROR: execute_outcome received None as event")
-        return "", "", {}
     chosen_string = choice(event.strings)
     # process text
     processed_text = event_text_adjust(
