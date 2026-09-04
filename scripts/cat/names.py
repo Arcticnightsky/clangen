@@ -114,6 +114,27 @@ class Name:
         )
 
     @classmethod
+    def get_category(cls, category: str):
+        """Return a localized name category, loading names first if needed."""
+        cls.load_localized_names()
+        return cls.names_dict.get(category, [])
+
+    @classmethod
+    def normal_name_combinations(cls) -> int:
+        """Return the number of regular prefix/suffix combinations available."""
+        cls.load_localized_names()
+        return max(
+            1,
+            len(cls.get_category("normal_prefixes"))
+            * len(cls.get_category("normal_suffixes")),
+        )
+
+    @staticmethod
+    def full_name(prefix, suffix) -> str:
+        """Safely combine a prefix and suffix into one comparable name string."""
+        return f"{prefix or ''}{suffix or ''}"
+
+    @classmethod
     def load_localized_names(cls):
         """
         Loads the correct names for the given language. Includes override for always using English names, in case localization wants to be ignored
