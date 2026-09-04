@@ -314,10 +314,7 @@ class Name:
                         pelt in ("Tortie", "Calico")
                         and tortie_pattern in self.names_dict["tortie_pelt_suffixes"]
                     ):
-                        if (
-                            constants.CONFIG["cat_name_controls"]["allow_eye_names"]
-                            and eyes in self.names_dict["eye_suffixes"]
-                        ):
+                        if eyes in self.names_dict["eye_suffixes"]:
                             pool = (
                                 self.names_dict["tortie_pelt_suffixes"][tortie_pattern]
                                 + self.names_dict["eye_suffixes"][eyes]
