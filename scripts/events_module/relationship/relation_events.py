@@ -1,3 +1,5 @@
+import os
+import random as random_module
 import random
 from random import choice
 from typing import Optional
@@ -17,6 +19,10 @@ from scripts.cat.enums import CatRank, CatAge
 from scripts.clan_package.get_clan_cats import (
     get_cats_same_age,
     get_possible_mates,
+)
+from scripts.events_module.relationship.romance_chance import (
+    cats_are_same_sex,
+    passes_same_sex_romance_chance,
 )
 
 events_triggered_per_cat: dict[str, int] = {}
@@ -44,6 +50,19 @@ def handle_relationships(cat: Cat):
 
         romantic_events.handle_mates_and_breakup(cat)
 
+        romance_interests = []
+        for relationship in cat.relationships.values():
+            if (
+                relationship.romance > 0
+                and relationship.cat_to
+                and relationship.cat_to.status.alive_in_player_clan
+            ):
+                romance_interests.append(relationship.cat_to)
+        if romance_interests:
+            inter_cat = random_module.choice(romance_interests)
+            if cats_are_same_sex(cat, inter_cat):
+                if not passes_same_sex_romance_chance(cat, inter_cat):
+                    return
 
 # ---------------------------------------------------------------------------- #
 #                                new event types                               #

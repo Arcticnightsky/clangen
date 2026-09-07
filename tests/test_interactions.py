@@ -21,6 +21,11 @@ cat_factory = TestCatFactory()
 
 
 class RelationshipConstraints(unittest.TestCase):
+    def test_single_interaction_normalizes_med_intensity(self):
+        interaction = SingleInteraction("test", intensity="med")
+
+        self.assertEqual(interaction.intensity, "medium")
+
     def test_siblings(self):
         # given
         parent = cat_factory.create_cat()
@@ -637,3 +642,143 @@ class SingleInteractionCatConstraints(unittest.TestCase):
             other_cat=clan,
         )
         self.assertEqual(chosen_event, all_to_clan)
+
+
+class RomanceInteractionWeighting(unittest.TestCase):
+    @patch("scripts.cat_relations.relationship.random.choices")
+    def test_mixed_sterilization_pair_reduces_romance_weight(self, mocked_choices):
+        cat_from = Cat(age="adult", moons=30, disable_random=True)
+        cat_to = Cat(age="adult", moons=30, disable_random=True)
+        cat_from.permanent_condition["neutered"] = {}
+        mixed_relationship = Relationship(cat_from, cat_to)
+
+        mocked_choices.return_value = [RelType.LIKE]
+        mixed_relationship.get_interaction_type(positive=True)
+        mixed_values = mocked_choices.call_args.args[0]
+        mixed_weights = mocked_choices.call_args.args[1]
+        mixed_romance_weight = mixed_weights[mixed_values.index(RelType.ROMANCE)]
+
+        intact_cat_from = Cat(age="adult", moons=30, disable_random=True)
+        intact_cat_to = Cat(age="adult", moons=30, disable_random=True)
+        intact_relationship = Relationship(intact_cat_from, intact_cat_to)
+
+        mocked_choices.return_value = [RelType.LIKE]
+        intact_relationship.get_interaction_type(positive=True)
+        intact_values = mocked_choices.call_args.args[0]
+        intact_weights = mocked_choices.call_args.args[1]
+        intact_romance_weight = intact_weights[intact_values.index(RelType.ROMANCE)]
+
+        self.assertLess(mixed_romance_weight, intact_romance_weight)
+
+
+class PairEventConstraintRegression(unittest.TestCase):
+    def test_get_event_rejects_failed_relationship_constraint(self):
+        cat_from = Cat()
+        cat_to = Cat()
+        rel = Relationship(cat_from, cat_to)
+        rel.romance = 12
+        cat_from.relationships[cat_to.ID] = rel
+
+        constrained_event = TextPoolEvent(
+            id="requires_adores_not_mates",
+            strings=["test"],
+            relationship_constraint=[
+                {
+                    "cats_from": ["m_c"],
+                    "cats_to": ["r_c"],
+                    "mutual": False,
+                    "constraints": ["adores", "-mates"],
+                }
+            ],
+        )
+        fallback_event = TextPoolEvent(id="fallback", strings=["test"])
+
+        chosen_event = generate_pair_event._get_event(
+            events=[constrained_event, fallback_event],
+            main_cat=cat_from,
+            other_cat=cat_to,
+        )
+
+        self.assertEqual(chosen_event, fallback_event)
+
+    def test_get_event_returns_none_when_no_event_matches_constraints(self):
+        cat_from = Cat()
+        cat_to = Cat()
+
+        mates_only_event = TextPoolEvent(
+            id="mates_only",
+            strings=["test"],
+            relationship_constraint=[
+                {
+                    "cats_from": ["m_c"],
+                    "cats_to": ["r_c"],
+                    "mutual": False,
+                    "constraints": ["mates"],
+                }
+            ],
+        )
+
+        chosen_event = generate_pair_event._get_event(
+            events=[mates_only_event],
+            main_cat=cat_from,
+            other_cat=cat_to,
+        )
+
+        self.assertIsNone(chosen_event)
+
+    @patch(
+        "scripts.events_module.relationship.generate_pair_event._get_change_amount",
+        return_value=10,
+    )
+    @patch(
+        "scripts.events_module.relationship.generate_pair_event.passes_same_sex_romance_chance",
+        return_value=False,
+    )
+    def test_same_sex_base_romance_gain_is_blocked(
+        self, _mocked_chance, _mocked_amount
+    ):
+        cat_from = Cat(gender="female")
+        cat_to = Cat(gender="female")
+        relationship = Relationship(cat_from, cat_to)
+
+        generate_pair_event._apply_base_influence(
+            intensity="low",
+            relationship=relationship,
+            type_of_change="positive",
+            type_of_interaction=RelType.ROMANCE,
+            chosen_string="test",
+        )
+
+        self.assertEqual(relationship.romance, 0)
+
+    @patch(
+        "scripts.events_module.relationship.generate_pair_event.passes_same_sex_romance_chance",
+        return_value=False,
+    )
+    def test_same_sex_extra_romance_gain_is_blocked(self, _mocked_chance):
+        cat_from = Cat(gender="female")
+        cat_to = Cat(gender="female")
+        relationship = Relationship(cat_from, cat_to)
+        cat_from.relationships[cat_to.ID] = relationship
+        event = TextPoolEvent(
+            id="extra_romance",
+            strings=["test"],
+            relationship_changes=[
+                {
+                    "cats_from": ["m_c"],
+                    "cats_to": ["r_c"],
+                    "mutual": False,
+                    "values": ["romance"],
+                    "amount": 10,
+                }
+            ],
+        )
+
+        generate_pair_event._apply_extra_influence(
+            event=event,
+            involved_cats={"m_c": cat_from, "r_c": cat_to},
+            relationship=relationship,
+            chosen_string="test",
+        )
+
+        self.assertEqual(relationship.romance, 0)
