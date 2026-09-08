@@ -356,7 +356,7 @@ def create_new_cat_block(
     chosen_cat: Optional["Cat"] = None
     # Existing outsiders keep patrols feeling connected, but should be the
     # exception: generate a fresh cat two thirds of the time.
-    if "exists" in attribute_list and randrange(3) == 0:
+    if "exists" in attribute_list:
         existing_outsiders = [
             i
             for i in Cat.all_cats.values()
