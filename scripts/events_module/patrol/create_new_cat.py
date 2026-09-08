@@ -4,6 +4,7 @@ from random import choice, randint, getrandbits, choices, random
 import i18n
 
 from scripts.cat.cats import Cat
+from scripts.cat.pelts import Pelt
 from scripts.cat.constants import INJURIES, ILLNESSES, PERMANENT, BACKSTORIES
 from scripts.cat.enums import CatRank, CatAge, CatGroup, CatStanding, CatSocial
 from scripts.cat.factories.new_cat_factory import NewCatFactory
@@ -363,6 +364,7 @@ def _assign_health(created_cat, option_dict):
         "NOLEFTEAR",
         "NORIGHTEAR",
         "MANLEG",
+        "BLIND",
     ]
 
     created_cat.pelt.scars = tuple(
@@ -386,6 +388,8 @@ def _assign_health(created_cat, option_dict):
                 created_cat.pelt.scars = (*created_cat.pelt.scars, "NOPAW")
             elif condition in ("lost their tail", "born without a tail"):
                 created_cat.pelt.scars = (*created_cat.pelt.scars, "NOTAIL")
+            elif condition in ("blind"):
+                created_cat.pelt.scars = (*created_cat.pelt.scars, "BLIND")
 
     # RANDOM PERM CONDITION ASSIGNMENT
     # chance to give the new cat a permanent condition, higher chance for found kits and litters
@@ -430,7 +434,38 @@ def _assign_health(created_cat, option_dict):
                 created_cat.pelt.scars = (*created_cat.pelt.scars, "NOPAW")
             elif chosen_condition in ("lost their tail", "born without a tail"):
                 created_cat.pelt.scars = (*created_cat.pelt.scars, "NOTAIL")
+            elif chosen_condition == "blind":
+                created_cat.pelt.scars = (*created_cat.pelt.scars, "BLIND")
 
+        if created_cat.pelt.colour == "WHITE" or created_cat.pelt.white_patches == "FULLWHITE":
+            blue_eye_count = int(Pelt.is_blue_eye(created_cat.pelt.eye_colour)) + int(
+                Pelt.is_blue_eye(created_cat.pelt.eye_colour2)
+            )
+
+            if blue_eye_count == 2:
+                # Two blue eyes in white cats carry the highest real-world risk.
+                deaf_chance = max(
+                    1,
+                    int(
+                        constants.CONFIG["cat_generation"]["base_permanent_condition"]
+                        * 0.4
+                    ),
+                )
+                if not random_module.randint(1, deaf_chance):
+                    created_cat.get_permanent_condition("deaf", born_with=True)
+            elif blue_eye_count == 1:
+                # One blue eye most often maps to unilateral/partial deafness.
+                partial_deaf_chance = max(
+                    1,
+                    int(
+                        constants.CONFIG["cat_generation"]["base_permanent_condition"]
+                        * 0.7
+                    ),
+                )
+                if not random_module.randint(1, partial_deaf_chance):
+                    created_cat.get_permanent_condition(
+                        "partial hearing loss", born_with=True
+                    )
 
 def _assign_stats(created_cat, option_dict):
     if option_dict.get("stat"):
