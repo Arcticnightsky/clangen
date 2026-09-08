@@ -348,24 +348,6 @@
             "littleMUSTACHE",
             "littleCHIN"
         ],
-        "HOTTOPIC": [
-            "littleROSINA_REDUCED",
-            "littleSPARKLE",
-            "littleTAIL_MID_RING",
-            "littleTAIL_LOW_RING",
-            "littleTAIL_HIGH_RING",
-            "littleTAILTIP",
-            "littleTAIL_REVERSE_MIN",
-            "littleTAIL_SMALL_LOW",
-            "littleTAIL_UNDER",
-            "littleTEARS_L",
-            "littleLEFTEAR_MID",
-            "littleEYESPOT_R",
-            "littleEYELINER_MIN_L",
-            "midTWO_SPOT_SMALL",
-            "midLEG_FRONT_RIGHT_REVERSE",
-            "midLEG_FRONT_LEFT_REVERSE"
-	],
         "EMO": [
             "littleROSINA_REDUCED",
             "littleDAMIEN_REDUCED",
@@ -541,7 +523,25 @@
             "midCHEST_HIGH",
             "midLEG_BACK_LEFT_FULL",
             "midSADDLE_MIN_REVERSE"
-        ]
+        ],
+        "HOTTOPIC": [
+            "littleROSINA_REDUCED",
+            "littleSPARKLE",
+            "littleTAIL_MID_RING",
+            "littleTAIL_LOW_RING",
+            "littleTAIL_HIGH_RING",
+            "littleTAILTIP",
+            "littleTAIL_REVERSE_MIN",
+            "littleTAIL_SMALL_LOW",
+            "littleTAIL_UNDER",
+            "littleTEARS_L",
+            "littleLEFTEAR_MID",
+            "littleEYESPOT_R",
+            "littleEYELINER_MIN_L",
+            "midTWO_SPOT_SMALL",
+            "midLEG_FRONT_RIGHT_REVERSE",
+            "midLEG_FRONT_LEFT_REVERSE"
+	]
     },
     "mostly": {
         "VAN": [
