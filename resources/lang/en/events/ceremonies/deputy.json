@@ -5,7 +5,7 @@
         "involved_cats": {
             "m_c": {
                 "has_apprentice": {
-                    "former": true
+                    "former": true,
                     "current": false
                 }
             }
@@ -24,7 +24,7 @@
         "involved_cats": {
             "m_c": {
                 "has_apprentice": {
-                    "current": true
+                    "current": true,
                     "former": false
                 }
             }
@@ -42,7 +42,7 @@
         "involved_cats": {
             "m_c": {
                 "has_apprentice": {
-                    "former": true
+                    "former": true,
                     "current": false
                 }
             },
@@ -62,7 +62,7 @@
         "involved_cats": {
             "m_c": {
                 "has_apprentice": {
-                    "current": true
+                    "current": true,
                     "former": false
                 }
             },
@@ -82,7 +82,7 @@
         "involved_cats": {
             "m_c": {
                 "has_apprentice": {
-                    "former": true
+                    "former": true,
                     "current": false
                 }
             },
@@ -110,7 +110,7 @@
         "involved_cats": {
             "m_c": {
                 "has_apprentice": {
-                    "current": true
+                    "current": true,
                     "former": false
                 }
             },
@@ -139,7 +139,7 @@
         "involved_cats": {
             "m_c": {
                 "has_apprentice": {
-                    "former": true
+                    "former": true,
                     "current": false
                 },
                 "stat": {
@@ -161,7 +161,7 @@
         "involved_cats": {
             "m_c": {
                 "has_apprentice": {
-                    "current": true
+                    "current": true,
                     "former": false
                 },
                 "stat": {
@@ -183,7 +183,7 @@
         "involved_cats": {
             "m_c": {
                 "has_apprentice": {
-                    "former": true
+                    "former": true,
                     "current": false
                 }
             }
@@ -198,7 +198,7 @@
         "involved_cats": {
             "m_c": {
                 "has_apprentice": {
-                    "current": true
+                    "current": true,
                     "former": false
                 }
             }
@@ -212,7 +212,7 @@
         "involved_cats": {
             "m_c": {
                 "has_apprentice": {
-                    "former": false
+                    "former": false,
                     "current": false
                 }
             }
@@ -227,7 +227,7 @@
         "involved_cats": {
             "m_c": {
                 "has_apprentice": {
-                    "former": true
+                    "former": true,
                     "current": false
                 }
             },
@@ -246,7 +246,7 @@
         "involved_cats": {
             "m_c": {
                 "has_apprentice": {
-                    "current": true
+                    "current": true,
                     "former": false
                 }
             },
