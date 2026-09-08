@@ -1301,6 +1301,9 @@
             "status": [
                 "any"
             ],
+            "skill": [
+                "-SWIMMER,2"
+            ],
             "dies": true
         },
         "r_c": {
@@ -1323,6 +1326,9 @@
                 "loving",
                 "responsible"
             ],
+            "skill": [
+                "-SWIMMER,2"
+            ],
             "dies": true
         },
         "history": [
@@ -1334,7 +1340,8 @@
                 "death": "This cat drowned alongside a Clanmate."
             }
         ]
-    }, {
+    }, 
+	{
     "event_id": "gen_death_horseplace",
     "location": ["any"],
     "season": ["any"],
@@ -1423,7 +1430,7 @@
         ],
         "outsider": {
             "current_rep": ["any"],
-            "changed": -3
+            "changed": -5
         }
     },
     {
@@ -2938,7 +2945,7 @@
             "war"
         ],
         "frequency": 1,
-        "event_text": "In a battle with o_c_n, r_c's mate m_c is killed. r_c vows the war will never end until o_c_n pays.",
+        "event_text": "In a battle with o_c_n, r_c's mate, m_c, is killed. r_c vows the war will never end until o_c_n pays.",
         "r_c": {
             "status": [
                 "leader"
@@ -4625,10 +4632,10 @@
         "event_text": "m_c grew weak as the days passed and now walks the stars of Silverpelt.",
         "m_c": {
             "age": [
-                "kitten"
+                "kitten", "newborn"
             ],
             "status": [
-                "kitten"
+                "kitten", "newborn"
             ],
             "dies": true
         },
@@ -5559,7 +5566,7 @@
             "leaf-fall"
         ],
         "tags": [],
-        "frequency": 4,
+        "frequency": 2,
         "event_text": "Lightning struck in camp, killing m_c.",
         "m_c": {
             "age": [
@@ -5782,7 +5789,7 @@
             "any"
         ],
         "season": [
-            "any"
+            "-leaf-bare"
         ],
         "tags": [],
         "frequency": 4,
@@ -6090,11 +6097,17 @@
                 "loving",
                 "responsible"
             ],
+            "skill": [
+                "-SWIMMER,2"
+            ],
             "dies": true
         },
         "r_c": {
             "age": [
                 "any"
+            ],
+            "skill": [
+                "-SWIMMER,2"
             ],
             "status": [
                 "any"
@@ -6580,7 +6593,13 @@
                 ],
                 "death": "m_c was brutally attacked and killed by a rogue."
             }
-        ]
+        ],
+        "outsider": {
+            "current_rep": [
+                "any"
+            ],
+            "changed": -3
+        }
     },
     {
         "event_id": "gen_death_dog_anylead2",
@@ -7311,7 +7330,7 @@
                 },
                 "moon_delay": [
                     1,
-                    12
+                    5
                 ],
                 "involved_cats": {
                     "m_c": "r_c",
@@ -7357,7 +7376,7 @@
                 "cats": [
                     "m_c"
                 ],
-                "death": "Curiosity killed m_c."
+                "death": "Curiosity killed this cat, but knowledge and fear brought {PRONOUN/m_c/object} back."
             }
         ]
     },
