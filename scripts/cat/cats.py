@@ -2115,7 +2115,7 @@ class Cat:
         if compat == CatCompatibility.POSITIVE:
             chance += 10
         elif compat == CatCompatibility.NEGATIVE:
-            chance -= 5
+            chance -= 10
 
         # Cat's compatibility with mediator also has an effect on success chance.
         for cat in (cat1, cat2):
