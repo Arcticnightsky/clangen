@@ -325,9 +325,6 @@ class Cat:
     @dead.setter
     def dead(self, die: bool):
         if die:
-            murder_history = self.history.murder
-            primary = self.skills.primary.path if self.skills.primary else None
-            secondary = self.skills.secondary.path if self.skills.secondary else None
             if self.status.group.is_afterlife():
                 print(
                     f"WARNING: Tried to kill {self.name} ID: {self.ID} but this cat is already dead!"
@@ -371,17 +368,10 @@ class Cat:
                 affinity += get_config(
                     "affinity.skill_favor.conflict"
                 ) * cat_skills.get(skill_conflict, 0)
-                # extra check for exiled cats
-                if self.status.is_exiled(CatGroup.PLAYER_CLAN_ID):
-                    afterlife_group = CatGroup.DARK_FOREST
-                    self.history.add_afterlife_acceptance(afterlife_group)
 
                 # afterlife does not like this cat
                 if (
                     affinity < 0
-                    or (murder_history and "is_murderer" in murder_history)
-                    or primary == SkillPath.DARK
-                    or secondary == SkillPath.DARK
                     or (
                         self.status.is_leader
                         and self.personality.trait
@@ -400,12 +390,6 @@ class Cat:
                                 afterlife_group, tyrant_leader_bad=True
                             )
                             self.status.send_to_afterlife(rejected_ID)
-                        elif (
-                            self.status.is_exiled(CatGroup.PLAYER_CLAN_ID)
-                            and self.status.is_outsider
-                        ):
-                            self.history.add_afterlife_acceptance(afterlife_group)
-                            self.status.send_to_afterlife()
                         else:
                             self.history.add_afterlife_acceptance(
                                 afterlife_group, rejected=True
@@ -621,7 +605,9 @@ class Cat:
             )
         self.status.leave_group(new_social_status=new_social_status)
         self.assign_thought()
-
+        if self.status.rank == CatRank.LEADER:
+            self.specsuffix_hidden = True
+        
         for app in self.apprentice.copy():
             app_ob = Cat.fetch_cat(app)
             if app_ob:
