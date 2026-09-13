@@ -113,6 +113,7 @@ def adjust_row(
     row: list[Optional[UIElement]], element: UIElement
 ) -> list[Optional[UIElement]]:
     if not row:  # if row is empty
+        cell_width = max(1, ui_scale_value(10))
         row = [
             None
             for x in range(
@@ -124,7 +125,10 @@ def adjust_row(
             )
         ]
 
-    index = int(element.get_abs_rect().x / ui_scale_value(10))
+    index = int(element.get_abs_rect().x / max(1, ui_scale_value(10)))
+    index = max(0, index)
+    if index >= len(row):
+        row.extend([None] * (index - len(row) + 1))
 
     # Clamping to suitable values to avoid going out of bounds
     index = max(0, min(index, len(row) - 1))

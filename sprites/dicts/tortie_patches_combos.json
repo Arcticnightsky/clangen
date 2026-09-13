@@ -205,5 +205,9 @@
         "HALF",
         "HEARTBEAT",
         "GRUMPYFACE"
+    ],
+    "TORTICO": [
+        "BRINDLE",
+        "PACMAN"
     ]
 }
