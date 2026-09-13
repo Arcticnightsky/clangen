@@ -173,7 +173,7 @@
         "strings": [
             "Shames {PRONOUN/m_c/self} for falling for that Twoleg trap...",
             "Feels awkward about having that nick in {PRONOUN/m_c/poss} ear",
-            "Wonders why the Twolegs set {PRONOUN/m_c/object} free after capturing {PRONOUN/m_c/subject}",
+            "Wonders why the Twolegs set {PRONOUN/m_c/object} free after capturing {PRONOUN/m_c/object}",
             "Is glad that the Twolegs set {PRONOUN/m_c/object} free after being taken to the cutter",
             "Had to flee {PRONOUN/m_c/poss} territory after being challenged because {PRONOUN/m_c/subject} had no urge to fight",
             "Shames {PRONOUN/m_c/self} for not being able to escape those Twolegs sooner..."
