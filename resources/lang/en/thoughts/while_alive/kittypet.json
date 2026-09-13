@@ -185,5 +185,24 @@
                 }
             }
         }
+    },
+  {
+        "event_id": "kittypet_fixed",
+        "strings": [
+            "Wonders why {PRONOUN/m_c/subject} felt so different after that one appointment to the vet",
+            "Frowns after not being able to scent-mark the house as {PRONOUN/m_c/poss} territory",
+            "Cringes whenever {PRONOUN/m_c/subject} pees in the litterbox",
+            "Enjoys how calm and carefree {PRONOUN/m_c/subject} has been after {PRONOUN/m_c/poss} cathood was taken away"
+        ],
+        "involved_cats": {
+            "m_c": {
+                "health": {
+                    "condition": [
+                        "spayed",
+                        "neutered"
+                    ]
+                }
+            }
+        }
     }
 ]
