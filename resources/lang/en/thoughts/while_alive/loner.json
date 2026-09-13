@@ -160,7 +160,7 @@
         "strings": [
             "Frowns deeply at the first frost",
             "Is starting to feel sick",
-            "is trying to hunt as much as {PRONOUN/m_c/subject} can beore leaf-bare",
+            "is trying to hunt as much as {PRONOUN/m_c/subject} can before leaf-bare",
             "Is trying to find shelter before leaf-bare"
         ]
     },
@@ -175,7 +175,8 @@
             "Feels jealous of how lucky kittypets are to escape the cold",
             "Is starting to feel sick",
             "Feels so cold and so lonely...",
-            "Came down with a fever that went away in a couple of day",
+            "Admires the colorful lights on Twoleg's dens in the area",
+            "Came down with a fever that went away after a couple of days",
             "Wishes {PRONOUN/m_c/subject} had a medicine cat to cool down {PRONOUN/m_c/poss} fever",
             "Was caught in the snow fall",
             "Is glad that {PRONOUN/m_c/subject} was able to find shelter this leaf-bare",
