@@ -232,8 +232,8 @@ dev_tools = true
     # intial chance of breakup
     [mates.breakup.initial_chance]
       threshold = 120
-      default_chance = 30
-      positive_compatibility = 5
+      default_chance = 20
+      positive_compatibility = 10
       negative_compatibility = -10
 
     # default weighting for type of breakup
