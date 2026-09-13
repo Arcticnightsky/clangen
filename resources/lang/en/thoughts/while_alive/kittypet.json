@@ -30,6 +30,7 @@
             "Is sleeping under the porch",
             "Is sleeping in a loaf position on the bed",
             "Is watching the Clan cats from afar",
+            "Is pretending to be a Clan cat",
             "Is meowing to be let in",
             "Is listening to frightening stories about wild cats",
             "Is meowing at {PRONOUN/m_c/poss} housefolk",
@@ -43,6 +44,7 @@
             "Lays in {PRONOUN/m_c/poss} bed",
             "Got stuck under the couch",
             "Is trying to bark at a dog",
+            "Is spending some quality time with {PRONOUN/m_c/poss} housefolk",
             "Chases a mysterious red dot",
             "Has been left in a room with the door closed",
             "Managed to escape {PRONOUN/m_c/poss} den",
@@ -64,6 +66,11 @@
             "Is throwing a hissy fit at the vet",
             "Doesn't want to go to the vet",
             "Is hiding under the bed",
+            "Is sleeping with {PRONOUN/m_c/poss} housefolk on the bed",
+            "Is snoozing on {PRONOUN/m_c/poss} housefolk's lap",
+            "Is all cuddled up and cozy next to {PRONOUN/m_c/poss} housefolk",
+            "Is getting pampered by {PRONOUN/m_c/poss} housefolk",
+            "Received a multitude of hugs, cuddles, and kisses from {PRONOUN/m_c/poss} housefolk",
             "Is lying about whether {PRONOUN/m_c/subject} {VERB/m_c/have/has} been fed",
             "Is stuck with a cone of shame",
             "Is showing {PRONOUN/m_c/poss} belly to {PRONOUN/m_c/poss} housefolk... but it's a trap",
@@ -80,7 +87,84 @@
             "Bit {PRONOUN/m_c/poss} housefolk",
             "Scratched {PRONOUN/m_c/poss} housefolk",
             "Is posing for {PRONOUN/m_c/poss} housefolk",
-            "Is kneeding on {PRONOUN/m_c/poss} housefolk"
+            "Is kneeding on {PRONOUN/m_c/poss} housefolk",
+            "Is watching some cats fighting outside from the safety of {PRONOUN/m_c/poss} house",
+            "Is watching other housefolk go about their day from the window",
+            "Is planning an escape from the house",
+            "Is napping in {PRONOUN/m_c/poss} housefolk's lap",
+            "Is napping in the fresh laundry",
+            "Is scratching {PRONOUN/m_c/poss} cat tree",
+            "Is napping in {PRONOUN/m_c/poss} cat tower",
+            "Is grooming {PRONOUN/m_c/poss} housefolk",
+            "Is welcoming {PRONOUN/m_c/poss} housefolk back home",
+            "Got stuck in a plastic bag and is freaking out",
+            "Smells an odd scent on {PRONOUN/m_c/poss} housefolk and is very curious",
+            "Smells another cat on {PRONOUN/m_c/poss} housefolk",
+            "Smells a cat {PRONOUN/m_c/subject} {VERB/m_c/hate/hates} on {PRONOUN/m_c/poss} housefolk and is not happy",
+            "Is in trouble for playing with a valuable trinket",
+            "Is playing with {PRONOUN/m_c/poss} housefolk's charger",
+            "Is stepping on {PRONOUN/m_c/poss} housefolk's keyboard",
+            "Is meowing for treats",
+            "Is sleeping on important paperwork",
+            "Wonders where {PRONOUN/m_c/poss} housefolk takes {PRONOUN/m_c/poss} litter",
+            "Is not a fan of the new toy {PRONOUN/m_c/poss} housefolk got {PRONOUN/m_c/object}",
+            "Really likes the new toy {PRONOUN/m_c/poss} housefolk brought home for {PRONOUN/m_c/object}",
+            "Is running from {PRONOUN/m_c/poss} housefolk after eating something off the ground",
+            "Is napping in a box",
+            "Wants to be involved in whatever {PRONOUN/m_c/poss} housefolk is doing",
+            "Is kneading the day away",
+            "Is making biscuits",
+            "Is bringing a live bird back home for {PRONOUN/m_c/poss} housefolk",
+            "Is being pet by {PRONOUN/m_c/poss} housefolk",
+            "Is getting all the best spots scratched by {PRONOUN/m_c/poss} housefolk",
+            "Is sleeping in {PRONOUN/m_c/poss} housefolk's chair right after they got up",
+            "Is staring at nothing, confusing {PRONOUN/m_c/poss} housefolk",
+            "Is not a fan of the new type of food {PRONOUN/m_c/poss} housefolk brought home for {PRONOUN/m_c/object}",
+            "Is meowing for food despite {PRONOUN/m_c/poss} bowl still being half full",
+            "Is rubbing {PRONOUN/m_c/poss} scent glands on everything",
+            "Is having {PRONOUN/m_c/poss} nails trimmed",
+            "Is clawing up the furniture",
+            "Is sleeping in {PRONOUN/m_c/poss} favorite spot",
+            "Is being destructive for attention",
+            "Is sneaking bites of {PRONOUN/m_c/poss} housefolk's houseplant",
+            "Is being praised for catching a mouse that got in the house",
+            "Is waking {PRONOUN/m_c/poss} housefolk up",
+            "Is meowing to be let in a closed room",
+            "Is meowing to be let out of a closed room",
+            "Is taunting the neighbor's dog",
+            "Is cozying up to the housedog",
+            "Is play fighting with the housedog",
+            "Is grooming the housedog",
+            "Is faking an injury for treats",
+            "Is faking an injury for attention",
+            "Is on the counter despite {PRONOUN/m_c/poss} housefolk's wishes",
+            "Is puffing {PRONOUN/m_c/poss} fur up at {PRONOUN/m_c/poss} reflection in a mirror",
+            "Is making dirt in {PRONOUN/m_c/poss} housefolk's houseplant",
+            "Is clawing up the curtains",
+            "Is lounging the day away without a care in the world",
+            "Misplaced {PRONOUN/m_c/poss} favorite toy",
+            "Is up in {PRONOUN/m_c/poss} housefolk's face",
+            "Feels bad about accidentally scratching {PRONOUN/m_c/poss} housefolk",
+            "Is getting along great with {PRONOUN/m_c/poss} housefolk's guest",
+            "Is not a fan of {PRONOUN/m_c/poss} housefolk's guest",
+            "Is following {PRONOUN/m_c/poss} housefolk no matter where they go",
+            "Is in trouble for getting in the trash",
+            "Is waiting for {PRONOUN/m_c/poss} housefolk to get home",
+            "Is drinking water out of {PRONOUN/m_c/poss} housefolk's forgotten glass",
+            "Is marking {PRONOUN/m_c/poss} territory all over the house",
+            "Is not a fan of {PRONOUN/m_c/poss} housefolk's new scented candle",
+            "Is trying to understand {PRONOUN/m_c/poss} housefolk's new trinket",
+            "Is trying to understand {PRONOUN/m_c/poss} housefolk's new appliance",
+            "Is getting brushed by {PRONOUN/m_c/poss} housefolk",
+            "Sleeps on a blanket softer then a cloud",
+            "Is enjoying the view from the top of the cat tree",
+            "Is sniffing {PRONOUN/m_c/poss} housefolk's shoes",
+            "Hears a mouse in the house but can't find it anywhere",
+            "Is on a walk with {PRONOUN/m_c/poss} housefolk",
+            "Is watching the TV",
+            "Is watching cat TV",
+            "Is running from the vacuum",
+            "Is getting in {PRONOUN/m_c/poss} housefolk's way while they're trying to clean"
         ]
     },
     {
@@ -162,6 +246,19 @@
         }
     },
     {
+        "event_id": "kittypet_greenleaf_leaf_bare",
+        "season": [
+            "greenleaf",
+            "leaf-bare"
+        ],
+        "strings": [
+            "Is thankful for the air conditioning",
+            "Hopes the weather isn't too hard on the cats without housefolk",
+            "Meows to go outside before feeling the temperature",
+            "Is inviting a cat to take refuge from the elements in {PRONOUN/m_c/poss} home"
+        ]
+    },
+    {
         "event_id": "kittypet_shameless_thoughts",
         "strings": [
             "Stole food the second {PRONOUN/m_c/poss} housefolk turned their head",
@@ -174,6 +271,99 @@
                 "stat": {
                     "trait": [
                         "shameless"
+                    ]
+                }
+            }
+        }
+    },
+    {
+        "event_id": "kittypet_leaffall",
+        "season": [
+            "leaf-fall"
+        ],
+        "strings": [
+            "Is cozied up by the fireplace",
+            "Is looking out the window, seeing all the pretty colors from the nearby trees",
+            "Is watching {PRONOUN/m_c/poss} housefolk rake leaves outside",
+            "Watches {PRONOUN/m_c/poss} housefolk decorate the yard with very scary decorations",
+            "Is eyeing a big, fat, roasted turkey on the table",
+            "Is starting to feel sick",
+            "Snuck out of {PRONOUN/m_c/poss} Twoleg den to enjoy the piles of leaves outside",
+            "Caught a chill from being outside and went back inside the Twoleg den",
+            "Is grateful for the warmth inside of the Twoleg den"
+        ]
+    },
+    {
+        "event_id": "kittypet_leafbare",
+        "season": [
+            "leaf-bare"
+        ],
+        "strings": [
+            "Is cozied up by the fireplace",
+            "Is looking out the window, watching snow fall outside",
+            "Is watching {PRONOUN/m_c/poss} housefolk shovel snow outside",
+            "Is starting to feel sick",
+            "Wonders how loners, Clan cats, and rogues are able deal with being outside in the cold all leaf-bare",
+            "Feels lucky about being a kittypet and not having to worry much about the cold outside",
+            "Snuck out of {PRONOUN/m_c/poss} Twoleg den to enjoy the snow outside",
+            "Watches {PRONOUN/m_c/poss} housefolk decorate a pine tree with pretty string lights",
+            "Watches {PRONOUN/m_c/poss} housefolk decorate outside the den with pretty string lights",
+            "Caught a chill from being outside and went back inside the Twoleg den",
+            "Is grateful for the warmth inside the Twoleg den"
+        ]
+    },
+    {
+        "event_id": "kittypet_newleaf",
+        "season": [
+            "newleaf"
+        ],
+        "strings": [
+            "Is looking out the window, seeing all the pretty colors from the nearby flowers",
+            "Is watching {PRONOUN/m_c/poss} housefolk plant flowers outside",
+            "Thought {PRONOUN/m_c/subject} saw a mysterious white rabbit leaving colorful eggs in the garden...",
+            "Goes outside for the first time since leaf-bare",
+            "Watches the newleaf rain outside",
+            "Is enjoying the garden with {PRONOUN/m_c/poss} housefolk",
+            "Is basking in the newleaf sunrays shining through the window",
+            "Is grateful for the coolness inside of the Twoleg den"
+        ]
+    },
+    {
+        "event_id": "kittypet_greenleaf",
+        "season": [
+            "greenleaf"
+        ],
+        "strings": [
+            "Caught a wave of heat after stepping outside and went back inside the Twoleg den",
+            "Wonders how loners, Clan cats, and rogues are able deal with being outside in the heat all greenleaf",
+            "Watches {PRONOUN/m_c/poss} housefolk grill tasty-smelling food outside",
+            "Watches it rain outside after days of dry heat",
+            "Is frightened by all the bright colors and loud booming noises {PRONOUN/m_c/subject} saw tonight",
+            "Admires all the fireflies in the garden",
+            "Is trying to avoid getting sprayed by water in the garden as the housefolk's kits play",
+            "Is enjoying the garden with {PRONOUN/m_c/poss} housefolk",
+            "Thinks it's too hot to even try going outside today",
+            "Feels lucky about being a kittypet and not having to worry much about the heat outside",
+            "Is being watched by a cat-sitter while {PRONOUN/m_c/poss} housefolk are away for the moon",
+            "Can't wait to explore outside more now that {PRONOUN/m_c/poss} housefolk are away for the moon",
+            "Is basking in the greenleaf sunrays shining through the window",
+            "Is grateful for the coolness inside of the Twoleg den"
+        ]
+    },
+  {
+        "event_id": "kittypet_fixed",
+        "strings": [
+            "Wonders why {PRONOUN/m_c/subject} felt so different after that one appointment to the vet",
+            "Frowns after not being able to scent-mark {PRONOUN/m_c/poss} housefolk's den as {PRONOUN/m_c/poss} territory",
+            "Cringes whenever {PRONOUN/m_c/subject} pees in the litterbox",
+            "Enjoys how calm and carefree {PRONOUN/m_c/subject} has been after {PRONOUN/m_c/poss} cathood was taken away"
+        ],
+        "involved_cats": {
+            "m_c": {
+                "health": {
+                    "condition": [
+                        "spayed",
+                        "neutered"
                     ]
                 }
             }
