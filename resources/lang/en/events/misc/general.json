@@ -17988,6 +17988,16 @@
                     "cats_from": "cat_from appreciated cat_to's thoughts about prey movement in the terrain."
                 }
             }
-        ]
+        ],
+    "supplies": [
+      {
+        "type": "freshkill",
+        "trigger": [
+            "low",
+            "adequate"
+        ],
+        "adjust": "increase_40"
+      }
+    ]
     }
 ]
