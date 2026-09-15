@@ -749,7 +749,6 @@ def change_affinity(self, starclan_change: int = 0, dark_forest_change: int = 0)
     :param dark_forest_change: The amount to change dark forest affinity by
     """
     modifier = get_config("affinity.base_compatibility_multiplier")
-    cat_skills = self.skills.get_skill_dict()
 
     if starclan_change:
         compatibility = game.starclan.get_compatibility(self)
@@ -759,11 +758,14 @@ def change_affinity(self, starclan_change: int = 0, dark_forest_change: int = 0)
         elif compatibility == CatCompatibility.NEGATIVE:
             starclan_change -= round(starclan_change * modifier)
 
-        star_skill = cat_skills.get(SkillPath.STAR, 0)
-        dark_skill = cat_skills.get(SkillPath.DARK, 0)
+        if not self.status.is_outsider:
+            cat_skills = self.skills.get_skill_dict()
 
-        starclan_change += get_config("affinity.skill_favor.match") * star_skill
-        starclan_change += get_config("affinity.skill_favor.conflict") * dark_skill
+            star_skill = cat_skills.get(SkillPath.STAR, 0)
+            dark_skill = cat_skills.get(SkillPath.DARK, 0)
+
+            starclan_change += get_config("affinity.skill_favor.match") * star_skill
+            starclan_change += get_config("affinity.skill_favor.conflict") * dark_skill
 
     if dark_forest_change:
         compatibility = game.dark_forest.get_compatibility(self)
@@ -773,11 +775,14 @@ def change_affinity(self, starclan_change: int = 0, dark_forest_change: int = 0)
         elif compatibility == CatCompatibility.NEGATIVE:
             dark_forest_change -= round(dark_forest_change * modifier)
 
-        dark_skill = cat_skills.get(SkillPath.DARK, 0)
-        star_skill = cat_skills.get(SkillPath.STAR, 0)
+        if not self.status.is_outsider:
+            cat_skills = self.skills.get_skill_dict()
 
-        dark_forest_change += get_config("affinity.skill_favor.match") * dark_skill
-        dark_forest_change += get_config("affinity.skill_favor.conflict") * star_skill
+            dark_skill = cat_skills.get(SkillPath.DARK, 0)
+            star_skill = cat_skills.get(SkillPath.STAR, 0)
+
+            dark_forest_change += get_config("affinity.skill_favor.match") * dark_skill
+            dark_forest_change += get_config("affinity.skill_favor.conflict") * star_skill
 
     self.starclan_affinity += starclan_change
     self.dark_forest_affinity += dark_forest_change
