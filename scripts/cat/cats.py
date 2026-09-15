@@ -4,6 +4,7 @@ Contains the Cat and Personality classes
 
 from __future__ import annotations
 
+import random as random_module
 import bisect
 import itertools
 import os.path
@@ -23,6 +24,7 @@ from scripts.cat.enums import (
     CatGroup,
     CatCompatibility,
     CatThought,
+    CatStanding,
 )
 from scripts.cat.factories.typed_dicts import (
     MentorshipDict,
@@ -32,6 +34,15 @@ from scripts.cat.factories.typed_dicts import (
     GenderDict,
 )
 from scripts.cat.history import History
+from scripts.cat.microservices.conditions import (
+    get_ill,
+    get_injured,
+    get_permanent_condition,
+    get_sterilization_condition_name,
+    apply_sterilization_condition,
+    handle_pending_neuter,
+    backdate_sterilization_history,
+)
 from scripts.cat.microservices.grief import grief
 from scripts.cat.names import Name
 from scripts.cat.pelts import Pelt
@@ -232,6 +243,8 @@ class Cat:
         self.experience = experience
         self.birth_cooldown = birth_cooldown
         self.specsuffix_hidden = specsuffix_hidden  # kill this ASAP
+        self.pending_neuter = kwargs.get("pending_neuter", False)
+        self.tnr_victim = kwargs.get("tnr_victim", False)
 
         # other misc
         self.name: Optional[Name] = None
@@ -331,7 +344,6 @@ class Cat:
                     is_kit=True,
                 )
             else:
-                cat_skills = self.skills.get_skill_dict()
                 if cat_default_afterlife_id == CatGroup.STARCLAN_ID:
                     affinity = self.starclan_affinity
                     skill_match = SkillPath.STAR
@@ -339,35 +351,55 @@ class Cat:
 
                     afterlife_group = CatGroup.STARCLAN
                     rejected_ID = CatGroup.DARK_FOREST_ID
-                else:
+                elif cat_default_afterlife_id == CatGroup.DARK_FOREST_ID:
                     affinity = self.dark_forest_affinity
                     skill_match = SkillPath.DARK
                     skill_conflict = SkillPath.STAR
 
                     afterlife_group = CatGroup.DARK_FOREST
                     rejected_ID = CatGroup.STARCLAN_ID
-
-                # scales with skill tier
-                affinity += get_config("affinity.skill_favor.match") * cat_skills.get(
-                    skill_match, 0
-                )
-                affinity += get_config(
-                    "affinity.skill_favor.conflict"
-                ) * cat_skills.get(skill_conflict, 0)
+                else:
+                    return
 
                 # afterlife does not like this cat
-                if affinity < 0:
+                if (
+                    affinity < 0
+                    or (
+                        self.status.is_leader
+                        and self.personality.trait
+                        in ["bloodthirsty", "vengeful", "fierce"]
+                    )
+                ):
                     # might send them to the opposite afterlife instead
-                    if random() < abs(affinity / 100):
-                        self.history.add_afterlife_acceptance(
-                            afterlife_group, rejected=True
-                        )
-                        self.status.send_to_afterlife(rejected_ID)
+                    if not random_module.randint(0, 1) == 0:
+                        if self.status.is_leader and self.personality.trait in [
+                            "bloodthirsty",
+                            "vengeful",
+                            "fierce",
+                        ]:
+                            afterlife_group = CatGroup.DARK_FOREST
+                            self.history.add_afterlife_acceptance(
+                                afterlife_group, tyrant_leader_bad=True
+                            )
+                            self.status.send_to_afterlife(rejected_ID)
+                        else:
+                            self.history.add_afterlife_acceptance(
+                                afterlife_group, rejected=True
+                            )
+                            self.status.send_to_afterlife(rejected_ID)
                         return
                     # fine, they can go to afterlife, but some cats don't like it
                     self.history.add_afterlife_acceptance(
                         afterlife_group, contentious=True
                     )
+                    if self.status.is_leader and self.personality.trait in [
+                        "bloodthirsty",
+                        "vengeful",
+                        "fierce",
+                    ]:
+                        self.history.add_afterlife_acceptance(
+                            afterlife_group, tyrant_leader_ok=True
+                        )
                 # afterlife thinks this cat is ok
                 else:
                     self.history.add_afterlife_acceptance(afterlife_group)
@@ -554,6 +586,8 @@ class Cat:
             if fetched_cat:
                 fetched_cat.update_mentor()
         self.update_mentor()
+        if self.status.rank == CatRank.LEADER:
+            self.specsuffix_hidden = True
 
     def leave_clan(self, new_social_status: CatSocial):
         """Removes cat from the Clan willingly. Makes status changes and removes apprentices."""
@@ -563,7 +597,9 @@ class Cat:
             )
         self.status.leave_group(new_social_status=new_social_status)
         self.assign_thought()
-
+        if self.status.rank == CatRank.LEADER:
+            self.specsuffix_hidden = True
+        
         for app in self.apprentice.copy():
             app_ob = Cat.fetch_cat(app)
             if app_ob:
@@ -705,7 +741,10 @@ class Cat:
 
     def change_affinity(self, starclan_change: int = 0, dark_forest_change: int = 0):
         """
-        Changes the starclan and dark forest affinity of the cat; applying additional modifiers based on the closeness of the cat's personality facets to the facets of the respective afterlife
+        Changes the starclan and dark forest affinity of the cat; applying additional
+        modifiers based on the closeness of the cat's personality facets to the facets
+        of the respective afterlife, as well as their afterlife connection skills.
+
         :param starclan_change: The amount to change starclan affinity by
         :param dark_forest_change: The amount to change dark forest affinity by
         """
@@ -719,6 +758,15 @@ class Cat:
             elif compatibility == CatCompatibility.NEGATIVE:
                 starclan_change -= round(starclan_change * modifier)
 
+            if not self.status.is_outsider:
+                cat_skills = self.skills.get_skill_dict()
+
+                star_skill = cat_skills.get(SkillPath.STAR, 0)
+                dark_skill = cat_skills.get(SkillPath.DARK, 0)
+
+                starclan_change += get_config("affinity.skill_favor.match") * star_skill
+                starclan_change += get_config("affinity.skill_favor.conflict") * dark_skill
+
         if dark_forest_change:
             compatibility = game.dark_forest.get_compatibility(self)
 
@@ -726,6 +774,15 @@ class Cat:
                 dark_forest_change += round(dark_forest_change * modifier)
             elif compatibility == CatCompatibility.NEGATIVE:
                 dark_forest_change -= round(dark_forest_change * modifier)
+
+            if not self.status.is_outsider:
+                cat_skills = self.skills.get_skill_dict()
+
+                dark_skill = cat_skills.get(SkillPath.DARK, 0)
+                star_skill = cat_skills.get(SkillPath.STAR, 0)
+
+                dark_forest_change += get_config("affinity.skill_favor.match") * dark_skill
+                dark_forest_change += get_config("affinity.skill_favor.conflict") * star_skill
 
         self.starclan_affinity += starclan_change
         self.dark_forest_affinity += dark_forest_change
@@ -893,9 +950,14 @@ class Cat:
         """Create a leader ceremony and add it to the history"""
 
         load_leader_ceremonies()
+        primary = self.skills.primary.path if self.skills.primary else None
+        secondary = self.skills.secondary.path if self.skills.secondary else None
 
         # determine which dict we're pulling from
         if game.clan.instructor.status.group == CatGroup.DARK_FOREST:
+            starclan = False
+            ceremony_dict: Dict = LEAD_CEREMONY_DF
+        elif primary == SkillPath.DARK or secondary == SkillPath.DARK:
             starclan = False
             ceremony_dict: Dict = LEAD_CEREMONY_DF
         else:
@@ -1223,6 +1285,7 @@ class Cat:
         """Handles a moon skip for an alive cat."""
         old_age = self.age
         self.moons += 1
+        self.handle_pending_neuter()
         if self.moons == 1 and self.status.rank == CatRank.NEWBORN:
             self.status._change_rank(CatRank.KITTEN)
 
@@ -1245,6 +1308,47 @@ class Cat:
 
         if self.status.rank.is_any_apprentice_rank():
             self.update_mentor()
+
+    # These condition helpers live in the conditions microservice, but are part
+    # of Cat's public API.  Keep method wrappers here so callers can safely use
+    # the same ``cat.get_*`` interface as the rest of the condition code.
+    def get_ill(
+        self, illness_name, event_triggered=False, lethal=True, severity="default"
+    ):
+        return get_ill(self, illness_name, event_triggered, lethal, severity)
+
+    def get_injured(
+        self,
+        name,
+        event_triggered=False,
+        lethal=True,
+        potential_scars=None,
+        severity="default",
+    ):
+        return get_injured(
+            self, name, event_triggered, lethal, potential_scars, severity
+        )
+
+    def get_permanent_condition(self, name, born_with=False, event_triggered=False):
+        return get_permanent_condition(self, name, born_with, event_triggered)
+
+    def get_sterilization_condition_name(self):
+        return get_sterilization_condition_name(self)
+
+    def apply_sterilization_condition(
+        self, from_twolegs: bool = False, adjust_personality: bool = False
+    ) -> bool:
+        return apply_sterilization_condition(self, from_twolegs, adjust_personality)
+
+    def handle_pending_neuter(self):
+        return handle_pending_neuter(self)
+
+    def backdate_sterilization_history(self, social_group: CatSocial):
+        return backdate_sterilization_history(self, social_group)
+
+    def create_one_relationship(self, other_cat: Cat):
+        """Create this cat's directional relationship to another cat."""
+        return create_one_relationship(self, other_cat)
 
     def assign_thought(self, thought_type: CatThought = None):
         """
@@ -1421,6 +1525,10 @@ class Cat:
         """Check if the cat is the parent of the other cat."""
         return inheritance_db.is_parent(self.ID, other_cat.ID)
 
+    def is_adoptive_parent(self, other_cat: Cat):
+        """Check if the cat is the adoptive parent of the other cat."""
+        return inheritance_db.is_adoptive_parent(self.ID, other_cat.ID)
+
     def is_sibling(self, other_cat: Cat):
         """Check if the cats are siblings."""
         return inheritance_db.is_sibling(self.ID, other_cat.ID)
@@ -1430,6 +1538,14 @@ class Cat:
         if not self.is_sibling(other_cat):
             return False
         return inheritance_db.is_littermate(self.ID, other_cat.ID)
+
+    def is_half_sibling(self, other_cat: Cat):
+        """Check if the cats are half siblings."""
+        return inheritance_db.is_half_sibling(self.ID, other_cat.ID)
+
+    def is_adoptive_sibling(self, other_cat: Cat):
+        """Check if the cats are adoptive siblings."""
+        return inheritance_db.is_adoptive_sibling(self.ID, other_cat.ID)
 
     def is_uncle_aunt(self, other_cat: Cat):
         """Check if the cats are related as uncle/aunt and niece/nephew."""
@@ -1591,6 +1707,8 @@ class Cat:
             not in [CatRank.LEADER, CatRank.DEPUTY, CatRank.WARRIOR]
         ):
             return False
+        if self.status.rank == CatRank.APPRENTICE and potential_mentor.moons < 24:
+            return False
         if (
             self.status.rank == CatRank.MEDIATOR_APPRENTICE
             and potential_mentor.status.rank != CatRank.MEDIATOR
@@ -1626,6 +1744,58 @@ class Cat:
         if self.ID not in mentor_cat.apprentice:
             mentor_cat.apprentice.append(self.ID)
 
+    def __build_mentor_rel_log(self) -> str:
+        rel_log_key = choice(
+            [
+                "relationships.mentor_rel_log_1",
+                "relationships.mentor_rel_log_2",
+            ]
+        )
+        return i18n.t(rel_log_key)
+
+    def __add_mentor_relationship_effects(self):
+        """Adds small relationship gains and rel logs for newly paired apprentices and mentors."""
+        mentor_cat = Cat.fetch_cat(self.mentor)
+        if not mentor_cat:
+            return
+
+        rel_log = event_text_adjust(
+            Cat,
+            self.__build_mentor_rel_log(),
+            main_cat=self,
+            random_cat=mentor_cat,
+        )
+
+        if mentor_cat.ID not in self.relationships:
+            self.create_one_relationship(mentor_cat)
+        if self.ID not in mentor_cat.relationships:
+            mentor_cat.create_one_relationship(self)
+
+        app_relationship = self.relationships[mentor_cat.ID]
+        mentor_relationship = mentor_cat.relationships[self.ID]
+
+        app_relationship.like += 5
+        app_relationship.trust += 5
+        app_relationship.log.append(
+            i18n.t(
+                "relationships.age_postscript",
+                text=rel_log,
+                name=mentor_cat.name,
+                count=mentor_cat.moons,
+            )
+        )
+
+        mentor_relationship.like += 5
+        mentor_relationship.respect += 5
+        mentor_relationship.log.append(
+            i18n.t(
+                "relationships.age_postscript",
+                text=rel_log,
+                name=self.name,
+                count=self.moons,
+            )
+        )
+
     def update_mentor(self, new_mentor: Any = None):
         """Takes mentor's ID as argument, mentor could just be set via this function."""
         # No !!
@@ -1642,10 +1812,14 @@ class Cat:
             self.__remove_mentor()
             return
 
+        previous_mentor = self.mentor
+        mentor_changed = False
+
         # If eligible, cat should get a mentor.
         if new_mentor:
             self.__remove_mentor()
             self.__add_mentor(new_mentor)
+            mentor_changed = self.mentor != previous_mentor
 
         # Check if current mentor is valid
         if self.mentor:
@@ -1657,12 +1831,15 @@ class Cat:
 
         if get_clan_setting("assign_mentors"):
             self.assign_random_mentor()
-
+            
     def assign_random_mentor(self):
         # Need to pick a random mentor if not specified
 
-        new_mentor = None
+        previous_mentor = self.mentor
+        mentor_changed = False
+
         if not self.mentor:
+            selected_mentor = None
             potential_mentors = []
             priority_mentors = []
             for cat in self.all_cats.values():
@@ -1672,11 +1849,15 @@ class Cat:
                         priority_mentors.append(cat)
             # First try for a cat who currently has no apprentices and is working
             if priority_mentors:  # length of list > 0
-                new_mentor = choice(priority_mentors)
+                selected_mentor = choice(priority_mentors)
             elif potential_mentors:  # length of list > 0
-                new_mentor = choice(potential_mentors)
-            if new_mentor:
-                self.__add_mentor(new_mentor.ID)
+                selected_mentor = choice(potential_mentors)
+            if selected_mentor:
+                self.__add_mentor(selected_mentor.ID)
+                mentor_changed = self.mentor != previous_mentor
+
+        if mentor_changed and self.mentor:
+            self.__add_mentor_relationship_effects()
 
     # ---------------------------------------------------------------------------- #
     #                                 relationships                                #
@@ -1947,7 +2128,7 @@ class Cat:
         if compat == CatCompatibility.POSITIVE:
             chance += 10
         elif compat == CatCompatibility.NEGATIVE:
-            chance -= 5
+            chance -= 10
 
         # Cat's compatibility with mediator also has an effect on success chance.
         for cat in (cat1, cat2):
@@ -2186,6 +2367,14 @@ class Cat:
     # ---------------------------------------------------------------------------- #
 
     @staticmethod
+    def name_sort_key(cat: Cat):
+        return cat.name.prefix.lower()
+
+    @staticmethod
+    def reverse_name_sort_key(cat: Cat):
+        return tuple(-ord(char) for char in cat.name.prefix.lower()) + (0,)
+
+    @staticmethod
     def sort_cats(given_list=None):
         # disable unnecessary lambda in this function
         # pylint: disable=unnecessary-lambda
@@ -2211,9 +2400,9 @@ class Cat:
         elif sort_type == "death":
             given_list.sort(key=lambda x: -1 * int(x.dead_for))
         elif sort_type == "name":
-            given_list.sort(key=lambda x: x.name.prefix.lower())
+            given_list.sort(key=lambda x: Cat.name_sort_key(x))
         elif sort_type == "reverse_name":
-            given_list.sort(key=lambda x: x.name.prefix.lower(), reverse=True)
+            given_list.sort(key=lambda x: Cat.name_sort_key(x), reverse=True)
 
         return
 
@@ -2247,10 +2436,10 @@ class Cat:
             elif sort_type == "death":
                 bisect.insort(Cat.all_cats_list, c, key=lambda x: -1 * int(x.dead_for))
             elif sort_type == "name":
-                bisect.insort(Cat.all_cats_list, c, key=lambda x: int(x.name.prefix))
+                bisect.insort(Cat.all_cats_list, c, key=lambda x: Cat.name_sort_key(x))
             elif sort_type == "reverse_name":
                 bisect.insort(
-                    Cat.all_cats_list, c, key=lambda x: -1 * int(x.name.prefix)
+                    Cat.all_cats_list, c, key=lambda x: Cat.reverse_name_sort_key(x)
                 )
         except (TypeError, NameError):
             # If you are using python 3.8, key is not a supported parameter into insort. Therefore, we'll need to
@@ -2466,6 +2655,8 @@ class Cat:
                 "no_kits": self.no_kits,
                 "no_retire": self.no_retire,
                 "no_mates": self.no_mates,
+                "pending_neuter": self.pending_neuter,
+                "tnr_victim": self.tnr_victim,
                 "pelt_name": self.pelt.name,
                 "pelt_color": self.pelt.colour,
                 "pelt_length": self.pelt.length,

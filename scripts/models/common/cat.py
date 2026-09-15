@@ -9,6 +9,7 @@ from pydantic import RootModel, StringConstraints
 class CatEnum(Enum):
     m_c = "m_c"
     r_c = "r_c"
+    mur_c = "mur_c"
 
 
 class Cat(RootModel):
