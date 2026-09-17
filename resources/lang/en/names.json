@@ -265,7 +265,7 @@
     "MALLOW": [
     "Antler", "Bear", "Bittern", "Bluff", "Brown", "Burdock", "Buzzard", "Cougar", "Crag", "Cricket", "Dark", "Deer", "Dust", "Falcon", "Fallow", "Fawn", "Ferret",
     "Grouse", "Moth", "Mud", "Python", "Quail", "Quill", "Root", "Sable", "Shade", "Shrew", "Squirrel", "Stag", "Wood", "Wren",
-    "Char", "Charred"
+    "Char", "Charred", "Burn"
     ],
     "DARKBROWN": [
     "Brown", "Brown", "Dark", "Dark", "Shade", "Night", "Russet", "Rowan", "Mud", "Oak", "Twig", "Loach", "Shadow", "Tawny", "Moth",
@@ -354,7 +354,7 @@
 	"root", "owl", "twig", "wood", "moth", "bark", "branch", "burr"
     ],
     "MALLOW": [
-	"root","twig", "wood", "moth", "bark", "branch", "burr", "back"
+	"root","twig", "wood", "moth", "bark", "branch", "burr", "back", "burn"
     ],
     "DARKBROWN": [
 	"root", "bark", "shade", "owl", "oak", "wood", "moth", "branch", "burr"
