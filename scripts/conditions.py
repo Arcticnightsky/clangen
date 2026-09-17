@@ -15,7 +15,6 @@ from scripts.cat.skills import SkillPath
 from scripts.game_structure import game
 
 
-```python
 def amount_clanmembers_covered(all_cats, amount_per_med) -> int:
     """
     number of clan members the meds can treat
@@ -43,7 +42,7 @@ def amount_clanmembers_covered(all_cats, amount_per_med) -> int:
     total_med_number = len(apprentices) / 2
 
     for cat in full_med:
-        healer_skill = cat.skills.get_skill_dict().get(SkillPath.HEALER, 0)
+        healer_skill = cat.skills.get_all().get(SkillPath.HEALER, 0)
 
         if healer_skill >= 4:
             skill_over_3 = healer_skill - 3
