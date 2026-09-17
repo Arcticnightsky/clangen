@@ -1,11 +1,15 @@
 import unittest
 from types import SimpleNamespace
-from unittest.mock import patch
+from unittest.mock import Mock, patch
 
 from scripts.events_module.consequences import (
+    can_be_biological_parent,
     gather_cat_objects,
-    ensure_parent_is_not_sterilized,
+    is_eligible_existing_outsider,
+    should_reuse_existing_outsider,
 )
+from scripts.cat.microservices.conditions import handle_pending_neuter
+from scripts.cat.enums import CatGroup, CatStanding
 
 
 class TestGatherCatObjects(unittest.TestCase):
@@ -42,26 +46,77 @@ class TestGatherCatObjects(unittest.TestCase):
         mock_print.assert_called_once_with("WARNING: Unsupported abbreviation unknown")
 
 
-class TestEnsureParentIsNotSterilized(unittest.TestCase):
-    def test_removes_sterilization_flags_from_parent(self):
+class TestBiologicalParents(unittest.TestCase):
+    def test_sterilized_cat_cannot_be_assigned_as_biological_parent(self):
         parent = SimpleNamespace(
             permanent_condition={"spayed": {"severity": "minor"}, "blind": {}},
             no_kits=True,
             pelt=SimpleNamespace(scars=("RIGHTEAR", "NOTAIL")),
         )
 
-        ensure_parent_is_not_sterilized(parent)
+        self.assertFalse(can_be_biological_parent(parent))
 
-        self.assertNotIn("spayed", parent.permanent_condition)
+        self.assertIn("spayed", parent.permanent_condition)
         self.assertIn("blind", parent.permanent_condition)
-        self.assertFalse(parent.no_kits)
-        self.assertNotIn("RIGHTEAR", parent.pelt.scars)
+        self.assertTrue(parent.no_kits)
+        self.assertIn("RIGHTEAR", parent.pelt.scars)
         self.assertIn("NOTAIL", parent.pelt.scars)
 
-    def test_no_changes_when_parent_not_sterilized(self):
+    def test_fertile_cat_can_be_assigned_as_biological_parent(self):
         parent = SimpleNamespace(permanent_condition={"blind": {}}, no_kits=True)
 
-        ensure_parent_is_not_sterilized(parent)
+        self.assertFalse(can_be_biological_parent(parent))
 
-        self.assertEqual({"blind": {}}, parent.permanent_condition)
-        self.assertTrue(parent.no_kits)
+        parent.no_kits = False
+        self.assertTrue(can_be_biological_parent(parent))
+
+
+class TestExistingOutsiderReuse(unittest.TestCase):
+    def test_exists_tag_always_reuses_existing_outsider(self):
+        self.assertTrue(should_reuse_existing_outsider(["exists"], False))
+
+    def test_non_patrol_new_cats_do_not_receive_patrol_reuse_roll(self):
+        self.assertFalse(should_reuse_existing_outsider(["loner"], False))
+
+    def test_empty_patrol_block_always_creates_new_cat(self):
+        self.assertFalse(should_reuse_existing_outsider([], True))
+
+    @patch("scripts.events_module.consequences.randrange", return_value=0)
+    def test_patrol_reuses_existing_outsider_one_third_of_the_time(self, _randrange):
+        self.assertTrue(should_reuse_existing_outsider(["loner"], True))
+
+    @patch("scripts.events_module.consequences.randrange", return_value=1)
+    def test_patrol_creates_new_cat_for_other_two_rolls(self, _randrange):
+        self.assertFalse(should_reuse_existing_outsider(["loner"], True))
+
+    def test_exiled_or_driven_away_outsiders_cannot_be_reused(self):
+        for standing, near in ((CatStanding.EXILED, True), (CatStanding.KNOWN, False)):
+            with self.subTest(standing=standing, near=near):
+                status = SimpleNamespace(
+                    is_outsider=True,
+                    standing_history=[
+                        {
+                            "group": CatGroup.PLAYER_CLAN_ID,
+                            "standing": [standing],
+                            "near": near,
+                        }
+                    ],
+                    get_standing_with_group=lambda _group: [standing],
+                    is_lost=lambda _group: False,
+                )
+                cat = SimpleNamespace(status=status, dead=False)
+
+                self.assertFalse(is_eligible_existing_outsider(cat, {}))
+
+
+class TestPendingNeuter(unittest.TestCase):
+    def test_captured_cat_is_sterilized_when_pending_neuter_resolves(self):
+        cat = SimpleNamespace(pending_neuter=True)
+        cat.apply_sterilization_condition = Mock()
+
+        handle_pending_neuter(cat)
+
+        self.assertFalse(cat.pending_neuter)
+        cat.apply_sterilization_condition.assert_called_once_with(
+            from_twolegs=True, adjust_personality=True
+        )
