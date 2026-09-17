@@ -323,12 +323,8 @@ class Name:
                             pool = random.choice(
                                 self.names_dict["tortie_pelt_suffixes"][tortie_pattern]
                             )
-                        pool = self.names_dict["tortie_pelt_suffixes"][tortie_pattern]
                     elif pelt in self.names_dict["pelt_suffixes"]:
-                        if (
-                            constants.CONFIG["cat_name_controls"]["allow_eye_names"]
-                            and eyes in self.names_dict["eye_suffixes"]
-                        ):
+                        if eyes in self.names_dict["eye_suffixes"]:
                             pool = (
                                 self.names_dict["pelt_suffixes"][pelt]
                                 + self.names_dict["colour_suffixes"][colour]
