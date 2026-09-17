@@ -36,23 +36,56 @@ from scripts.events_module.relationship.romance_chance import (
 )
 
 
-def ensure_parent_is_not_sterilized(cat: Optional["Cat"]) -> None:
-    """Remove sterilization conditions from a cat that has been assigned as a parent."""
-    if not cat:
-        return
+def can_be_biological_parent(cat: Optional["Cat"]) -> bool:
+    """Return whether a cat can be assigned as a biological parent in an event."""
+    return (
+        bool(cat)
+        and not cat.no_kits
+        and not any(
+            condition in cat.permanent_condition for condition in ("spayed", "neutered")
+        )
+    )
 
-    removed_condition = False
-    for condition in ("spayed", "neutered"):
-        if condition in cat.permanent_condition:
-            cat.permanent_condition.pop(condition, None)
-            removed_condition = True
 
-    if removed_condition:
-        cat.no_kits = False
-        if hasattr(cat, "pelt") and hasattr(cat.pelt, "scars"):
-            cat.pelt.scars = tuple(
-                scar for scar in cat.pelt.scars if scar != "RIGHTEAR"
-            )
+def is_eligible_existing_outsider(cat: "Cat", in_event_cats: dict) -> bool:
+    """Return whether an outsider is available to be reused by a patrol.
+
+    Exiles and driven-away cats must never be reintroduced through a new-cat
+    patrol. Check the player Clan's standing record directly so a stale or
+    malformed nearness value cannot make an unavailable cat eligible.
+    """
+    player_clan_standing = cat.status.get_standing_with_group(CatGroup.PLAYER_CLAN_ID)
+    player_clan_record = next(
+        (
+            record
+            for record in cat.status.standing_history
+            if record["group"] == CatGroup.PLAYER_CLAN_ID
+        ),
+        None,
+    )
+    return (
+        cat.status.is_outsider
+        and player_clan_record is not None
+        and player_clan_record.get("near") is True
+        and CatStanding.EXILED not in player_clan_standing
+        and not cat.status.is_lost(CatGroup.PLAYER_CLAN_ID)
+        and not cat.dead
+        and cat not in in_event_cats.values()
+    )
+
+
+def should_reuse_existing_outsider(
+    attribute_list: List[str], allow_patrol_outsider_reuse: bool
+) -> bool:
+    """Return whether a new-cat block should use an existing outsider.
+
+    The ``exists`` tag always explicitly requests an existing cat. Otherwise,
+    patrols reuse a suitable outsider one third of the time, as long as the
+    block contains attributes. Empty blocks always create a fresh cat.
+    """
+    return "exists" in attribute_list or (
+        allow_patrol_outsider_reuse and bool(attribute_list) and randrange(3) == 0
+    )
 
 
 def create_new_cat_block(
@@ -63,6 +96,7 @@ def create_new_cat_block(
     i: int,
     attribute_list: List[str],
     other_clan=None,
+    allow_patrol_outsider_reuse: bool = False,
 ) -> list:
     """
     Creates a single new_cat block and then generates and returns the cats within the block
@@ -72,6 +106,9 @@ def create_new_cat_block(
     :param dict in_event_cats: dict containing involved cats' abbreviations as keys and cat objects as values
     :param int i: index of the cat block
     :param list[str] attribute_list: attribute list contained within the block
+    :param bool allow_patrol_outsider_reuse: allow patrols to reuse an existing
+        outsider one third of the time when the block does not explicitly use
+        the ``exists`` tag
     """
 
     new_cats = None
@@ -96,10 +133,14 @@ def create_new_cat_block(
             if index >= i:
                 continue
 
+            parent = event.new_cats[index][0]
+            if not can_be_biological_parent(parent):
+                continue
+
             if parent1 is None:
-                parent1 = event.new_cats[index][0]
+                parent1 = parent
             else:
-                parent2 = event.new_cats[index][0]
+                parent2 = parent
 
         adoptive_indexes = [
             int(index) if index.isdigit() else index for index in adoptive_indexes
@@ -354,18 +395,11 @@ def create_new_cat_block(
 
     # check if we can use an existing cat here
     chosen_cat: Optional["Cat"] = None
-    # Existing outsiders keep patrols feeling connected, but should be the
-    # exception: generate a fresh cat two thirds of the time.
-    if "exists" in attribute_list:
+    if should_reuse_existing_outsider(attribute_list, allow_patrol_outsider_reuse):
         existing_outsiders = [
-            i
-            for i in Cat.all_cats.values()
-            if i.status.is_outsider
-            and i.status.is_near(CatGroup.PLAYER_CLAN_ID)
-            and not i.status.is_exiled(CatGroup.PLAYER_CLAN_ID)
-            and not i.status.is_lost(CatGroup.PLAYER_CLAN_ID)
-            and not i.dead
-            and i not in in_event_cats.values()
+            cat
+            for cat in Cat.all_cats.values()
+            if is_eligible_existing_outsider(cat, in_event_cats)
         ]
         possible_outsiders = []
         for cat in existing_outsiders:
@@ -443,10 +477,6 @@ def create_new_cat_block(
 
     # Now we generate the new cat
     if not chosen_cat:
-        if litter or rank in (CatRank.KITTEN, CatRank.NEWBORN):
-            for par in (parent1, parent2):
-                ensure_parent_is_not_sterilized(par)
-
         new_cats = create_new_cat(
             Cat,
             new_name=new_name,

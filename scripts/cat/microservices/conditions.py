@@ -381,10 +381,7 @@ def handle_pending_neuter(self):
         return
 
     self.pending_neuter = False
-    if random_module.getrandbits(1):
-        self.apply_sterilization_condition(
-            from_twolegs=True, adjust_personality=True
-        )
+    self.apply_sterilization_condition(from_twolegs=True, adjust_personality=True)
 
 
 def backdate_sterilization_history(self, social_group: CatSocial):

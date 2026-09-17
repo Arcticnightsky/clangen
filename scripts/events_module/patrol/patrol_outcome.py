@@ -941,6 +941,7 @@ class PatrolOutcome:
                     i,
                     attribute_list,
                     other_clan=patrol.other_clan,
+                    allow_patrol_outsider_reuse=True,
                 )
             )
             dead = []
