@@ -42,7 +42,7 @@ def amount_clanmembers_covered(all_cats, amount_per_med) -> int:
     total_med_number = len(apprentices) / 2
 
     for cat in full_med:
-        healer_skill = cat.skills.get_skill_value(SkillPath.HEALER)
+        healer_skill = cat.skills.get_skill_dict(SkillPath.HEALER)
 
         if healer_skill >= 4:
             skill_over_3 = healer_skill - 3
