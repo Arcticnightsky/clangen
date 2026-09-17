@@ -13,10 +13,8 @@
             "senior adult": 0,
             "senior": 0
         },
-        "illness_infectiousness": [
-        ],
-        "risks": [
-        ],
+        "illness_infectiousness": [],
+        "risks": [],
         "herbs": {
             "1": [],
             "2": [],
@@ -36,8 +34,7 @@
             "senior adult": 0,
             "senior": 0
         },
-        "illness_infectiousness": [
-        ],
+        "illness_infectiousness": [],
         "risks": [
             {
                 "name": "an infected wound",
@@ -54,9 +51,9 @@
         ],
         "herbs": {
             "1": [
-            "marigold",
-            "ragwort"
-        ],
+                "marigold",
+                "ragwort"
+            ],
             "2": [
                 "daisy",
                 "juniper"
@@ -79,8 +76,7 @@
             "senior adult": 0,
             "senior": 0
         },
-        "illness_infectiousness": [
-        ],
+        "illness_infectiousness": [],
         "risks": [
             {
                 "name": "sore",
@@ -93,9 +89,9 @@
         ],
         "herbs": {
             "1": [
-            "marigold",
-            "ragwort"
-        ],
+                "marigold",
+                "ragwort"
+            ],
             "2": [
                 "daisy"
             ],
@@ -117,8 +113,7 @@
             "senior adult": 0,
             "senior": 0
         },
-        "illness_infectiousness": [
-        ],
+        "illness_infectiousness": [],
         "risks": [
             {
                 "name": "sore",
@@ -131,9 +126,9 @@
         ],
         "herbs": {
             "1": [
-            "marigold",
-            "ragwort"
-        ],
+                "marigold",
+                "ragwort"
+            ],
             "2": [
                 "daisy",
                 "juniper"
@@ -156,8 +151,7 @@
             "senior adult": 0,
             "senior": 0
         },
-        "illness_infectiousness": [
-        ],
+        "illness_infectiousness": [],
         "risks": [
             {
                 "name": "sore",
@@ -170,10 +164,10 @@
         ],
         "herbs": {
             "1": [
-            "marigold",
-            "ragwort",
-            "dandelion"
-        ],
+                "marigold",
+                "ragwort",
+                "dandelion"
+            ],
             "2": [
                 "juniper",
                 "daisy"
@@ -197,8 +191,7 @@
             "senior adult": 0,
             "senior": 0
         },
-        "illness_infectiousness": [
-        ],
+        "illness_infectiousness": [],
         "risks": [
             {
                 "name": "an infected wound",
@@ -211,8 +204,8 @@
         ],
         "herbs": {
             "1": [
-            "juniper"
-        ],
+                "juniper"
+            ],
             "2": [
                 "ragwort"
             ],
@@ -234,10 +227,8 @@
             "senior adult": 0,
             "senior": 0
         },
-        "illness_infectiousness": [
-        ],
-        "risks": [
-        ],
+        "illness_infectiousness": [],
+        "risks": [],
         "herbs": {
             "1": [],
             "2": [],
@@ -257,8 +248,7 @@
             "senior adult": 0,
             "senior": 0
         },
-        "illness_infectiousness": [
-        ],
+        "illness_infectiousness": [],
         "risks": [
             {
                 "name": "an infected wound",
@@ -279,11 +269,11 @@
         ],
         "herbs": {
             "1": [
-            "juniper",
-            "ragwort",
-            "marigold",
-            "dandelion"
-        ],
+                "juniper",
+                "ragwort",
+                "marigold",
+                "dandelion"
+            ],
             "2": [
                 "daisy",
                 "poppy"
@@ -306,8 +296,7 @@
             "senior adult": 60,
             "senior": 30
         },
-        "illness_infectiousness": [
-        ],
+        "illness_infectiousness": [],
         "risks": [
             {
                 "name": "whitecough",
@@ -320,8 +309,8 @@
         ],
         "herbs": {
             "1": [
-            "betony"
-        ],
+                "betony"
+            ],
             "2": [
                 "rosemary",
                 "juniper"
@@ -378,11 +367,11 @@
         ],
         "herbs": {
             "1": [
-            "juniper",
-            "ragwort",
-            "goldenrod",
-            "mullein"
-        ],
+                "juniper",
+                "ragwort",
+                "goldenrod",
+                "mullein"
+            ],
             "2": [
                 "betony",
                 "tansy"
@@ -406,7 +395,6 @@
             "senior": 75
         },
         "illness_infectiousness": [
-
             {
                 "name": "whitecough",
                 "chance": 10
@@ -436,11 +424,11 @@
         ],
         "herbs": {
             "1": [
-            "juniper",
-            "ragwort",
-            "goldenrod",
-            "dandelion"
-        ],
+                "juniper",
+                "ragwort",
+                "goldenrod",
+                "dandelion"
+            ],
             "2": [
                 "betony",
                 "mullein"
@@ -463,10 +451,8 @@
             "senior adult": 0,
             "senior": 0
         },
-        "illness_infectiousness": [
-        ],
-        "risks": [
-        ],
+        "illness_infectiousness": [],
+        "risks": [],
         "herbs": {
             "1": [],
             "2": [],
@@ -528,9 +514,9 @@
             "senior adult": 0,
             "senior": 0
         },
-        "illness_infectiousness": [
-        ],
-        "risks": [{
+        "illness_infectiousness": [],
+        "risks": [
+            {
                 "name": "failing eyesight",
                 "chance": 80
             }
@@ -554,8 +540,7 @@
             "senior adult": 0,
             "senior": 0
         },
-        "illness_infectiousness": [
-        ],
+        "illness_infectiousness": [],
         "risks": [
             {
                 "name": "blind",
@@ -581,8 +566,7 @@
             "senior adult": 0,
             "senior": 0
         },
-        "illness_infectiousness": [
-        ],
+        "illness_infectiousness": [],
         "risks": [
             {
                 "name": "deaf",
@@ -608,16 +592,13 @@
             "senior adult": 0,
             "senior": 0
         },
-        "illness_infectiousness": [
-        ],
-        "risks": [
-        ],
+        "illness_infectiousness": [],
+        "risks": [],
         "herbs": {
             "1": [],
             "2": [],
             "3": []
         }
-
     },
     "constant joint pain": {
         "severity": "minor",
@@ -632,8 +613,7 @@
             "senior adult": 0,
             "senior": 0
         },
-        "illness_infectiousness": [
-        ],
+        "illness_infectiousness": [],
         "risks": [
             {
                 "name": "joint pain",
@@ -642,8 +622,8 @@
         ],
         "herbs": {
             "1": [
-            "marigold"
-        ],
+                "marigold"
+            ],
             "2": [
                 "daisy",
                 "ragwort",
@@ -667,8 +647,7 @@
             "senior adult": 0,
             "senior": 0
         },
-        "illness_infectiousness": [
-        ],
+        "illness_infectiousness": [],
         "risks": [
             {
                 "name": "seizure",
@@ -677,15 +656,15 @@
         ],
         "herbs": {
             "1": [
-            "ragwort"
-        ],
+                "ragwort"
+            ],
             "2": [
                 "juniper"
-        ],
+            ],
             "3": [
                 "thyme",
                 "betony"
-        ]
+            ]
         }
     },
     "allergies": {
@@ -701,8 +680,7 @@
             "senior adult": 0,
             "senior": 0
         },
-        "illness_infectiousness": [
-        ],
+        "illness_infectiousness": [],
         "risks": [
             {
                 "name": "running nose",
@@ -730,8 +708,7 @@
             "senior adult": 0,
             "senior": 0
         },
-        "illness_infectiousness": [
-        ],
+        "illness_infectiousness": [],
         "risks": [
             {
                 "name": "headache",
@@ -757,8 +734,7 @@
             "senior adult": 0,
             "senior": 0
         },
-        "illness_infectiousness": [
-        ],
+        "illness_infectiousness": [],
         "risks": [
             {
                 "name": "constant nightmares",
@@ -771,8 +747,8 @@
         ],
         "herbs": {
             "1": [
-            "poppy"
-        ],
+                "poppy"
+            ],
             "2": [
                 "juniper"
             ],
@@ -794,8 +770,7 @@
             "senior adult": 0,
             "senior": 0
         },
-        "illness_infectiousness": [
-        ],
+        "illness_infectiousness": [],
         "risks": [
             {
                 "name": "grief stricken",
@@ -808,8 +783,8 @@
         ],
         "herbs": {
             "1": [
-            "poppy"
-        ],
+                "poppy"
+            ],
             "2": [
                 "juniper",
                 "ragwort"
@@ -832,8 +807,7 @@
             "senior adult": 0,
             "senior": 0
         },
-        "illness_infectiousness": [
-        ],
+        "illness_infectiousness": [],
         "risks": [
             {
                 "name": "severe headache",
@@ -846,13 +820,13 @@
         ],
         "herbs": {
             "1": [
-            "rosemary"
-        ],
+                "rosemary"
+            ],
             "2": [
                 "juniper"
             ],
             "3": [
-            "poppy"
+                "poppy"
             ]
         }
     },
@@ -869,15 +843,13 @@
             "senior adult": 0,
             "senior": 0
         },
-        "illness_infectiousness": [
-        ],
-        "risks": [
-        ],
+        "illness_infectiousness": [],
+        "risks": [],
         "herbs": {
             "1": [
-            "poppy",
-            "juniper"
-        ],
+                "poppy",
+                "juniper"
+            ],
             "2": [],
             "3": []
         }
@@ -895,8 +867,7 @@
             "senior adult": 0,
             "senior": 0
         },
-        "illness_infectiousness": [
-        ],
+        "illness_infectiousness": [],
         "risks": [
             {
                 "name": "sore throat",
@@ -908,6 +879,48 @@
             "poppy",
             "honey"
         ],
+            "2": [],
+            "3": []
+        }
+    },
+    "neutered": {
+        "severity": "minor",
+        "congenital": "never",
+        "moons_until": 0,
+        "mortality": {
+            "newborn": 0,
+            "kitten": 0,
+            "adolescent": 0,
+            "young adult": 0,
+            "adult": 0,
+            "senior adult": 0,
+            "senior": 0
+        },
+        "illness_infectiousness": [],
+        "risks": [],
+        "herbs": {
+            "1": [],
+            "2": [],
+            "3": []
+        }
+    },
+    "spayed": {
+        "severity": "minor",
+        "congenital": "never",
+        "moons_until": 0,
+        "mortality": {
+            "newborn": 0,
+            "kitten": 0,
+            "adolescent": 0,
+            "young adult": 0,
+            "adult": 0,
+            "senior adult": 0,
+            "senior": 0
+        },
+        "illness_infectiousness": [],
+        "risks": [],
+        "herbs": {
+            "1": [],
             "2": [],
             "3": []
         }
