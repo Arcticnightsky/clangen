@@ -15,6 +15,7 @@ from scripts.cat.skills import SkillPath
 from scripts.game_structure import game
 
 
+```python
 def amount_clanmembers_covered(all_cats, amount_per_med) -> int:
     """
     number of clan members the meds can treat
@@ -38,17 +39,20 @@ def amount_clanmembers_covered(all_cats, amount_per_med) -> int:
     total_exp = total_exp * 0.003
 
     # Determine the total med number. Med cats with certain skill counts
-    # as "more" of a med cat.  Only full medicine cat can have their skills have effect
+    # as "more" of a med cat. Only full medicine cat can have their skills have effect
     total_med_number = len(apprentices) / 2
 
     for cat in full_med:
-        healer_skill = cat.skills.get_skill_dict(SkillPath.HEALER)
+        healer_skill = cat.skills.get_skill_dict().get(SkillPath.HEALER, 0)
 
         if healer_skill >= 4:
             skill_over_3 = healer_skill - 3
-            total_med_number += 2 + (skill_over_3 // 3) + (
-                0.5 if skill_over_3 % 3 >= 1 else 0
-            ) + (0.25 if skill_over_3 % 3 == 2 else 0)
+            total_med_number += (
+                2
+                + (skill_over_3 // 3)
+                + (0.5 if skill_over_3 % 3 >= 1 else 0)
+                + (0.25 if skill_over_3 % 3 == 2 else 0)
+            )
         elif healer_skill == 3:
             total_med_number += 2
         elif healer_skill == 2:
@@ -63,6 +67,8 @@ def amount_clanmembers_covered(all_cats, amount_per_med) -> int:
     return int(
         adjust_med_number * (amount_per_med + 1)
     )  # number of cats they can care for
+```
+
 
 def medicine_cats_can_cover_clan(all_cats, amount_per_med) -> bool:
     """
