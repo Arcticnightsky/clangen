@@ -66,7 +66,6 @@ def amount_clanmembers_covered(all_cats, amount_per_med) -> int:
     return int(
         adjust_med_number * (amount_per_med + 1)
     )  # number of cats they can care for
-```
 
 
 def medicine_cats_can_cover_clan(all_cats, amount_per_med) -> bool:
