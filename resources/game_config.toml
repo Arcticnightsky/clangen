@@ -109,7 +109,7 @@ dev_tools = true
   override_same_age_group = true
 
   # 1/chance of becoming mates when the conditions are fulfilled
-  chance_fulfilled_condition = 2
+  chance_fulfilled_condition = 1
 
   # 1/chance of becoming mates, triggers with friends_to_lover (has to be a high number because many relationships are checked each moon)
   chance_friends_to_lovers = 130
@@ -282,7 +282,7 @@ dev_tools = true
 
 [new_cat]
   # number of welcoming events to add when a new cat joins
-  cat_amount_welcoming = 3
+  cat_amount_welcoming = 4
 
   # ext_relative_modifer * parents(len) is what will a relative's relation toward the parent 
   # will be divided by when deciding on a relative's initial relationship toward a kit
@@ -363,7 +363,7 @@ dev_tools = true
   birth_cooldown = 6
 
   # 1/chance that kits, relationship and other factors will influence this chance
-  primary_chance_mated = 70
+  primary_chance_mated = 60
 
   # 1/chance that kits, relationship and other factors will influence this chance
   primary_chance_unmated = 130
