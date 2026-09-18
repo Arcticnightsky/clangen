@@ -36,18 +36,9 @@ from scripts.events_module.relationship.romance_chance import (
 )
 
 
-def can_be_biological_parent(cat: Optional["Cat"]) -> bool:
-    """Return whether a cat can be assigned as a biological parent in an event."""
-    return (
-        bool(cat)
-        and not cat.no_kits
-        and not any(
-            condition in cat.permanent_condition for condition in ("spayed", "neutered")
-        )
-    )
-
-
-def is_eligible_existing_outsider(cat: "Cat", in_event_cats: dict) -> bool:
+def is_eligible_existing_outsider(
+    cat: "Cat", in_event_cats: dict, requires_biological_parent: bool = False
+) -> bool:
     """Return whether an outsider is available to be reused by a patrol.
 
     Exiles and driven-away cats must never be reintroduced through a new-cat
@@ -63,6 +54,9 @@ def is_eligible_existing_outsider(cat: "Cat", in_event_cats: dict) -> bool:
         ),
         None,
     )
+    is_sterilized = any(
+        condition in cat.permanent_condition for condition in ("spayed", "neutered")
+    )
     return (
         cat.status.is_outsider
         and player_clan_record is not None
@@ -71,6 +65,7 @@ def is_eligible_existing_outsider(cat: "Cat", in_event_cats: dict) -> bool:
         and not cat.status.is_lost(CatGroup.PLAYER_CLAN_ID)
         and not cat.dead
         and cat not in in_event_cats.values()
+        and not (requires_biological_parent and (cat.no_kits or is_sterilized))
     )
 
 
@@ -97,6 +92,7 @@ def create_new_cat_block(
     attribute_list: List[str],
     other_clan=None,
     allow_patrol_outsider_reuse: bool = False,
+    requires_biological_parent: bool = False,
 ) -> list:
     """
     Creates a single new_cat block and then generates and returns the cats within the block
@@ -109,6 +105,8 @@ def create_new_cat_block(
     :param bool allow_patrol_outsider_reuse: allow patrols to reuse an existing
         outsider one third of the time when the block does not explicitly use
         the ``exists`` tag
+    :param bool requires_biological_parent: exclude infertile outsiders when
+        this cat will be assigned as a biological parent later in the event
     """
 
     new_cats = None
@@ -399,7 +397,9 @@ def create_new_cat_block(
         existing_outsiders = [
             cat
             for cat in Cat.all_cats.values()
-            if is_eligible_existing_outsider(cat, in_event_cats)
+            if is_eligible_existing_outsider(
+                cat, in_event_cats, requires_biological_parent
+            )
         ]
         possible_outsiders = []
         for cat in existing_outsiders:

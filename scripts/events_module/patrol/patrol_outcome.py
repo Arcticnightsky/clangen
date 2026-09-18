@@ -2,6 +2,7 @@
 # -*- coding: ascii -*-
 from html import escape
 import random
+import re
 from os.path import exists as path_exists
 from random import choice, choices
 from typing import List, Dict, Union, TYPE_CHECKING, Optional, Tuple
@@ -932,6 +933,12 @@ class PatrolOutcome:
             in_event_cats["s_c"] = self.stat_cat
 
         for i, attribute_list in enumerate(self.new_cat):
+            requires_biological_parent = any(
+                str(i) in match.group(1).split(",")
+                for later_attributes in self.new_cat[i + 1 :]
+                for tag in later_attributes
+                if (match := re.match(r"parent:([,0-9]+)", tag))
+            )
             patrol.new_cats.append(
                 create_new_cat_block(
                     Cat,
@@ -942,6 +949,7 @@ class PatrolOutcome:
                     attribute_list,
                     other_clan=patrol.other_clan,
                     allow_patrol_outsider_reuse=True,
+                    requires_biological_parent=requires_biological_parent,
                 )
             )
             dead = []

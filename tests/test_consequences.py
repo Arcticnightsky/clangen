@@ -46,31 +46,6 @@ class TestGatherCatObjects(unittest.TestCase):
         mock_print.assert_called_once_with("WARNING: Unsupported abbreviation unknown")
 
 
-class TestBiologicalParents(unittest.TestCase):
-    def test_sterilized_cat_cannot_be_assigned_as_biological_parent(self):
-        parent = SimpleNamespace(
-            permanent_condition={"spayed": {"severity": "minor"}, "blind": {}},
-            no_kits=True,
-            pelt=SimpleNamespace(scars=("RIGHTEAR", "NOTAIL")),
-        )
-
-        self.assertFalse(can_be_biological_parent(parent))
-
-        self.assertIn("spayed", parent.permanent_condition)
-        self.assertIn("blind", parent.permanent_condition)
-        self.assertTrue(parent.no_kits)
-        self.assertIn("RIGHTEAR", parent.pelt.scars)
-        self.assertIn("NOTAIL", parent.pelt.scars)
-
-    def test_fertile_cat_can_be_assigned_as_biological_parent(self):
-        parent = SimpleNamespace(permanent_condition={"blind": {}}, no_kits=True)
-
-        self.assertFalse(can_be_biological_parent(parent))
-
-        parent.no_kits = False
-        self.assertTrue(can_be_biological_parent(parent))
-
-
 class TestExistingOutsiderReuse(unittest.TestCase):
     def test_exists_tag_always_reuses_existing_outsider(self):
         self.assertTrue(should_reuse_existing_outsider(["exists"], False))
@@ -107,6 +82,31 @@ class TestExistingOutsiderReuse(unittest.TestCase):
                 cat = SimpleNamespace(status=status, dead=False)
 
                 self.assertFalse(is_eligible_existing_outsider(cat, {}))
+
+    def test_sterilized_outsider_cannot_be_reused_as_biological_parent(self):
+        status = SimpleNamespace(
+            is_outsider=True,
+            standing_history=[
+                {
+                    "group": CatGroup.PLAYER_CLAN_ID,
+                    "standing": [CatStanding.KNOWN],
+                    "near": True,
+                }
+            ],
+            get_standing_with_group=lambda _group: [CatStanding.KNOWN],
+            is_lost=lambda _group: False,
+        )
+        cat = SimpleNamespace(
+            status=status,
+            dead=False,
+            no_kits=True,
+            permanent_condition={"spayed": {}},
+        )
+
+        self.assertTrue(is_eligible_existing_outsider(cat, {}))
+        self.assertFalse(
+            is_eligible_existing_outsider(cat, {}, requires_biological_parent=True)
+        )
 
 
 class TestPendingNeuter(unittest.TestCase):
