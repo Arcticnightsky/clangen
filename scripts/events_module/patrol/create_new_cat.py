@@ -451,7 +451,7 @@ def _assign_health(created_cat, option_dict):
                         * 0.4
                     ),
                 )
-                if not random_module.randint(1, deaf_chance):
+                if not random.randint(1, deaf_chance):
                     created_cat.get_permanent_condition("deaf", born_with=True)
             elif blue_eye_count == 1:
                 # One blue eye most often maps to unilateral/partial deafness.
@@ -462,7 +462,7 @@ def _assign_health(created_cat, option_dict):
                         * 0.7
                     ),
                 )
-                if not random_module.randint(1, partial_deaf_chance):
+                if not random.randint(1, partial_deaf_chance):
                     created_cat.get_permanent_condition(
                         "partial hearing loss", born_with=True
                     )
