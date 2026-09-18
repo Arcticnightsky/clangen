@@ -383,7 +383,6 @@ def handle_pending_neuter(self):
     self.pending_neuter = False
     self.apply_sterilization_condition(from_twolegs=True, adjust_personality=True)
 
-
 def backdate_sterilization_history(self, social_group: CatSocial):
     """
     Backdates moon_start for a sterilized outsider cat so condition history reflects

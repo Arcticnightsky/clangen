@@ -93,7 +93,7 @@
         "BEARD": [
             "littleBEARD_SMALL",
             "littleBIB_SMALL"
-        ],
+        ]
     },
     "mid": {
         "DOUGIE": [
@@ -667,6 +667,6 @@
             "midTAIL_OVER",
             "midTWO_SPOT_MID",
             "midSHIRT"
-        ],
+        ]
     }
 }

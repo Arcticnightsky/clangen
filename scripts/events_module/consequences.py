@@ -131,10 +131,14 @@ def create_new_cat_block(
             if index >= i:
                 continue
 
+            parent = event.new_cats[index][0]
+            if not can_be_biological_parent(parent):
+                continue
+
             if parent1 is None:
-                parent1 = event.new_cats[index][0]
+                parent1 = parent
             else:
-                parent2 = event.new_cats[index][0]
+                parent2 = parent
 
         adoptive_indexes = [
             int(index) if index.isdigit() else index for index in adoptive_indexes

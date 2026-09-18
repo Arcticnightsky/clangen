@@ -3,6 +3,7 @@ from types import SimpleNamespace
 from unittest.mock import Mock, patch
 
 from scripts.events_module.consequences import (
+    can_be_biological_parent,
     gather_cat_objects,
     is_eligible_existing_outsider,
     should_reuse_existing_outsider,
