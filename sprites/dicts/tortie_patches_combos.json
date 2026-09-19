@@ -285,5 +285,9 @@
         "BIBFULL_T",
         "BOTHEARS_T",
         "BLANKET"
+    ],
+    "TORTICO": [
+        "BRINDLE",
+        "PACMAN"
     ]
 }

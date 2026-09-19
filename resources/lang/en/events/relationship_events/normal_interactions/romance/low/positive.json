@@ -30,15 +30,15 @@
             "m_c stayed up all night thinking of ways to impress r_c.",
             "m_c thinks r_c is really funny.",
             "m_c had a dream about r_c.",
-            "m_c thinks r_c has very soft fur.",
-            "m_c and r_c sunbathe together.",
-            "m_c and r_c take a nap together."
+            "m_c thinks r_c has very soft fur."
         ]
     },
     {
         "event_id": "rom_inc_low3",
         "strings": [
-            "m_c is prancing around in front of r_c."
+            "m_c is prancing around in front of r_c.",
+            "m_c and r_c sunbathe together.",
+            "m_c and r_c take a nap together."
         ],
         "relationship_changes": [
             {
@@ -88,8 +88,39 @@
                 "stat": {
                     "trait": [
                         "charming",
+                        "cunning",
                         "charismatic",
                         "flamboyant"
+                    ]
+                }
+            }
+        }
+    },
+    {
+        "event_id": "rom_inc_low6",
+        "strings": [
+            "m_c can't help but admire just how brave r_c is..."
+        ],
+        "involved_cats": {
+            "m_c": {
+                "stat": {
+                    "trait": [
+                        "-fierce",
+                        "-bold",
+                        "-daring",
+                        "-rebellious",
+                        "-confident"
+                    ]
+                }
+            },
+            "r_c": {
+                "stat": {
+                    "trait": [
+                        "fierce",
+                        "bold",
+                        "daring",
+                        "rebellious",
+                        "confident"
                     ]
                 }
             }

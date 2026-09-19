@@ -94,29 +94,6 @@
             "littleBEARD_SMALL",
             "littleBIB_SMALL"
         ],
-        "BERRYHEART": [
-            "littleBEARD_HIGH",
-            "littleBELLY_MIN",
-            "littleBLAZE_MID",
-            "littleLEFTEAR_RING",
-            "littleLEG_BACK_LEFT_SMALL",
-            "littleLEG_BACK_RIGHT_SMALL",
-            "littleLEG_FRONT_LEFT_SMALL",
-            "littleRIGHTEAR_RING",
-            "littleTAIL_MIN",
-            "littleLEG_FRONT_RIGHT_SMALL",
-            "midBIB_FULL"
-        ],
-        "FALLEN_LEAVES": [
-            "littleTAIL_REVERSE_HALF_LOW",
-            "littleTAIL_REVERSE_MIN",
-            "littleMASK_FULL",
-            "littleLEG_FRONT_RIGHT_SMALL",
-            "littleDAMIEN_REDUCED",
-            "midCHEST_HIGH",
-            "midLEG_BACK_LEFT_FULL",
-            "midSADDLE_MIN_REVERSE"
-        ],
         "EARBROWS": [
             "littleLEFTEAR",
             "littleRIGHTEAR",
@@ -254,15 +231,6 @@
             "littleLEG_BACK_RIGHT_SMALL",
             "midMIA_REDUCED"
         ],
-        "TALLSTAR": [
-            "littleLEG_FRONT_LEFT_MIN_LOW",
-            "littleTAIL_REVERSE_MIN_LOW",
-            "littleBEARD_SMALL",
-            "littleBLAZE_MID",
-            "littleTAIL_MIN",
-            "midSADDLE_HIGH",
-            "midCHEST_HIGH"
-        ],
         "HUNTSMANGLIDE": [
             "littleBEARD_SMALL",
             "littleBELLY_MID",
@@ -273,19 +241,6 @@
             "littleRIGHTEAR_TIP",
             "littleTAILTIP",
             "midCHEST_HIGH"
-        ],
-        "BADGERFANG": [
-            "littleBLAZE_FULL",
-            "littleLEFTEAR",
-            "littleRIGHTEAR",
-            "littleLEG_FRONT_RIGHT_SMALL",
-            "littleLEG_FRONT_LEFT_SMALL",
-            "littleLEG_BACK_LEFT_SMALL",
-            "littleLEG_BACK_RIGHT_SMALL",
-            "littleDAMIEN_REDUCED",
-            "midBIB_HIGH",
-            "midSTRIPE_MID",
-            "midTAIL_OVER"
         ],
         "SOMBER": [
             "littleBEARD_SMALL",
@@ -337,38 +292,24 @@
             "midTAIL_HIGH",
             "midMITAINE"
         ],
-        "BIG_JASON": [
-            "littleBLAZE",
-            "littleBIB",
-            "littleBACKSPOT",
-            "littleESTRELLA",
-            "littleHONEY",
-            "littleLEFTEAR",
-            "littleLUNA",
-            "littleREVERSEHEART",
-            "littleRIGHTEAR",
-            "littleSCOURGE",
-            "littleSPARKLE",
-            "littleTEARDROP",
-            "littleTEARS_L",
-            "littleUNDEREYE_MAX_R",
-            "littleLITTLE",
+        "BERRYHEART": [
+            "littleBEARD_HIGH",
+            "littleBELLY_MIN",
+            "littleBLAZE_MID",
+            "littleLEFTEAR_RING",
+            "littleLEG_BACK_LEFT_SMALL",
+            "littleLEG_BACK_RIGHT_SMALL",
+            "littleLEG_FRONT_LEFT_SMALL",
+            "littleRIGHTEAR_RING",
+            "littleTAIL_MIN",
             "littleLEG_FRONT_RIGHT_SMALL",
-            "littleLEG_BACK_LEFT_MID",
-            "littleLEG_BACK_RIGHT_MID",
-            "littleBELLY_SMALL",
-            "littleEYESPOT_L",
-            "littleEYESPOT_R",
-            "littleMUZZLE",
-            "littleMUSTACHE",
-            "littleCHIN"
+            "midBIB_FULL"
         ],
-        "HOTTOPIC": [
+        "EMO": [
             "littleROSINA_REDUCED",
-            "littleSPARKLE",
-            "littleTAIL_MID_RING",
-            "littleTAIL_LOW_RING",
-            "littleTAIL_HIGH_RING",
+            "littleDAMIEN_REDUCED",
+            "littleBLAZE_SMALL",
+            "littleTEARS_R",
             "littleTAILTIP",
             "littleTAIL_REVERSE_MIN",
             "littleTAIL_SMALL_LOW",
@@ -582,16 +523,65 @@
             "midWOODPECKER",
             "midWINGS_REDUCED"
         ],
-        "INKSPILL": [
-            "littleRIGHTEAR",
-            "littleTAIL_MID",
-            "littleTWO_SPOT",
-            "littleUNDEREYE_MAX_R",
-            "littleUNDEREYE_MAX_L",
-            "littleFOREHEAD_MID",
-            "littleEYESPOT_R",
+        "FALLEN_LEAVES": [
+            "littleTAIL_REVERSE_HALF_LOW",
+            "littleTAIL_REVERSE_MIN",
+            "littleMASK_FULL",
+            "littleLEG_FRONT_RIGHT_SMALL",
+            "littleDAMIEN_REDUCED",
+            "midCHEST_HIGH",
+            "midLEG_BACK_LEFT_FULL",
+            "midSADDLE_MIN_REVERSE"
+        ],
+        "TALLSTAR": [
+            "littleLEG_FRONT_LEFT_MIN_LOW",
+            "littleTAIL_REVERSE_MIN_LOW",
+            "littleBEARD_SMALL",
+            "littleBLAZE_MID",
+            "littleTAIL_MIN",
+            "midSADDLE_HIGH",
+            "midCHEST_HIGH"
+        ],
+        "BADGERFANG": [
+            "littleBLAZE_FULL",
             "littleLEFTEAR",
-            "littleMASK_REVERSE_PARTIAL",
+            "littleRIGHTEAR",
+            "littleLEG_FRONT_RIGHT_SMALL",
+            "littleLEG_FRONT_LEFT_SMALL",
+            "littleLEG_BACK_LEFT_SMALL",
+            "littleLEG_BACK_RIGHT_SMALL",
+            "littleDAMIEN_REDUCED",
+            "midBIB_HIGH",
+            "midSTRIPE_MID",
+            "midTAIL_OVER"
+        ],
+        "BIG_JASON": [
+            "littleBLAZE",
+            "littleBIB",
+            "littleBACKSPOT",
+            "littleESTRELLA",
+            "littleHONEY",
+            "littleLEFTEAR",
+            "littleLUNA",
+            "littleREVERSEHEART",
+            "littleRIGHTEAR",
+            "littleSCOURGE",
+            "littleSPARKLE",
+            "littleTEARDROP",
+            "littleTEARS_L",
+            "littleUNDEREYE_MAX_R",
+            "littleLITTLE",
+            "littleLEG_FRONT_RIGHT_SMALL",
+            "littleLEG_BACK_LEFT_MID",
+            "littleLEG_BACK_RIGHT_MID",
+            "littleBELLY_SMALL",
+            "littleEYESPOT_L",
+            "littleEYESPOT_R",
+            "littleMUZZLE",
+            "littleMUSTACHE",
+            "littleCHIN"
+        ],
+        "HOTTOPIC": [
             "littleROSINA_REDUCED",
             "littleSADDLE_SMALL",
             "midMISS",
@@ -732,22 +722,6 @@
             "midTWO_SPOT_REVERSE",
             "midCHEST_FULL"
         ],
-        "FULLWHITE": [
-            "littleLEFTEAR",
-            "littleMASK_FACE",
-            "littleRIGHTEAR",
-            "littleUNDER_HEART",
-            "littleSTRIPE_SMALL",
-            "midFLANK_FULL",
-            "midLEG_BACK_LEFT_FULL",
-            "midLEG_BACK_RIGHT_FULL",
-            "midLEG_FRONT_LEFT_FULL",
-            "midLEG_FRONT_RIGHT_FULL",
-            "midTAIL_FULL",
-            "midBELLY_FULL",
-            "midBIB_FULL",
-            "midUNDERS"
-        ],
         "TAILTWO": [
             "littleLEFTEAR",
             "littleMASK_REVERSE_BROWS",
@@ -773,6 +747,23 @@
             "midBIB_FULL",
             "midBELLY_FULL",
             "midFLANK_MID"
+        ],
+        "INKSPILL": [
+            "littleRIGHTEAR",
+            "littleTAIL_MID",
+            "littleTWO_SPOT",
+            "littleUNDEREYE_MAX_R",
+            "littleUNDEREYE_MAX_L",
+            "littleFOREHEAD_MID",
+            "littleEYESPOT_R",
+            "littleLEFTEAR",
+            "littleMASK_REVERSE_PARTIAL",
+            "littleROSINA_REDUCED",
+            "littleSADDLE_SMALL",
+            "midMISS",
+            "midTAIL_OVER",
+            "midTWO_SPOT_MID",
+            "midSHIRT"
         ]
     }
 }

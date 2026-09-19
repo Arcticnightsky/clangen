@@ -1301,6 +1301,9 @@
             "status": [
                 "any"
             ],
+            "skill": [
+                "-SWIMMER,2"
+            ],
             "dies": true
         },
         "r_c": {
@@ -1323,6 +1326,9 @@
                 "loving",
                 "responsible"
             ],
+            "skill": [
+                "-SWIMMER,2"
+            ],
             "dies": true
         },
         "history": [
@@ -1334,7 +1340,8 @@
                 "death": "This cat drowned alongside a Clanmate."
             }
         ]
-    }, {
+    }, 
+	{
     "event_id": "gen_death_horseplace",
     "location": ["any"],
     "season": ["any"],
@@ -1423,7 +1430,7 @@
         ],
         "outsider": {
             "current_rep": ["any"],
-            "changed": -3
+            "changed": -5
         }
     },
     {
@@ -2861,7 +2868,7 @@
         },
         "m_c": {
             "status": ["warrior", "deputy", "leader"],
-            "relationship_status": ["adores"],
+            "relationship_status": ["adores", "mates"],
             "dies": true
         },
         "injury": [
@@ -2938,7 +2945,7 @@
             "war"
         ],
         "frequency": 1,
-        "event_text": "In a battle with o_c_n, r_c's mate m_c is killed. r_c vows the war will never end until o_c_n pays.",
+        "event_text": "In a battle with o_c_n, r_c's mate, m_c, is killed. r_c vows the war will never end until o_c_n pays.",
         "r_c": {
             "status": [
                 "leader"
@@ -3209,7 +3216,7 @@
         "tags": [
             "all_lives"
         ],
-        "frequency": 4,
+        "frequency": 3,
         "event_text": "m_c and r_c loved each other so much they could not be parted, even by death. c_n found their bodies still wrapped around each other in the morning.",
         "m_c": {
             "age": [
@@ -4625,10 +4632,10 @@
         "event_text": "m_c grew weak as the days passed and now walks the stars of Silverpelt.",
         "m_c": {
             "age": [
-                "kitten"
+                "kitten", "newborn"
             ],
             "status": [
-                "kitten"
+                "kitten", "newborn"
             ],
             "dies": true
         },
@@ -4812,7 +4819,7 @@
             "any"
         ],
         "season": [
-            "any"
+            "-leaf-bare"
         ],
         "tags": [],
         "frequency": 3,
@@ -5559,7 +5566,7 @@
             "leaf-fall"
         ],
         "tags": [],
-        "frequency": 4,
+        "frequency": 2,
         "event_text": "Lightning struck in camp, killing m_c.",
         "m_c": {
             "age": [
@@ -5782,7 +5789,7 @@
             "any"
         ],
         "season": [
-            "any"
+            "-leaf-bare"
         ],
         "tags": [],
         "frequency": 4,
@@ -6090,11 +6097,17 @@
                 "loving",
                 "responsible"
             ],
+            "skill": [
+                "-SWIMMER,2"
+            ],
             "dies": true
         },
         "r_c": {
             "age": [
                 "any"
+            ],
+            "skill": [
+                "-SWIMMER,2"
             ],
             "status": [
                 "any"
@@ -6198,7 +6211,7 @@
             "any"
         ],
         "season": [
-            "any"
+            "-leaf-bare"
         ],
         "tags": [],
         "frequency": 4,
@@ -6580,7 +6593,13 @@
                 ],
                 "death": "m_c was brutally attacked and killed by a rogue."
             }
-        ]
+        ],
+        "outsider": {
+            "current_rep": [
+                "any"
+            ],
+            "changed": -3
+        }
     },
     {
         "event_id": "gen_death_dog_anylead2",
@@ -7311,7 +7330,7 @@
                 },
                 "moon_delay": [
                     1,
-                    12
+                    5
                 ],
                 "involved_cats": {
                     "m_c": "r_c",
@@ -7357,7 +7376,7 @@
                 "cats": [
                     "m_c"
                 ],
-                "death": "Curiosity killed m_c."
+                "death": "Curiosity killed this cat, but knowledge and fear brought {PRONOUN/m_c/object} back."
             }
         ]
     },
@@ -9650,7 +9669,7 @@
                 "hostile",
                 "neutral"
             ],
-            "changed": -2
+            "changed": -6
         }
     },
     {
@@ -10399,5 +10418,126 @@
                 "death": "m_c was killed by a predator on a solo hunt."
             }
             ]
-    }
+    },
+    {
+        "event_id": "gen_death_newborn_death1",
+        "location": [
+            "any"
+        ],
+        "season": [
+            "any"
+        ],
+        "tags": ["clan: medicine cat"],
+        "frequency": 2,
+        "event_text": "As the medicine cat looks over r_c's newborn litter one last time, they noticed something was very off... little m_c hasn't moved since {PRONOUN/m_c/subject} was birthed, nor did {PRONOUN/m_c/subject} have a pulse... After a few unsuccessful attempts of reviving the kit, a heartbreaking realization dawns over the medicine cat and r_c: m_c was stillborn.",
+        "m_c": {
+            "age": [
+                "newborn"
+            ],
+            "status": [
+                "newborn"
+            ],
+		    "relationship_constraint": [
+			    "child/parent"
+		    ],
+            "dies": true
+        },
+        "r_c": {
+            "age": [
+                "young adult",
+                "adult",
+                "senior adult",
+                "senior"
+            ],
+        "has_injuries": {
+            "r_c": [
+                "recovering from birth"
+            ]
+		  }
+        },
+        "history": [
+            {
+                "cats": [
+                    "m_c"
+                ],
+                "death": "m_c was stillborn."
+            }
+        ]
+    },
+    {
+        "event_id": "gen_death_newborn_death2",
+        "location": [
+            "any"
+        ],
+        "season": [
+            "any"
+        ],
+        "tags": [],
+        "frequency": 1,
+        "event_text": "r_c knew that m_c was smaller than a typical newborn kit, but she didn't expect m_c to have been so weak that {PRONOUN/m_c/subject}'d be sent to Starclan not even an hour after birth... r_c wails in agony as m_c's tiny body is moved for {PRONOUN/m_c/poss} vigil.",
+        "m_c": {
+            "age": [
+                "newborn"
+            ],
+            "status": [
+                "newborn"
+            ],
+		    "relationship_constraint": [
+			    "child/parent"
+		    ],
+            "dies": true
+        },
+        "r_c": {
+            "age": [
+                "young adult",
+                "adult",
+                "senior adult",
+                "senior"
+            ],
+        "has_injuries": {
+            "r_c": [
+                "recovering from birth"
+            ]
+		  }
+        },
+        "history": [
+            {
+                "cats": [
+                    "m_c"
+                ],
+                "death": "m_c died shortly after birth."
+            }
+        ]
+    },
+    {
+        "event_id": "gen_death_age_any6",
+        "location": [
+            "any"
+        ],
+        "season": [
+            "any"
+        ],
+        "sub_type": [
+            "old_age"
+        ],
+        "tags": [
+            "all_lives"
+        ],
+        "frequency": 4,
+        "event_text": "m_c has lived a long life filled with many memories, good and bad. {PRONOUN/m_c/subject/CAP} is grateful to have been a part of such a wonderful Clan, but {PRONOUN/m_c/subject} knows {PRONOUN/m_c/poss} time here is up. m_c closes {PRONOUN/m_c/poss} eyes one final time with no regrets, letting death claim {PRONOUN/m_c/object} for the first and last time.",
+        "m_c": {
+            "age": [
+                "senior"
+            ],
+            "dies": true
+        },
+        "history": [
+            {
+                "cats": [
+                    "m_c"
+                ],
+                "death": "m_c died of old age."
+            }
+        ]
+}
 ]
