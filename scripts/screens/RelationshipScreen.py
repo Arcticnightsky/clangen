@@ -589,8 +589,6 @@ class RelationshipScreen(Screens):
                 },
                 tool_tip_text="screens.relationship.view_log",
             )
-            if relationship.cat_to.dead:
-                self.log_buttons[f"rel{i}_open_log"].disable()
             self.profile_buttons[f"rel{i}_view_profile"] = UISurfaceImageButton(
                 ui_scale(pygame.Rect((-6, 5), (36, 36))),
                 Icon.CAT_HEAD,

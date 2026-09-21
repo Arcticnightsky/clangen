@@ -28,23 +28,7 @@
     "m_c": {
       "status": ["loner", "rogue", "kittypet"],
       "new_thought": "Is curious about the Clan that sought {PRONOUN/m_c/object} out",
-      "kit_thought": "Is curious about the new place {PRONOUN/m_c/subject}{VERB/m_c/'re/'s} in",
-      "relationships": [
-        {
-          "cats_from": ["m_c"],
-          "cats_to": ["clan"],
-          "mutual": false,
-          "values": ["like"],
-          "amount": 5
-        },
-        {
-          "cats_from": ["m_c"],
-          "cats_to": ["some_clan"],
-          "mutual": false,
-          "values": ["trust"],
-          "amount": 5
-        }
-      ]
+      "kit_thought": "Is curious about the new place {PRONOUN/m_c/subject}{VERB/m_c/'re/'s} in"
     }
   },
   {
@@ -57,13 +41,6 @@
       "new_thought": "Is curious why the Clan has allowed {PRONOUN/m_c/object} back",
       "kit_thought": "Is curious why {PRONOUN/m_c/subject}{VERB/m_c/'ve/'s} been brought here",
       "relationships": [
-        {
-          "cats_from": ["m_c"],
-          "cats_to": ["clan"],
-          "mutual": false,
-          "values": ["like"],
-          "amount": 5
-        },
         {
           "cats_from": ["m_c"],
           "cats_to": ["some_clan"],
@@ -86,17 +63,13 @@
       "relationships": [
         {
           "cats_from": ["m_c"],
-          "cats_to": ["clan"],
-          "mutual": false,
-          "values": ["like"],
-          "amount": 5
-        },
-        {
-          "cats_from": ["m_c"],
           "cats_to": ["some_clan"],
           "mutual": false,
           "values": ["trust"],
-          "amount": 5
+          "amount": 5,
+          "log": {
+            "cats_from": "cat_from is lucky to be able to count on c_n for bringing {PRONOUN/cat_from/object} back home."
+          }
         }
       ]
     }
