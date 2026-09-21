@@ -596,6 +596,8 @@ class Cat:
                 (CatSocial.KITTYPET, CatSocial.LONER, CatSocial.ROGUE)
             )
         self.status.leave_group(new_social_status=new_social_status)
+        self.assign_thought(CatThought.ON_RANK_CHANGE)
+
         self.assign_thought()
         if self.status.rank == CatRank.LEADER:
             self.specsuffix_hidden = True

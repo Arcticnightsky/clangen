@@ -61,7 +61,9 @@
         "involved_cats": {
             "r_c": {
                 "status": [
-                    "any"
+                    "warrior",
+                    "deputy",
+                    "leader"
                 ],
                 "group": [
                     "-afterlife",
