@@ -20,7 +20,9 @@
     {
         "event_id": "rogue_to_other_rogues",
         "strings": [
-            "Showing off {PRONOUN/m_c/poss} scars to r_c"
+            "Shows off {PRONOUN/m_c/poss} scars to r_c",
+            "Got into an argument with r_c",
+            "Got into a fight with r_c"
         ],
         "involved_cats": {
             "m_c": {
@@ -73,7 +75,12 @@
     {
         "event_id": "kitten_rogue_thoughts",
         "strings": [
-            "Is currently trying to figure out how to catch a bird"
+            "Is currently trying to figure out how to catch a bird",
+            "Is currently trying to figure out how to catch a mouse",
+            "Is learning the hunters crouch", 
+            "Wonders why other rogues have to be so mean to each other",
+            "Is trying to learn how to intimidate others",
+            "Is trying to teach {PRONOUN/m_c/self} how to fight"
         ],
         "involved_cats": {
             "m_c": {
@@ -90,6 +97,11 @@
             "Wishes {PRONOUN/m_c/subject} still had {PRONOUN/m_c/poss} family around",
             "Has been teaching {PRONOUN/m_c/self} how to hunt",
             "Misses {PRONOUN/m_c/poss} friends",
+            "Misses {PRONOUN/m_c/poss} mother",
+            "Misses {PRONOUN/m_c/poss} littermates",
+            "Wonders who was the rogue who fathered {PRONOUN/m_c/object}",
+            "Is trying to learn how to intimidate others",
+            "Is trying to teach {PRONOUN/m_c/self} how to fight",
             "Regrets {PRONOUN/m_c/poss} actions",
             "Wonders what being in a Clan is like",
             "Is spending a long time thinking about a cool rogue name"
@@ -110,6 +122,8 @@
             "Is hoping {PRONOUN/m_c/subject} can find something to fill {PRONOUN/m_c/poss} belly tonight",
             "Licks at an old, aching scar in an attempt to soothe it",
             "Was almost found by a c_n patrol",
+            "Got into an argument with another rogue",
+            "Got into a fight with another rogue",
             "Is lurking in c_n territory",
             "Scents for prey"
         ],
@@ -128,6 +142,15 @@
         "strings": [
             "Thinks about finding some Twolegs to help {PRONOUN/m_c/object} in {PRONOUN/m_c/poss} old age",
             "Thinks {PRONOUN/m_c/poss} joints are aching too much to hunt today",
+            "Doesn't have the strength or the energy {PRONOUN/m_c/subject} used to have to fight off a younger rogue",
+            "Reflects on how many enemies {PRONOUN/m_c/subject} made over the seasons",
+            "Laughs at a poor intimidation attempt by a younger rogue",
+            "Was able to fight off a younger rogue thanks to {PRONOUN/m_c/poss} seasons of experience",
+            "Thinks younger rogues fight pathetically nowadays",
+            "Thinks younger rogues don't fight properly nowadays",
+            "Thinks younger rogues fight over worthless things nowadays",
+            "Taught a younger rogue a lesson",
+            "Wonders is {PRONOUN/m_c/subject} should just change {PRONOUN/m_c/poss} ways and become a loner",
             "Wonders if {PRONOUN/m_c/subject} can carry on"
         ],
         "involved_cats": {
@@ -214,7 +237,7 @@
     {
         "event_id": "vengeful_rogue",
         "strings": [
-            "Wants vengeance on {PRONOUN/m_c/poss} past Clan"
+            "Wants vengeance on those who have wronged {PRONOUN/m_c/object}"
         ],
         "involved_cats": {
             "m_c": {
@@ -225,5 +248,65 @@
                 }
             }
         }
+    },
+    {
+        "event_id": "rogue_leaffall",
+        "season": [
+            "leaf-fall"
+        ],
+        "strings": [
+            "Is starting to feel sick",
+            "is trying to hunt as much as {PRONOUN/m_c/subject} can before leaf-bare",
+            "Stole another cat's stash of prey for leaf-bare",
+            "Fought another cat over shelter for leaf-bare",
+            "Is trying to find shelter before leaf-bare"
+        ]
+    },
+    {
+        "event_id": "rogue_leafbare",
+        "season": [
+            "leaf-bare"
+        ],
+        "strings": [
+            "Is struggling to find prey in the snow",
+            "Feels sick with jealousy of how lucky kittypets are to escape the cold",
+            "Is starting to feel sick",
+            "Stole prey from another cat's small stash and is running away",
+            "Feels so cold, it's driving {PRONOUN/m_c/object} insane",
+            "Is feeling too cold to fight anyone",
+            "Came down with a fever that went away in a couple of days",
+            "Was caught in the snow fall",
+            "Fought another cat over shelter from the snow",
+            "Fought another cat over scrawny prey",
+            "Feels as if the bitter cold is making {PRONOUN/m_c/object} feel more violent"
+        ]
+    },
+    {
+        "event_id": "rogue_newleaf",
+        "season": [
+            "newleaf"
+        ],
+        "strings": [
+            "Is glad newleaf is here again",
+            "Dreads the presence of all of the fleas and ticks coming out again...",
+            "Scratches {PRONOUN/m_c/self} violently from all the fleas and ticks on {PRONOUN/m_c/poss} pelt"
+        ]
+    },
+    {
+        "event_id": "rogue_greenleaf",
+        "season": [
+            "greenleaf"
+        ],
+        "strings": [
+            "Fought another cat over shelter from the heat",
+            "Fought another cat over shelter from a storm",
+            "Scratches {PRONOUN/m_c/self} violently from all the fleas and ticks on {PRONOUN/m_c/poss} pelt",
+            "Feels as if the scorching heat is making {PRONOUN/m_c/object} feel more violent",
+            "Feels sick with jealousy of how lucky kittypets are to escape the heat",
+            "Fought another cat over shelter from the rain",
+            "Feels like fighting any cat who pisses {PRONOUN/m_c/object} off because of the heat",
+            "Feels so hot, it's driving {PRONOUN/m_c/object} insane",
+            "Is trying to find a body of water to cool off in"
+        ]
     }
 ]

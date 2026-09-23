@@ -589,18 +589,19 @@ def _check_cat_apprentice(cat, has_app: dict) -> bool:
     if not has_app:
         return True
 
-    # check for None value instead of False-y!
+    # Check current apprentice status if explicitly specified
     if has_app.get("current") is not None:
         if has_app["current"] and not cat.apprentice:
             return False
         elif not has_app["current"] and cat.apprentice:
             return False
 
-    # check for None value instead of False-y!
+    # "former": true means the cat has had an apprentice,
+    # either currently or formerly.
     if has_app.get("former") is not None:
-        if has_app["former"] and not cat.former_apprentices:
+        if has_app["former"] and not (cat.apprentice or cat.former_apprentices):
             return False
-        if not has_app["former"] and cat.former_apprentices:
+        elif not has_app["former"] and cat.former_apprentices:
             return False
 
     return True

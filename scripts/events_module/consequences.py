@@ -4,6 +4,7 @@ from typing import Optional, List, Union, Type
 
 import i18n
 
+import random as random_module
 from scripts.cat.cats import Cat
 from scripts.cat.enums import (
     CatRank,
@@ -14,6 +15,7 @@ from scripts.cat.enums import (
     CatThought,
 )
 from scripts.cat.factories.new_cat_factory import NewCatFactory
+from scripts.cat.pelts import Pelt
 from scripts.cat.factories.enums import CatType
 from scripts.cat.microservices.add_to_clan import add_to_clan, add_dependents_to_clan
 from scripts.cat.microservices.conditions import get_permanent_condition
@@ -29,6 +31,56 @@ from scripts.events_module.parameter_dicts import RelationshipChangeDict
 from scripts.game_structure import game, constants
 from scripts.cat.constants import BACKSTORIES, PERMANENT
 from scripts.events_module.text_adjust import process_text, adjust_list_text
+from scripts.events_module.relationship.romance_chance import (
+    passes_same_sex_romance_chance,
+)
+
+
+def is_eligible_existing_outsider(
+    cat: "Cat", in_event_cats: dict, requires_biological_parent: bool = False
+) -> bool:
+    """Return whether an outsider is available to be reused by a patrol.
+
+    Exiles and driven-away cats must never be reintroduced through a new-cat
+    patrol. Check the player Clan's standing record directly so a stale or
+    malformed nearness value cannot make an unavailable cat eligible.
+    """
+    player_clan_standing = cat.status.get_standing_with_group(CatGroup.PLAYER_CLAN_ID)
+    player_clan_record = next(
+        (
+            record
+            for record in cat.status.standing_history
+            if record["group"] == CatGroup.PLAYER_CLAN_ID
+        ),
+        None,
+    )
+    is_sterilized = any(
+        condition in cat.permanent_condition for condition in ("spayed", "neutered")
+    )
+    return (
+        cat.status.is_outsider
+        and player_clan_record is not None
+        and player_clan_record.get("near") is True
+        and CatStanding.EXILED not in player_clan_standing
+        and not cat.status.is_lost(CatGroup.PLAYER_CLAN_ID)
+        and not cat.dead
+        and cat not in in_event_cats.values()
+        and not (requires_biological_parent and (cat.no_kits or is_sterilized))
+    )
+
+
+def should_reuse_existing_outsider(
+    attribute_list: List[str], allow_patrol_outsider_reuse: bool
+) -> bool:
+    """Return whether a new-cat block should use an existing outsider.
+
+    The ``exists`` tag always explicitly requests an existing cat. Otherwise,
+    patrols reuse a suitable outsider one third of the time, as long as the
+    block contains attributes. Empty blocks always create a fresh cat.
+    """
+    return "exists" in attribute_list or (
+        allow_patrol_outsider_reuse and bool(attribute_list) and randrange(3) == 0
+    )
 
 
 def create_new_cat_block(
@@ -39,6 +91,8 @@ def create_new_cat_block(
     i: int,
     attribute_list: List[str],
     other_clan=None,
+    allow_patrol_outsider_reuse: bool = False,
+    requires_biological_parent: bool = False,
 ) -> list:
     """
     Creates a single new_cat block and then generates and returns the cats within the block
@@ -48,6 +102,11 @@ def create_new_cat_block(
     :param dict in_event_cats: dict containing involved cats' abbreviations as keys and cat objects as values
     :param int i: index of the cat block
     :param list[str] attribute_list: attribute list contained within the block
+    :param bool allow_patrol_outsider_reuse: allow patrols to reuse an existing
+        outsider one third of the time when the block does not explicitly use
+        the ``exists`` tag
+    :param bool requires_biological_parent: exclude infertile outsiders when
+        this cat will be assigned as a biological parent later in the event
     """
 
     new_cats = None
@@ -72,10 +131,14 @@ def create_new_cat_block(
             if index >= i:
                 continue
 
+            parent = event.new_cats[index][0]
+            if not requires_biological_parent(parent):
+                continue
+
             if parent1 is None:
-                parent1 = event.new_cats[index][0]
+                parent1 = parent
             else:
-                parent2 = event.new_cats[index][0]
+                parent2 = parent
 
         adoptive_indexes = [
             int(index) if index.isdigit() else index for index in adoptive_indexes
@@ -109,6 +172,24 @@ def create_new_cat_block(
                     continue
 
                 give_mates.append(in_event_cats[index])
+
+    # gather romance
+    give_romance = []
+    for tag in attribute_list:
+        match = re.match(r"romance:([_,0-9a-zA-Z]+)", tag)
+        if not match:
+            continue
+
+        romance_indexes = match.group(1).split(",")
+
+        # TODO: make this less ugly
+        for index in romance_indexes:
+            if index in in_event_cats:
+                if in_event_cats[index].status.rank.is_any_apprentice_rank():
+                    print("Can't romance apprentices")
+                    continue
+
+                give_romance.append(in_event_cats[index])
 
     # determine gender
     if "male" in attribute_list:
@@ -167,8 +248,13 @@ def create_new_cat_block(
             age = randint(min_age, max_age)
             break
 
+        if match.group(1) == "romance" and give_romance:
+            min_age, max_age = Cat.age_moons[give_romance[0].age]
+            age = randint(min_age, max_age)
+            break
+
         if match.group(1) == "has_kits":
-            age = randint(19, 120)
+            age = randint(20, 120)
             break
 
     if rank and not age:
@@ -307,15 +393,13 @@ def create_new_cat_block(
 
     # check if we can use an existing cat here
     chosen_cat: Optional["Cat"] = None
-    if "exists" in attribute_list:
+    if should_reuse_existing_outsider(attribute_list, allow_patrol_outsider_reuse):
         existing_outsiders = [
-            i
-            for i in Cat.all_cats.values()
-            if i.status.is_outsider
-            and i.status.is_near(CatGroup.PLAYER_CLAN_ID)
-            and not i.status.is_exiled(CatGroup.PLAYER_CLAN_ID)
-            and not i.dead
-            and i not in in_event_cats.values()
+            cat
+            for cat in Cat.all_cats.values()
+            if is_eligible_existing_outsider(
+                cat, in_event_cats, requires_biological_parent
+            )
         ]
         possible_outsiders = []
         for cat in existing_outsiders:
@@ -408,9 +492,11 @@ def create_new_cat_block(
             gender=gender,
             alive=alive,
             outside=outside,
+            is_meeting_cat="meeting" in attribute_list,
             parent1=parent1.ID if parent1 else None,
             parent2=parent2.ID if parent2 else None,
             adoptive_parents=adoptive_parents if adoptive_parents else None,
+            skip_female_rarity_roll="can_birth" in attribute_list,
         )
 
         # NEXT
@@ -515,9 +601,11 @@ def create_new_cat(
     gender: str = None,
     alive: bool = True,
     outside: bool = False,
+    is_meeting_cat: bool = False,
     parent1: str = None,
     parent2: str = None,
     adoptive_parents: list = None,
+    skip_female_rarity_roll: bool = False,
 ) -> list:
     """
     This function creates new cats and then returns a list of those cats
@@ -533,6 +621,7 @@ def create_new_cat(
     :param original_group: set as the cat's old group - default: None (cat will not be given any past group)
     :param str thought: if you need to give a custom thought, set it here
     :param bool outside: set this as True to generate the cat as an outsider instead of as part of the Clan - default: False (Clan cat)
+    :param bool is_meeting_cat: set this as True when generated from a meeting new-cat block
     :param int moons: set the age of the new cat(s) - default: None (will be random or if kit/litter is true, will be kitten.
     :param str gender: set the gender (BIRTH SEX) of the cat - default: None (will be random)
     :param bool alive: set this as False to generate the cat as already dead - default: True (alive)
@@ -624,6 +713,7 @@ def create_new_cat(
             parent1=parent1,
             parent2=parent2,
             adoptive_parents=adoptive_parents if adoptive_parents else [],
+            skip_female_rarity_roll=skip_female_rarity_roll,
         )
         # this simulates a "history" as whomever they used to be
         new_cat.status.change_current_moons_as(moons)
@@ -651,12 +741,84 @@ def create_new_cat(
 
         # NAMES and accs
         # clancat adults should have already generated with a clan-ish name, thus they skip all of this re-naming
-        # little babies will take a clancat name, we love indoctrination
+        # little babies will take a clancat name IF they join the clan, we love indoctrination
         if (
             (kit or litter or moons < 12) and not outside
         ) and original_group not in game.clan.other_clan_IDs:
-            # babies change name, in case their initial name isn't clan-ish
-            new_cat.change_name()
+            if (
+                is_meeting_cat
+                and outside
+                and original_social
+                in (CatSocial.LONER, CatSocial.KITTYPET, CatSocial.ROGUE)
+            ):
+                # young cats who are outsiders keep their outsider names
+                name_categories = [
+                    "silly_names",
+                    "human_names",
+                    "loner_names",
+                    "normal_prefixes",
+                ]
+                # defaults in case of error
+                weights = [1, 1, 1, 1]
+                # give kittypets a kittypet name
+                if original_social == CatSocial.KITTYPET:
+                    weights = constants.CONFIG["cat_name_controls"]["kittypet"]
+
+                if original_social == CatSocial.LONER:
+                    weights = constants.CONFIG["cat_name_controls"]["loner"]
+
+                if original_social == CatSocial.ROGUE:
+                    weights = constants.CONFIG["cat_name_controls"]["rogue"]
+
+                selected_category = choices(name_categories, weights, k=1)[0]
+                name = choice(Name.get_category(selected_category))
+                new_cat.change_name(new_prefix=name, new_suffix="")
+            else:
+                # means that this young cat joins the clan and gets indoctrinated, muahaha
+                new_cat.name = Name(
+                    biome=game.clan.biome,
+                    specsuffix_hidden=new_cat.specsuffix_hidden,
+                    cat=new_cat,
+                )
+
+                excluded_ids = {new_cat.ID}
+                used_prefixes = {
+                    cat.name.prefix
+                    for cat in Cat.all_cats.values()
+                    if cat.ID not in excluded_ids
+                    and cat.status.alive_in_player_clan
+                    and cat.age in (CatAge.NEWBORN, CatAge.KITTEN, CatAge.ADOLESCENT)
+                }
+                used_full_names = {
+                    Name.full_name(cat.name.prefix, cat.name.suffix)
+                    for cat in Cat.all_cats.values()
+                    if cat.ID not in excluded_ids and cat.status.alive_in_player_clan
+                }
+
+                max_attempts = Name.normal_name_combinations()
+                for _ in range(max_attempts):
+                    if new_cat.name.prefix in used_prefixes:
+                        new_cat.name = Name(
+                            biome=game.clan.biome,
+                            specsuffix_hidden=new_cat.specsuffix_hidden,
+                            cat=new_cat,
+                        )
+                        continue
+
+                    if (
+                        Name.full_name(new_cat.name.prefix, new_cat.name.suffix)
+                        in used_full_names
+                    ):
+                        new_cat.name = Name(
+                            prefix=new_cat.name.prefix,
+                            biome=game.clan.biome,
+                            specsuffix_hidden=new_cat.specsuffix_hidden,
+                            cat=new_cat,
+                        )
+                        continue
+
+                    break
+
         elif original_group not in game.clan.other_clan_IDs:
             name_categories = [
                 "silly_names",
@@ -716,6 +878,7 @@ def create_new_cat(
             "NOLEFTEAR",
             "NORIGHTEAR",
             "MANLEG",
+            "BLIND",
         ]
 
         new_cat.pelt.scars = tuple(
@@ -765,6 +928,57 @@ def create_new_cat(
                     new_cat.pelt.scars = (*new_cat.pelt.scars, "NOPAW")
                 elif chosen_condition in ("lost their tail", "born without a tail"):
                     new_cat.pelt.scars = (*new_cat.pelt.scars, "NOTAIL")
+                elif chosen_condition in ("blind"):
+                    new_cat.pelt.scars = (*new_cat.pelt.scars, "BLIND")
+
+        if new_cat.pelt.colour == "WHITE" or new_cat.pelt.white_patches == "FULLWHITE":
+            blue_eye_count = int(Pelt.is_blue_eye(new_cat.pelt.eye_colour)) + int(
+                Pelt.is_blue_eye(new_cat.pelt.eye_colour2)
+            )
+
+            if blue_eye_count == 2:
+                # Two blue eyes in white cats carry the highest real-world risk.
+                deaf_chance = max(
+                    1,
+                    int(
+                        constants.CONFIG["cat_generation"]["base_permanent_condition"]
+                        * 0.4
+                    ),
+                )
+                if not random_module.randint(1, deaf_chance):
+                    new_cat.get_permanent_condition("deaf", born_with=True)
+            elif blue_eye_count == 1:
+                # One blue eye most often maps to unilateral/partial deafness.
+                partial_deaf_chance = max(
+                    1,
+                    int(
+                        constants.CONFIG["cat_generation"]["base_permanent_condition"]
+                        * 0.7
+                    ),
+                )
+                if not random_module.randint(1, partial_deaf_chance):
+                    new_cat.get_permanent_condition(
+                        "partial hearing loss", born_with=True
+                    )
+
+        should_apply_sterilization = False
+        if (
+            original_social in (CatSocial.KITTYPET, CatSocial.LONER)
+            and not new_cat.age.is_baby()
+        ):
+            if original_social == CatSocial.LONER:
+                should_apply_sterilization = randint(1, 40) == 1
+            else:
+                should_apply_sterilization = randint(1, 4) == 1
+
+        if should_apply_sterilization:
+            was_sterilized = new_cat.apply_sterilization_condition()
+            if was_sterilized:
+                if original_social == CatSocial.KITTYPET:
+                    new_cat.pelt.scars = tuple(
+                        scar for scar in new_cat.pelt.scars if scar != "RIGHTEAR"
+                    )
+                new_cat.backdate_sterilization_history(original_social)
 
         # KILL >:D only if we're sposed to tho
         if not alive:
@@ -833,7 +1047,7 @@ def gather_cat_objects(
         if abbr == "m_c":
             found_cat = extra_cat if extra_cat else event.main_cat
         elif abbr == "r_c":
-            found_cat = event.random_cat
+            found_cat = event.random_cat if event.random_cat else None
 
         # add/remove cat if found and then continue for loop
         if is_exclusionary and found_cat:
@@ -886,6 +1100,7 @@ def gather_cat_objects(
             continue
 
         # FACET CATS IN CLAN
+        supported_facet_abbr = True
         if abbr == "high_social":
             found_cat_list = {c for c in out_set if c.personality.sociability > 8}
         elif abbr == "low_social":
@@ -902,6 +1117,8 @@ def gather_cat_objects(
             found_cat_list = {c for c in out_set if c.personality.aggression > 8}
         elif abbr == "low_aggress":
             found_cat_list = {c for c in out_set if c.personality.aggression <= 8}
+        else:
+            supported_facet_abbr = False
 
         # add/remove cats if found and then continue for loop
         if is_exclusionary and found_cat_list:
@@ -947,7 +1164,15 @@ def unpack_rel_block(
     for block in relationship_effects:
         cats_from = block.get("cats_from", [])
         cats_to = block.get("cats_to", [])
-        amount = block.get("amount")
+        raw_amount = block.get("amount")
+        try:
+            amount = int(raw_amount)
+        except (TypeError, ValueError):
+            print(
+                "WARNING: relationship effect amount must be numeric, "
+                f"got {raw_amount!r} in block {block}"
+            )
+            continue
         values = [x for x in block.get("values", ()) if x in possible_values]
 
         # if this is a reaction from the entire clan, we need to know for later
@@ -1069,7 +1294,8 @@ def change_relationship_values(
     :param respect: amount to change admiration (respect), default 0
     :param comfort: amount to change comfort, default 0
     :param trust: amount to change trust, default 0
-    :param log: the string to append to the relationship log of cats involved
+    :param log: the string to append to the relationship log of cats involved.
+        Pass False to intentionally skip logging relationship setup changes.
     :param bool flip_log: If True, this will "flip" the cats used for cat_to and cat_from abbreviation replacements. This should really only be used for mutual relationship changes from events.
     """
 
@@ -1100,6 +1326,10 @@ def change_relationship_values(
                 single_cat_from.is_potential_mate(single_cat_to, for_love_interest=True)
                 or single_cat_to.ID in single_cat_from.mate
             ):
+                if romance > 0 and not passes_same_sex_romance_chance(
+                    single_cat_from, single_cat_to
+                ):
+                    continue
                 # now gain the romance
                 rel.romance += romance
 
@@ -1117,9 +1347,13 @@ def change_relationship_values(
                   " /Respect: " + str(respect) +
                   " /Comfort: " + str(comfort) +
                   " /Trust: " + str(trust)) if changed else print("No relationship change")"""
-            if not log:
-                log = i18n.t("relationships.relationship_log")
-            if log and isinstance(log, str):
+            # Every relationship change needs an explanatory log unless the
+            # caller intentionally suppresses one for relationship setup.
+            # This prevents malformed event data from falling back to the
+            # unhelpful generic interaction message.
+            if log is None:
+                log = i18n.t("relationships.relationship_change_log")
+            if isinstance(log, str):
                 replace_dict = {}
                 cat_from = single_cat_to if flip_log else single_cat_from
                 cat_to = single_cat_from if flip_log else single_cat_to

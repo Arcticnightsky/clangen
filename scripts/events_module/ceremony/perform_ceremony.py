@@ -168,12 +168,50 @@ def check_and_promote_deputy():
 
     if get_config("ranks.only_leader_kits_deputy") and game.clan.leader is not None:
         possible_deputies = [c for c in possible_deputies if c.ID in get_leaders_kits()]
+        
+    # If the leader is present, prioritize warriors they highly respect.
+    leader = game.clan.leader
+    use_mentor_weighting = False
+    if leader and leader.status.alive_in_player_clan:
+        respected_deputies = [
+            cat
+            for cat in possible_deputies
+            if leader.relationships.get(cat.ID)
+            and (
+                leader.relationships[cat.ID].respect >= 30
+                or leader.relationships[cat.ID].trust >= 30
+            )
+        ]
 
+        if respected_deputies:
+            possible_deputies = respected_deputies
+        else:
+            use_mentor_weighting = True
+
+    # If there are possible deputies, choose from that list.
     if possible_deputies:
-        # from here we must have appropriate deputy choices
-        main_cat = random.choice(possible_deputies)
+        if use_mentor_weighting:
+            deputy_weights = [
+                2 if len(cat.former_apprentices) >= 2 else 1
+                for cat in possible_deputies
+            ]
+            main_cat = random.choices(
+                possible_deputies,
+                weights=deputy_weights,
+                k=1,
+            )[0]
+        else:
+            main_cat = random.choice(possible_deputies)
+
+        # A qualified deputy was found, so use the normal deputy ceremony.
+        trigger_ceremony(
+            main_cat,
+            CatRank.DEPUTY,
+            {"past_deputy": game.clan.deputy},
+        )
+
     else:
-        # If there are no possible deputies, choose someone else, with special text.
+        # If there are no eligible deputies, choose a warrior with special text.
         all_warriors = list(
             filter(
                 lambda x: x.status.alive_in_player_clan
@@ -185,8 +223,17 @@ def check_and_promote_deputy():
         if get_config("ranks.only_leader_kits_deputy") and game.clan.leader is not None:
             # If none of the leader's kits meet all the requirements for deputy, choose one randomly, with special text.
             all_warriors = [c for c in all_warriors if c.ID in get_leaders_kits()]
+            
         if all_warriors:
             main_cat = random.choice(all_warriors)
+
+            # No qualified deputy was found, so use the fallback ceremony.
+            trigger_ceremony(
+                main_cat,
+                CatRank.DEPUTY,
+                {"past_deputy": game.clan.deputy, "no_eligible_deputy": True},
+            )
+
         else:
             # If there are no warriors at all, no one is named deputy.
             game.cur_events_list.append(
@@ -194,7 +241,6 @@ def check_and_promote_deputy():
             )
             return
 
-    trigger_ceremony(main_cat, CatRank.DEPUTY, {"past_deputy": game.clan.deputy})
     game.clan.deputy = main_cat
 
 
@@ -403,7 +449,6 @@ def _is_suitable_medcat_app(cat) -> bool:
     beneficial_skills = [
         SkillPath.OMEN,
         SkillPath.PROPHET,
-        SkillPath.HEALER,
         SkillPath.STAR,
         SkillPath.DREAM,
         SkillPath.CLAIRVOYANT,
@@ -411,13 +456,39 @@ def _is_suitable_medcat_app(cat) -> bool:
         SkillPath.CAMP,
     ]
 
+    unbeneficial_skills = [
+        SkillPath.FIGHTER,
+        SkillPath.HUNTER,
+        SkillPath.DARK,
+    ]
+
     if cat.skills.primary.path in beneficial_skills:
         chance = chance / 2
         logger.info("beneficial primary skill, chance updated to %d", round(chance))
 
     if cat.skills.secondary and cat.skills.secondary.path in beneficial_skills:
-        chance = chance / 4
+        chance = chance / 2
         logger.info("beneficial secondary skill, chance updated to %d", round(chance))
+
+    if cat.skills.primary.path == SkillPath.HEALER:
+        chance = chance / 8
+        logger.info(
+            "%s's a natural healer! Chance updated to %d", cat.name, round(chance)
+        )
+
+    if cat.skills.secondary and cat.skills.secondary.path == SkillPath.HEALER:
+        chance = chance / 8
+        logger.info(
+            "%s's a natural healer! Chance updated to %d", cat.name, round(chance)
+        )
+
+    if cat.skills.primary.path in unbeneficial_skills:
+        chance = chance * 3.5
+        logger.info("unbeneficial primary skill, chance updated to %d", round(chance))
+
+    if cat.skills.secondary and cat.skills.secondary.path in unbeneficial_skills:
+        chance = chance * 3.5
+        logger.info("unbeneficial secondary skill, chance updated to %d", round(chance))
 
     if cat.is_disabled():
         chance = chance / 2

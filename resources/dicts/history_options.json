@@ -34,6 +34,14 @@
       "starclan_kit_6",
       "starclan_kit_7"
     ],
+    "starclan_tyrant_lead_bad": [
+      "starclan_tyrant_lead_bad_0",
+      "starclan_tyrant_lead_bad_1"
+    ],
+    "starclan_tyrant_lead_ok": [
+      "starclan_tyrant_lead_ok_0",
+      "starclan_tyrant_lead_ok_1"
+    ],
     "dark_forest_default": [
       "dark_forest_default_0",
       "dark_forest_default_1",
@@ -68,6 +76,16 @@
       "dark_forest_kit_2",
       "dark_forest_kit_3",
       "dark_forest_kit_4"
+    ],
+    "dark_forest_tyrant_lead_bad": [
+      "dark_forest_tyrant_lead_bad_0",
+      "dark_forest_tyrant_lead_bad_1",
+      "dark_forest_tyrant_lead_bad_2",
+      "dark_forest_tyrant_lead_bad_3"
+    ],
+    "dark_forest_tyrant_lead_ok": [
+      "dark_forest_tyrant_lead_ok_0",
+      "dark_forest_tyrant_lead_ok_1"
     ]
   }
 }

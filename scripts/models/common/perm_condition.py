@@ -24,3 +24,5 @@ class PermCondition(Enum):
     recurring_shock = "recurring shock"
     lasting_grief = "lasting grief"
     persistent_headaches = "persistent headaches"
+    neutered = "neutered"
+    spayed = "spayed"
