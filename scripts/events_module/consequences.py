@@ -132,7 +132,7 @@ def create_new_cat_block(
                 continue
 
             parent = event.new_cats[index][0]
-            if not can_be_biological_parent(parent):
+            if not requires_biological_parent(parent):
                 continue
 
             if parent1 is None:
