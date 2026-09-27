@@ -578,6 +578,7 @@ class Patrol:
             outside_cats=outside_cats,
             event=outcome,
             other_clan=self.other_clan,
+            force_new_cats=True,
         )
         if not (temp_involved_cats or will_create_how_many):
             return False
