@@ -292,10 +292,10 @@ class TestInvolvedCats(unittest.TestCase):
         set_up_patrol_class_w_event(self.patrol_class, [war1], [patrol])
         self.patrol_class._create_needed_cats()
 
-        self.assertEqual(
+        self.assertNotEqual(
             outsider1,
             self.patrol_class.involved_cats["n_c0"],
-            msg=f"{outsider1} should be n_c0",
+            msg="n_c0 should be a newly generated cat, not an existing outsider",
         )
 
         self.assertNotEqual(
@@ -487,7 +487,7 @@ class TestOutcomeExecution(unittest.TestCase):
                 intro_strings=["test"],
                 decline_strings=["test"],
                 involved_cats={
-                    "n_c0": InvolvedCatDict(),
+                    "n_c0": InvolvedCatDict(can_create_new_cat={}),
                 },
                 success_outcomes=[{"strings": [""], "join": [JoinDict(cats=["n_c0"])]}],
                 fail_outcomes=[{"strings": ["test"]}],
@@ -504,10 +504,11 @@ class TestOutcomeExecution(unittest.TestCase):
                 other_clan=OtherClan(),
             )
 
+            self.assertNotEqual(outsider1, self.patrol_class.involved_cats["n_c0"])
             self.assertTrue(
-                outsider1.status.alive_in_player_clan,
-                msg=f"{outsider1} should be part of the player_clan, instead {outsider1} is rank: {outsider1.status.rank} with group: {outsider1.status.group}. The patrol's n_c0 is {self.patrol_class.involved_cats['n_c0']}",
+                self.patrol_class.involved_cats["n_c0"].status.alive_in_player_clan
             )
+            self.assertTrue(outsider1.status.is_outsider)
 
         with self.subTest("Test that outsider takes on an appropriate rank."):
             war1 = TestCatFactory.create_cat(rank=CatRank.WARRIOR)

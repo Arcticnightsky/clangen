@@ -56,12 +56,7 @@ class TestExistingOutsiderReuse(unittest.TestCase):
     def test_empty_patrol_block_always_creates_new_cat(self):
         self.assertFalse(should_reuse_existing_outsider([], True))
 
-    @patch("scripts.events_module.consequences.randrange", return_value=0)
-    def test_patrol_reuses_existing_outsider_one_third_of_the_time(self, _randrange):
-        self.assertTrue(should_reuse_existing_outsider(["loner"], True))
-
-    @patch("scripts.events_module.consequences.randrange", return_value=1)
-    def test_patrol_creates_new_cat_for_other_two_rolls(self, _randrange):
+    def test_patrol_attributes_without_exists_always_create_new_cat(self):
         self.assertFalse(should_reuse_existing_outsider(["loner"], True))
 
     def test_exiled_or_driven_away_outsiders_cannot_be_reused(self):
