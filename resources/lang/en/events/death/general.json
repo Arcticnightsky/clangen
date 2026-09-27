@@ -908,7 +908,9 @@
             "any"
         ],
         "season": [
-            "-leaf-bare"
+            "leaf-fall",             
+            "newleaf",             
+            "greenleaf"
         ],
         "tags": [],
         "frequency": 3,
@@ -934,7 +936,9 @@
             "any"
         ],
         "season": [
-            "-leaf-bare"
+            "leaf-fall",             
+            "newleaf",             
+            "greenleaf"
         ],
         "frequency": 3,
         "event_text": "m_c saved r_c from a snake but was bitten in the process. The venom killed {PRONOUN/m_c/object}.",
@@ -4819,7 +4823,9 @@
             "any"
         ],
         "season": [
-            "-leaf-bare"
+            "leaf-fall",             
+            "newleaf",             
+            "greenleaf"
         ],
         "tags": [],
         "frequency": 3,
@@ -5789,7 +5795,9 @@
             "any"
         ],
         "season": [
-            "-leaf-bare"
+            "leaf-fall",             
+            "newleaf",             
+            "greenleaf"
         ],
         "tags": [],
         "frequency": 4,
@@ -6211,7 +6219,9 @@
             "any"
         ],
         "season": [
-            "-leaf-bare"
+            "leaf-fall",             
+            "newleaf",             
+            "greenleaf"
         ],
         "tags": [],
         "frequency": 4,
@@ -8429,7 +8439,11 @@
     {
         "event_id": "gen_death_drownedbyaduck",
         "location": ["any"],
-        "season": ["-leaf-bare"],
+        "season": [            
+			"leaf-fall",             
+            "newleaf",             
+            "greenleaf"
+		],
         "poi": {
             "name": ["terrain_lake"]
         },
@@ -8458,7 +8472,11 @@
     {
         "event_id": "gen_death_drownedinabog",
         "location": ["beach", "forest", "wetlands"],
-        "season": ["-leaf-bare"],
+        "season": [            
+			"leaf-fall",             
+            "newleaf",             
+            "greenleaf"
+		],
         "sub_type": [],
         "tags": [],
         "frequency": 1,
@@ -9432,7 +9450,9 @@
             "wetlands"
         ],
         "season": [
-            "-leaf-bare"
+            "leaf-fall",             
+            "newleaf",             
+            "greenleaf"
         ],
         "tags": [
             "all_lives",
