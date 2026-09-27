@@ -50,7 +50,7 @@ def handle_relationships(cat: Cat):
 
     romantic_events.handle_mates_and_breakup(cat)
 
-        romance_interests = []
+    romance_interests = []
         for relationship in cat.relationships.values():
             if (
                 relationship.romance > 0
