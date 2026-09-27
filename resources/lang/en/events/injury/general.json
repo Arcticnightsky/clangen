@@ -4998,7 +4998,9 @@
             "any"
         ],
         "season": [
-            "-leaf-bare"
+            "leaf-fall",
+            "newleaf",
+            "greenleaf"
         ],
         "frequency": 4,
         "event_text": "m_c was bitten by a snake, and miraculously survived!",
@@ -6393,7 +6395,11 @@
     {
         "event_id": "gen_injury_drownedbyaduck",
         "location": ["any"],
-        "season": ["-leaf-bare"],
+        "season": [            
+            "leaf-fall",             
+            "newleaf",             
+            "greenleaf"
+        ],
         "sub_type": [],
         "tags": [],
         "poi": {
