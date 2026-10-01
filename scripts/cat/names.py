@@ -139,9 +139,13 @@ class Name:
             "female": "female",
             "trans female": "female",
         }.get(genderalign, "unisex")
+        
         categories = [f"unisex_{name_type}_names"]
         if gender != "unisex":
-            categories.append(f"{gender}_{name_type}_names")
+            if random.randint(0, 1) == 0:
+                categories.append(f"{gender}_{name_type}_names")
+            else:
+                categories.append(f"unisex_{name_type}_names")
         selected_category = random.choice(categories)
         return random.choice(cls.names_dict[selected_category])
 
