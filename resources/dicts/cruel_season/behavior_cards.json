@@ -4,6 +4,7 @@
     "modifiers": {
       "pregnancy.birth_cooldown": 2,
       "pregnancy.primary_chance_mated": 20,
+      "random_affair_chance": 80,
       "pregnancy.primary_chance_unmated": 40
     }
   },
