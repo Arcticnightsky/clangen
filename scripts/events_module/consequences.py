@@ -74,13 +74,11 @@ def should_reuse_existing_outsider(
 ) -> bool:
     """Return whether a new-cat block should use an existing outsider.
 
-    The ``exists`` tag always explicitly requests an existing cat. Otherwise,
-    patrols reuse a suitable outsider one third of the time, as long as the
-    block contains attributes. Empty blocks always create a fresh cat.
+    Only the ``exists`` tag explicitly requests an existing cat. Patrol new-cat
+    blocks must otherwise always generate a fresh cat, even when their block
+    contains other attributes.
     """
-    return "exists" in attribute_list or (
-        allow_patrol_outsider_reuse and bool(attribute_list) and randrange(3) == 0
-    )
+    return "exists" in attribute_list
 
 
 def create_new_cat_block(
@@ -102,9 +100,9 @@ def create_new_cat_block(
     :param dict in_event_cats: dict containing involved cats' abbreviations as keys and cat objects as values
     :param int i: index of the cat block
     :param list[str] attribute_list: attribute list contained within the block
-    :param bool allow_patrol_outsider_reuse: allow patrols to reuse an existing
-        outsider one third of the time when the block does not explicitly use
-        the ``exists`` tag
+    :param bool allow_patrol_outsider_reuse: retained for call compatibility.
+        Existing outsiders are now reused only when the block explicitly uses
+        the ``exists`` tag.
     :param bool requires_biological_parent: exclude infertile outsiders when
         this cat will be assigned as a biological parent later in the event
     """

@@ -49,7 +49,7 @@ def updated_create_new_cat(
     # check if we need to match age to an assigned mate
     if option_dict.get("can_create_new_cat", {}).get("assign_mate"):
         possible_ages = []
-        for m in option_dict["can_create_new_cat"].get("assign_mate", []):
+        for m in option_dict.get("can_create_new_cat", {}).get("assign_mate", []):
             if m in involved_cats:
                 possible_ages.append(involved_cats[m].age)
         # this takes priority over any age specified in option_dict
@@ -73,7 +73,8 @@ def updated_create_new_cat(
                         r
                         for r in [*CatRank]
                         if r.is_any_clancat_rank()
-                        and r not in (CatRank.LEADER, CatRank.DEPUTY, CatRank.MEDICINE_CAT)
+                        and r
+                        not in (CatRank.LEADER, CatRank.DEPUTY, CatRank.MEDICINE_CAT)
                     ]
                 )
         else:
@@ -95,7 +96,7 @@ def updated_create_new_cat(
         )
 
     # handle applying an age for litters if one wasn't specified
-    is_litter = option_dict["can_create_new_cat"].get("become_litter")
+    is_litter = option_dict.get("can_create_new_cat", {}).get("become_litter")
     if is_litter:
         if not status.get("age") or not status["age"].is_baby():
             status["age"] = choice((CatAge.NEWBORN, CatAge.KITTEN))
@@ -103,8 +104,11 @@ def updated_create_new_cat(
     if not status.get("rank") and not status.get("age"):
         # if no group was given either, then we just pick either no group or other clan
         if not option_dict.get("group"):
+            possible_groups = ["no_group"]
+            if other_clan:
+                possible_groups.append(CatGroup.OTHER_CLAN)
             status["group_ID"] = _get_id_for_group(
-                ["no_group", CatGroup.OTHER_CLAN], involved_cats, other_clan
+                possible_groups, involved_cats, other_clan
             )
 
         # then we find an appropriate rank for that group
@@ -138,13 +142,15 @@ def updated_create_new_cat(
     blood_parents: list[Cat] = []
     adoptive_parents: list[Cat] = []
 
-    for p in option_dict["can_create_new_cat"].get("assign_blood_parent", []):
+    for p in option_dict.get("can_create_new_cat", {}).get("assign_blood_parent", []):
         if p in involved_cats:
             if isinstance(involved_cats[p], list):
                 blood_parents.extend(involved_cats[p])
             else:
                 blood_parents.append(involved_cats[p])
-    for p in option_dict["can_create_new_cat"].get("assign_adoptive_parent", []):
+    for p in option_dict.get("can_create_new_cat", {}).get(
+        "assign_adoptive_parent", []
+    ):
         if p in involved_cats:
             if isinstance(involved_cats[p], list):
                 adoptive_parents.extend(involved_cats[p])
@@ -259,7 +265,7 @@ def updated_create_new_cat(
         blood_parents
         or adoptive_parents
         or is_litter
-        or option_dict["can_create_new_cat"].get("assign_mate")
+        or option_dict.get("can_create_new_cat", {}).get("assign_mate")
     ):
         inheritance_db.load_inheritances(Cat)
 
@@ -269,8 +275,8 @@ def updated_create_new_cat(
 def _assign_mates(
     created_cat: Cat, involved_cats: dict[str, Cat], option_dict: InvolvedCatDict
 ):
-    if option_dict["can_create_new_cat"].get("assign_mate"):
-        for m in option_dict["can_create_new_cat"].get("assign_mate", []):
+    if option_dict.get("can_create_new_cat", {}).get("assign_mate"):
+        for m in option_dict.get("can_create_new_cat", {}).get("assign_mate", []):
             if m in involved_cats:
                 # we delay inheritance recalc because we'll handle it later on, and we don't want to do it twice
                 created_cat.set_mate(involved_cats[m], recalculate_inheritance=False)
@@ -443,7 +449,10 @@ def _assign_health(created_cat, option_dict):
             elif chosen_condition == "blind":
                 created_cat.pelt.scars = (*created_cat.pelt.scars, "BLIND")
 
-        if created_cat.pelt.colour == "WHITE" or created_cat.pelt.white_patches == "FULLWHITE":
+        if (
+            created_cat.pelt.colour == "WHITE"
+            or created_cat.pelt.white_patches == "FULLWHITE"
+        ):
             blue_eye_count = int(Pelt.is_blue_eye(created_cat.pelt.eye_colour)) + int(
                 Pelt.is_blue_eye(created_cat.pelt.eye_colour2)
             )
@@ -472,6 +481,7 @@ def _assign_health(created_cat, option_dict):
                     created_cat.get_permanent_condition(
                         "partial hearing loss", born_with=True
                     )
+
 
 def _assign_stats(created_cat, option_dict):
     if option_dict.get("stat"):
