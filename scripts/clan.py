@@ -354,7 +354,7 @@ class Clan:
                     weights = constants.CONFIG["cat_name_controls"]["rogue"]
 
                 selected_category = choices(name_categories, weights, k=1)[0]
-                name = choice(Name.names_dict[selected_category])
+                name = Name.get_outsider_name(selected_category, c.genderalign)
                 c.change_name(new_prefix=name, new_suffix="")
 
                 # add back to all_cats, cus they get removed during `create_clan()`

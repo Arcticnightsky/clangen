@@ -120,6 +120,36 @@ class Name:
         return cls.names_dict.get(category, [])
 
     @classmethod
+    def get_outsider_name(cls, category: str, genderalign: str) -> str:
+        """Return an outsider name compatible with the cat's gender identity.
+
+        Gender-specific outsider names live in a separate resource so that the
+        large, frequently edited base name list remains conflict-free. Binary
+        cats have an equal chance of receiving a matching gendered name or a
+        unisex name; all other gender identities receive unisex names.
+        """
+        cls.load_localized_names()
+        if category == "normal_prefixes":
+            return random.choice(cls.names_dict[category])
+
+        name_type = category.removesuffix("_names")
+        gender = {
+            "male": "male",
+            "trans male": "male",
+            "female": "female",
+            "trans female": "female",
+        }.get(genderalign, "unisex")
+        
+        categories = [f"unisex_{name_type}_names"]
+        if gender != "unisex":
+            if random.randint(0, 1) == 0:
+                categories.append(f"{gender}_{name_type}_names")
+            else:
+                categories.append(f"unisex_{name_type}_names")
+        selected_category = random.choice(categories)
+        return random.choice(cls.names_dict[selected_category])
+
+    @classmethod
     def normal_name_combinations(cls) -> int:
         """Return the number of regular prefix/suffix combinations available."""
         cls.load_localized_names()
@@ -156,8 +186,15 @@ class Name:
         if always_english:
             with open("resources/lang/en/names.json", encoding="utf-8") as read_file:
                 names_dict = ujson.loads(read_file.read())
+            with open(
+                "resources/lang/en/outsider_names.json", encoding="utf-8"
+            ) as read_file:
+                names_dict.update(ujson.loads(read_file.read()))
         else:
             names_dict = load_lang_resource("names.json")
+            # These names intentionally use the English resource until each
+            # locale supplies a gendered outsider-name file of its own.
+            names_dict.update(load_lang_resource("outsider_names.json"))
 
         save_dir = get_save_dir()
 
@@ -235,7 +272,7 @@ class Name:
         weights = constants.CONFIG["cat_name_controls"][str(social)]
 
         selected_category = random.choices(name_categories, weights, k=1)[0]
-        name = random.choice(self.names_dict[selected_category])
+        name = self.get_outsider_name(selected_category, self.cat.genderalign)
         self.cat.change_name(new_prefix=name, new_suffix="")
 
     # Generate possible prefix

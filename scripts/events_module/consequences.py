@@ -769,7 +769,7 @@ def create_new_cat(
                     weights = constants.CONFIG["cat_name_controls"]["rogue"]
 
                 selected_category = choices(name_categories, weights, k=1)[0]
-                name = choice(Name.get_category(selected_category))
+                name = Name.get_outsider_name(selected_category, new_cat.genderalign)
                 new_cat.change_name(new_prefix=name, new_suffix="")
             else:
                 # means that this young cat joins the clan and gets indoctrinated, muahaha
@@ -842,7 +842,7 @@ def create_new_cat(
                 weights = constants.CONFIG["cat_name_controls"]["rogue"]
 
             selected_category = choices(name_categories, weights, k=1)[0]
-            name = choice(Name.names_dict[selected_category])
+            name = Name.get_outsider_name(selected_category, new_cat.genderalign)
 
             # now, if this cat should take a new clan name, we give them such
             if new_name:
