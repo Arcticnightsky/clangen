@@ -641,16 +641,16 @@ dev_tools = true
   min_leader_lives = 9
 
   # base 1/chance that leader will die
-  leader_death_chance = 10
+  leader_death_chance = 20
 
   # base 1/chance a cat will die
   classic_death_chance = 500
-  death_chance = 350
+  death_chance = 650
 
   # modifiers for death chance based on if a war is going badly
   # SUBTRACTS from the denominator so higher = more likely to die
-  war_death_modifier_leader = 5
-  war_death_modifier = 230
+  war_death_modifier_leader = 8
+  war_death_modifier = 330
 
   # age cats will start dying of old age based on old_age_death_curve
   old_age_death_start = 150
