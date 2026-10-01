@@ -1010,9 +1010,9 @@ dev_tools = true
 
   # the amount of prey a healthy warrior will catch automatically each timeskip
   # amount will be chosen from the given range. default is 2-4 prey.
-  auto_warrior_prey = [2,4]
+  auto_warrior_prey = [4,6]
   # the same, but for healthy apprentices
-  auto_apprentice_prey = [1,3]
+  auto_apprentice_prey = [2,4]
 
 
   # the baseline of prey amount caught on patrol will be a warrior's prey_requirement plus this value
