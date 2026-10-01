@@ -13,7 +13,10 @@ from scripts.game_structure import game
 
 
 def create_ceremony(
-    main_cat: Cat, old_name: str = None, involved_cats: dict[str, Cat] = None
+    main_cat: Cat,
+    old_name: str = None,
+    involved_cats: dict[str, Cat] = None,
+    honor: str = None,
 ):
     """
     Finds appropriate ceremony for main_cat and adds it to the cur_events_list
@@ -49,7 +52,7 @@ def create_ceremony(
         frequency_active=False,
         ensured_id=get_config("event_generation.debug_ensure_ceremony_id"),
     )
-    
+
     # we won't actually use results or rel results for ceremonies
     processed_string, results, rel_results = execute_outcome(
         chosen_ceremony, involved_cats
@@ -60,7 +63,7 @@ def create_ceremony(
 
     # do the extra processing for specifically ceremony text
     processed_string = ceremony_text_adjust(
-        main_cat.personality.trait, old_name, processed_string
+        main_cat.personality.trait, old_name, processed_string, honor
     )
 
     game.cur_events_list.append(
