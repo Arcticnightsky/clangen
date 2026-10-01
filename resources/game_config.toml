@@ -103,7 +103,7 @@ dev_tools = true
   allow_mating = true
 
   # maximum age difference allowed for cats to be romantic with each other
-  age_range = 24
+  age_range = 40
 
   # if true, disables the same-age group check
   override_same_age_group = true
