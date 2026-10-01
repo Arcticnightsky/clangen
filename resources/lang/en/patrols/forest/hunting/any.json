@@ -1594,7 +1594,7 @@
                 "death": [
                     {
                         "cats": [
-                            "r_c0"
+                            "p_l"
                         ],
                         "history": "m_c was killed by a coyote protecting its scavenged meal."
                     }
@@ -2180,7 +2180,7 @@
                 "death": [
                     {
                         "cats": [
-                            "r_c0"
+                            "p_l"
                         ],
                         "history": "m_c was killed by a wolf pack protecting its meal."
                     }

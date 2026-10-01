@@ -4894,7 +4894,7 @@
                 "death": [
                     {
                         "cats": [
-                            "r_c0"
+                            "p_l"
                         ],
                         "history": "m_c lost a life to a hostile Clan."
                     }
@@ -4918,7 +4918,7 @@
                 "death": [
                     {
                         "cats": [
-                            "r_c0"
+                            "p_l"
                         ],
                         "history": ""
                     }
@@ -5637,7 +5637,7 @@
                 "death": [
                     {
                         "cats": [
-                            "r_c0"
+                            "p_l"
                         ],
                         "history": "m_c lost a life to a hostile Clan."
                     }
@@ -5661,7 +5661,7 @@
                 "death": [
                     {
                         "cats": [
-                            "r_c0"
+                            "p_l"
                         ],
                         "history": ""
                     }
@@ -6380,7 +6380,7 @@
                 "death": [
                     {
                         "cats": [
-                            "r_c0"
+                            "p_l"
                         ],
                         "history": "m_c lost a life to a hostile Clan."
                     }
@@ -6404,7 +6404,7 @@
                 "death": [
                     {
                         "cats": [
-                            "r_c0"
+                            "p_l"
                         ],
                         "history": ""
                     }
@@ -7123,7 +7123,7 @@
                 "death": [
                     {
                         "cats": [
-                            "r_c0"
+                            "p_l"
                         ],
                         "history": "m_c lost a life to a hostile Clan."
                     }
@@ -7147,7 +7147,7 @@
                 "death": [
                     {
                         "cats": [
-                            "r_c0"
+                            "p_l"
                         ],
                         "history": ""
                     }
@@ -7634,7 +7634,7 @@
                 "death": [
                     {
                         "cats": [
-                            "r_c0"
+                            "p_l"
                         ],
                         "history": "m_c was killed by a hostile Clan."
                     }
@@ -7690,7 +7690,7 @@
                 "death": [
                     {
                         "cats": [
-                            "r_c0"
+                            "p_l"
                         ],
                         "history": "m_c lost a life against a hostile Clan."
                     }

@@ -615,7 +615,7 @@
                 "death": [
                     {
                         "cats": [
-                            "r_c0"
+                            "p_l"
                         ],
                         "history": "m_c was ambushed by rogues while on a solo patrol."
                     }
@@ -755,7 +755,7 @@
                 "death": [
                     {
                         "cats": [
-                            "r_c0"
+                            "p_l"
                         ],
                         "history": "m_c was killed by a flood."
                     }
