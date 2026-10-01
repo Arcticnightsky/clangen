@@ -1029,10 +1029,10 @@ dev_tools = true
   # cats of each rank will choose a random num of prey from the given list to catch each moon
   # ranks that are not leader, deputy, or warrior will only catch prey if no leader/deputy/warriors are available to do so
   [prey.auto_catch]
-    leader = [2, 3, 3, 4]
-    deputy = [2, 3, 3, 4]
-    warrior = [2, 3, 3, 4]
-    apprentice = [1, 2, 2, 3]
+    leader = [3, 4, 4, 5]
+    deputy = [3, 4, 4, 5]
+    warrior = [3, 4, 4, 5]
+    apprentice = [2, 3, 3, 4]
     "medicine cat" = [0, 1, 1, 2]
     "medicine cat apprentice" = [0, 1]
     mediator = [0, 1, 2, 2]
