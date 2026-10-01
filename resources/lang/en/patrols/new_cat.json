@@ -9869,7 +9869,7 @@
                         ],
                         "amount": -10,
                         "log": {
-                            "cats_from": "cat_from got into a small tussle with cat_to after cat_to was about to hurt {PRONOUN/cat_from/poss} dog friend."
+                            "cats_from": "cat_from got into a small tussle with cat_to after cat_from was about to hurt {PRONOUN/cat_to/poss} dog friend."
                         }
                     }
                 ],
