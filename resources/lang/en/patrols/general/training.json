@@ -3907,7 +3907,7 @@
                 "frequency": 4,
                 "outcome_art": "cat_sprites/gen_train_speakingromance_WrWr",
                 "strings": [
-                    "p_l has a comprehensive list to get through, it's good to make sure {PRONOUN/s_c0/subject}{VERB/p_l/'ve/'s} always got a clear assessment of c_n's capabilities. Should the world come to threaten them, p_l will know which Clanmates {PRONOUN/p_l/subject} can rely on, and which will be suited to what tasks. It's a challenging, productive afternoon."
+                    "p_l has a comprehensive list to get through, it's good to make sure {PRONOUN/p_l/subject}{VERB/p_l/'ve/'s} always got a clear assessment of c_n's capabilities. Should the world come to threaten them, p_l will know which Clanmates {PRONOUN/p_l/subject} can rely on, and which will be suited to what tasks. It's a challenging, productive afternoon."
                 ],
                 "involved_cats": {
                     "p_l": {
@@ -19308,7 +19308,7 @@
                 "condition": [
                     {
                         "cats": [
-                            "s_c0"
+                            "r_c1"
                         ],
                         "condition": [
                             "minor_injury"
