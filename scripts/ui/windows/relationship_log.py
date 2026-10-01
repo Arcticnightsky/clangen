@@ -437,7 +437,7 @@ class RelationshipLogWindow(GameWindow):
             elif cat.is_grandparent(other_cat):
                 if cat.genderalign in ("female", "trans female"):
                     relation = f"{i18n.t("general.grandmother")}<br>"
-                elif cat.inspect_cat.genderalign in ("male", "trans male"):
+                elif cat.genderalign in ("male", "trans male"):
                     relation = f"{i18n.t("general.grandfather")}<br>"
                 else:
                     relation = relation = f"{i18n.t("general.grandparent")}<br>"
