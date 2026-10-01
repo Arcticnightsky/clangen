@@ -2,7 +2,7 @@ import unittest
 from copy import deepcopy
 from random import Random
 from types import SimpleNamespace
-from unittest.mock import patch
+from unittest.mock import MagicMock, patch
 
 from scripts.cat.factories.test_cat_factory import TestCatFactory
 
@@ -13,8 +13,9 @@ from scripts.game_structure import game, constants
 from scripts.cat.cats import Cat
 from scripts.cat.names import Name
 from scripts.cat_relations.inheritance2 import inheritance_db
-from scripts.cat.enums import CatAge, CatRank, CatGroup, CatSocial
+from scripts.cat.enums import CatAge, CatRank, CatGroup, CatSocial, CatCompatibility
 from scripts.cat_relations.relationship import Relationship
+from scripts.cat.skills import Skill, SkillPath
 
 cat_factory = TestCatFactory()
 
@@ -853,6 +854,30 @@ class TestNameRepr(unittest.TestCase):
                 cat.status.become_lost()
                 cat.name.specsuffix_hidden = True
                 self.assertTrue(str(cat.name).endswith("test"))
+
+
+class TestAffinityChanges(unittest.TestCase):
+    def test_afterlife_skills_modify_affinity_changes(self):
+        starclan = MagicMock()
+        starclan.get_compatibility.return_value = CatCompatibility.NEUTRAL
+        dark_forest = MagicMock()
+        dark_forest.get_compatibility.return_value = CatCompatibility.NEUTRAL
+
+        with patch.object(game, "starclan", starclan), patch.object(
+            game, "dark_forest", dark_forest
+        ):
+            star_cat = cat_factory.create_cat(moons=12)
+            star_cat.skills.primary = Skill(SkillPath.STAR, points=10)
+            star_cat.change_affinity(starclan_change=-50, dark_forest_change=30)
+
+            dark_cat = cat_factory.create_cat(moons=12)
+            dark_cat.skills.primary = Skill(SkillPath.DARK, points=10)
+            dark_cat.change_affinity(starclan_change=-50, dark_forest_change=30)
+
+        self.assertEqual(star_cat.starclan_affinity, -10)
+        self.assertEqual(star_cat.dark_forest_affinity, 10)
+        self.assertEqual(dark_cat.starclan_affinity, -70)
+        self.assertEqual(dark_cat.dark_forest_affinity, 70)
 
 
 class TestAfterlifeAssignment(unittest.TestCase):

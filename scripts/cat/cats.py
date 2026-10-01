@@ -761,7 +761,7 @@ class Cat:
                 starclan_change -= round(starclan_change * modifier)
 
             if not self.status.is_outsider:
-                cat_skills = self.skills.get_skill_dict()
+                cat_skills = self.skills.get_all()
 
                 star_skill = cat_skills.get(SkillPath.STAR, 0)
                 dark_skill = cat_skills.get(SkillPath.DARK, 0)
@@ -778,7 +778,7 @@ class Cat:
                 dark_forest_change -= round(dark_forest_change * modifier)
 
             if not self.status.is_outsider:
-                cat_skills = self.skills.get_skill_dict()
+                cat_skills = self.skills.get_all()
 
                 dark_skill = cat_skills.get(SkillPath.DARK, 0)
                 star_skill = cat_skills.get(SkillPath.STAR, 0)
