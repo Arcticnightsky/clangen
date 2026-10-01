@@ -59,7 +59,7 @@ def create_ceremony(
     )
 
     # cats to be displayed as buttons under the event
-    button_cats = [c for c in involved_cats.values() if c is not None]
+    button_cats = [c for c in involved_cats.values() if isinstance(c, Cat)]
 
     # do the extra processing for specifically ceremony text
     processed_string = ceremony_text_adjust(
