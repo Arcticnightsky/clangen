@@ -691,7 +691,7 @@ dev_tools = true
 
   # 5/chance (for most personalities) or 15/chance (for some personalities) an injury will occur 
   classic_injury_chance = 700
-  injury_chance = 600
+  injury_chance = 650
 
   # 1/chance a cat will get a permanent condition from an event with that possibility 
   permanent_condition_chance = 40
