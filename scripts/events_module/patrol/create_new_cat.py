@@ -309,7 +309,7 @@ def _assign_name(created_cat: Cat):
             weights = constants.CONFIG["cat_name_controls"]["rogue"]
 
         selected_category = choices(name_categories, weights, k=1)[0]
-        name = choice(Name.names_dict[selected_category])
+        name = Name.get_outsider_name(selected_category, created_cat.genderalign)
         created_cat.change_name(new_prefix=name, new_suffix="")
 
 
