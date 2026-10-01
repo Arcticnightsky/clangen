@@ -27,7 +27,7 @@
     "modifiers": {
       "condition_related.war_injury_modifier": 235,
       "death_related.war_death_modifier": 340,
-      "death_related.war_death_modifier_leader": 46
+      "death_related.war_death_modifier_leader": 10
     }
   }
 }
