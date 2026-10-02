@@ -15063,5 +15063,377 @@
                 ]
             }
         ]
+    },
+    {
+        "event_id": "gen_bord_exiled_plea",
+        "types": [
+            "border"
+        ],
+        "frequency": 2,
+        "tags": [],
+        "required_cat_types": {
+            "patrol_cats": [
+                2,
+                6
+            ]
+        },
+        "chance_of_success": 50,
+        "patrol_art": "cat_sprites/gen_bord_begging_Ln",
+        "intro_strings": [
+            "On border patrol, the patrol finds someone who they thought they'd never see again, a former Clan member who has since been exiled. They have deeply regretted their actions and plea to rejoin c_n. They swear that they have changed since then and that they'll <i>never ever</i> cause trouble again."
+	    ],
+        "decline_strings": [
+            "The patrol says no and leaves them at the border."
+        ],
+        "success_outcomes": [
+            {
+                "frequency": 4,
+                "strings": [
+                    "The patrol hesitates at first, but n_c0 sounds so convincing and the patrol can feel {PRONOUN/n_c0/poss} sense of remorse, so they take n_c0 back to the Clan where {PRONOUN/n_c0/subject} is allowed to return. n_c0 thanks c_n earnestly and promises to be a better Clanmate."
+                ],
+                "involved_cats": {
+                    "n_c0": {
+                        "can_create_new_cat": {},
+        		        "standing": {
+                            "currently": [
+					            "exiled",
+					            "near"
+				            ]
+          		        }
+                    }
+                },
+                "exp_gained": 10,
+                "relationship_changes": [
+                    {
+                        "cats_from": [
+                            "n_c0"
+                        ],
+                        "cats_to": [
+                            "patrol_cats"
+                        ],
+                        "values": [
+                            "like",
+                            "trust",
+                            "comfort"
+                        ],
+                        "amount": 10,
+                        "log": {
+                            "cats_from": "cat_from was grateful that cat_to allowed {PRONOUN/n_c0/object} to rejoin c_n."
+                        }
+                    },
+                    {
+                        "cats_from": [
+                            "clan", "high_lawful"
+                        ],
+                        "cats_to": [
+                            "n_c0"
+                        ],
+                        "values": [
+                            "trust",
+                            "comfort"
+                        ],
+                        "amount": -20,
+                        "log": {
+                            "cats_from": "cat_from was extremley surprised and skeptical about cat_to's return and {PRONOUN/cat_to/poss} promise to be better."
+                        }
+                    }
+                ],
+                "join": [
+                    {
+                        "cats": [
+                            "n_c0"
+                        ],
+                        "new_status": [
+                            "warrior"
+                        ]
+                    }
+                ]            
+	    },
+        {
+                "frequency": 3,
+                "strings": [
+                    "The patrol remembers what n_c0 did, and they are kind of unsure of how to respond to {PRONOUN/n_c0/object}, so they take n_c0 back to camp where it is decided that n_c0 can rejoin c_n. n_c0 thanks c_n earnestly and promises to be a better Clanmate."
+                ],
+                "exp_gained": 15,
+                "involved_cats": {
+                    "n_c0": {
+                        "can_create_new_cat": {},
+        		        "standing": {
+                            "currently": [
+					            "exiled",
+					            "near"
+				            ]
+          		        }
+                    }
+                },
+                "relationship_changes": [
+                    {
+                        "cats_from": [
+                            "n_c0"
+                        ],
+                        "cats_to": [
+                            "patrol_cats"
+                        ],
+                        "values": [
+                            "like",
+                            "trust",
+                            "comfort"
+                        ],
+                        "amount": 10,
+                        "log": {
+                            "cats_from": "cat_from was grateful that cat_to allowed {PRONOUN/n_c0/object} to rejoin c_n. "
+                        }
+                    },
+                    {
+                        "cats_from": [
+                            "patrol_cats"
+                        ],
+                        "cats_to": [
+                            "n_c0"
+                        ],
+                        "values": [
+                            "trust"
+                        ],
+                        "amount": 10,
+                        "log": {
+                            "cats_from": "cat_from was grateful that cat_to allowed {PRONOUN/n_c0/object} to rejoin c_n."
+                        }
+                    },
+                    {
+                        "cats_from": [
+                            "clan", "high_lawful"
+                        ],
+                        "cats_to": [
+                            "n_c0"
+                        ],
+                        "values": [
+                            "trust",
+                            "comfort"
+                        ],
+                        "amount": -20,
+                        "log": {
+                            "cats_from": "cat_from was extremley surprised and skeptical about cat_to's return and {PRONOUN/cat_to/poss} promise to be better."
+                        }
+                    }
+                ]
+            },
+            {
+                "frequency": 4,
+                "strings": [
+                    "The patrol hesitates at first, but n_c0 sounds so convincing and the patrol can feel {PRONOUN/n_c0/poss} sense of remorse, so they take n_c0 back to the Clan where {PRONOUN/n_c0/subject} is allowed to return. n_c0 thanks c_n earnestly and promises to be a better Clanmate."
+                ],
+                "involved_cats": {
+                    "n_c0": {
+                        "can_create_new_cat": {},
+        		        "standing": {
+                            "currently": [
+					            "exiled",
+					            "near"
+				            ]
+          		        }
+                    }
+                },
+                "exp_gained": 10,
+                "relationship_changes": [
+                    {
+                        "cats_from": [
+                            "clan", "high_lawful"
+                        ],
+                        "cats_to": [
+                            "n_c0"
+                        ],
+                        "values": [
+                            "trust",
+                            "comfort"
+                        ],
+                        "amount": -20,
+                        "log": {
+                            "cats_from": "cat_from was extremley surprised and skeptical about cat_to's return and {PRONOUN/cat_to/poss} promise to be better."
+                        }
+                    }
+                ],
+                "join": [
+                    {
+                        "cats": [
+                            "n_c0"
+                        ],
+                        "new_status": [
+                            "warrior"
+                        ]
+                    }
+                ],
+                "future_event": [
+                    {
+                        "event_type": "murder",
+                        "pool": {},
+                        "moon_delay": [
+                            1,
+                            3
+                        ],
+                        "involved_cats": {
+                            "m_c": "n_c0",
+                            "mur_c": {
+                                "age": [
+                                    "any"
+                                ]
+                        }
+                ]
+	        }
+        ],
+        "fail_outcomes": [
+            {
+                "frequency": 4,
+                "strings": [
+                    "The patrol hesitates at first, but n_c0 sounds so convincing and the patrol can feel {PRONOUN/n_c0/poss} sense of remorse, so they take n_c0 back to the Clan where {PRONOUN/n_c0/subject} is sent away without further discussion. n_c0 is visibly disappointed and is escorted out of camp."
+                ],
+                "exp_gained": 0,
+                "involved_cats": {
+                    "n_c0": {
+                        "can_create_new_cat": {},
+        		        "standing": {
+                            "currently": [
+					            "exiled",
+					            "near"
+				            ]
+          		        }
+                    }
+                },
+                "relationship_changes": [
+                    {
+                        "cats_from": [
+                            "n_c0"
+                        ],
+                        "cats_to": [
+                            "clan"
+                        ],
+                        "values": [
+                            "like",
+                            "trust",
+                            "comfort"
+                        ],
+                        "amount": -10,
+                        "log": {
+                            "cats_from": "cat_from was crushed to hear that no one in c_n was willing to give {PRONOUN/cat_from/object} a second chance."
+                        }
+                    },
+                    {
+                        "cats_from": [
+                            "clan", "high_lawful"
+                        ],
+                        "cats_to": [
+                            "n_c0"
+                        ],
+                        "values": [
+                            "trust",
+                            "comfort"
+                        ],
+                        "amount": -20,
+                        "log": {
+                            "cats_from": "cat_from was extremley surprised and skeptical about cat_to's return and {PRONOUN/cat_to/poss} promise to be better."
+                        }
+                    }
+                ],
+                "meet": [
+                    {
+                        "cats": [
+                            "n_c0"
+                        ]
+                    }
+                ]
+            },
+            {
+                "frequency": 4,
+                "strings": [
+                    "The patrol hesitates, n_c0 doesn't sound very convincing... After the patrol privatley discusses among themselves on wether they should bring n_c0 back to camp, they ultimatley decide not to and they drive n_c0 away from the border."
+                ],
+                "exp_gained": 0,
+                "involved_cats": {
+                    "n_c0": {
+                        "can_create_new_cat": {},
+        		        "standing": {
+                            "currently": [
+					            "exiled",
+					            "near"
+				            ]
+          		        }
+                    }
+                }
+                "meet": [
+                    {
+                        "cats": [
+                            "n_c0"
+                        ]
+                    }
+                ]
+            },
+            {
+                "frequency": 4,
+                "strings": [
+                    "The patrol remembers what n_c0 did, they tell n_c0 that they will not bring n_c0 back to camp. They tell n_c0 to leave immediatley."
+                ],
+                "exp_gained": 0,
+                "involved_cats": {
+                    "n_c0": {
+                        "can_create_new_cat": {},
+        		        "standing": {
+                            "currently": [
+					            "exiled",
+					            "near"
+				            ]
+          		        }
+                    }
+                }
+                "meet": [
+                    {
+                        "cats": [
+                            "n_c0"
+                        ]
+                    }
+                ]
+            }
+        ],
+        "antag_success_outcomes": [
+            {
+                "frequency": 4,
+                "strings": [
+                    "Hissing, p_l bowls the kittypet over, and with a ripping sound, the bat wing detaches from their back. The plump cat's crying increases in volume as they flee. p_l brings the trophy back to camp to boast."
+                ],
+                "exp_gained": 15,
+                "reputation_changes": {
+                    "outsider": -2
+                },
+                "relationship_changes": [
+                    {
+                        "cats_from": [
+                            "clan",
+                            "high_aggress"
+                        ],
+                        "cats_to": [
+                            "patrol_cats"
+                        ],
+                        "mutual": false,
+                        "values": [
+                            "like"
+                        ],
+                        "amount": 5,
+                        "log": {
+                            "cats_from": "cat_from was amused by cat_to's trophy of bat wings ripped from a strange kittypet."
+                        }
+                    }
+                ]
+            }
+        ],
+        "antag_fail_outcomes": [
+            {
+                "frequency": 4,
+                "strings": [
+                    "Swaggering up, p_l tries to intimidate the kittypet. But while the cat is easily successfully frightened, that doesn't make them any less stuck in place, and eventually the patrol is forced to help set them free, if only so they can leave c_n's borders."
+                ],
+                "exp_gained": 0,
+                "reputation_changes": {
+                    "outsider": -1
+                }
+            }
+        ]
     }
 ]
