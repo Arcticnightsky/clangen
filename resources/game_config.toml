@@ -645,12 +645,12 @@ dev_tools = true
 
   # base 1/chance a cat will die
   classic_death_chance = 500
-  death_chance = 650
+  death_chance = 450
 
   # modifiers for death chance based on if a war is going badly
   # SUBTRACTS from the denominator so higher = more likely to die
   war_death_modifier_leader = 8
-  war_death_modifier = 330
+  war_death_modifier = 230
 
   # age cats will start dying of old age based on old_age_death_curve
   old_age_death_start = 150
@@ -678,7 +678,7 @@ dev_tools = true
 
 [condition_related]
   # 10/chance an illness will occur
-  illness_chance = 650
+  illness_chance = 450
   classic_illness_chance = 750
 
   # how much each medicine cat reduces the chance of infection, higher number is better
@@ -691,14 +691,14 @@ dev_tools = true
 
   # 5/chance (for most personalities) or 15/chance (for some personalities) an injury will occur 
   classic_injury_chance = 700
-  injury_chance = 650
+  injury_chance = 450
 
   # 1/chance a cat will get a permanent condition from an event with that possibility 
   permanent_condition_chance = 40
 
   # modifiers for injury chance based on if a war is going badly
   # SUBTRACTS from the denominator so higher = more likely to get injured
-  war_injury_modifier = 525
+  war_injury_modifier = 225
 
 [medcats]
   # base number of cats each medcat can care for, before skill/experience modifiers
