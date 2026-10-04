@@ -15169,23 +15169,6 @@
                 "relationship_changes": [
                     {
                         "cats_from": [
-                            "n_c0"
-                        ],
-                        "cats_to": [
-                            "patrol_cats"
-                        ],
-                        "values": [
-                            "like",
-                            "trust",
-                            "comfort"
-                        ],
-                        "amount": 10,
-                        "log": {
-                            "cats_from": "cat_from was grateful that cat_to allowed {PRONOUN/n_c0/object} to rejoin c_n. "
-                        }
-                    },
-                    {
-                        "cats_from": [
                             "patrol_cats"
                         ],
                         "cats_to": [
@@ -15382,7 +15365,25 @@
 				            ]
           		        }
                     }
-                }
+                },
+                "relationship_changes": [
+                    {
+                        "cats_from": [
+                            "n_c0"
+                        ],
+                        "cats_to": [
+                            "patrol_cats"
+                        ],
+                        "values": [
+                            "like",
+                            "trust",
+                            "comfort"
+                        ],
+                        "amount": -10,
+                        "log": {
+                            "cats_from": "cat_from was upset that cat_to's patrol refused to bring {PRONOUN/cat_from/object} back to camp."
+                        }
+                },
                 "meet": [
                     {
                         "cats": [
