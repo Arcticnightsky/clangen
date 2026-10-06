@@ -15095,10 +15095,14 @@
                     "n_c0": {
                         "can_create_new_cat": {},
         		        "standing": {
+							"group": [
+								"player_clan"
+							],
                             "currently": [
 					            "exiled",
 					            "near"
-				            ]
+				            ],
+        					"past": []
           		        }
                     }
                 },
@@ -15161,10 +15165,14 @@
                     "n_c0": {
                         "can_create_new_cat": {},
         		        "standing": {
+							"group": [
+								"player_clan"
+							],
                             "currently": [
 					            "exiled",
 					            "near"
-				            ]
+				            ],
+        					"past": []
           		        }
                     }
                 },
@@ -15213,10 +15221,14 @@
                     "n_c0": {
                         "can_create_new_cat": {},
         		        "standing": {
+							"group": [
+								"player_clan"
+							],
                             "currently": [
 					            "exiled",
 					            "near"
-				            ]
+				            ],
+        					"past": []
           		        }
                     }
                 },
@@ -15281,10 +15293,14 @@
                     "n_c0": {
                         "can_create_new_cat": {},
         		        "standing": {
+							"group": [
+								"player_clan"
+							],
                             "currently": [
 					            "exiled",
 					            "near"
-				            ]
+				            ],
+        					"past": []
           		        }
                     }
                 },
@@ -15343,10 +15359,14 @@
                     "n_c0": {
                         "can_create_new_cat": {},
         		        "standing": {
+							"group": [
+								"player_clan"
+							],
                             "currently": [
 					            "exiled",
 					            "near"
-				            ]
+				            ],
+        					"past": []
           		        }
                     }
                 },
@@ -15368,10 +15388,14 @@
                     "n_c0": {
                         "can_create_new_cat": {},
         		        "standing": {
+							"group": [
+								"player_clan"
+							],
                             "currently": [
 					            "exiled",
 					            "near"
-				            ]
+				            ],
+        					"past": []
           		        }
                     }
                 },
@@ -15415,10 +15439,14 @@
                     "n_c0": {
                         "can_create_new_cat": {},
         		        "standing": {
+							"group": [
+								"player_clan"
+							],
                             "currently": [
 					            "exiled",
 					            "near"
-				            ]
+				            ],
+        					"past": []
           		        }
                     }
                 },
@@ -15482,10 +15510,14 @@
                     "n_c0": {
                         "can_create_new_cat": {},
         		        "standing": {
+							"group": [
+								"player_clan"
+							],
                             "currently": [
 					            "exiled",
 					            "near"
-				            ]
+				            ],
+        					"past": []
           		        }
                     }
                 },
