@@ -138,6 +138,10 @@
             "m_c is the only cat who can make r_c laugh.",
             "m_c can't stop staring deep into r_c's eyes, they're just too pretty..."
         ],
+        "involved_cats": {
+            "m_c": {},
+            "r_c": {}
+        },
         "relationship_constraint": [
             {
                 "cats_from": [
@@ -179,6 +183,10 @@
             "m_c and r_c snuck out of camp together.",
             "m_c promises r_c to always be there to protect {PRONOUN/r_c/object} with {PRONOUN/m_c/poss} life."
         ],
+        "involved_cats": {
+            "m_c": {},
+            "r_c": {}
+        },
         "relationship_constraint": [
             {
                 "cats_from": [
@@ -223,6 +231,10 @@
             "m_c and r_c shyly exchange glances with eachother as the Clan talks about kits.",
             "m_c and r_c were caught grooming eachother's pelts a little too softly and slowly..."
         ],
+        "involved_cats": {
+            "m_c": {},
+            "r_c": {}
+        },
         "relationship_constraint": [
             {
                 "cats_from": [
