@@ -15388,7 +15388,7 @@
                             "trust",
                             "comfort"
                         ],
-						            "mutual": false,
+						"mutual": false,
                         "amount": -10,
                         "log": {
                             "cats_from": "cat_from was upset that cat_to's patrol refused to bring {PRONOUN/cat_from/object} back to camp."
@@ -15435,11 +15435,11 @@
                             "trust",
                             "comfort"
                         ],
-						            "mutual": true,
+						"mutual": true,
                         "amount": -10,
                         "log": {
                             "cats_from": "cat_from was angry that {PRONOUN/cat_from/poss} former Clanmates decided to attack {PRONOUN/cat_from/object} instead of bringing {PRONOUN/cat_from/object} back to camp.",
-							              "cats_to": "cat_to was angry that cat_from dared to enter c_n territory and plea to rejoin the Clan after what {PRONOUN/cat_from/subject} did."
+							"cats_to": "cat_to was angry that cat_from dared to enter c_n territory and plea to rejoin the Clan after what {PRONOUN/cat_from/subject} did."
                         }
                 	},
                     {
@@ -15453,8 +15453,8 @@
                         "mutual": false,
                         "values": [
                             "like",
-							              "respect",
-							              "trust"
+							"respect",
+							"trust"
                         ],
                         "amount": 10,
                         "log": {
@@ -15502,7 +15502,7 @@
                             "trust",
                             "comfort"
                         ],
-						            "mutual": true,
+						"mutual": true,
                         "amount": -10,
                         "log": {
                             "cats_from": "cat_from was angry that {PRONOUN/cat_from/poss} former Clanmates decided to attack {PRONOUN/cat_from/object} instead of bringing {PRONOUN/cat_from/object} back to camp.",
@@ -15542,10 +15542,10 @@
                     {
                         "event_type": "death",
                         "pool": {
-							          "event_id": [
-								          "gen_death_guarddisappearance_any2"
-							            ]
-						            },
+							    "event_id": [
+								"gen_death_guarddisappearance_any2"
+							]
+						},
                         "moon_delay": [
                             1,
                             3
@@ -15556,8 +15556,8 @@
                                 "status": [
                 					"warrior",
                 					"deputy"
-            				]
-                        }
+            					]
+                        	}
                         }
                     }
                 ],
@@ -15569,4 +15569,6 @@
                     }
                 ]
             }
+        ]
+    }
 ]
