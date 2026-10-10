@@ -15069,7 +15069,7 @@
         "types": [
             "border"
         ],
-        "frequency": 4,
+        "frequency": 1,
         "tags": [],
         "required_cat_types": {
             "patrol_cats": [
@@ -15179,10 +15179,10 @@
                 "relationship_changes": [
                     {
                         "cats_from": [
-                            "patrol_cats"
+                            "n_c0"
                         ],
                         "cats_to": [
-                            "n_c0"
+                            "patrol_cats"
                         ],
                         "values": [
                             "trust"
