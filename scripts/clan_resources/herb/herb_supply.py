@@ -435,7 +435,7 @@ class HerbSupply:
 
         # the amount of herb types the med has found
         amount_of_herbs = (
-            choices(population=[1, 2, 3], weights=weight, k=1)[0] + amount_modifier
+            choices(population=[3, 6, 9], weights=weight, k=1)[0] + amount_modifier
         )
         if self.disable_random:
             amount_of_herbs = 3

@@ -24870,7 +24870,7 @@
                 "death": [
                     {
                         "cats": [
-                            "r_c0"
+                            "p_l"
                         ],
                         "history": "m_c died before completing {PRONOUN/m_c/poss} medicine cat training, from accidentally eating deathberries."
                     }
@@ -49382,7 +49382,7 @@
                 "death": [
                     {
                         "cats": [
-                            "r_c0"
+                            "p_l"
                         ],
                         "history": "m_c died before completing {PRONOUN/m_c/poss} medicine cat training from accidentally eating deathberries."
                     }
@@ -51267,7 +51267,7 @@
                 "death": [
                     {
                         "cats": [
-                            "r_c0"
+                            "s_c0"
                         ],
                         "history": "m_c was killed after {PRONOUN/m_c/subject} failed to heed a medicine cat's warning and knowingly ingested a deathberry on patrol."
                     }

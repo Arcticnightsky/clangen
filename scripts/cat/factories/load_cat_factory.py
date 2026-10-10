@@ -121,6 +121,8 @@ class LoadCatFactory(BaseCatFactory):
             "experience": kwargs.get("experience"),
             "birth_cooldown": kwargs.get("birth_cooldown", 0),
             "specsuffix_hidden": kwargs.get("specsuffix_hidden", False),
+            "pending_neuter": kwargs.get("pending_neuter", False),
+            "tnr_victim": kwargs.get("tnr_victim", False),
         }
 
         cat = Cat(**cat_params)

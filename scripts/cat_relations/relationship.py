@@ -42,6 +42,7 @@ class Relationship:
         else:
             self.log = []
 
+        self._same_sex_romance_chance_passed = False
         self.no_longer_neutral = []
         """
         List of rel types that made it out of the neutral tier (ROMANCE is not included). This list is used to indicate which types should not return to a neutral state.

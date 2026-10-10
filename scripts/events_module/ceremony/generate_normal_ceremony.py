@@ -13,7 +13,10 @@ from scripts.game_structure import game
 
 
 def create_ceremony(
-    main_cat: Cat, old_name: str = None, involved_cats: dict[str, Cat] = None
+    main_cat: Cat,
+    old_name: str = None,
+    involved_cats: dict[str, Cat] = None,
+    honor: str = None,
 ):
     """
     Finds appropriate ceremony for main_cat and adds it to the cur_events_list
@@ -28,6 +31,15 @@ def create_ceremony(
 
     new_rank = main_cat.status.rank.replace(" ", "_")
     possible_events = load_text_pool_events(f"events/ceremonies/{new_rank}.json")
+
+    # If this is a normal deputy appointment, don't allow the
+    # "no suitable deputy" ceremony to be selected.
+    if new_rank == "deputy" and "no_eligible_deputy" not in involved_cats:
+        possible_events = [
+            event
+            for event in possible_events
+            if event.event_id != "deputy_clan_unsure0"
+        ]
 
     chosen_ceremony, involved_cats = get_valid_event(
         primary_cat=main_cat,
@@ -47,11 +59,11 @@ def create_ceremony(
     )
 
     # cats to be displayed as buttons under the event
-    button_cats = [c for c in involved_cats.values() if c is not None]
+    button_cats = [c for c in involved_cats.values() if isinstance(c, Cat)]
 
     # do the extra processing for specifically ceremony text
     processed_string = ceremony_text_adjust(
-        main_cat.personality.trait, old_name, processed_string
+        main_cat.personality.trait, old_name, processed_string, honor
     )
 
     game.cur_events_list.append(

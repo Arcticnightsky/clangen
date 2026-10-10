@@ -21,6 +21,12 @@
         "starclan_contentious_2": "Though m_c was accepted among the stars, {PRONOUN/m_c/subject} soon found that the judgement of their ancestors is hard to bear.",
         "starclan_contentious_3": "Despite some very passionate protests, m_c was accepted into StarClan.",
 
+        "starclan_tyrant_lead_bad_0": "Despite m_c's <i>extremley</i> tyrannical leadership decisions and actions, Starclan still accepted {PRONOUN/m_c/object} into their ranks.",
+        "starclan_tyrant_lead_bad_1": "Though m_c was accepted among the stars, {PRONOUN/m_c/subject} soon found that the judgement of their ancestors is hard to bear, knowing about the tyrannical deeds {PRONOUN/m_c/subject} did as leader.",
+
+        "starclan_tyrant_lead_ok_0": "Despite m_c's <i>extremley</i> tyrannical leadership decisions and actions, {PRONOUN/m_c/subject} was still a great leader who led the Clan well and Starclan accepts {PRONOUN/m_c/object} into their ranks.",
+        "starclan_tyrant_lead_ok_1": "Though m_c was accepted among the stars, {PRONOUN/m_c/subject} soon found that the judgement of their ancestors is hard to bear, knowing about the tyrannical deeds {PRONOUN/m_c/subject} did as leader.",
+        
         "starclan_kit_0": "m_c was guided into StarClan, where the life denied to {PRONOUN/m_c/object} by the real world could be played out in paradise as much as possible.",
         "starclan_kit_1": "m_c's life was too short. It's not fair, but StarClan would make up for the lack as much as they could.",
         "starclan_kit_2": "StarClan sheltered m_c, certain {PRONOUN/m_c/subject} would see {PRONOUN/m_c/poss} family again one day.",
@@ -59,6 +65,14 @@
         "dark_forest_kit_1": "m_c reached a shadowed hollow, still and quiet. {PRONOUN/m_c/subject/CAP} hadn't seen any cat, and didn't know how {PRONOUN/m_c/subject} got so far from camp.",
         "dark_forest_kit_2": "The wind rustled through the trees, shadowed tangled on the ground, and m_c stepped into an afterlife peaceful, still, and quiet.",
         "dark_forest_kit_3": "The new world was damp and dark, but not unwelcoming to m_c.",
-        "dark_forest_kit_4": "m_c wandered the Dark Forest, a little confused, but mostly curious."
+        "dark_forest_kit_4": "m_c wandered the Dark Forest, a little confused, but mostly curious.",
+
+        "dark_forest_tyrant_lead_bad_0": "m_c's <i>extremley</i> tyrannical leadership decisions and actions led {PRONOUN/m_c/object} straight into the Dark Forest.",
+        "dark_forest_tyrant_lead_bad_1": "StarClan was NOT happy about how m_c led c_n. Abusing your clanmates just because they disagree with you and just being a hostile leader? What a tyrant — m_c was sent to the Dark Forest for {PRONOUN/m_c/object} actions.",
+        "dark_forest_tyrant_lead_bad_2": "m_c was condemned to the Dark Forest for the abuse of {PRONOUN/m_c/poss} Clanmates.",
+        "dark_forest_tyrant_lead_bad_3": "m_c was a very ferocious cat in life. Unfortunatley, {PRONOUN/m_c/subject} abused {PRONOUN/m_c/poss} leader status to get {PRONOUN/m_c/poss} way using teeth and claws, even on {PRONOUN/m_c/poss} own Clanmates. StarClan has condemned {PRONOUN/m_c/object} to the Dark Forest for {PRONOUN/m_c/poss} abuse of power.",
+
+        "dark_forest_tyrant_lead_ok_0": "Despite m_c's <i>extremley</i> tyrannical leadership decisions and actions, {PRONOUN/m_c/subject} was still a great leader who lead the Clan well and Starclan accepts {PRONOUN/m_c/object} into their ranks.",
+        "dark_forest_tyrant_lead_ok_1": "Though m_c was accepted among the stars, {PRONOUN/m_c/subject} soon found that the judgement of their ancestors is hard to bear, knowing about the tyrannical deeds {PRONOUN/m_c/subject} did as leader."
     }
 }

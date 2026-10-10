@@ -25,9 +25,9 @@
   "tooth_and_claw": {
     "card_art": "danger/tooth_and_claw.png",
     "modifiers": {
-      "condition_related.war_injury_modifier": 235,
-      "death_related.war_death_modifier": 340,
-      "death_related.war_death_modifier_leader": 46
+      "condition_related.war_injury_modifier": 270,
+      "death_related.war_death_modifier": 230,
+      "death_related.war_death_modifier_leader": 10
     }
   }
 }
