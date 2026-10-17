@@ -779,11 +779,11 @@ def handle_lost_cats_return(predetermined_cat_IDs: list = None):
         ):
             sterilized_condition = returned_cat.get_sterilization_condition_name()
             if (
-                sterilized_condition in returned_cat.permanent_condition
+                sterilized_condition in returned_cat.permanent_conditions
                 and "RIGHTEAR" not in returned_cat.pelt.scars
             ):
                 returned_cat.pelt.scars = (*returned_cat.pelt.scars, "RIGHTEAR")
-                returned_cat.permanent_condition.pop("partial hearing loss", None)
+                returned_cat.permanent_conditions.pop("partial hearing loss", None)
             returned_cat.tnr_victim = False
             tale_text = event_text_adjust(
                 Cat,
@@ -1429,7 +1429,7 @@ def handle_injuries_or_general_death(cat):
 
         return True
 
-    sterilized = any(cond in cat.permanent_condition for cond in ("neutered", "spayed"))
+    sterilized = any(cond in cat.permanent_conditions for cond in ("neutered", "spayed"))
     max_old_age = 324 if sterilized else 300
 
     # chance to die of old age
