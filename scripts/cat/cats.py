@@ -1631,8 +1631,6 @@ class Cat:
                 self.__add_mentor(selected_mentor.ID)
                 mentor_changed = self.mentor != previous_mentor
 
-        if mentor_changed and self.mentor:
-            self.__add_mentor_relationship_effects()
 
     # ---------------------------------------------------------------------------- #
     #                                 relationships                                #
