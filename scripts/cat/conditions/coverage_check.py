@@ -53,9 +53,8 @@ def amount_of_clan_covered_total(all_cats) -> int:
 
     adjust_med_number = total_med_number + total_exp
 
-    return int(
-        adjust_med_number * (amount_per_med + 1)
-    )  # number of cats they can care for
+    amount_per_med = get_amount_cat_for_one_medic(game.clan)
+    return int(adjust_med_number * amount_per_med)  # number of cats they can care for
 
 
 def medicine_cats_can_cover_clan(all_cats) -> bool:
