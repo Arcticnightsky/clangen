@@ -1090,11 +1090,17 @@ class ProfileScreen(Screens):
             for condition in the_cat.permanent_conditions:
                 if condition.is_congenital and condition.moons_until_discovery >= 0:
                     continue
-                if condition.name == "spayed":
+                if any(
+                    permanent_condition.name == "spayed"
+                    for permanent_condition in the_cat.permanent_conditions
+                ):
                     output += i18n.t(
                         "utility.exclamation", text=i18n.t("general.is_spayed")
                     )
-                elif condition.name == "neutered":
+                elif any(
+                    permanent_condition.name == "neutered"
+                    for permanent_condition in the_cat.permanent_conditions
+                ):
                     output += i18n.t(
                         "utility.exclamation", text=i18n.t("general.is_neutered")
                     )
