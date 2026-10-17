@@ -1330,7 +1330,13 @@ class Cat:
     def get_ill(
         self, illness_name, event_triggered=False, lethal=True, severity="default"
     ):
-        return get_ill(self, illness_name, event_triggered, lethal, severity)
+        return gain_temporary_condition(
+            self,
+            illness_name,
+            omit_moonskip=event_triggered,
+            prevent_death=not lethal,
+            severity=None if severity == "default" else severity,
+        )
 
     def get_injured(
         self,
@@ -1340,8 +1346,13 @@ class Cat:
         potential_scars=None,
         severity="default",
     ):
-        return get_injured(
-            self, name, event_triggered, lethal, potential_scars, severity
+        return gain_temporary_condition(
+            self,
+            name,
+            omit_moonskip=event_triggered,
+            prevent_death=not lethal,
+            severity=None if severity == "default" else severity,
+            scar_pool_override=potential_scars,
         )
 
     def get_permanent_condition(self, name, born_with=False, event_triggered=False):
