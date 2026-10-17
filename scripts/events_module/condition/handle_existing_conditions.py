@@ -310,6 +310,7 @@ def _apply_fatality(cat, condition, event_list) -> list:
     event = generate_condition_event(
         path=f"conditions/death_strings/{condition.name}.json",
         involved_cats={"m_c": cat},
+        death_condition=condition.name,
     )
     # clear event list first to make sure any heal or risk events from other injuries are not shown
     event_list.clear()
