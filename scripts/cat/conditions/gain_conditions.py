@@ -239,7 +239,7 @@ def apply_sterilization_condition(
 ) -> bool:
     """Apply the cat's spayed/neutered permanent condition exactly once."""
     condition_name = get_sterilization_condition_name(cat)
-    if condition_name in cat.permanent_conditions:
+    if any(condition.name == condition_name for condition in cat.permanent_conditions):
         cat.pending_neuter = False
         if from_twolegs:
             cat.tnr_victim = True
@@ -266,5 +266,6 @@ def backdate_sterilization_history(cat, social_group):
     condition_name = get_sterilization_condition_name(cat)
     for condition in cat.permanent_conditions:
         if condition.name == condition_name:
-            condition.moon_gained = 0
+            if condition.moon_gained is None:
+                condition.moon_gained = 0
             return
