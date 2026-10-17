@@ -52,6 +52,7 @@ def generate_sprite(
         not disable_sick_sprite
         and cat.not_working()
         and age != CatAge.NEWBORN
+        and not cat.pelt.paralyzed
         and constants.CONFIG["cat_sprites"]["sick_sprites"]
     ):
         if age in (CatAge.KITTEN, CatAge.ADOLESCENT):
