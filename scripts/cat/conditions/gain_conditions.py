@@ -168,6 +168,11 @@ def gain_permanent_condition(
 
     cat.permanent_conditions.append(new_condition)
 
+    # Spaying and neutering are permanent conditions in the new system. Clear
+    # a queued procedure once the matching condition has been added.
+    if name in ("spayed", "neutered"):
+        cat.pending_neuter = False
+
     # APPEARANCE
     if name == "paralyzed":
         cat.pelt.paralyzed = True
@@ -222,3 +227,44 @@ def _find_moons_until(cat_moon_age: int, moons_until: list[int]) -> int:
     # this mimics the idea that this cat has had the condition since birth
     # with the reveal countdown ticking the whole time
     return reveal_moon - cat_moon_age
+
+
+def get_sterilization_condition_name(cat) -> str:
+    """Return the sterilization condition appropriate for this cat."""
+    return "spayed" if cat.gender == "female" else "neutered"
+
+
+def apply_sterilization_condition(
+    cat, from_twolegs: bool = False, adjust_personality: bool = False
+) -> bool:
+    """Apply the cat's spayed/neutered permanent condition exactly once."""
+    condition_name = get_sterilization_condition_name(cat)
+    if condition_name in cat.permanent_conditions:
+        cat.pending_neuter = False
+        if from_twolegs:
+            cat.tnr_victim = True
+        return False
+
+    before = len(cat.permanent_conditions)
+    gain_permanent_condition(cat, condition_name, omit_moonskip=True)
+    applied = len(cat.permanent_conditions) > before
+    if applied:
+        cat.pending_neuter = False
+        if from_twolegs:
+            cat.tnr_victim = True
+    return applied
+
+
+def handle_pending_neuter(cat):
+    """Apply a queued spay/neuter procedure during the next moon skip."""
+    if cat.pending_neuter and not cat.dead:
+        apply_sterilization_condition(cat)
+
+
+def backdate_sterilization_history(cat, social_group):
+    """Mark an existing sterilization condition as predating the current record."""
+    condition_name = get_sterilization_condition_name(cat)
+    for condition in cat.permanent_conditions:
+        if condition.name == condition_name:
+            condition.moon_gained = 0
+            return
