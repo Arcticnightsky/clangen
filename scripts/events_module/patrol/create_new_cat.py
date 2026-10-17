@@ -14,7 +14,6 @@ from scripts.cat.constants import (
     BACKSTORIES,
 )
 from scripts.cat.pelts import Pelt
-from scripts.cat.constants import INJURIES, ILLNESSES, PERMANENT, BACKSTORIES
 from scripts.cat.enums import CatRank, CatAge, CatGroup, CatStanding, CatSocial
 from scripts.cat.factories.new_cat_factory import NewCatFactory
 from scripts.cat.names import Name
