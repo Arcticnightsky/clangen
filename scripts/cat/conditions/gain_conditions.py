@@ -172,7 +172,12 @@ def gain_permanent_condition(
     if name == "paralyzed":
         cat.pelt.paralyzed = True
 
-    if condition.get("requires_scar"):
+    # Congenital blindness is represented by the BLIND scar. Acquired
+    # blindness must not add another blindness scar over existing eye scars.
+    if name == "blind" and is_congenital:
+        if "BLIND" not in cat.pelt.scars:
+            cat.pelt.scars = (*cat.pelt.scars, "BLIND")
+    elif condition.get("requires_scar"):
         new_scar = choice(condition["possible_scars"])
         cat.pelt.scars = (*cat.pelt.scars, new_scar)
 
