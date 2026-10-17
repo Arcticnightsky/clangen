@@ -705,7 +705,7 @@ dev_tools = true
   duration_modifier_tags = []
 
   # how much each medicine cat reduces the chance of infection, higher number is better
-  med_infection_reduction = 0.05
+  med_infection_reduction = 0.08
   # the seasons in which illnesses can spread. Fleas will always be able to spread in all seasons.
   illness_outbreak_season = ["Leaf-bare", "Leaf-fall"]
   # if there are more sick cats than this percentage of healthy cats then further outbreaks are prevented
