@@ -64,7 +64,9 @@ def update_temporary_condition_state(condition: TemporaryCondition):
         condition.duration -= 1
 
     if condition.duration <= 0:
-        if condition.current_complication:
+        # Recovering from birth has a fixed recovery period. An infection or
+        # other complication should not keep this condition active indefinitely.
+        if condition.current_complication and condition.name != "recovering_from_birth":
             condition.duration = 1
             return ConditionState.CONTINUING
         else:
