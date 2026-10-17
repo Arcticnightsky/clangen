@@ -9,7 +9,9 @@ from scripts.events_module.text_pool_event.event_retrieval import (
 from scripts.events_module.text_pool_event.handle_consequences import execute_outcome
 
 
-def generate_condition_event(path: str, involved_cats: dict) -> EventInformation:
+def generate_condition_event(
+    path: str, involved_cats: dict, death_condition: str = None
+) -> EventInformation:
     """
     Generates and executes condition event
     :param involved_cats: Cats involved in the event. Key is string designation and value is cat object (or list of cat objects)
@@ -35,6 +37,7 @@ def generate_condition_event(path: str, involved_cats: dict) -> EventInformation
     processed_text, results, rel_results = execute_outcome(
         event=chosen_event,
         event_involved_cats=involved_cats,
+        death_condition=death_condition,
     )
 
     types = ["health"]
