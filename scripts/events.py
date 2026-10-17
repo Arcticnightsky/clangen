@@ -1180,6 +1180,7 @@ def gain_accessories(cat):
         chance += acc_chances["baby_modifier"]
     elif cat.age in [CatAge.SENIOR_ADULT, CatAge.SENIOR]:
         chance += acc_chances["elder_modifier"]
+        
     if cat.personality.trait in [
         "adventurous",
         "childish",
@@ -1208,6 +1209,12 @@ def gain_accessories(cat):
         "nervous",
     ]:
         chance += acc_chances["grumpy_trait_modifier"]
+
+    if cat.gender == "female":
+        chance += acc_chances["female_modifier"]
+    elif cat.gender == "male":
+        chance += acc_chances["male_modifier"]
+    
     if cat.pelt.accessory and len(cat.pelt.accessory) >= 1:
         chance += acc_chances["multiple_acc_modifier"]
     if ceremony_accessory:
