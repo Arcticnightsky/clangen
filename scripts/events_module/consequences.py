@@ -6,6 +6,7 @@ import i18n
 
 import random as random_module
 from scripts.cat.cats import Cat
+from scripts.cat.conditions.gain_conditions import gain_permanent_condition
 from scripts.cat.enums import (
     CatRank,
     CatAge,
@@ -18,7 +19,6 @@ from scripts.cat.factories.new_cat_factory import NewCatFactory
 from scripts.cat.pelts import Pelt
 from scripts.cat.factories.enums import CatType
 from scripts.cat.microservices.add_to_clan import add_to_clan, add_dependents_to_clan
-from scripts.cat.microservices.conditions import get_permanent_condition
 from scripts.cat.names import Name
 from scripts.cat_relations.cat_handle_funcs import create_relationships_new_cat
 from scripts.cat_relations.enums import RelType
@@ -29,7 +29,7 @@ from scripts.clan_package.settings import get_clan_setting
 from scripts.config import get_config
 from scripts.events_module.parameter_dicts import RelationshipChangeDict
 from scripts.game_structure import game, constants
-from scripts.cat.constants import BACKSTORIES, PERMANENT
+from scripts.cat.constants import BACKSTORIES, PERMANENT_CONDITIONS
 from scripts.events_module.text_adjust import process_text, adjust_list_text
 from scripts.events_module.relationship.romance_chance import (
     passes_same_sex_romance_chance,
@@ -892,42 +892,21 @@ def create_new_cat(
             chance = constants.CONFIG["cat_generation"]["base_permanent_condition"] + 10
         if not int(random() * chance):
             possible_conditions = []
-            for condition in PERMANENT:
-                if (kit or litter) and PERMANENT[condition]["congenital"] not in [
-                    "always",
-                    "sometimes",
+            for condition in PERMANENT_CONDITIONS:
+                if (kit or litter) and PERMANENT_CONDITIONS[condition][
+                    "can_be_congenital"
                 ]:
-                    continue
-                # next part ensures that a kit won't get a condition that takes too long to reveal
-                moons = new_cat.moons
-                leeway = 5 - (PERMANENT[condition]["moons_until"] + 1)
-                if moons > leeway:
                     continue
                 possible_conditions.append(condition)
 
             if possible_conditions:
                 chosen_condition = choice(possible_conditions)
-                if PERMANENT[chosen_condition]["congenital"] in [
-                    "always",
-                    "sometimes",
-                ]:
-                    get_permanent_condition(new_cat, chosen_condition, True)
-                    if (
-                        new_cat.permanent_condition[chosen_condition]["moons_until"]
-                        == 0
-                    ):
-                        new_cat.permanent_condition[chosen_condition][
-                            "moons_until"
-                        ] = -2
-
-                # assign scars
-
-                if chosen_condition in ("lost a leg", "born without a leg"):
-                    new_cat.pelt.scars = (*new_cat.pelt.scars, "NOPAW")
-                elif chosen_condition in ("lost their tail", "born without a tail"):
-                    new_cat.pelt.scars = (*new_cat.pelt.scars, "NOTAIL")
-                elif chosen_condition in ("blind"):
-                    new_cat.pelt.scars = (*new_cat.pelt.scars, "BLIND")
+                if PERMANENT_CONDITIONS[chosen_condition]["can_be_congenital"]:
+                    gain_permanent_condition(
+                        new_cat,
+                        chosen_condition,
+                        is_congenital=True,
+                    )
 
         if new_cat.pelt.colour == "WHITE" or new_cat.pelt.white_patches == "FULLWHITE":
             blue_eye_count = int(Pelt.is_blue_eye(new_cat.pelt.eye_colour)) + int(
