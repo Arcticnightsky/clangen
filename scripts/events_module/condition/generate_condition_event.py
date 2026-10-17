@@ -20,7 +20,13 @@ def generate_condition_event(path: str, involved_cats: dict) -> EventInformation
     chosen_event, involved_cats = get_valid_event(
         primary_cat=involved_cats.get("m_c", None),
         involved_cats=involved_cats,
-        interactable_cats=Cat.all_cats_list,
+        # Condition-event roles (especially medicine cats) must be filled by living Clan cats.
+        # Keep the already-supplied main cat untouched so death events can still describe a dead patient.
+        interactable_cats=[
+            cat
+            for cat in Cat.all_cats_list
+            if not cat.dead and cat.status.alive_in_player_clan
+        ],
         possible_events=possible_events,
         frequency_active=False,
     )
