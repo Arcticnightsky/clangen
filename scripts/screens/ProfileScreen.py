@@ -1090,11 +1090,11 @@ class ProfileScreen(Screens):
             for condition in the_cat.permanent_conditions:
                 if condition.is_congenital and condition.moons_until_discovery >= 0:
                     continue
-                if "spayed" in the_cat.permanent_conditions:
+                if condition.name == "spayed":
                     output += i18n.t(
                         "utility.exclamation", text=i18n.t("general.is_spayed")
                     )
-                elif "neutered" in the_cat.permanent_conditions:
+                elif condition.name == "neutered":
                     output += i18n.t(
                         "utility.exclamation", text=i18n.t("general.is_neutered")
                     )
@@ -1890,22 +1890,16 @@ class ProfileScreen(Screens):
             if condition.is_congenital:
                 text_list.append(i18n.t("general.born_with"))
             else:
-                if name == "spayed":
-                    moons_with = (
-                        game.clan.age
-                        - self.the_cat.permanent_condition[name]["moon_start"]
-                    )
+                if condition.name == "spayed":
+                    moons_with = game.clan.age - condition.moon_gained
                     text_list.append(
                         i18n.t(
                             "general.has_been_spayed_for",
                             moons=i18n.t("general.moons_age", count=moons_with),
                         )
                     )
-                elif name == "neutered":
-                    moons_with = (
-                        game.clan.age
-                        - self.the_cat.permanent_condition[name]["moon_start"]
-                    )
+                elif condition.name == "neutered":
+                    moons_with = game.clan.age - condition.moon_gained
                     text_list.append(
                         i18n.t(
                             "general.has_been_neutered_for",
