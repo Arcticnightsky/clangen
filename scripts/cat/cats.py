@@ -37,10 +37,9 @@ from scripts.cat.factories.typed_dicts import (
     GenderDict,
 )
 from scripts.cat.history import History
-from scripts.cat.microservices.conditions import (
-    get_ill,
-    get_injured,
-    get_permanent_condition,
+from scripts.cat.conditions.gain_conditions import (
+    gain_temporary_condition,
+    gain_permanent_condition,
     get_sterilization_condition_name,
     apply_sterilization_condition,
     handle_pending_neuter,
@@ -1346,7 +1345,7 @@ class Cat:
         )
 
     def get_permanent_condition(self, name, born_with=False, event_triggered=False):
-        return get_permanent_condition(self, name, born_with, event_triggered)
+        return gain_permanent_condition(self, name, is_congenital=born_with, omit_moonskip=event_triggered)
 
     def get_sterilization_condition_name(self):
         return get_sterilization_condition_name(self)
