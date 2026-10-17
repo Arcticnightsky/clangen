@@ -505,6 +505,12 @@ dev_tools = true
   # modifies accessory chance based on if cat had a ceremony
   ceremony_modifier = -20
 
+  # modifies accessory chance based on if cat is a she-cat, because she-cats are more fashionable 
+  female_modifier = -25
+  
+  # modifies accessory chance based on if cat is a tom
+  male_modifier = 25
+
   # modifies accessory chance based on if cat already has at least one other accessory
   multiple_acc_modifier = 50
 
