@@ -5,7 +5,7 @@ from scripts.config import get_config
 from scripts.game_structure import game
 
 
-def amount_of_clan_covered_total(all_cats) -> int:
+def amount_of_clan_covered_total(all_cats, amount_per_med) -> int:
     """
     number of clan members the meds in total can treat
     """
