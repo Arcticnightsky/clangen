@@ -5585,7 +5585,7 @@
                 "death": [
                     {
                         "cats": [
-                            "r_c0"
+                            "p_l"
                         ],
                         "history": "m_c lost their life in an ambush on the border."
                     }
@@ -5609,7 +5609,7 @@
                 "death": [
                     {
                         "cats": [
-                            "r_c0"
+                            "p_l"
                         ],
                         "history": "lost a life in an ambush on the border"
                     }
