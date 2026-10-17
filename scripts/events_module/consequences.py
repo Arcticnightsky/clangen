@@ -55,7 +55,7 @@ def is_eligible_existing_outsider(
         None,
     )
     is_sterilized = any(
-        condition in cat.permanent_condition for condition in ("spayed", "neutered")
+        condition in cat.permanent_conditions for condition in ("spayed", "neutered")
     )
     return (
         cat.status.is_outsider
