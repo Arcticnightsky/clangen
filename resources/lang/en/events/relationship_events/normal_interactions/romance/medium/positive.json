@@ -296,6 +296,9 @@
                     "-elder",
                     "-kitten"
                 ],
+                "health": {
+                    "working": true
+                },
                 "trait": [
                     "playful",
                     "childish",
@@ -307,6 +310,9 @@
                     "-elder",
                     "-kitten"
                 ],
+                "health": {
+                    "working": true
+                },
                 "trait": [
                     "playful",
                     "childish",
