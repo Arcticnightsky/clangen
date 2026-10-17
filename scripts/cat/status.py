@@ -602,7 +602,7 @@ class Status:
         if self.is_lost(CatGroup.PLAYER_CLAN_ID):
             return CatGroup.STARCLAN_ID
         # meanwhile clan cats go wherever their guide points them
-        if game.clan:
+        if game.clan and game.clan.instructor:
             return game.clan.instructor.status.group_ID
         return CatGroup.STARCLAN_ID
 

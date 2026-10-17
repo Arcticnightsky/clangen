@@ -113,7 +113,7 @@
                     "r_c"
                 ],
                 "injuries": [
-                    "water in their lungs", "shock"
+                    "water_in_lungs", "shock"
                 ]
             }
         ],

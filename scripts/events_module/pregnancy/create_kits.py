@@ -5,6 +5,7 @@ from typing import Optional
 import i18n
 
 from scripts.cat.cats import Cat
+from scripts.cat.conditions.gain_conditions import add_congenital_condition
 from scripts.cat.enums import (
     CatAge,
     CatSocial,
@@ -20,24 +21,21 @@ from scripts.cat_relations.enums import RelType
 from scripts.cat_relations.inheritance2 import inheritance_db
 from scripts.cat_relations.relationship import Relationship, create_one_relationship
 from scripts.clan_package.settings import get_clan_setting
-from scripts.cat.microservices.conditions import add_congenital_condition
 from scripts.config import get_config
-from scripts.events_module.event_information import EventInformation
 from scripts.events_module.consequences import (
     create_new_cat,
     change_relationship_values,
 )
 from scripts.events_module.event_filters import get_personality_compatibility
+from scripts.events_module.event_information import EventInformation
 from scripts.events_module.pregnancy.build_strings import get_newborn_strings
 from scripts.events_module.pregnancy.check_family_size import (
     biggest_family_is_big,
     get_biggest_family,
 )
 from scripts.events_module.pregnancy.check_parents import check_parent_rank
-from scripts.events_module.short.condition_events import Condition_Events
 from scripts.events_module.text_adjust import event_text_adjust, adjust_list_text
 from scripts.game_structure import game
-from scripts.models.common import cat
 
 
 def ensure_unique_kit_name(kit: Cat, litter_kittens, clan=None):
@@ -116,7 +114,7 @@ def get_kits(
     blood_parent = None
 
     ##### SELECT BACKSTORY #####
-    if cat and "pregnant" in cat.injuries:
+    if cat and "pregnant" in cat.temporary_conditions:
         backstory = choice(["halfclan1", "outsider_roots1"])
     elif cat:
         backstory = choice(["halfclan2", "outsider_roots2"])
@@ -254,14 +252,6 @@ def get_kits(
             random() * get_config("cat_generation.base_permanent_condition")
         ):
             add_congenital_condition(kit)
-            for condition in kit.permanent_condition:
-                if kit.permanent_condition[condition] == "born without a leg":
-                    cat.pelt.scars = (*cat.pelt.scars, "NOPAW")
-                elif kit.permanent_condition[condition] == "born without a tail":
-                    cat.pelt.scars = (*cat.pelt.scars, "NOTAIL")
-                elif kit.permanent_condition[condition] == "blind":
-                    cat.pelt.scars = (*cat.pelt.scars, "BLIND")
-            Condition_Events.handle_already_disabled(kit)
 
         # create and update relationships
         relationships_to_update = []
@@ -661,7 +651,7 @@ def get_balanced_kit_chance(
     # - 33+33+25+25+21+21+21+21+21+18+18+18+18+18+16+15+7+7+7+6+6+6+179+163+
     # - 163+163+163+162+153+153+153+153+152+140+137+137+133+129+129+127+124+
     # - 124+109+2+2+2+2+2 = 10,123 / 131 (amount of cats I had at the time) = 77.275 = avg age of my clan's cats
-    
+
     if clan_size:
         avg_age = int(sum(cat.moons for cat in Cat.all_cats.values()) / clan_size)
         if avg_age > 80:

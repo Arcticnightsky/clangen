@@ -1027,7 +1027,7 @@ class PatrolScreen(Screens):
                 and the_cat.status.rank.is_allowed_to_patrol()
                 and the_cat.status.alive_in_player_clan
                 and the_cat not in self.current_patrol
-                and not the_cat.not_working()
+                and the_cat.can_work()
                 and the_cat.ID not in queens_with_young_kits
             ):
                 if (
