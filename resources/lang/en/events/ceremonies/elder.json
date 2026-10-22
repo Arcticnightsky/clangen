@@ -164,14 +164,9 @@
     {
         "event_id": "elder_adult_retire1",
         "involved_cats": {
-            "m_c": {
-                "age": ["-senior", "-adolescent"]
-            },
+            "m_c": {},
             "r_c0": {
-                "status": ["leader"],
-                "stat": {
-                    "trait": ["wise", "thoughtful", "calm", "sincere", "responsible"]
-                }
+                "status": ["leader"]
             }
         },
         "strings": [
