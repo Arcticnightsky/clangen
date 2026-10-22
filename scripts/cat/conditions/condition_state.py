@@ -64,8 +64,10 @@ def update_temporary_condition_state(condition: TemporaryCondition):
         condition.duration -= 1
 
     if condition.duration <= 0:
-        # Complications are separate conditions and must not extend the original
-        # condition beyond its configured duration.
+        # Birth recovery has a fixed duration, even if a complication occurs.
+        if condition.current_complication and condition.name != "recovering_from_birth":
+            condition.duration = 1
+            return ConditionState.CONTINUING
         return ConditionState.HEALED
     else:
         return ConditionState.CONTINUING
