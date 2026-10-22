@@ -7438,8 +7438,8 @@
                 "cats": [
                     "m_c"
                 ],
-                "scar": "m_c was scarred in a fight against o_c_n.",
-                "death": "m_c died from {PRONOUN/m_c/poss} wounds after a battle with o_c_n."
+                "scar": "m_c was scarred in a fight against o_c_n after they tried to break into the nursery.",
+                "death": "m_c died from {PRONOUN/m_c/poss} wounds after a battle with o_c_n after they tried to break into the nursery."
             }
         ],
         "other_clan": {
