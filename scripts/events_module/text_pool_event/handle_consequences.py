@@ -110,6 +110,29 @@ def execute_outcome(
 
     # just gonna make this a copy so that we don't accidentally change the base info
     rel_changes = event.relationship_changes.copy()
+
+    # For a non-clan-wide murder reveal, only the cat who discovers the murder
+    # should lose any romantic feelings they have for the murderer.
+    if (
+        any(
+            sub_type in ("murder_reveal", "hidden_murder_reveal")
+            for sub_type in event.sub_type
+        )
+        and "clan_wide" not in event.tags
+    ):
+        discoverer = event_involved_cats.get("r_c")
+        murderer = event_involved_cats.get("m_c")
+        if isinstance(discoverer, Cat) and isinstance(murderer, Cat):
+            relationship = discoverer.relationships.get(murderer.ID)
+            if relationship and relationship.romance > 0:
+                rel_changes.append(
+                    {
+                        "cats_from": ["r_c"],
+                        "cats_to": ["m_c"],
+                        "values": ["romance"],
+                        "amount": -relationship.romance,
+                    }
+                )
     for block in rel_changes:
         if "log" in block:
             for group in block["log"]:
