@@ -1086,7 +1086,10 @@
                 "-kitten"
             ],
             "status": [
-                "any"
+                "leader",
+                "deputy",
+                "warrior",
+                "apprentice"
             ],
             "trait": [
                 "troublesome",
@@ -6976,6 +6979,11 @@
         "m_c": {
             "status": [
                 "medicine cat"
+            ],
+            "trait": [
+                "compassionate",
+                "faithful",
+                "oblivious"
             ]
         },
         "injury": [
