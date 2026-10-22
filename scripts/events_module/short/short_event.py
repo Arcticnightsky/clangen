@@ -350,6 +350,10 @@ class ShortEvent:
                 if cat.ID == self.main_cat.ID:
                     continue
 
+                # A private reveal is only known by the discovering cat.
+                if "clan_wide" not in self.tags and cat != self.random_cat:
+                    continue
+
                 rel = cat.relationships.get(self.main_cat.ID)
 
                 if not rel:
