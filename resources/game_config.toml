@@ -719,15 +719,15 @@ dev_tools = true
   illness_percentage_max = 0.25
 
   # 5/chance (for most personalities) or 15/chance (for some personalities) an injury will occur 
-  classic_injury_chance = 450
-  injury_chance = 270
+  classic_injury_chance = 900
+  injury_chance = 600
 
   # 1/chance a cat will get a permanent condition from an event with that possibility 
   permanent_condition_chance = 40
 
   # modifiers for injury chance based on if a war is going badly
   # SUBTRACTS from the denominator so higher = more likely to get injured
-  war_injury_modifier = 225
+  war_injury_modifier = 100
 
   [condition_related.medcats]
     # base number of cats each medcat can care for, before skill/experience modifiers
