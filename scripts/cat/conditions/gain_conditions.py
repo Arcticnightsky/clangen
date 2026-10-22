@@ -39,6 +39,13 @@ def gain_temporary_condition(
         TEMPORARY_CONDITIONS.keys()
     ):
         return
+
+    # A cat born without a tail cannot sustain an injury to its tail.
+    if name == "mangled_tail" and (
+        any(condition.name == "born_without_tail" for condition in cat.permanent_conditions)
+        or "NOTAIL" in cat.pelt.scars
+    ):
+        return
     if name == "kittencough" and cat.status.rank not in (
         CatRank.KITTEN,
         CatRank.NEWBORN,
