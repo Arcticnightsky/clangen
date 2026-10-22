@@ -17,6 +17,7 @@ def create_ceremony(
     old_name: str = None,
     involved_cats: dict[str, Cat] = None,
     honor: str = None,
+    ensured_id: str = None,
 ):
     """
     Finds appropriate ceremony for main_cat and adds it to the cur_events_list
@@ -50,7 +51,7 @@ def create_ceremony(
             choice(game.clan.all_other_clans) if game.clan.all_other_clans else None
         ),
         frequency_active=False,
-        ensured_id=get_config("event_generation.debug_ensure_ceremony_id"),
+        ensured_id=ensured_id or get_config("event_generation.debug_ensure_ceremony_id"),
     )
 
     # we won't actually use results or rel results for ceremonies
