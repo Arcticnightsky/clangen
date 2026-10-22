@@ -580,7 +580,10 @@ def _determine_retirement(cat: Cat):
                 cat.retire_cat()
 
                 create_ceremony(
-                    main_cat=cat, old_name=old_name, involved_cats={"m_c": cat}
+                    main_cat=cat,
+                    old_name=old_name,
+                    involved_cats={"m_c": cat},
+                    ensured_id="elder_adult_retire1",
                 )
 
 
