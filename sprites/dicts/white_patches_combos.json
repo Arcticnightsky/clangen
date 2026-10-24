@@ -351,23 +351,6 @@
             "littleLEG_FRONT_RIGHT_SMALL",
             "midBIB_FULL"
         ],
-        "EMO": [
-            "littleROSINA_REDUCED",
-            "littleDAMIEN_REDUCED",
-            "littleBLAZE_SMALL",
-            "littleTEARS_R",
-            "littleTAILTIP",
-            "littleTAIL_REVERSE_MIN",
-            "littleTAIL_SMALL_LOW",
-            "littleTAIL_UNDER",
-            "littleTEARS_L",
-            "littleLEFTEAR_MID",
-            "littleEYESPOT_R",
-            "littleEYELINER_MIN_L",
-            "midTWO_SPOT_SMALL",
-            "midLEG_FRONT_RIGHT_REVERSE",
-            "midLEG_FRONT_LEFT_REVERSE"
-        ],
         "HIGHSOCKS": [
             "littleEXTRA",
             "littleEYEBROW_SMALL",
@@ -504,7 +487,7 @@
             "littleLEFTEAR_MID",
             "midTWO_SPOT_SMALL"
         ],
-        "EMO2": [
+        "EMO": [
             "littleTAIL_MID_RING",
             "littleTAILTIP",
             "littleTAIL_HIGH_RING",
