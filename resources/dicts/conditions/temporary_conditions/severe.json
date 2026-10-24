@@ -504,7 +504,7 @@
         },
         "progression": {
             "amputated_leg": {
-                "chance": 0.4,
+                "chance": 0.1,
                 "when": "CONTINUING",
                 "allow_scar": true
             },
@@ -567,7 +567,7 @@
         },
         "progression": {
             "amputated_tail": {
-                "chance": 0.5,
+                "chance": 0.1,
                 "when": "CONTINUING",
                 "allow_scar": true
             }
@@ -701,12 +701,12 @@
         "side_effect": {},
         "progression": {
             "amputated_tail": {
-                "chance": 0.2,
+                "chance": 0.05,
                 "when": "CONTINUING",
                 "allow_scar": true
             },
             "amputated_leg": {
-                "chance": 0.2,
+                "chance": 0.05,
                 "when": "CONTINUING",
                 "allow_scar": true
             }

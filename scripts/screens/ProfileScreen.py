@@ -791,10 +791,13 @@ class ProfileScreen(Screens):
         output += "\n"
 
         # PELT TYPE
-        output += i18n.t(
-            "screens.profile.pelt_label",
-            pelt=i18n.t(f"cat.pelts.{the_cat.pelt.name}").lower(),
-        )
+        if the_cat.pelt.white_patches == "FULLWHITE":
+            output += i18n.t("screens.profile.pelt_label", pelt="fullwhite")
+        else:
+            output += i18n.t(
+                "screens.profile.pelt_label",
+                pelt=i18n.t(f"cat.pelts.{the_cat.pelt.name}").lower(),
+            )
         # NEWLINE ----------
         output += "\n"
 
@@ -1087,7 +1090,22 @@ class ProfileScreen(Screens):
             for condition in the_cat.permanent_conditions:
                 if condition.is_congenital and condition.moons_until_discovery >= 0:
                     continue
-                output += i18n.t("general.has_permanent_condition")
+                if any(
+                    permanent_condition.name == "spayed"
+                    for permanent_condition in the_cat.permanent_conditions
+                ):
+                    output += i18n.t(
+                        "utility.exclamation", text=i18n.t("general.is_spayed")
+                    )
+                elif any(
+                    permanent_condition.name == "neutered"
+                    for permanent_condition in the_cat.permanent_conditions
+                ):
+                    output += i18n.t(
+                        "utility.exclamation", text=i18n.t("general.is_neutered")
+                    )
+                else:
+                    output += i18n.t("general.has_permanent_condition")
 
                 # NEWLINE ----------
                 output += "\n"
@@ -1878,14 +1896,31 @@ class ProfileScreen(Screens):
             if condition.is_congenital:
                 text_list.append(i18n.t("general.born_with"))
             else:
-                # moons with the condition if not born with condition
-                moons_with = game.clan.age - condition.moon_gained
-                text_list.append(
-                    i18n.t(
-                        "general.had_condition_for",
-                        moons=i18n.t("general.moons_age", count=moons_with),
+                if condition.name == "spayed":
+                    moons_with = game.clan.age - condition.moon_gained
+                    text_list.append(
+                        i18n.t(
+                            "general.has_been_spayed_for",
+                            moons=i18n.t("general.moons_age", count=moons_with),
+                        )
                     )
-                )
+                elif condition.name == "neutered":
+                    moons_with = game.clan.age - condition.moon_gained
+                    text_list.append(
+                        i18n.t(
+                            "general.has_been_neutered_for",
+                            moons=i18n.t("general.moons_age", count=moons_with),
+                        )
+                    )
+                else:
+                    # moons with the condition if not born with condition
+                    moons_with = game.clan.age - condition.moon_gained
+                    text_list.append(
+                        i18n.t(
+                            "general.had_condition_for",
+                            moons=i18n.t("general.moons_age", count=moons_with),
+                        )
+                    )
 
             # is permanent
             text_list.append(
