@@ -2842,6 +2842,7 @@
                         "stat": {
                             "trait": [
                                 "insecure",
+                                "nervous",
                                 "childish",
                                 "compassionate",
                                 "gloomy"
@@ -19255,7 +19256,7 @@
                 "condition": [
                     {
                         "cats": [
-                            "s_c0"
+                            "r_c1"
                         ],
                         "condition": [
                             "minor_injury"

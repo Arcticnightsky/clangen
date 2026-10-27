@@ -51,6 +51,7 @@ def execute_outcome(
     event_involved_cats: dict[str, Union[Cat, list[Cat]]],
     other_clan: OtherClan = None,
     chosen_poi: str = None,
+    death_condition: str = None,
 ) -> tuple[str, dict, dict]:
     """
     Executes the outcome, applying any specified consequences.
@@ -61,6 +62,10 @@ def execute_outcome(
     :param chosen_poi: The POI being used for this event, if there is one
     :returns: Outcome text, results text, list of created rel logs (might be empty)
     """
+
+    if event is None:
+        print("ERROR: execute_outcome received None as event")
+        return "", "", {}
 
     # Must start with cat creation.
     create_needed_cats(event, event_involved_cats, other_clan)
@@ -86,7 +91,9 @@ def execute_outcome(
 
     results = {
         "join": _handle_joining(event, event_involved_cats),
-        "death": _handle_death(event, event_involved_cats, other_clan, chosen_poi),
+        "death": _handle_death(
+            event, event_involved_cats, other_clan, chosen_poi, death_condition
+        ),
         "meet": _handle_meeting(event, event_involved_cats),
         "lost": _handle_lost(event, event_involved_cats),
         "condition": _handle_conditions(event, event_involved_cats, other_clan),
@@ -105,6 +112,7 @@ def execute_outcome(
 
     # just gonna make this a copy so that we don't accidentally change the base info
     rel_changes = event.relationship_changes.copy()
+
     for block in rel_changes:
         if "log" in block:
             for group in block["log"]:
@@ -302,6 +310,7 @@ def _handle_death(
     event_involved_cats: dict[str, Union[Cat, list[Cat]]],
     other_clan: OtherClan,
     chosen_poi: str = None,
+    death_condition: str = None,
 ) -> str:
     """
     Handles cats dying on patrol
@@ -404,13 +413,20 @@ def _handle_death(
                     )
 
             # KILL
-            __handle_death_history(c, block["history"], other_clan)
+            __handle_death_history(
+                c, block["history"], other_clan, death_condition
+            )
             c.die(body)
 
     return " ".join(results)
 
 
-def __handle_death_history(cat: Cat, death_text: str, other_clan: OtherClan) -> None:
+def __handle_death_history(
+    cat: Cat,
+    death_text: str,
+    other_clan: OtherClan,
+    death_condition: str = None,
+) -> None:
     """Handles adding death history for dead cats."""
 
     if not death_text:
@@ -422,7 +438,9 @@ def __handle_death_history(cat: Cat, death_text: str, other_clan: OtherClan) -> 
     else:
         final_death_history = death_text
 
-    cat.history.add_death(death_text=final_death_history)
+    cat.history.add_death(
+        death_text=final_death_history, condition=death_condition
+    )
 
 
 def _handle_lost(

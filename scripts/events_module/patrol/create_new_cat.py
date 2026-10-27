@@ -1,6 +1,8 @@
 from itertools import combinations
 from random import choice, randint, getrandbits, choices, random
 
+import i18n
+
 from scripts.cat.cats import Cat
 from scripts.cat.conditions.gain_conditions import (
     gain_temporary_condition,
@@ -11,6 +13,7 @@ from scripts.cat.constants import (
     PERMANENT_CONDITIONS,
     BACKSTORIES,
 )
+from scripts.cat.pelts import Pelt
 from scripts.cat.enums import CatRank, CatAge, CatGroup, CatStanding, CatSocial
 from scripts.cat.factories.new_cat_factory import NewCatFactory
 from scripts.cat.names import Name
@@ -49,7 +52,7 @@ def updated_create_new_cat(
     # check if we need to match age to an assigned mate
     if option_dict.get("can_create_new_cat", {}).get("assign_mate"):
         possible_ages = []
-        for m in option_dict["can_create_new_cat"].get("assign_mate", []):
+        for m in option_dict.get("can_create_new_cat", {}).get("assign_mate", []):
             if m in involved_cats:
                 possible_ages.append(involved_cats[m].age)
         # this takes priority over any age specified in option_dict
@@ -73,7 +76,8 @@ def updated_create_new_cat(
                         r
                         for r in [*CatRank]
                         if r.is_any_clancat_rank()
-                        and r not in (CatRank.LEADER, CatRank.DEPUTY)
+                        and r
+                        not in (CatRank.LEADER, CatRank.DEPUTY, CatRank.MEDICINE_CAT)
                     ]
                 )
         else:
@@ -95,7 +99,7 @@ def updated_create_new_cat(
         )
 
     # handle applying an age for litters if one wasn't specified
-    is_litter = option_dict["can_create_new_cat"].get("become_litter")
+    is_litter = option_dict.get("can_create_new_cat", {}).get("become_litter")
     if is_litter:
         if not status.get("age") or not status["age"].is_baby():
             status["age"] = choice((CatAge.NEWBORN, CatAge.KITTEN))
@@ -103,8 +107,11 @@ def updated_create_new_cat(
     if not status.get("rank") and not status.get("age"):
         # if no group was given either, then we just pick either no group or other clan
         if not option_dict.get("group"):
+            possible_groups = ["no_group"]
+            if other_clan:
+                possible_groups.append(CatGroup.OTHER_CLAN)
             status["group_ID"] = _get_id_for_group(
-                ["no_group", CatGroup.OTHER_CLAN], involved_cats, other_clan
+                possible_groups, involved_cats, other_clan
             )
 
         # then we find an appropriate rank for that group
@@ -138,13 +145,15 @@ def updated_create_new_cat(
     blood_parents: list[Cat] = []
     adoptive_parents: list[Cat] = []
 
-    for p in option_dict["can_create_new_cat"].get("assign_blood_parent", []):
+    for p in option_dict.get("can_create_new_cat", {}).get("assign_blood_parent", []):
         if p in involved_cats:
             if isinstance(involved_cats[p], list):
                 blood_parents.extend(involved_cats[p])
             else:
                 blood_parents.append(involved_cats[p])
-    for p in option_dict["can_create_new_cat"].get("assign_adoptive_parent", []):
+    for p in option_dict.get("can_create_new_cat", {}).get(
+        "assign_adoptive_parent", []
+    ):
         if p in involved_cats:
             if isinstance(involved_cats[p], list):
                 adoptive_parents.extend(involved_cats[p])
@@ -153,6 +162,9 @@ def updated_create_new_cat(
 
     # GENDER
     gender = choice(option_dict.get("gender")) if option_dict.get("gender") else None
+    skip_female_rarity_roll = bool(
+        option_dict.get("gender") and "can_birth" in option_dict["gender"]
+    )
     if gender and "can_birth" in gender:
         if not get_clan_setting("same sex birth"):
             gender = "female"
@@ -170,9 +182,10 @@ def updated_create_new_cat(
             gender=gender,
             parent1=blood_parents[0].ID if blood_parents else None,
             parent2=blood_parents[1].ID if len(blood_parents) > 1 else None,
-            adoptive_parents=[p.ID for p in adoptive_parents]
-            if adoptive_parents
-            else None,
+            adoptive_parents=(
+                [p.ID for p in adoptive_parents] if adoptive_parents else None
+            ),
+            skip_female_rarity_roll=skip_female_rarity_roll,
         )
 
         # MATES
@@ -219,11 +232,13 @@ def updated_create_new_cat(
         change_relationship_values(
             cats_to=new_cats,
             cats_from=blood_parents + adoptive_parents,
+            log=False,
             **get_config("new_cat.parent_buff.parent_to_kit"),
         )
         change_relationship_values(
             cats_to=blood_parents + adoptive_parents,
             cats_from=new_cats,
+            log=False,
             **get_config("new_cat.parent_buff.kit_to_parent"),
         )
 
@@ -242,6 +257,7 @@ def updated_create_new_cat(
         change_relationship_values(
             cats_to=new_cats,
             cats_from=new_cats,
+            log=False,
             **get_config("new_cat.sib_buff.cat1_to_cat2"),
         )
 
@@ -252,7 +268,7 @@ def updated_create_new_cat(
         blood_parents
         or adoptive_parents
         or is_litter
-        or option_dict["can_create_new_cat"].get("assign_mate")
+        or option_dict.get("can_create_new_cat", {}).get("assign_mate")
     ):
         inheritance_db.load_inheritances(Cat)
 
@@ -262,8 +278,8 @@ def updated_create_new_cat(
 def _assign_mates(
     created_cat: Cat, involved_cats: dict[str, Cat], option_dict: InvolvedCatDict
 ):
-    if option_dict["can_create_new_cat"].get("assign_mate"):
-        for m in option_dict["can_create_new_cat"].get("assign_mate", []):
+    if option_dict.get("can_create_new_cat", {}).get("assign_mate"):
+        for m in option_dict.get("can_create_new_cat", {}).get("assign_mate", []):
             if m in involved_cats:
                 # we delay inheritance recalc because we'll handle it later on, and we don't want to do it twice
                 created_cat.set_mate(involved_cats[m], recalculate_inheritance=False)
@@ -296,7 +312,7 @@ def _assign_name(created_cat: Cat):
             weights = constants.CONFIG["cat_name_controls"]["rogue"]
 
         selected_category = choices(name_categories, weights, k=1)[0]
-        name = choice(Name.names_dict[selected_category])
+        name = Name.get_outsider_name(selected_category, created_cat.genderalign)
         created_cat.change_name(new_prefix=name, new_suffix="")
 
 
@@ -363,6 +379,7 @@ def _assign_health(created_cat, option_dict):
         "NOLEFTEAR",
         "NORIGHTEAR",
         "MANLEG",
+        "BLIND",
     ]
 
     created_cat.pelt.scars = tuple(
@@ -403,6 +420,39 @@ def _assign_health(created_cat, option_dict):
             chosen_condition = choice(possible_conditions)
             if PERMANENT_CONDITIONS[chosen_condition]["can_be_congenital"]:
                 gain_permanent_condition(created_cat, chosen_condition, True)
+
+        if (
+            created_cat.pelt.colour == "WHITE"
+            or created_cat.pelt.white_patches == "FULLWHITE"
+        ):
+            blue_eye_count = int(Pelt.is_blue_eye(created_cat.pelt.eye_colour)) + int(
+                Pelt.is_blue_eye(created_cat.pelt.eye_colour2)
+            )
+
+            if blue_eye_count == 2:
+                # Two blue eyes in white cats carry the highest real-world risk.
+                deaf_chance = max(
+                    1,
+                    int(
+                        constants.CONFIG["cat_generation"]["base_permanent_condition"]
+                        * 0.4
+                    ),
+                )
+                if not random.randint(1, deaf_chance):
+                    created_cat.get_permanent_condition("deaf", born_with=True)
+            elif blue_eye_count == 1:
+                # One blue eye most often maps to unilateral/partial deafness.
+                partial_deaf_chance = max(
+                    1,
+                    int(
+                        constants.CONFIG["cat_generation"]["base_permanent_condition"]
+                        * 0.7
+                    ),
+                )
+                if not random.randint(1, partial_deaf_chance):
+                    created_cat.get_permanent_condition(
+                        "partial hearing loss", born_with=True
+                    )
 
 
 def _assign_stats(created_cat, option_dict):
@@ -496,9 +546,11 @@ def _assign_past_status_and_standing(
 
             created_cat.status.add_to_group(
                 new_group_ID=group,
-                become_rank=CatRank(choice(option_dict["status"]))
-                if option_dict.get("status")
-                else None,
+                become_rank=(
+                    CatRank(choice(option_dict["status"]))
+                    if option_dict.get("status")
+                    else None
+                ),
             )
         if option_dict.get("status") and created_cat.status.rank == status["rank"]:
             created_cat.status._change_rank(CatRank(choice(option_dict["status"])))

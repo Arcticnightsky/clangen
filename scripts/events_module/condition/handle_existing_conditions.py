@@ -149,6 +149,25 @@ def handle_temporary_conditions(cat: Cat):
 
         condition_extra_info = TEMPORARY_CONDITIONS[condition.name]
 
+        # Older saves can contain stale complication links from conditions that
+        # were never successfully added or have since been removed. Clear those
+        # links so the original injury can heal normally.
+        if condition.current_complication and not any(
+            c.name == condition.current_complication
+            for c in cat.temporary_conditions + cat.permanent_conditions
+        ):
+            condition.current_complication = None
+
+        # Normalize durations from older saves. Previously, a stale complication
+        # could keep an injury alive indefinitely and preserve an inflated duration.
+        if not condition.current_complication:
+            max_duration = condition_extra_info.get("duration", condition.duration)
+            if set(condition_extra_info.get("tags", [])).intersection(
+                set(get_config("condition_related.duration_modifier_tags"))
+            ):
+                max_duration *= get_config("condition_related.duration_modifier")
+            condition.duration = min(condition.duration, max_duration)
+
         state = update_temporary_condition_state(condition)
 
         # PROGRESSION - this can happen during various states, so we check it first
@@ -251,6 +270,13 @@ def handle_permanent_conditions(cat: Cat):
         if condition.omit_moonskip:
             continue
 
+        # Also clean stale links on permanent conditions so they can gain risks again.
+        if condition.current_complication and not any(
+            c.name == condition.current_complication
+            for c in cat.temporary_conditions + cat.permanent_conditions
+        ):
+            condition.current_complication = None
+
         state = update_permanent_condition_state(condition)
 
         # PROGRESSION - this can happen during various states, so we check it first
@@ -315,6 +341,7 @@ def _apply_fatality(cat, condition, event_list) -> list:
     event = generate_condition_event(
         path=f"conditions/death_strings/{condition.name}.json",
         involved_cats={"m_c": cat},
+        death_condition=condition.name,
     )
     # clear event list first to make sure any heal or risk events from other injuries are not shown
     event_list.clear()
@@ -557,7 +584,10 @@ def _determine_retirement(cat: Cat):
                 cat.retire_cat()
 
                 create_ceremony(
-                    main_cat=cat, old_name=old_name, involved_cats={"m_c": cat}
+                    main_cat=cat,
+                    old_name=old_name,
+                    involved_cats={"m_c": cat},
+                    ensured_id="elder_adult_retire1",
                 )
 
 
