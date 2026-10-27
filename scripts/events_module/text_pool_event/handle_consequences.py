@@ -344,14 +344,15 @@ def _handle_death(
                     game.clan.leader_lives = 0
 
                     if not block.get("no_results"):
+                        leader_death_text = event_text_adjust(
+                            Cat,
+                            i18n.t("cat.history.n_leader_death_all"),
+                            main_cat=c,
+                            chosen_poi=chosen_poi,
+                        )
                         results.append(
-                            event_text_adjust(
-                                Cat,
-                                i18n.t("cat.history.n_leader_death_all").replace(
-                                    "m_c", _profile_link(c)
-                                ),
-                                main_cat=c,
-                                chosen_poi=chosen_poi,
+                            leader_death_text.replace(
+                                str(c.name), _profile_link(c), 1
                             )
                         )
                 elif "some_lives" in death_tags:
