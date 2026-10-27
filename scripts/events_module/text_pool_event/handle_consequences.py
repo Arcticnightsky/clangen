@@ -371,7 +371,7 @@ def _handle_death(
                         results.append(
                             i18n.t(
                                 "cat.history.n_leader_lost_lives", count=1
-                            ).replace("m_c", _profile_link(c))
+                            ).replace("m_c", str(c.name))
                         )
                 if extra_result := check_stolen_vitality(c, lives_lost):
                     results.append(extra_result)
