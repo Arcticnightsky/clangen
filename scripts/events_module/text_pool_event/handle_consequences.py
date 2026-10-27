@@ -319,22 +319,21 @@ def _handle_death(
         return ""
 
     death_tags = [t for t in event.tags if t in ("all_lives", "some_lives")]
-
     results = []
-    player_cat_names = []
-    other_cat_names = []
-
-    dead_cats = []
 
     for block in event.death:
+        dead_cats = []
         for abbr, cat in event_involved_cats.items():
             if abbr in block["cats"]:
-                if isinstance(event_involved_cats[abbr], list):
-                    dead_cats.extend(event_involved_cats[abbr])
+                if isinstance(cat, list):
+                    dead_cats.extend(cat)
                 else:
-                    dead_cats.append(event_involved_cats[abbr])
+                    dead_cats.append(cat)
 
-        # we default to a body being present
+        # Keep each block's results separate so names from earlier blocks
+        # aren't carried forward and printed again.
+        player_cat_names = []
+        other_cat_names = []
         body = block.get("body", True)
 
         for c in dead_cats:
@@ -348,7 +347,9 @@ def _handle_death(
                         results.append(
                             event_text_adjust(
                                 Cat,
-                                i18n.t("cat.history.n_leader_death_all"),
+                                i18n.t("cat.history.n_leader_death_all").replace(
+                                    "m_c", _profile_link(c)
+                                ),
                                 main_cat=c,
                                 chosen_poi=chosen_poi,
                             )
@@ -361,14 +362,9 @@ def _handle_death(
 
                     if not block.get("no_results"):
                         results.append(
-                            event_text_adjust(
-                                Cat,
-                                i18n.t(
-                                    "cat.history.n_leader_lost_lives", count=lives_lost
-                                ),
-                                main_cat=c,
-                                chosen_poi=chosen_poi,
-                            )
+                            i18n.t(
+                                "cat.history.n_leader_lost_lives", count=lives_lost
+                            ).replace("m_c", _profile_link(c))
                         )
                 else:
                     lives_lost = 1
@@ -376,12 +372,9 @@ def _handle_death(
 
                     if not block.get("no_results"):
                         results.append(
-                            event_text_adjust(
-                                Cat,
-                                i18n.t("cat.history.n_leader_lost_lives", count=1),
-                                main_cat=c,
-                                chosen_poi=chosen_poi,
-                            )
+                            i18n.t(
+                                "cat.history.n_leader_lost_lives", count=1
+                            ).replace("m_c", _profile_link(c))
                         )
                 if extra_result := check_stolen_vitality(c, lives_lost):
                     results.append(extra_result)
@@ -390,36 +383,33 @@ def _handle_death(
             elif c.status.is_outsider:
                 other_cat_names.append(_profile_link(c))
 
-                if not block.get("no_results"):
-                    results.append(
-                        i18n.t(
-                            "screens.patrol.dead_outsider",
-                            cats=adjust_list_text(other_cat_names),
-                            count=len(other_cat_names),
-                        )
-                    )
-
             # NORMAL PLAYER CAT
             else:
                 player_cat_names.append(_profile_link(c))
 
-                if not block.get("no_results"):
-                    results.append(
-                        i18n.t(
-                            "cat.history.regular_death",
-                            cats=adjust_list_text(player_cat_names),
-                            count=len(player_cat_names),
-                        )
-                    )
-
             # KILL
-            __handle_death_history(
-                c, block["history"], other_clan, death_condition
-            )
+            __handle_death_history(c, block["history"], other_clan, death_condition)
             c.die(body)
 
-    return " ".join(results)
+        if not block.get("no_results"):
+            if other_cat_names:
+                results.append(
+                    i18n.t(
+                        "screens.patrol.dead_outsider",
+                        cats=adjust_list_text(other_cat_names),
+                        count=len(other_cat_names),
+                    )
+                )
+            if player_cat_names:
+                results.append(
+                    i18n.t(
+                        "cat.history.regular_death",
+                        cats=adjust_list_text(player_cat_names),
+                        count=len(player_cat_names),
+                    )
+                )
 
+    return " ".join(results)
 
 def __handle_death_history(
     cat: Cat,
