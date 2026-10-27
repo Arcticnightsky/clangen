@@ -60,7 +60,31 @@ def updated_create_new_cat(
         status["age"] = choice(possible_ages)
 
     if option_dict.get("age") and not status.get("age"):
-        status["age"] = CatAge(choice(option_dict["age"]))
+        # Age constraints can include exclusions such as "-newborn". Those are
+        # event filters, not CatAge values, so remove them before choosing an age.
+        age_options = option_dict["age"]
+        excluded_ages = {
+            age[1:]
+            for age in age_options
+            if isinstance(age, str) and age.startswith("-")
+        }
+        valid_ages = {age.value for age in CatAge}
+        possible_ages = [
+            age
+            for age in age_options
+            if age in valid_ages and age not in excluded_ages
+        ]
+
+        # If the event only specified excluded ages, choose from all remaining
+        # valid ages instead of passing an exclusion to CatAge().
+        if not possible_ages:
+            possible_ages = [
+                age for age in valid_ages if age not in excluded_ages
+            ]
+        if not possible_ages:
+            possible_ages = list(valid_ages)
+
+        status["age"] = CatAge(choice(possible_ages))
 
     if option_dict.get("status"):
         # check for "clancat" first since it's not really a rank
