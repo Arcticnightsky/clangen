@@ -33,7 +33,9 @@ def generate_condition_event(
 
     # we won't use results and rel_results here
     processed_text, results, rel_results = execute_outcome(
-        event=chosen_event, event_involved_cats=involved_cats
+        event=chosen_event,
+        event_involved_cats=involved_cats,
+        death_condition=death_condition,
     )
 
     types = ["health"]
