@@ -350,11 +350,7 @@ def _handle_death(
                             main_cat=c,
                             chosen_poi=chosen_poi,
                         )
-                        results.append(
-                            leader_death_text.replace(
-                                str(c.name), _profile_link(c), 1
-                            )
-                        )
+                        results.append(leader_death_text)
                 elif "some_lives" in death_tags:
                     lives_lost = randint(2, max(1, game.clan.leader_lives - 1))
                     game.clan.leader_lives -= lives_lost
@@ -365,7 +361,7 @@ def _handle_death(
                         results.append(
                             i18n.t(
                                 "cat.history.n_leader_lost_lives", count=lives_lost
-                            ).replace("m_c", _profile_link(c))
+                            ).replace("m_c", str(c.name))
                         )
                 else:
                     lives_lost = 1
