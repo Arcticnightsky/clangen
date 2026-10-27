@@ -283,7 +283,11 @@ def handle_permanent_conditions(cat: Cat):
         for progression, info in condition.progression.items():
             if info["when"] == state:
                 chance = info["chance"]
-                progression_events, conditions_to_remove = _check_progression(
+                (
+                    progression_events,
+                    conditions_to_remove,
+                    scar_applied,
+                ) = _check_progression(
                     cat, condition, progression, chance, conditions_to_remove
                 )
                 if progression_events:
@@ -360,7 +364,7 @@ def _check_risks(
     """
     event_list = []
     if condition.current_complication:
-        # Don't add another complication while one is already active.
+        # early return if there's already a complication on the condition
         return event_list, conditions_to_remove
 
     current_conditions = {
