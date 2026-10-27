@@ -424,10 +424,15 @@ def __handle_death_history(
         print("WARNING: Death occurred, but some death history is missing.")
         death_text = i18n.t("defaults.patrol_regular_death")
 
-    if other_clan:
-        final_death_history = death_text.replace("o_c_n", other_clan.name)
-    else:
-        final_death_history = death_text
+    # Death-history strings use the same placeholders as event text (such as
+    # m_c and o_c_n), so process them before storing them in the cat's history.
+    final_death_history = event_text_adjust(
+        Cat,
+        death_text,
+        main_cat=cat,
+        involved_cat_dict={"m_c": cat},
+        other_clan=other_clan,
+    )
 
     cat.history.add_death(
         death_text=final_death_history, condition=death_condition
