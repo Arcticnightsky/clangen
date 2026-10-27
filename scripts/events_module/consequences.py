@@ -1022,9 +1022,9 @@ def gather_cat_objects(
 
         found_cat = None
         if abbr == "m_c":
-            found_cat = extra_cat if extra_cat else event.main_cat
+            found_cat = extra_cat if extra_cat else getattr(event, "main_cat", None)
         elif abbr == "r_c":
-            found_cat = event.random_cat if event.random_cat else None
+            found_cat = getattr(event, "random_cat", None)
 
         # add/remove cat if found and then continue for loop
         if is_exclusionary and found_cat:
@@ -1042,8 +1042,11 @@ def gather_cat_objects(
         if re.match(r"n_c:[0-9]+", abbr):  # new_cats
             index = re.match(r"n_c:([0-9]+)", abbr).group(1)
             index = int(index)
-            if index < len(event.new_cats):
-                found_cat_list.update(event.new_cats[index])
+            # Some condition/relationship paths call this helper without a
+            # full event object. In that case there are no event-created cats.
+            new_cats = getattr(event, "new_cats", []) if event is not None else []
+            if index < len(new_cats):
+                found_cat_list.update(new_cats[index])
         # OVERALL CLAN CATS
         elif abbr == "clan":
             found_cat_list.update(clan_cats)
