@@ -233,7 +233,7 @@
                 "death": [
                     {
                         "cats": [
-                            "r_c0"
+                            "p_l"
                         ],
                         "history": "m_c lost their life to a badger."
                     }
@@ -1303,7 +1303,7 @@
                 "death": [
                     {
                         "cats": [
-                            "r_c0"
+                            "p_l"
                         ],
                         "history": "m_c was killed by a falling branch while on patrol."
                     }

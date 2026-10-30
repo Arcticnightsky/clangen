@@ -4,6 +4,14 @@
         "strings": [
 			"r_c and m_c bonded over their preferred nesting materials while m_c was getting comfortable in {PRONOUN/m_c/poss} new den."
         ],
+        "involved_cats": {
+            "m_c": {
+                "past_status": [
+                    "loner", "rogue"
+                ],
+                "backstory": ["-kittypet_backstories"]
+            }
+        },
         "relationship_changes": [
             {
                 "cats_from": ["r_c"],

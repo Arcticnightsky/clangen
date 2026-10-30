@@ -7,7 +7,9 @@ from scripts.events_module.text_pool_event.event_retrieval import (
 from scripts.events_module.text_pool_event.handle_consequences import execute_outcome
 
 
-def generate_condition_event(path: str, involved_cats: dict) -> EventInformation:
+def generate_condition_event(
+    path: str, involved_cats: dict, death_condition: str = None
+) -> EventInformation:
     """
     Generates and executes condition event
     :param involved_cats: Cats involved in the event. Key is string designation and value is cat object (or list of cat objects)
@@ -18,14 +20,22 @@ def generate_condition_event(path: str, involved_cats: dict) -> EventInformation
     chosen_event, involved_cats = get_valid_event(
         primary_cat=involved_cats.get("m_c", None),
         involved_cats=involved_cats,
-        interactable_cats=Cat.all_cats_list,
+        # Condition-event roles (especially medicine cats) must be filled by living Clan cats.
+        # Keep the already-supplied main cat untouched so death events can still describe a dead patient.
+        interactable_cats=[
+            cat
+            for cat in Cat.all_cats_list
+            if not cat.dead and cat.status.alive_in_player_clan
+        ],
         possible_events=possible_events,
         frequency_active=False,
     )
 
     # we won't use results and rel_results here
     processed_text, results, rel_results = execute_outcome(
-        event=chosen_event, event_involved_cats=involved_cats
+        event=chosen_event,
+        event_involved_cats=involved_cats,
+        death_condition=death_condition,
     )
 
     types = ["health"]

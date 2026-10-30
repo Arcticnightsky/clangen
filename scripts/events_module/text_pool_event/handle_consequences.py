@@ -51,6 +51,7 @@ def execute_outcome(
     event_involved_cats: dict[str, Union[Cat, list[Cat]]],
     other_clan: OtherClan = None,
     chosen_poi: str = None,
+    death_condition: str = None,
 ) -> tuple[str, dict, dict]:
     """
     Executes the outcome, applying any specified consequences.
@@ -61,6 +62,10 @@ def execute_outcome(
     :param chosen_poi: The POI being used for this event, if there is one
     :returns: Outcome text, results text, list of created rel logs (might be empty)
     """
+
+    if event is None:
+        print("ERROR: execute_outcome received None as event")
+        return "", "", {}
 
     # Must start with cat creation.
     create_needed_cats(event, event_involved_cats, other_clan)
@@ -86,7 +91,9 @@ def execute_outcome(
 
     results = {
         "join": _handle_joining(event, event_involved_cats),
-        "death": _handle_death(event, event_involved_cats, other_clan, chosen_poi),
+        "death": _handle_death(
+            event, event_involved_cats, other_clan, chosen_poi, death_condition
+        ),
         "meet": _handle_meeting(event, event_involved_cats),
         "lost": _handle_lost(event, event_involved_cats),
         "condition": _handle_conditions(event, event_involved_cats, other_clan),
@@ -105,6 +112,7 @@ def execute_outcome(
 
     # just gonna make this a copy so that we don't accidentally change the base info
     rel_changes = event.relationship_changes.copy()
+
     for block in rel_changes:
         if "log" in block:
             for group in block["log"]:
@@ -302,6 +310,7 @@ def _handle_death(
     event_involved_cats: dict[str, Union[Cat, list[Cat]]],
     other_clan: OtherClan,
     chosen_poi: str = None,
+    death_condition: str = None,
 ) -> str:
     """
     Handles cats dying on patrol
@@ -310,22 +319,21 @@ def _handle_death(
         return ""
 
     death_tags = [t for t in event.tags if t in ("all_lives", "some_lives")]
-
     results = []
-    player_cat_names = []
-    other_cat_names = []
-
-    dead_cats = []
 
     for block in event.death:
+        dead_cats = []
         for abbr, cat in event_involved_cats.items():
             if abbr in block["cats"]:
-                if isinstance(event_involved_cats[abbr], list):
-                    dead_cats.extend(event_involved_cats[abbr])
+                if isinstance(cat, list):
+                    dead_cats.extend(cat)
                 else:
-                    dead_cats.append(event_involved_cats[abbr])
+                    dead_cats.append(cat)
 
-        # we default to a body being present
+        # Keep each block's results separate so names from earlier blocks
+        # aren't carried forward and printed again.
+        player_cat_names = []
+        other_cat_names = []
         body = block.get("body", True)
 
         for c in dead_cats:
@@ -336,14 +344,13 @@ def _handle_death(
                     game.clan.leader_lives = 0
 
                     if not block.get("no_results"):
-                        results.append(
-                            event_text_adjust(
-                                Cat,
-                                i18n.t("cat.history.n_leader_death_all"),
-                                main_cat=c,
-                                chosen_poi=chosen_poi,
-                            )
+                        leader_death_text = event_text_adjust(
+                            Cat,
+                            i18n.t("cat.history.n_leader_death_all"),
+                            main_cat=c,
+                            chosen_poi=chosen_poi,
                         )
+                        results.append(leader_death_text)
                 elif "some_lives" in death_tags:
                     lives_lost = randint(2, max(1, game.clan.leader_lives - 1))
                     game.clan.leader_lives -= lives_lost
@@ -352,14 +359,9 @@ def _handle_death(
 
                     if not block.get("no_results"):
                         results.append(
-                            event_text_adjust(
-                                Cat,
-                                i18n.t(
-                                    "cat.history.n_leader_lost_lives", count=lives_lost
-                                ),
-                                main_cat=c,
-                                chosen_poi=chosen_poi,
-                            )
+                            i18n.t(
+                                "cat.history.n_leader_lost_lives", count=lives_lost
+                            ).replace("m_c", str(c.name))
                         )
                 else:
                     lives_lost = 1
@@ -367,12 +369,9 @@ def _handle_death(
 
                     if not block.get("no_results"):
                         results.append(
-                            event_text_adjust(
-                                Cat,
-                                i18n.t("cat.history.n_leader_lost_lives", count=1),
-                                main_cat=c,
-                                chosen_poi=chosen_poi,
-                            )
+                            i18n.t(
+                                "cat.history.n_leader_lost_lives", count=1
+                            ).replace("m_c", str(c.name))
                         )
                 if extra_result := check_stolen_vitality(c, lives_lost):
                     results.append(extra_result)
@@ -381,48 +380,59 @@ def _handle_death(
             elif c.status.is_outsider:
                 other_cat_names.append(_profile_link(c))
 
-                if not block.get("no_results"):
-                    results.append(
-                        i18n.t(
-                            "screens.patrol.dead_outsider",
-                            cats=adjust_list_text(other_cat_names),
-                            count=len(other_cat_names),
-                        )
-                    )
-
             # NORMAL PLAYER CAT
             else:
                 player_cat_names.append(_profile_link(c))
 
-                if not block.get("no_results"):
-                    results.append(
-                        i18n.t(
-                            "cat.history.regular_death",
-                            cats=adjust_list_text(player_cat_names),
-                            count=len(player_cat_names),
-                        )
-                    )
-
             # KILL
-            __handle_death_history(c, block["history"], other_clan)
+            __handle_death_history(c, block["history"], other_clan, death_condition)
             c.die(body)
+
+        if not block.get("no_results"):
+            if other_cat_names:
+                results.append(
+                    i18n.t(
+                        "screens.patrol.dead_outsider",
+                        cats=adjust_list_text(other_cat_names),
+                        count=len(other_cat_names),
+                    )
+                )
+            if player_cat_names:
+                results.append(
+                    i18n.t(
+                        "cat.history.regular_death",
+                        cats=adjust_list_text(player_cat_names),
+                        count=len(player_cat_names),
+                    )
+                )
 
     return " ".join(results)
 
-
-def __handle_death_history(cat: Cat, death_text: str, other_clan: OtherClan) -> None:
+def __handle_death_history(
+    cat: Cat,
+    death_text: str,
+    other_clan: OtherClan,
+    death_condition: str = None,
+) -> None:
     """Handles adding death history for dead cats."""
 
     if not death_text:
         print("WARNING: Death occurred, but some death history is missing.")
         death_text = i18n.t("defaults.patrol_regular_death")
 
-    if other_clan:
-        final_death_history = death_text.replace("o_c_n", other_clan.name)
-    else:
-        final_death_history = death_text
+    # Death-history strings use the same placeholders as event text (such as
+    # m_c and o_c_n), so process them before storing them in the cat's history.
+    final_death_history = event_text_adjust(
+        Cat,
+        death_text,
+        main_cat=cat,
+        involved_cat_dict={"m_c": cat},
+        other_clan=other_clan,
+    )
 
-    cat.history.add_death(death_text=final_death_history)
+    cat.history.add_death(
+        death_text=final_death_history, condition=death_condition
+    )
 
 
 def _handle_lost(

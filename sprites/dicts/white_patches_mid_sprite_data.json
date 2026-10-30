@@ -56,7 +56,8 @@
             "BIB_HIGH",
             "BIB_FULL",
             "UNDER_FULL",
-            "SHIRT"
+            "SHIRT",
+            "EMO"
         ]
     ]
 }
