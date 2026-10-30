@@ -2494,7 +2494,7 @@
         },
         "r_c": {
             "age": [
-                "any"
+                "-newborn"
             ],
             "status": [
                 "any"
@@ -2546,7 +2546,7 @@
         },
         "r_c": {
             "age": [
-                "any"
+                "-newborn"
             ],
             "status": [
                 "any"
@@ -2626,7 +2626,7 @@
         },
         "r_c": {
             "age": [
-                "any"
+                "-newborn"
             ],
             "status": [
                 "any"
@@ -9691,7 +9691,7 @@
         },
         "r_c": {
             "status": [
-                "any"
+                "-newborn"
             ]
         },
         "relationships": [
