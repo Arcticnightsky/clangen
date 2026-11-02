@@ -419,6 +419,10 @@
         "prototype": "#text_box_30",
         "misc": {"text_horiz_alignment": "left"}
     },
+    "#text_box_30_horizleft_spacing_115": {
+        "prototype": "#text_box_30_horizleft",
+        "misc": {"text_horiz_alignment": "left", "line_spacing": "1.15"}
+    },
     "#text_box_30_horizleft_spacing_95": {
         "prototype": "#text_box_30_horizleft",
         "misc": {"text_horiz_alignment": "left", "line_spacing": "0.95"}
