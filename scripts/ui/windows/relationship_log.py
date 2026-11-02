@@ -66,7 +66,7 @@ class RelationshipLogWindow(GameWindow):
         self.elements["log1_text"] = pygame_gui.elements.UITextBox(
             log_string,
             ui_scale(pygame.Rect((18, 0), (330, 230))),
-            object_id="#text_box_26_horizleft",
+            object_id="#text_box_26_horizleft_spacing_115",
             container=self,
             anchors={
                 "top_target": self.elements["log1_title"],
@@ -98,7 +98,7 @@ class RelationshipLogWindow(GameWindow):
         self.elements["log2_text"] = pygame_gui.elements.UITextBox(
             log_string,
             ui_scale(pygame.Rect((20, 0), (330, 230))),
-            object_id="#text_box_26_horizleft",
+            object_id="#text_box_26_horizleft_spacing_115",
             container=self,
             anchors={
                 "top_target": self.elements["log2_title"],
