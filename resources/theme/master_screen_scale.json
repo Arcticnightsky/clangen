@@ -395,6 +395,10 @@
         "prototype": "#text_box_30",
         "misc": {"text_horiz_alignment": "center"}
     },
+    "#text_box_30_horizcenter_spacing_115": {
+        "prototype": "#text_box_30_horizcenter",
+        "misc": {"text_horiz_alignment": "center", "line_spacing": "1.15"}
+    },
     "#text_box_30_horizcenter_pad_10_10": {
         "prototype": "#text_box_30_horizcenter",
         "misc": {"padding": "5,5"}
