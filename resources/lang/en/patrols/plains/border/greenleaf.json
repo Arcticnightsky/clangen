@@ -980,6 +980,9 @@
                         }
                     }
                 ],
+                "involved_cats": {
+                    "r_c0": {}
+                },
                 "death": [
                     {
                         "cats": [
@@ -1975,6 +1978,9 @@
                         }
                     }
                 ],
+                "involved_cats": {
+                    "r_c0": {}
+                },
                 "death": [
                     {
                         "cats": [

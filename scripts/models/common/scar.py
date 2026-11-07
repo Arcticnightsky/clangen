@@ -55,3 +55,4 @@ class Scar(Enum):
     FROSTSOCK = "FROSTSOCK"
     TOE = "TOE"
     SNAKETWO = "SNAKETWO"
+    BLIND = "BLIND"

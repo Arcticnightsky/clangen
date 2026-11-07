@@ -851,7 +851,7 @@ class EventsScreen(Screens):
             display_element_event = pygame_gui.elements.UITextBox(
                 event_object.text,
                 ui_scale(pygame.Rect((0, 0), (509, -1))),
-                object_id=get_text_box_theme("#text_box_30_horizleft"),
+                object_id=get_text_box_theme("#text_box_30_horizleft_spacing_115"),
                 starting_height=1,
                 container=display_element_container,
                 manager=MANAGER,
