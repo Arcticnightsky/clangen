@@ -1162,7 +1162,10 @@ dev_tools = true
     base_progression_effect = 0.05
 
     # herb bonus applied when cats should gather a boosted number of herbs
-    general_amount_bonus = 4
+    general_amount_bonus = 2
+  
+    # the percentage of herbs lost per moon
+    herb_loss = 0.0
 
     gathering_variance = [-1, 1]
     [clan_resources.herbs.increase_amounts]
@@ -1316,7 +1319,7 @@ dev_tools = true
   
   # the percentage of freshkill that is lost per moon, after the decay formula has run
   [prey.prey_loss]
-    loss = 0
+    loss = 0.0
 
   # the bonus prey a hunter skill cat will catch according to exp rank
   [prey.hunter_exp_bonus]
