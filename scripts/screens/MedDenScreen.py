@@ -371,19 +371,26 @@ class MedDenScreen(Screens):
         Creates the actual cat list
         """
 
-        tooltip_text = [
-            adjust_list_text(
-                (
-                    [
-                        i18n.t(
-                            f"conditions.{'temporary_conditions' if con in cat.temporary_conditions else 'permanent_conditions'}.{con.name}"
-                        )
-                        for con in cat.temporary_conditions + cat.permanent_conditions
-                    ]
+        tooltip_text = []
+        for cat in self.condition_cats[self.tab_showing]:
+            condition_names = []
+            seen_conditions = set()
+
+            for con in cat.temporary_conditions + cat.permanent_conditions:
+                if con.name in seen_conditions:
+                    continue
+
+                seen_conditions.add(con.name)
+                condition_type = (
+                    "temporary_conditions"
+                    if con in cat.temporary_conditions
+                    else "permanent_conditions"
                 )
-            )
-            for cat in self.condition_cats[self.tab_showing]
-        ]
+                condition_names.append(
+                    i18n.t(f"conditions.{condition_type}.{con.name}")
+                )
+
+            tooltip_text.append(adjust_list_text(condition_names))
 
         self.elements["cat_list"] = UICatListDisplay(
             ui_scale(pygame.Rect((8, 25), (560, 200))),
