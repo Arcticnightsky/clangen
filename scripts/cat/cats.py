@@ -1961,11 +1961,20 @@ class Cat:
         mates = rel1.cat_from.ID in rel1.cat_to.mate
 
         rel_values = [v for v in [*RelType] if v != RelType.ROMANCE]
-        if allow_romantic and (mates or cat1.is_potential_mate(cat2)):
+        can_romance = allow_romantic and (
+            mates or cat1.is_potential_mate(cat2)
+        )
+        if can_romance:
             rel_values.append(RelType.ROMANCE)
 
-        # Determine the number of traits to effect, and choose the traits
+        # Determine the number of traits to effect, and choose the traits.
         chosen_rel = sample(rel_values, k=randint(2, len(rel_values)))
+
+        # When romance is enabled and the cats are valid potential mates,
+        # make sure mediation actually affects their romantic relationship.
+        # Otherwise, the romance option can be selected but randomly omitted.
+        if can_romance and RelType.ROMANCE not in chosen_rel:
+            chosen_rel[-1] = RelType.ROMANCE
 
         if compat is True:
             personality_bonus = 2
