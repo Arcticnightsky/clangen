@@ -903,7 +903,7 @@ class PatrolScreen(Screens):
         self.elements["patrol_info"] = pygame_gui.elements.UITextBox(
             "screens.patrol.label_patrol_info",
             ui_scale(pygame.Rect((105, 460), (240, 200))),
-            object_id="#text_box_22_horizleft",
+            object_id="#text_box_22_horizleft_spacing_115",
             manager=MANAGER,
             text_kwargs={
                 "leader": str(self.patrol_obj.involved_cats["p_l"].name),
