@@ -44,6 +44,7 @@ from scripts.cat.conditions.gain_conditions import (
     apply_sterilization_condition,
     handle_pending_neuter,
     backdate_sterilization_history,
+    apply_scar_conditions,
 )
 from scripts.cat.microservices.grief import grief
 from scripts.cat.names import Name
@@ -270,6 +271,9 @@ class Cat:
 
         if self.ID is not None:
             Cat.insert_cat(self)
+
+        # Restore the condition effects of scars already present on the pelt.
+        apply_scar_conditions(self)
 
     @property
     def age(self):
