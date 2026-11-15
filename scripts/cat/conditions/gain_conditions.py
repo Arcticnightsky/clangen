@@ -201,6 +201,35 @@ def gain_permanent_condition(
         )
 
 
+def apply_scar_conditions(cat):
+    """
+    Restore the condition effects associated with appearance scars.
+
+    These conditions are applied immediately because the scar is already
+    present when the cat is created.
+    """
+    scars = set(cat.pelt.scars)
+
+    if "BRIGHTHEART" in scars and not any(
+        condition.name == "one_bad_eye" for condition in cat.permanent_conditions
+    ):
+        gain_permanent_condition(cat, "one_bad_eye", set_moons_until=-2)
+
+    if "NOEAR" in scars:
+        if not any(
+            condition.name == "deaf" for condition in cat.permanent_conditions
+        ):
+            gain_permanent_condition(cat, "deaf", set_moons_until=-2)
+    elif {"NOLEFTEAR", "NORIGHTEAR"}.intersection(scars):
+        if not any(
+            condition.name in ("partial_hearing_loss", "deaf")
+            for condition in cat.permanent_conditions
+        ):
+            gain_permanent_condition(
+                cat, "partial_hearing_loss", set_moons_until=-2
+            )
+
+
 def add_congenital_condition(cat):
     """
     Adds a random congenital condition to the cat
