@@ -130,9 +130,10 @@ def create_new_cat_block(
                 continue
 
             parent = event.new_cats[index][0]
-            if not requires_biological_parent:
-                continue
 
+            # A parent tag always establishes biological parentage. The
+            # requires_biological_parent flag is only used when deciding
+            # whether an existing outsider is eligible to fill a parent role.
             if parent1 is None:
                 parent1 = parent
             else:
