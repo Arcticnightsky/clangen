@@ -2,6 +2,9 @@ from random import choice
 from typing import Union, Type, TYPE_CHECKING, Tuple, List, Optional
 
 from scripts.cat_relations.relationship import create_one_relationship
+from scripts.events_module.relationship.romance_chance import (
+    passes_same_sex_romance_chance,
+)
 
 if TYPE_CHECKING:
     from scripts.cat.cats import Cat
@@ -46,6 +49,18 @@ def get_alive_clan_queens(living_cats):
                 queen_dict[parents[1].ID] = [cat]
                 living_kits.remove(cat)
     return queen_dict, living_kits
+
+
+def get_queens_with_young_kits(living_cats, max_kit_moons: int) -> set:
+    """
+    Returns a set of queen IDs that currently have at least one kit with moons <= max_kit_moons.
+    """
+    queen_dict, _ = get_alive_clan_queens(living_cats)
+    return {
+        queen_id
+        for queen_id, kits in queen_dict.items()
+        if any(kit.moons <= max_kit_moons for kit in kits)
+    }
 
 
 def find_alive_cats_with_rank(
@@ -142,6 +157,8 @@ def get_possible_mates(cat) -> Tuple[List["Cat"], List["Cat"]]:
             continue
 
         if inter_cat.is_potential_mate(cat, for_love_interest=True):
+            if not passes_same_sex_romance_chance(cat, inter_cat):
+                continue
             if cat.relationships[inter_cat.ID].romance > 0:
                 existing_romance_mates.append(inter_cat)
             possible_mates.append(inter_cat)

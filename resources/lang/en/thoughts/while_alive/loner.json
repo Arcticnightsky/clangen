@@ -22,8 +22,11 @@
             "Sniffed around a known Clan territory curiously",
             "Envies the strong kinship the Clan cats have",
             "Took a stroll through the city",
+            "Nearly avoided getting caught by animal control",
+            "Was shooed away by a rude Twoleg",
             "Spies a kittypet through a window, jealous of the protection and food they have",
             "Spies a kittypet and taunts them that they can't enjoy freedom",
+            "Is eating kibble from a convenient, automatic outdoor feeder",
             "Is taking a nap, hoping something exciting will happen to defeat {PRONOUN/m_c/poss} boredom"
         ]
     },
@@ -49,6 +52,7 @@
             "Is currently trying to figure out how to catch a squirrel",
             "Is currently trying to figure out how to catch a rabbit",
             "Is missing {PRONOUN/m_c/poss} parents",
+            "Is missing {PRONOUN/m_c/poss} littermtes",
             "Regrets missing an easy catch",
             "Learned how slippery the edge of a river can be the hard way",
             "Is playing in the fallen leaves",
@@ -154,7 +158,10 @@
             "leaf-fall"
         ],
         "strings": [
-            "Frowns deeply at the first frost"
+            "Frowns deeply at the first frost",
+            "Is starting to feel sick",
+            "is trying to hunt as much as {PRONOUN/m_c/subject} can before leaf-bare",
+            "Is trying to find shelter before leaf-bare"
         ]
     },
     {
@@ -163,7 +170,65 @@
             "leaf-bare"
         ],
         "strings": [
+            "Is struggling to find prey in the snow",
+            "Considers temporarily being a kittypet for leaf-bare just to escape the bitter cold",
+            "Feels jealous of how lucky kittypets are to escape the cold",
+            "Is starting to feel sick",
+            "Feels so cold and so lonely...",
+            "Admires the colorful lights on Twoleg's dens in the area",
+            "Came down with a fever that went away after a couple of days",
+            "Wishes {PRONOUN/m_c/subject} had a medicine cat to cool down {PRONOUN/m_c/poss} fever",
+            "Was caught in the snow fall",
+            "Is glad that {PRONOUN/m_c/subject} was able to find shelter this leaf-bare",
+            "Wished that {PRONOUN/m_c/subject} was able to find shelter this leaf-bare...",
+            "Realizes how cold can amplify loneliness",
             "Wishes newleaf would come already"
         ]
+    },
+    {
+        "event_id": "loner_newleaf",
+        "season": [
+            "newleaf"
+        ],
+        "strings": [
+            "Is glad newleaf is here again",
+            "Dreads the presence of all of the fleas and ticks coming out again...",
+            "Is happy that prey is abundant again"
+        ]
+    },
+    {
+        "event_id": "loner_greenleaf",
+        "season": [
+            "greenleaf"
+        ],
+        "strings": [
+            "Is trying to find shade in this heat",
+            "Considers temporarily being a kittypet for greenleaf just to escape the scorching heat",
+            "Feels jealous of how lucky kittypets are to escape the heat",
+            "Is trying to find shelter from the rain",
+            "Is trying to clear out all the fleas and ticks from {PRONOUN/m_c/poss} pelt",
+            "Is trying to find a body of water to cool off in"
+        ]
+    },
+  {
+        "event_id": "loner_fixed",
+        "strings": [
+            "Shames {PRONOUN/m_c/self} for falling for that Twoleg trap...",
+            "Feels awkward about having that nick in {PRONOUN/m_c/poss} ear",
+            "Wonders why the Twolegs set {PRONOUN/m_c/object} free after capturing {PRONOUN/m_c/object}",
+            "Is glad that the Twolegs set {PRONOUN/m_c/object} free after being taken to the cutter",
+            "Had to flee {PRONOUN/m_c/poss} territory after being challenged because {PRONOUN/m_c/subject} had no urge to fight",
+            "Shames {PRONOUN/m_c/self} for not being able to escape those Twolegs sooner..."
+        ],
+        "involved_cats": {
+            "m_c": {
+                "health": {
+                    "condition": [
+                        "spayed",
+                        "neutered"
+                    ]
+                }
+            }
+        }
     }
 ]

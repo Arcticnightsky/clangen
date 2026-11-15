@@ -69,7 +69,7 @@ def handle_having_kits(cat: Cat):
     if second_parent and not can_have_kits:
         return
 
-    chance = get_balanced_kit_chance(cat, second_parent, is_affair)
+    chance = get_balanced_kit_chance(cat, second_parent, is_affair, kits_are_adopted)
 
     if not int(random() * chance):
         # If you've reached here - congrats, kits!

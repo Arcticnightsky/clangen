@@ -1114,7 +1114,10 @@
                 "-kitten"
             ],
             "status": [
-                "any"
+                "leader",
+                "deputy",
+                "warrior",
+                "apprentice"
             ],
             "trait": [
                 "troublesome",
@@ -5026,7 +5029,9 @@
             "any"
         ],
         "season": [
-            "any"
+            "leaf-fall",
+            "newleaf",
+            "greenleaf"
         ],
         "frequency": 4,
         "event_text": "m_c was bitten by a snake, and miraculously survived!",
@@ -6421,7 +6426,11 @@
     {
         "event_id": "gen_injury_drownedbyaduck",
         "location": ["any"],
-        "season": ["-leaf-bare"],
+        "season": [            
+            "leaf-fall",             
+            "newleaf",             
+            "greenleaf"
+        ],
         "sub_type": [],
         "tags": [],
         "poi": {
@@ -6998,6 +7007,11 @@
         "m_c": {
             "status": [
                 "medicine cat"
+            ],
+            "trait": [
+                "compassionate",
+                "faithful",
+                "oblivious"
             ]
         },
         "injury": [
@@ -7452,8 +7466,8 @@
                 "cats": [
                     "m_c"
                 ],
-                "scar": "m_c was scarred in a fight against o_c_n.",
-                "death": "m_c died from {PRONOUN/m_c/poss} wounds after a battle with o_c_n."
+                "scar": "m_c was scarred in a fight against o_c_n after they tried to break into the nursery.",
+                "death": "m_c died from {PRONOUN/m_c/poss} wounds after a battle with o_c_n after they tried to break into the nursery."
             }
         ],
         "other_clan": {
@@ -9738,7 +9752,7 @@
             "tags": ["cave"],
             "category": "terrain"
         },
-        "frequency": 3,
+        "frequency": 2,
         "event_text": "m_c was struck in the face by a piece of falling rubble in POI.",
         "m_c": {
             "age": ["-newborn", "-kitten"]
@@ -9766,7 +9780,7 @@
             "tags": ["cave"],
             "category": "terrain"
         },
-        "frequency": 3,
+        "frequency": 2,
         "event_text": "m_c's tail was crushed by a piece of falling rubble in POI.",
         "m_c": {
             "age": ["-newborn", "-kitten"]
@@ -9840,7 +9854,7 @@
                 "cats_to": ["r_c"],
                 "mutual": false,
                 "values": ["trust", "comfort"],
-                "amount": 15,
+                "amount": 20,
                 "log": {
                     "cats_from": "cat_from couldn't thank r_c enough for saving {PRONOUN/m_c/poss} life after {PRONOUN/m_c/subject} nearly fell to {PRONOUN/m_c/poss} death."
                 }
@@ -9893,6 +9907,112 @@
                 "death": "m_c was killed by complications of {PRONOUN/m_c/poss} wounds after angering a flock of birds."
             }
         ]
-    }
+    },
+{
+    "event_id": "gen_injury_leaderpunish2",
+    "location": [
+        "any"
+    ],
+    "season": [
+        "any"
+    ],
+    "sub_type": [],
+    "tags": [],
+    "frequency": 2,
+    "event_text": "Tired of m_c's tyrannical leadership, r_c challenges {PRONOUN/m_c/object}. m_c goes to punish {PRONOUN/r_c/object} {PRONOUN/m_c/self} and they get into an intense fight in front of the Clan. Both cats end up severely hurt in the end.",
+    "new_accessory": [],
+    "m_c": {
+        "status": [
+            "leader"
+        ],
+        "trait": [
+            "bloodthirsty",
+            "vengeful",
+            "arrogant",
+            "fierce"
+        ]
+    },
+    "r_c": {
+        "status": [
+            "warrior"
+        ],
+        "trait": [
+            "rebellious"
+        ]
+    },
+    "injury": [
+        {
+            "cats": [
+                "m_c", "r_c"
+            ],
+            "injuries": [
+                "battle_injury"
+            ],
+            "scars": [
+                "ONE",
+                "TWO",
+                "HINDLEG",
+                "FACE",
+                "SNOUT",
+                "CHEEK",
+                "BACK",
+                "CATBITE"
+            ]
+        }
+    ],
+    "history": [
+        {
+            "cats": [
+                "m_c"
+            ],
+            "scar": "m_c was scarred after punishing r_c.",
+            "death": "m_c died from {PRONOUN/m_c/poss} injuries after punishing r_c."
+        },
+        {
+            "cats": [
+                "r_c"
+            ],
+            "scar": "r_c was scarred after being punished by m_c.",
+            "death": "r_c died from {PRONOUN/r_c/poss} injuries after m_c punished {PRONOUN/r_c/object}."
+        }
+        
+    ],
+    "relationships": [
+        {
+            "cats_from": [
+                "m_c"
+            ],
+            "cats_to": [
+                "r_c"
+            ],
+            "mutual": true,
+            "values": [
+                "comfort",
+                "respect",
+                "trust",
+                "like"
+            ],
+            "amount": -30,
+            "log": {
+                "cats_from": "cat_from punished cat_to for speaking out against {PRONOUN/cat_to/object} and they got into a fight in front of the whole Clan."
+            }
+        },
+        {
+            "cats_from": [
+                "clan", "high_lawful"
+            ],
+            "cats_to": [
+                "r_c"
+            ],
+            "mutual": false,
+            "values": [
+                "respect"
+            ],
+            "amount": 15,
+            "log": {
+                "cats_from": "cat_from grew a deeper respect for cat_to after {PRONOUN/cat_to/subject} stood up against the leader."
+            }
+        }
+    ]
+}
 ]
-

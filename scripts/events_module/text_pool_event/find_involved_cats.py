@@ -22,6 +22,7 @@ def find_cats(
     outside_cats: list,
     event: Union[PatrolEvent, TextPoolEvent],
     other_clan: OtherClan,
+    force_new_cats: bool = False,
 ) -> tuple[dict, int]:
     """
     Finds and returns cats for a PatrolEvent or TextPoolEvent.
@@ -30,6 +31,9 @@ def find_cats(
     :param outside_cats: A list of cats outside the Clan eligible to appear in the event.
     :param event: The PatrolEvent or TextPoolEvent that needs involved cats
     :param other_clan: The OtherClan object involved in the event
+    :param force_new_cats: Prevent patrol new-cat roles from being filled by
+        existing outsiders. Patrol outcomes are TextPoolEvents, so their
+        caller sets this explicitly.
     :return: (involved_cats, will_create_how_many). Involved_cats is an updated version of the input
         (of the same name) with valid cats. Also returns the number of new cats that will need to be
         created.  If an involved_cats is empty AND will_create_how_many is 0, then necessary valid cats
@@ -81,9 +85,12 @@ def find_cats(
 
         # CHECK NEW CATS
         elif "n_c" in abbr:
-            possible_cats = [
-                c for c in outside_cats if c not in temp_involved_cats.values()
-            ]
+            is_patrol_new_cat = force_new_cats or isinstance(event, PatrolEvent)
+            possible_cats = (
+                []
+                if is_patrol_new_cat
+                else [c for c in outside_cats if c not in temp_involved_cats.values()]
+            )
 
             # CATS THAT CAN BE MADE
             if "can_create_new_cat" in constraints:
@@ -123,6 +130,10 @@ def find_cats(
                         )
                     )
                 # It's OK if we can't find a cat - we can create it later.
+                can_create_new_cat = True
+            elif is_patrol_new_cat:
+                # Patrol n_c roles without explicit creation constraints still
+                # represent fresh cats and use the generator's defaults.
                 can_create_new_cat = True
 
         # CHECK MULTI_CAT

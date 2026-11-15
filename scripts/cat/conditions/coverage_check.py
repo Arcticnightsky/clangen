@@ -28,23 +28,33 @@ def amount_of_clan_covered_total(all_cats) -> int:
     total_exp = total_exp * 0.003
 
     # Determine the total med number. Med cats with certain skill counts
-    # as "more" of a med cat.  Only full medicine cat can have their skills have effect
+    # as "more" of a med cat. Only full medicine cat can have their skills have effect
     total_med_number = len(apprentices) / 2
+
     for cat in full_med:
-        if cat.skills.meets_skill_requirement(SkillPath.HEALER, 3):
+        healer_skill = cat.skills.get_all().get(SkillPath.HEALER, 0)
+
+        if healer_skill >= 4:
+            skill_over_3 = healer_skill - 3
+            total_med_number += (
+                2
+                + (skill_over_3 // 3)
+                + (0.5 if skill_over_3 % 3 >= 1 else 0)
+                + (0.25 if skill_over_3 % 3 == 2 else 0)
+            )
+        elif healer_skill == 3:
             total_med_number += 2
-        elif cat.skills.meets_skill_requirement(SkillPath.HEALER, 2):
+        elif healer_skill == 2:
             total_med_number += 1.75
-        elif cat.skills.meets_skill_requirement(SkillPath.HEALER, 1):
+        elif healer_skill == 1:
             total_med_number += 1.5
         else:
             total_med_number += 1
 
     adjust_med_number = total_med_number + total_exp
 
-    return int(
-        adjust_med_number * (get_amount_cat_for_one_medic(game.clan) + 1)
-    )  # number of cats they can care for
+    amount_per_med = get_amount_cat_for_one_medic(game.clan)
+    return int(adjust_med_number * amount_per_med)  # number of cats they can care for
 
 
 def medicine_cats_can_cover_clan(all_cats) -> bool:

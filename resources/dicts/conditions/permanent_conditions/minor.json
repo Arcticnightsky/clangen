@@ -4,9 +4,12 @@
         "can_be_congenital": true,
         "can_be_acquired": true,
         "requires_scar": false,
-        "moons_until_discovery": [2,10],
+        "moons_until_discovery": [
+            2,
+            10
+        ],
         "mortality": {},
-        "immune_system_effect": 0.0,
+        "immune_system_effect": 0,
         "progression": {},
         "risks": {
             "sore": 0.1,
@@ -38,9 +41,12 @@
         "can_be_congenital": false,
         "can_be_acquired": true,
         "requires_scar": true,
-        "moons_until_discovery": [0,0],
+        "moons_until_discovery": [
+            0,
+            0
+        ],
         "mortality": {},
-        "immune_system_effect": 0.0,
+        "immune_system_effect": 0,
         "progression": {},
         "risks": {
             "infection": 0.05,
@@ -68,9 +74,12 @@
         "can_be_acquired": false,
         "requires_scar": true,
         "remove_on_death": false,
-        "moons_until_discovery": [0,0],
+        "moons_until_discovery": [
+            0,
+            0
+        ],
         "mortality": {},
-        "immune_system_effect": 0.0,
+        "immune_system_effect": 0,
         "progression": {},
         "risks": {},
         "treatment_strength": {
@@ -87,9 +96,12 @@
         "severity": "minor",
         "can_be_congenital": true,
         "can_be_acquired": true,
-        "moons_until_discovery": [2,7],
+        "moons_until_discovery": [
+            2,
+            7
+        ],
         "mortality": {},
-        "immune_system_effect": 0.0,
+        "immune_system_effect": 0,
         "progression": {},
         "risks": {
             "whitecough": 0.1,
@@ -115,9 +127,12 @@
         "can_be_congenital": true,
         "can_be_acquired": true,
         "requires_scar": false,
-        "moons_until_discovery": [1,5],
+        "moons_until_discovery": [
+            1,
+            5
+        ],
         "mortality": {},
-        "immune_system_effect": 0.0,
+        "immune_system_effect": 0,
         "progression": {
             "deaf": {
                 "chance": 0.05,
@@ -140,9 +155,12 @@
         "severity": "minor",
         "can_be_congenital": true,
         "can_be_acquired": true,
-        "moons_until_discovery": [1,5],
+        "moons_until_discovery": [
+            1,
+            5
+        ],
         "mortality": {},
-        "immune_system_effect": 0.0,
+        "immune_system_effect": 0,
         "progression": {},
         "risks": {
             "joint_pain": 0.4,
@@ -166,9 +184,12 @@
         "severity": "minor",
         "can_be_congenital": true,
         "can_be_acquired": false,
-        "moons_until_discovery": [2,5],
+        "moons_until_discovery": [
+            2,
+            5
+        ],
         "mortality": {},
-        "immune_system_effect": 0.0,
+        "immune_system_effect": 0,
         "progression": {},
         "risks": {
             "running_nose": 0.1
@@ -185,9 +206,12 @@
         "severity": "minor",
         "can_be_congenital": false,
         "can_be_acquired": true,
-        "moons_until_discovery": [0,0],
+        "moons_until_discovery": [
+            0,
+            0
+        ],
         "mortality": {},
-        "immune_system_effect": 0.0,
+        "immune_system_effect": 0,
         "progression": {},
         "risks": {
             "grief_stricken": 0.2,
@@ -212,9 +236,12 @@
         "severity": "minor",
         "can_be_congenital": true,
         "can_be_acquired": true,
-        "moons_until_discovery": [2,7],
+        "moons_until_discovery": [
+            2,
+            7
+        ],
         "mortality": {},
-        "immune_system_effect": 0.0,
+        "immune_system_effect": 0,
         "progression": {},
         "risks": {},
         "treatment_strength": {
@@ -231,9 +258,12 @@
         "can_be_congenital": false,
         "can_be_acquired": true,
         "requires_scar": true,
-        "moons_until_discovery": [2,3],
+        "moons_until_discovery": [
+            2,
+            3
+        ],
         "mortality": {},
-        "immune_system_effect": 0.0,
+        "immune_system_effect": 0,
         "progression": {},
         "risks": {
             "sore_throat": 0.4
@@ -249,5 +279,43 @@
         "possible_scars": [
             "THROAT"
         ]
+    },
+    "neutered": {
+        "severity": "minor",
+        "can_be_congenital": false,
+        "can_be_acquired": true,
+        "requires_scar": false,
+        "moons_until_discovery": [
+            0,
+            0
+        ],
+        "mortality": {},
+        "immune_system_effect": 0,
+        "progression": {},
+        "risks": {},
+        "treatment_strength": {
+            "1": [],
+            "2": [],
+            "3": []
+        }
+    },
+    "spayed": {
+        "severity": "minor",
+        "can_be_congenital": false,
+        "can_be_acquired": true,
+        "requires_scar": false,
+        "moons_until_discovery": [
+            0,
+            0
+        ],
+        "mortality": {},
+        "immune_system_effect": 0,
+        "progression": {},
+        "risks": {},
+        "treatment_strength": {
+            "1": [],
+            "2": [],
+            "3": []
+        }
     }
 }

@@ -160,7 +160,7 @@
                 "death": [
                     {
                         "cats": [
-                            "r_c0"
+                            "p_l"
                         ],
                         "history": "m_c died to keep c_n safe from a large dog."
                     }
@@ -1118,7 +1118,7 @@
                 "death": [
                     {
                         "cats": [
-                            "r_c0"
+                            "p_l"
                         ],
                         "history": "This cat was killed in a fight with a small dog, but they took the dog out with them."
                     }

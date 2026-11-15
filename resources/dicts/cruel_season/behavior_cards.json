@@ -4,6 +4,7 @@
     "modifiers": {
       "pregnancy.birth_cooldown": 2,
       "pregnancy.primary_chance_mated": 20,
+      "random_affair_chance": 80,
       "pregnancy.primary_chance_unmated": 40
     }
   },
@@ -28,12 +29,12 @@
       "pregnancy.four_kit_possibility.young adult": 17,
       "pregnancy.four_kit_possibility.adult": 16,
       "pregnancy.four_kit_possibility.senior adult": 8,
-      "pregnancy.four_kit_possibility.senior": 1,
+      "pregnancy.four_kit_possibility.senior": 2,
 
       "pregnancy.five_kit_possibility.young adult": 15,
       "pregnancy.five_kit_possibility.adult": 7,
       "pregnancy.five_kit_possibility.senior adult": 5,
-      "pregnancy.five_kit_possibility.senior": 0,
+      "pregnancy.five_kit_possibility.senior": 1,
 
       "pregnancy.max_kit_possibility.young adult": 12,
       "pregnancy.max_kit_possibility.adult": 3,

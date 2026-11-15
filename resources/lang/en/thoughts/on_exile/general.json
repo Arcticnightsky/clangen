@@ -10,7 +10,17 @@
             "Is devastated by {PRONOUN/m_c/poss} sudden exile",
             "Never expected c_n would exile {PRONOUN/m_c/object}",
             "Wonders if what {PRONOUN/m_c/subject} did was worth getting exiled for"
-        ]
+        ],
+        "involved_cats": {
+            "m_c": {
+                "stat": {
+                    "trait": [
+                        "-vengeful",
+                        "-bloodthirsty"
+                    ]
+                }
+            }
+        }
     },
     {
         "event_id": "general_exiled_revenge",
